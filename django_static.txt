@@ -1,0 +1,85 @@
+
+основная документация
+=======================
+1)
+https://docs.djangoproject.com/en/dev/howto/static-files/
+
+2)
+https://docs.djangoproject.com/en/dev/howto/static-files/deployment/
+
+
+
+Мануал
+=================
+1)
+путь создал чтобы не путать
+nameapp/static/nameapp/css
+--------------------------
+потому в шаблоне надо указать папку внитри статик
+<link rel="stylesheet" href="{% static 'comments/css/custom.css' %}">
+
+
+2)
+если импорт модуля из глобальных настроек
+-------------------------------
+from django.conf import settings
+
+
+то там стаят настройки:
+-----------------------
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/var/www/example.com/media/"
+MEDIA_ROOT = ''
+
+
+# URL that handles the media served from MEDIA_ROOT.
+# Examples: "http://example.com/media/", "http://media.example.com/"
+MEDIA_URL = ''
+
+
+# Absolute path to the directory static files should be collected to.
+# Example: "/var/www/example.com/static/"
+STATIC_ROOT = None
+
+
+# URL that handles the static files served from STATIC_ROOT.
+# Example: "http://example.com/static/", "http://static.example.com/"
+STATIC_URL = None
+
+
+3)
+в локальных сеттингах можно переопределить пути:
+STATIC_URL = '/static/'
+STATIC_ROOT = None
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')          ## этот путь пойдет для collectstatic
+
+
+
+4)
+urlpatterns = [
+    ...
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+5) в общем надо пробывать нюансы на практике
+
+
+6)
+Вот такое может быть в Сеттингах проекта (но при деплое надо указывать путь на nginx):
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.11/howto/static-files/
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+
+
+

@@ -1,0 +1,870 @@
+Шпаргалка по PostgreSQL
+=======================
+https://khashtamov.com/ru/postgresql-cheatsheet/
+
+
+Фундаментальный курс по postgreSQL
+====================
+https://www.youtube.com/watch?v=qw--VYLpxG4&list=PLSVqTfjvRr4SYZ7P-xZtbLK0esmFSybpl&index=3&t=6918s
+
+
+PostgreSQL
+==========================
+How To Use PostgreSQL with your Django Application on Ubuntu 16.04
+(PostgreSQL+Django+Python+Env)
+--------------------------
+https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-16-04
+
+
+Шпаргалка по PostgreSQL
+=======================
+https://khashtamov.com/ru/postgresql-cheatsheet/    
+
+
+
+
+
+
+0)
+https://postgresapp.com/
+
+
+GUI
+---------
+postbird
+
+из центра устанвки приложений ubuntu
+
+подключился по данных БД из Джанго
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'django_girls_db',
+        'USER': 'django_girls_user',
+        'PASSWORD': 'prostomag76',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+
+
+
+
+
+1)
+в обычной командной строке
+переход на суперюзера для postgresql под именем postgres
+--------------------------
+ryndin@ubu:~$ sudo -i -u postgres           ***
+
+postgres@ubu:~$ psql                        ***
+
+psql (10.8 (Ubuntu 10.8-0ubuntu0.18.04.1), server 9.5.14)
+Type "help" for help.
+
+postgres=# 
+
+
+2)
+в строке через джанго админ менеджера
+---------------------
+my_django_girls$ python manage.py dbshell           ***
+
+psql (10.8 (Ubuntu 10.8-0ubuntu0.18.04.1), server 9.5.14)
+SSL connection (protocol: TLSv1.2, cipher: ECDHE-RSA-AES256-GCM-SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+django_girls_db=>  
+
+
+
+3)
+то же самое из простой консоли
+----------------------
+postgres@ubu:~$ psql -h localhost -p 5432 -U django_girls_user django_girls_db      ***
+
+Password for user django_girls_user: 
+psql (10.8 (Ubuntu 10.8-0ubuntu0.18.04.1), server 9.5.14)
+SSL connection (protocol: TLSv1.2, cipher: ECDHE-RSA-AES256-GCM-SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+django_girls_db=> 
+
+
+4)
+Документация (в т.ч. скачена книга)
+-------------
+https://www.postgresql.org/docs/
+
+
+5)
+Генерация Фейковых Данных
+и Создание Таблиц Базы Данных
+-------------------
+https://mockaroo.com/
+
+
+
+6)
+пример комманд в psql
+---------------------
+
+ryndin@ubu:~/PycharmProjects/my_django_gerls/my_django_girls$ sudo -i -u postgres
+postgres@ubu:~$ psql
+psql (10.8 (Ubuntu 10.8-0ubuntu0.18.04.1), server 9.5.14)
+Type "help" for help.
+
+
+postgres=# \l                   ***
+
+ django_girls_db    | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | =Tc/postgres                    +
+                    |          |          |             |             | postgres=CTc/postgres           +
+                    |          |          |             |             | django_girls_user=CTc/postgres
+ postgres           | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | 
+ studentsproject_db | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | =Tc/postgres                    +
+                    |          |          |             |             | postgres=CTc/postgres           +
+                    |          |          |             |             | studentsprojectuser=CTc/postgres
+ template0          | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | =c/postgres                     +
+                    |          |          |             |             | postgres=CTc/postgres
+ template1          | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | =c/postgres                     +
+                    |          |          |             |             | postgres=CTc/postgres
+ test               | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | 
+
+
+
+
+
+postgres=# \c test                  ***
+
+psql (10.8 (Ubuntu 10.8-0ubuntu0.18.04.1), server 9.5.14)
+You are now connected to database "test" as user "postgres".
+test=#
+
+
+
+test=# \d                     ***
+
+           List of relations
+ Schema |   Name    | Type  |  Owner   
+--------+-----------+-------+----------
+ public | mock_data | table | postgres
+(1 row)
+
+
+
+
+test=# \l                       ***
+            
+ django_girls_db    | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | =Tc/postgres                    +
+                    |          |          |             |             | postgres=CTc/postgres           +
+                    |          |          |             |             | django_girls_user=CTc/postgres
+ postgres           | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | 
+ studentsproject_db | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | =Tc/postgres                    +
+                    |          |          |             |             | postgres=CTc/postgres           +
+                    |          |          |             |             | studentsprojectuser=CTc/postgres
+ template0          | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | =c/postgres                     +
+                    |          |          |             |             | postgres=CTc/postgres
+ template1          | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | =c/postgres                     +
+                    |          |          |             |             | postgres=CTc/postgres
+ test               | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | 
+
+
+
+test=# \dt                      ***
+
+ public | mock_data | table | postgres
+
+
+
+вставка данных в таблицу
+--------------
+test=# insert into MOCK_DATA (id, first_name, last_name, email, gender, ip_address) values (50, 'Morten', 'Matchett', 'mmatchett1d@ftc.gov', 'Male', '23.197.214.17');
+
+
+
+выборка всей таблицы
+-------------
+test=# SELECT * FROM mock_data;
+
+  1 | Ivie       | Fairham      | ifairham0@discovery.com          | Female | 32.188.173.196
+  2 | Trev       | Wrenn        | twrenn1@cyberchimps.com          | Male   | 46.208.115.83
+  3 | Elliot     | Skipton      | eskipton2@gnu.org                | Male   | 79.180.196.162
+  4 | Jedidiah   | Stirzaker    | jstirzaker3@example.com          | Male   | 164.99.160.85
+  5 | Lu         | Sowersby     | lsowersby4@soundcloud.com        | Female | 250.76.238.250
+  6 | Phineas    | Eastgate     | peastgate5@desdev.cn             | Male   | 230.58.135.39
+  7 | Dorella    | Culpen       | dculpen6@digg.com                | Female | 231.59.98.202
+............
+
+
+
+выбрка по колонке
+-----------
+test=# SELECT first_name FROM mock_data;
+......
+
+
+
+выборка
+------------
+test=# SELECT first_name, last_name FROM mock_data WHERE id<5;
+
+ Ivie       | Fairham
+ Trev       | Wrenn
+ Elliot     | Skipton
+ Jedidiah   | Stirzaker
+
+
+
+выборка и сортировка
+-------------
+test=# SELECT first_name, last_name, ip_address FROM mock_data WHERE id<6 ORDER BY ip_address;
+
+ Jedidiah   | Stirzaker | 164.99.160.85
+ Lu         | Sowersby  | 250.76.238.250
+ Ivie       | Fairham   | 32.188.173.196
+ Trev       | Wrenn     | 46.208.115.83
+ Elliot     | Skipton   | 79.180.196.162
+
+
+
+выборка и сортировка по убыванию (DESC)
+-------------
+test=# SELECT first_name, last_name, ip_address FROM mock_data WHERE id<6 ORDER BY ip_address DESC;
+
+ Elliot     | Skipton   | 79.180.196.162
+ Trev       | Wrenn     | 46.208.115.83
+ Ivie       | Fairham   | 32.188.173.196
+ Lu         | Sowersby  | 250.76.238.250
+ Jedidiah   | Stirzaker | 164.99.160.85
+
+
+
+
+
+
+
+
+PostgreSQL
+==========================
+
+How To Use PostgreSQL with your Django Application on Ubuntu 16.04
+(PostgreSQL+Django+Python+Env)
+--------------------------
+https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-16-04
+
+
+
+PostgreSQL - Докумкентация
+==========================
+
+How To Use PostgreSQL with your Django Application on Ubuntu 16.04
+(PostgreSQL+Django+Python+Env)
+------------------
+https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-16-04
+
+
+
+УСТАНОВКА И ИСПОЛЬЗОВАНИЕ POSTGRESQL В UBUNTU 16.04
+------------------------------------
+https://www.8host.com/blog/ustanovka-i-ispolzovanie-postgresql-v-ubuntu-16-04/
+
+
+
+
+ИСПОЛЬЗОВАНИЕ РОЛЕЙ И УПРАВЛЕНИЕ ДОСТУПОМ В POSTGRESQL
+-------------------------------
+https://www.8host.com/blog/ispolzovanie-rolej-i-upravlenie-dostupom-v-postgresql/
+
+
+
+
+How To Use PostgreSQL with your Django Application on Ubuntu 14.04
+--------------------------
+https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-14-04
+
+
+
+Комманды postgresql
+-------------------
+http://proft.me/2013/06/9/postgresql-spravochnik-po-komandam-psql-pg_dump/
+
+
+
+Видео-digest: лучшее по PostgreSQL
+---------------------
+http://blogerator.ru/page/video-digest-luchshee-po-postgresql-obuchenie
+==================================
+
+
+
+
+Кастомый Мануал  (пока простой мануал для ДБ в рамках роли postgres)
+======================
+
+1)
+обновить репозитории
+$ sudo apt update               **
+
+
+2)
+$ sudo apt install postgresql postgresql-contrib     **
+
+
+sudo apt install python-pip python-dev libpq-dev postgresql postgresql-contrib
+
+
+3)
+Во время установки был создан Linux-пользователь postgres (Суперпользователь),
+который связан со стандартной ролью системы.
+
+Можно использовать этот аккаунт, чтобы подключиться к Postgres.
+Чтобы перейти в сессию пользователя postgres:
+----------------------
+
+ryndin@pc:~$ sudo -i -u postgres            **
+postgres@pc:~$      ## то есть это глобальная роль пользователя postgres (как ryndin)
+
+
+4)
+захожу в postgresql под ролью (пользователем) postgres
+(так же можно и под ryndin - если создана роль в postgresql)
+-------------------
+
+postgres@pc:~$ psql             **
+psql (9.5.7)
+Type "help" for help.
+postgres=#
+
+
+5)
+создал БД в рамках роли
+-----------------------
+
+postgres=# CREATE DATABASE students2017_db;         **
+CREATE DATABASE
+
+
+6)
+создал юзера и пароль для него
+------------------------------
+
+postgres=# CREATE USER students2017user WITH PASSWORD 'prostomag76';        **
+CREATE ROLE
+
+
+7)
+настроил юникод и дал права юзера на БД
+----------------------
+
+postgres=# ALTER ROLE students2017user SET client_encoding TO 'utf8';       **
+ALTER ROLE
+postgres=# GRANT ALL PRIVILEGES ON DATABASE students2017_db TO students2017user;    **
+GRANT
+
+
+
+
+Выйти из командной строки:
+-------------------------
+    postgres=# \q           **
+    postgres@pc:~$ 
+
+
+Сразу зайти в Командную строку (без активации сессии пользователя)
+-----------------------
+    ryndin@pc:~$ sudo -u postgres psql              **
+    ...    
+    psql (9.5.5)
+    Type "help" for help.
+    postgres=# 
+
+
+
+
+В сессии пользователя можно почитать Мануал по Созданию Роли/Пользователя
+---------------------
+    postgres@pc:~$ man createuser
+
+
+
+В роли пользователя postgres зашел в Командную строку и установил пароль для этой роли
+----------------------------
+
+    postgres@pc:~$ psql         **
+    psql (9.5.5)
+    Type "help" for help.
+
+
+    postgres=# \du              ** вызвал список ролей / пока 1 роль
+                                   List of roles
+ Role name |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+
+
+    postgres=# \password        **
+
+    Enter new password:         -- установил пароль (как в сеттингс Джанго проекта) 
+    Enter it again: 
+
+
+
+
+Установка postgreSQL клиента на Django проект:
+============================
+Сначала Ставлю Глобальные Пакеты
+----------------
+    ryndin@pc:~$ sudo apt-get install python-pip python-dev libpq-dev postgresql postgresql-contrib
+
+
+
+Затем в Виртуальной среде ставлю Клиент для Джаного
+-------------------------
+    =(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ pip install psycopg2            **
+
+
+
+В settings.py уже сделал настройки для postgreSQL и проверю доступность через Коммандную строку     -- запустилось
+----------------------------
+    =(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py dbshell            **
+    psql (9.5.5)
+    SSL connection (protocol: TLSv1.2, cipher: ECDHE-RSA-AES256-GCM-SHA384, bits: 256, compression: off)
+    Type "help" for help.
+
+    myproject2016_db=# 
+
+
+
+Сделал первую Миграцию в ДБ (makemigrations / migrate)
+---------------------------
+    =(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py migrate            **
+
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying sessions.0001_initial... OK
+
+
+
+Список всех баз данных  (я щас в БД myproject2016_db)
+----------------------
+    myproject2016_db-# \l           **
+
+                                     List of databases
+       Name       |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+------------------+----------+----------+-------------+-------------+-----------------------
+ myproject2016_db | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | 
+ postgres         | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | 
+ template0        | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | =c/postgres          +
+                  |          |          |             |             | postgres=CTc/postgres
+ template1        | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | =c/postgres          +
+                  |          |          |             |             | postgres=CTc/postgres
+(4 rows)
+
+
+
+Список всех таблиц в активной БД
+------------------------------
+    myproject2016_db-# \dt(+)              **
+
+     public | auth_group                 | table | postgres
+     public | auth_group_permissions     | table | postgres
+     public | auth_permission            | table | postgres
+     public | auth_user                  | table | postgres
+     public | auth_user_groups           | table | postgres
+     public | auth_user_user_permissions | table | postgres
+     public | django_admin_log           | table | postgres
+     public | django_content_type        | table | postgres
+     public | django_migrations          | table | postgres
+     public | django_session             | table | postgres
+
+
+
+Список юзеров - пока один
+---------------------
+    myproject2016_db-# \du
+
+    postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+
+
+
+
+В settings.py проекта настроил Имя и Пароль нового Роли-Пользователя
+и manage.py dbshell 
+-------------------
+    =(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py dbshell            **
+
+    psql (9.5.5)
+    SSL connection (protocol: TLSv1.2, cipher: ECDHE-RSA-AES256-GCM-SHA384, bits: 256,  compression: off)
+    Type "help" for help.
+
+    myproject2016_db=> \l           **
+
+                                       List of databases
+       Name       |  Owner   | Encoding |   Collate   |    Ctype    |    Access privileges     
+------------------+----------+----------+-------------+-------------+--------------------------
+ myproject2016_db | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | =Tc/postgres            +
+                  |          |          |             |             | postgres=CTc/postgres   +
+                  |          |          |             |             | projectuser=CTc/postgres
+ postgres         | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | 
+ template0        | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | =c/postgres             +
+                  |          |          |             |             | postgres=CTc/postgres
+ template1        | postgres | UTF8     | ru_UA.UTF-8 | ru_UA.UTF-8 | =c/postgres             +
+                  |          |          |             |             | postgres=CTc/postgres
+(4 rows)
+
+
+В рамках проекта - Просмотр всех Таблиц в Базе Данных Проекта
+(пока моделей нет потому пока только Менеджерские таблицы )
+---------------------
+
+    myproject2016_db-# \dt              **
+
+                       List of relations
+     Schema |            Name            | Type  |  Owner   
+    --------+----------------------------+-------+----------
+     public | auth_group                 | table | postgres
+     public | auth_group_permissions     | table | postgres
+     public | auth_permission            | table | postgres
+     public | auth_user                  | table | postgres
+     public | auth_user_groups           | table | postgres
+     public | auth_user_user_permissions | table | postgres
+     public | django_admin_log           | table | postgres
+     public | django_content_type        | table | postgres
+     public | django_migrations          | table | postgres
+     public | django_session             | table | postgres
+    (10 rows)
+
+
+
+Просмотр содержимого конктремной Таблицы
+---------------------------
+    myproject2016_db-# \d auth_user         **
+
+                                     Table "public.auth_user"
+    Column    |           Type           |                       Modifiers                        
+--------------+--------------------------+--------------------------------------------------------
+ id           | integer                  | not null default nextval('auth_user_id_seq'::regclass)
+ password     | character varying(128)   | not null
+ last_login   | timestamp with time zone | 
+ is_superuser | boolean                  | not null
+ username     | character varying(150)   | not null
+ first_name   | character varying(30)    | not null
+ last_name    | character varying(30)    | not null
+ email        | character varying(254)   | not null
+ is_staff     | boolean                  | not null
+ is_active    | boolean                  | not null
+ date_joined  | timestamp with time zone | not null
+Indexes:
+    "auth_user_pkey" PRIMARY KEY, btree (id)
+    "auth_user_username_key" UNIQUE CONSTRAINT, btree (username)
+    "auth_user_username_6821ab7c_like" btree (username varchar_pattern_ops)
+Referenced by:
+    TABLE "auth_user_groups" CONSTRAINT "auth_user_groups_user_id_6a12ed8b_fk_auth_user_id" FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED
+    TABLE "auth_user_user_permissions" CONSTRAINT "auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id" FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED
+    TABLE "django_admin_log" CONSTRAINT "django_admin_log_user_id_c564eba6_fk_auth_user_id" FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED
+
+
+
+Практический пример - Подключил к моему проекту postgreSQL вместо mySQL
+========================
+migrate -- сделал миграцию Моделей и их Связей в БД /
+Подключил Фикстуру-файл json с данными о Студентах и Группах
+
+
+ЧТО БЫЛО до последней миграции
+------------------------------
+myproject2016_db=# \dt
+ public | auth_group                 | table | postgres
+ public | auth_group_permissions     | table | postgres
+ public | auth_permission            | table | postgres
+ public | auth_user                  | table | postgres
+ public | auth_user_groups           | table | postgres
+ public | auth_user_user_permissions | table | postgres
+ public | django_admin_log           | table | postgres
+ public | django_content_type        | table | postgres
+ public | django_migrations          | table | postgres
+ public | django_session             | table | postgres
+ public | students_student           | table | postgres
+
+myproject2016_db=# \d students_student
+ id          | integer                | not null default nextval('students_student_id_seq'::regclass)
+ first_name  | character varying(256) | not null
+ last_name   | character varying(256) | not null
+ middle_name | character varying(256) | not null
+ birthday    | date                   | 
+ notes       | text                   | not null
+ photo       | character varying(100) | 
+ ticket      | character varying(256) | not null
+
+
+myproject2016_db=# \q
+
+
+Сделал Миграцию для привязки Проекта к postgreSQL
+=================== 
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py migrate
+
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions, students
+Running migrations:
+  Applying students.0004_auto_20170118_0940... OK
+  Applying students.0005_auto_20170118_0940... OK
+  Applying students.0006_auto_20170118_1620... OK
+  Applying students.0007_auto_20170118_1630... OK
+  Applying students.0008_auto_20170118_1631... OK
+  Applying students.0009_auto_20170118_1703... OK
+  Applying students.0010_auto_20170118_1708... OK
+  Applying students.0011_group... OK
+  Applying students.0012_student_student_group... OK
+  Applying students.0013_auto_20170122_2058... OK
+  Applying students.0014_auto_20170122_2059... OK
+  Applying students.0015_auto_20170122_2101... OK
+
+
+
+Зашел в консоль БД в вируальной среде
+Видно что появились новые мигрированные поля и таблица Групп
+======================
+
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py dbshell
+
+psql (9.5.5)
+SSL connection (protocol: TLSv1.2, cipher: ECDHE-RSA-AES256-GCM-SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+myproject2016_db=# \dt   **
+
+                   List of relations
+ Schema |            Name            | Type  |  Owner   
+--------+----------------------------+-------+----------
+ public | auth_group                 | table | postgres
+ public | auth_group_permissions     | table | postgres
+ public | auth_permission            | table | postgres
+ public | auth_user                  | table | postgres
+ public | auth_user_groups           | table | postgres
+ public | auth_user_user_permissions | table | postgres
+ public | django_admin_log           | table | postgres
+ public | django_content_type        | table | postgres
+ public | django_migrations          | table | postgres
+ public | django_session             | table | postgres
+ public | students_group             | table | postgres
+ public | students_student           | table | postgres
+(12 rows)
+
+
+myproject2016_db=# \d students_group        **
+
+                                  Table "public.students_group"
+  Column   |          Type          |                          Modifiers                          
+-----------+------------------------+-------------------------------------------------------------
+ id        | integer                | not null default nextval('students_group_id_seq'::regclass)
+ title     | character varying(256) | not null
+ notes     | text                   | not null
+ leader_id | integer                | 
+Indexes:
+    "students_group_pkey" PRIMARY KEY, btree (id)
+    "students_group_leader_id_key" UNIQUE CONSTRAINT, btree (leader_id)
+Foreign-key constraints:
+    "students_group_leader_id_41cb2861_fk_students_student_id" FOREIGN KEY (leader_id) REFERENCES students_student(id) DEFERRABLE INITIALLY DEFERRED
+Referenced by:
+    TABLE "students_student" CONSTRAINT "students_student_student_group_id_66f421b5_fk_students_group_id" FOREIGN KEY (student_group_id) REFERENCES students_group(id) DEFERRABLE INITIALLY DEFERRED
+
+
+myproject2016_db=# \d students_student      **
+
+                                      Table "public.students_student"
+      Column      |          Type          |                           Modifiers                           
+------------------+------------------------+---------------------------------------------------------------
+ id               | integer                | not null default nextval('students_student_id_seq'::regclass)
+ first_name       | character varying(256) | not null
+ last_name        | character varying(256) | not null
+ middle_name      | character varying(256) | not null
+ birthday         | date                   | 
+ notes            | text                   | not null
+ photo            | character varying(100) | 
+ ticket           | character varying(256) | not null
+ have_breakfast   | boolean                | not null
+ student_group_id | integer                | 
+Indexes:
+    "students_student_pkey" PRIMARY KEY, btree (id)
+    "students_student_1334b541" btree (student_group_id)
+Foreign-key constraints:
+    "students_student_student_group_id_66f421b5_fk_students_group_id" FOREIGN KEY (student_group_id) REFERENCES students_group(id) DEFERRABLE INITIALLY DEFERRED
+Referenced by:
+    TABLE "students_group" CONSTRAINT "students_group_leader_id_41cb2861_fk_students_student_id" FOREIGN KEY (leader_id) REFERENCES students_student(id) DEFERRABLE INITIALLY DEFERRED
+
+
+    // Видно что не было Модели Группы и не было поля Группа в Модели Студента
+    // Также на Сайте Данных с полями нет, то есть есть 1 поля ранее внесенное в postgreSQL
+
+
+Чищу старую БД / Заполняю новыми днными
+=======================================
+flush / loaddata
+
+
+Чишу старые данные в БД
+------------------------
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py flush
+
+You have requested a flush of the database.
+This will IRREVERSIBLY DESTROY all data currently in the 'myproject2016_db' database,
+and return each table to an empty state.
+Are you sure you want to do this?
+
+    Type 'yes' to continue, or 'no' to cancel: yes
+
+
+Делаю Загрузку новых данных из Файла-Фикстуры
+---------------------------
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py loaddata students_db.json
+
+Installed 133 object(s) from 1 fixture(s)
+
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py dbshell        **
+
+psql (9.5.5)
+SSL connection (protocol: TLSv1.2, cipher: ECDHE-RSA-AES256-GCM-SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+
+Видно в БД что новое поле Группы в Модели Студент появилось / Даже написаны Связи
+---------------------------------
+
+myproject2016_db=# \d students_student      **
+
+                                      Table "public.students_student"
+      Column      |          Type          |                           Modifiers                           
+------------------+------------------------+---------------------------------------------------------------
+ id               | integer                | not null default nextval('students_student_id_seq'::regclass)
+ first_name       | character varying(256) | not null
+ last_name        | character varying(256) | not null
+ middle_name      | character varying(256) | not null
+ birthday         | date                   | 
+ notes            | text                   | not null
+ photo            | character varying(100) | 
+ ticket           | character varying(256) | not null
+ have_breakfast   | boolean                | not null
+ student_group_id | integer                | 
+Indexes:
+    "students_student_pkey" PRIMARY KEY, btree (id)
+    "students_student_1334b541" btree (student_group_id)
+Foreign-key constraints:
+    "students_student_student_group_id_66f421b5_fk_students_group_id" FOREIGN KEY (student_group_id) REFERENCES students_group(id) DEFERRABLE INITIALLY DEFERRED
+Referenced by:
+    TABLE "students_group" CONSTRAINT "students_group_leader_id_41cb2861_fk_students_student_id" FOREIGN KEY (leader_id) REFERENCES students_student(id) DEFERRABLE INITIALLY DEFERRED
+
+
+После runserver зашел на сайт и убидился что Данные со Студентами и Группаи заполненны. Админка доступна !!!
+Важно: Обработка запросов Серевером видно что выполняется в 2 раза быстрее чем при работе в связке с mySQL !!!
+
+
+
+Сеттинги в Джаного
+==================
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydatabase',
+        'USER': 'mydatabaseuser',
+        'PASSWORD': 'mypassword',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
+
+
+
+Свежая установка
+====================
+
+Капаемся в Свежей Базе Данных ПостгресСКЛ
+
+1)
+Настройка
+После успешной установки самоё время заняться базовой настройкой СУБД PostgreSQL.
+По умолчанию доступ к СУБД имеет пользователь postgres. Заходим под ним:
+----------------------
+
+user@ryndin-lenovo-ideapad-520:~$ sudo -u postgres psql             ***
+
+[sudo] пароль для user: 
+psql (12.1 (Ubuntu 12.1-1.pgdg18.04+1), сервер 10.11 (Ubuntu 10.11-1.pgdg18.04+1))
+Введите "help", чтобы получить справку.
+
+postgres=# 
+
+
+2)
+Для того, чтобы создать новую базу данных выполняем следующую команду внутри psql:
+------------------------
+
+postgres=# CREATE DATABASE ryndindatabase;              ***
+CREATE DATABASE
+
+
+3)
+Создаём отдельного пользователя с логином myuser и паролем password:
+сначала видно что 2 юзера уже существуют (но я не помню их пароли, потому создаю третьего)
+-------------------------------
+
+postgres=# CREATE USER ryndin WITH password 'prostomag76';
+ОШИБКА:  роль "ryndin" уже существует
+postgres=# CREATE USER postgres WITH password 'prostomag76';
+ОШИБКА:  роль "postgres" уже существует
+
+postgres=# CREATE USER workuser WITH password 'prostomag76';        ***
+CREATE ROLE
+
+
+4)
+Чтобы дать полные привилегии над нашей новой базой данных mydatabase пользователю myuser выполняем:
+----------------------------
+
+postgres=# GRANT ALL PRIVILEGES ON DATABASE ryndindatabase TO workuser;         ***
+GRANT
+
+
+5)
+Чтобы сделать нового пользователя администратором нашей СУБД, выполняем:
+--------------------
+
+postgres=# ALTER USER workuser WITH SUPERUSER;              ***
+ALTER ROLE
+
+Чтобы лишить его ранее предоставленных полномочий, выполним:
+----------------------
+
+postgres=# ALTER USER workuser WITH NOSUPERUSER;
+
+
+6)
+Для того, чтобы авторизоваться в PostgreSQL под новым пользователем, запускаем:
+------------------------------
+
+user@ryndin-lenovo-ideapad-520:~$ psql -h localhost ryndindatabase workuser             ***
+
+Пароль пользователя workuser: 
+psql (12.1 (Ubuntu 12.1-1.pgdg18.04+1), сервер 10.11 (Ubuntu 10.11-1.pgdg18.04+1))
+SSL-соединение (протокол: TLSv1.3, шифр: TLS_AES_256_GCM_SHA384, бит: 256, сжатие: выкл.)
+Введите "help", чтобы получить справку.
+
+ryndindatabase=# 
+
+
+7)
+Для выхода из сеанса, необходимо выполнить команду \q

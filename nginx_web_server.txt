@@ -1,0 +1,19 @@
+
+установка nginx веб сервера в облачном сервере:
+--------------------
+https://www.8host.com/blog/ustanovka-nginx-v-ubuntu-16-04/
+
+
+Полная установка нп Хостинге 8host.com проекта в свзязке
+ubuntu (debian) / django / gunicorn (wsgi) / nginx (web proxy) /
+------------------------------------------  
+https://www.8host.com/blog/razrabotka-django-prilozheniya-na-postgresql-nginx-gunicorn-v-debian-8/
+
+
+How To Install Nginx on Ubuntu 16.04
+-------------------------------------
+https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-16-04
+
+
+
+

@@ -1,0 +1,469 @@
+Прежде чем учить jqury надо иметь базовые навыки в:
+-----------------
+    HTML
+    CSS
+    JavaScript
+
+
+jQuery обычно взаимедействует со следующими элементами:
+-----------------
+    HTML/DOM manipulation
+    CSS manipulation
+    HTML event methods
+    Effects and animations
+    AJAX
+
+
+Если локально скачан jQuery то вставляется на стнаницу ссылка как сорс
+---------------------
+    <body>
+    ...
+    <script src="jquery-3.1.1.min.js"></script>
+    </body>
+
+
+Глобально Библиотека доступна на cdn серверах:
+    Гугл
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    Майскрософт        
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js">
+
+
+Общий систатсис Библиотеки
+========================
+    $(selector).action()
+    1) псевдоим бибилотеки jquery
+    2) селектор - html элемент к котормоу применяется действие/метод
+    3) действие / метод
+
+Примеры
+    $(this).hide() - скрыть текущий объект / элемент (как инстанс).
+    $("p").hide() - скрыть рараграфы (по тегу)
+
+
+
+$(document).ready
+=================
+методы jquery выполняются только если загружен вся структура документа (HTML/DOM)
+но навеное лучше синтаксис именнованных функций
+-----------------
+
+function myFunction1(){
+    $("p").click(function(event){
+        $(this).hide();
+    });
+};
+
+$(document).ready(function(){
+    myFunction1();
+    myFunction2();
+    myFunction3();
+});
+
+
+Основные селекторы:
+$('selector').method(function(){
+})
+====================
+$('#')              // по id
+$('.class')         // по имени класса
+$('tag')            // по имени тега
+$('*')              // все элементы
+$(this)             // текущий элемент (выбран уже селектором) / выбранный экземпляр
+$('teg.class')      // по тегу с именем класса
+$('teg:first')      // первый элемент в последовательности подобных
+$('ul li:first')    // первый подтег каждого именнованого тега
+$("[href]")         // все элементы с атрибутом href
+$("tr:even")        // четные строки в таблице
+$("tr:odd")         // нечетные строки в таблице
+$(":button")        // все элементы button и input с типом type='button'
+$("teg[target='_blank']")   // все теги с атрибутом по значению 
+
+
+Селектор-Тестер
+===================
+https://www.w3schools.com/jquery/trysel.asp
+
+
+
+Глобальные и Локальные файлы
+======================
+<body>
+........
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+<script src="my_jquery_functions.js"></script>
+</body>
+
+
+
+События / Event
+================
+mouseleave      // если мышка ушла с элемента -> действие
+
+click           // если клик (левая кнопка) на элементе
+
+dblclick        // если двойной клик на элемента
+
+mousedown       // если мышка нажата на элементе (на все 3 кнопки)
+
+mouseup         // если мышка отжалась на элементе (на все 3 кнопки)
+
+mouseenter      // если мышка наехала на элемент
+
+hover           // действия 2 раза, при наведении (покрытия) на элемент, и при схода с
+                элемента
+    $("h2").hover(
+        function(){
+        alert("Навелся на Заголовок");
+        },
+        function(){
+        alert("Ушел с Заголовка");
+        }
+    );
+
+
+focus          // запускает действие при клике на поле формы, например на инпуте
+.css           // такой экшн редактирует стили css на элементах
+    $('input').focus(function(event){
+        $(this).css("background-color", "orange");      // меняет цвет фона поля формы
+
+blur            // запускает действие когда курсор убран (перекликан) с поля формы
+    $('#blur').blur(function(event){
+        $(this).css("background-color", "green");       // курсор ушел - задан цвет поля
+        });
+
+
+on              // запускает набор действий, например собранных в массиве ключ/значение
+    $("p.on").on({
+        mouseenter: function(){
+            $(this).css("background-color", "lightgray");
+        },
+        mouseleave: function(){
+            $(this).css("background-color", "lightblue");
+        },
+        click: function(){
+            $(this).css("background-color", "yellow");
+        }
+    });
+    // строка меняет свой цвет фона в трех позиций: наведение/покидание/клик
+
+on              // 2 смысл метода
+    $("p").on("click", function(){
+        $(this).hide();     // запускает событие как метод + 2 параметра /событие / действие
+
+
+keypress            // действие, если в поле формы напечатан символ с клавиатуры
+    $("input").keypress(function(){
+        $(this).hide();     // например при вводе символа элемент поля пропадает
+
+
+
+Эффекты
+===================
+hide()
+show()          // методы скрывают и отображвют элементы на страницы + скрость
+
+    $("#hide").click(function(){
+        $("p").hide(500);          // скрытие за 1000 мс
+    });
+    $("#show").click(function(){
+        $("p").show(500);          // отображение за 2000 мс
+    });
+
+$(selector).show(speed,callback);       // общий синтатксис / есть опционный параматр коллбек
+
+
+toggle()        // "тупблер" по очерези при экшене делает скрытие/отображение
+    $("#hide").click(function(){
+        $("p").toggle(500);         // скрытие/отображение за 500 мс.
+    });
+
+
+fade...()            // эффект Затухание    fadeIn() / fadeOut() / fadeToggle()
+    $("button").click(function(){
+       $("p").fadeIn(5000);             // Отображение
+      $("p").fadeOut(5000);             // Затухание
+    });
+<p class="one" style="display:none">Первый параграф</p>
+    // для отображения может пригодится начальный стиль css для элемента style="display:none"
+
+    $("button").click(function(){
+        $("p").fadeToggle(5000);        // двустороннее действие
+    });
+
+
+fadeTo()            // отображение до указанного уровня Прозрачности (скрытые+открытые)
+    function myFunction1(){
+    $("button").click(function(){
+        $("p").fadeTo(1000, 0.4);   // сделает Прозрачность в 40% для всех параграфов
+    });
+    };
+
+
+slideDown()
+slideUp()
+slideToggle()       // Слайдирование Элемента Отображение / Скрытие / ТудаСюда
+    $("button").click(function(){
+        $('span').slideToggle(1000);    // ТудаСюда Слайдирует (Прячется/Сплывает) элемент
+    });
+
+    $("#do").click(function(){
+        $('span').slideUp(1000);        // Прячется Элемент при екшене
+    });
+    $("#anddo").click(function(){
+        $('span').slideDown(1000);      // Отображается Элемент при екшене
+    });
+
+    $('div').slideUp(1000).slideDown(1000);     // Последовательность Тоже Работает
+
+
+
+Эффекты Анимации
+=========================
+animate({}, 1000)           // эффекты Анимации над Элементами
+                            // параметры Анимации - как Ключи:значения в Словаре
+    $("#do").click(function(){
+        $("#box").animate({
+        left: '350px',          // смещение от лева вправо на 350 пикселей
+        opacity: '0.5',         // прозрачность 50%
+        height: '150px',        // изменение высоты блока до 150 пикс
+        width: '150px'          // изменение ширины блока до 150 пикс
+        }, 1500);               // время Анимации в мс
+    });
+
+    $("#do").click(function(){
+        $("#box").animate({
+        left: '350px',
+        opacity: '0.5',
+        height: '+=150px',      // пририщение значения - высоты блока
+        width: '+=200px'        // приращение значения - ширины блока
+        }, 1500);
+    });
+
+    // реальная анимация путем оперирования назначенной переменной-объекта свойств блока    
+    $("#do").click(function(){
+        var div = $("#box");
+        div.animate({height: '+=300px', opacity: '0.4'}, "slow");
+        div.animate({width: '+=300px', opacity: '0.8'}, "slow");
+        div.animate({height: '-=100px', opacity: '0.4'}, "slow");
+        div.animate({width: '-=100px', opacity: '0.8'}, "slow");
+    });
+    
+
+stop()          // команда останавливает эффекты js нв странице
+    $("#flip").click(function(){        // при клике на панели шапки
+        $("#panel").slideDown(5000);    // панел с текстом раскрывается (была скрыта)    
+    });
+    $("#stop").click(function(){        // но при клике на кнопке
+        $("#panel").stop();             // эффект анимации остановлен где есть.
+    }); 
+    
+    // вот код разметки страницы:
+    <style>                 // стили css для панелей
+        #panel, #flip {
+        padding: 5px;
+        font-size: 18px;
+        text-align: center;
+        background-color: #555;
+        color: white;
+        border: solid 1px #666;
+        border-radius: 5px;
+    }
+    #panel {
+        padding: 50px;
+        display: none;
+    }
+    </style>
+    <button id="stop">Stop sliding</button>     // теги-элементы страницы
+    <div id="flip">Click to slide down panel</div>
+    <div id="panel">Hello world!</div>
+
+
+callback        // может быть как функция внутри метода
+                // может быть как отдельная инструкция в последовательности
+    
+    $("button").click(function(){
+        $("p").hide("slow", function(){             // как функция в методе
+        alert("The paragraph is now hidden");
+        });
+    });
+
+    $("button").click(function(){
+        $("p").hide(1000);
+        alert("The paragraph is now hidden");       // как отдельная инструкция
+    });
+
+
+
+AJAX
+=================
+http://jquery.page2page.ru/index.php5/Ajax
+    // очень подробно и понятно на русскоязычной старницы
+
+https://www.w3schools.com/jquery/jquery_ajax_intro.asp
+
+https://www.w3schools.com/jquery/jquery_ref_ajax.asp
+
+AJAX = Asynchronous JavaScript and XML.
+
+
+$.ajax()              // комбинированный метод запроса на сервер + куча параметров
+=====================
+Общий синтаксис заботы запроса jQuery/AJAX со стороны клиента - это не python !
+-----------------------
+$.ajax({name:value, name:value, ... })
+
+Атрибуты Этого метода как пары ключ/значение в словаре запроса:
+---------------------
+    http://jquery.page2page.ru/index.php5/Ajax-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81
+    https://www.w3schools.com/jquery/ajax_ajax.asp
+
+  На русскоязычной странице очень подробно представлены параменты запроса ajax()
+
+
+ajaxSetup()         // устанавливаются Значения по умолчанию для ajax()
+-----------         Так же методом словаря ключ/значение из параметров в ajax()     
+
+
+
+Все методы ajax() запроса:
+=================
+$.get()
+------------
+    Осуществляет запрос к серверу методом GET, без перезагрузки страницы. Функция имеет
+    несколько необязательных параметров.
+    jQuery.get(url,[data],[callback],[dataType])
+        url — url-адрес, по которому будет отправлен запрос.
+        data — данные, которые будут отправлены на сервер. Они должны быть представлены в
+        объектом, в формате: {fName1:value1, fName2:value2, ...}.
+        
+    callback(data, textStatus, jqXHR) — пользовательская функция, которая будет вызвана
+        после ответа сервера.
+        data — данные, присланные с сервера.
+        textStatus — статус того, как был выполнен запрос.
+        jqXHR — объект jqXHR (в версиях до jquery-1.5, вместо него использовался
+        XMLHttpRequest)
+    dataType — ожидаемый тип данных, которые пришлет сервер в ответ на запрос
+
+    GET - Запрашивает на получение данных с сервера
+    POST -  Предоставляет данные для обработки на сервер
+    
+    Пример get()
+    --------------
+    $("button").click(function(){
+        $.get("demo_test.asp", function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    });   
+    // 1) url - адрес куда идет запрос POST
+    // 2) callback функция, имеющая 2 параметра: 
+        1) content данных, 
+        2) статус запроса - success / error  
+
+      
+$.post()
+------------
+    Осуществляет запрос к серверу методом POST, без перезагрузки страницы. Функция имеет
+    несколько необязательных параметров.
+    
+    jQuery.post(url,[data],[callback],[dataType])
+        url — url-адрес, по которому будет отправлен запрос.
+        data — данные, которые будут отправлены на сервер. Они должны быть представлены в
+        форме объекта, в формате: {fName1:value1, fName2:value2, ...}.
+
+    callback(data, textStatus, jqXHR) — пользовательская функция, которая будет вызвана
+        после ответа сервера.
+        data — данные, присланные с сервера.
+        textStatus — статус того, как был выполнен запрос.
+        jqXHR — объект jqXHR (в версиях до jquery-1.5, вместо него использовался
+        XMLHttpRequest)
+    dataType — ожидаемый тип данных, которые пришлет сервер в ответ на запрос (подробности тут).
+
+    Пример post()
+    -------------
+    $("button").click(function(){
+        $.post("demo_test_post.asp",        // 1) URL адрес куда запрос
+        {                                   // 2) словарь пар значений для сервера
+            name: "Donald Duck",
+            city: "Duckburg"
+        },
+        function(data, status){             // колбек-функция "перезвона" от сервера
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    });
+
+
+
+$.load()
+--------------
+    Осуществляет запрос к серверу без перезагрузки страницы. Полученные от сервера данные
+    будут автоматически помещены внутрь выбранных элементов. Функция имеет несколько
+    необязательных параметров.
+    
+    $.load(url,[data],[callback],[dataType])
+        url — url-адрес, по которому будет отправлен запрос.
+        data — данные, которые будут отправлены на сервер. Они должны быть представлены в
+        форме объекта, например: {fName1:value1, fName2:value2, ...}.
+    
+    callback(data, textStatus, XMLHttpRequest) — пользовательская функция, которая будет
+        вызвана после того, как присланный сервером html-текст будет помещен в выбранные
+        элементы страницы.
+        data — данные, присланные с сервера.
+        textStatus — статус того, как был выполнен запрос.
+        XMLHttpRequest — объект XMLHttpRequest
+    dataType — ожидаемый тип данных, которые пришлет сервер в ответ на запрос
+
+load()              // метод загрузки файла с удаленного сервера 
+    <script>
+    $(document).ready(function(){
+        $("button").click(function(){           // по нажатию кнопки
+        $("#div1").load("demo_test.txt");       // в div будет загружен новый текст !!!
+        });
+    });
+    </script>
+
+    <body>
+    <div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+    <button>Get External Content</button>
+    ...
+
+    Опционноые параметры при load()
+    --------------------
+    responseTxt - contains the resulting content if the call succeeds
+    statusTxt - contains the status of the call
+    xhr - contains the XMLHttpRequest object
+    
+    $("button").click(function(){
+        $("#div1").load("demo_test.txt", function(responseTxt, statusTxt, xhr){
+            if(statusTxt == "success")
+                alert("External content loaded successfully!");
+            if(statusTxt == "error")
+                alert("Error: " + xhr.status + ": " + xhr.statusText);
+        });
+    });
+
+
+
+$.getScript()
+---------------
+    Делает запрос к серверу без перезагрузки страницы, с запросом javascript файла. При
+    получении запрошенного файла, код внутри него будет автоматически выполнен. Метод имеет
+    параметры:
+    
+    jQuery.getScript(url, [success(data, textStatus)])
+        url — url-адрес js-файла.
+        success(data, textStatus) — пользовательская функция, которая будет вызвана после
+        удачного выполнения загруженного js-файла.
+        data — данные, присланные с сервера.
+        textStatus — статус того, как был выполнен запрос.
+
+    $.getScript("test.js", function(){
+        alert("Скрипт выполнен.");
+    });
+
+........ и прочие методы, которые можно изучить потом по мере реализации Кода на практике
+==================
+
+
+

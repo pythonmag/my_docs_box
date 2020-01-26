@@ -1,0 +1,200 @@
+Апликация для Django для регистрации Пользователей
+
+
+django-registration-redux
+=========================
+	https://pypi.python.org/pypi/django-registration-redux/
+	Версию пакета всегда лучше утчнать по ссылке на pypi и указывать явно при Инсталяции 
+
+Само Django не дает функционала для регистарии пользователей, кроме как через интерфейс 
+Администратора вбивать новых пользователей (как бы как для Копроративного сайта с разрешения начальника :))
+
+(myproject2016py)ryndin@pc:~/work/myproject2016py/src/myproject2016$
+
+		pip install django-registration-redux==1.3      **
+
+	// Результат:
+	Downloading/unpacking django-registration-redux==1.3
+  	Downloading django_registration_redux-1.3-py2-none-any.whl (136kB): 136kB downloaded
+	Installing collected packages: django-registration-redux
+	Successfully installed django-registration-redux
+	Cleaning up...
+
+(myproject2016py)ryndin@pc:~/work/myproject2016py/src/myproject2016$ pip list
+
+	Django (1.8.8)
+	django-crispy-forms (1.5.2)
+	django-registration-redux (1.3)
+	MySQL-python (1.2.5)
+	Pillow (3.1.0)
+	pip (1.5.4)
+	python-dateutil (2.4.2)
+	python-magic (0.4.10)
+	setuptools (2.2)
+	six (1.10.0)
+	wsgiref (0.1.2)
+
+
+
+Апликация для Django для регистрации Пользователей через Соц.сети
+====================
+https://pypi.python.org/pypi/python-social-auth/
+
+Список Соц Сетей огромный, там все что нужно.
+
+
+Вносим модуль registration в список Апликаций моего Проекта (settings.py)
+--------------------------
+INSTALLED_APPS = (
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'crispy_forms',
+
+    'registration',
+
+    'myproject2016app',
+)
+
+
+Всторенные Апликации Аутентификации и Сессий (поддержание связей между запросами для Юзеров)
+--------------------
+
+Вбудована аплікація django.contrib.auth надає нам модель користувача, модель групи, дозволи,
+форми та логіку для логування, зміни паролю та виходу із веб-сайту.
+Вбудована аплікація django.contrib.sessions надає модель для зберігання користувацьких сесій
+в базі даних і, звичайно, усю логіку для управління ними.
+// Немного о cookie
+
+	// Куки защита о кроссайтовго запроса
+	
+	csrftoken=d64IVhUjqJVO6Ub2iUp7Sxg25JX4OJRx
+
+	// Куки Сессия имеет все данные о Юзере для сохранения связи между запросами при работе на 
+		сайте под залогиненом пользователе в защищеном режиме https 
+
+	sessionid=rzllqqrwc5k7y26edzt7ivcxbshqz7fm
+
+// Слудующие МидлВары должны быть в проекте (устанавливаются при старте проекта):
+
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.contrib.auth.middleware.SessionAuthenticationMiddleware'
+
+
+
+
+registration profile
+--------------------
+В Интерфейсе Администратора появилось Дирректория для регистрации пользователей Администратором.
+Это является подтверждением что апликация registration к Проекту подключена.
+
+
+migrate / makemigrations
+------------------------
+
+Пакет Регистрации имеет в своем составе Модели(для БД) потому необходимо проделать Миграции
+Чтобы обновить БД.
+
+(myproject2016py)ryndin@pc:~/work/myproject2016py/src/myproject2016$ 
+		python manage.py migrate
+
+	// Результат:
+	Operations to perform:
+  	Synchronize unmigrated apps: staticfiles, messages, crispy_forms
+  	Apply all migrations: sessions, admin, myproject2016app, auth, contenttypes, registration
+	Synchronizing apps without migrations:
+  	Creating tables...
+    Running deferred SQL...
+  	Installing custom SQL...
+	Running migrations:
+  	Rendering model states... DONE
+  	Applying registration.0001_initial... OK
+  	Applying registration.0002_registrationprofile_activated... OK
+  	Applying registration.0003_migrate_activatedstatus... OK
+
+Если бы команда migrate не пошла сразу то надо было бы сначала Создать оновленные миграции 
+командой makemigrations.
+
+
+
+Настройки в settigs.py для django-registration-redux
+---------------------
+REGISTRATION_OPEN = True
+
+
+
+Логика для Зарегистрированных Пользователей
+=============================
+
+Объект user доступен во всех шаблонах потому используе его метод .is_authenticated можно 
+Отображения Шаблонов подстроить под пользоветелей, наприммер я решил дать возможность написать
+мне письмо только Разегистрированным пользователям.
+  
+{% if user.is_authenticated %}
+            <li {% if request.path == "/sendmail/" %}class="active"{% endif %}>
+                <a href="{% url 'send_mail' %}">
+                    <span class="glyphicon glyphicon-envelope"></span> Send Me Mail
+				</a>
+			</li>
+{% endif %}
+
+
+Также для пользователя использую Логику отображения блоков Тегов в Зависимости от наличия user
+{{user.username }} дает глобально доступ и имени пользователя на Сайте.
+-------------------
+
+<!--Right Buttoms of Nav Panel Registration -->
+{% if user.is_authenticated %}
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{user.username }} || </a></li>
+        <li><a href="#">Выйти</a></li>
+    </ul>
+{% else %}
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+{% endif %}
+
+
+
+Настройка Урлов по трем Событиям  Регистрация / Выход из Логина / Вход в Логин
+--------------------------------
+
+from django.contrib.auth import views as auth_views
+from django.views.generic import RedirectView
+... 
+
+ # Users Register / Login / Logout url
+
+    url(r'^register/complete/$', RedirectView.as_view(pattern_name='home')),
+
+    url(r'^users/logout/$', auth_views.logout, kwargs={'next_page': 'home'}),
+
+    url(r'^users/$', include('registration.backends.simple.urls', namespace='users'))
+
+
+стр.630 учебника - много всего.
+
+Модуль urls аплікації django-registration перевіряє наявність змінної в налаштуваннях проекту
+INCLUDE_AUTH_URLS. Якщо дана змінна не є у False (а ми її взагалі не чіпали), тоді аплікація
+підключає усі вбудовані в’юшки з модуля django.contrib.auth: login, logout і решту. Таким
+чином django-registration підключить їх для нас та ще й у область URL адрес: “/users/”.
+Тепер маємо працюючі адреси users/login, users/logout, users/register і тому подібні. Єдине,
+що варто тут пам’ятати: дані в’юшки підключаються із іншими іменами URL шаблонів.
+django-registration додає до них префікси “auth_”. Так, наприклад, URL шаблон під назвою
+login буде називатись auth_login.
+
+
+стр.631 Ошибка в именах Урлов в Шаблоне
+
+
+
+
+
+
+

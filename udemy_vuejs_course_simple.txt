@@ -1,0 +1,194 @@
+Начало
+================
+
+Документация
+------------
+https://vuejs.org/
+
+
+Расширение для Хрома
+--------------
+Vue.js devtools
+https://chrome.google.com/webstore/detail/vuejs-devtools/
+
+
+Уроки от Сайта VUE
+===================
+где я остановился -
+https://www.vuemastery.com/courses/intro-to-vue-js/attribute-binding
+
+
+
+
+Первый Простой Пример
+---------------------
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- development version, includes helpful console warnings -->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>    // импорт сорса
+</head>
+
+<body>
+
+<h1 id='app-1'>{{ message }}</h1>               // отображение данных на странице
+
+	<script type="text/javascript">
+		new Vue({
+
+			el: '#app-1',
+			data: {
+				message: 'TEST TEXT'            // данные под конкретный ID
+			}
+		})
+	</script>
+
+</body>
+
+</html>
+
+
+
+Второй Пример - Объекты
+------------------------
+<body>
+
+<div id='app-1'><h1>{{message}}</h1></div>
+
+<div id ='app-2'><h2>{{message}}</h2></div>
+
+
+	<script type="text/javascript">
+		
+		let vm1 = new Vue({                     // как объекты
+
+			el: '#app-1',
+			data: {
+				message: 'TEST TEXT'
+			}
+		})
+
+		let vm2 = new Vue({                     // как объекты
+
+			el: '#app-2',
+			data: {
+				message: 'NEW TEXT'
+			}
+		})
+
+	</script>
+
+</body>
+
+
+В Браузере через Консоль меняются значения
+--------------------
+vm1.message = 'HELLO WORLD'
+"HELLO WORLD"
+
+vm2.message = 'HELLO'
+"HELLO"
+
+
+
+Третий пример
+-------------
+<body>
+
+<div id='app-1'><h1>{{message}}</h1></div>
+
+<div id ='app-2'>
+	<h2>{{message}}</h2>
+	<h2>{{ isActive ? myNumber*2 : myNumber }}</h2>      // логика if true else false
+<h3>{{ message.split('').reverse('').join('') }}</h3>	 // логика преобразования строки
+    <h4><a v-bind:href="myURL">{{myURL}}</a></h4>        // привязанная переменная через v-bind
+    		
+
+<form action="" method='GET' class="was-validated">
+	<div class="form-group">
+    <label for="uname">Username:</label>
+    <input type="text"
+    		class="form-control"
+    		id="uname"
+    		placeholder="Enter username"
+    		name="uname"
+    		required
+    		v-model='message'>             // создана молель элемента данных (меняется на лету) 
+    </div>
+  </form>
+
+
+
+</div>
+
+
+	<script type="text/javascript">
+		
+		let vm1 = new Vue({
+
+			el: '#app-1',
+			data: {
+				message: 'TEST TEXT'
+			}
+		})
+
+		let vm2 = new Vue({
+
+			el: '#app-2',
+			data: {
+				message: 'NEW TEXT',
+				myNumber: 100,
+				isActive: true,
+                myURL: 'https://www.google.com'
+			}
+		})
+
+	</script>
+
+</body>
+
+
+
+пример Акшена и Функции на Акшен
+-----------------------
+
+<input v-on:click='addToKart'       // нажатие на кнопку
+			class='btn btn-primary' type="button" name="" value="ADD TO CART">
+
+<button type="button" class="btn btn-success">
+  ITEMS IN CART <span class="badge"> {{ cart }} </span>
+</button>
+
+
+    data: 
+    ......
+    cart: 0,                    // переменная под {{}}
+				
+	},
+
+	methods: {
+		addToKart: function () {
+		this.cart += 1          // Приращение Переменной при запуске Функции
+	    }
+	}
+
+
+
+Вызываемая функция tytle в html шаблоне как Объект
+==================
+{{ tytle }}                                   // Объект - Строка
+
+
+    computed: {                               // функция которая перерастает в Объект
+    			tytle: function () {
+				return this.brend + '  ' + this.prodact
+			    }
+	}
+
+
+
+
+
+
+

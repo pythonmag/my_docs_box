@@ -1,0 +1,4807 @@
+﻿
+1. Web-технологии. Архитектура веб-приложений
+==============================================
+https://www.youtube.com/watch?v=Ys2CB4C2NWA&index=21&list=PLSVqTfjvRr4TjLCu8Dx-rbxSEd0ljd7ee&t=1232s
+
+
+Курс Веб-Техногоии от Мозилла
+-----------------------------
+https://developer.mozilla.org/en-US/docs/Web
+
+
+internet(глобальная сеть / связь между сетями) /
+ethernet (внутренняя сеть / локальная) /
+www(совокупность данных на серверах в internet)
+
+IP (internet protocole) самый простой способ идентификации по сети / 
+
+
+
+TCP (transmission control protocol - управляет IP / надежный последовательный), 
+скорость не гарантированная но доставка ганантирована /
+-----------------------------------
+https://ru.wikipedia.org/wiki/Transmission_Control_Protocol
+
+
+
+DNS (domane name) система доменных имен: IP == name.com (хост имя) /
+
+
+
+HTTP (hiper text protocole) / URI / URL / request-response / 
+---------------
+https://developer.mozilla.org/ru/docs/Web/HTTP/Overview
+
+
+
+FTP (file transport protocol) / 21 port / передача файлов и картинок (клиент-сервер) 
+
+
+
+SHH (шифрующий трафик протокол) / может удаленной управлят ОС / github использует / 
+
+
+
+P2P (peer-to-peer, P2P) - пиринговая сеть (равный к равному) / типпа торрент сети / 
+или типа сети крипто валют / все равные, каждый и клиент и сервер / все данные синхронные /
+также сети распределенных вычислений /
+
+
+SMPT (Simple Mail Transfer Protocol — простой протокол передачи почты) / POP (post office protocol)/
+IMAP 
+
+
+
+MIME - type
+-----------
+https://developer.mozilla.org/ru/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+http://htmlbook.ru/html/value/mime
+https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_MIME-%D1%82%D0%B8%D0%BF%D0%BE%D0%B2
+
+Указание MIME-типа используется в HTML обычно при передаче данных форм и вставки
+на страницу различных объектов.
+
+https://developer.mozilla.org/ru/docs/Web/HTTP/Basics_of_HTTP/MIME_types -- тут подробно
+
+text/plain
+text/html
+text/css
+text/javascript
+
+application/javascript
+application/json
+application/pdf
+
+image/jpeg
+image/png
+
+multipart/form-data         # html form port 
+    # - <form action="http://localhost:8000/" method="post" enctype="multipart/form-data">
+
+
+
+Система документов
+------------------
+py / html / js / css / img / + гиперссылки между html
+
+
+Ссылки / гиперссылка / ресурсы
+---------------
+<a href="/...html"></>                              # гиперссылка - загрузка по обращению
+
+<link rel="stylesheet" href="/...css">              # resource - загрузка автоматическая
+
+<script src="/...js"></script>                      # resource - загрузка автоматическая
+
+<img src="/...png">                                 # resource - загрузка автоматическая
+
+<form action="http://domen.org">                    # url адрес для форме
+
+css-file
+.class {
+    background-image: url(../pictures/ground.png)   # ссылка на файл из css-файла
+}
+
+css-file
+@font_face {
+    font-family: Terminus;
+    src: url(fonts/terminus.ttf);               # загрузка кастомного шрифта для css
+}
+
+file-js:
+var fromUrl = '/dir/project/save/'              # создание переменной - строка урл
+
+$.ajax({
+    type: 'POST',
+    url: fromUrl,                               # передача в массив для обработки в ajax
+    data: {...} 
+});
+
+
+
+application/json                # формат передачи кратких пакетов массивов данных
+----------------
+{
+    'name1': 'value',
+    'name2': [
+        'name3': 'value',
+        {'name4': 'value', 'name5': 'value'}    
+    ]
+}
+
+
+
+URL - адрес
+Адрес Докумнтов в ВЕБе 
+-----------------------
+
+http://server.org:8000/path/to/file/doc.html?a=1&b=2#part1
+    # url запрос на сервер
+
+    http - протокол (может быть https - новый протокол подобный но с доп уровнем шифрования)
+    server.org - домен имя сервера (может быть IP)
+    /path/to/file/ - путь на сервере к файлу
+    doc.html - название файла
+    ?a=1&b=2 - дополнительные опции разпроса    (query-string)
+    #part1 - якорь / положение строки на странице
+
+
+
+Абсольтный URL 
+----------------
+1) http://server.org:8000/path/to/file/doc.html?a=1&b=2#part1
+2) //server.org:8000/path/to/file/doc.html?a=1&b=2#part1    (схема http или https)
+
+
+
+Относительный URL
+-----------------
+1) /path/to/file/doc.html?a=1&b=2#part1     # от корневой папки проекта в домене
+        # браузер подставляет (до /) http + доменное имя
+
+2) doc.html?a=1&b=2#part1               # от URL текущего документа
+        # брузер подставит http + /относит петь в файлу в проекте/
+    
+3) ?a=1&b=2         # url запрос по доп параматрам в пределах загруженной страницы
+        # браузер подставит полный путь к файлу
+        # http://server.org:8000/path/to/file/doc.html            
+
+4) #part1           # тоже url запрос / но это просто ссылка на якорь на странице
+    
+
+
+
+WEB-приложение == Клиент-Серверное приожение / Происходит взаимодействие Клиента и Сервера
+--------------
+
+
+
+2. Web-технологии. Web-клиенты 
+==============================
+https://www.youtube.com/watch?v=_1MMltouPAw&t=12s
+
+
+Web-клиенты это не только Браузеры !! :)
+---------------------
+1) полноценные браузеры
+    ## chrome / firefox / IE / Opera 
+
+В процесы выполенения работы Браузером по загрузке html / css / js / image
+выполняются процедуры (новые понятия):
+
+    parse -- / анализ/разбор html / выделение гиперсылок / и загрузка сорсов
+
+    rendering -- / обработка / отрисовка / HTML + интерактивность на экране
+
+
+
+2) встроенные движки / браузеры
+    ## webkit / web-view
+
+WebKit — свободный движок для отображения веб-страниц, разработанный на основе кода библиотек KHTML и KJS, 
+используемых в графической среде KDE.
+
+
+
+3) библиотеки языков для работы с протоколом HTTP
+    # urllib / libcurl / прочее    
+
+например urllib для python
+--------------------------
+ryndin@pc:~$ python3
+Python 3.5.2 (default, Nov 17 2016, 17:05:23) 
+[GCC 5.4.0 20160609] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> import urllib
+>>> dir(urllib)
+['__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__',
+'__package__', '__path__', '__spec__', 'error', 'parse', 'request', 'response']
+
+>>> urllib.request                                      # отдельный модуль под каждый тип запросов в Сети
+<module 'urllib.request' from '/usr/lib/python3.5/urllib/request.py'>
+>>> urllib.response
+<module 'urllib.response' from '/usr/lib/python3.5/urllib/response.py'>
+>>> urllib.parse
+<module 'urllib.parse' from '/usr/lib/python3.5/urllib/parse.py'>
+
+
+
+4) Консольные утилиты / Работа через консоль LINUX
+    ## wget, curl, telnet
+  
+Wget — (GNU Wget) свободная неинтерактивная консольная программа для загрузки файлов по
+сети. Поддерживает протоколы HTTP, FTP и HTTPS, а также поддерживает работу через HTTP
+прокси-сервер. Программа включена почти во все дистрибутивы GNU/Linux.
+
+
+ryndin@pc:~$ wget
+
+wget: не указан URL
+Использование: wget [КЛЮЧ]... [URL]...
+В хелпе модуля прописано очень много функций по протоколам
+
+
+
+cURL — свободная (распространяемая по лицензии MIT), кроссплатформенная служебная
+программа командной строки, позволяющая взаимодействовать с множеством различных
+серверов по множеству различных протоколов с синтаксисом URL.
+ryndin@pc:~$ curl --help
+Usage: curl [options...] <url>
+Options: (H) means HTTP/HTTPS only, (F) means FTP only
+
+
+
+посмотреть документацию
+-----------------------
+(base) user@ryndin-lenovo-ideapad-520:~$ man curl
+
+
+
+пример curl - запрос на сайт
+---------------------------
+(base) ~$ curl -vv 'google.com'
+
+* Rebuilt URL to: google.com/
+*   Trying 216.58.215.78...
+* TCP_NODELAY set
+* Connected to google.com (216.58.215.78) port 80 (#0)
+> GET / HTTP/1.1
+> Host: google.com
+> User-Agent: curl/7.58.0
+> Accept: */*
+> 
+< HTTP/1.1 301 Moved Permanently
+< Location: http://www.google.com/
+< Content-Type: text/html; charset=UTF-8
+< Date: Sun, 12 Jan 2020 05:24:33 GMT
+< Expires: Tue, 11 Feb 2020 05:24:33 GMT
+< Cache-Control: public, max-age=2592000
+< Server: gws
+< Content-Length: 219
+< X-XSS-Protection: 0
+< X-Frame-Options: SAMEORIGIN
+< 
+<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE>301 Moved</TITLE></HEAD><BODY>
+<H1>301 Moved</H1>
+The document has moved
+<A HREF="http://www.google.com/">here</A>.
+</BODY></HTML>
+* Connection #0 to host google.com left intact
+
+
+
+пример curl - запрос на сайт
+----------------------------
+ryndin@pc:~$ curl -vv http://meg2mag.pythonanywhere.com/
+
+*   Trying 34.206.101.184...                    # Заголовок запроса
+* Connected to meg2mag.pythonanywhere.com (34.206.101.184) port 80 (#0)
+> GET / HTTP/1.1
+> Host: meg2mag.pythonanywhere.com
+> User-Agent: curl/7.47.0
+> Accept: */*
+
+< HTTP/1.1 200 OK                               # Заголовок Ответа
+< Server: openresty/1.9.15.1
+< Date: Sat, 16 Sep 2017 17:31:41 GMT
+< Content-Type: text/html; charset=utf-8
+< Content-Length: 43360
+< Connection: keep-alive
+< Vary: Accept-Encoding
+< Vary: Cookie, Accept-Language
+< X-Frame-Options: SAMEORIGIN
+< Content-Language: en
+< Set-Cookie: 
+        csrftoken=DCdYHmIFMzqmC4qlbQ9ljBYXJhVqCP8bOOj2DjwlwrNbr4JP3EJ1ORY9bUIZgo54; 
+        expires=Sat, 15-Sep-2018 17:31:41 GMT; 
+        Max-Age=31449600; Path=/
+< X-Clacks-Overhead: GNU Terry Pratchett
+
+<!DOCTYPE html>                                  # далее отобразит код всей страницы сайта
+<html lang="en">
+........
+
+
+telnet - TELNET (сокр. от англ. teletype network) — сетевой протокол для реализации
+текстового интерфейса по сети (в современной форме — при помощи транспорта TCP). Название
+«telnet» имеют также некоторые утилиты, реализующие клиентскую часть протокола.
+Современный стандарт протокола описан в RFC 
+ryndin@pc:~$ telnet
+telnet>                 # режим консольного клиент-сервера
+
+(base) user@ryndin-lenovo-ideapad-520:~$ telnet itc.ua 80
+Trying 93.183.199.243...                                        # view rial IP adress for example
+Connected to itc.ua.
+
+(base) user@ryndin-lenovo-ideapad-520:~$ telnet google.com 80
+Trying 216.58.215.110...
+Connected to google.com.
+
+
+
+
+История Эволюции технологий Интернета
+================
+http://www.evolutionoftheweb.com/               # представлено на Карте интерактивно
+
+
+
+AJAX
+================
+https://www.w3schools.com/js/js_ajax_intro.asp
+
+AJAX, Ajax (ˈeɪdʒæks, от англ. Asynchronous Javascript and XML — «асинхронный JavaScript
+и XML») — подход к построению интерактивных пользовательских интерфейсов веб-приложений,
+заключающийся в «фоновом» обмене данными браузера с веб-сервером.
+В результате, при обновлении данных веб-страница не перезагружается полностью, и веб-
+приложения становятся быстрее и удобнее. 
+
+AJAX — не самостоятельная технология, а концепция использования нескольких смежных
+технологий. AJAX базируется на двух основных принципах:
+
+    использование технологии динамического обращения к серверу «на лету», без перезагрузки
+    всей страницы полностью, например с использованием XMLHttpRequest (основной объект);
+
+    через динамическое создание дочерних фреймов;
+
+    через динамическое создание тега <script>[2].
+
+    через динамическое создание тега <img>, как это реализовано в Google Analytics.
+    использование DHTML для динамического изменения содержания страницы;
+
+В качестве формата передачи данных могут использоваться фрагменты простого текста,
+HTML-кода, JSON или XML.
+
+
+DOM
+================
+https://www.w3schools.com/js/js_htmldom.asp
+
+
+
+
+3. Web-технологии. Язык разметки HTML
+=====================================
+https://www.youtube.com/watch?v=sZSMX3JQJZU&t=20s&list=PLSVqTfjvRr4TjLCu8Dx-rbxSEd0ljd7ee&index=17
+
+<!DOCTYPE html>             # html5 теперь постоянно новая и обновляющаяся версия
+
+CEO / оптимизация для поисковых роботов
+-----------------
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">     # мета-данные
+<meta name="keywords" content="site, test, list, students"/>            # ключевые слова
+<meta name="description" content="Site test about python django"/>      # строка описания
+
+
+Иконки (варианты)
+---------------------
+https://www.w3schools.com/icons/default.asp
+
+
+1)
+# icon
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">           # исходник
+
+<i class="fa fa-cloud"></i>      # иконка 1   
+<i class="fa fa-heart"></i>      # иконка 2 
+
+2)
+# bootstrap icon
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<i class="glyphicon glyphicon-cloud"></i>       # иконка 1 
+<i class="glyphicon glyphicon-remove"></i>      # иконка 2
+
+
+3)
+сайт с иконками (скачать в формате .ico)
+
+https://www.iconfinder.com/
+
+<link href="if_Citycons_ship_1342928.ico" rel="shortcut icon" type="image/x-icon"/>
+    # задается маленький логотип на вкладке сайта
+
+
+3)
+такая миникартинка на вкладке youtube
+<link rel="shortcut icon" href="/yts/img/favicon-vfl8qSV2F.ico" type="image/x-icon">
+миникартинка еще куда-то
+<link rel="icon" href="/yts/img/favicon_32-vflOogEID.png" sizes="32x32">
+
+
+
+Ссылки
+----------
+<a href="#anch1"></a> => <a name="nach1">       # ссылка по странице на якорь
+
+<a href=""><img src=""></a>                     #   картинка как кликабельная ссылка
+
+<a href="" target="_blank"></a>                 # открытие в новом окне браузера
+
+<table border='1'>              # свойство тега - наличие обводки таблицы
+    <caption></caption>         # название таблицы
+    <thead>
+        <th><td></td></th>      # жирный текст в строке / ка бы заголовок таблицы
+        <th rowspan='2'></th>   # объединение 2 ячейки в высоту        
+        <tr><td></td></tr>      # блок строки и внутри блок ячейки
+        <td colspan='2'></td>   # объединение 2 ячейки в ширину
+    </thead>
+    <tbody>
+</tbody>
+</table>
+
+
+
+<!-- хорошо -->
+<a href="/nojs.html" target="_blank" onclick="ajax(); return false">
+  запусти меня
+</a>
+
+
+
+формы
+-----------
+<form action="{% url "" %}" method="post" enctype="multipart/form-data">
+
+    # способ кодирования данных (для передачи как post) - enctype="multipart/form-data"
+    # другой способ кодирования (по умолчанию через url) - "application/x-www-form-urlencoded" 
+
+    {% csrf_token %}
+
+    <imput type='hidden' ...>
+    <imput type='file' ...>
+    <imput type='text' ...>
+    <imput type='password' ...>
+    <input type="checkbox" ... >
+
+    <textarea name="text" rows='3' ></textarea>
+
+    <select><option></option></select>
+
+    <button type='submit' ...>Do Submit</button>
+</form>
+
+
+Атрибуты Полей Формы:
+---------------------
+type                # тип поля и функционал
+name                # имя объкта словаря которое попадает в запрос post
+value               # значение объекта словаря по имени
+placeholder         # подсказка для клиента (в поле для ввода)
+autocompleate='off' # чтобы браузер не предлагал варианты заполнения поля из истории
+
+
+Если метод отправки Формы на серсер GET -- то все идет в URLадресе, в т.ч. защитный ключ
+что не есть правильно - это ошибка !!
+
+(пример ввода в форму строки "test test")
+
+http://localhost:8000/comments/create/?csrfmiddlewaretoken=YxTRPYLnSxTyKSxzeTY70FlsSADXkraTkKMJ7qoa4nDXtE1RwCKnC4dwcemwlMaf&create_top_comment=test+tets&text=
+
+
+все теги html
+------------------
+http://htmlbook.ru/
+
+
+
+
+4. Web-технологии. CSS - язык описания стилей
+=============================================
+https://www.youtube.com/watch?v=DSbwRB2ooCk&t=11s
+
+
+
+все про css / попробывать все методы
+-----------
+https://www.w3schools.com/css/default.asp
+
+
+
+простые селекторы в css
+------------------
+@charset "utf-8"                # еще один способ задать кодировку ткста на странице
+
+/* first style */
+* {                             # базовый селектор для всех тегов/классов/идент
+    margin: 0px;                # как правило для сброса стилей самого браузера вначале
+    padding: 0px;
+    border: 0px;
+    font-size: 120%;
+}
+
+p {                             # селектор названия Тега
+    margin-top: 10px;
+}
+
+.btn {                          # селектор названия Класса (class / группы элементов)
+    border: solid 3px red;
+}
+
+i {                             # например селектор для всех иконок
+    color: blue;
+}
+
+#first_p {                      # селектор Идентификатора (id / уникальный на странице)
+    font-size: 150%;
+}
+
+
+сложные селекторы в css
+-----------------------
+/*Сложные селекторы*/
+div.art a {                     # все a которые внутри блока div с классом art 
+    text-decoration: underline;
+}
+# <div class="art">
+    <p><a href="//google.com">A href 1</a></p>
+
+
+a > code {                      # вложенность 1 уровень (именно дочерний)
+    border: solid 3px green;
+}
+
+h1, h2 {                        # Стил текста заголовков (по перечислению) - наклонный
+    font-style: italic;
+}
+
+
+псевдоклассы в css
+------------------
+Браузер в зависимост от сss отрабатывает События на элементах
+
+a: visited
+a: link
+div: hower
+input: focus
+li: first-child
+
+/*Псевдоклассы - Браузер отрабатывает события*/
+a:visited  {                # если ссылка уже посещена (в пределах сессии) - меняет цвет
+    color: red;
+}
+
+a:link {                    # если ссылка еще не посещена (не нажата) - другой цвет
+    color: yellow;
+}
+
+div.art:hover {             # если мышка наведена на блок с классом - активируется фон
+    background: orange;
+}
+
+input:focus {               # если курсов в поле инпута (в фокусе) - срабатывает высота
+    height: 50px;
+}
+
+li:first-child {            # первый потомок в групповом теге (список) - свой стиль
+    color: green;
+}
+
+
+псевдоэлементы в css
+--------------------
+.element:before
+.element:after
+
+/*Псевдоэлементы - Браузер добавит*/
+li:before {                         # Добавит к строке списка Подстроку До
+    content: ' Before Input String ';
+}
+
+li:after {                          # Добавит к строке списка Подстроку После
+    content: ' After Input String ';
+}
+
+
+
+рачет Специфичности стилей (для сss)
+-------------------------
+Для перекрытия стилейц
+Для разрешения конфликтов стилей
+У кого специфичноть выше - тот стиль и применится
+
+по баллам:
+# id == 100 баллов              # самая высокая специфичность
+. class = 10 баллов
+теги == 1 балл
+
+!important                      # 1 раз возведет стиль в высший приоритет
+
+
+
+
+стили Расположения на Странице
+------------------------------
+display: none;               # элемент не видим / не занимает места / отсутствует в html документе / но присутствует в DOM разделе / доступен через js операторы
+
+display: block;              # элемент занимает максимальную ширину / начинается с новой сроки / но учитывает значения width / height
+
+display: inline;             # занимает макс ширину / не прерывает строку / как бы в строке  Не учитывает значения width / height
+
+display: inline-block;      # блок внутри строки
+
+
+
+
+
+float / clear
+----------------
+float-right / float-left / clear: both
+
+img {
+    max-width: 360px;
+    float: right;           # картинка сдвинута вправо/влево / вписывается в поле строки
+    padding-right: 10px;
+}
+
+
+
+
+float / clear   / блочная верстка
+----------------
+
+css
+-------
+.kvadrat {          # блок квадрат с фоном и белым текстом (так чтобы по 3 на строку)
+    width: 300px;
+    height: 300px;
+    background-color: brown;
+    color: white;
+    margin: 10px 10px 10px 0;
+}
+
+.to-left {          # свойство квадрата - выравниваине влево (в сроке один за другим)
+    float: left;
+}
+
+.to-right {         # свойство квадрата - выравниваине вправо (в сроке один за другим)
+    float: right;
+}
+
+.to-clear {         # свойство пустого блока - разделятяет (подводит черту) между группами 
+    clear: both;    # флоатов
+}
+
+img {
+    max-width: 500px;
+    float: left;
+    padding-right: 10px;
+    clear: both;
+    border: 3px;
+}
+
+p {
+    font-size: 120%;
+}
+
+html
+----
+  <div class="kvadrat to-left">Kvadrat 1</div>      # группа флоатов влево
+  <div class="kvadrat to-left">Kvadrat 2</div>
+  <div class="kvadrat to-left">Kvadrat 3</div>
+  <div class="kvadrat to-left">Kvadrat 4</div>
+
+  <div class="to-clear">Kvadrat 5</div>             # блок разделения
+
+  <div class="kvadrat to-right">Kvadrat 6</div>     # группа флоатов вправо
+  <div class="kvadrat to-right">Kvadrat 7</div>
+  <div class="kvadrat to-right">Kvadrat 8</div>
+  <div class="kvadrat to-right">Kvadrat 9</div>
+
+  <div class="to-clear">Kvadrat 10</div>        # блок разделения (обязателен от картинки)
+
+  <img src="./1752.jpg" alt="arny">
+
+
+
+
+Позиционирование
+------------------
+https://www.w3schools.com/css/css_positioning.asp
+
+position: static;           # статическое положение блока (стандартное по умолчанию)
+
+position: relative;         # изменяемое положение / возможны смещения / но поле остается
+
+position: absolute;         # занимает статичное заданое положение в родитель элементе
+                            # как бы родитель не перемещаслся по странице
+
+position: fixed;            # фиксированное положение в окне браузера / 
+                            # не зависит от прокрутки
+
+position: sticky;           # не выходит за окно браузера (при прокрутке) по указанной границе
+
+top / right / bottom / left /
+
+
+
+
+box-sizing: content-box (defoult)	# (по умолчанию) - форматирование отступов по границе содержимого
+
+box-sizing: border-box				# концепция форматированя отступов по границам блока
+
+
+
+z-index: -1;                # положение элемента на заднем фоне за следующим элементом
+img {                       # картинка (фиксирована по краю) на заднем фоне текста
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: +1;            # -1 == на заднем фоне / +1 == на преднем фоне (как модальное окно)
+}
+<img src="w3css.gif" width="100" height="140">
+<p>Because the image has a z-index of -1, it will be placed behind the text.</p>
+
+
+
+bootstrap
+-----------
+https://www.w3schools.com/bootstrap/default.asp
+
+для фронендщика обычно достаточно + немного css
+
+
+
+
+5. Web-технологии. Сетевые протоколы
+====================================
+https://www.youtube.com/watch?v=hio5jDRKUVc
+
+
+Логика протокола HTTP (от клиента на сервер и обратно)
+---------------------
+
+От Клиента / http / tls (шифрование при https) / tcp / ip / ->
+
+На сервере / ip / tcp / tls (дешифрование при https) /http / ->
+
+И обратно не Клиент.
+
+В конце - закрытие протокола http.
+
+
+Глобальная система DNS серверов имеет 3 уровня: destal(III).ukr(II).net(I)
+1 уровень знает о IP серверов 2 уровня / 2 уровень знает о IP серверов 3 уровня
+На DNS серверах провайдера обычно данные кешируются и потому происходит сразу
+1 точный запрос на 3 уровень (по IP).
+
+
+Порты
+----------
+Одновременно комп (ОС) может обрабатывать несколько соединений через Порты (:8080).
+Некорые программы (интерфейсы) имеют резервированные порты:
+
+20,21 -- FTP
+
+22 -- SSH
+
+25 -- SMTP
+
+80 -- HTTP
+
+443 - HTTPS
+
+
+Пример работы сервера запроса по протоколу TCP со стороны Клиента
+----------------------
+import socket
+requestt = b"Hello TCP!"
+soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)     # объект сокета с настройками Сети
+soc.connect(('127.0.0.1', 8000))                            # подключение к серверу / ip + порт
+soc.send(requestt)                                          # отправка запроса
+responsee = soc.recv(20)                                    # объекты ответа / но не более 1024 раз
+soc.close()                                                 # закрытие соединения
+
+
+на мой тетовый запущенный django-server пришел запрос ))
+-------------------------
+
+=(students)ryndin@pc:~$ python manage.py runserver
+
+Performing system checks...
+System check identified no issues (0 silenced).
+September 21, 2017 - 11:49:15
+Django version 1.11.2, using settings 'students2017.settings'
+Starting development server at http://127.0.0.1:8000/
+...
+несколько вызовов
+-----------------
+WARNING / 2017-09-21 11:50:40,532 / basehttp / 9829 / 139755987646208 / "Hello TCP!" 400 -
+WARNING / 2017-09-21 11:50:40,532 / basehttp / 9829 / 139755987646208 / "Hello TCP!" 400 -
+INFO / 2017-09-21 11:52:49,688 / basehttp / 9829 / 139755987646208 / code 400, message Bad HTTP/0.9 request type ('Hello')
+WARNING / 2017-09-21 11:52:49,689 / basehttp / 9829 / 139755987646208 / "Hello TCP!" 400 -
+
+
+
+Пример работы эхо-сервера по протоколу TCP со стороны Сервера
+
+(подробный код в файле про nginx and apache, код рабочий, сам тестил, и код Клиента, и код Сервера)
+---------------------
+
+import socket
+soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)     # создан бъект Сокета для Сети
+soc.bind(('127.0.0.1', 1234))                   # прием запроса / ip хоста + № порта
+soc.listen(10)                                  # очередь из 10 запросов разрешена 
+while True:
+    conn, addr = soc.accept()                   # распаковка объекта подключения и адреса
+    while True:
+        data = conn.recv(1024)                  # формирование пакетов ответов / не более ..
+        if not data: break
+        conn.send(data)                         # отправка ответов на машину Клиента
+    conn.close()                                # закрытие соединения
+
+
+
+TLS пртокол крипто шифрования пакетов HTTP => HTTPS
+===================
+пакеты меджу клиентом и серверов защищаются дополнительно:
+
+ - при рукопожатии через сокеты и Клиент и Сервер получают аутентификацию
+
+ - происходит шифрование и сжатие пакетов данных
+
+ - защита от подмены части пакетов и проверка целосности пакетов (от хакеров)
+
+
+
+
+6. Web-технологии. Протокол HTTP
+================================
+https://www.youtube.com/watch?v=HFt7Lm7hv1E&t=16s
+
+HTTP / документы / Мета данные / mime type / авторизация / поддержка сессий (поскольку
+прерывистость запрос/ответ ) / кеширование данных (например браузер кеширует js сss
+файлы) / договоренность клиента и сервера о типах сжатия и кодирования / не стримит 
+(только прерывистые запрос/ответ)
+
+
+TCP => TLS (opc) => HTTP(s) => HTTP Request => HTTP Response
+
+
+Заголовок General / пример
+-----------------
+Request URL:http://devgroup.vitaliypodoba.com/
+
+Request Method:GET
+
+Status Code:200 OK
+
+Remote Address:178.62.192.200:80                # знает IP
+
+Referrer Policy:no-referrer-when-downgrade
+
+
+Заголовок Request / пример
+-----------------
+GET /t/topic/1914/25 HTTP/1.1                   # GET / относительный url / версия http
+
+Host: devgroup.vitaliypodoba.com                # вместе с хостом
+
+Connection: keep-alive                          # тип соединение (не закрывающее)
+
+Cache-Control: max-age=0
+
+Upgrade-Insecure-Requests: 1
+
+User-Agent: Mozilla/5.0 (X11; Linux x86_64)     # браузеры у клиента
+
+        AppleWebKit/537.36 (KHTML, like Gecko)
+
+        Chrome/60.0.3112.78 
+
+        Safari/537.36
+
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8   # что может принять браузер от сервера
+
+Accept-Encoding: gzip, deflate
+
+Accept-Language: en,uk;q=0.8,ru;q=0.6
+
+Cookie: _t=aa187e7e68e7523fed3562e83a769e74;    # кукки сессии браузера 
+   
+_forum_session=T1dSRnZsR2k4RlZMdWZXYk9tRnBYM1BXV2VaOFBlYlBtb1NJTnM5MXhTR3pYandzaFAxL0hSUWJFNGxYY0F5YVdheUJMejBSZlBkKzBjcTZRL2xRRys0VElqSnN2aGJQaG8wbXR6WmpYeDdDMEk5WE5FNnpxZ2hscC9HeE4rekh3cjRBTzdIVytsdDJJYzlXQnJQZWRWeVgycnZLaXFGc1BZM3htNWRUZVhMRitVUFIvVWxiYUJQWVpVQkI2RXdmdHJDeWJLWFFRZExRVHNMMUdTVm1DekpTWTZadnJpV1dtMkZ1bmtWK0U4QytkcmlxYlBseFdJdS9MNmUrazZOZ3I5ZmFBc3BBaEFmVi95Z1RDQ09tQXU3dG11Y21IWisvWklZNGVGejFITU9vdkxsUmxJa05CU1h1VjZlckhvc3JvZk9MS3JRRTNVTGoyT3hMbjJ2OVNqNnl2aGI3am9uN3N2RGM3YW1nc2QxUVR2dkdsVGt5MGhLM1ltVDdqVGo5LS03NnY1SGNUcDh1V3YwQ21LWE5vRm9BPT0%3D--a5451dd602f638777556e93e9f1239243cfe4a75
+
+
+Заголовок Response (+ html + sources)
+------------------ 
+HTTP/1.1 200 OK
+
+Server: nginx                                   # имя веб сервера
+
+Date: Thu, 21 Sep 2017 10:25:39 GMT
+
+Content-Type: text/html; charset=utf-8          # mime-type -- обязателен для браузера
+
+Transfer-Encoding: chunked                      # формат передачи - фрагментированный
+
+Connection: keep-alive                          # тип соединения (не закрывающее)
+
+Vary: Accept-Encoding
+
+Vary: Accept-Encoding
+
+X-Frame-Options: SAMEORIGIN
+
+X-XSS-Protection: 1; mode=block
+
+X-Content-Type-Options: nosniff
+
+X-Discourse-Username: ryndin
+
+X-Discourse-Route: list/latest
+
+Set-Cookie:                                     # кукки от сервера / сохранятся в браузере
+
+_forum_session=YWxlVnhUVXhxZGtKd2VlZmRJS2phUHR4N0V3UVprWi9teWxnRzNtUFA4SUNPOGlvMzdLQlczOEd4MlVzWXlvQWwwT29iYmVBWHlleEFnQ2dBdlU1YVdSSzUrcTAyQk1yWlVYZ0VuYTI2cFh4c1dCQ3hlT3ZmUTZ4cGJQbjIreWdwY3V3ZkNHUU4wcTZjNSs1M0gxMkwzMTBxb1gveU5INDlGdm9lNjJRRWk3eVpWc0UxalhMY01Id0IxQkdmL3Z4WFJCcFN2bk54ZEJqako4THVVNjhEOXFUbGU0THo4dC9Ncm9DeUNHSndDbzh2ZHZwalU2T2RreWtScksyK080ZjhrdURiV3hwWlQ2WlEvL05oRUJTRVdPTTFyVldybHdpSWFId0pud0dnQSthSy96b3lLZnlPdXl2WjVpZXFqQk1XaFgrcEhHeDRhcVh6MSswNnJaRm43SDNiWFhpL2JtbEcyZGI4RHhCYmZKNHJ4Sjl5M2pMNmR0QjdDT0RSNWV1LS1POUVtaXdkK3BNVnFNcWpFVzB3cU9BPT0%3D--fd7e273ab3c2c8d47dac607ff1ec46a081fa0396; path=/; HttpOnly
+
+X-Request-Id: 8eb325ca-6a76-4517-8b4c-46d17a779ed1
+
+X-Runtime: 0.337444
+
+X-UA-Compatible: IE=edge
+
+Content-Encoding: gzip                          # метод сжатия
+
+
+
+HTTP методы запросов:
+---------------------
+GET -- получение документа по url + параметрам (заголовки + тело документов)
+
+POST -- отправка данных на сервер из Форм от клиента (произвольные данные в виде 
+    массивов данных по ключам/значения)
+
+HEAD -- получение только Загловков документов (как в POST но ровно без тела документа)
+    / использую боты и роботы для мониторинга наличия и состояния документов
+
+PUT -- отправка документа целиком на серве по url и его сохранение там (в основном на серверах с доступом)
+
+DELETE -- запрос на удаление документа с сервера по указанному url
+
+CONECT, TRACE, OPTION --  
+
+COPY, MOVE, MKCOL -- расширения метода webDAV (для работы с файлами на серверах с доступом) 
+WebDAV (Web Distributed Authoring and Versioning) или просто DAV — набор расширений и
+дополнений к протоколу HTTP, поддерживающих совместную работу пользователей над
+редактированием файлов и управление файлами на удаленных веб-серверах. В качестве миссии
+рабочей группы по созданию DAV было заявлено: "разработка дополнений к протоколу HTTP,
+обеспечивающих свободное взаимодействие инструментов распределенной разработки веб-страниц,
+в соответствии с потребностями работы пользователей"
+
+    WebDAV расширяет HTTP следующими командами:
+        PROPFIND — Получение свойств объекта на сервере в формате XML. 
+            Также можно получать структуру репозитория (дерево каталогов);
+        PROPPATCH — Изменение свойств за одну транзакцию;
+        MKCOL — Создать коллекцию объектов (каталог в случае доступа к файлам);
+        COPY — Копирование из одного URI в другой;
+        MOVE — Перемещение из одного URI в другой;
+        LOCK — Поставить блокировку на объекте. WebDAV поддерживает эксклюзивные и
+            общие (shared) блокировки;
+        UNLOCK — Снять блокировку с ресурса.
+
+
+
+HTTP коды ответов:
+-----------------
+1хх -- информационные
+
+2хх -- успешное выполнение запрос/ответ
+    200 - OK
+    204 - No Content - запрос выполнен ок но документ пуст
+
+3хх -- перенаправление
+    301 - документ сменил url
+    302 - повторить запрос по другому url
+    304 - документ не изменился / использовать кэш
+
+4хх -- ошибки на стороне клиента (404 неправельный url)
+    400 - неправильный синтаксис запроса
+    401 - требуется авторизация
+    403 - нет доступа / авторизация не валидная
+    404 - документ не найден
+    
+5xx -- ошибки на стороне сервера 
+    500 - неожиданная ошибка сервера (часто на кастомном апликейшн сервере / исключение необработанное например)
+    502 - ответ прокси сервера с ошибкой
+    504 - прокси сервер не отвечает 
+
+
+
+
+
+7. Web-технологии. Web сервера
+==============================
+https://www.youtube.com/watch?v=1Tp5TV3BVWE
+
+
+Веб-сервера
+----------------
+1)
+Apache
+https://ru.wikipedia.org/wiki/Apache_HTTP_Server
+
+2)
+nginx
+https://ru.wikipedia.org/wiki/Nginx
+
+3)
+WSGI (англ. Web Server Gateway Interface) — стандарт взаимодействия между Python-программой,
+выполняющейся на стороне сервера (Django аппликацией), и самим веб-сервером, например
+Apache(mod_wsgi) или Nginx (влияет на настройку Конфик Файла Веб Сервера)
+https://ru.wikipedia.org/wiki/WSGI
+
+
+Запуск и остановка nginx сервера в Linux
+--------------------
+$ sudo /etc/init.d/nginx start  [stop | restart]
+
+[sudo] пароль для ryndin: 
+[ ok ] Starting nginx (via systemctl): nginx.service.
+
+$ sudo /etc/init.d/nginx stop
+
+[ ok ] Stopping nginx (via systemctl): nginx.service.
+
+
+$ gedit /var/log/nginx/access.log           # лог файл успешных событий сервера nginx
+
+$ gedit /var/log/nginx/error.log            # лог файл ошибок сервера nginx
+
+$ gedit /var/run/nginx.pid                  # process id nginx - нужен для старта и стопа
+
+$ gedit /etc/nginx/nginx.conf               # файл конфигурации nginx
+
+
+
+Мастер Веб Сервер (работает под root пользователем):
+------------------
+1)
+Читает и валидирует лог фойл
+
+2)
+Открывает сокеты и логи
+
+3)
+Запускает и управляет дочерними процессами (Воркеры / worker)
+
+4)
+restart / binary update
+
+5) 
+адмнистрирование кеша
+
+
+
+Дочерний процесс / warker (www-data user)
+------------------
+1)
+Непосредственно Обработка входящих запросов
+Чтение HTTP запроса / разбор(парсинг) запроса
+
+2)
+выбор / virtual host (host + domain)
+
+3)
+выбор / location    (обработка url, document.root, наличие файла и документа)
+
+4)
+проверка доступа (через настройки конфига - логин парол и администрирование прав ip адресов)
+
+5)
+Чтение файла (с места хранения на диске)
+
+6)
+Применение фильтров (сжатие, подготовка документа по частям, устанка типа документа)
+
+7)
+отправка HTTP ответа (если файла нет - 5 и 6 пунт пропускаются)
+
+8)
+запись access log (после отправки http response клиенту)
+
+9)
+очистка ОЗУ (памяти)  + все сначала с п.1) 
+
+
+
+Веб сервер модульный / его ядро делает 3 вещи: получение запроса / парсинг заголовка запроса /
+ отправка ответа / (ну еще чистка кеша) / 
+
+все остальное делают встраиваемые модули - Воркеры сервера
+
+
+Директивы (настройки) Конфиг Файла Сервера
+------------------------------------------
+
+http            # конфигурация (массив данных) для http сервера
+
+server          # конфигурация (массив данных) домера (виртуального хоста)
+
+server_name     # имена доменов обрабатываемых
+
+location        # группа url адресов
+
+root, alias     # пути откуда брать файлы
+
+error_log       # журнал ошибок сервера
+
+access_log      # журнал событий запросов
+
+
+
+состояние выполнения процессов
+------------------------------
+
+~$ ps -o pid,euser,egroup,comm,args -C nginx
+
+  PID EUSER    EGROUP   COMMAND         COMMAND
+ 1253 root     root     nginx           nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+ 1254 www-data www-data nginx           nginx: worker process
+ 1255 www-data www-data nginx           nginx: worker process
+ 1256 www-data www-data nginx           nginx: worker process
+ 1257 www-data www-data nginx           nginx: worker process
+
+
+
+МногоПоточность / mulyithreading / работы веб сервера
+-------------------------------
+МногоПроцессность (на уровне ОС)
+
+
+Основные Веб Сервера
+=====================
+Apache(C)       -- prefork (много-процессный) / threading (много-поточный) / быстрый но тяжело настраиваемый
+        // универсальный но сложный / большой объем / ? с многопоточностью и многопроцессностью (комбиниров)
+        
+
+Tomcat(Java), Jetty(Java)   -- под Java аппликации и интерпрайз приложения
+
+
+Starman(perl), Gunicorn(python)     -- prefork / в привязке к языкам / легко настраиваемые
+        // нет многопоточности
+        http://gunicorn.org/
+
+
+Nginx(C), Lighttpl(C)       -- асинхронные / threading / легкие, быстрые (в т.ч. по python) 
+        // современный / быстрый / подходит под python
+        https://nginx.org/ru/
+        https://www.lighttpd.net/
+
+
+Node.JS(js), Tornado(python)    -- асинхронные / чисто под языки / для чатов-многопоточность
+
+        // обеспечивают поточность и расширяемость в рамках языка
+        https://nodejs.org/en/
+        http://www.tornadoweb.org/en/stable/
+
+
+Вывод: быстрые Веб Сервера это:
+
+    1) nginx
+    2) nodeJS
+    3) tornado
+
+
+ 
+
+8. Web-технологии. Архитектура frontend backend
+===============================================
+https://www.youtube.com/watch?v=fgJQyCaUoVo
+
+
+
+Логика взаимодействия Веб Клиента и Серверов
+--------------------------------------------
+1)
+веб клиент
+взаимодействие через frontend-server / nginx /
+
+2)
+frontend-server / nginx / он же proxy-server / 
+статические jpg/js/css выдает из хранилищ сам сразу на клиент
+за бизнес логикой и html делет запросы на backend-server
+
+3)
+backend-server / application-server(django) / запускает бизнес логику / 
+генерирует на выход html / json / обращяется за данными на SQL-DB / noSQL-DB
+
+
+
+Работа Frontend Proxy Сервера (nginx):
+------------------------------------- 
+1)
+отдача статических документов (img/js/css) сразу с диска клиенту
+
+2)
+reverse proxy / быстро получить данных от backend сервера / и работать с клиентом / много потоков
+
+3)
+балансировка нагрузки
+
+4)
+сборка SSI
+
+5)
+авторизация / SSL шифрование / нарезка картинок / протокол сжатия
+
+
+
+Backend (Application) Server
+----------------------------
+
+
+https://ru.wikipedia.org/wiki/CGI
+https://ru.wikipedia.org/wiki/WSGI      ## for python
+------------------------
+
+CGI (старый) / FastCGI / SCGI ==> WSGI (актуальный под python) -- ...GateWey Interface 
+
+    - протокол работы nginx <--> Backend (Application) Server (Django/Flask) 
+
+
+WSGI
+------------
+https://ru.wikipedia.org/wiki/WSGI
+
+https://wsgi.readthedocs.io/en/latest/          -- Документация
+
+http://wsgi.tutorial.codepoint.net/intro        -- простой туториал
+
+https://docs.djangoproject.com/en/3.0/howto/deployment/wsgi/        -- Мод в Джанго
+
+https://be.groovie.org/2005/10/07/wsgi_and_wsgi_middleware_is_easy.html
+
+
+
+Протокол работы с backend-server для python
+
+По данному протоколу ФронтЕнд сервер (Nginx) общается с БекЭнд сервером (Django) 
+
+WSGI (англ. Web Server Gateway Interface) — стандарт взаимодействия между 
+Python-программой, выполняющейся на стороне сервера, и самим веб-сервером[1],
+например nginx
+
+WSGI предоставляет простой и универсальный интерфейс между большинством веб-серверов
+и веб-приложениями или фреймворками.
+
+По стандарту, WSGI-приложение должно удовлетворять следующим требованиям:
+    должно быть вызываемым (callable) объектом (обычно это функция или метод)
+    принимать два параметра:
+
+        - словарь переменных окружения (environ)
+        - обработчик запроса (start_response)
+
+    вызывать обработчик запроса с кодом HTTP-ответа и HTTP-заголовками
+    возвращать итерируемый объект с телом ответа
+
+Middleware (Промежуточный слой)
+    Помимо приложений и серверов, стандарт дает определение middleware-компонентов,
+    предоставляющих интерфейсы как приложению, так и серверу. То есть для сервера
+    middleware является приложением, а для приложения — сервером. Это позволяет
+    составлять «цепочки» WSGI-совместимых middleware. Middleware - простая обертка
+    над объектом приложения, реализовать её можно через замыкание.
+
+Middleware могут брать на себя следующие функции (но не ограничиваются этим):
+
+    - обработка сессий
+
+    - аутентификация/авторизация
+
+    - управление URL (маршрутизация запросов)
+
+    - балансировка нагрузки
+
+    - пост-обработка выходных данных (например, проверка на валидность)
+
+    - изменение заголовков
+
+
+
+wsgi.py / Django progect
+---------
+import os
+
+from django.core.wsgi import get_wsgi_application
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "studentsdb27.settings")
+# os.environ['DJANGO_SETTINGS_MODULE'] = 'studentsdb27.settings'
+
+application = get_wsgi_application()
+
+
+
+
+wsgi.py / Django core
+-------------
+import django
+
+from django.core.handlers.wsgi import WSGIHandler                   # основной код логики ТУТ
+
+def get_wsgi_application():
+
+    """
+    The public interface to Django's WSGI support. Should return a WSGI
+    callable.
+    Allows us to avoid making django.core.handlers.WSGIHandler public API, in
+    case the internal WSGI implementation changes or moves in the future.
+    """
+
+    django.setup(set_prefix=False)
+
+    return WSGIHandler()
+
+
+
+Переменные окружения для Сервера
+--------------------------------
+Переменные среды CGI, формируемые веб-сервером.
+
+http://htmlbook.ru/webserver/ssi/peremennye-okruzheniya
+
+DOCUMENT_ROOT       Путь к корневой папке сайта. Для локального веб-сервера значение
+может принимать вид z:/home/htmlbook.ru/www, а в других случаях зависит от
+операционной системы сервера и используемого программного обеспечения.
+
+GATEWAY_INTERFACE   Версия CGI (Common Gateway Interface, общий шлюзовый интерфейс).
+Значение обычно равно CGI/1.1.
+
+HTTP_ACCEPT     Типы файлов, которые способен принять браузер. В качестве значения
+возвращается список поддерживаемых MIME-типов разделенных между собой запятой,
+например: text/html, application/xhtml+xml.
+
+HTTP_CONNECTION     Тип соединения браузера с веб-сервером. Так, значение keep-alive
+означает, что браузер поддерживает постоянное соединение с сервером. При этом в
+течение одного сеанса соединения разрешено делать несколько запросов. Повторного
+соединения в таком случае уже не происходит.
+
+HTTP_HOST       Доменное имя сайта. Обычно различают имена с префиксом www
+(www.htmlbook.ru) и без него (htmlbook.ru). Переменная вернёт тот адрес сайта,
+который указан в адресной строке браузера.
+
+HTTP_REFERER        Адрес страницы, с которой пользователь перешел на данный сайт,
+он еще называется реферер.
+
+HTTP_USER_AGENT     Идентификатор используемого браузера и операционной системы.
+В качестве значения возвращается строка, содержащая ключевые слова. Например,
+следующая строка / Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0.2) Gecko/20100101
+Firefox/6.0.2 / говорит, что пользователь использует браузер Firefox 6.0.2 под
+операционной системой Windows 7.
+
+QUERY_STRING    Запрос, который указан в адресной строке после вопросительного знака
+(?). Обычно пишется в форме «переменная=значение», где переменные разделяются между
+собой амперсандом (&). Так, при написании адреса 
+http://htmlbook.ru/?id=5&slv=34  будет возвращено значение id=5&slv=34.
+
+REMOTE_ADDR     IP-адрес посетителя сайта.
+
+REQUEST_METHOD      Метод отправки данных на сервер. По умолчанию применяется метод GET.
+
+REQUEST_URI     Адрес запрашиваемого документа. Отсчёт ведётся от корня сайта, 
+т.е. для полного адреса http://htmlbook.ru/1.html вернется значение 1.html.
+
+SERVER_ADDR         IP-адрес компьютера, на котором размещается сайт.
+
+SERVER_ADMIN        Адрес электронной почты администратора сайта.
+
+SERVER_NAME         Имя сервера.
+
+SERVER_PORT     	Порт, по которому ожидается получение данных.
+
+SERVER_PROTOCOL     Протокол для получения и отправки данных. Значение обычно равно HTTP/1.1.
+
+SERVER_SOFTWARE     Программное обеспечение установленное на сервере. Для веб-сервера
+Apache возвращается номер версии (Apache/2.2.4), а также версия PHP (PHP/5.3.3).
+
+HTTP_X_FORWARDED_FOR        Если пользователь работает через прокси-сервер, то в этом
+поле будет IP-адрес компьютера, обратившегося к прокси-серверу. Если данное поле уже
+содержит значение, то новое значение будет добавлено через запятую.
+
+GATEWAY_INTERFACE       версия интерфейса CGI в виде CGI/x.y. Например, CGI/1.1
+
+SCRIPT_NAME             - HTTP-путь к скрипту.
+
+PATH_TRANSLATED         - полный физический путь к скрипту.
+
+CONTENT_LENGTH          - длина содержимого
+
+HTTP_ACCEPT_LANGUAGE        - список поддерживаемых браузером языков в виде
+двухбуквенных наименований (через запятую), например: ru,en. Удобно, если скрипт
+может выдавать ответы на нескольких языках (скажем, для русскоязычных и англоязычных
+посетителей сайта).
+
+HTTP_ACCEPT_ENCODING        - список поддерживаемых методов сжатия ответа.
+Например: gzip,deflate.
+
+
+Переменные окружения (environ) WSGI
+-----------------------------------
+
+wsgi.version        версия wsgi протокола
+
+wsgi.url_sheme      схема протокола (http/https)
+
+wsgi.input          file-handle для чтения тела запроса
+
+wsgi.errors         file-handle для вывода ошибок
+
+wsgi.multithreaded      
+
+wsgi.multiprocess
+
+
+
+Схема развертывания WSGI
+========================
+1) 
+Web Server (Nginx)  / <--> HTTP
+
+2) Application Server (WSGI) / WSGI / Framwork (lib classes) / Applicaton
+
+
+
+
+
+9. Web-технологии. MVC фреймворки
+=================================
+https://www.youtube.com/watch?v=vlKC-lehgjU
+
+
+Типы запросов
+=============
+** - те запросы которые работают с бекендом сервера приложения (django / flask)
+
+1)
+Запросы статических документов  (nginx -- может сам все обарботать / до бекенда не дойдет)
+
+2) **
+Зпросы динамических документов (html шаблоны с сгенерированными значениями атрибутов / json)
+
+3) **
+Отправка данных форм на сервер (Post)
+
+4) **
+AJAX запросы (туда/сюда асинхронно JSON / сервер обработал / браузер обработал / html -- одностраничное)
+
+5) **
+запросы к API сервера 
+
+6)
+Персистентные содинения (отдельный бекенд сервер типа чата)
+
+
+
+Основные задачи Веб Приложения
+==============================
+1)
+маршрутизация URL
+
+2)
+парсинг заголовков и параметоров запросов
+
+3)
+хранение состояния/сессии пользователя
+
+4)
+выполнение бизнес-логики
+
+5)
+работа с БД
+
+6)
+генерация HTML страницы / JSON ответа / (упаковывается в http-response)
+
+
+
+
+MVC (model/view/controller)/ 
+
+MTV (model/template/view)  / фреймворки
+===========================
+
+WSGI(протокол) + middleware (промежут. слой логики / влияет на request/response) /
+как правило уже находятся в составе Фреймоврка и подключены
+
+
+url-pattern == router - направленя потока запроса исходя из URL в запросе
+
+
+
+DJANGO
+============
+Model (M) / urls.py (router) / views (V) / templates (T) / models (orm) /    # MVT
+
+
+default_dir/settings.py
+-----------
+
+WSGI_APPLICATION = 'students2017.wsgi.application'
+# точка входа в django-проект от web
+
+ROOT_URLCONF = 'students2017.urls'          
+# файл маршрутизатор (url-patterns)
+
+DATABASES = secret_settings.DATABASES       
+# путь к БД проекта
+
+TEMPLATES = [...        
+# указан Движок / Дирректории / Контекст процессоры / для шаблонов
+
+Важно !! по умолчанию в кадой папке аппликация ищется папка templates/ 
+
+INSTALLED_APPS = [...   
+# подключенные в django-проект аппликации (мидллвары + кастомные)
+
+
+BASE_DIR
+--------
+
+!!!!!
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                                    # абсолютный путь к корневой диррекории проекта
+
+то же что и (в 3 инструкции):
+BASE_DIR = os.path.abspath(__file__)
+BASE_DIR = os.path.dirname(BASE_DIR)
+BASE_DIR = os.path.dirname(BASE_DIR)
+!!!!!
+
+
+'DIRS': [os.path.join(BASE_DIR, 'students2017', 'templates'),], 
+                                    # абсолютный путь к дирректориям шаблонов проекта
+
+
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static')    # папка статич файлов проекта
+
+
+# LOGGING
+LOG_FILE = os.path.join(BASE_DIR, 'students_log.log')
+
+
+
+local_settings.py
+-----------------
+файл для кастомных настроек проекта, в нем декларируются собственные настройки
+(заносится в игнор файл для git)
+
+а в файле settings.py (в конце)
+пишется код на затерание настроек
+
+try:
+    from my_project.local_settings import *
+except ImportError:
+    pass                # то есть или кастомные настройки или отавит без изменений
+
+
+
+urls.py
+=================
+ROOT_URLCONF --> urls.py --> urlpatterns[] --> до первого совпадения url() / иначе --> 
+404 Not Found
+
+
+Функции которые используются
+----------------------------
+url()
+include()                                       # url(r'^blog/', include('blog.urls'))
+patterns('app1.views', url(), url(), ...)       # обертка - добавляет префикс
+
+
+
+reverse routing
+---------------
+Механизм позволяет обратиться к url со стороны сервера (гиперссылки из шаблона, код вьюшки)
+
+url('', view, name='home')                          # в патторне задается имя для url
+
+from django.core.urlresolvers import reverse
+
+reverse('home')                                     # обращение к url по имени
+reverse('category', args=(21,))                     # с передачей параметра в паттерн
+reverse('post-item', kwargs={'pk': 8,})
+
+exmpl.html
+...{% url 'post-item' post.pk %}         # обращение к урл по имени из шаблона + параметр
+
+
+
+Приложения
+===========
+./manage.py startapp app1
+или
+python manage.py startapp app1
+
+app1    / Рекомендации по структуре дерева приложения №Х
+----
+-templates                  # дир шаблонов в разрезе аппликации
+-static                     # статик файлы в аппликации но (colectstaticfiles)
+-templatetags               # дирректори собственных тегов шаблонов (спец синтаксис)    
+-management                 # дирректория собственных комманд для manage.py
+    |--commands             # имя модуля обязателное
+-migrations
+-models.py                  # или пакет или файл (имя рекомендованное)
+-tests.py                   # кастомные тесты в аппилкации (к вьюшкам) - спец синтаксис
+-urls.py                    # url в рамках аппликации
+-views.py                   или пакет или файл (имя рекомендованное)
+
+
+
+
+10. Web-технологии. MVC фреймворки. Часть 2
+==================================
+https://www.youtube.com/watch?v=w_qfivxRra8
+
+django views
+------------
+
+django.http.HttpRequest - вьюшка принимает объект
+
+django.http.HttpResponse - вьюшка возвращает объект
+
+
+Reg Exp
+------------
+url(r'^posts/(?P<year>\d[4])/$', my_view, name='my_view')
+
+    # механизм захвата именновонного параметра в regex движке и передача в функцию-вьюшку 
+
+my_view(request, year):
+    year_obj = Post.objects.get(year)
+
+    # выдодит посты с годом который пришл в query_string url запроса 
+
+
+
+HttpRequest // request
+======================
+https://docs.djangoproject.com/en/3.0/ref/request-response/#httprequest-objects
+
+
+
+request.method          # проверка метода запроса, который пришел на сервер
+
+request.GET             # словарь с GET параметрами
+
+request.POST            # словарь с POST параметрами
+
+request.COOKIES         # словарь с Куками от клиента
+
+request.FILES           # словарь с объектами файлов(имя=>файл-дескриптор) загрузка файла
+
+request.META            # cловарь переменных wsgi-окружения (заголовки запросов)
+
+request.session         # словарь (middleware) параметров сессии (временная Модель в БД) -- **
+
+request.user            # словарь (middleware) параметров пользователя (Модель в БД) -- **
+
+    ** многоразовые объекты, например обект сессии удобен для складывания туже заказов в карзину для определенного
+        пользователя, прежде чем сделать заказ на сайт
+
+        инструмент авторизаци пользователя удобен, все действия можно привязать к конкретному пользователю,
+        а профиль его хранится в БД.
+
+
+HttpResponse
+======================
+
+https://docs.djangoproject.com/en/3.0/ref/request-response/#httpresponse-objects
+
+
+from django.http imort HttpResponse
+
+def my_view(request):
+
+    response = HttpResponse(   
+                 
+        content = '<html><p>text to response - page not found</p></html>',      # это Тело Ответа через Заголовок
+      
+        content_type = 'text/html',
+
+        status = 404
+
+        location = "...."
+    )   
+
+    response['year'] = 2017                     # дополнительный Заголовок Ответа
+    
+    return response
+
+
+>>> from django import http
+
+>>> dir(http)
+[
+'BadHeaderError', 'FileResponse', 'Http404',
+
+'HttpRequest',                          # объект http запроса от Клиента        
+
+'HttpResponse',                         # объект http ответа (request)
+
+    # далее Все Наследники от HttpResponse
+
+    https://docs.djangoproject.com/en/3.0/ref/request-response/#httpresponse-subclasses
+
+'HttpResponseBadRequest',               # 400
+
+'HttpResponseForbidden',                # код 403
+
+'HttpResponseGone',
+
+'HttpResponseNotAllowed',
+
+'HttpResponseNotFound',                 # возвращает код 404
+
+'HttpResponseNotModified',
+
+'HttpResponsePermanentRedirect',        # код 301
+
+'HttpResponseRedirect',                 # код 302 - редирект по урлу
+
+'HttpResponseServerError',
+
+        # дочерние классы от HttpResponse - задают логику Статусов ответов
+
+'JsonResponse',                         # интересные классы / объект json ответа
+        
+        ## https://docs.djangoproject.com/en/3.0/ref/request-response/#jsonresponse-objects
+
+'QueryDict',                         
+
+'RawPostDataException', 'SimpleCookie',
+
+'StreamingHttpResponse', 'UnreadablePostError',
+
+ '__all__', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__',
+ '__name__', '__package__', '__path__', '__spec__', 'cookie', 'multipartparser',
+ 'parse_cookie', 
+
+ 'request', 'response'
+]
+
+
+
+class QueryDict
+=========================
+
+https://docs.djangoproject.com/en/3.0/ref/request-response/#querydict-objects
+
+
+объекты Класса QueryDict:       # ведут себя как Словари, но имеют Сверху еще Логику
+
+    request.POST           
+    
+    request.GET['xxx']
+
+    request.GET.get('xxx', 'defoult')
+--------------------------
+
+1)
+request.GET['xxx'] - ведет себя как словарь и в случае отсутствия объекта словаря
+вызывает исклчение
+
+
+2)
+request.GET.get('xxx', 'defoult') - метод / возвращает объект по ключу, а если его нет
+то вернет дефолтное значение
+
+
+3)
+try:                                    # желательна проверка типов переменных (против хакеров) !!!
+    page = int(page)
+
+except ValueError:
+    return HttpResponseBedRequest()     # код 400 (плохой/неожиданный объект запроса)
+ 
+
+4)
+/path/?id=2&id=3&id=5               # приходит url запрос
+
+id = request.GET.get('id')          # id is 5       # на выходе только Одно значение параметра (последнее)
+
+id = request.GET.getlist('id')      # id is [2,3,5]         # список Всех параметров по ключу ID
+
+qs = request.GET.urlencode()        # id=2&id=3&id=5    # url строка    # например Сохранение строки Запроса
+
+
+5)
+request.GET.post('')            # методы переопределения значения аргументов
+
+request.GET.postlist('id')
+
+
+6)
+request.POST.get()              # логика аналогична как GET но с POST запросами
+
+request.POST.getlist('id')
+
+
+7)
+
+>>> q = QueryDict('a=1', mutable=True)  # Ключ что Значение Изменяемое
+
+>>> q.update({'a': '2'})                # Добавляется Новое значение Параметру
+
+>>> q.getlist('a')
+['1', '2']                              # Значения по Ключу - Две штуки
+
+>>> q['a'] # returns the last
+'2'
+
+
+
+request.META
+==========================
+agent = request.META.get('HTTP_USER_AGENT')        # вызов значений окружения из META
+
+
+user_ip = request.META.get('HTTP_X_REAL_IP')        # ip удаленного Реального клиента
+if user_ip is None:
+    user_ip = requet.META.get('REMOTE_ADDR')        # ip прокси веб серера
+
+
+    # имена переменных окружения описаны выше в туториале
+
+
+
+request.COOKIES
+==========================
+1) set
+resp = HttpResponse(html)              # задаем значении Куки для клиента
+
+resp.set_cookie('my_age', 40)           # функция создания Собственной Кукки -- сохраняется в Респонс объект 
+
+2) get
+my_ege = request.COOKIES('my_age')      # принимаем значение Куки с клиента
+40
+
+
+
+Декораторы в Джанго
+===================
+1) 
+@require_GET             # ограничивает логику функции только для GET/POST параметров
+
+@require_POST
+
+2)
+@login_required(login_url='/login/')    
+
+    # вьюшка работает только для залогирован пользователя / или редиректит на страницу Рег
+
+
+
+Шаблонизация в ДЖАНГО
+=====================
+Контекст (данные из БД и из кода) + Шаблон (html) ==> Шаблонизатор
+
+web-мастер делает Шаблоны / программист кодом создает и передает Контекст / Разделение !!!
+
+Особенности:
+------------
+1) Шаблонизатор экранирует все html сущности/теги -- для безопасности
+
+2) Шаблонизатор расширяем кастомными Тегами и Фильтрами
+
+3) В объектах доступны аргументы через точку а также методы без аргументов и элемент по индексам (например из списка) 
+
+
+Теги Шаблонизатора / в них код шаблонизатора
+------------------
+
+{% %}                                   # логика 
+
+{{ }}                                   # переменная
+
+{{ var|filter1:val1|filter2:val2 }}     # фильтры к переменной
+
+{% for ... %}{% endfor %}           # итерация по списку
+
+{% if %}{% elif %}{% endif %}       # условия
+
+{% include 'test.html '%}           # встраивание подшаблона
+
+{% block name_block %}{% endblock %}    # блок для встраивания подшаблонов
+
+{% extends 'base.html' %}               # наследования от базового шаблона
+
+{{ block.super }} + custom              # вывод контекста блока родит шаблона   
+
+{% comment %}qwert{% endcomment %}  # строка комментария в шаблоне
+
+
+Склеивание и Вызов Шаблонизатора
+--------------------------------
+from django shortcuts import render, render_to_response         / обработчики
+
+...
+return render(request, 'blog/post_data.html', {'post': post, 'comments': comments})
+
+    # то же что и метод ниже + request в контекст идет
+
+...
+return render_to_response('blog/post_data.html', {'post': post, 'comments': comments})
+
+    # чаще всего так вьюшка оканчивается - это объект HttpResponse 
+
+
+# TEMPLATE_DIRS -- из сеттингов, это префикс для корня шаблонов
+
+# {'post': post, 'comments': comments} -- это контекст / идет в шаблон
+
+# post, comments, request -- объекты шаблонизатора, доступны в шаблоне
+
+
+
+Context Processors / Контекс Процессоры
+=======================================
+Управляют переменными контекста (request и пр.)
+
+Переменные контекста передаются через render() 
+
+или как глобальные переменные проекта (через контекст процессоры, как request)
+
+
+в сеттингах проекта:
+--------------------
+'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',       // request
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',  // messages
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
+
+                'students2017.custom_context_processors.site_portal_url',
+                'students.app_context_processors.groups_processor',     // кастомный
+            ],
+
+
+код кастомного контекст-процессора
+--------------
+from .util import get_groups
+
+def groups_processor(request):
+    return {'GROUPS': get_groups(request)}
+
+
+Нюанс !!!:
+---------
+...
+return render_to_response(template_name, context)   
+
+            # работает быстро / но комнтексn-процессоры игнорирует (-request)
+
+return render(request, template_name, context)
+
+            # работает медленнее и задействует все укзанные контекст-процессоры, и кастомные
+
+
+
+
+11. Web-технологии. Работа с СУБД
+=================================
+https://www.youtube.com/watch?v=i_VJr2t9CEw
+
+1)
+Реляционные базы данных 
+Данные хранятся в таблицах по строкам и столбца и имеют связи между ячейками (relation)
+Все данные в столбце - данные одного типа, например
+id / name / value / date_added / author /
+23 / yurii/ 45   / 12-08-2017  /  user1 /
+
+
+
+Лучшие решения при проектировании БД
+--------------
+#) Связь между Таблицами через синтетические Первичные ключи (№ регистранции,
+уникальный ключ / псебдоним) то есть то что не будет меняться никогда
+
+#) связь с вариантами значения "на выбор" - через индексы на внешнюю таблицу
+(а не как аргументы на выбор как кортеж для переменной)
+
+
+главные задачи проектирования БД:
+---------------------------------
+1) сокращения избыточности
+
+2) устранение дублирования / все данные в конкретной ячейке + связи и ссылки !!!
+
+
+
+Python и Базы Данных
+====================
+SQL - язык структурированных запросов в БД / не программирования / а потоки данных 
+
+
+стандарт PEP-0249   / интерфейс для работы с БД
+https://www.python.org/dev/peps/pep-0249/
+
+
+В принципе можно кастомно писать SQL запросы (строки) напрямую в БД. При этом с
+помощью питона открывается соединение / создается объект курсор - как массив данных /
+делатеся отправки и сохранение в Бд и пр.
+
+Но во Фреймворках в современных условиях всю эту работу берет на себя ORM, который
+сам генерирует этот код на основании входных данных (Класс Модель структуры таблицы,
+взаимосвязи между Модедями, комманды которые загружают в БД и парсят из БД данные) 
+и пр.
+
+
+как работает ORM
+----------------
+
+mySQL
+http://mysql-python.sourceforge.net/MySQLdb.html
+-----------------
+
+import MySQLdb
+
+db = MySQLdb.connect(host='localhost', port=3307, user='ryndin', passwd='1234', db='baza')
+
+    # такие же данные в сеттигах джанго проекта
+
+cursor = db.cursor()            # объект и последовательный поток данных
+
+db.commit()                     # созранение и завершение передачи данных в БД
+
+db.close()                      # закрытие текущего соединения
+
+
+сursor.execute("select * fromusers")    # метод запроса в БД для курсора
+
+users = cursor.fetchall()               # через курсор получение всех срок из БД
+
+c=db.cursor()                           # пример запроса в БД через курсор
+
+max_price=5
+
+c.execute("""SELECT spam, eggs, sausage FROM breakfast
+          WHERE price < %s""", (max_price,))
+
+
+
+Базы Данных и Джанго
+====================
+https://docs.djangoproject.com/en/2.0/topics/db/models/
+
+https://docs.djangoproject.com/en/2.0/topics/db/managers/
+
+https://docs.djangoproject.com/en/2.0/topics/db/queries/
+
+https://docs.djangoproject.com/en/2.0/topics/db/queries/#field-lookups
+
+https://docs.djangoproject.com/en/2.0/topics/db/queries/#the-pk-lookup-shortcut
+
+
+Прямой Сырой Запрос в БД (без ORM)
+1)
+сначала прямой доступ к БД из Джанго
+
+приведены 3 примера запроса к БД
+-------------------
+
+from django.db import connection, connections
+
+curs = connection.cursor()                          # объект Соединения с БД
+    curs.execute("select * from tbl limit 10")
+
+curs = connactions['default'].cursor()              # соединение с Дефолтной БД
+curs.execute("select * from tbl limit 10")
+
+curs = connactions['enather'].cursor()              # соединение с еще одной БД (как сеттинги)
+curs.execute("select * from tbl limit 10")
+
+
+
+2)
+ORM - Object Relatoin Mapping
+-----------------------------
+
+Комманды:
+
+$ python3 manage.py
+
+$ python3 manage.py makemigrations
+
+$ python3 manage.py migrate
+
+$ python3 manage.py inspectdb
+
+$ python3 manage.py sqlmigrate
+
+$ python3 manage.py dbshell                 # только mysql postgresql
+
+
+Класс Модели            -->     Таблица SQL
+
+объект/атрибут Модели   -->     Строка таблицы
+
+QuerySet                -->     Запрос (множество запроса)
+
+
+простой запрос в ДБ через модель:
+
+for user in User.objects.filter(age__gt=21):
+    print(user.name)
+
+
+Основные классы полей:
+---------------------
+CharField / EmailField / TextField / BooleanField / IntegerField / 
+DateField / DateTimeField
+
+
+Свойства Полей (популярные)
+---------------------------
+blank           # поле может быть пустым (None)
+
+null            # при этом хранится в базе как NULL (как хранить пустое значение) (или "")
+
+max_length      # максимальная длинна поля
+
+primary_key     # это поле - первичный ключ (если автоприращение pk=id не подходит)
+
+unique          # поле уникально (например номер паспорта - нет дубликатов в БД)
+
+db_index        # для этого поля нужен индекс в базе   (дял оптимизации - отд тема)
+
+default         # значение по умолчанию (даже может быть привязан вызов функции особой)
+
+choices         # варианты значений [('s', 'small'), ('m', 'middle'),...]
+                    # 's' - сохраняется в БД / 'small' - хранится в питон-коде 
+
+
+Свойства полей моделей - важный функционал, которые хранит в себе Мета информацию о полях,
+даже такую которая не сохраняется в БД, но сохраняется на уровне питон-кода и доступна
+фреймворку
+
+
+Связи между Моделями
+--------------------
+(на примере класса Модели)
+
+Post --> (Category, PostStatus, Tag)
+
+
+class Post(models.Model):
+
+    title = models.CharField(max_length = 255)
+    ...
+
+    cartegory = models.ForeignKey(Category,                     # OneToMany
+                                null = True, 
+                                on_delete = models.SET_NULL)
+
+            # внешняя связь для выбора Категирии для Поста
+            # категория может быть NULL - то есть может быть не выбрана
+            # on_delete -- при удалении Категории. значение устанавливается в NULL
+
+    status = models.OneToOneField(PostStatus)
+
+            # внешняя связь на поле вспомогательной таблицы
+            # например статистика про пост / комменты / показы / лайки и пр.
+            #
+
+    tags = models.ManyToManyField(Tag)
+
+            # в БД создается промужет таблица со ссылками на post и tag (posttags) 
+            # данная таблица не имеет представления в виде Класса но хранит в бвзе 
+            # обоюдные связи
+
+
+Настройки для внешних ключей
+----------------------------
+(касается ForeignKey, OneToOneField)
+
+1) models.PROTECT
+    # если поле внешней модели удаляется, то срабатывает Запрет на удаление внешнего поля 
+
+2) models.CASCADE
+    # если внешнее поле удаляется, то удаляются все объекты которые на него ссылались !!
+    # и даже те поля удаляются которые ссылются каскадно на дочерние поля от ссылки 
+
+3) models.SET_NULL
+    # если внешнее поле удаляется, то его значение в дочерн поле устанавливается
+     в NULL
+
+4) models.DO_NOTHING
+    # если внешнее поле удаляется, то в связанном поле ничего не происходит
+    (остается ссылка ?)
+
+
+Использование Отношений Моделей в Коде
+------------------------------
+Post --> (Category, PostStatus, Tag)
+
+post = Post.objects.get(pk=1)       # выборка строки главной таблицы
+
+
+category = post.category            # внешний (ForignKey) атрибут/объект строки
+
+category_id = post.category_id      # число/номер внешнего атрибута (сгенерировано Джанго)
+
+
+category.post_set.all()             # обратное обращение к post (массив инстансев Post )
+
+
+status = post.status                # атрибут/объект(уникальный) 
+
+status_id = post.status_id          # число/номер внешнего атрибута
+
+
+tags_manager = post.tags            # Менеджер связей (ManyToMany obj) 
+
+post.tags.all()                     # массив внешних атрибутов (через Менеджер)
+
+
+tag.post_set.all()                  # обратное обращение к post (массив инстансев Post )
+                                    # Доступ к задающему Связи объекту 
+
+
+
+
+12. Web-технологии. Django модели
+=================================
+https://www.youtube.com/watch?v=rb2OUjzI7Uw
+
+
+Django API Models
+=================
+
+
+1)
+создание / Модель не принимает связи в аргументы
+-----------------
+from app1/models import Post, Category
+
+categ = Category(title='Python')
+categ.save()                        # появляется pk/id
+
+или 
+
+categ = Category.objects.create(title='Python')
+
+изменение / простая таблица
+-----------
+categ.title = 'Course Python'           # переназначение атрибута объекта
+categ.save()
+
+
+2)
+создание / Модель принмает связи 
+--------------------------------
+categ_py = Category.objects.get(title="Course Python")
+
+po = Post(title="Intro", ..., category=categ_py)        # объект инстанса в Аргумент
+po.save
+
+po.tags = Tag.objects.all()[0:3]        # связь ManyToMany / объект-Менеджер /
+                                        # связь на первые 3 тега из массива /
+po.save()                               # это все в промежуточной таблице связи
+
+tag_new = Tag(name='learn')
+tag_new.save()
+
+po.add(tag_new)       # добавление связи на Тег через метод add() / для связи ManyToMany
+    
+
+3)
+загрузка объекта (строки) из Модели (тиблицы) БД
+-------------------------
+try:
+    post = Post.objects.get(pk=4)       # вызов через модель-менеджер и фильтр
+except Post.DoesNotExist:               # собственный класс-обработчик исключений в Модели
+    post = None                         # объект Модели не создан (не вызван)
+
+
+4)
+загрузка множеств объектом Таблицы
+----------------------------------
+post_queryset = Post.objects.all()      # объект QuerySet / Невыполненный запрос в БД
+post_set = Post.objects.all()[0:4]      # выборка из Множества
+
+
+categ = Category.objects.get(id=3)
+post_set = Post.objects.filter(category=categ)
+    # выборка всех постов по категории
+
+
+tricks_posts = Post.objects.filter(title__contains='tricks')
+    # выборка объекта queryset с фильтацие по содержимому (__элементы SQL)
+
+tricks_posts = tricks_posts.order_by('-rating')
+    # последовательная обработка сортировкой
+
+tricks_posts = tricks_posts[10:20]
+    # последующая выборка по срезу в объекте QuerySet (как множество)
+
+
+
+Основные классы полей:
+=====================
+CharField / EmailField / TextField / BooleanField / IntegerField / 
+DateField / DateTimeField
+
+
+Атрибуты полей моделей
+----------------------
+https://docs.djangoproject.com/en/2.0/ref/models/fields/#module-django.db.models.fields
+https://docs.djangoproject.com/en/2.0/topics/db/models/#fields
+
+    null
+
+    blank
+
+    choices
+
+    db_column
+
+    db_index
+
+    db_tablespace
+
+    default
+
+    editable
+
+    error_messages
+
+    help_text
+
+    primary_key
+
+    unique
+
+    unique_for_date
+
+    unique_for_month
+
+    unique_for_year
+
+    erbose_name
+
+
+Свойства Полей (популярные)
+---------------------------
+blank           # поле может быть пустым (None)
+
+null            # при этом хранится в базе как NULL (как хранить пустое значение) (или "")
+
+max_length      # максимальная длинна поля
+
+primary_key     # это поле - первичный ключ (если автоприращение pk=id не подходит)
+
+unique          # поле уникально (например номер паспорта - нет дубликатов в БД)
+
+db_index        # для этого поля нужен индекс в базе   (для  оптимизации - отд тема)
+
+default         # значение по умолчанию (даже может быть привязан вызов функции особой)
+
+choices         # варианты значений [('s', 'small'), ('m', 'middle'),...]
+                    # 's' - сохраняется в БД / 'small' - хранится в питон-коде
+
+Свойства полей моделей - важный функционал, которые хранит в себе Мета информацию
+о полях, даже такую которая не сохраняется в БД, но сохраняется на уровне питон-кода
+и доступна фреймворку
+
+Фактически Свойства полей являются Мета информацией для Инстансев, они могут не 
+храниться в БД и в коде питона, ипользуются ORM для работы по запросам с БД, а также
+другими апликациями проекта (например Админкой и Командной строкой) для отображения
+полей моделей.
+
+
+
+Связи Моделей
+==============
+https://docs.djangoproject.com/en/2.0/topics/db/queries/#many-to-many-relationships
+https://docs.djangoproject.com/en/2.0/topics/db/queries/#one-to-one-relationships
+
+
+1)
+many-to-one
+
+models.ForeignKey(Catigory, null = True, on_delete = models.SET_NULL)
+
+Например зависимая модель Person ссылается через ForeignKey на модель Ukrainian
+То есть много Персон могут быть Украинцами (как Категория)  
+
+Данная связь реализуется как / в моделе Персона генерируется поле Ukrainian_id
+
+
+
+2)
+one-to-one
+
+models.OneToOneField(StatisticThisModel)
+
+Например модель Персона ссылается на Модель Достижения,Ю в которой хранятся
+достижения именно этой Персоны
+
+Данная связь реализуется как / в модели Персона генерируется поле 
+Достижения_id(UNOQUE) / та есть поле Достижений является уникальным/личным именно для
+этой Персоны
+
+
+3)
+many-to-many
+
+models.ManyToManyField(SomeModel)
+
+Например модель Статья может ссылатся на модель Теги
+В итоге к Статье могут быть выбране Нескольно Тегов
+А Тег быть привязан к Нескольким Статьям
+
+Данная связь реализуется через Промежуточную таблицу / название СтатьяТеги /
+в котороой указаня связь (Статья_id Пост_id)
+
+
+
+Действия при Удалении Внешнего объекта Ссылки
+---------------------
+Что делается со значение поля Модели которое ссылается на внешнюю Модель если та
+модель (ее Инстанс) удалился
+
+RESTRICT    -> models.PROTECT       # блокируется удаление внешней Модели
+
+CASCADE     -> models.CASCADE       # удаляется все Интсансы с зависимыми полями
+
+SET NULL    -> models.SET_NULL      # значение поля Модели устанавливается как null
+
+NO ACTION   -> models.DO_NOTHING    # значение поля никак не меняется (как успела взять)
+
+
+
+Использование Связей Моделей (Таблиц в БД) в Питоне
+RalatedManager
+============================
+
+#)
+person = Person.objects.get(name='ryndin')
+
+вызвали объект модели как отдельную персону / Отдельная строка в Таблице / Массив
+
+#)
+ukranian = person.ukranian
+
+это вызов Всей Модели Украинец, в которой можно брать отдеьные атрибуты и пр.
+
+ukranian.country
+ukranian.capital
+
+#)
+ukranian_id = person.ukranian_id
+
+
+создание объекта как отдельного поля из Модели Украинец / как его порядковый номер в БД
+
+#)
+achiv = person.achiv
+achiv_id = person.achiv_id
+achiv_sony = person.achiv_sony
+
+Предположу что Модель Ачивки является Уникальной именно для этого Персонажа
+И также доступня и вся Модель ачивки / А также отдельные элементы Модели
+
+#)
+tags_manager = person.tags
+
+создастся объект RalatedManager от Персосы с которой через Свзяль Многие-ко-Многим
+привязаны Теги, которые данная Персона отмечает
+
+tags = person.tags.all()
+
+это уже будет объект Тегов как Список [] значений
+
+
+#)
+Обратные методы:
+----------------
+
+ukranian.person_set
+tags.person_set
+
+ - Этот метод возвращает  RalatedManager of Person
+
+ukranian.person_set.all()
+    
+ - Этот Метод возвращает сам объект [Person] из которго доступны массивы данных
+
+
+
+ModelManager / for Model class
+==============
+менеджер Модели создается при создании Модели (таблицы БД) и предназначен для 
+управления и работы с данной Моделью / предоставляет все методы, фильтры
+
+ModelManager наследует все методы от QuerySet
+
+пример:
+-----------
+posts = Post.objects            // это ModelManager
+
+posts = Post.objects.all()      // это QuerySet
+posts = Post.objects.get(id=5)  // это QuerySet
+
+
+
+META API
+=================
+https://docs.djangoproject.com/en/2.0/ref/models/meta/
+
+доступ к менеджеру   _meta
+
+>>> from django.contrib.auth.models import User
+
+.get_field
+>>> User._meta.get_field('username')
+<django.db.models.fields.CharField: username>
+
+.get_fields
+>>> User._meta.get_fields()
+(<ManyToOneRel: admin.logentry>,
+ <django.db.models.fields.AutoField: id>,
+
+META OPTIONS
+------------
+https://docs.djangoproject.com/en/2.0/ref/models/options/#model-meta-options
+
+abstract
+
+app_label
+app_label = 'myapp'
+
+db_table
+db_table = 'music_album'
+
+ordering
+ordering = ['-order_date']
+
+verbose_name
+verbose_name = "pizza"
+
+verbose_name_plural
+verbose_name_plural = "stories"
+
+
+
+Объект Вопроса Q в Моделях
+==========================
+https://docs.djangoproject.com/en/3.0/topics/db/queries/#complex-lookups-with-q-objects
+
+(нечто новое и интересное)
+
+Poll.objects.get(
+    Q(question__startswith='Who'),
+    Q(pub_date=date(2005, 5, 2)) | Q(pub_date=date(2005, 5, 6))
+)
+
+типа как:
+
+SELECT * from polls WHERE question LIKE 'Who%'
+    AND (pub_date = '2005-05-02' OR pub_date = '2005-05-06')
+
+то есть Q конструктор Запроса в БД по условиям.
+Дословно -- Как объект Вопрос.
+
+
+
+Менеджер Моделей
+(Фактически делает запросы в БД)
+
+Model.objects
+=================
+
+>>> from students_db.models import Student
+
+>>> Student
+<class 'students_db.models.Student'>
+
+>>> Student.objects
+<django.db.models.manager.Manager object at 0x7f0016ca2c50>
+
+>>> dir(Student.objects)
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__',
+ '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__',
+ '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__',
+ '__setattr__', '__sizeof__', '__slotnames__', '__str__', '__subclasshook__',
+ '__weakref__', '_constructor_args', '_db', '_get_queryset_methods', '_hints',
+ '_insert', '_queryset_class', '_set_creation_counter', '_update',
+
+ 'aggregate', 'all', 'annotate', 'auto_created', 'bulk_create', 'check',
+ 'complex_filter', 'contribute_to_class', 'count', 'create', 'creation_counter',
+ 'dates', 'datetimes', 'db', 'db_manager', 'deconstruct', 'defer', 'difference',
+ 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'filter', 'first',
+ 'from_queryset', 'get', 'get_or_create', 'get_queryset', 'in_bulk', 'intersection',
+ 'iterator', 'last', 'latest', 'model', 'name', 'none', 'only', 'order_by',
+ 'prefetch_related', 'raw', 'reverse', 'select_for_update', 'select_related',
+ 'union', 'update', 'update_or_create', 'use_in_migrations', 'using', 'values',
+ 'values_list']
+
+>>> Student.objects.values_list()
+<QuerySet []>
+
+>>> Student.objects.values()
+<QuerySet []>
+
+>>> Student.objects.get_queryset()
+<QuerySet []>
+
+>>> Student.objects.db
+'default'
+
+
+
+
+12. Web-технологии. Django модели | Технострим
+=================================
+https://www.youtube.com/watch?v=rb2OUjzI7Uw&list=PLrCZzMib1e9qZwq95WVmGB-acnot5ka4a
+
+# Создание Элемента БД (Инстанс Модели)
+---------------------------------------
+>>> from blog.models import Blog
+
+>>> b = Blog(name='Beatles Blog', tagline='All the latest Beatles news.')
+>>> b.save()                # запись в Бд и создание b.id и b.pk
+
+или
+
+>>> b = Blog.objects.create(name='Beatles Blog', tagline='All the latest Beatles news.')
+
+в этой конструкции работа через ОбъектМенеджер / save() спрятан в методе create()
+
+>>> b.name = 'Scorpins Blog'
+>>> b.save()
+
+обычный метод изменения значения атрибута (поля) Таблицы в БД
+
+
+
+Создание Элеменитов БД со Связями
+=================================
+from blog.models import Person, Ukrainian, Tags
+
+Легеда: Персона иметт связь с Украинец как ФоринКи
+Персона имеет связь к Теги как Многие-ко Многим
+
+#)
+c = Ukrainian(title = 'Plaining PS4')
+c.save()
+
+Создал Свойство для Модели Украинец (присуще всем Украицам)
+Сохранил
+
+#)
+p = Person(name = 'yurii', ..., citizen = c)
+p.save()
+
+Создал объект Персонажа в котором переопределил Имя и Добавил Связь с Украинцем
+(как объект) 
+Сохранил
+
+#) 
+t = Tags(title='swiming')
+t.save()
+
+Создал новый объект Тег в Модели теги
+
+#)
+p.tags = Tags.objects.all()[:3] 
+p.save()
+
+Персонажу через поле Теги в Связь передал 3 Тега из Модели Теги
+Операция через МодельМенеджер которые имеет методы например all()
+Сохранил
+
+p.tags.add(t)
+p.save()
+
+Аналогичный вариант но через Метод add() объекта модели а не через ОбъектМенеджер 
+
+
+Загрузка одного объекта из БД (в код питона)
+=======================
+1)
+try:
+    post = Post.objects.get(pk=4)
+except Post.DoesNotExist:
+    post = None
+
+Моменты реализации:
+Создается объект как инстанс класса, который имеет атрибуты поля из БД
+Используется конструкция trt/except на случай отсутствия поля в БД с указанным pk
+интересно что класс Исключения испортирован из модуля Моделей (спец адаптирован)
+
+.objects.get()      -- загружает в принципе всегда 1 объект
+
+2)
+try:
+    post = Post.objects.get(name='ryndin')
+except MultipleObjectsReturned:
+    post = None
+
+Тут реализована проверки, на случай если из БД возвращено более чем 1 объект
+
+
+
+Загрузка Нескольких объектов из БД (в код питона)
+=======================
+
+1)
+post_all = Post.objects.all()                       # object QuertSet
+post_first_three = Post.objects.all()[:3]           # запрос в Бд по Слайсингу
+
+МодельМенеджер имеет методы в т.ч. Среза
+
+2)
+с = Catigory.objects.get(pk=4)                      # 'about python'
+
+posts_python = Post.objects.filter(catigpry = c)
+или
+posts_python = Post.objects.filter(catigpry_id = c.pk)
+
+Выборка по фильтрации или по Объектам или по атрибутам Объектов
+
+3)
+django_posts = Post.objects.filter(title__contains = 'django')      # QuerySet
+django_posts = django_posts.order_by('-raiting')                    # QuerySet
+django_posts = django_posts[3:8]                                    # запрос в БД
+
+Вариант выборки постов по Заголовкам в которых есть слово 'django'/
+применен Фильтр по содержимому Подстроки (создан объект )
+Также применена последовательная сортировка по Параметру и Срез Массива (тут Запрос)
+
+
+
+QuerySet 
+
+объект Запроса к БД
+====================
+https://docs.djangoproject.com/en/2.0/ref/models/querysets/
+
+
+Это объект Запроса к БД (именно запрос а не ответ). Это множество объектов запроса
+- Массив/Множество. QuerySet - ленивый (lazy) объект. То есть запрос осуществляется
+не в момент создания QuerySet как менеджера, в только при итерации по нему[индексация],
+либо при вызову метода, возвращающего результат.
+
+примеры:
+------------------
+post = Post.objects                             # ModelManager
+posts = post.filter(title__match='learn')       # QuerySet
+posts = posts.order_by('age')                   # QuerySet
+posts = post.reverse()                          # QuerySet
+posts_requerst = posts[0:7]                     # [Post] -- request to BD
+
+
+QuerySet являются объектами питон и могут сохранятся в Переменные
+А потом уже запускаться. Также QuerySet накапливают логику запроса через логическое
+И (например цепочки фильтров). 
+
+
+queryset позволяет создавать цепочки обьктов запросов, например от первого Менеджера,
+добавляе или перезаписывая условия и фильтры.
+
+
+методы queryset / формируют объекты QuerySet (lazy)
+================
+https://docs.djangoproject.com/en/2.0/ref/models/querysets/#methods-that-return-new-querysets
+
+
+filter() / exclude()        # SQL: WHERE / NOT WHERE / filter(**kwargs)
+
+фильтры как аналоги запросов SQL / WHERE ...
+под методы filter() и под exclude()
+
+filter(выборка)             # массив объектов которые соответствуют выборке
+exclude(выборка)            # массив объектов которые НЕ соответствуют выборке
+-----------
+
+https://docs.djangoproject.com/en/1.11/ref/models/querysets/#field-lookups
+
+(field = value1)    // точное совпадение имени поля
+
+(field__contains = value2 )     // типа содержит в себе / SQL: LIKE
+Entry.objects.get(headline__contains='Lennon')
+SELECT ... WHERE headline LIKE '%Lennon%';
+
+
+(field__isnull, field__gt, field__lte)      // значение 0 / больше / меньше чем
+Entry.objects.filter(id__gt=4)
+SELECT ... WHERE id > 4;
+
+
+(field__startswith = 'substring')       // Поле начинает ся с ...
+Entry.objects.filter(headline__startswith='Lennon')
+SELECT ... WHERE headline LIKE 'Lennon%';
+
+(field__search = 'word1 word2 word3')       // поиск по элементам поля
+Entry.objects.filter(headline__search="+Django -jazz Python")
+SELECT ... WHERE MATCH(tablename, headline) AGAINST (+Django -jazz Python IN BOOLEAN MODE);
+
+
+
+order_by()                  # условие сортировки полей
+Entry.objects.filter(pub_date__year=2005).order_by('-pub_date', 'headline') /
+знак "-" в атрибуте сортировки означане "сортировка в обратном порядке (по убыванию)"
+
+annotate()                # SQL: JOIN / GROUP BY / агрегация / тяжелый - не екомендуется
+
+
+values()                  # возврат сырых данных колонок / а не хитрые объекты queryset
+                          # например возврат типа списка словарей 
+>>> Blog.objects.filter(name__startswith='Beatles').values()
+<QuerySet [{'id': 1, 'name': 'Beatles Blog', 'tagline': 'All the latest Beatles news.'}]>    
+
+>>> Blog.objects.values()
+<QuerySet [{'id': 1, 'name': 'Beatles Blog', 'tagline': 'All the latest Beatles news.'}]>
+
+>>> Blog.objects.values('id', 'name')
+<QuerySet [{'id': 1, 'name': 'Beatles Blog'}]>
+
+values() -- это вопрос Оптимизации / Производительности запросов в БД !!!
+
+
+values_list()         # Возврат простого типа списка не со словарями а Кортежи пар значений
+>>> Entry.objects.values_list('id', Lower('headline'))
+<QuerySet [(1, 'first entry'), ...]>
+
+
+distinct()                 # SQL: SELECT DISTINCT / выборка уникальных значений ??
+>>> Entry.objects.order_by('blog__name', 'mod_date').distinct('blog__name', 'mod_date')
+
+
+select_related()    # all() -- тотальный запрос в БД (долгий) /     
+    # метод ограничивает запрос по имени запрашиваем полей и их связи
+    # 
+e = Entry.objects.select_related('blog').get(id=5)
+
+
+
+Методы QuerySet / Запрос в БД
+=============================
+https://docs.djangoproject.com/en/2.0/ref/models/querysets/#methods-that-do-not-return-querysets
+
+
+get()           // самый простой метод выборки 1 объекта по ключам
+e = Entry.objects.get(id=3)
+
+create()        //  создание Нового объекта в ДБ (через Модель)
+p = Person(first_name="Bruce", last_name="Springsteen")
+p.save(force_insert=True)
+
+update()        //  одновление сразу нескольких атрибутов/свойств объектоа
+>>> Entry.objects.filter(pub_date__year=2010).update(comments_on=False, headline='This is old')
+
+delete()        //  удаление сразу массива указанных (по фильтрам) объектов и БД
+>>> b = Blog.objects.get(pk=1)
+>>> Entry.objects.filter(blog=b).delete()
+(4, {'weblog.Entry': 2, 'weblog.Entry_authors': 2})
+
+
+get_or_create()     // выбор объекта или его создание (по атрибутам) - специальный синтакс
+obj, created = Person.objects.update_or_create(
+    first_name='John', last_name='Lennon',
+    defaults={'first_name': 'Bob'},
+)
+https://docs.djangoproject.com/en/1.11/ref/models/querysets/#update-or-create
+
+
+count()     // SQL:COUNT(*) возвращает количество объектов по выборке 
+Entry.objects.filter(headline__contains='Lennon').count()
+
+
+
+Фильтры-Условия для методов QuerySet
+только для filter() / exclude()
+============================
+
+#)
+гибридный метод фильтрации
+предварительная фильтрация до поля title в связанной модели catigory + 
+поиск-условие содержания подстроки 
+
+Post.objects.filter(catigory__title__contains = 'python')
+
+
+#)
+https://docs.djangoproject.com/en/2.0/ref/models/querysets/#field-lookups
+Чистые фильтры-условия
+
+__exact
+Entry.objects.get(id__exact=14)
+Entry.objects.get(id__exact=None)
+
+__iexact
+Blog.objects.get(name__iexact='beatles blog')
+Blog.objects.get(name__iexact=None)
+
+__contains
+Entry.objects.get(headline__contains='Lennon')
+
+__icontains
+Entry.objects.get(headline__icontains='Lennon')
+
+__in
+Entry.objects.filter(id__in=[1, 3, 4])
+
+__gt
+Entry.objects.filter(id__gt=4)
+
+__gte
+
+__lt
+
+__lte
+
+__startswith
+Entry.objects.filter(headline__startswith='Lennon')
+
+__istartswith
+
+__endswith
+Entry.objects.filter(headline__endswith='Lennon')
+
+__iendswith
+
+__range
+import datetime
+start_date = datetime.date(2005, 1, 1)
+end_date = datetime.date(2005, 3, 31)
+Entry.objects.filter(pub_date__range=(start_date, end_date))
+
+__date
+Entry.objects.filter(pub_date__date=datetime.date(2005, 1, 1))
+Entry.objects.filter(pub_date__date__gt=datetime.date(2005, 1, 1))
+
+__year
+Entry.objects.filter(pub_date__year=2005)
+Entry.objects.filter(pub_date__year__gte=2005)
+
+__month
+Entry.objects.filter(pub_date__month=12)
+Entry.objects.filter(pub_date__month__gte=6)
+
+__day
+
+__week
+Entry.objects.filter(pub_date__week=52)
+Entry.objects.filter(pub_date__week__gte=32, pub_date__week__lte=38)
+
+__week_day
+Entry.objects.filter(pub_date__week_day=2)
+Entry.objects.filter(pub_date__week_day__gte=2)
+
+__quarter
+Example to retrieve entries in the second quarter (April 1 to June 30):
+Entry.objects.filter(pub_date__quarter=2)
+
+__time
+Entry.objects.filter(pub_date__time=datetime.time(14, 30))
+Entry.objects.filter(pub_date__time__between=(datetime.time(8), datetime.time(17)))
+
+__hour
+__minute
+__second
+
+__isnull
+Entry.objects.filter(pub_date__isnull=True)
+
+__regex
+Entry.objects.get(title__regex=r'^(An?|The) +')
+SQL
+SELECT ... WHERE title REGEXP BINARY '^(An?|The) +';                # MySQL
+SELECT ... WHERE REGEXP_LIKE(title, '^(An?|The) +', 'c');           # Oracle
+SELECT ... WHERE title ~ '^(An?|The) +';                            # PostgreSQL
+SELECT ... WHERE title REGEXP '^(An?|The) +';                       # SQLite
+
+__iregex
+Case-insensitive regular expression match.
+Entry.objects.get(title__iregex=r'^(an?|the) +')
+
+
+
+QuerySet row()
+================
+https://docs.djangoproject.com/en/2.0/topics/db/sql/#performing-raw-sql-queries
+
+Метод row('SQL command')
+
+Дает возможность для формирования QuerySet к объкту Менеджера Модели применить
+сырой SQL запрос, иногда так удобнее
+
+>>> for p in Person.objects.raw('SELECT * FROM myapp_person'):
+...     print(p)
+John Smith
+Jane Jones
+
+>>> Person.objects.raw('SELECT id, first_name, last_name, 
+    birth_date FROM myapp_person')
+
+>>> first_person = Person.objects.raw('SELECT * FROM myapp_person LIMIT 1')[0]
+
+и прочее / читай документацию
+
+
+
+ModelManager 
+(for Model class)
+================
+менеджер Модели создается при создании Модели (таблицы БД) и предназначен для 
+управления и работы с данной Моделью / предоставляет все методы, фильтры
+
+ModelManager наследует все методы от QuerySet !!! 
+
+ModelManager работает с массивом вызываемых объектов.
+
+ModelManager Используется для создания QuerySet запросов в конкретную Модель
+
+пример:
+-----------
+posts = Post.objects            // это ModelManager
+posts = Post.objects.all()      // это QuerySet
+posts = Post.objects.get(id=5)  // это QuerySet
+
+Менеджер Моделей
+(Фактически делает запросы в БД)
+
+
+Model.objects
+-------------
+
+>>> from students_db.models import Student
+
+>>> Student
+<class 'students_db.models.Student'>
+
+>>> Student.objects
+<django.db.models.manager.Manager object at 0x7f0016ca2c50>
+
+>>> dir(Student.objects)
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__',
+ '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__',
+ '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__',
+ '__setattr__', '__sizeof__', '__slotnames__', '__str__', '__subclasshook__',
+ '__weakref__', '_constructor_args', '_db', '_get_queryset_methods', '_hints',
+ '_insert', '_queryset_class', '_set_creation_counter', '_update',
+
+ 'aggregate', 'all', 'annotate', 'auto_created', 'bulk_create', 'check',
+ 'complex_filter', 'contribute_to_class', 'count', 'create', 'creation_counter',
+ 'dates', 'datetimes', 'db', 'db_manager', 'deconstruct', 'defer', 'difference',
+ 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'filter', 'first',
+ 'from_queryset', 'get', 'get_or_create', 'get_queryset', 'in_bulk', 'intersection',
+ 'iterator', 'last', 'latest', 'model', 'name', 'none', 'only', 'order_by',
+ 'prefetch_related', 'raw', 'reverse', 'select_for_update', 'select_related',
+ 'union', 'update', 'update_or_create', 'use_in_migrations', 'using', 'values',
+ 'values_list']
+
+>>> Student.objects.values_list()
+<QuerySet []>
+
+>>> Student.objects.values()
+<QuerySet []>
+
+>>> Student.objects.get_queryset()
+<QuerySet []>
+
+>>> Student.objects.db
+'default'
+
+
+
+Кастомный ModelManager / очень интересно
+=======================
+
+https://docs.djangoproject.com/en/2.0/topics/db/managers/#modifying-a-manager-s-initial-queryset
+https://docs.djangoproject.com/en/2.0/topics/db/managers/#adding-extra-manager-methods
+
+Идея Кастомного Менеджера Модели - наполнить функциями по подготовке QuerySet в БД
+
+по умолчанию в джаного выывается менеджер Модели как POST.objects
+но если custom_objects определить в коде Модели как вызов собственного Менеджера
+то можно создать поведение собственного Менеджера Модели
+
+class PostManager(models.Manager):          # создаю собственный Менеджер с методами
+
+    def best_posts(self):
+        return self.filter(likes__gt=150)
+
+    def published(self):
+        return self.filter(published=True)
+    
+    def create_draft(self, **kwargs):
+        kwargs['draft'] = True
+        return self.cteate(**kwargs)
+
+class Post(models.Model):
+    title = models.CharField()
+    custom_objects = PostManager()          # инит Кастомного Менеджера Модели 
+
+posts = Post.objects.filter(likes__gt=150)
+    заменен на
+posts = Post.custom_objects.best_posts() !!!!!
+
+
+
+
+RelatedManager / Менеджер Отношений Модлей
+=================
+
+(только в для ManyToManyField связи / где есть промежуточная Таблица Связей )
+
+class Post(models.Model):
+    ...
+    tags = models.ManyToManyField(Tag)
+
+post1 = Post.objects.get(pk=2)
+tags_for_post1 = post1.tags         
+
+## RelatedManager / методы подобны к QuerySet но все в контексте (с фильтром)
+   к конкретному объекту post1
+
+
+tags_for_post1 = post1.tags.count()     # только теги в Связи с данным постом
+tags_for_post1 = post1.tags.values()  
+tags_for_post1 = post1.tags.create()
+
+
+Типичные методы RelatedManager
+=============================
+post1.tags.create(**kwargs)             # создание новго тега уже с привязкой к посту
+
+post1.tags.add(tag_new)                 # привязка существующего тега к  посту
+
+post1.tags.remove(tag1)                 # удаление одного тега поста
+
+post.tags.clear()                       # очистка свех тегов поста 
+
+
+
+Миграции в Джанго
+=================
+Миграция - это процедура изменения структуры БД в соответствии с изменениями в Моделях
+Синхронизация структур БД и Модели.
+
+В папке каждой апликации проекта подразумевается наличие папки migrations/
+Если такая папка создается (автоматически) то следует чо Джанго поддерживает
+миграции моделей данноой Апликации.
+
+
+python manage.py makemigrations   # комманда анализа изменений в Модеях и создание Миграции
+                                  # создает файлы в папке migrations/ апликации 
+
+python manage.py migrate          # применение Миграций для изменений в БД (запромы)
+
+
+В папке migrations/ можно увидеть структуры и историю создания БД из ORM Джанго
+
+
+
+Кастомный код Миграции в ДБ (вне ORM Джанго)
+(справочно / чтобы был в курсе)
+==============================
+project/mogrations/2017-25-09-more-post-fields.py       # файл миграции в кастомной папке
+
+from django.core.management import setup_environ        # подьем инфраструктуры Джанго
+from project import settings
+
+setup_environ(settings)                                 # применение сеттингов проекта (БД)
+
+from django.db import connaction                        # модуль соединения
+
+cursor = connaction.cursor()                            # курсор соединения
+
+cussor.execute("""                                      # запрос БД + SQL команда
+    alter table blog_post add column is_best tinyint(1);
+""")
+
+
+
+РЕКОМЕНДАЦИИ:
+=============
+Прохая практика - Fat Controller / Толстая Вью Функция
+
+A)
+Контроллер / Вьюшка предназначена исключительно работы с HTTP request / response
+объектами
+Если добавлять во Вьюшки другую логику то Запросы и Ответы обростают ненужними 
+операциями (выполнение кода построчно) и ограничивается функциональность Вьюшек,
+в плане многократных вызовов.
+
+B)
+Всю Бизнес Логику следует размещать в Моделях !!!
+
+либо как методы в Классе Модели
+
+либо как методы в Менеджере Моделей
+
+либо в Классах Хелперах.                # utils
+
+
+
+
+13. Web-технологии. Отображение данных
+======================================
+https://www.youtube.com/watch?v=xh4LllVJS1A
+
+Типичные сценарии апликейшн Сервера
+-----------------------------------
+1) Отображение объекта  
+        # объект из БД как правило / в Шаблонах
+
+
+2) Отображение Списка объектов
+        # из БД + язык Шаблонов        
+
+
+3) обработка Форм и Изменение объектов
+
+
+4) Авторизация и Сессии пользователей (Миддлвара)
+
+
+5) Запуск фоновых процессов
+
+
+6) Интеграция с внешними системами
+
+
+1) отображение Объекта из БД
+----------------------------
+/blog/post/
+
+url(r'^post/(&P<slug>\w+)/$', post_details, name='post-details')
+
+для более читаемого url часто вместо id обїекта (из БД) используют "жетон" "slug"
+
+
+1)
+базовая вью-функция / контроллер
+-------------------
+
+вьюшка как контроллер должна быть Простой и короткой
+допускается расширение кода во вьюшке если это Один объект из БД
+Если создается массив объектов + их валидация - то бизнес логика
+пишется в Моделях, то есть в их кастомных Менеджерах QuerySet (для запросов в БД)
+--------------------
+
+Больше Бизнес логики в Классах моделей - то что без формирования QuerySet !!!
+Если нужна бизнес-логика по формированию запросов в БД - то она в
+Кастомных Менеджерах Моделей !!! 
+
+
+from django.http import Http404
+from django shortcuts import render
+
+def post_details(request, slug):
+    try:
+        post = Post.objects.get(slug=slug)          # slug приходит в тело функции
+
+    excrpt Post.DoesNotExist:
+        # любой ненайденный объект и БД через url должать выдавать ошибку 404        
+        raise Http404               
+
+    return render(request, 'blog/post_details.html', 
+                {'post': post})                     # в Контекст - объект post (из БД)
+
+
+улучшенная вью-функция / контроллер
+-----------------------
+
+from django.shortcuts import render, get_object_or_404
+from django.views.decorators.http import require_GET
+
+@require_GET                            # декоратор допускает только GET запросы от Клиента
+def post_details(request, slug):
+
+    post = get_object_or_404(Post, slug=slug)       # сразу отрабатывает если нет объекта
+
+    return render(request, 'blog/post_details.html', 
+                {'post': post})                     # в Контекст - объект post (из БД)
+
+
+Связяанные сущности с объектом из БД
+------------------------------------
+Идея - Доставка в Шаблонизатор
+
+def post_details(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    
+    try:
+        # из свзянной модели выбрать оценку от пользователя
+        vote = post.votes.filter(user=request.user)[0]
+
+    excent Vote.DoesNotExist:
+        vote = 0
+
+    return render(request, 'blog/post_details.html', {      # словарь == context
+                'post': post,                               # объект
+                'category': post.category,                  # сзязь через Firiegnkey / сущность
+                'tags': post.tags.all()[:],                 # связь через ManyToManyField / сущнос
+                'vote': vote,                               # ... / сущность
+                })
+
+
+Сущности прамо из Шаблонизатора
+-------------------------------
+
+Пример когда в Шаблон может прийти только Объект post
+А его атрибуты уже можно вызывать через язык Шаблонов через (.)
+
+# через связи объекта
+<h1>{{ post.category.title }} - {{ post.title }}</h1>       
+
+# связанный объект и его метод Менеджера
+{% for tag in post.tags.all %}                  
+    
+    # get_url - кастомый метод в Модели
+    <a href="{{ tag.get_url }}">{{ tag }}</a>    
+
+{% endfor %}
+
+
+models.py
+---------
+
+Пример в котором в Молели реализованы кастосные функции
+(паттерн "логики больше в моделях")
+
+функции get_url() __str__  фактически кастомные и доступны в Шаблоне HTML через
+контексты {{ tag.get_url }} и {{ tag }}
+
+reverse() - формирует строку с URL исходя из имени Вьюшки и Входных параметров
+
+from django.core.urlresolvers import reverse
+
+class Tag(models.Model):
+    
+    # создается slug
+    slug = models.SlugField(unique = True)       
+    ...
+
+    # для {{ tag.get_url }}
+
+    def get_url(self):                          
+        return reverse('blog:tag-details', kwargs={'slug': self.slug})
+
+    # для {{ tag }}
+
+    def __str__(self):
+        return self.title                       }
+
+
+
+
+Пагинация 
+Постаничное отображение Списков объектов из БД Сайта
+===================================
+
+from django.core.paginator import Paginator
+
+
+Примеры методов Пагинатора на примере (Первое знакомство):
+---------------
+objects = ['Yan', 'Soumi', 'Jobby', 'Johan', 'Strippy', 'Lukky']
+
+>>>p = Paginator(objects, 2)
+
+  <django.core.paginator.Paginator object at 0x7f09401eef60>  
+          
+  # объект (инстанс) класса Пагинатор (принял список /  по 2 на страницу)
+
+>>> p.count:  6
+
+   # количестов принятых объектов          
+
+>>> p.object_list:  ['Yan', 'Soumi', 'Jobby', 'Johan', 'Strippy', 'Lukky']
+
+    # список объектов в Конкретной странице
+
+>>> p.allow_empty_first_page:  True
+
+>>> p.num_pages:  3
+
+    # количество страниц на которые разобъет Пагинатор
+
+>>> p.page_range:  range(1, 4)  
+ 
+    # Генератор Последовательности Страниц 
+
+>>> p.page(2):  <Page 2 of 3> 
+   
+    # объект страницы 2 (отображение через __str__)
+
+>>> p.page(1):  <Page 1 of 3>
+
+    # объект страницы 1 (отображение через __str__)
+
+
+-------------------- => page2 object
+
+>>> page2 = p.page(2):  <Page 2 of 3>   # объект страницы 1 (отображение через __str__)
+
+>>> page2.end_index():  4               # индес последней станицы
+
+>>> page2.has_next():  True             # есть ли следующая страница
+
+>>> page2.has_previous():  True         # есть ли предыдущая страница
+
+>>> page2.has_other_pages():  True      # есть ли другие стнаицы
+
+>>> page2.next_page_number():  3        # номер следующей страницы
+
+>>> page2.previous_page_number():  1    # номер предыдущей страницы
+
+>>> page2.__dict__:  {'number': 2, 'paginator': <django.core.paginator.Paginator object at 0x7fd05f7bb080>, 'object_list': ['Jobby', 'Johan']}      # объект ведет себя как Словарь
+
+>>> page2.__dict__:  dict_items([('number', 2), ('paginator', <django.core.paginator.Paginator object at 0x7fd05f7bb080>), ('object_list', ['Jobby', 'Johan'])])                            # Объект Страницы ведет себя как Словарь
+
+
+
+Классическая вьюшка Пагинатора
+==============================
+https://docs.djangoproject.com/en/1.11/topics/pagination/#using-paginator-in-a-view
+
+Фактически применима как Листинг любой Последовательности Объектов
+Встроена Валидация по "Страница - не число" и "Не существующая страница"
+
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+from django.shortcuts import render
+
+def listing(request):
+
+    contact_list = Contacts.objects.all()
+    
+    # Show 25 contacts per page
+
+    paginator = Paginator(contact_list, 25)         
+
+    page = request.GET.get('page')
+    
+    try:
+        contacts = paginator.page(page)
+    
+    except PageNotAnInteger:
+        
+        # Валидация
+        # Если пришедший № страницы не Число - выводим Первую страницу
+
+        contacts = paginator.page(1)
+    
+    except EmptyPage:
+        
+        # Валидация
+        # Если введено Не Существующая страница - Выводим Последнюю страницу 
+
+        contacts = paginator.page(paginator.num_pages)
+
+    return render(request, 'list.html', {'contacts': contacts})
+
+
+
+
+Вьюшка Пагинатора - интерпретация
+=================================
+from django.core.paginator import Paginator, EmptyPage
+
+def post_list_all(request):
+
+    posts = Post.objects.filter(is_published=True)
+
+    # лимит объектов на страницу от Клиента
+    # ПОПРОБЫВАТЬ потом на Заполненном Объекте БД
+
+    limit = request.GET.get('limit', 10)           
+
+    # запрошенный № страницы от Клиента
+    # ПОПРОБЫВАТЬ потом на Заполненном Объекте БД
+
+    page_this = request.GET.get('page', 1)               
+    
+    # объект Пагинатора с параметрами (объект постов(все) / на сколько станиц разбивать )
+
+    paginator = Paginator(posts, limit)         
+   
+    # новый атрибут объекта Пагинатор/ хардкод/ так не делать/ а через reverse() url()
+
+    paginator.base_url = '/blog/all-posts/?page='
+
+    try:
+        # создан объект Страницы по номеру !!
+
+        page = paginator.page(page_this)                  
+    
+    except EmptyPage:
+        # если запрошенная страница Не существует, то выдает Последнюю страницу
+
+        page = paginator.page(paginator.num_pages)   
+
+    # Шаблонизатор (html + context
+
+    return render(request, 'blog/post_by_tag.html', {   )
+        'posts': page.object_list,
+        'paginator': paginator,
+        'page': page,   
+    })
+
+
+
+Шаблон Пагинатора (Блок Кнопок)
+===============================
+используется спеиальный тег в html + стилизатор bootstrap
+
+<nav>
+<ul class='pagination'>
+    
+    # выведит все кнопки последовательности
+
+    {% for pag in paginator.page_range %}       
+    
+    {% if pag.number == page.number %}
+        <li class='active'>                     # кнопка отобразится как Активная (по условию)
+    {% else %}
+        <li>                                    # обычная/неактивная кнопка
+    {% endfor %}
+
+    # склейка Урла
+    # но лучше использовать {% url '/blog/page.number' %}
+
+    <a href='{{ paginator.base_url }}{{ pag.number }}'>
+        
+        # на кнопках - Номера станиц 
+        
+        {{ pag.number }}</a>                
+</ul>
+</nav>
+
+
+
+Progressive Loading
+========================
+
+Постепенная Загрузка Страница
+(по мере листания вниз)
+
+Дано:
+через Кнопку "ДАЛЕЕ"
+по 10 Постов на страницу
+Не должно буть 2х подряд постов из 1 категории
+
+1)
+Кастомный МоделМенеджер и функция main()
+
+class PostManager(model.Manager):                       # castom model manager
+
+    # кастомная функция
+
+    def main(self, since, limit=10):
+
+        # листинг постов из БД - сортировка от большего id
+
+        qs = self.order_by('-id')
+
+        result = []
+
+        # since - приходит из шаблона через вьюшку - количество обработанных уже постов
+
+        if since is not None:
+
+            # чтобы id постов в обработку были меньше предыдущих (переданных)
+
+            qs.filter('id__lt' = since)
+
+        # делаем срез в 1000 постов для всего анализа (экономия памяти)
+
+        for post in result[:1000]:
+
+            # если посты во временный список не пошли
+
+            if len(result) = 0:
+                result.append(post)
+            
+            # добавление в список чтобы категория не совпадала с последним в списке
+
+            elif result[-1].catigory != post.catigory:
+                result.append(post)
+
+            # если превышен лимит в 10 постов в блоке  
+                      
+            if len(esult) >= limit:
+                break
+
+        return result
+
+
+2)
+Вью-Функция
+
+def post_list_main(request):                                # only http object create
+    
+    # since придет из url параметра
+
+    since = request.GET.get('since')        
+    
+    # отработка объекта выборки постов
+
+    posts = Post.objects.main(since)                        # busines logic from custom model manager
+
+    # передача шаблона и контекста
+
+    return render(request, 'blog/post_main.html', 
+                  {'posts': posts,
+                    # id последнего поста в группе
+                    since: posts[-1]id},
+                  )
+
+3)
+Ссылка в Шаблоне
+
+<a href="/blog/main/?since={{ since }}">Далее</a>           # button to progressive pagination
+
+
+
+
+14. Web-технологии. Обработка форм Django | Технострим
+==========================================
+https://www.youtube.com/watch?v=TnziqFQQ3t0
+
+GET
+============
+метод для получения данных
+
+
+запрос GET может Кешироваться промежуточными сервисами
+(Кеширование - в зависимости от Заголовков запроса  )
+
+
+GET запрос применяется только в поисковых формах.!!
+
+
+Все данные в запросе GET попадают в url диспетчер (фактически в request)
+Оттуда данные все могут быть прочитаны и применены.
+
+
+POST
+============
+метод для изменения данных (в БД)
+
+POST запросы никогда не Кешируются промежут сервисаси
+
+POST должен применяться в Формах, которые меняют данные нв Сервере
+
+
+Отправка POST формы со страницы html
+-------------------
+Поля формы сервером проверяются на Валидность
+
+Если поля не валидны Сервер отдает html response с кодом 200
+/ но / данные на сервере не сохраняются /
+в ответе передаются данных строк формы и объект Ошибок Логика возврата данных -
+чтобы пользователь их в форму опять не вбивал (правильные) Строки Ошибок доступны
+на Клиенте - чтобы вывести на экран.
+
+Если поля (данные формы) валидны то данных сохраняются в БД
+ответ от сервера на клиент приходит с кодом 302 (редирект) что случайно 2 раз (при
+обрыве например соединения при сохранении) не запостить данных в БД (например платеж)
+Редирект обычно сопровождается Статусными сообщениями о результатах Поста
+
+
+
+Лучние решения
+==============
+    Всегда проверять пользовательские данные
+
+    Для форм с данными для сохранения на сервере (в БД) применять POST
+
+    Не заставлять вводить данные повторно
+
+    Все правильные поля дожны возвращаться на Клиент и попадать в нужные поля
+    Пользователь вводит заново только неправильные данные
+
+    Сообщеть об ошибках детально - по полям
+
+    Сообщать об успешной обработке Формы
+
+    При успешном сохранении делать Редирект
+
+
+Перенаправление в HTTP 
+=====================
+
+Алгоритм Запросов:
+------------------
+Клиент на сервер: POST / some_url
+
+Сервер: сохранение данных б БД
+
+Серврер на клиент: HTTP 302 / Location: new_url / Redirect
+
+Клиент на сервер: POST / new_url
+
+Серврер на клиент: HTTP 200 / OK
+
+
+HTTP ResponseRedirect
+=====================
+
+from django.http inport HttpResponseRedirect
+
+def some_view(request):
+    ......
+    return HttpResponseRedirect('/new_url/')
+
+
+Django Forms
+=====================
+
+В классы Форм идет некоторая Логика по Валидации и Сохранению данных (вместо Вьюшек)
+
+Образец Класса Формы
+--------------------
+
+from django import forms
+
+class FeedbackForm(forms.Form):
+
+    # обекты 2 полей / email поле также имеет встроенную Валидацию  
+   
+    email = forms.EmailField(max_length = 100)
+
+    # объект этого поля имеет свойтсво что это в html texterea 
+
+    message = forms.CharField(widget = forms.Texterea) 
+
+    # общим метод на все поля
+    def clean(self):
+        if is_spam(self.cleaned_data):
+            raise forms.ValidationError(
+                u'Сообщение похоже на спам',
+                code = 'spam',
+            )
+
+    метод валидации конкрентного поля / с суфиком
+    def clean_message(self):
+
+        # спец объект валидных данных
+        message = self.cleaned_data['message']
+        
+        # кастомная функция проверки матов        
+        if not etic(message):
+            raise forms.ValidationError(
+            u'Сообщение не корректно'        
+        )
+        return message
+
+    def save(self):
+
+        # объект Поста для сохранения с Валидными данными
+        post = Post(**self.cleaned_data)
+        
+        # сохранение и возврат объекта Поста        
+        post.save()
+        return post
+
+-------------------
+
+clean()             # 2 обязательных метода для Класса Формы (переопределяются)
+clean_<field>()
+
+clean_data  / {}    # словарь с прошедшими валидацию данными из полей форм
+
+save()              # обязательный метод для сохранения данных (переопределяется)
+
+raise forms.ValidationError     # спец инструкция перехватки Ошибки Валидации
+
+**self.cleaned_data     # еще раз Себе напомню - это типа Словарь с Парами значений
+
+
+Поля в Классах Форм
+===================
+
+Правила Валидации через методы clean() clean_<field>() определяются автоматически
+исходя из Типа Поля.  
+
+BooleanField        # Флажок (опубликован/неОпубликован да/нет)
+
+CharField           # текстовое поле ввода
+
+EmailField          # текстовое поле / email
+
+PaswordField        # текстовое поле / *****
+
+ChoiceField         # выбор из нескольких вариантов (ключ - в БД/ значение в коде питон)
+                    # в Браузере как - Выпадающий список
+
+DeteField           # выбор даты
+
+DateTimeField       # выбор даты и времени
+
+FileField           # загрузка файла
+
+
+Валидация данных
+----------------
+
+запускается методом is_valid()  - это флажок - возращает True/False
+
+Валидные поля сохраняются в self.cleaned_data
+
+При невалидных данных поля - выбрасыватеся исключение forms.ValidationError
+
+
+Валидация данных во Вьюшке
+==========================
+
+def post_add(request):
+
+    if request.method == "POST":                # POST
+        
+        form = AddPostForm(request.POST)        # bound объукт формы (с данными)
+        
+        if form.is_valid():                     # срабатывает вся валидация и True/False
+            
+            post = form.save()                  # данные в БД / объект с данными
+
+            url = post.get_url()                # встроенный метод  
+
+            return HttpResponseRedirect(url)    
+    
+    else:                                       # GET
+        form = AddPostForm()                    # un_bound / непривязанная к данным форма  
+
+    return render(request, 'blog/post_add.html', {'form': form})
+
+
+объект form в Шаблонах
+======================
+
+#)
+Ленивый вариант
+---------------
+
+В Джанго есть какая то дефолтная верстка и теги Верстки в языке шаблонов
+Тут вшиты и Ошибки / и Подсвечивание полей  / и Подсказки и пр.
+Минул в том что отображение как правило не соответствует Тех.Заданию
+
+{{ form.as_ul }}
+
+{{ form.as_p }}
+
+{{ form.as_table }}
+
+
+#)
+Кастомизированный вариант
+-------------------------
+
+HTML разметка пишется катосмно а в нужные Поля вставляются данные а также
+Вставляются названия классов по Условию
+
+
+{% for e in form.none_field_errors %}       # список Общих ошибок (не по Полям)
+    <div class='alert ....'>{{ e }}</div>
+{% endfor %}
+
+<fieldset>
+{% for filed in form %}
+    {% if field.errors %}has-error{% enfif %}
+    {{ field.label }}
+    {{ field }}
+{% endfor %}
+</fieldset>
+<button>.....
+
+
+Model Form
+=============
+Такой себе Ленивый способ создания Формы через классы Форм
+
+Применимы только для Простых стравочников
+Так сказать для не основных сущностей проекта
+Для простых форм
+
+from django.forms import ModelForm
+
+class ArticleForm(modelForm):
+
+    class Meta:
+
+        model = Post
+
+        fields = ['title', 'contant', 'catigory', 'tags']
+
+
+методы / clean() / clean_<field>() / save / cleaned_data / уже работают
+
+Дополнительная Кастомизация таких Классов Форм возможна например, через crispy-forms
+!!!
+
+
+
+Безопасность Форм
+=================
+
+Проверка пользователя (1)
+---------------------
+
+class AddPostForm(form.Form):
+    .....
+
+    def __init__(self, user, **kwargs)
+        self._user = user                                   # трансформировал инит
+        super(AddpostForm, self).__init__(**kwargs)         # но запустил инит родителя
+
+    def clean(self):
+        if self._user.is_banned:                            # кастомный метод (флаг из БД)
+            raise ValidationError(u'Вы забанены были')
+
+    def save(self):
+        self.cleaned_data['author'] = self._user            # дополняю данные в БД Юзером
+        return Post.objects.create(**self.cleaned_data)
+
+
+Проверка пользователя (2)
+---------------------
+
+from django.contrib.auth.decorators import login_required
+
+@login_required                     # вьюшка доступна только залогир пользователю
+def post_add(request):
+    
+    form = AddPostForm(request.user, request.Post)      # в Джанго юзер есть всегда
+    if form.is_valid():
+        post = form.save()
+
+
+CSRF
+=================
+
+С нашей формы от Клиента приходит строка и в Кукках и в POST параметрах.
+Злоумышденник может перехватить Кукки но не сможет сгенерировать нужный
+csrf в POST параметрах запроса.
+
+<form mathod="POST" action="/blog/add/">
+    {% csrf_token %}
+</form>
+
+.........
+
+
+
+
+15. Web-технологии. Сессии и авторизации | Технострим
+========================================
+https://www.youtube.com/watch?v=MwsW3X7dPtM
+
+
+Авторизация
+-----------
+
+2 способа 
+
+1)
+Basic HTTP Авторизация
+----------------------
+
+В основном используется для авторизации в сетевых устройствах (роетерах/модемах) админов
+Всплывает в дефолном окне браузера 
+
+от клиента на сервер: GET /admin/
+
+от сервера на клиент: 401 Unauthorized realm = 'admin'
+
+от клиента на сервер: Пароль+Логин / GET /admin/ Authorization: Basic <codersdata>
+    # base64(login + ':' + password)
+
+от сервера на клиент: 200 ОК            (логин и парол подошли)
+или от сервера на клиент: 403 Forbidden (логин и парол не подошли)
+
+REMOTE_USER - глобальная переменная СGI с именем Авторизованного Юзера
+
+
+
+2)
+COOKIES
+Авторизация через КУККИ
+-----------------------
+
+Cookies - маленькие фрагменты данных (как словари / пары значений) которые Браузер
+хранит на стороне Клиента и передает Пакетом на сервер.
+
+Для каждого домена Кукки свои, и чужие Кукки на домен не попадают
+У кукк есть время Жизни и Доменное имя.
+
+Name / Value / Domen / Path - /... / Expires - дата жизни / Size / Secure - https 
+/ HttpOnly - cookie не доступна js
+
+команда в консоли браузера
+---------------
+document.cookie
+
+"uid=5032225;
+ lapuid=b483c786-d006-41ed-ae37-c130f634bd8c;
+ _ga=GA1.2.2077749283.1521141193;
+ _gid=GA1.2.1712936141.1521141193;
+ __qca=P0-1075748497-1521141193953;
+ vote_4785=1;
+ __gads=ID=00fe092e24fe0f1d:T=1521141236:S=ALNI_MYaV5wg9E-Ge5GUQdNmeWOLukVnyg;
+ _mwuck=f3b6b713-2821-4a5c-a0f1-e4215462eab7;
+GED_PLAYLIST_ACTIVITY=W3sidSI6IkJleDgiLCJ0c2wiOjE1MjExNDEyOTQsIm52IjoxLCJ1cHQiOjE1M
+jExNDEyMzgsImx0IjoxNTIxMTQxMjk0fV0.;
+_gat=1;
+ _dc_gtm_UA-45979688-2=1"
+
+
+Установка Кукки
+Передача от Сервера на Клиент
+---------------
+
+Set-Cookie: name = mmlfdl; Domain = jhjdhfjdhj; Expires = jjfkdk; Secure
+
+Для удаления Кукки его время жизни устанавливается сервером В Прошлом
+
+
+Передача Кукки
+От Клиента на Сервер
+--------------
+
+Cookie: sessid = jkfdfkjdi; lang = ru; csrftoken = lkldklfjdkfkdk  
+
+В одной строке передаются сразу все Кукки но только пары имя/значение
+
+    
+Кукки в Джанго
+--------------
+
+# установка 
+
+resp_obj.set_cookie('sessid', 'sdksdksjkd')
+
+resp_obj.set_cookie('group', 'sdksdksjkd', domain='site.com',
+                     path='/pasts/',
+                     expires = (datetime.now + timedelta(days=45)),
+                    )
+
+# удажение
+
+resp_obj.delete_cookie('group')
+
+
+# вызов
+
+request.COOKIES                     # весь массив 
+
+request.COOKIES.get('sessid')       # одна кукки
+
+
+Cookie Based Авторизация
+Алгоритм
+=========================
+
+от клиента на сервер: POST /login/ login=ryndin&pass=1254
+от сервера на клиент: 302 Found Set-Cookie:sessid = kkfjdh Location:/some/url/
+от клиента на сервер: GET /some/url Cookie:sessid = kkfjdh
+от сервера на клиент: 200 OK
+
+для проверки Сессии между Клиентом и Сервером как правило используется middleware
+
+'django.contrib.sessions.middleware.SessionMiddleware',
+
+middleware - это Класс Питон, который имеет методы работы с request/response объектами
+-------------------------
+
+process_request(request)
+
+# запускается в момень захода запроса на сервер (до view роутера)
+# тут request может быть изменен
+
+process_view(request, view, args, kwargs)
+
+# запускается в момент запуска вьюшки
+
+process_response(request, response)
+
+# запускается в момент создания объекта response (после рендера)
+
+process_exception(request, exception)
+
+# запускается в момент выкидывания вьюшкой Исключения
+
+
+Пример 
+process_request(request)
+------------------------
+
+Если от Клиента в Кукках пришел sessid то в request создаются объекты Сессии и Юзера
+Иначе объекты создаются с путсыми значениями и дальнейшая сессия не поддерживатеся
+
+class CheckSissionmidlleware:
+
+    def process_request(request):
+        
+        try:
+            sessid = request.COKKIE.get('sessid')
+
+            session = Session.objects.get(
+                key=sessid,
+                expires__gt = datetime.now()            
+            )
+
+            request.session = session
+            request.user = user
+
+        except Session.DoesNotExist:
+
+            reuqest.session = None
+            request.user = None
+            
+
+кастомный LOGOUT 
+Выход из Сессии
+----------------
+
+При запуска функции если Сессия активна то удаляется объект сессии из БД
+и перенаправления на нейтральную станицу
+
+При следующем запросе от Клиента данной сессии на сервере уже не будет.
+Понадобится новая Авторизация.
+
+def logout(request):
+    sessid = request.COOKIE.get('sessid') 
+    
+    if sessid is not None:
+        Session.objects.delete(key=sessid)
+
+    url = request.GET.get('continue', '/')
+    return HttpResponseRedirect(url)   
+            
+
+
+Встроенная Авторизация Django
+=============================
+
+djangp.contrib.sessions
+-----------------------
+
+Поддреживается ананонимная Сессия - то есть не свзяданняя с Авториз пользователем
+
+
+Redis хранилище - Джаного позволяет там хранить сессии
+
+
+request.session
+---------------
+
+Поскольку встроенные сессия Джаного - в установленных апликациях:
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+
+
+до досnупен объект request.session
+
+обїект request.session ведет себя как Словарь - то есть можно читать значения и менять
+
+
+django.contrib.auth
+-------------------
+
+реализована отдельно / поверх сессий джанго
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+
+
+request.user
+------------
+
+user = request user
+user.is_authenticated()     # True / False
+user.is_anonymous()         # True / False
+
+
+
+Безопасность Паролей
+====================
+
+1) запрос с клиента на сервер через https
+
+2) хранение пароля в виде Хешей с добавлением Соли
+
+3) captcha - от ботов по перебору паролей
+
+
+примеры апликаций captcha
+-------------------------
+
+https://github.com/mbi/django-simple-captcha
+
+# эта новее и круче (+ajax)
+
+https://github.com/praekelt/django-recaptcha
+
+
+
+Django Packages
+===============
+https://djangopackages.org/
+
+Представлены все возможные Пакеты созданные для Джанго
+В том числе поиск по имени, рейтинги, ссылки на документацию
+
+
+
+
+
+16. Web-технологии. Технология AJAX | Технострим
+================================================
+https://www.youtube.com/watch?v=TjwhsLewZGo
+
+AJAX
+=======
+
+Суть что вся страница не перезагржается, а сервер и клиент
+Обмениваются кусочками данных которые обновляются на сервере
+и в некотороых полях web странице на клиенте. (через HTTP)
+
+Сейчас данные передаются чаще всего через JSON объект
+
+
+AJAX на Клиенте (кастомный)  
+==========================
+
+такое API не очень удобное
+
+(xhr - xml_http_request)
+
+var xhr = new XMLHttpRequest()
+xhr.open('POST', '/xhr/some.html', true)        # открытие соединения Асинхронного (true)
+xhr.onereadystatechange = function() {          # функция-обработчик - callback
+    if (xhr.readyState == 4) {                  # параметр - если получен Ответ или Ошибка
+        if (xhr.status == 200) {                # Статус ответа
+            alert(xhr.responseText);            # Тело ответа
+        }    
+    }
+};
+
+xhr.send('a=5&b=3')                # отправка запроса на сервер + данные http_request
+
+
+
+
+AJAX с помощью JQuery
+=====================
+
+Более простая форма организации AJAX потока обмена данными
+через билиотеку js - jquery
+
+Промис объект - это ответ с Сервера
+
+$.ajax({
+    url: '/blog/comments/add',                      // url запроса
+    type: 'POST',                                   // метод запроса
+    data: {post_id: 12, text: 'Good Idea!'},        // данные на передачу
+
+}).success(function(data) {                         // метод Промис объекта / data - JSON
+    if (data.status == 'ok') {
+        console.log(data.comment_id);    
+    }        
+
+}).error(function() {                               // метод Промис объекта
+    console.log('http error');
+});
+
+
+кратко
+-------
+$.ajax({}).success(function()).error(function())
+
+$.ajax() метод добавляет X-Requested-With: XMLHttpRequest       # заголовок в HTTP
+
+что придает Асинхронности всему этому процессу
+
+
+пример вьюшки которая работает с AJAX запросом
+-------------------------------------
+
+def comments_list(request):
+
+    post_id = requiest.GET.get('post_id')               # получили id из реквеста от клиента
+
+    post = get_object_or_404(Post, post_id)             # получили объект из БД или содали его в БД
+
+    comments = paginate(request, post.cpmments)         # создали объект для Респонса 
+
+    return render(request, '/blog/comments.html', {'comments': comments})       # обработка в Респонс обычный html
+
+возвращается только блок html кода без надстроек
+
+
+
+Объект Ответа в JSON
+====================
+
+Например
+
+{'status': 'ok',
+ 'comment_id': 123}
+
+{'status': 'error',
+ 'code': 'no-auth',
+ 'message': 'you are not authorization'}
+
+
+
+
+Классы Джанго для JSON Response
+===============================
+
+пример:
+-------
+from django.http import HttpResponse
+import json
+
+
+class HttpResponseAjaxSuccess(HttpResponse):                # спец класс для успешного Респонса ajax
+
+    def __init__(self, status='ok', **kwargs)
+
+        kwargs['status'] = status
+
+        super(HttpResponseAjax, self).__init__(
+
+            content = json.dumps(kwargs),                   # создает JSON строку
+            mimetype = 'application/json'
+        )
+
+class HttpResponseAjaxError(HttpResponseAjaxSuccess):       # Спец класс для Неуспешного (с ошибками)  ajax
+
+    def __init__(self, code, message):
+
+        super(HttpResponseAjaxError, self).__init__(
+
+            status = 'error', code = code, message = message
+        )
+
+# выше написанные классы гарантируют простоту
+# и однообразие их использования во Вьюшках
+
+
+
+@login_required_ajax                                       # это Кастомный декоратор
+def comment_add(request):
+
+    form = AddCommentForm(request.POST)
+
+    if form.is_valid():
+        comment = form.save()
+
+        return HttpResponseAjaxSuccess(comment_id = comment.id)
+    
+else:
+        HttpResponseAjaxError(
+            code = 'bed_params', message = form.errors.as_data())
+
+
+# Кастомный декоратор для ajax запросов
+
+def login_required_ajax(view):
+
+    def view2(request, *args, **kwargs):
+
+        if request.user.is_authenticated()
+            return view(request, *args, **kwargs)
+
+        elif request.is_ajax()                      # ajax but authenticated 
+            return HttpResponseAjaxError(
+                code = 'no_auth', message = 'Need Auth'            
+            )
+
+        else:
+            redirect('/login/?continue=', + request.get_full_path())
+
+    return view2
+
+
+
+
+Django JsonResponse
+===================
+
+https://stackoverflow.com/questions/2428092/creating-a-json-response-using-django-and-python
+---------
+from django.utils import simplejson
+from django.http import HttpResponse
+
+def some_view(request):
+
+    data = {"key1": "value1", "key2": "value2"}
+
+    data_json = simplejson.dumps(data)
+
+    return HttpResponse(data_json, mimetype='application/json')
+
+    # создает JSON строку и передает по http
+
+
+или
+---------
+
+from django.utils import simplejson
+
+class JsonResponse(HttpResponse):
+    """
+        JSON response
+    """
+    def __init__(self, content, mimetype='application/json',
+                 status=None, content_type=None):
+        super(JsonResponse, self).__init__(
+            content=simplejson.dumps(content),                  # создает JSON строку
+            mimetype=mimetype,
+            status=status,
+            content_type=content_type,
+        )
+
+
+или уже есть класс в Джанго
+------------------
+
+from django.http import JsonResponse
+return JsonResponse({'foo':'bar'})
+
+
+
+
+CORS
+====================
+
+Cross Origin Resource Sharing
+
+Технология обеспечивает AJAx запросы на другие домены
+
+Например для работы на сайте Апликации Комментариев DISQUS
+
+Логика реализуется через Заголовки запросов с укзанием Истоников Домена
+
+# заголовок запроса 
+ORIGIN: site.com                        # запрос с сайта-партнера
+
+# заголовки ответа
+Access-Control-Allow-Origin: *          # указывает серверу на сайт-партнер
+Access-Control-Allow-Credentials:       # обеспечивает работу с Кукками
+
+
+Декоратор для CORS
+------------------
+
+def allow_cors(view):
+
+    def view2(request, *args, **kwargs):
+
+        response = view(request, *args, **kwargs)
+        
+        origin = request.META.get('HTTP_ORIGIN')
+
+        if not origin:
+
+            return response
+
+        for domain in settings.CORS_WHITE_LIST:
+
+            if origin.endswith('.' + domain):
+
+                response['Access-Control-Allow-Origin'] = origin
+
+        return response
+
+    return view2
+
+            
+
+
+
+17. Web-технологии. Real Time сообщения | Технострим
+========================================
+https://www.youtube.com/watch?v=Td6QGidr8hc
+
+HTTP ключевая проблема это - пока нет запроса - нет ответа!!!
+
+# 
+клиент на сервер
+HTTP/AJAX
+
+
+# сервер на клиенты
+HTTP/WebSocket
+
+
+У клиента должно быть постоянно открытое соединение с Сервером.
+Лучше всего отлеьный протокол - WebSocket
+
+
+Технология commet для реал тайм сообщений на сегодня одно из основных в Сети
+например Вконтакте ее использует.
+
+
+были commet / push и прочие технологии
+
+
+WebSocket
+=========
+Но в последнее время передовым является WebSocket
+Его и надо использовать. Есть библиотека в Питоне
+Передача идет в виде Бинарных Фреймов (фрагментов)
+
+
+логика обмена сообщениями
+--------------
+
+рукопожатие между клиентом и сервером
+--------------
+# от клиента на сервер
+http 
+GET/messages
+Upgrade: websocket              # предложение сменить http на websocket
+
+
+# от сервера на клиент
+http
+101 Switching protocol
+Upgrade: websocket              # согласие сменить http на websocket
+
+
+передача данных
+------------
+# от клиента на сервер
+websocket                       # уже обмен сообщениями через websocket
+
+
+# от сервера на клиент
+websocket
+
+
+код рукопожатия
+---------------
+# от Клиента
+GET /chart /HTTP 1.1
+Host: server.example.com
+Upgrade: websocket
+Conection: Upgrade
+Sec-WebSocket-Key: jkjkjklshjdkhskld==
+Sec-WebSocket-Origin: http://example.com
+Sec-WebSocket-Protocol: chart, superchart
+Sec-WebSocket-Version: 15
+
+
+# от Сервера
+Upgrade: websocket
+Conection: Upgrade
+Sec-WebSocket-Key: ;ldlsd;s'ldlsdlsmdsk=
+Sec-WebSocket-Protocol: chart
+
+http://          ws://
+https://         wss://
+
+
+Объект JSON на js
+-----------------
+JSON
+JSON {parse: ƒ, stringify: ƒ, Symbol(Symbol.toStringTag): "JSON"}
+
+
+код на Клиенте
+--------------
+
+var socket = new WebSocket('ws://host/echo')            # Спец Объект Сокет из Конструктора
+
+# при открытии соединения
+socket.onopen = function(event) {                       # объект - функция колбек (реагирует на событие)
+    console.log('ws opened');
+    var data = JSON.stringify({message: 'Start WebSocket!'});
+    socket.send(data);                                  # отправка данных на Сервер
+}; 
+
+
+# при получении сообщения
+socket.onmessage = function(event) {                    # event - объект ответа от сервера   
+    var response = JSON.parse(event.data);
+    console.log('ws mwsssage: ', response.message)
+};
+
+
+# при закрытии соединения
+socket.onclose = function(event) {           
+    console.log('ws closed!')
+};
+
+
+
+код на Сервере
+-----------------
+(пример через евент фреймворт на питоне - tornado)
+
+class EchoWebSocket(tornado.websocket.WebSocketHandler):
+    
+    # метод сервера - срабатывает при открытии соединения с Клиентом
+    
+    def open(self):
+        print('Web Socket Opened!')
+
+    # страбатывает при получении сообщения от Клиента (упрощенно отправляет его назад)
+    # message можно было сохранить в БД, переслать другим клиентам и пр.
+
+    def on_message(self, message):
+
+        self.write_message(message)
+
+    # срабатывает при закрытии соединения
+
+    def on_close(self):
+
+        print('Web Socket Closed!')
+
+
+Django Channels
+это WebSocket для Django
+
+===============
+В Днанго это делатеся через Django Channels
+https://khashtamov.com/ru/django-channels-websocket/
+
+https://channels.readthedocs.io/en/latest/ 
+
+
+
+
+
+ЕЩЕ один КУРС / ПОЗЖЕ пройти
+============================
+============================
+
+1. Веб-разработка. Введение, сетевые протоколы | Технострим
+============================
+https://www.youtube.com/watch?v=PsLzEAsphbM&t=8897s
+
+
+2. Веб-разработка. Web серверы | Технострим
+==============================
+https://www.youtube.com/watch?v=wV2WavaPNrU&t=1238s
+
+
+3. Веб-разработка. Серверная разработка ч.1 | Технострим
+=======================================
+https://www.youtube.com/watch?v=4u0mIqf7_iM&t=16s
+
+
+4. Веб-разработка. Обработка пользовательских данных | Технострим
+=======================================
+https://www.youtube.com/watch?v=_cS6dlaj4IA&t=24s
+
+
+5. Веб-разработка. html, css, javascript | Технострим
+========================================
+https://www.youtube.com/watch?v=2jRh8NnbXh0&t=17s
+
+
+6. Веб-разработка. Серверная разработка | Технострим
+=======================================
+https://www.youtube.com/watch?v=fvcXyEUHh2c
+
+
+7. Веб-разработка. В глубь Django | Технострим
+=================================
+https://www.youtube.com/watch?v=LX-Uyx1vfhI&t=2174s
+
+
+8. Веб-разработка. Выкатка сайта на продакшн | Технострим
+============================================
+https://www.youtube.com/watch?v=q3E-Gp9ehdo&t=2184s
+
+
+
+
+
+
+ЕЩЕ один КУРС / ПОЗЖЕ пройти
+============================
+============================
+
+1)
+Web-технологии. Введение
+========================
+https://www.youtube.com/watch?v=tiRIWEnvsPI
+
+
+2)
+Web-технологии. Сетевые протоколы
+=================================
+https://www.youtube.com/watch?v=i16XviL8YMY&t=2446s
+
+
+3)
+Web-технологии. Web-серверы
+===========================
+https://www.youtube.com/watch?v=E0t2CYo0qSk&t=2989s
+
+
+4)
+Web-технологии. Серверная разработка
+====================================
+https://www.youtube.com/watch?v=yg1rout4PKM
+
+
+5)
+Web-технологии. Реляционные базы данных
+===========================
+https://www.youtube.com/watch?v=jb_gkVQqikA
+
+
+6)
+Web-технологии. MVC-фреймворки. Django
+===============================
+https://www.youtube.com/watch?v=Ykurlvt-VYQ
+
+
+7)
+Web-технологии. Django (часть 2)
+================================
+https://www.youtube.com/watch?v=PX4PL-XSQ3Q
+
+
+8)
+Web-технологии. HTML и CSS
+==========================
+https://www.youtube.com/watch?v=0B6mQgz4YX0
+
+
+9)
+Web-технологии. Javascript
+==========================
+https://www.youtube.com/watch?v=8y1SthX9nBs
+
+
+10)
+Web-технологии. Rich Internet Applications
+=============================
+https://www.youtube.com/watch?v=DSyFfM0WROg
+
+
+11)
+Web-технологии. Безопасность web-приложений
+=============================
+https://www.youtube.com/watch?v=k4xDUJa6bhg
+
+
+
+
+
+
+

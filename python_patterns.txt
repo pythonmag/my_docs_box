@@ -1,0 +1,12 @@
+Передовые паттерны проектирования в Python
+==================
+http://toly.github.io/blog/2014/03/05/advanced-design-patterns-in-python/
+
+Генераторы
+Декораторы
+ContextLib (менеджеры контекста) Contaxt Managers
+Дескрипторы
+Метаклассы
+Паттерны
+
+

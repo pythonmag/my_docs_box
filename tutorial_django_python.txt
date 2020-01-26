@@ -1,0 +1,2681 @@
+0)
+Глобальные пакеты совет Виталия
+=================
+
+sudo apt install build-essential make cmake scons
+sudo apt install autoconf automake autoconf-archive
+sudo apt install gettext libtool
+sudo apt install libbz2-dev zlib1g-dev
+sudo apt install libexpat-dev libncurses-dev
+sudo apt install libjpeg62-dev libcurl4-openssl-dev
+sudo apt install libssl-dev python python-dev curl
+
+
+Основные Элементы джанго
+========================
+https://docs.djangoproject.com/en/2.0/topics/
+
+Документация стала еще более крутая и подробная.
+Некоторые функции, классы и методы Джанго прошли трансформацию, потому
+требуют дополнительного изучения.
+
+
+
+Краткие заментки по созданию Джаного проекта "Сервис Студенты" в 2018 году.
+============================
+
+1) 
+Виртуальную среду и Джаного утсановил с помощью venv (tutorial_venv.txt)
+
+
+2)
+https://docs.djangoproject.com/en/2.0/intro/tutorial01/
+официальная документация
+
+
+3)
+отдельные главы будут в отдельных файлах
+А в этом файле - общим поток программирования.
+
+4)
+проверка что джаного апликация установлена нормально 
+модуль должен выдасть список комманд
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+    src$ django-admin.py
+
+5)
+Генерируем общую папку проекта (следим путь)
+Формируется струтктура менеджерских модулей и файлов
+Важно наличие менеджер файла manage.py и менеджер папки с названием проекта
+запуск manage.py тоже должен дать список менеджерских комманд проекта
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+    src$ django-admin.py startproject students_service
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+    src/students_service$ ls
+    manage.py  students_service
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+    src/students_service$ python3 manage.py 
+
+6)
+стандартный алогоритм синжранизации (при первом разе создани БД) связей между проектом
+и БД (sqLite, mySQL, postgreSQL и др.)
+При добавлении новой апликации или импорта новых данных JSON процедура такая же
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+    src/students_service$ python3 manage.py makemigrations
+    No changes detected
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+    src/students_service$ python3 manage.py migrate
+
+
+7)
+Команда запуска Виртуального (локального) Сервера джанго для доступа в Браузере
+адрес в адресной строке : http://127.0.0.1:8000/
+
+Поскольку сразу доступен Админский интерфейс то то выполняются некоторые запросы
+что видно в Консоли  
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+    src/students_service$ python3 manage.py runserver
+    Performing system checks...
+
+    System check identified no issues (0 silenced).
+    March 06, 2018 - 07:35:21
+    Django version 2.0.2, using settings 'students_service.settings'
+    Starting development server at http://127.0.0.1:8000/
+    Quit the server with CONTROL-C.
+
+[06/Mar/2018 07:35:34] "GET / HTTP/1.1" 200 16348
+[06/Mar/2018 07:35:34] "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+[06/Mar/2018 07:35:34] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 82564
+[06/Mar/2018 07:35:34] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 80304
+[06/Mar/2018 07:35:34] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 81348
+
+
+8)
+Создаю Первую (но не последнюю) Апликацию в рамках запущенного Проекта
+Все в отдельной папке связь с которой через Сеттинги и УРЛ деспетчер Проекта
+Таких Аппликаций может быть много в проекта и они отвечают за разные разделы Сайта
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+    src/students_service$ python3 manage.py startapp students_db
+
+
+9)
+Структура отдельной апликации
+=================
+models  .py or dir
+tests   .py or dir
+views   .py or dir
+apps    .py
+admin   .py
+
+
+10)
+подключаю отдельную аппликацию к проекту в Сеттингах
+встроенные аппликации дают нужную Логику для работы проекта
+(менеджер статических файлов, менеджер сообщений, сессии(кукки), юзеры и пр. )
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+    src/students_service/students_service$ subl settings.py
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'students_db',                      # кастомная аппликация
+]
+
+
+
+11) 
+запустил проект в PyCharm - Comunity Edition
+При открытие проекта в этом редакторе лучше открыть папку 
+
+~/my_projects/django_students_srvice/django_students/
+
+в которой есть код Виртуальной среды и кастомная папка src
+тогда Редактор подключит Виртуальную среду, пакеты, Контекст Джанго
+Также можно будет управлять пакетами питон, добавлять необходимые через API Редактора
+
+Также запустится Интерпретатор питон из Виртуальной Среды.
+и в отдельном окне Консоль с активированной Вирт Средой проекта.
+Также отдельное окно с функционалом TODO - напоминалка что не сделано.
+
+
+
+12)
+при работе с sqlite БД прежде чем делать комминт кода в GIT репозиторий надо 
+исправить сроку настройки места хранения файла БД (чтобы его в репозиторий не кидать) 
+
+затем удалить существующий файл БД и сделать снова $ python3 manage.py migrate
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, '..', 'db.sqlite3'),     # '..'
+    }
+}
+
+
+13)
+GIT
+=============
+
+.gitignore
+----------
+создание Файла
+# Created by https://www.gitignore.io/api/django,python,pycharm
+
+положить в папку где manage.py
+
+создание коммита и пуш в репозиторий
+-------------------------------------
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+    src/students_service$ ls
+    manage.py  students_db  students_service
+
+(db.sqlite3 находится теперь на уровень выше - он не гитится)
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+    src/students_service$ git init
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+    src/students_service$ git add *
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+    src/students_service$ git status
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+    src/students_service$ git commit -am 'first commit students_service'
+
+
+создание репозитория на github
+------------------------------
+https://github.com/pythonmag/students_service
+
+"""
+…or create a new repository on the command line
+echo "# students_service" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/pythonmag/students_service.git
+git push -u origin master
+
+…or push an existing repository from the command line
+git remote add origin https://github.com/pythonmag/students_service.git
+git push -u origin master
+"""
+
+следовательно:
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+src/students_service$
+    git remote add origin https://github.com/pythonmag/students_service.git
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+src/students_service$
+    git push -u origin master
+
+Ввести пароль и логин на github
+
+!!!!
+Кстати, В Редакторе PyCharm автомотически настроился API по VCS менеджмента
+git репозитория.
+Очень удобно.
+
+
+14)
+начальная тестовая Вьюшка-функция (обрабочик)
+=========================
+
+views.py апликауции
+---------
+from django.shortcuts import render
+from django.http import HttpResponse
+
+# Create your views here.
+def studens_list(request, test):
+    return HttpResponse('<h1>Hello World</h1> {}'.format(test))
+
+Примечания:
+request - переменная и контекст-процессор. то есть она из Глобального контекта
+и несет в себе информацию о запросе от Клиента на Сервер
+Она проходит через декораторы МидлВары и через их Логику обросает доп Данными 
+(так же и назад в виде response)
+
+пока объект request пустой так как нет запроса от Клиента
+
+from django.template.context_processors import request
+
+request
+<function request at 0x7fd76bfa2378>
+
+request.__dict__
+{}
+
+Но когда запрос на Сервер приходит то request наполняется Данными:
+    request.path: шлях запиту;
+    request.GET: дані, що прийшли частиною GET параметрів;
+    request.POST: дані, що прийшли в тілі поста форми із браузера;
+    request.method: тип запиту, напр. GET або POST;
+    request.COOKIES: славнозвісні Cookies, які ми з вами оглянули в попере-
+    дніх секціях даної глави;
+    request.FILES: файли, що прийшли до нас із форми, із полів типу file;
+    request.META: заголовки запиту згідно HTTP протоколу;
+    request.user: залогований Django користувач
+через МидлВары.
+
+Второй параметр (как) словарь (test) передается от url функции диспетчера
+Там может быть все что угодно.
+
+
+15)
+Контекс процессоры указаны в сеттингах вот как:
+==================
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+Тут же буду регистрировать собственные контекс-процессоры 
+(глобальная видимость в проекте).
+
+
+16)
+
+доп.теоритическая инфа тут:
+https://docs.djangoproject.com/en/2.0/intro/tutorial01/
+
+15.1 /
+в папке апликации создам файл для настройки url путей
+students_service/students_db/urls.py
+
+# students_db/urls.py
+код:
+-------
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('', views.studens_list, {'test': 'test'}, name='students_list'),
+]
+
+Словарь по умолчанию в функцию передается пустой {}
+
+
+15.2 /
+подключу Данный модуль диспетчер url апликации к Общему url диспетчеру проекта
+(в менеджерской папке)
+
+# students_service/urls.py
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('students_db.urls'))       # как корневая папка сайта
+]
+
+
+17)
+html шаблоны
+============
+
+Статические файлы html / js / css / jpg надо создавать в папках аппликаций в 
+подпапке аппликация/templates/название_аппликации.
+
+если есть папка templates то она автоматично добавляется в реест Фреймворка
+
+и тогда для шаблонов можно указывать подпапки (чтобы разделить апликации)
+в корневой папке templates
+
+Обращаться в шабоне к html документу в итоге можно 'students_db/students_list.html'
+
+первый html шаблон - страница Списка студентов (пока как домашняя страница сайта)
+
+/students_db/templates/students_db/students_list.html
+
+Вся перечисленная логики с Папками Шаблонов работает благодаря Сеттингам:
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    ......
+
+Также можно добавить папке templates в менеджерскую папку проекта, для
+шаблонов, которые не имеют отношения к аппликациям
+НО ее надо явно подключить в сеттингах вот здесь:
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],         ## тут прописать путь
+
+
+
+18)
+для быстрой разметки и макетирования html страниц использую bootstrap4
+====================
+
+https://getbootstrap.com/
+
+4 версия Бутстрапа позволяет выполнять большенство блоков и их стиль (кроме динамики)
+
+На этапе моделирования и проектирования кода можно обойтись без кастомного css
+
+
+19)
+планирование Структуры url диспетчера
+==========================
+
+'/'                     домашняя страница сайта / домашняя станица аппликации Студенты
+'/students/add'         страница формы добавления нового студента
+'/students/123/edit'    страница формы редактирования данных студента
+'/students/123/delete'  страницы формы удаления студента из БД
+
+'/groups'               домашняя страница сайта / домашняя станица аппликации Студенты
+'/groups/add'           страница формы добавления нового студента
+'/groups/123/edit'      страница формы редактирования данных студента
+'/groups/123/delete'    страницы формы удаления студента из БД
+
+'/journal'              журнал посещений всех студентов (с сортировкой)
+'/journal/123'          журнал посещений конкретного студента
+'/journal/update'       
+
+
+
+20)
+url диспетчер функция
+нюансы
+=====================
+
+вот это меня удивило в функции менеджере url
+#)
+было в книге: 
+url(r'^students/(?P<sid>\d+)/edit/$', 'students.views.students_edit',
+    name='students_edit'),
+
+#)
+по последней документации:
+path('students/<int:stud_id>/edit', views.students_edit, name='students_edit'),
+
+фактически получая запрос от клиента сервер джанго ищет в списке urlpatterns
+функцию url с подходящей строкой адреса и далее идет запуск вью-функции
+
+-----------------
+!!!
+Немнго о возможностях Движка Регуклярных Выражений:
+
+#)
+r'^students/(\d+)/edit/$'
+
+конструкция (\d+) приводит к захвату значения в дефолные переменные Движка
+как $1 = 10, $2 = 25 и их то туда можно брать после отработки строки кода
+(по индексу)
+
+#)
+r'^students/(?P<sid>\d+)/edit/$'
+конструкция (?P<sid>\d+) приводит к захвату Именованной переменной pid=25
+в Движке Рег Выражений, и ее поте оттуда можно брать но уже по имени
+
+Эти переменные могут передаваться в Функцию-Вьюшку вторым элементов после request
+!!!!
+
+
+
+
+21)
+Динамические элементы в html шаблонах - за счет языка Шаблонов Джанго 
+=====================================
+
+#)  переменные 
+
+{{ student }}
+{{ student.name }}
+{{ student.group.leader }}
+
+Иерархия поиска атрибута 
+    1) по ключу как словарь
+    2) имя метода как объект
+    3) по индексу как список
+
+#)  теги 
+
+{% if student %}
+    {{ student.first_name }}        # чистая логика
+{% endif %}
+
+{% url "home" %}                    # получает от сервера псевдоним url функции
+
+<ul>
+{% for student in students %}       # логика цикла как в питоне
+    <li>{{ student.first_name }}</li>
+{% endfor %}
+</ul>
+
+{% url ”students_edit” 125 %}       # псевдоним url функции + параметр для вьюшки
+
+
+#)  фильтры
+https://docs.djangoproject.com/en/2.0/ref/templates/builtins/
+
+{{ student.first_name | lower }}                # нижний регистр
+{{ student.biography | truncatewords:30 }}      # фрагмент строки - 30 символов
+{{ value|join:" // " }}                         # разделение элементов в строке
+{{ value|last }}                                # последний элемент списка
+{{ value|make_list }}                           # последовательность - в список
+{{ value|slugify }}             "Joel is a slug", the output will be "joel-is-a-slug".
+
+и много прочих фильтров фактически как Логика в html
+
+Конечно Питонисту лучше максимально логики прописывать на сервере
+А в html шаблоны возвращать готовые массивы данных, но иногда надо и так.
+
+
+
+22)
+request / response objects
+==========================
+
+HttpRequest objects
+https://docs.djangoproject.com/en/2.0/ref/request-response/#httprequest-objects
+
+
+Стуктура запросов Клиент - Сервер
+Пишу для себя
+
+Пример структуры:
+
+#General
+Request URL:http://127.0.0.1:8000/journal
+Request Method:GET
+Status Code:200 OK
+Remote Address:127.0.0.1:8000
+Referrer Policy:no-referrer-when-downgrade
+
+----------------
+#Response Headers
+Content-Length:21
+Content-Type:text/html; charset=utf-8
+Date:Thu, 08 Mar 2018 09:46:41 GMT
+Server:WSGIServer/0.2 CPython/3.5.2
+X-Frame-Options:SAMEORIGIN
+
+#Response Source
+HTTP/1.1 200 OK
+Date: Thu, 08 Mar 2018 09:46:41 GMT
+Server: WSGIServer/0.2 CPython/3.5.2
+Content-Length: 21
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: SAMEORIGIN
+
+----------------
+#Request Headers
+Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding:gzip, deflate, br
+Accept-Language:ru,en-US;q=0.9,en;q=0.8,uk;q=0.7
+Cache-Control:max-age=0
+Connection:keep-alive
+Host:127.0.0.1:8000
+Referer:http://127.0.0.1:8000/
+Upgrade-Insecure-Requests:1
+User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)
+Chrome/64.0.3282.186 Safari/537.36
+
+#Request Source
+GET /journal HTTP/1.1
+Host: 127.0.0.1:8000
+Connection: keep-alive
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)
+Chrome/64.0.3282.186 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Referer: http://127.0.0.1:8000/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru,en-US;q=0.9,en;q=0.8,uk;q=0.7
+
+----------------
+django.http.Request объект
+request
+его структура
+
+{{ request }}           <WSGIRequest: GET '/'>
+
+{{ request.path }}      /
+
+{{ request.method }}    GET
+
+{{ request.GET }}       <QueryDict: {}>
+
+{{ request.POST }}      <QueryDict: {}>
+
+{{ request.FILES }}     <MultiValueDict: {}>
+
+{{ request.COOKIES }}   {}
+
+{{ request.user }}      AnonymousUser
+
+{{ request.session }}   
+<django.contrib.sessions.backends.db.SessionStore object at 0x7f4d39f1b940>
+
+{{ request.META }}      
+переменные окружения от wsgi-прокси-сервера
+------------------
+{'DBUS_SESSION_BUS_ADDRESS': 'unix:abstract=/tmp/dbus-MPJ9p51wN7',
+ 'XDG_GREETER_DATA_DIR': '/var/lib/lightdm-data/ryndin',
+ 'GNOME_KEYRING_CONTROL': '',
+ 'SESSION_MANAGER': 'local/ubu:@/tmp/.ICE-unix/3978,unix/ubu:/tmp/.ICE-unix/3978',
+ 'HTTP_CACHE_CONTROL': 'max-age=0',
+ 'J2SDKDIR': '/usr/lib/jvm/java-9-oracle',
+
+ 'wsgi.errors': <_io.TextIOWrapper name='<stderr>' mode='w' encoding='UTF-8'>,
+
+ 'LOGNAME': 'ryndin',
+
+ 'SERVER_NAME': 'localhost',
+ 'HTTP_ACCEPT_ENCODING': 'gzip, deflate, br',
+ 'XDG_MENU_PREFIX': 'gnome-',
+ 'COLORTERM': 'gnome-terminal',
+ 'XAUTHORITY': '/home/ryndin/.Xauthority',
+ 'UPSTART_INSTANCE': '',
+
+ 'SERVER_SOFTWARE': 'WSGIServer/0.2',
+ 'MANDATORY_PATH': '/usr/share/gconf/ubuntu.mandatory.path',
+ 'TERMINATOR_UUID': 'urn:uuid:26ebd507-40c2-4249-83b8-be476f235a71',
+ 'IM_CONFIG_PHASE': '1',
+
+ 'SHELL': '/bin/bash',
+ 'XDG_SESSION_DESKTOP': 'ubuntu',
+
+ 'PATH': '/home/ryndin/my_projects/django_students_srvice/django_students/bin:
+/home/ryndin/bin:/home/ryndin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:
+/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:
+/usr/lib/jvm/java-9-oracle/bin:/usr/lib/jvm/java-9-oracle/db/bin',
+
+ 'wsgi.file_wrapper': <class 'wsgiref.util.FileWrapper'>,
+
+ 'PWD': '/home/ryndin/my_projects/django_students_srvice/django_students/src/students_service',
+
+ 'REQUEST_METHOD': 'GET',
+ 'XDG_VTNR': '7', 
+ 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
+cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;
+44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:
+*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:
+*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.
+lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:
+*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:
+*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:
+*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:
+*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:
+*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:
+*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:
+*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:
+*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:
+*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:
+*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:
+*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:',
+
+ 'GATEWAY_INTERFACE': 'CGI/1.1',
+ 'LESSCLOSE': '/usr/bin/lesspipe %s %s',
+ 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh',
+ 'XDG_SEAT': 'seat0',
+ 'CLUTTER_IM_MODULE': 'xim',
+
+ 'LANG': 'ru_UA.UTF-8',
+ 'UPSTART_JOB': 'unity7',
+
+ 'SERVER_PORT': '8000',
+ 'COMPIZ_BIN_PATH': '/usr/bin/',
+ 'WINDOWID': '88080388',
+
+ 'wsgi.multithread': True,
+ 'JAVA_HOME': '/usr/lib/jvm/java-9-oracle',
+ '_': '/home/ryndin/my_projects/django_students_srvice/django_students/bin/python',
+ 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/usr/share/upstart/xdg:/etc/xdg',
+ 'XDG_CURRENT_DESKTOP': 'Unity',
+ 'GIO_LAUNCHED_DESKTOP_FILE_PID': '8675',
+ 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/terminator.desktop',
+ 'COMPIZ_CONFIG_PROFILE': 'ubuntu',
+ 'GPG_AGENT_INFO': '/home/ryndin/.gnupg/S.gpg-agent:0:1',
+ 'QT_LINUX_ACCESSIBILITY_ALWAYS_ON': '1',
+ 'QT_IM_MODULE': 'ibus',
+
+ 'wsgi.run_once': False,
+ 'GDM_LANG': 'ru_RU',
+
+ 'wsgi.version': (1, 0),
+ 'GTK2_MODULES': 'overlay-scrollbar',
+
+ 'USER': 'ryndin',
+ 'UPSTART_EVENTS': 'xsession started',
+ 'ORBIT_SOCKETDIR': '/tmp/orbit-ryndin',
+
+ 'QUERY_STRING': '',
+ 'IBUS_DISABLE_SNOOPER': '1',
+ 'GTK_MODULES': 'gail:atk-bridge:unity-gtk-module',
+
+ 'HOME': '/home/ryndin',
+
+ 'REMOTE_HOST': '',
+
+ 'wsgi.multiprocess': False,
+ 'DESKTOP_SESSION': 'ubuntu',
+
+ 'LANGUAGE': 'ru_UA:ru',
+ 'QT_ACCESSIBILITY': '1',
+
+ 'VIRTUAL_ENV': '/home/ryndin/my_projects/django_students_srvice/django_students',
+ 'QT4_IM_MODULE': 'xim',
+ 'GNOME_KEYRING_PID': '',
+ 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:
+/var/lib/snapd/desktop:/var/lib/snapd/desktop',
+
+ 'PATH_INFO': '/',
+ 'PS1': '(django_students) \\[\\e]0;\\u@\\h: \\w\\a\\]${debian_chroot:+($debian_chroot)}
+\\u@\\h:\\w\\$ ',
+
+ 'OLDPWD': '/home/ryndin/my_projects/django_students_srvice/django_students/src',
+ 'HTTP_UPGRADE_INSECURE_REQUESTS': '1',
+ 'JOB': 'unity-settings-daemon',
+
+ 'HTTP_HOST': '127.0.0.1:8000',
+
+ 'CONTENT_TYPE': 'text/plain',
+
+ 'DJANGO_SETTINGS_MODULE': 'students_service.settings',
+ 'GTK_IM_MODULE': 'ibus',
+ 'XDG_SESSION_PATH': '/org/freedesktop/DisplayManager/Session0',
+ 'DEFAULTS_PATH': '/usr/share/gconf/ubuntu.default.path',
+ 'UPSTART_SESSION': 'unix:abstract=/com/ubuntu/upstart-session/1000/3620',
+
+ 'wsgi.url_scheme': 'http',
+ 'TERM': 'xterm',
+ 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated',
+
+ 'HTTP_ACCEPT_LANGUAGE': 'ru,en-US;q=0.9,en;q=0.8,uk;q=0.7',
+ 'wsgi.input': <_io.BufferedReader name=5>,
+ 'SESSIONTYPE': 'gnome-session',
+ 'DERBY_HOME': '/usr/lib/jvm/java-9-oracle/db',
+ 'QT_QPA_PLATFORMTHEME': 'appmenu-qt5',
+ 'SHLVL': '1',
+
+ 'REMOTE_ADDR': '127.0.0.1',
+
+ 'HTTP_ACCEPT': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+
+ 'SERVER_PROTOCOL': 'HTTP/1.1',
+
+ 'HTTP_CONNECTION': 'keep-alive',
+
+ 'HTTP_USER_AGENT': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like 
+Gecko) Chrome/64.0.3282.186 Safari/537.36',
+ 'GDMSESSION': 'ubuntu',
+ 'XDG_SEAT_PATH': '/org/freedesktop/DisplayManager/Seat0',
+ 'CONTENT_LENGTH': '',
+ 'SCRIPT_NAME': '',
+ 'XDG_SESSION_ID': 'c2',
+ 'INSTANCE': '',
+ 'XMODIFIERS': '@im=ibus',
+ 'SESSION': 'ubuntu',
+ 'DISPLAY': ':0',
+ 'RUN_MAIN': 'true',
+ 
+ 'TZ': 'UTC',
+ 'XDG_SESSION_TYPE': 'x11',
+ 'J2REDIR': '/usr/lib/jvm/java-9-oracle',
+ 'LESSOPEN': '| /usr/bin/lesspipe %s',
+ 'XDG_RUNTIME_DIR': '/run/user/1000'
+ }
+
+
+--------------------
+Например GET запрос от Клиента гененирует параметры (некоторые):
+http://127.0.0.1:8000/groups?a=1&b=2&c=3
+
+    'SERVER_PORT': '8000',
+    'REQUEST_METHOD': 'GET', 
+    'QUERY_STRING': 'a=1&b=2&c=3',
+    'PATH_INFO': '/groups',
+    'HTTP_HOST': '127.0.0.1:8000',
+    'REMOTE_ADDR': '127.0.0.1', 
+    'SERVER_PROTOCOL': 'HTTP/1.1',
+    'HTTP_CONNECTION': 'keep-alive',
+    'TZ': 'UTC', 
+    'CONTENT_TYPE': 'text/plain', 
+    'HTTP_ACCEPT': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 
+    'LANG': 'ru_UA.UTF-8',
+    'USER': 'ryndin',
+
+
+
+23)
+HttpRasponse()
+==============
+
+Объект Джинго по возврану данных на Стророну Клиента
+
+https://docs.djangoproject.com/en/2.0/ref/request-response/#httpresponse-objects
+
+Атрибуты:
+---------
+HttpResponse.content
+HttpResponse.charset
+HttpResponse.status_code
+HttpResponse.reason_phrase
+HttpResponse.streaming
+HttpResponse.closed
+
+
+Классы - Наследники HttpRasponse
+-------------------
+HttpResponseRedirect
+HttpResponsePermanentRedirect
+HttpResponseNotModified
+HttpResponseBadRequest
+HttpResponseNotFound
+HttpResponseForbidden
+HttpResponseNotAllowed
+HttpResponseGone
+HttpResponseServerError
+
+JsonResponse()
+
+StreamingHttpResponse()
+
+FileResponse()
+
+
+response.set_cookie('group', 2)
+request.COOKIE
+-------------------
+Метод Добавляет в объект Ответа Кукки как хаш-данные / пара ключ:значение и атрибуты
+
+#)
+передача клиенту от сервера данные по Кукки
+
+response =  HttpResponse('<h1>Student {} Delete from DB / QueryItem = {}</h1>'.
+                             format(stud_id, query_item))
+response.set_cookie('group', 2)
+response.set_cookie('planet', 'Mars')
+return response
+
+#)
+Заголовок Респонса на Клиенте:
+
+Content-Length:65
+Content-Type:text/html; charset=utf-8
+Date:Sat, 10 Mar 2018 14:01:24 GMT
+Server:WSGIServer/0.2 CPython/3.5.2
+Set-Cookie:planet=Mars; Path=/              # Кукки пришли на Клиент
+Set-Cookie:group=2; Path=/
+X-Frame-Options:SAMEORIGIN
+
+#)
+HttpResponse.set_cookie
+HttpResponse.set_signed_cookie
+HttpResponse.delete_cookie
+
+https://docs.djangoproject.com/en/2.0/ref/request-response/#django.http.HttpResponse.set_cookie
+Добываю переменную которая содержит типа  Словарь Кук (ключ:значение) 
+
+def my_view(request):
+    my_cookies = request.COOKIES.items()        # как и методы QueryDict
+    print(my_cookies)
+
+#)
+Принт в Консоли:
+
+dict_items([('group', '2'), ('planet', 'Mars')])
+
+
+
+24)
+QueryDict objects
+=================
+
+https://docs.djangoproject.com/en/2.0/ref/request-response/#querydict-objects
+
+query_item = request.GET.getlist('name')
+
+QueryDict это Конструктор типа Словаря который дает работать со строкой Query_String
+запроса 
+
+request.GET.get()
+request.GET.getlist()
+request.GET.items()
+request.GET.values()
+request.GET.setlist()
+request.GET.dict()
+request.GET.urlencode()
+
+и прочие методы
+
+QueryDict ведет себя как Словарь, то есть формирует данные из Запроса как пары
+Ключ:Значение, но также умеет и другие методы. напрмер / добавлять элементы / сохранять
+элементы в строку, 
+
+например код
+------------
+#)
+строка запроса / 2 аргумента под одним ключем
+http://127.0.0.1:8000/students/1/delete?name=yurii&name=lena
+
+#)
+def students_delete(request, stud_id):
+    query_item = request.GET.getlist('name')
+    print('query is {}'.format(query_item))
+    return HttpResponse('<h1>Student {} Delete from DB / QueryItem = {}</h1>'.
+                        format(stud_id, query_item))
+
+логика: из реквеста извлекаю список со значениями по ключу / и эти значения передаю
+в строку респонса
+
+#)
+вывод на странице Браузера
+
+Student 1 Delete from DB / QueryItem = ['yurii', 'lena']
+
+
+
+25)
+Декораторы Джанго
+=================
+
+View decorators
+
+https://docs.djangoproject.com/en/2.0/topics/http/decorators/
+https://simpleisbetterthancomplex.com/2015/12/07/working-with-django-view-decorators.html
+
+django.views.decorators.http 
+
+Надстройка над Вью Функциями которая меняет поведение Вьюшки, например срабатывает
+только на GET ил POST запросы, или Срабатывает только при залогиненом пользователе,
+или же перенаправляет клиента на страницу залогинивания.
+
+@require_GET
+
+@require_POST
+
+@login_required(login_url='/login/')
+
+
+пример создания собственного декоратора
+---------------
+from django.core.exceptions import PermissionDenied
+from simple_decorators.apps.models import Entry
+
+def user_is_entry_author(function):
+    def wrap(request, *args, **kwargs):
+        entry = Entry.objects.get(pk=kwargs['entry_id'])
+        if entry.created_by == request.user:
+            return function(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+    wrap.__doc__ = function.__doc__
+    wrap.__name__ = function.__name__
+    return wrap
+
+@login_required                         # Декоратор Джанго
+@user_is_entry_author                   # Кастомный Декоратор
+def remove(request, entry_id):
+    entry = get_object_or_404(Entry, pk=entry_id)
+    entry.delete()
+    messages.success(request, 'Entry was successfully removed!')
+    return redirect('index')
+
+
+пример
+рабочий кастомный декоратор в Джанго
+------------------
+дает функционал если пришел ajax запрос
+
+@login_required_ajax                        # это Кастомный декоратор
+def comment_add(request):
+    form = AddCommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save()
+        return HttpResponseAjaxSuccess(
+            comment_id = comment.id)
+    else:
+        HttpResponseAjaxError(
+            code = 'bed_params', message = form.errors.as_data())
+
+
+# Кастомный декоратор для ajax запросов
+def login_required_ajax(view):
+    def view2(request, *args, **kwargs):
+        if request.user.is_authenticated()
+            return view(request, *args, **kwargs)
+        elif request.is_ajax()                      # ajax but authenticated 
+            return HttpResponseAjaxError(
+                code = 'no_auth', message = 'Need Auth'            
+            )
+        else:
+            redirect('/login/?continue=', + request.get_full_path())
+    return view2
+
+
+
+26)
+Джанго шортКаты
+===============
+
+https://docs.djangoproject.com/en/2.0/topics/http/shortcuts/
+
+Функции которые объединяю концепцию HttpResponse + Шаблонизацию
+То есть на Клиент передают те просто объект ответа но и Шаблон HTML
+на котором это объект Респонс можно применить
+
+#)
+render()
+
+render(request, template_name, context=None, content_type=None,
+        status=None, using=None) 
+
+#)
+render_to_response()
+
+render_to_response(template_name, context=None, content_type=None, status=None,
+                    using=None)
+
+#)
+redirect()
+
+redirect(to, permanent=False, *args, **kwargs)
+
+
+#)
+get_object_or_404()
+
+get_object_or_404(klass, *args, **kwargs)
+
+
+#)
+get_list_or_404()
+
+get_list_or_404(klass, *args, **kwargs)
+
+
+
+
+27)
+Classy Class-Based Views.
+========================
+
+Detailed descriptions, with full methods and attributes,
+for each of Django's class-based generic views.
+
+https://ccbv.co.uk/
+
+https://docs.djangoproject.com/en/2.0/ref/class-based-views/
+
+
+
+28)
+static
+==========
+
+https://docs.djangoproject.com/en/2.0/howto/static-files/
+
+----------
+STATIC_URL = '/static/'             # как называются статик папки в основании
+
+<link rel="stylesheet" href="/static/css/main.css">  # хардкорная строка
+
+--------
+{% load static %}
+<img src="{% static "my_app/example.jpg" %}" alt="My image"/>
+
+{% load static from staticfiles %}                  # или так тоже работает испорт
+
+---------
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+         # 'DIRS': [],              # custom add
+        'DIRS': [(), os.path.join(BASE_DIR, 'templates')],              # custom add
+так видит все папки Статик - и в апликациях и в корневой менедж папка
+
+
+urls.py
+-------
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # ... the rest of your URLconf goes here ...
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+-----------
+В сетингах можно указать Статик Коллекцию папку чде будут храниться статик файлы
+Доже на удаленном сервере, например
+
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static')    
+# папка статич файлов проекта как вариант (это место КоллектСтатик - чтобы не коммитить)
+
+STATIC_ROOT = "/var/www/example.com/static/"        # вариант Удаленного хранилища
+
+и после комманды
+
+$ python manage.py collectstatic
+
+все стактик файлы проекта будут продуюлированы в ту папку. откуда и будут вызываться 
+
+-------------
+Для проверки можно запросить поиск где статик файлы 
+
+$ python manage.py findstatic img/avatar_python.jpg
+
+Found 'img/avatar_python.jpg' here:
+  /home/ryndin/my_projects/django_students_srvice/django_students/src/
+   students_service/students_db/static/img/avatar_python.jpg
+
+
+
+29)
+# -*- coding: utf-8 -*-
+======================
+
+В начале файла .py
+Для корректного отображения Кирилици в объектах Строк кода Питон
+
+
+
+30)
+Данные во вью-функцию (например из БД)
+======================
+
+Далее данные в html шаблон через Язык шаблонов Джанго
+Затем цикл по данным через Язык шаблонов Джанго
+https://docs.djangoproject.com/en/2.0/ref/templates/builtins/#for
+
+---------------------
+STUDENTS = (
+{'id':1, 'first_name': 'yurii',
+ 'last_name': 'ryndin', 'ticket': 2458},
+
+{'id':2, 'first_name': 'lena',
+ 'last_name': 'ryndina', 'ticket': 7824},
+
+{'id':3, 'first_name': 'valera',
+ 'last_name': 'kalnysh', 'ticket': 3584},
+)
+
+# Students
+def studens_list(request):
+    return render(request, 'students_db/students_list.html', {'students': STUDENTS})
+
+-------------
+<tbody>
+  {% for student in students %}
+  <tr>
+    <th scope="row">{{ forloop.counter }}</th>
+    <td><img class="rounded-circle"
+             src="{% static 'img/avatar_python.jpg' %}"
+             alt="" height='30' width='30'/></td>
+    <td><a href="{% url 'students_edit' student.id %}">
+      {{ student.last_name }}</a></td>
+    <td><a href="{% url 'students_edit' student.id %}">
+      {{ student.first_name }}</a></td>
+    <td>{{ student.ticket }}</td>
+    <td><a href="{% url 'groups_edit' 32%}">ЭМ-2</a></td>
+    <td>Кнопка Выпадайка</td>
+  </tr>
+  {% endfor %}<!--end for student in students-->
+</tbody>
+
+------------------
+Альтернативная Реализация проверки Активной Закладки
+{% ifactive ... %}
+
+https://github.com/j4mie/django-activelink
+
+{% load activelink %}
+....
+<a href="/myurl/" class="{% ifactive "/myurl/" %}on{% else %}off{% endifactive %}">
+Menu item</a>
+
+----------
+интересный цикл с реакцией на отсутствие объекта цикла
+
+<ul>
+{% for athlete in athlete_list %}
+    <li>{{ athlete.name }}</li>
+{% empty %}
+    <li>Sorry, no athletes in this list.</li>
+{% endfor %}
+</ul>
+
+
+
+31)
+апликация lorem в языке Шаблонов Джаного - хорошая идея
+================================
+
+https://docs.djangoproject.com/en/2.0/ref/templates/builtins/#lorem
+
+{% lorem %} will output the common “lorem ipsum” paragraph
+{% lorem 3 p %} will output the common “lorem ipsum” paragraph
+{% lorem 2 w random %} will output two random Latin words
+
+
+
+32)
+Наследование Блоков кода html через Язык шаблонов Джанго
+=============================
+
+https://docs.djangoproject.com/en/2.0/ref/templates/builtins/#extends
+{% extends "./base.html" %}
+указание в Шаблоне-Наследнике откуда берется Базовая разметка
+
+{% extends 'students_db/base.html' %}
+более универсальный способ указания базы-шаблона с указанием имени папки, которая
+лежит в папке templates
+(templates/students_db/base.html)
+
+extends - обов’язково даний тег має йти першим в дочірньому шаблоні; він вказує
+інтерпретатору шаблонів, що ми унаслідуємось від шаблона “students/base.html;
+
+{% block ... %}{% endblock ...%} 
+бронирование местя для блока кода Наследника
+
+{% block ... %}
+{{ block.super }} + new string 
+% endblock ...%}
+наследование Контента блока рожителя, например подстроки
+
+Таким чином все, що робить тег “block” це визначає місця в базовому шаблоні,
+які можуть бути перевизначені кінцевим шаблоном !!!
+
+{% comment %} and {% endcomment %}
+
+{% csrf_token %}
+https://docs.djangoproject.com/en/2.0/ref/csrf/
+
+
+
+33)
+контекст-процессоры
+context processors
+===================
+
+Процесор контексту (context processor) - це функція, яка приймає об’єкт запиту і
+повертає словник із даними, що стають автоматично доступними у кожному шаблоні
+проекту, який використовує даний процесор.
+Якщо у більшість шаблонів у вашому проекті чи аплікації ви передаєте один і той
+самий кусок даних з ваших в’юшок, тоді варто задуматись про перенесення таких даних
+у ваш кастомний процесор контексту.
+Таким чином написавши один раз логіку по підготовці даних, ви отримаєте їх у кожному
+вашому шаблоні. 
+
+хорошая статья именно про контекст-процессоры в Джанго
+http://softwaremaniacs.org/blog/2006/01/12/context-processors/
+
+регистрация в сеттингах тут:
+TEMPLATE/'context_processors'
+
+request - уже глобальный объект и доступен во всех html шаблонах
+потому работает:
+
+<a class="nav-link {% if request.path == '/' %}active{% endif %}"
+    href="{% url 'home' %}">Студенты</a> 
+
+там в шаблоне можно прочитать контекс-процессоры
+<p>{{ request.path }}</p>
+<p>{{ request }}</p>
+
+также по умолчанию работаю конекс-процессоры Джанго
+debug / request / auth / messages
+
+----------------
+Кастомный контекс-процессор - генерирует глобальную пару Ключ/Значения для Шаблона
+
+#)
+def custom_processors(request):
+    return {
+        'SITE_URL': 'http://'+request.META['HTTP_HOST'],
+        # сюда еще много данных можна добавить как пары ключ/значение,
+    }
+
+#)
+'context_processors': [
+                ....
+                'django.contrib.messages.context_processors.messages',
+                'students_service.context_processors.custom_processors',
+
+#)
+<td><img class="rounded-circle"
+       src="{{ SITE_URL }}{% static 'img/avatar_python.jpg' %}"
+       alt="" height='30' width='30'/></td>
+
+ВАЖНО!!!
+--------
+Функции шаблонизаторы
+
+render_to_response(template, context)
+быстрая функция как идея, и потому ни request ни контекст-процессоры на страницу
+НЕ передает !!!
+
+render(request, template, context)
+Всеобемлющая функции как идея, передает и Контекст и Контекс-Процессоры и request
+С ней все НОРМ.
+
+
+
+34)
+Джанго Пагинатор
+================
+
+Класс Пагинации, то есть принимает объект-последовательность и итетируемым образом
+выдает его частями согласно заданным условиям.
+
+https://docs.djangoproject.com/en/2.0/topics/pagination/
+
+чуть теминала:
+-------------
+>>> from django.core.paginator import Paginator
+
+>>> Paginator
+<class 'django.core.paginator.Paginator'>
+
+>>> my_objects = {'yurii':['prog', 34, 'ZAP'], 'andrey': ['seler', 23, 'DNEPR'],
+    'lena': ['creator', 20, 'KYIV']}
+
+>>> pag_obj = Paginator(my_objects, 2)
+
+>>> pag_obj
+<django.core.paginator.Paginator object at 0x7fcb17080c18>
+
+>>> pag_obj.__dict__
+{'allow_empty_first_page': True, 'count': 3, 
+ 'object_list': {'lena': ['creator', 20, 'KYIV'], 'yurii': ['prog', 34, 'ZAP'],
+ 'andrey': ['seler', 23, 'DNEPR']}, 'num_pages': 2, 'per_page': 2, 'orphans': 0}
+
+>>> dir(pag_obj)
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__',
+ '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__',
+ '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__',
+ '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__',
+ '__subclasshook__', '__weakref__', '_check_object_list_is_ordered', '_get_page',
+
+ 'allow_empty_first_page',          # рабочие методы объекта-пагинатора
+ 'count',
+ 'get_page',
+ 'num_pages',
+ 'object_list',
+ 'orphans',
+ 'page',
+ 'page_range',
+ 'per_page',
+ 'validate_number']
+
+Фактически Конструктор класса Пагинатора передает классу Пагинатора и его Инстансам
+методы работы с массивом данных а также сохраняет некоторые переменные, например
+количество Элементов на 1 странице (можно им управлять) !!! 
+
+пример из документации
+----------------------
+>>> from django.core.paginator import Paginator
+>>> objects = ['john', 'paul', 'george', 'ringo']
+>>> p = Paginator(objects, 2)
+
+>>> p.count
+4
+
+>>> p.num_pages
+2
+
+>>> type(p.page_range)
+<class 'range_iterator'>
+
+>>> p.page_range
+range(1, 3)
+
+>>> page1 = p.page(1)
+
+>>> page1
+<Page 1 of 2>
+
+>>> page1.object_list
+['john', 'paul']
+
+>>> page2 = p.page(2)
+
+>>> page2.object_list
+['george', 'ringo']
+
+>>> page2.has_next()
+False
+
+>>> page2.has_previous()
+True
+
+>>> page2.has_other_pages()
+True
+
+>>> page2.next_page_number()
+Traceback (most recent call last):
+...
+EmptyPage: That page contains no results
+
+>>> page2.previous_page_number()
+1
+
+>>> page2.start_index() # The 1-based index of the first item on this page
+3
+
+>>> page2.end_index() # The 1-based index of the last item on this page
+4
+
+>>> p.page(0)
+Traceback (most recent call last):
+...
+EmptyPage: That page number is less than 1
+
+>>> p.page(3)
+Traceback (most recent call last):
+...
+EmptyPage: That page contains no results
+
+------------------
+Attributes
+    Page.object_list                # The list of objects on this page.
+
+    Page.number                     # The 1-based page number for this page.
+
+    Page.paginator                  # The associated Paginator object.
+
+------------------
+Пример с моими комментариями
+Пример где понятно что объект для шаблона формируется как часть Массива из БД
+Данный Массив разбит на количество частей (страниц), которые вызываются по №
+стнаницы из Запроса от Клиента
+В принципе не важен какой Массив данных, важно что это Последовательность
+однотипных данных и она бьется на части.
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
+
+def listing(request):                           # функция принимает объект запроса
+    contact_list = Contacts.objects.all()       # Массив из БД
+    paginator = Paginator(contact_list, 25)     # Количестов частей (страниц) Массива
+
+    page = request.GET.get('page')              # число как номер Страницы
+    contacts = paginator.get_page(page)         # выборка чати Массива по №
+    return render(request, 'list.html', {'contacts': contacts}) # передача в Шаблон
+
+
+пример отдельной функции пагинации
+----------------
+Пример отдельной функции
+========================
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+def paginate(objects, size, request, context, var_name="object_list"):
+
+    """
+    Paginate objects provided by view.
+            This function takes:
+                * list of elements;
+                * number of objects per page;
+                * request object to get url parameters from;
+                * context to set new variables into;
+                * var_name - variable name for list of objects.
+    It returns updated context object.
+    """
+
+    paginator = Paginator(objects, size)
+
+    page = request.GET.get('page', '1')
+
+    try:
+        object_list = paginator.page(page)
+    except PageNotAnInteger:
+        object_list = paginator.page(1)
+    except EmptyPage:
+        object_list = paginator.page(paginator.num_pages)
+
+    context[var_name] = object_list
+    context['is_paginated'] = object_list.has_other_pages()
+    context['page_obj'] = object_list
+    context['paginator'] = paginator
+
+    return context
+
+
+пример Пагинатора (начального)
+встроенного во вью функцию
+Моего Проекта
+=========================
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from ..models import Student
+
+# Students
+def studens_list(request):
+    students_path = request.path
+    students = Student.objects.all()
+    order_by_value = request.GET.get('order_by', '')
+
+    # if link send order_by param
+    if order_by_value in ['first_name', 'last_name', 'ticket', 'id']:
+        students = students.order_by(order_by_value)
+
+        # if link send reverse order_by
+        if request.GET.get('reverse', '') == '1':
+            students = students.reverse()
+
+    # paginate object students
+    paginator = Paginator(students, 2)
+    page = request.GET.get('page')
+
+    try:
+        students = paginator.page(page)
+
+    except PageNotAnInteger:
+        students = paginator.page(1)
+
+    except EmptyPage:
+        students = paginator.page(paginator.num_pages)
+
+
+    return render(request, 'students_db/students_list.html',
+                  {'students': students,
+                   'students_path': students_path,
+                   })
+
+
+шаблон Пагинатора
+=================
+
+хорошая статья
+https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html
+
+документация
+https://docs.djangoproject.com/en/2.0/topics/pagination/
+
+
+{% if students.has_other_pages %}
+
+<!--Block Pagination-->
+<ul class="pagination">
+
+  <!--first page-->
+  <li class="page-item">
+    <a class="page-link" href="{% url 'home' %}?page=1"> First </a>
+  </li>
+  
+  {% if students.has_previous %}
+  <!--previous page-->
+  <li class="page-item">
+    <a class="page-link"
+       href="{% url 'home' %}?page={{students.previous_page_number}}"> < </a>
+  </li>
+  {% endif %}
+  
+  {% for this_page in students.paginator.page_range %}
+  <li class="page-item {% if students.number == this_page %}active{% endif %}">
+    <a class="page-link"
+       href="{% url 'home' %}?page={{this_page}}">
+      {{ this_page }}</a>
+  </li>
+  {% endfor %}
+  
+  {% if students.has_next %}
+  <!--next page-->
+  <li class="page-item">
+    <a class="page-link"
+       href="{% url 'home' %}?page={{students.next_page_number}}"> > </a>
+  </li>
+  {% endif %}
+  
+  <!--last page-->
+  <li class="page-item">
+    <a class="page-link"
+       href="{% url 'home' %}?page={{students.paginator.num_pages}}">
+      Last</a>
+  </li>
+  
+</ul>
+<!--End Block Pagination-->
+{% endif %}
+
+
+Дополнение по Шаблону Пагинации Страницы
+---------------------
+
+Если пори листании Странци наду оставить Соргировки (и с учетом реверса)
+Надо урл адрес линка дополнить атрибутами соритировки
+
+{% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+.....
+{% if students.has_next %}
+  <!--next page-->
+  <li class="page-item">
+    <a class="page-link"
+       href="{% url 'home' %}?page={{students.next_page_number}}&order_by={{order_by}}&reverse={{reverse}}">
+      > </a>
+  </li>
+{% endif %}
+....
+{% endwith %}
+
+
+Задание по Непрерывной Загружаемой Пагинации
+----------------------
+стр. 256 Книги Виталия Подобы
+
+Трохи забігаючи наперед пропоную самостійно спробувати розібратись із
+Javascript та технологією Ajax, і спробувати реалізувати навігацію з допомо-
+гою кнопки “Load More...” (Завантажити Більше). Думаю ви вже неодноразо-
+во бачили такий тип навігації, коли доскролюєте до кінця списку елементів,
+а там внизу бачите кнопку “Load More...”, при кліку по якій, динамічно
+довантажується наступна пачка елементів. І так продовжується до тих пір
+поки ви не витягнете усіх елементів із сервера. В такому випадку кнопка
+“Load More...” зникає.
+
+Ще трохи ускладнюючи приклад із кнопкою “Load More...” пропоную зро-
+бити варіант, коли цієї кнопки немає, а натомість наступна пачка еле-
+ментів завантажується автоматично, коли ви проскролили до кінця сто-
+рінки. І так продовжується допоки елементи на серверві не вичерпаються
+повністю. Тут вам допоможе Javascript подія “onscroll” та наступний ви-
+раз: “(window.innerHeight + window.scrollY) >= document.body.offsetHeight”.
+Розберіться із даним виразом самостійно. І рекомендую не писати даний
+функціонал на “голому” Javascript, а користуватись бібліотекою jQuery.
+
+
+
+35)
+Модели / Базы Данных / Массивы данных / Объект Запроса из БД / QuerySet / Q
+=============================================================
+
+https://docs.djangoproject.com/en/2.0/topics/db/models/
+https://docs.djangoproject.com/en/2.0/topics/db/managers/
+https://docs.djangoproject.com/en/2.0/topics/db/queries/
+https://docs.djangoproject.com/en/2.0/topics/db/queries/#field-lookups
+https://docs.djangoproject.com/en/2.0/topics/db/queries/#the-pk-lookup-shortcut
+https://docs.djangoproject.com/en/2.0/topics/db/queries/#complex-lookups-with-q-objects
+https://docs.djangoproject.com/en/2.0/topics/db/queries/#many-to-many-relationships
+https://docs.djangoproject.com/en/2.0/topics/db/queries/#one-to-one-relationships
+
+
+Комманды:
+---------
+$ python3 manage.py
+$ python3 manage.py makemigrations
+$ python3 manage.py migrate
+$ python3 manage.py inspectdb
+$ python3 manage.py sqlmigrate
+$ python3 manage.py dbshell             # только mysql postgresql
+
+простой запрос в ДБ через модель:
+for user in User.objects.filter(age__gt=21):
+    print(user.name)
+
+
+Основные классы полей:
+---------------------
+CharField / EmailField / TextField / BooleanField / IntegerField / 
+DateField / DateTimeField
+
+Атрибуты полей моделей
+----------------------
+https://docs.djangoproject.com/en/2.0/ref/models/fields/#module-django.db.models.fields
+https://docs.djangoproject.com/en/2.0/topics/db/models/#fields
+
+null
+blank
+choices
+db_column
+db_index
+db_tablespace
+default
+editable
+error_messages
+help_text
+primary_key
+unique
+unique_for_date
+unique_for_month
+unique_for_year
+verbose_name
+
+
+Свойства Полей (популярные)
+---------------------------
+blank           # поле может быть пустым (None)
+
+null            # при этом хранится в базе как NULL (как хранить пустое значение) (или "")
+
+max_length      # максимальная длинна поля
+
+primary_key     # это поле - первичный ключ (если автоприращение pk=id не подходит)
+
+unique          # поле уникально (например номер паспорта - нет дубликатов в БД)
+
+db_index        # для этого поля нужен индекс в базе   (дял оптимизации - отд тема)
+
+default         # значение по умолчанию (даже может быть привязан вызов функции особой)
+
+choices         # варианты значений [('s', 'small'), ('m', 'middle'),...]
+                    # 's' - сохраняется в БД / 'small' - хранится в питон-коде
+
+Свойства полей моделей - важный функционал, которые хранит в себе Мета информацию
+о полях, даже такую которая не сохраняется в БД, но сохраняется на уровне питон-кода
+и доступна фреймворку
+
+
+META API
+-------------
+https://docs.djangoproject.com/en/2.0/ref/models/meta/
+
+доступ к менеджеру   _meta
+
+>>> from django.contrib.auth.models import User
+
+.get_field
+>>> User._meta.get_field('username')
+<django.db.models.fields.CharField: username>
+
+.get_fields
+>>> User._meta.get_fields()
+(<ManyToOneRel: admin.logentry>,
+ <django.db.models.fields.AutoField: id>,
+
+
+META OPTIONS
+------------
+https://docs.djangoproject.com/en/2.0/ref/models/options/#model-meta-options
+
+abstract
+
+app_label
+app_label = 'myapp'
+
+db_table
+db_table = 'music_album'
+
+ordering
+ordering = ['-order_date']
+
+verbose_name
+verbose_name = "pizza"
+
+verbose_name_plural
+verbose_name_plural = "stories"
+
+
+Менеджер Моделей
+(Фактически делает запросы в БД)
+Model.objects
+-------------
+
+>>> from students_db.models import Student
+
+>>> Student
+<class 'students_db.models.Student'>
+
+>>> Student.objects
+<django.db.models.manager.Manager object at 0x7f0016ca2c50>
+
+>>> dir(Student.objects)
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__',
+ '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__',
+ '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__',
+ '__setattr__', '__sizeof__', '__slotnames__', '__str__', '__subclasshook__',
+ '__weakref__', '_constructor_args', '_db', '_get_queryset_methods', '_hints',
+ '_insert', '_queryset_class', '_set_creation_counter', '_update',
+
+ 'aggregate', 'all', 'annotate', 'auto_created', 'bulk_create', 'check',
+ 'complex_filter', 'contribute_to_class', 'count', 'create', 'creation_counter',
+ 'dates', 'datetimes', 'db', 'db_manager', 'deconstruct', 'defer', 'difference',
+ 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'filter', 'first',
+ 'from_queryset', 'get', 'get_or_create', 'get_queryset', 'in_bulk', 'intersection',
+ 'iterator', 'last', 'latest', 'model', 'name', 'none', 'only', 'order_by',
+ 'prefetch_related', 'raw', 'reverse', 'select_for_update', 'select_related',
+ 'union', 'update', 'update_or_create', 'use_in_migrations', 'using', 'values',
+ 'values_list']
+
+>>> Student.objects.values_list()
+<QuerySet []>
+
+>>> Student.objects.values()
+<QuerySet []>
+
+>>> Student.objects.get_queryset()
+<QuerySet []>
+
+>>> Student.objects.db
+'default'
+
+# Создание Элемента БД (Инстанс Модели)
+>>> from blog.models import Blog
+>>> b = Blog(name='Beatles Blog', tagline='All the latest Beatles news.')
+>>> b.save()
+
+
+Объект Вопроса Q в Моделях
+--------------------------
+(нечто новое и интересное)
+
+Poll.objects.get(
+    Q(question__startswith='Who'),
+    Q(pub_date=date(2005, 5, 2)) | Q(pub_date=date(2005, 5, 6))
+)
+
+типа как:
+
+SELECT * from polls WHERE question LIKE 'Who%'
+    AND (pub_date = '2005-05-02' OR pub_date = '2005-05-06')
+
+то есть Q конструктор Запроса в БД по условиям.
+
+
+36)
+HTTP
+HTTPS
+============
+TCP портом за замовчуванням для HTTPS є 443 (для HTTP — 80)
+
+
+
+37)
+Файл в корневой папке проекта со Всему нужными пакетами
+
+$ touch requirements.txt
+
+(django_students)$ pip freeze 
+Django==2.0.2
+django-debug-toolbar==1.9.1
+Pillow==5.0.0
+pkg-resources==0.0.0
+pytz==2018.3
+six==1.11.0
+sqlparse==0.2.4
+
+Копируем все сторки в файл requirements.txt 
+
+Теперь добавленией нового пакета в Список пакетов в файл можно устанавливать
+
+$ pip install -r requirements.txt
+
+sudo apt install mysql-client libmysqlclient-dev
+
+
+
+38)
+API Моделей (БД)
+================
+
+>>> from students_db.models import Student
+
+>>> from django.utils import timezone
+
+# создание Объекта в БД
+>>> stud1 = Student(first_name = 'yurii', last_name = 'ryndin',
+            birth_date = timezone.now(), ticket = '2458', notes = 'some text')
+>>> stud1.save()
+
+# заменя значения поля Объекта из БД
+>>> stud1.first_name = 'pasha'
+>>> stud1.save()
+
+>>> Student.objects.get(first_name = 'yurii')
+....
+students_db.models.DoesNotExist: Student matching query does not exist.
+
+>>> Student.objects.get(first_name = 'pasha')
+<Student: Student object (1)>
+
+# запрос как фильтры и операторы сравнения
+>>> Student.objects.get(first_name = 'pasha').last_name
+'ryndin'
+
+>>> Student.objects.get(first_name = 'pasha').pk
+1
+
+>>> Student.objects.get(first_name = 'pasha').id
+1
+
+>>> Student.objects.get(first_name = 'pasha').ticket
+'2458'
+
+основні методи менеджера об’єктів, які найчастіше використовуються, це:
+    all, filter, exclude, get, get_or_create, order_by, reverse, exists
+
+
+
+39)
+static
+media
+==============
+
+#)
+from django.contrib import admin
+from django.urls import path, include
+from django.conf.urls.static import static
+from . import settings
+
+if settings.DEBUG is True:
+    import debug_toolbar
+
+urlpatterns = [
+    path(r'', include('students_db.urls')),
+    path(r'admin/', admin.site.urls),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 
+  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+#)
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+
+
+STATIC_URL = '/static/'            
+
+# для комманды $ python manage.py collectstatic
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static')
+
+# для сохранения файлов при загрузке в модели
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+
+Теперь загруженные Файлы в Поле Модели сохраняются по пути
+os.path.join(BASE_DIR, '..', 'media')
+
+
+-------------
+# склейка Префикса к папке MEDIA + имя файла через Модель Студента
+<a href="{% get_media_prefix %}{{ student.photo }}"
+
+https://docs.djangoproject.com/es/1.9/ref/templates/builtins/#std:templatetag-get_media_prefix
+
+<td><a href="{% if student.photo%}{% get_media_prefix %}{{ student.photo }}{% endif%}#">
+        <img class="rounded-circle"
+             src="{% if student.photo %}{{ student.photo.url }}
+                  {% else %}{% static 'img/avatar_python.jpg' %}{% endif %}"
+             alt="" height='40' width='40'/>
+        </a>
+      </td>
+
+
+40)
+Админ Апликация
+===============
+
+admin.py
+
+from django.contrib import admin
+from .models import Student
+
+# Register your models here.
+admin.site.register(Student)
+
+
+41)
+Иконки в html шиблоны
+=====================
+
+Основной Источник Иконок
+------------------------
+В принципе есть все необходимые Иконки для Быстрых проектов
+
+# тут вся документация и теги иконок
+https://www.w3schools.com/icons/default.asp
+
+# это линк в html страницу
+<link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+# это тег иконки
+<i class="fa fa-hand-o-down" style="font-size:20px;"></i>
+
+
+пример Вставки Иконки при Сортировке
+---------------------
+<th scope="col"><a href="{% url 'home' %}?order_by=group">
+    Группа</a>
+    {% if request.GET.order_by == 'group' %}
+    <i class="fa fa-chevron-circle-down" style="font-size:20px;"></i>
+    {% endif %}
+</th>
+
+
+42)
+Теги Джинго - Логика Ссылок
+===================
+
+# псевдоним - как копия и для Краткости
+{% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+
+# далее логика формирования строки GET url запроса
+<thead>
+<tr>
+    <th scope="col">
+    <a href="{% url 'home' %}?order_by=id{% if order_by == 'id' and reverse != '1' %}&amp;reverse=1{% endif %}">
+        ID</a>
+    {% if order_by == 'id' and reverse != '1' %}
+        <i class="fa fa-chevron-circle-down" style="font-size:20px;"></i>
+    {% elif order_by == 'id' and reverse == '1' %}
+        <i class="fa fa-chevron-circle-up" style="font-size:20px;"></i>
+{% endif %}
+</th>
+
+
+# строка get запроса
+http://127.0.0.1:8000/?order_by=ticket&reverse=1
+
+{% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+<a href="{% url 'home' %}?order_by=id{% if order_by == 'id' and reverse != '1' %}&amp;reverse=1{% endif %}">
+
+
+
+43)
+Модель Группа
+==============
+
+Связянные Поля в Моделях
+
+Связи Меджу Моделями:
+1) Студент имеет Группу
+Параметр обязательный
+
+2) Группа имеет Старосту из Списка студентов
+Необходима Валидация что Студент-Староста принадлежит Данной Группе
+параметр необязательный - то есть Старосты может не быть
+
+https://docs.djangoproject.com/en/2.0/topics/db/models/#relationships
+
+Многие к Одному
+===============
+ForeignKey
+
+https://docs.djangoproject.com/en/2.0/topics/db/models/#many-to-one-relationships
+
+
+Один к одному
+=============
+OneToOneField 
+
+https://docs.djangoproject.com/en/2.0/topics/db/models/#one-to-one-relationships
+
+
+Многие ко Многим
+================
+ManyToManyField
+
+https://docs.djangoproject.com/en/2.0/topics/db/models/#many-to-many-relationships
+
+
+Сама на Себя
+============
+'self'
+
+Сам на себе. Якщо клієнт привів нам іншого клієнта, тоді ми це позначаємо в
+таблиці як зв’язок рядка із іншим рядком цієї ж таблиці. Такий тип зв’язку на-
+зиваємо ще посиланням на себе. Тобто таблиця містить рядок, що посилається
+на рядок з цієї ж таблиці.
+В Django ORM для цього використовуємо також поле ForeignKey, але першим
+аргументом, замість назви класу моделі, передаємо стрічку ‘self’. Ця стрічка
+повідомляє ORM систему, що дане поле буде посилатись на рядки всередині
+тієї самої таблиці (на об’єкти моделі, в якій міститься дане поле).
+
+
+пример Модели группы
+---------------------
+class Group(models.Model):
+    """Group Model for DB"""
+
+    class Meta:
+        verbose_name = u'Группа'
+        verbose_name_plural = u'Группы'
+        # ordering = ['last_name']
+
+    def __str__(self):
+        if self.leader:
+            return 'title: {} / leader: {}'. \
+                format(self.title, self.leader.last_name)
+        else:
+            return 'title: {}'.format(self.title)
+
+    title = models.CharField(
+        max_length=256,
+        blank=False,
+        verbose_name=u"Название"
+    )
+
+    leader = models.OneToOneField(      # validation student to leader Only ones
+        Student,
+        verbose_name=u'Староста',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL
+    )
+
+    notes = models.TextField(
+        blank=True,
+        verbose_name=u'Примечания'
+    )
+
+
+пример операций в консоли
+-------------------------
+
+>>> dir()
+['Group', 'Student', '__builtins__', 'group1', 'grpup1', 'stud1']
+
+>>> Group.objects.filter(id=1).delete()
+(1, {'students_db.Group': 1})
+
+>>> from students_db.models.groups import Group
+
+>>> Group.objects.all()
+<QuerySet [<Group: title: Code Python / leader: ryndin>]>
+
+>>> groups = Group.objects.all()
+
+>>> groups
+<QuerySet [<Group: title: Code Python / leader: ryndin>, <Group: title: Code JS / leader: claud>]>
+
+
+>>> group3 =  groups.filter(leader_id = 3)
+
+>>> group3
+<QuerySet [<Group: title: Code JS / leader: claud>]>
+
+
+>>> group3.values()
+<QuerySet [{'leader_id': 3, 'notes': 'learning JS code', 'title': 'Code JS', 'id': 2}]>
+
+
+Джанго на русском
+-----------------
+https://djbook.ru/rel1.9/
+
+
+Поле выбора значения
+choice
+--------------------
+
+https://stackoverflow.com/questions/8077840/choicefield-in-django-model
+
+
+
+GENDER_CHOICE = (('M', u'Мужской'), ('F', u'Женский'), ('X', u'Не Выбран'))
+
+
+
+44)
+Фикстура
+====================
+Файл в формате JSON
+
+Дает возможность сохранить Структуры БД и Данные из БД в файл JSON 
+Потом его можно загзурить в пустой проект для Создания Структуры и Добавления Данных
+
+Одной коммандой можно создать файл со всеми данными
+----------------
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/src/students_service$
+    python manage.py dumpdata --format=json --indent=4 > project_data.json
+
+Файл появится в Корневой Папке Проекта (где .git)
+
+
+пример сессийного блока
+-----------------------
+{
+    "model": "sessions.session",
+    "pk": "yqtpcm7cvwcfpvuk999yr53qn6cujfhj",
+    "fields": {
+        "session_data": "Y2Y5MGYzMThmNDhhZDNjYTE5MjI2YjgzZDE0MDk1OWU3NzVkODk4ODp7Il9hdXRoX3VzZXJfaGFzaCI6IjUyMTk1M2RlN2ZjMTBkOWExNGEzNmExNWZmOTM0OWU3ZTNhMDBjMDAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
+        "expire_date": "2018-04-05T18:50:41.091Z"
+    }
+},
+
+
+пример блока модели данных
+--------------------------
+{
+    "model": "students_db.student",
+    "pk": 1,
+    "fields": {
+        "gender": "M",
+        "first_name": "pasha",
+        "last_name": "ryndin",
+        "middle_name": "",
+        "birth_date": "2018-03-18 20:44:00.217220+00:00",
+        "photo": "12248841_942652475824859_1461093161_n.jpg",
+        "ticket": "2458",
+        "notes": "some text",
+        "student_group": 1
+    }
+},
+
+
+Фактически комманда loaddata хороша только при создании БД с нуля, то есть когда нет
+еще ни одной таблицы данных.
+
+Django - делаем дамп базы данных и восстанавливаем из него с dumpdata и loaddata
+--------------------------------
+https://the-bosha.ru/2016/06/29/django-delaem-damp-bazy-dannykh-i-vosstanavlivaem-iz-nego-s-dumpdata-i-loaddata/
+
+
+
+45)
+mySQL
+=====================
+
+Весь процесс Настройки и Подключения к Джанго Серверу mySQL Базы данных 
+расписан в файле tutorial_mysql.txt
+
+
+46)
+Реализация Страниц
+Список Групп
+Список Экзаменов
+(только интересные моменты)
+=====================
+
+ТЗ по странице Экзамены:
+    
+    назва предмету;
+
+    дата і час проведення;
+    (нуже потом виджет от js по передачи объекта Времени)    
+
+    назва викладача, що прийматиме іспит;
+
+    група, для якої проводитиметься іспит.
+    (связь ForigenKey)
+
+
+---------------
+В шаблоне Сделать Красную Запись что "Х дней осталость но начала Экзамена"
+Для этого Кастомизировать Менеджер моделей
+
+
+стр.274 Книги Виталия Подобы
+----------------------
+Задания по реализации станицы Экзамены / Результаты Экзаменов
+Реализовал экзамены + Преподаватели.
+Результаты экзаменов - решил потом сделаю.
+
+страница Преподаватели - можно реализовать в виде Карт / и ссылки на Экзамены и Группы
+
+
+
+47)
+Обратня связь для полей ManyToManyField
+=======================================
+ForeignKey()
+
+ТОлько этот тип полей имеет Промежуточную таблицу Связей
+Потому работает Обратная связь
+И это Очень Круто
+
+вот Ссылка на пример:
+---------------------
+https://stackoverflow.com/questions/32998591/django-count-of-foreign-key-model
+
+
+пример в Шаблоне
+--------------------
+<td><a href="{% url 'groups_edit' group.id %}">
+
+    {{ group.student_set.all|length }}
+
+    {%for student in group.student_set.all %}</a>
+        <p><a href="{% url 'students_edit' student.id %}">
+        {{student.last_name}} {{student.first_name}}</a></p>
+    {% endfor %}
+</td>
+
+
+совет ментора
+--------------
+обычно заменяю стандартное <model_name>_set на что-то более понятное, 
+например вместо group.student_set.all использовать group.students.all 
+Сделать это можно через параметр поля related_name в модели.
+
+
+
+48)
+Формы передачи данных на Сервер 
+Валидация Форм
+(первое знакомство)
+===============================================
+
+стили для форм
+bootstrap 4 forms
+--------------
+https://getbootstrap.com/docs/4.0/components/forms/
+
+
+<form
+    action=”/submit_form.html”          # url адрес
+    method=”post”                       # метод отправки
+    enctype=”multipart/form-data”       # если в ворме есть файлы на отправку
+    name=”myform”>
+
+метод GET в форме идеально пожходит для Форм поиска Инфы на сайте
+(при это формируемый запрос видел с строке url)
+
+метод POST подходидля добавления, изменения данных на сервере (в БД) в т.ч.
+для отправки паролей и зашифрованных данных
+
+Самые Виды Проверок данных:
+-------------------
+    1) заполнение обязательных полей
+    2) правильный формат дат, телефонов, email
+    3) сложность и алгоритм пароля
+    4) правильный тип и размер файла
+
+
+Типы защиты данных Форм:
+------------------------
+    1) https    / ssl сертификат
+    2) csrf
+
+
+csrf
+-----------
+скрытое поле на форме / уходит на сервер
+<input type="hidden"
+       name="csrfmiddlewaretoken"
+       value="utadwKy9Q7j1XUX2aH2Vuq510VoD3lXRpegvVxHcab4QrK197lR2GBJ2GpOvsmRR">
+
+
+POST - рукопожатие
+------------------ 
+происходит между сервером и клиентом
+Причет после первого запроса от клиента, сервер сначала генерирует и отсылает
+на клиент данные Кукки, а затем уже проверяет Пост клиента по данным Куккам
+
+
+Cookie: 
+    csrftoken=vJGv0AJVUd4X9tYuQ3ekquNznIwpPfZgquMNpnSYehPMDj2BNH3rCFrA3cWhegTg;     
+    sessionid=ylg4ibnprtppm3to265uymkdjw9kgoaf
+
+
+Алгоритм проверки Данных Проста Формы
+(пример):
+------------------
+    проверка произошел ли Пост формы
+    если Пост на сервер пришел - проверить входные данные
+    если данные из Поста все валиные - сохранить в БД через менеджер Моделей
+    сделать редирект на Клиенте на головную страницу (уже с новым массивом данных)
+    если некоторые поля данных Поста не валидные - вернуть на клиент мессаджи Ошибок
+    Валидные данные также вернуть на клиент и отобразить в полях Формы
+    Если Пост был но была нажата Кнопка Отменить - то простой редирект (без работы с БД)
+    Если Поста не было - то показ шаблона пустой формы
+
+
+Кастомная описательная Логика Вьюшки
+-----------------------------
+
+def students_add(request):
+    # если форма пришла как Пост:
+        # если нажата кнопка Отменить:
+            # редирект на головную страницу Списка студентов
+
+        # если нажата кнопака Отправить:
+            # проверка данных на Валидность и сбор Ошибок
+
+            # если данные не Валидны:
+                # передача Шаблона формы с Массивом ошибок
+
+            # если данные Валидны:
+                # создание объекта в БД
+                # редирект на главную страницу
+
+    # если форма не пришла как Пост:
+        # редирект на начальное состояние формы
+
+        return render(request, 'students_db/student_add.html', {
+            'groups': Group.objects.all().order_by('title'),})
+
+
+Class-Base-Views - имеют большинство нужных методов и Инстансы только принимают Данные
+
+
+reverse('url_name')
+{% url 'url_name' %}
+------------------
+from django.core.urlresolvers import reverse
+
+reverse('url_name') в питон коде равноценно
+{% url 'url_name' %} в html шаблоне
+
+
+Описание Некоторых Параметров Поля Формы
+-----------------------------
+
+<form action="{% url 'students_add' %}"         # url диспетчер на сервере
+      method="POST"                             # метод для передачи данных на сервер
+      enctype="multipart/form-data"             # нужет такой тип передачи данных
+      class="col-sm-7">
+  {% csrf_token %}                              # паттерн кукки для безопасного соединения
+
+....
+<div class="form-group">
+    <label for="berthDateField"><strong>
+      Дата Рождения</strong></label>
+    <input name="birth_date" type="text"          # name - параметр для Сервера
+           class="form-control border border-secondary"
+           value="{{request.POST.birth_date}}"    # value - дубляж в поле параметра от Сервера 
+           id="berthDateNameField" placeholder="YYYY-MM-DD">
+    <small class="form-text text-muted">
+      Введите Дату Рождения в Формате Год(4)-Месяц(2)-Дата(2)</small>
+    <span class="text-danger font-weight-bold">
+      {{errors.birth_date}}                       # errors - контекст от сервера - набор Ошибок
+    </span>
+  </div>
+
+....
+<button type="submit"
+          class="btn btn-outline-primary"
+          name="button_add">                     # параметр для вью-функции на Подтверждение   
+          Добавить Студента</button>
+  
+  <button type="submit"
+          class="btn btn-outline-info"
+          name="button_cancel">                  # параметр для вью-функции на Отмену
+          Отменить</button>
+</form>
+
+
+валидация фото с помощью PIL
+----------------------------
+# photo - and validate with PIL Image
+photo = request.FILES.get('photo')
+if photo:
+    try:
+        Image.open(photo).verify()
+    except Exception:
+        errors['photo'] = 'Файл не есть Изображение'
+    else:
+        if photo.size > (2*512*512):
+            errors['photo'] = 'Файл Слишком Большой'
+        else:
+            data['photo'] = photo
+
+
+
+49)
+Реализация Статусных Сообщений
+====================
+
+status_message
+
+Первая реализация:
+(пример)
+-----------------
+    1) если форма вся сработала на сервере
+    2) если форма не сработала и вернулись ошибки
+    3) если пользователь нажал Отменить
+
+Поле Статусного Сообщения - одно и то же / Разный только Контекст сообщения
+
+для начала
+-----------------
+резерв места в base.html под статусное сообщение
+
+{% block status_message %}
+    <!--Block Status Message-->
+    <div class="alert alert-success mt-2" role="alert">
+      {{request.GET.status_message}}
+    </div>
+    <!--End Block Status Message-->
+{% endblock status_message %}
+
+Идея в том что в базовом шаблоне бронирую место под статусное сообщение.
+Для удобства под строку сообщения использую стиль Будстрап
+Далее на каждой странице сайта будет такое строка сообщения Если в контексте
+придет объект Статусного сообщения.
+ 
+также можно воспользоватся 2 способали:
+1) либо переопределить весть блок статусного сообщения
+    {% block status_message %}
+    .....
+    {% endblock status_message %}
+
+2) либо добавить какими то кастомными данными через 
+    {% block status_message %}
+    {{block.super}} + custom data
+    {% endblock status_message %}
+
+
+
+50)
+Форма Письма на Админа
+======================
+
+Автоматич Класс Формы Джанго
+----------------------
+https://djbook.ru/rel1.7/ref/forms/fields.html
+
+https://ccbv.co.uk/projects/Django/2.0/django.views.generic.edit/FormView/
+
+https://docs.djangoproject.com/en/2.0/ref/class-based-views/generic-editing/#generic-editing-views
+
+
+файл
+----------
+contact_admin.py
+
+
+send_mail()
+-----------
+https://docs.djangoproject.com/en/2.0/topics/email/#module-django.core.mail
+
+
+form приходит как объект Контекста через render()
+------------------------
+
+{% block content_page %}
+<form action='{% url "contact_admin" %}' method='post'>
+  {% csrf_token %}
+  {{ form.as_ul }}
+<input type='submit' value='Отправить' name='send_button'/>
+</form>
+{% endblock %}
+
+
+crispy forms
+============
+также есть отдельный файл-туториал (в моей паке) с полезной информацие по Криспи Формах
+
+http://django-crispy-forms.readthedocs.io/en/latest/index.html
+
+через данную аликация прикрутим стили из бутстрап3 для полей формы
+
+django-crispy-forms==1.7.2
+
+pip install -r requirements.txt
+
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+
+
+на временное хранение
+(Cтиль через класс Form)
+---------------------
+<!--<form action='{% url "contact_admin" %}' method='post'>-->
+  <!--{% csrf_token %}-->
+  <!--{{ form.as_ul }}-->
+  <!--{{ form.errors }}-->
+<!--<input type='submit' value='Отправить' name='send_button'/>-->
+<!--</form>-->
+
+
+Стиль формы через Crispy Forms
+-----------------
+{% extends 'students_db/base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+.....
+{% block content_page %}
+
+  {% crispy form %}
+
+{% endblock %}
+
+
+
+51)
+Class Base Views
+=================
+https://docs.djangoproject.com/en/2.0/ref/class-based-views/base/#base-views
+https://ccbv.co.uk/
+
+View
+TemplateView                # класс для создания html шаблона
+RedirectView                # класс для Редиректа (дейтсвие)
+
+
+Generic display views
+---------------------
+https://docs.djangoproject.com/en/2.0/ref/class-based-views/generic-display/#generic-display-views
+
+DetailView                  # класс для вывода 1 объекта из БД
+ListView                    # класс для вывода Списка объектов из БД
+
+Generic editing views
+---------------------
+https://docs.djangoproject.com/en/2.0/ref/class-based-views/generic-editing/#generic-editing-views
+
+FormView
+CreateView                  # класс для Создания объекта в БД
+UpdateView                  # класс для Редактирования Объекта
+DeleteView                  # класс для удаления Объекта из БД
+
+
+Generic date views
+------------------
+https://docs.djangoproject.com/en/2.0/ref/class-based-views/generic-date-based/#module-django.views.generic.dates
+
+ArchiveIndexView
+YearArchiveView
+MonthArchiveView
+WeekArchiveView
+DayArchiveView
+TodayArchiveView
+DateDetailView
+
+
+подробно ListView
+=================
+https://ccbv.co.uk/projects/Django/2.0/django.views.generic.list/ListView/
+
+class TestListView(ListView):
+    model = Student                                 # модель для списка
+    template_name = 'students_db/test_list.html'    # явное имя шаблона
+    template_name_suffix = '_list'                  # суфикс для шаблона (модель+су)
+    context_object_name = 'student_list'            # объект идет в шаблон
+
+
+
+подробно UpdateView
+=================
+https://ccbv.co.uk/projects/Django/2.0/django.views.generic.edit/UpdateView/
+
+# class StudentUpdateView(UpdateView):
+model = Student
+template_name = 'students_db/student_update_form.html'  # где шаблон для отображения
+form_class = StudentUpdateForm                          # Класс Формы
+template_name_suffix = '_update_form'                   # если нет  параметра то сам найдет
+
+def get_success_url(self):                              # куда и как Редирект при Успехе 
+    ....
+
+def post(self, request, *args, **kwargs):               # как сохранять (например Кнопки)
+    ....
+
+class StudentUpdateForm(ModelForm):
+    class Meta:
+        model = Student     
+        fields = '__all__'                              # поля для отображения
+        .....
+
+
+подробно DeleteView
+=================
+
+django-bootstrap4
+-----------------
+библиотека вроде для работы с bootstrap4
+
+http://django-bootstrap4.readthedocs.io/en/latest/
+https://pypi.python.org/pypi/django-bootstrap4
+https://github.com/zostera/django-bootstrap4
+
+<form action="{% url 'student_delete' object.id %}"     # параметр может быть пустой
+      method="post"
+      class="form">
+    {% csrf_token %}
+    
+    <p><strong>Вы дейтсвительно хотите удлить Данные Студента?:</strong></p>
+    id: {{ object.id }}<br>
+    first name: {{ object.first_name }}<br>
+    last name: {{ object.last_name }}<br>
+    group: {{ object.student_group.title }}<br>
+  
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">Удалить</button>
+    {% endbuttons %}
+
+</form>
+
+
+
+
+52)
+messages framework
+==================
+https://docs.djangoproject.com/en/2.0/ref/contrib/messages/
+
+
+
+
+
+
+101)
+Форма добавления Объекта в БД
+Запрос добавления объекта в БД
+==============================
+
+
+
+
+

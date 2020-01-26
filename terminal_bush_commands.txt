@@ -1,0 +1,203 @@
+
+0)
+Документация и начальные Менеджеры
+============
+http://studylinux.ru/shpargalka-komandy-unix-linux-kratko.html
+
+$ sudo apt install krusader
+$ sudo apt install mc
+$ sudo apt-get install terminator
+
+
+
+1)
+https://habrahabr.ru/company/ruvds/blog/325522/
+Фундаментальный документ по командам и скриптам в Терминале
+====================
+Bash-скрипты: начало
+Bash-скрипты, часть 2: циклы
+Bash-скрипты, часть 3: параметры и ключи командной строки 
+Bash-скрипты, часть 4: ввод и вывод
+Bash-скрипты, часть 5: сигналы, фоновые задачи, управление сценариями 
+Bash-скрипты, часть 6: функции и разработка библиотек
+Bash-скрипты, часть 7: sed и обработка текстов
+Bash-скрипты, часть 8: язык обработки данных awk
+Bash-скрипты, часть 9: регулярные выражения
+
+
+
+2)
+Узнаваемые комманды
+=====================
+$ ls                    ## содержимое текущей дирректории
+$ ls -laht	(la) 		## сдержимое папки с в расширенном виде
+
+$ pwd				    ## путь где мы в текущий момент находимся
+
+$ cd <dir>				## открыть дирректорию
+$ cd ..				    ## вернуться на папку назад (одна точка - та же директория, 2 - на шаг назад)
+
+$ mkdir <dir>			## создание папки
+$ touch test.txt		## создание файла
+
+$ cp 1.txt 2.txt	    ## копируем содержимое файла ои одного в другой
+$ cp * <dir>/			## скопировать все содержимое текущей папки в папку сатира/
+$ cp m*.txt <dir>/		## скопировать все файлы в текущей папке, которые начинаются на
+				                    (m) в папку <dir>
+
+$ mv xxx.txt <dir>/     ## перемещение файла из текущей директории в ааа/
+$ mv 1.txt 2.txt <dir>/	## меняет название файла с одного на другое с переносом в папку
+
+$ rm test.txt           ## удаление файла
+$ rm -r slapstick/		## удаление папки рекурсивно. то есть вглубь в папках как найдет
+
+$ echo "Hello" > hello.txt	## передает текст в файл
+
+$ cat hello.txt             ## выводит текст из файла в консоль
+$ sort requirements.txt     ## вывод текста сортированного из файла в консоль 
+$ cat > requirements.txt    ## перезапись всего файла (ждет ввода текста)
+
+$ cat 11.txt > 22.txt	    ## сохраняет текст из одного файла в другой (новое содержимое)
+
+$ grep -i pillow requirements.txt   ## ищет фрагмент текста в файле (-i - бнз регистра)
+$ grep -i students data.json 
+    "model": "students.student",    ## пример вывода элементов поиска - то что надо
+    "model": "students.group",
+    "model": "students.exam",
+
+
+редактор в Командной строке
+--------
+$ nano requirements.txt     ## открывает в встроенном редакторе
+    Ctrl + O                ## сохранить изменения в файле
+    Ctrl + X                ## выход из встроенного редактора
+
+
+Алиасы / Псевдонимы
+--------
+$ alias lss='ls'            ## скрип alias назначил ls как lss (обе команды работают)
+
+$ alias                     ## полный список Алиасов
+    alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+    alias egrep='egrep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias grep='grep --color=auto'
+    alias l='ls -CF'
+    alias la='ls -A'
+    alias ll='ls -alF'
+    alias ls='ls --color=auto'
+    alias lss='ls'          ## вот мною созданный Алиас
+
+$ ./manage.py runserver     ## запуск исполнтиельного файла и комманды в нем
+
+
+
+Переменные Сред
+---------------
+$ echo $PATH            ## вывод путей переменной (нва 1 месте запущенная вирт среда)
+    /home/ryndin/projects/students2017/bin:
+    /usr/local/sbin:
+    /usr/local/bin:
+    /usr/sbin:
+    /usr/bin:
+    /sbin:
+    /bin:
+    /usr/games:
+    /usr/local/games:
+    /snap/bin:
+    /usr/lib/jvm/java-8-oracle/bin:
+    /usr/lib/jvm/java-8-oracle/db/bin:
+    /usr/lib/jvm/java-8-oracle/jre/bin
+
+
+
+$ echo $USER            ## Еще одна переменная Виртуальной среды
+        ryndin
+
+
+
+$ env                   ## вывод всех переменных запущенной Виртуальной среды
+    XDG_VTNR=7
+    XDG_SESSION_ID=c2
+    XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/ryndin
+    ...
+    SHELL=/bin/bash
+    DERBY_HOME=/usr/lib/jvm/java-8-oracle/db
+    QT_LINUX_ACCESSIBILITY_ALWAYS_ON=1
+    ...
+    DEFAULTS_PATH=/usr/share/gconf/ubuntu.default.path
+    VIRTUAL_ENV=/home/ryndin/projects/students2017
+    ...
+    PATH=/home/ryndin/projects/students2017/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin
+    ...
+    PWD=/home/ryndin/projects/students2017/src/students2017
+    ...
+    JAVA_HOME=/usr/lib/jvm/java-8-oracle
+    ...
+    LANG=ru_UA.UTF-8
+    HOME=/home/ryndin
+    ...
+
+
+Где пакеты
+-----------
+$ which js                  ## конманда показывает где исходный код Программ
+    /usr/bin/js
+
+$ which python
+    /home/ryndin/projects/students2017/bin/python
+
+$ which nano
+    /bin/nano
+
+$ which java
+    /usr/bin/java
+
+$ which subl
+    /usr/bin/subl
+
+
+$ tree                      ## паказывает стуктуру / дерево дирректории с вложениями
+
+
+
+
+Суперюзер:
+------------
+вход под root пользователем
+$ sudo su	                ## вход под Суперюзером
+    [sudo] password for ryndin:
+
+# exit                      ## выход из Суперюзера
+	exit
+
+
+
+Работа с Пакетами
+-----------------
+$ sudo apt install python3   ## установка программы на Комп
+
+$ sudo apt update            ## Обновление Базы Репозиториев (через менеджер apt)
+
+Скачивание пакетов (без установки)
+------------------
+$ sudo wget https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz
+$ sudo wget http://itc.ua/wp-content/uploads/2017/01/Assassins_Creed_03-770x415.jpg
+
+
+распаковка архивов
+==================
+$ tar xfz Python-2.7.9.tgz
+
+
+
+
+
+
+
+
+
+
+
+
+

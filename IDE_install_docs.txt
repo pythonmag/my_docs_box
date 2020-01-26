@@ -1,0 +1,105 @@
+Перед Установкой Апликадии в нашем Джаного проекте лучше сразу постатить Редакторы для 
+python+django
+
+=========================== 
+Я выбрал PyCharm Community (бесплатная) для Линукс
+https://www.jetbrains.com/pycharm/download/#section=linux
+
+
+Как установить pycharm под ubuntu
+https://www.youtube.com/watch?v=oXP_PlUh2LA
+	
+	// Кидаем архим в папку с программами (programs_install)
+	Сначала пакет в архивирванном виде tar.gz
+	
+	// разархивируем через консоль или просто в файл-менеджере правой кнопкой извлечь
+	ryndin@pc:~/programs_install$ tar xvfz pycharm-community-5.0.4.tar.gz       **
+	
+	// появилась разархивированная папка - она и нужна		
+	ryndin@pc:~/programs_install$ ls 
+	pycharm-community-5.0.4  pycharm-community-5.0.4.tar.gz
+
+	// Запуск Установщика PyCharm (но пока на компе нет глобального JDK Java - надо ставить) 	
+	ryndin@pc:~/programs_install$ pycharm-community-5.0.4/bin/pycharm.sh        **
+	// No JDK found. Please validate either PYCHARM_JDK, JDK_HOME or JAVA_HOME
+		 environment variable points to valid JDK installation.
+	
+
+// у меня на компе пока нет java но можно спросить у Консоли
+	ryndin@pc:~/programs_install$ java          **
+	Приложение 'java' может быть найдено в следующих пакетах:
+ 	* default-jre
+ 	* gcj-4.8-jre-headless
+ 	* openjdk-7-jre-headless
+ 	* gcj-4.6-jre-headless
+ 	* openjdk-6-jre-headless
+
+
+//	Oracle JDK 7	(Предпочтительная Сборка)
+	Это последняя стабильная версия.	
+	// ставлю альтернативную сборку java от Oracle (минуты четыре)
+	sudo apt-get install python-software-properties     **
+	sudo add-apt-repository ppa:webupd8team/java        
+	sudo apt update                                 
+	sudo apt install oracle-java7-installer
+        или 
+    sudo apt install oracle-java8-installer
+        или ...
+
+	Управление версиями Java (опционально)
+	Если на вашем сервере (Droplet) установлено несколько версий Java, можно задать,
+	какая именно версия будет использоваться по-умолчанию. Для этого выполните команду:
+ 	sudo update-alternatives --config java
+	Есть 2 варианта для альтернативы java (предоставляет /usr/bin/java).
+		
+	  Выбор   Путь                                        Приор Состояние
+	------------------------------------------------------------
+	* 0            /usr/lib/jvm/java-7-oracle/jre/bin/java          1072      автоматический режим
+	  1            /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java   1071      ручной режим
+	  2            /usr/lib/jvm/java-7-oracle/jre/bin/java          1072      ручной режим
+	
+	Нажмите enter, чтобы сохранить текущий выбор[*], или введите выбранное число: 
+	// то есть у меня все ОК и выбрана правильная версия, ничего менять не буду
+	// или вот можно посмотреть версию текущую
+	ryndin@pc:~$ java -version
+	java version "1.7.0_80"
+	Java(TM) SE Runtime Environment (build 1.7.0_80-b15)
+	Java HotSpot(TM) 64-Bit Server VM (build 24.80-b11, mixed mode)
+
+// вот еще есть мануал на эту тему (не предпочтительная сборка)
+https://www.digitalocean.com/community/tutorials/java-ubuntu-apt-get-ru
+	
+	// ставлю java (пару минут)		-- это версия openjdk-7-jre может быть не самая лучшая
+	ryndin@pc:~/programs_install$ sudo apt-get install openjdk-7-jre
+	// посмотрим что поставило
+	ryndin@pc:~/programs_install$ java -version
+		java version "1.7.0_91"
+		OpenJDK Runtime Environment (IcedTea 2.6.3) (7u91-2.6.3-0ubuntu0.14.04.1)
+		OpenJDK 64-Bit Server VM (build 24.91-b01, mixed mode)
+
+	
+// Ставим PyCharm наконец-то
+// Не забываем отменить первую птичку о запуска из Терминала
+// Тему Выбираем Даркула
+// Перезагружаем
+// Даже если захлчит запусткать из Терминала, надо иконку при запущенной программе
+	закрепить на рабочей панели и все ОК.
+// Прикручиваем в настройках Рабочий проект и Пакеты Питон+Пакеты
+=========================
+
+	
+=========================
+Sublime Text
+
+// Установка Sublime Text 3
+// Добавляем репозиторий Sublime Text 3 Ubuntu PPA :
+	$ sudo add-apt-repository ppa:webupd8team/sublime-text-3
+	$ sudo apt-get update
+// Устанавливаем Sublime Text 3:
+	sudo apt-get install sublime-text-installer
+// Как открыть файл в Sublime через терминал
+// При открытии терминала при помощи команды:
+	$ subl
+// При открытой программе закрепляю иконку на панели иконок. Все ОК.
+=========================
+	

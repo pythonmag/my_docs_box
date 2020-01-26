@@ -1,0 +1,92 @@
+
+
+What is the best way to do nested comments in django?
+---------------------------------
+https://www.reddit.com/r/django/comments/3ar3ga/what_is_the_best_way_to_do_nested_comments_in/
+
+
+How can I render a tree structure (recursive) using a django template?
+---------------------------------
+https://stackoverflow.com/questions/32044/how-can-i-render-a-tree-structure-recursive-using-a-django-template/11644588#11644588
+
+
+Пример Блока Медиа для Вложенности
+----------------------------------
+<!--media 1-->
+<div class="media">
+
+    <!--left 1-->
+    <div class="media-left">
+      <img src="{% static 'img/nophoto.png' %}" alt="Demo Avatar John Doe" class="media-object" style="width:60px;margin-top:8px">
+    </div>
+    <!--end left 1-->
+
+    <!--body 1-->
+    <div class="media-body">
+      <h4 class="media-heading">John Doe <small><i>Posted on February 19, 2016</i></small></h4>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+    <!--media 2     -->
+    <div class="media">
+        <!--left 2        -->
+        <div class="media-left">
+          <img src="{% static 'img/nophoto.png' %}" alt="Demo Avatar Jane Doe" class="media-object" style="width:45px;margin-top:8px">
+        </div>
+        <!--end left 2-->
+
+        <!--body 2    -->
+        <div class="media-body">
+          <h4 class="media-heading">John Doe <small><i>Posted on February 20, 2016</i></small></h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <!--end body 2-->
+
+    </div>
+    <!--end media 2-->
+
+    </div>
+    <!--end body 1-->
+</div>
+<!--end media 1-->
+
+
+
+Пример организации Древовидности Комментариев
+==================
+
+root_comment.html
+-----------------
+{% extends 'students/base.html' %}
+{% load i18n %}
+{% load static from staticfiles %}
+
+{% block content %}
+
+<ul>
+{% for comment in comments %}
+    {% if not comment.parent %}
+    {% include "comment/tree_comment.html" %}
+    {% endif %}
+{% endfor %}
+</ul>
+
+{% endblock %}
+
+
+tree_comment.html
+-----------------
+<li>{{ comment.text }}
+    {%if comment.children %}
+        <ul>
+         {% for ch in comment.children.get_queryset %}
+              {% with comment=ch template_name="comment/tree_comment.html" %}
+                   {% include template_name %}
+              {% endwith %}
+         {% endfor %}
+         </ul>
+    {% endif %}
+</li>
+
+
+
+

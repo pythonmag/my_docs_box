@@ -1,0 +1,25 @@
+
+3W JS DOM
+===============
+https://www.w3schools.com/js/js_htmldom.asp
+
+
+
+MDN JS DOM
+===============
+https://developer.mozilla.org/ru/docs/DOM/DOM_Reference
+
+
+
+
+простой пример
+был Заголовок h1 на странице
+Я его изменил через Атрибут ДОМ
+================================
+document.documentElement.innerText
+"SPY GAME"
+
+document.documentElement['innerText'] = 'SOME TITLE'
+"SOME TITLE"
+
+

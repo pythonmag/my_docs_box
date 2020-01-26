@@ -1,0 +1,87 @@
+
+Javascript має прямий доступ до управління куками на поточному домені і
+сторінці. Але дефолтний інтерфейс роботи із куками є доволі незручний і
+багатослівний, тому скористаємось додатковою бібліотекою - плагіном для
+jQuery: 
+
+jQuery Cookie
+===============
+http://plugins.jquery.com/cookie/
+https://github.com/carhartl/jquery-cookie
+
+сорсы
+---------------
+https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+
+Пример
+===========
+1)
+js code
+------------
+//
+function initGroupSelector(){
+    // event change select group
+    $('#group-selector select').change(function(event){
+
+        // get value of current select group
+        var group = $(this).val();
+
+        // if group select in browser
+        if (group) {
+            $.cookie('current_group', group, {'path': '/', 'expires': 365});
+
+        // if group not select in browser
+        } else {
+            $.removeCookie('current_group', {'path': '/'});
+        }
+
+        // reload page
+        location.reload(true);
+
+        return true;
+    });
+}
+
+
+2)
+python code
+------------
+def get_current_group(request):
+    """
+    Get pk of current group from cookie list from browser
+    (To context processor)
+    """
+
+    pk = request.COOKIES.get('current_group')
+
+    if pk:
+        from .models import Group
+        try:
+            group = Group.objects.get(pk=int(pk))
+        except Group.DoesNotExist:
+            return None
+        else:
+            return group
+
+    else:
+        return None
+
+
+3)
+html / select
+--------------
+<div class="form-group" id="group-selector">
+        <label for="select-group">Select Group (select one):</label>
+        <select class="form-control" id="select-group">
+          <option value="">All Groups</option>
+          {% for group in GROUPS %}
+          <option value="{{ group.id }}"{% if group.selected %}selected="1"{% endif %}>
+            {{ group.title }} // {{ group.leader }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+

@@ -1,0 +1,190 @@
+главная статья по настройке атома редактора под питон джанго
+===========================
+https://hackernoon.com/setting-up-a-python-development-environment-in-atom-466d7f48e297
+
+
+(все что ниже не обязательно)
+
+
+https://www.youtube.com/watch?v=L7SP7wVKYVI
+
+atom-i18
+emmet
+atom-beautify
+minimap
+pigments
+color-picker
+file-icons
+highlight-selected
+minimap-highlight-selected
+svg-preview
+autoclose-html
+simple-drag-drop-text
+indent-guide-improved
+python-indent
+auto-encoding
+fold-lines
+lorem﻿
+python-autopep8
+
+
+django-atom
+atom-django
+django-templates
+language-django
+
+
+linter
+linter-flake8
+
+
+ide-python
+autocomplete-python
+python-tools
+atom-python-run
+python-debugger
+
+
+
+https://atom.io/packages/search?utf8=%E2%9C%93&q=django&commit=Search
+платформа для поиска пакетом в Атом по посковому слову
+
+
+
+How to setup ATOM as your Python development environment
+https://medium.com/@andrealmar/how-to-setup-atom-as-your-python-development-environment-a67fe8738bd3
+
+
+
+мануалы по настройке атома
+-------------------------
+https://www.youtube.com/watch?v=L7SP7wVKYVI
+https://www.youtube.com/watch?v=DjEuROpsvp4
+
+
+Пакеты
+=======
+
+script
+----------
+запуск кода в редакторе ???
+
+
+autocomplite-python
+-------------------
+автоподстановка синтаткиса питон
+предлагает встроенные переменные, методы, функции, классы
+
+
+django-wrap-i18n
+----------------
+Wraps selected text in {% trans "text" %}, _("text") or gettext("text") according to file extension.
+If no selection - inserts import:
+from django.utils.translation import ugettext_lazy as _
+or
+{% load i18n %}
+
+
+atom-i18n
+-------------
+локализация редактора под мой язык
+больше для русс языка ничего ставить не надо.
+
+
+atom-beautify
+python-autopep8
+-------------
+ставятся оба
+для лучшего форматирование текста многих языков программмирования
+надо pip install autopep8
+
+
+python-Debugger
+---------------
+
+
+linter-flake8
+-------------
+надо еще
+pip install flake8
+
+
+python-tools
+------------
+можно изменять имя сразу в несколькоих подсвеченных местах
+
+
+atom-python-run
+---------------
+
+
+auto-encoding
+-------------
+автоматическая проверка кодировки файлов
+
+
+autoclose-html
+--------------
+автоматическое закрытие тегов в html
+
+
+django-atom
+
+atom-django
+
+language-django
+
+django-templates
+------------
+
+
+file-icons
+------------
+иконки для файлов в проводнике
+
+
+fold-lines
+-----------
+линия на свернутых блоках кода / как в старых редакторах
+
+
+hightlight-selected
+
+minimap-highlight-selected
+-------------------
+подсвечивание выделенного слова в коде
+
+
+minimap
+--------
+миникарта в коде
+
+
+pigments
+--------------------
+подсветка цвета по его коду 
+
+
+simple-drag-drop-text
+drag-drop-text
+---------------------
+перетаскивание мышкой части подсвеченного кода
+
+
+svg-preview
+-----------
+предприсмотр свг файлов
+
+
+color-picker
+------------
+правой кнопкой можно выбрать колор пикер прямо в редакторе
+
+
+emmet
+-----------
+высрое создание тегов в коде
+
+
+lorem
+-----------

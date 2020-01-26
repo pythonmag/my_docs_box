@@ -1,0 +1,25 @@
+В консоли дает Дебаг инфу о функции
+===================================
+
+
+https://github.com/cool-RR/PySnooper
+
+
+pip install pysnooper
+
+
+пример кода
+-----------
+import pysnooper
+@pysnooper.snoop()
+def number_to_bits(number):
+    ....
+
+
+такая инфа
+-----------
+Starting var:.. number = 6
+15:29:11.327032 call         4 def number_to_bits(number):
+15:29:11.327032 line         5     if number:
+15:29:11.327032 line         6         bits = []
+New var:....... bits = []

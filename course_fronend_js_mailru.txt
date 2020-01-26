@@ -1,0 +1,15 @@
+1. ФРОНТЕНД. Введение во Frontend | Технострим
+=====================
+https://www.youtube.com/watch?v=mub0B5peRIs&list=PLrCZzMib1e9r9OwZDTtkgdIOy84SwICKu
+
+
+
+2. ФРОНТЕНД. Работа с DOM и сетью, браузерные события | Технострим
+===================
+https://www.youtube.com/watch?v=1Z2FYFZ_trI&list=PLrCZzMib1e9r9OwZDTtkgdIOy84SwICKu&index=2
+
+
+
+3. ФРОНТЕНД. Модульность, разработка компонентов, шаблонизация | Технострим
+========================
+https://www.youtube.com/watch?v=G2u6JWnxdVE&list=PLrCZzMib1e9r9OwZDTtkgdIOy84SwICKu&index=3

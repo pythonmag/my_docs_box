@@ -1,0 +1,274 @@
+
+
+Устанавливаю Клиент (python3-venv) для Виртуальной среды на python
+===================
+$ sudo apt install python3-venv         **
+-------------------------------
+клиент по установки виртуальной среды для питона
+"""
+Уже установлен пакет python3.5-venv самой новой версии (3.5.2-2ubuntu0~16.04.1).
+"""
+
+
+Устанавливаю саму виртуальную среду с нужной версией питона (по умолчанию нет сайт пакетов)
+=====================
+ryndin@pc:~/workprojects/django_test_project$ python3.5 -m venv ryndin      **
+
+
+
+Запускаю виртуальную среду          **
+=====================
+ryndin@pc:~/workprojects/django_test_project$ cd ryndin/    **
+
+ryndin@pc:~/workprojects/django_test_project/ryndin$ ls
+bin  include  lib  lib64  pyvenv.cfg  share
+
+ryndin@pc:~/workprojects/django_test_project/ryndin$ source bin/activate    **
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin$ 
+
+
+Всегда не мешает начале обновить версию pip (по умолчанию версия 8)
+=======================
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src$ pip install --upgrade pip     **
+Successfully installed pip-9.0.1
+
+
+Устанавливаю django-Фреймворк (он в сайт-пакетах будет) И созданную папку src (она пока пустая)
+(дополняет виртуальную среду Питона)
+======================
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src$ pwd
+/home/ryndin/workprojects/django_test_project/ryndin/src
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src$ pip install django==1.10.5    **
+Successfully installed django-1.10.5
+    // пока папка src пустая (пока только установки виртуальной среды)
+
+
+Создаю базу джанго проекта (стартую джанго проект)
+(это уже отдельная папка вне вирутвальной среды с набором Логики проекта)
+=======================
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src$ django-admin.py startproject django_test  **
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src$ ls
+django_test
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src$ cd django_test/   **
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src/django_test$ ls
+django_test  manage.py
+
+
+
+Делаю начальные миграции (конфигурация)
+и Активирую Проект (пока пустой)
+*** Это уже свой путь по созданию Джанго проекта с Нуля - не для клонирования стороннего проекта ***
+*** Чтобы клонировать проект с Гитхаба - этот пункт выполнять не нужно !!! *** 
+================================
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src/django_test$ python manage.py migrate
+
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying sessions.0001_initial... OK
+-------------------
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src/django_test$ python manage.py runserver    **
+
+Performing system checks...
+System check identified no issues (0 silenced).
+March 04, 2017 - 08:26:04
+Django version 1.10.5, using settings 'django_test.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+
+
+
+Если это Новый проект и Не делаем Клонирования репозитория то надо Создать Апликацию 
+/ Апликаций в проекте может быть много
+=========================== 
+(testSite) ryndin@pc:~/workprojects/testSite/testSite/src/testSite$ python manage.py startapp testJs    **
+(testSite) ryndin@pc:~/workprojects/testSite/testSite/src/testSite$ ls
+db.sqlite3  manage.py  requirements.txt  testJs  testSite
+
+// по умолчанию подключена БД db.sqlite3, но она тоже требует начальных миграций
+You have 13 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+
+// потому,
+(testSite) ryndin@pc:~/workprojects/testSite/testSite/src/testSite$ python manage.py migrate    **
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  ...
+
+
+
+Вариант
+Клонирование Стороннего проекта (кода с репозитория) в чистую папку проекта Джаного ()
+=======================
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src/django_test$ pwd
+/home/ryndin/workprojects/django_test_project/ryndin/src/django_test
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src/django_test$ ls
+manage.py
+---------------------
+Убедился что в папке апликации джаного и там только Менеджер файл
+
+Сюда Клонирую Сторонний проект (Это должна быть корневая папка джаного проекта)
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src/django_test$ git clone git@github.com:pythonmag/studentsdb27.git
+Клонирование в «studentsdb27»…
+remote: Counting objects: 296, done.
+remote: Compressing objects: 100% (38/38), done.
+remote: Total 296 (delta 11), reused 0 (delta 0), pack-reused 255
+Получение объектов: 100% (296/296), 706.54 KiB | 543.00 KiB/s, готово.
+Определение изменений: 100% (150/150), готово.
+Проверка соединения… готово.
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src/django_test$ 
+
+
+
+Захожу в корневую папку Клонированного проекта
+Запускаю Проекат
+=======================
+Выдает ошибку что нет внешнего модуля databases
+(он у меня был вне репозитория для безопасности в режиме Дебаг)
+Я его добавлю отделно вне корневой папки проекта
+-----------------------
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src/django_test/studentsdb27$ ls
+manage.py  README.md  requirements.txt  students  studentsdb27  students_db.json
+
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src/django_test/studentsdb27$ python3 manage.py runserver
+...
+ImportError: No module named 'studentsdb27.databases'
+
+
+
+После изменений в Удаленном репозитории
+===========================
+делаю апгрейд в локальном репозитории (git клиент уже содан в папке проекта)
+---------------------------
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src/django_test/studentsdb27$ git pull
+remote: Counting objects: 20, done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 20 (delta 11), reused 20 (delta 11), pack-reused 0
+Распаковка объектов: 100% (20/20), готово.
+Из github.com:pythonmag/studentsdb27
+   8de2547..13b39e5  master     -> origin/master
+Обновление 8de2547..13b39e5
+Fast-forward
+ .gitignore                                     |   5 +--
+ students/contex_processors.py                  |   5 +++
+ students/static/js/custom.js                   |  16 ++++++++++
+ students/templates/students/base.html          |   9 ++++--
+ students/templates/students/journal.html       |  15 +++++++--
+ students/templates/students/students_list.html |   2 +-
+ students/util.py                               |  35 ++++++++++++++++++++
+ students/views/journal.py                      | 114 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-------
+ studentsdb27/databases.py                      |  24 ++++++++++++++
+ studentsdb27/settings.py                       |   4 +--
+ studentsdb27/urls.py                           |   2 +-
+ 11 files changed, 205 insertions(+), 26 deletions(-)
+ create mode 100644 students/contex_processors.py
+ create mode 100644 studentsdb27/databases.py
+
+
+
+Делаю очередую пробу по запуску Проекта
+====================
+Проблема в том что проект пока не имеет Сайт-пакетов - потому ставлю
+--------------------
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src/django_test/studentsdb27$ python3 manage.py runserver
+...
+ImportError: No module named 'crispy_forms'
+--------------------
+Теперь очевидно что нет Сайт-пакетов - но ведь есть requirements.txt
+а в нем Индексы всех необходимых Сайт-Пакетов
+    Django==1.10.5
+    django-registration-redux==1.4
+    MySQL-python==1.2.5
+    olefile==0.44
+    Pillow==4.0.0
+    pkg-resources==0.0.0
+    psycopg2==2.6.2
+    python-dateutil==2.6.0
+    python-magic==0.4.12
+    six==1.10.0
+    django-crispy-forms==1.6.1
+--------------------
+Также любой Сайт-Пакет можно поставить через  
+    <venv>$ pip install django-crispy-forms==1.6.1
+
+
+
+Делаю Полую Установку Всех Сайт-Пакетов
+=====================
+При этом по умолчанию БД в проектк установлена sqlite, потому MySQL-python==1.2.5 не устанавливается (дает ошибку) - убираю из файлика requirements.txt
+....
+Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-b71i6log/MySQL-python/
+---------------------
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src/django_test/studentsdb27$ pip install -r requirements.txt
+....
+Successfully installed Pillow-4.0.0 django-registration-redux-1.4 olefile-0.44 psycopg2-2.6.2 python-dateutil-2.6.0 python-magic-0.4.12 six-1.10.0
+
+
+
+Делаю начальные миграции
+========================
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src/django_test/studentsdb27$ python3 manage.py makemigrations
+....
+Migrations for 'students':
+  students/migrations/0005_auto_20170304_1007.py:
+    - Alter field photo on student
+-----------------
+(ryndin) ryndin@pc:~/workprojects/django_test_project/ryndin/src/django_test/studentsdb27$ python3 manage.py migrate
+....
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions, students
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying sessions.0001_initial... OK
+  Applying students.0001_initial... OK
+  Applying students.0002_monthjournal... OK
+  Applying students.0003_auto_20170225_1734... OK
+  Applying students.0004_auto_20170226_1757... OK
+  Applying students.0005_auto_20170304_1007... OK
+
+
+loaddata пока не вышло
+======================
+Закинуть данные в БД sqlite из файлика students_db.json пока не получилось.
+Но Запущенный проект работат и данные через клиент заполняются.
+Ящитаюэтоуспех! :)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,406 @@
+Логування через Социальные сети
+=========================
+
+
+social-auth-app-django==1.1.0
+$ pip install -r requirements.txt
+    Installing collected packages: social-auth-app-django
+    Successfully installed social-auth-app-django-1.1.0
+
+https://pypi.python.org/pypi/social-auth-app-django/1.1.0
+
+http://python-social-auth.readthedocs.io/en/latest/configuration/django.html
+
+
+API Facebook
+------------
+блок Фейсбук для разработчиков (Апликации)
+https://developers.facebook.com
+https://axiacore.com/blog/how-retrieve-facebook-extra-info-from-django/
+https://simpleisbetterthancomplex.com/tutorial/2016/10/24/how-to-add-social-login-to-django.html
+http://python-social-auth.readthedocs.io/en/latest/backends/index.html#social-backends
+
+
+
+1)
+$ pip install social-auth-app-django
+
+
+2)
+INSTALLED_APPS = (
+    ...
+    'social_django',
+    ...
+)
+
+
+
+3)
+    (studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py migrate
+    Operations to perform:
+    Apply all migrations: admin, auth, contenttypes, registration, sessions, social_django,
+    students, studentsdb27
+    Running migrations:
+    Applying social_django.0001_initial... OK
+    Applying social_django.0002_add_related_name... OK
+    Applying social_django.0003_alter_email_max_length... OK
+    Applying social_django.0004_auto_20160423_0400... OK
+    Applying social_django.0005_auto_20160727_2333... OK
+    Applying social_django.0006_partial... OK
+
+
+
+4)
+MIDDLEWARE_CLASSES = [
+    ...
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+]
+
+
+5)
+обрати внимание - 3 момента
+---------------
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'sitecomments', 'templates'),    # add for social auth
+            
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                ....
+
+                'social_django.context_processors.backends',        # Тут
+                'social_django.context_processors.login_redirect',  # Тут
+            ]
+        },
+    },
+]
+
+
+6)
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+
+7)
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',         # Github
+    'social_core.backends.twitter.TwitterOAuth',        # Twitter
+    'social_core.backends.facebook.FacebookOAuth2',     # Facrbook
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+7.1) настройки для всех Соц Сетей
+https://python-social-auth.readthedocs.io/en/latest/backends/index.html
+
+
+8) проверить наличие в Админке
+http://localhost:8000/admin/social_django/
+
+
+9)
+from django.conf.urls import url, include
+from django.contrib import admin
+from django.contrib.auth import views as auth_views
+from mysite.core import views as core_views
+urlpatterns = [
+    url(r'^$', core_views.home, name='home'),
+
+    url(r'^login/$', auth_views.login, name='login'),
+    url(r'^logout/$', auth_views.logout, name='logout'),
+
+    url(r'^oauth/', include('social_django.urls', namespace='social')),  # Тут
+    url(r'^admin/', admin.site.urls),
+]
+
+
+7) подтянулось куча вьюшек
+$ python manage.py show_urls
+    ...
+    /admin/social_django/association/	django.contrib.admin.options.changelist_view	admin:social_django_association_changelist	
+    /admin/social_django/association/<var>/	django.views.generic.base.RedirectView		
+    /admin/social_django/association/<var>/change/	django.contrib.admin.options.change_view	admin:social_django_association_change	
+    /admin/social_django/association/<var>/delete/	django.contrib.admin.options.delete_view	admin:social_django_association_delete	
+    /admin/social_django/association/<var>/history/	django.contrib.admin.options.history_view	admin:social_django_association_history	
+...
+ 
+
+8) 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'
+
+
+10)
+в сеттингах
+-----------
+import os
+import secret_settings
+
+SECRET_KEY = secret_settings.SECRET_KEY
+
+# secret block of variables
+# via Facebook Ligin
+SOCIAL_AUTH_FACEBOOK_KEY = secret_settings.SOCIAL_AUTH_FACEBOOK_KEY         # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = secret_settings.SOCIAL_AUTH_FACEBOOK_SECRET   # App Secret
+
+# via Github Ligin
+SOCIAL_AUTH_GITHUB_KEY = secret_settings.SOCIAL_AUTH_GITHUB_KEY
+SOCIAL_AUTH_GITHUB_SECRET = secret_settings.SOCIAL_AUTH_GITHUB_SECRET
+
+# via Twitter Ligin
+SOCIAL_AUTH_TWITTER_KEY = secret_settings.SOCIAL_AUTH_TWITTER_KEY
+SOCIAL_AUTH_TWITTER_SECRET = secret_settings.SOCIAL_AUTH_TWITTER_SECRET
+
+# via Steam Login
+SOCIAL_AUTH_STEAM_API_KEY = secret_settings.SOCIAL_AUTH_STEAM_API_KEY
+SOCIAL_AUTH_STEAM_EXTRA_DATA = secret_settings.SOCIAL_AUTH_STEAM_EXTRA_DATA
+
+
+11) 
+.gitignore
+----------
+указать в исключения файл, который в корневой папке проекта
+-------------------
+databases.py
+secret_settings.py
+
+
+12)
+<!--Block Login via Social-->
+    <div class="panel panel-success">
+    <div class="panel-heading"><h4>{% trans 'OR .. Login via Social' %}</h4></div>
+    <div class="panel-body">
+
+    <div class="btn btn-group btn-group-justified">
+
+        <!--Via Facebook-->
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default"><a href="{% url 'social:begin' 'facebook' %}" >
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                <h4>{% trans 'Login via Facebook' %}</h4></a></button>
+        </div>
+
+        <!--Via GitHub-->
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default"><a href="{% url 'social:begin' 'github' %}" >
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                <h4>{% trans 'Login via GitHub' %}</h4></a></button>
+        </div>
+
+        <!--Via Twitter-->
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default"><a href="{% url 'social:begin' 'twitter' %}" >
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                <h4>{% trans 'Login via Twitter' %}</h4></a></button>
+        </div>
+
+        <!--Via Google+-->
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default"><a href="{% url 'social:begin' 'steam' %}" >
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                <h4>{% trans 'Login via Steam' %}</h4></a></button>
+        </div>
+
+    </div>
+</div>
+</div>
+<!--End Block Login via Social-->
+------------------------------------
+
+<span class="glyphicons glyphicons-fingerprint"></span>
+
+
+
+
+Хороший мануал
+--------------
+https://simpleisbetterthancomplex.com/tutorial/2016/10/24/how-to-add-social-login-to-django.html
+
+
+Также у Виталия такой мануал в Книге в главе 12
+
+
+сколько соц сетей поддреживает
+------------------
+http://python-social-auth.readthedocs.io/en/latest/backends/index.html#social-backends
+
+
+
+Логування через Социальные сети
+=========================
+
+social-auth-app-django==1.1.0
+$ pip install -r requirements.txt
+    Installing collected packages: social-auth-app-django
+    Successfully installed social-auth-app-django-1.1.0
+
+https://pypi.python.org/pypi/social-auth-app-django/1.1.0
+
+http://python-social-auth.readthedocs.io/en/latest/configuration/django.html
+
+
+1)
+$ pip install social-auth-app-django
+
+$ pip freeze > requirements.txt 
+
+
+2)
+INSTALLED_APPS = (
+    ...
+    'social_django',
+    ...
+)
+
+
+3)
+    (studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py migrate
+    Operations to perform:
+    Apply all migrations: admin, auth, contenttypes, registration, sessions, social_django,
+    students, studentsdb27
+    Running migrations:
+    Applying social_django.0001_initial... OK
+    Applying social_django.0002_add_related_name... OK
+    Applying social_django.0003_alter_email_max_length... OK
+    Applying social_django.0004_auto_20160423_0400... OK
+    Applying social_django.0005_auto_20160727_2333... OK
+    Applying social_django.0006_partial... OK
+
+
+
+4)
+MIDDLEWARE_CLASSES = [
+    ...
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+]
+
+
+5)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            PROJECT_DIR.child('templates'),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                ....
+
+                'social_django.context_processors.backends',        # Тут
+                'social_django.context_processors.login_redirect',  # Тут
+            ]
+        },
+    },
+]
+
+
+6)
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+
+7)
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',         # Github
+    'social_core.backends.twitter.TwitterOAuth',        # Twitter
+    'social_core.backends.facebook.FacebookOAuth2',     # Facebook
+    'social_core.backends.steam.SteamOpenId',           # SteamID    
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+7.1) настройки для всех Соц Сетей
+https://python-social-auth.readthedocs.io/en/latest/backends/index.html
+
+
+8) проверить наличие в Админке
+http://localhost:8000/admin/social_django/
+
+
+9)
+from django.conf.urls import url, include
+from django.contrib import admin
+from django.contrib.auth import views as auth_views
+from mysite.core import views as core_views
+
+urlpatterns = [
+    url(r'^$', core_views.home, name='home'),
+    url(r'^login/$', auth_views.login, name='login'),
+    url(r'^logout/$', auth_views.logout, name='logout'),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),  # Тут
+    url(r'^admin/', admin.site.urls),
+]
+
+
+7) подтянулось куча вьюшек
+$ python manage.py show_urls
+    ...
+    /admin/social_django/association/	django.contrib.admin.options.changelist_view	admin:social_django_association_changelist	
+    /admin/social_django/association/<var>/	django.views.generic.base.RedirectView		
+    /admin/social_django/association/<var>/change/	django.contrib.admin.options.change_view	admin:social_django_association_change	
+    /admin/social_django/association/<var>/delete/	django.contrib.admin.options.delete_view	admin:social_django_association_delete	
+    /admin/social_django/association/<var>/history/	django.contrib.admin.options.history_view	admin:social_django_association_history	
+...
+
+
+8) 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'
+
+
+9) 
+> <div class="btn btn-group btn-group-justified">
+
+>         <!--Via Facebook-->
+>         <div class="btn-group" role="group">
+>             <button type="button" class="btn btn-default"><a href="{% url 'social:begin' 'facebook' %}" >
+>                 <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+>                 <h4>{% trans 'Login via Facebook' %}</h4></a></button>
+>         </div>
+
+>         <!--Via GitHub-->
+>         <div class="btn-group" role="group">
+>             <button type="button" class="btn btn-default"><a href="{% url 'social:begin' 'github' %}" >
+>                 <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+>                 <h4>{% trans 'Login via GitHub' %}</h4></a></button>
+>         </div>
+
+>         <!--Via Twitter-->
+>         <div class="btn-group" role="group">
+>             <button type="button" class="btn btn-default"><a href="{% url 'social:begin' 'twitter' %}" >
+>                 <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+>                 <h4>{% trans 'Login via Twitter' %}</h4></a></button>
+>         </div>
+
+>         <!--Via Google+-->
+>         <div class="btn-group" role="group">
+>             <button type="button" class="btn btn-default"><a href="{% url 'social:begin' 'steam' %}" >
+>                 <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+>                 <h4>{% trans 'Login via Steam' %}</h4></a></button>
+>         </div>
+
+>     </div>
+
+
+
+
+СТАТЬИ
+===================
+
+1)
+Django. Авторизация через социальные сети с помощью django-social-auth
+--------------------------
+http://adw0rd.com/2013/2/27/django-social-auth/
+Блог от Эдварда
+
+
+2)
+

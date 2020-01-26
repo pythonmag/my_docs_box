@@ -1,0 +1,195 @@
+
+1)
+документация -- начало
+=================
+https://djbook.ru/rel1.9/intro/tutorial06.html#customize-your-app-s-look-and-feel
+
+
+2)
+==========
+библиотека
+django.contrib.staticfiles
+
+
+3)
+??
+==========
+polls/static/polls/style.css
+или
+polls/style.css
+сработают оба пути
+
+
+4)
+=============
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+
+// новое для себя узнал - фон страницы :)
+
+body {
+    background: url('images/background_grey.png');
+}
+    
+
+
+
+
+5)
+=============
+https://djbook.ru/rel1.9/howto/static-files/index.html
+    // там о следующем
+
+1)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, '..', "static"),
+    '/var/www/static/',
+]
+
+2)
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # ... the rest of your URLconf goes here ...
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+3)
+если MEDIA_URL равна /media/
+
+
+4)
+from django.conf import settings
+
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # ... the rest of your URLconf goes here ...
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+5)
+$ python manage.py collectstatic
+
+# path for collectstatic + media
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')              ###
+
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static')            ###
+
+
+
+6)
+================
+Настройки + Админ команды + Шаблон Теги
+
+https://djbook.ru/rel1.9/ref/contrib/staticfiles.html
+
+например:
+=(djbooksite)ryndin@pc:~$   python manage.py findstatic pollsapp/style.css
+
+Found 'pollsapp/style.css' here:
+  /home/ryndin/workprojects/djbooksite/djbooksite/src/djbooksite/pollsapp/static/pollsapp/style.css
+
+
+=(djbooksite)ryndin@pc:~$ python manage.py collectstatic
+...
+63 static files copied to '/home/ryndin/workprojects/djbooksite/djbooksite/src/static'.
+
+
+7)
+================
+статик файлы на Боевых Серверах
+
+https://djbook.ru/rel1.9/howto/static-files/deployment.html
+
+
+
+UDEMY
+==================
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+
+1)
+===========
+ папка static создаем в коренвой папке всего проекта 
+(рядом папки Апплиаций и templates)
+
+
+2)
+===========
+STATIC_DIR = os.path.join(BASE_DIR, 'static')          # add my static dir path
+
+STATICFILES_DIRS = [                                   
+    STATIC_DIR,
+    # '/var/www/static/',                               # outsize source may be
+]
+
+
+3)
+===========
+STATIC_URL = '/static/'
+
+для того чтобы работало
+
+{% load static %}
+или так или так
+{% load staticfiles %}
+
+
+и
+<img src="{% static "my_app/example.jpg" %}" alt="My image"/>
+
+
+
+4)
+==========
+путь в проекте для хранения картинок
+
+base_dir/static/img/superman.jpg
+
+
+5)
+============
+такой путь в брайзере откроет указанную картинку
+
+http://127.0.0.1:8000/static/img/superman.jpg
+
+
+
+6)
+=============
+ссылка в Шаблоне на файл
+
+<body>
+  <h1>Images Page</h1>
+  <img src="{% static 'img/superman.jpg' %}" alt="">
+</body>
+
+
+7)
+=============
+css-папка
+
+base_dir/static/css
+base_dir/static/css/main.css
+
+
+8)
+=============
+пример css/main.css
+
+h1{
+    color: blue;
+}
+
+
+9)
+============
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+
+

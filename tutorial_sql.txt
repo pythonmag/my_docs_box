@@ -1,0 +1,24 @@
+
+SQL 
+=============================
+
+Туториал по SQL языку
+------------------------
+http://www.w3schools.com/sql/default.asp
+
+
+
+Socratica
+Learn SQL with Socratica |¦| SQL Tutorial |¦| SQL for Beginners
+-------------------------
+https://www.youtube.com/watch?v=nWyyDHhTxYU&list=PLSVqTfjvRr4StvGs8N2hdu8DrH9B6e0EP&index=2&t=0s
+
+
+
+Последние новости из мира MySQL
+-----------------
+http://blogerator.ru/page/poslednie-novosti-iz-mira-mysql
+
+
+
+

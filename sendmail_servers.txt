@@ -1,0 +1,102 @@
+
+Какая то моя практика уже была
+====================
+# add to settings.py
+# email settings
+# please, set here you smtp server details and your admin email
+# or 'meg2mag@gmail.com' or 'ryndin@i.ua'
+ADMIN_EMAIL = 'ryndin@i.ua'
+EMAIL_HOST = 'smtp.mandrillapp.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'meg2mag@gmail.com'
+EMAIL_HOST_PASSWORD = 'vq9WwlqixHzauMC0IxHLRw'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+https://mandrillapp.com - користуюсь ним найбільше в даний момент;
+https://sendgrid.com/ - один із найпопулярніших сервісів розсилки листів на даний момент;
+http://www.icontact.com/ - ще один непоганий сервіс відправки листів.
+
+Отправка электронных писем
+Настройки Django
+--------------------------
+http://djbook.ru/rel1.8/topics/email.html#module-django.core.mail
+    Код находится в модуле django.core.mail.
+    // Пример:	
+    // Функция-вьюшка применятеся к Форме ContactForm
+	    def contact_admin(request):
+            if request.method == 'POST':
+                # наполняет форму параметрами в виде данных из поста реквеста (Привязанная форма)
+                form = ContactForm(request.POST)
+                # встроенный метод во вьюшку по валидации полей по их типу, на входе - валидные данные в переменные
+            if form.is_valid():
+                from_email = form.cleaned_data['from_email']
+                subject = form.cleaned_data['subject']
+                message = form.cleaned_data['message']
+            try:
+                # встроенный метод отправки сообщения через список данных о настройке ADMIN_EMAIL
+                send_mail(from_email, subject, message, [ADMIN_EMAIL])
+            # если есть ошибки по вывод сообщение и неотпправка
+            except Exception:
+                message = u'Во время отправки Сообщения возникла неожиданная Ошибка' \
+                      u'Попробуйте еще раз.'
+            else:
+                message = u'СООБЩЕНИЕ УСПЕШНО ОТОСЛАНО'
+		    ...
+
+send_mail()			// Метод отправки Сообщения на Хостинг
+
+send_mail(subject, message, from_email, recipient_list, fail_silently=False,
+ auth_user=None, auth_password=None, connection=None, html_message=None)¶
+
+Самый простой способ отправить письмо – использовать django.core.mail.send_mail().
+Параметры subject, message, from_email и recipient_list являются обязательными.
+    subject: строка.
+    message: строка.
+    from_email: строка.
+
+	recipient_list: список строк, каждая является email. Каждый получатель из recipient_list
+	будет видеть остальных получателей в поле “To:” письма.
+
+    fail_silently: булево. При False send_mail вызовет smtplib.SMTPException. Смотрите
+	документацию smtplib, чтобы узнать список всех ошибок, каждый из которых наследуется от SMTPException.
+
+    auth_user: необязательное имя пользователя, которое используется при авторизации на SMTP
+	сервере. Если не указано, Django будет использовать значение EMAIL_HOST_USER.
+
+    auth_password: необязательный пароль, который используется при авторизации на SMTP сервере.
+	Если не указано, Django будет использовать значение EMAIL_HOST_PASSWORD.
+
+    connection: необязательный бэкенд, который будет использоваться для отправки письма. 
+	Если не указан, будет использоваться бэкенд по умолчанию. Смотрите раздел о бэкендах
+	для отправки электронной почты.
+
+    html_message: если html_message указано, письмо будет с multipart/alternative, и будет
+	содержать message с типом text/plain, и html_message с типом text/html.
+
+
+
+
+СТАТЬИ
+====================
+
+1)
+Send Text Messages in Python Using Nexmo
+(Pretty Printed)
+Вроде бесплатный роутер писем с сайта
+--------------------
+https://www.youtube.com/watch?v=U7g-3OUx7mM&index=5&list=PLXmMXHVSvS-DvYEVy6JQUAjannaohHXRV
+
+страница Сервиса
+https://www.nexmo.com/
+
+
+2)
+УСТАНОВКА И НАСТРОЙКА POSTFIX НА UBUNTU 14.04
+(месседжер роутер под Убунту)
+сервис встраивается в комманди Убунту
+-----------------------------
+http://www.8host.com/blog/ustanovka-i-nastrojka-postfix-na-ubuntu-14-04/
+
+
+

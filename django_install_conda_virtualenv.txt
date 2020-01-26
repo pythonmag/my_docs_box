@@ -1,0 +1,207 @@
+ВАРИАНТ ЧЕРЕЗ CONDA (Anaconda / Minicinda)
+
+УДЕМИ курс
+=================
+
+ryndin@ubu:~$ conda create --name myUdemyVenv django [python=3.6]       *******
+    
+    ## Package Plan ##
+    environment location: /home/ryndin/anaconda3/envs/myUdemyVenv
+    added / updated specs: 
+    - django
+    # To activate this environment, use:    
+    # > source activate myUdemyVenv
+    #
+    # To deactivate an active environment, use:
+    # > source deactivate
+
+
+ryndin@ubu:~$ source activate myUdemyVenv               *******
+
+
+(myUdemyVenv) ryndin@ubu:~$ source deactivate
+
+
+ryndin@ubu:~$ conda --help                              ********
+
+
+(myUdemyVenv) ryndin@ubu:~/anaconda3/envs/myUdemyVenv$ mkdir src            *******
+
+
+(myUdemyVenv) ryndin@ubu:~/anaconda3/envs/myUdemyVenv$ conda info --envs    *******
+
+    # conda environments:
+    #
+    base                     /home/ryndin/anaconda3
+    myUdemyVenv           *  /home/ryndin/anaconda3/envs/myUdemyVenv
+    my_app                   /home/ryndin/anaconda3/envs/my_app
+
+
+(myUdemyVenv) ryndin@ubu:~$ conda install [package]             *******
+или
+(myUdemyVenv) ryndin@ubu:~$ pip install [package]               *******
+
+
+(myUdemyVenv) ryndin@ubu:~/anaconda3/envs/myUdemyVenv$ pip install --upgrade pip    ****
+
+
+(myUdemyVenv) ryndin@ubu:~/anaconda3/envs/myUdemyVenv$ pip list         *******
+
+    Package    Version  
+    ---------- ---------
+    certifi    2018.4.16
+    Django     2.0.2    
+    pip        10.0.1   
+    pytz       2018.4   
+    setuptools 39.0.1   
+    wheel      0.31.0
+
+
+(myUdemyVenv) ryndin@ubu:~/anaconda3/envs/myUdemyVenv$ python           ******
+
+    Python 3.6.5 |Anaconda, Inc.| (default, Mar 29 2018, 18:21:58) 
+    [GCC 7.2.0] on linux
+    Type "help", "copyright", "credits" or "license" for more information.
+    >>> 
+
+
+(myUdemyVenv) ryndin@ubu:~/anaconda3/envs/myUdemyVenv$ django-admin     *******
+    [список комманд]
+
+
+(myUdemyVenv) ryndin@ubu:~/anaconda3/envs/myUdemyVenv$ cd src       *****
+
+(myUdemyVenv) ryndin@ubu:~/anaconda3/envs/myUdemyVenv/src$ 
+    django-admin startproject udemy_project                         ******
+
+
+(myUdemyVenv) ryndin@ubu:~/anaconda3/envs/myUdemyVenv/src/udemy_project$
+    python3 manage.py                                               *******
+    
+Type 'manage.py help <subcommand>' for help on a specific subcommand.
+
+
+(myUdemyVenv) ryndin@ubu:~/anaconda3/envs/myUdemyVenv/src/udemy_project$
+    python3 manage.py startapp first_app                            *******
+
+
+(myUdemyVenv) ryndin@ubu:~/anaconda3/envs/myUdemyVenv/src/udemy_project$
+    python3 manage.py runserver                     ********
+    
+    Performing system checks...
+    System check identified no issues (0 silenced).
+    You have 14 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s):   
+    admin, auth, contenttypes, sessions.
+    Run 'python manage.py migrate' to apply them.
+    April 23, 2018 - 13:11:18
+    Django version 2.0.2, using settings 'udemy_project.settings'
+    Starting development server at http://127.0.0.1:8000/
+    Quit the server with CONTROL-C.
+
+THE END ))
+
+
+
+ВАРИАНТ через VENV
+(напет намного меньше весит)
+========================
+
+$ sudo apt install python3-venv         *****
+
+$ python3.6 -m venv ryndin              *****
+
+$ ls                                    *****
+bin  include  lib  lib64  pyvenv.cfg  share
+
+$ source bin/activate                   *****
+
+$ pip install --upgrade pip             *****
+
+$ pip install django==2....             *****
+
+
+code$ ..bin/django-admin.py startproject django_test    *****
+
+code$ ls
+django_test  manage.py                                  *****
+
+code$ python manage.py startapp testJs                  *****
+
+code/django_test$ python manage.py migrate              *****
+()
+
+code/django_test$ python manage.py runserver            *****
+
+
+
+ВАРИАНТ через VIRTUALENV через PyCharm
+(напет намного меньше весит)
+========================
+
+ЕСЛИ делать через PyCharm то установка среды делается при Открытии Редактора
+и тогда команды Терминала идут уже В Рабочей Виртуальной Среде
+
+Редактор Сразу в Терминале запускает Виртуальную Среду
+
+
+()/udemy_python_django$   pip install --upgrade pip         *****
+
+()udemy_python_django$    pip list                          *****
+
+Package    Version
+---------- -------
+pip        18.1   
+setuptools 28.8.0 
+
+()udemy_python_django$    pip install django                *****
+
+code$ python manage.py startapp testJs                      *****
+
+code/django_test$ python manage.py migrate                  *****
+()
+
+code/django_test$ python manage.py runserver                *****
+
+proj$ pip freeze -> requirements.txt                        *****
+(так сохранить список Пакетов в Файл для Работы)
+
+
+
+
+ВАРИАНТ через VIRTUALENV через Терминал
+(напет намного меньше весит)
+========================
+
+my_project$ virtualenv -p /usr/bin/python3.6 my_project --no-site-packages --
+    prompt=="(my_proj_virt)"            *****
+
+studentsdb27$ source bin/activate       *****
+
+()studentsdb27$ mkdir src               *****
+
+()studentsdb27$ cd src/                 *****
+
+()studentsdb27/src$ git clone git@github.com:pythonmag/studentsdb27.git     *****
+(опционно если есть проект для клонирования в git репозитории)
+
+()studentsdb27$     pip install -r requirements.txt      *****
+(если из репозитория пришел файл со списком пакетов)
+
+()src/studentsdb27$     pip freeze      *****
+(вывод списка в удобном виде)
+       
+()src/studentsdb27$     pip freeze -r requirements.txt     *****
+(установить Пакеты по Списку из Файла)
+
+()udemy_python_django$    pip install django                *****
+
+code$ python manage.py startapp testJs                       *****
+
+code/django_test$ python manage.py migrate                   *****
+()
+
+code/django_test$ python manage.py runserver                *****
+
+proj$ pip freeze -> requirements.txt                        *****
+(так сохранить список Пакетов в Файл для Работы)
+

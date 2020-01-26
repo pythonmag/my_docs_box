@@ -1,0 +1,34 @@
+﻿
+Getting Started With Django Channels
+====================================
+/ django / django-channels / redis / WebSockets / ws://
+(env)$ pip install django==1.10.5 channels==1.0.2 asgi_redis==1.0.0
+
+https://realpython.com/blog/python/getting-started-with-django-channels/
+
+
+
+Django Channels: работа с WebSocket и не только
+===================================
+https://khashtamov.com/ru/django-channels-websocket/
+
+
+
+Что нового появилось в Django Channels?
+=======================================
+https://khashtamov.com/ru/django-channels-new-features/
+
+
+
+
+
+Django Channels
+Documentations
+===============
+https://channels.readthedocs.io/en/latest/
+
+
+
+Websockets for Django applications using Redis as message queue
+==================================
+https://django-websocket-redis.readthedocs.io/en/latest/

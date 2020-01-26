@@ -1,0 +1,452 @@
+
+https://simpleisbetterthancomplex.com/
+=====================================
+
+Article about Python + Django / Blog
+
+newest in top
+======================
+
+Ask Vitor #2: How to dynamically filter ModelChoice's queryset in a ModelForm?
+Mar 22, 2017 
+https://simpleisbetterthancomplex.com/questions/2017/03/22/how-to-dynamically-filter-modelchoices-queryset-in-a-modelform.html
+
+
+https://simpleisbetterthancomplex.com/article/2017/03/21/class-based-views-vs-function-based-views.html
+Mar 21, 2017 
+https://simpleisbetterthancomplex.com/article/2017/03/21/class-based-views-vs-function-based-views.html
+
+
+Ask Vitor #1: Getting form data to appear in URL and for use in the next view
+Mar 17, 2017 
+https://simpleisbetterthancomplex.com/questions/2017/03/17/getting-form-data-to-appear-in-url-and-for-use-in-the-next-view.html
+
+
+How to Create Django Admin List Actions
+Mar 14, 2017 
+https://simpleisbetterthancomplex.com/tutorial/2017/03/14/how-to-create-django-admin-list-actions.html
+
+
+How to Create Infinite Scroll With Django
+Mar 13, 2017 
+https://simpleisbetterthancomplex.com/tutorial/2017/03/13/how-to-create-infinite-scroll-with-django.html
+
+
+How to Crop Images in a Django Application
+Mar 2, 2017 
+https://simpleisbetterthancomplex.com/tutorial/2017/03/02/how-to-crop-images-in-a-django-application.html
+
+
+How to Add reCAPTCHA to a Django Site
+Feb 21, 2017 
+https://simpleisbetterthancomplex.com/tutorial/2017/02/21/how-to-add-recaptcha-to-django-site.html
+
+
+How to Create User Sign Up View
+Feb 18, 2017 
+https://simpleisbetterthancomplex.com/tutorial/2017/02/18/how-to-create-user-sign-up-view.html
+
+
+How to Implement Case-Insensitive Username
+Feb 6, 2017 
+https://simpleisbetterthancomplex.com/tutorial/2017/02/06/how-to-implement-case-insensitive-username.html
+
+
+How to Create Group By Queries With Django ORM
+Dec 6, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/12/06/how-to-create-group-by-queries.html
+
+
+How to Filter QuerySets Dynamically
+Nov 28, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
+
+
+How to Add User Profile To Django Admin
+Nov 23, 2016
+https://simpleisbetterthancomplex.com/tutorial/2016/11/23/how-to-add-user-profile-to-django-admin.html
+
+
+Django Multiple Files Upload Using Ajax
+Nov 22, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/11/22/django-multiple-file-upload-using-ajax.html
+
+
+How to Implement CRUD Using Ajax and Json
+Nov 15, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/11/15/how-to-implement-a-crud-using-ajax-and-json.html
+
+
+Django Under the Hood 2016
+ Nov 8, 2016 
+https://simpleisbetterthancomplex.com/article/2016/11/08/django-under-the-hood.html
+
+
+Django Tips #19 Protecting Sensitive Information
+Nov 1, 2016 
+https://simpleisbetterthancomplex.com/tips/2016/11/01/django-tip-19-protecting-sensitive-information.html
+
+
+How to Handle GitHub Webhooks Using Django
+Oct 31, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/10/31/how-to-handle-github-webhooks-using-django.html
+
+
+How to Add Social Login to Django
+---------------------------------
+Oct 24, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/10/24/how-to-add-social-login-to-django.html
+
+
+Django Tips #18 Difference Between ugettext And ugettext_lazy
+Oct 17, 2016 
+https://simpleisbetterthancomplex.com/tips/2016/10/17/django-tip-18-translations.html
+
+
+How to Deploy a Django Application to Digital Ocean
+----------------------
+Oct 14, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/10/14/how-to-deploy-to-digital-ocean.html
+
+
+How to Use Django's Generic Relations
+Oct 13, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/10/13/how-to-use-generic-relations.html
+
+
+How to Use Django's Generic Relations
+Oct 13, 2016
+https://simpleisbetterthancomplex.com/tutorial/2016/10/13/how-to-use-generic-relations.html
+
+
+Package of the Week: django-hosts
+Oct 11, 2016 
+https://simpleisbetterthancomplex.com/packages/2016/10/11/django-hosts.html
+
+
+List of Useful URL Patterns
+Oct 10, 2016 
+https://simpleisbetterthancomplex.com/references/2016/10/10/url-patterns.html
+
+
+Package of the Week: isort
+Oct 8, 2016 
+https://simpleisbetterthancomplex.com/packages/2016/10/08/isort.html
+
+
+Django Tips #17 Using QuerySet Latest & Earliest Methods
+Oct 6, 2016 
+https://simpleisbetterthancomplex.com/tips/2016/10/06/django-tip-17-earliest-and-latest.html
+
+
+Django Tips #16 Simple Database Access Optimizations
+Oct 5, 2016 
+https://simpleisbetterthancomplex.com/tips/2016/10/05/django-tip-16-simple-database-access-optimizations.html
+
+
+How to Use Django's Flatpages App
+Oct 4, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/10/04/how-to-use-django-flatpages-app.html
+
+
+Estimating the Effort of Development of a Django Application
+Оценка усилий по разработке приложения Django
+Oct 3, 2016 
+https://simpleisbetterthancomplex.com/article/2016/10/03/effort-estimation.html
+
+
+Django Tips #15 Using Mixins With Class-Based Views
+Sep 27, 2016 
+https://simpleisbetterthancomplex.com/tips/2016/09/27/django-tip-15-cbv-mixins.html
+
+
+How to Create a Password Reset View
+Sep 19, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/09/19/how-to-create-password-reset-view.html
+
+
+Django Shortcuts
+----------------
+ Sep 12, 2016
+https://simpleisbetterthancomplex.com/article/2016/09/12/shortcuts.html
+
+
+Django Tips #14 Using the Messages Framework
+----------------------------------
+Sep 6, 2016 
+https://simpleisbetterthancomplex.com/tips/2016/09/06/django-tip-14-messages-framework.html
+
+
+How to Work With AJAX Request With Django
+-----------------------------
+Aug 29, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/08/29/how-to-work-with-ajax-request-with-django.html
+
+
+How to Create a One Time Link
+Aug 24, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/08/24/how-to-create-one-time-link.html
+
+
+Django Tips #13 Using F() Expressions
+Aug 23, 2016
+https://simpleisbetterthancomplex.com/tips/2016/08/23/django-tip-13-f-expressions.html
+
+
+Dealing With QueryString Parameters
+Работа с параметрами QueryString
+Aug 22, 2016 
+https://simpleisbetterthancomplex.com/snippet/2016/08/22/dealing-with-querystring-parameters.html
+
+
+Django Tips #12 Disabling Migrations to Speed Up Unit Tests
+Aug 19, 2016 
+https://simpleisbetterthancomplex.com/tips/2016/08/19/django-tip-12-disabling-migrations-to-speed-up-unit-tests.html
+
+
+Package of the Week: Pendulum
+Aug 18, 2016 
+https://simpleisbetterthancomplex.com/packages/2016/08/18/pendulum.html
+
+
+Exploring Django Utils #2
+Aug 17, 2016 
+https://simpleisbetterthancomplex.com/article/2016/08/17/exploring-django-utils-2.html
+
+
+Django Tips #11 Custom Manager With Chainable QuerySets
+Aug 16, 2016 
+https://simpleisbetterthancomplex.com/tips/2016/08/16/django-tip-11-custom-manager-with-chainable-querysets.html
+
+
+How to Create a Password Confirmation View
+Aug 15, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/08/15/how-to-create-a-password-confirmation-view.html
+
+
+Django Tips #10 AuthenticationForm Custom Login Policy
+Aug 12, 2016
+https://simpleisbetterthancomplex.com/tips/2016/08/12/django-tip-10-authentication-form-custom-login-policy.html
+
+
+Package of the Week: django-import-export
+--------------------
+Aug 11, 2016 
+https://simpleisbetterthancomplex.com/packages/2016/08/11/django-import-export.html
+
+
+Exploring Django Utils #1
+Aug 10, 2016 
+https://simpleisbetterthancomplex.com/article/2016/08/10/exploring-django-utils-1.html
+
+
+How to Deploy Django Applications on Heroku
+-------------------------------------------
+Aug 9, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/08/09/how-to-deploy-django-applications-on-heroku.html
+
+
+How to Export to PDF (3 methods)
+Aug 8, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/08/08/how-to-export-to-pdf.html
+
+
+Package of the Week: Flake8
+Aug 5, 2016 
+https://simpleisbetterthancomplex.com/packages/2016/08/05/flake8.html
+
+
+Django Tips #9 How to Create a Change Password View
+Aug 4, 2016 
+https://simpleisbetterthancomplex.com/tips/2016/08/04/django-tip-9-password-change-form.html
+
+
+How to Paginate with Django
+---------------------------
+Aug 3, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html
+
+
+How to Split Views Into Multiple Files
+Aug 2, 2016
+https://simpleisbetterthancomplex.com/tutorial/2016/08/02/how-to-split-views-into-multiple-files.html
+
+
+How to Upload Files With Django
+-------------------------------
+Aug 1, 2016
+https://simpleisbetterthancomplex.com/tutorial/2016/08/01/how-to-upload-files-with-django.html
+
+
+How to Export to Excel
+Jul 29, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/07/29/how-to-export-to-excel.html
+
+
+How to Create Django Signals
+Jul 28, 2016
+https://simpleisbetterthancomplex.com/tutorial/2016/07/28/how-to-create-django-signals.html
+
+
+How to Return JSON-Encoded Response
+------------------
+Jul 27, 2016
+https://simpleisbetterthancomplex.com/tutorial/2016/07/27/how-to-return-json-encoded-response.html
+
+
+How to Reset Migrations
+-----------------------
+Jul 26, 2016
+https://simpleisbetterthancomplex.com/tutorial/2016/07/26/how-to-reset-migrations.html
+
+
+Django Tips #8 Blank or Null?
+----------------------------
+Jul 25, 2016
+https://simpleisbetterthancomplex.com/tips/2016/07/25/django-tip-8-blank-or-null.html
+
+
+How to Extend Django User Model
+-------------------------------!!!
+(Databases Fields)
+Jul 22, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
+
+
+Django Tips #7 How to Get the Current URL Within a Django Template
+Jul 20, 2016
+https://simpleisbetterthancomplex.com/tips/2016/07/20/django-tip-7-how-to-get-the-current-url-within-a-django-template.html
+{{ request.build_absolute_uri }}
+
+
+How to Create a Custom Django Middleware
+Jul 18, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/07/18/how-to-create-a-custom-django-middleware.html
+
+
+Django Tips #6 get_or_create
+----------------------------
+Jul 14, 2016 
+https://simpleisbetterthancomplex.com/tips/2016/07/14/django-tip-6-get-or-create.html
+
+
+How to Use Django's Built-in Login System
+Jun 27, 2016
+https://simpleisbetterthancomplex.com/tutorial/2016/06/27/how-to-use-djangos-built-in-login-system.html
+
+
+Date Template Filter
+--------------------
+Jun 21, 2016 
+https://simpleisbetterthancomplex.com/references/2016/06/21/date-filter.html
+
+
+Django Tips #5 How to Merge QuerySets
+Jun 20, 2016 
+https://simpleisbetterthancomplex.com/tips/2016/06/20/django-tip-5-how-to-merge-querysets.html
+
+
+How to Send Email in a Django App
+-----------------!!!!
+(https://app.sendgrid.com) -- service
+Jun 13, 2016 
+https://simpleisbetterthancomplex.com/tutorial/2016/06/13/how-to-send-email.html
+-----------------!!!!
+При деплое моего сайта подключить на месяц для демонтсрации
+
+
+Django Tips #4 Automatic DateTime Fields
+May 23, 2016 
+https://simpleisbetterthancomplex.com/tips/2016/05/23/django-tip-4-automatic-datetime-fields.html
+(auto_now and auto_now_add)
+
+
+Django Tips #3 Optimize Database Queries
+May 16, 2016 
+https://simpleisbetterthancomplex.com/tips/2016/05/16/django-tip-3-optimize-database-queries.html
+
+
+How to Setup a SSL Certificate on Nginx for a Django Application
+May 11, 2016
+https://simpleisbetterthancomplex.com/tutorial/2016/05/11/how-to-setup-ssl-certificate-on-nginx-for-django-application.html
+(Get PositiveSSL for $9.00/yr.)
+
+
+Django Tips #2 humanize
+May 9, 2016 
+https://simpleisbetterthancomplex.com/tips/2016/05/09/django-tip-2-humanize.html
+{% load humanize %}
+
+
+Django Tips #1 redirect
+May 5, 2016 
+https://simpleisbetterthancomplex.com/tips/2016/05/05/django-tip-1-redirect.html
+
+
+Working with Django View Decorators
+-----------------------------------
+Dec 7, 2015
+https://simpleisbetterthancomplex.com/2015/12/07/working-with-django-view-decorators.html
+@login_required
+Create the decorator module
+
+
+Package of the Week: Django Widget Tweaks
+Dec 4, 2015
+https://simpleisbetterthancomplex.com/2015/12/04/package-of-the-week-django-widget-tweaks.html
+{% load widget_tweaks %}
+
+
+
+Starting a New Django 1.8 Project
+---------------------------------
+Nov 30, 2015 
+https://simpleisbetterthancomplex.com/2015/11/30/starting-a-new-django-18-project.html
+##
+pip install virtualenv
+virtualenv simple_django_skeleton
+git clone git@github.com:sibtc/simple-django-skeleton.git
+pip install django
+django-admin startproject simple_skeleton .
+pip freeze > requirements.txt
+....
+
+
+Package of the Week: Python Decouple
+Nov 26, 2015
+https://simpleisbetterthancomplex.com/2015/11/26/package-of-the-week-python-decouple.html
+##
+pip install python-decouple
+
+
+Small Open-Source Django Projects to Get Started
+Nov 23, 2015
+https://simpleisbetterthancomplex.com/2015/11/23/small-open-source-django-projects-to-get-started.html
+
+
+
+https://www.digitalocean.com/community/tutorials
+================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

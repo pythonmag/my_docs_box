@@ -1,0 +1,550 @@
+a=[]	# список изменяемый
+a=()	# кортеж не изменяемый
+a={:}	# словарь изменяемый
+
+
+list = list + [exp]	# явное добавление элемента списка
+list.append()	# добавление одного элемента списка
+list.extend([1,2,3])	# разширяем список за счет другого списка (объединение)
+list.insert(2.'asd')	# добавление элемента в список четко по индексу
+
+
+del list[2]	# удаление элемента списка по индексу
+list remove('item')	# удаление элемента списка по имени
+list.pop(1)	# удаление по индексу ?? 
+
+
+def foo (*args, **kwargs):	# Функция в качестве аргументов принимает КОРТЕЖИ и БИБЛИОТЕКИ
+
+
+
+range (left, right, step)
+
+a=[3,6]
+range(*a) =>> [3,4,5] # принимает аргументы в диапозон по правилу левый/плавый/шаг
+
+
+
+foo=(lambda z, x : z*x)(10,5) =>> 50 # неименованя функция, чтобе не занимать память.
+ ускорить выполнение, не занимать имена функций, не присать однострочные функции
+
+
+foo=(lambda z,x : z*x)
+foo (10,20) 	=>> 200 # или так сначала задаем логику и промежуточную переменную, потом передаем значения
+
+
+
+list=[10,20,-10,-5]
+a=filter(lambda x: x<10, list) =>> [-10,-5] # тоесть функция фильрует элементы по условию логики
+
+
+
+list1=[1,2,3,4]
+list2=[-1,-2,-3,-4]
+a=map(lambda x,y : x*y, list1, list2)	# выдаст список перемноженных попарно элементов
+
+
+
+list1=[1,2,3,4]
+a=reduce(lambda res,x : res*x, list1) # выдаст "свод" перемножения элементов
+
+a=reduce(lambda res,x : res+x, list1) # выдаст "свод сложения" элементов
+
+a=reduce(lambda res,x : res+x, list1, 5) # выдаст "свод сложения" элементов c учетом заданного параметра (5)
+ 
+
+
+class A(object):
+    def __init__(self, arg1, arg2): # функция логики для инициализации наследника
+        self.arg1=arg1
+        self.arg2=arg2
+    def ...
+
+self	# означает такущий экземпляр класса
+
+    def __print (self):		# таким обазом "__" создактся приватная скрытая функция
+        self.name
+искажает имя родителя и =>> _A__print, потому и не видимо вместе с классом.
+
+
+# Статические переменные
+Class Counter(object):
+    count=0
+    def __init__(self):
+        self.__class__.count + =1
+
+
+# Инстанс класса Чилд при инициации с помощью Супер получает доступ к классу Парент
+class Child(Parent):
+    def __init__(self):
+        super(Child, self).__init__(self)
+
+
+__name__ # имя Класса
+
+
+__module__ # имя Модуля, в котором класс определен
+
+
+__doc__ # строка документации
+
+
+__bases__ # кортеж базовых классов
+
+
+__dict__ # словарь атрибутов класса
+
+
+# Исключения
+while True:
+    try:
+        ...
+    exept ItemError:
+        print "It ia Error..."
+
+
+
+for item in code:
+    try:
+        code1
+    exept NameError:
+        print ...
+    else:
+        print ...
+        f.close()
+
+
+raise NameError("....")  # в переводе "определять" исключение
+
+
+
+f=open("text.py", "r")
+...
+try:
+    do ....
+finally:	# в итоге выполнения функции закрывает исходный файл, например
+    f.close()
+
+
+
+whith open(text.py) as f:	# команда "whith"
+    for line in f:
+        print (line)
+
+
+class logic_for_whith:	# такая внутренняя логика работы оператора "whith"
+    __enter__(self):
+        при вызове открываем файл(функцию и пр.)
+        return thing
+    __exit___(self, *args):
+        при завершении выполнения кода файл закрывается
+
+
+
+
+from ... import "модуль"
+
+reload("модуль")	# так переимпортируется модуль т.е. пеегружается
+при этом внутри его логики происходит (при запустке модуля):
+__name__=="__main__"
+
+
+if __name__=="__main__":
+    code ...		# такая конструкция запускает код, только когда модуль вызван или импортирован
+
+
+os, sys, sys.path  # последний - путь к каталогам. из которых вызываются модули
+  
+
+dir()    # показывает внутреннюю структуру модуля
+
+
+
+# Имитация и Вызов встроенного типа:
+class Add(object):
+    def __call__(self, a, b):  # так определяется встроенная вызываемая функция
+        return a*b
+>> add=Add()
+>> add(10,20)  >> 200
+			# метод  variable() это __call__  в предке. 
+
+
+
+В Python есть метод super(), который обычно применяется к объектам. Его главная задача это возможность использования в классе потомке, методов класса-родителя. По аналогии с PHP5 нечто вроде parrent::__construct()
+    # Родительский класс
+    class A(object):
+        def __init__(self):
+            print(u'конструктор класса A')
+    # Потомок класса А
+    class B(A):
+        def __init__(self):
+            print(u'конструктор класса B')
+            super(B,self).__init__()
+
+Смысл примера заключается в том, что Python не запустит родительский конструктор, поскольку мы его переопределили в классе B… Поэтому методом super() мы явно вызываем родительский конструктор. Кто-то посчитает код избыточным, ведь приходиться ссылаться на текущий класс чтобы запустить методы родителя, как стало известно в Python версии 3.0 это проблема решена, метод super() будет вызываться без аргументов.
+Кстати существует альтернативная реализация тех же самых действий, как еще ее называют в старом стиле:
+    class A:
+        def __init__(self):
+            print(u'конструктор класса A')
+    class B(A):
+        def __init__(self):
+            print(u'конструктор класса B')
+            A.__init__(self)	# так же как метод - super
+
+
+
+isinstance(a, A)		>> True
+
+issubclass(type, object)	>> True
+
+
+
+# метод for заключает в себе итерацию то есть свзязку iter()/next()
+for item in range(10):
+    print item
+
+# Встроенная связка функции Итератор и Некст
+>>> a=[1,2,3,4,5]
+>>> iter=iter(a)	# Создает итерацию по списку
+>>> iter.next()		# Выдает по очереди элементы из итератора
+1
+2
+3
+
+
+
+# Пример создания Класса Итератора для прохождения циклов в обратном направлении:
+class Reverse():
+    def __init__(self, data):	# встроенная логика инициализации данных и их индексов
+        self.data=data
+        self.index=len(data)
+    def __iter__(self):		# встроенная логика итератора
+        return self
+
+    def next(self):		# обязательная связка __iter__()/next()
+        """
+        Произвольная логика вывода значения элемента списка по индексу который имеет убывание
+        если дошли до нуля, то завершение итерации и выдача исключения
+        """
+        if self.index==0:
+            raise StopIteration
+        self.index=self.index-1
+        return self.data[self.index]
+
+for item in Reverse("abrakadabra"):
+    print item, 
+
+
+
+# Альтернативный класс Итератора через функцию yield
+def reverse(data):
+    for index in range(len(data)-1, -1, -1):
+        yield data[index]
+	"""yield вместо return возвращает значения не выходя из выполнения а идет до конца
+	то есть функция после вернет генератор"""
+
+for item in reverse("abrakadabra"):
+    print item, 
+
+
+
+import itertools # куча разных функций для итерируемых объектов
+
+
+
+# Такие вот себе Выражения-Генераторы
+sum (i*i for i in range(20))
+
+zvec=[1,2,3]
+xvec=[4,5,6]
+sum (z*x for z,x in zip(zvec, xvec))	# последовательно перемнажает пары из списков 
+
+
+
+# Декораторы @foo
+def makebold(fn):
+    def wrapped():
+        return "<b>" + fn() + "</b>"
+    return wrapped
+ 
+def makeitalic(fn):
+    def wrapped():
+        return "<i>" + fn() + "</i>"
+    return wrapped
+ 
+@makebold
+@makeitalic
+def hello():
+    return "hello habr"
+ 
+print hello() ## выведет <b><i>hello habr</i></b>
+"""
+Понял для себя так: функция-декоратор есть мостиком между ф-цией которую декорируют (hello())
+и функцией, которая дикарирует (wrapped()). т.е. декоратор на функцию одевает функцию.
+"""
+
+# Дескрипторы
+a.x = 1 	==>> setattr(a, 'x', 1)
+del a.x 	==>> delattr(a, 'x')
+a.x 		==>>  getattr(a, 'x')
+# set и del чистят только a.__dict__ то есть только вытеряут наклейку в объекте 
+
+# Интерфейс Дескриптера - конструкция синтаксиса методов (все это для инстанса)
+class Descr(object):
+    def __get__(self, obj, cls=None):
+        pass
+    def __set__(self, obj, val):
+        pass
+    def __delete__(self, obj):
+        pass
+
+
+# Слабый Дескриптор - в инстансе объект метода переопределяется вызовом
+class Slaby(object):
+    def __get__(self, obj, cls):
+        return "Slaby Value"
+class A(object):
+    a=Slaby()
+
+>> i=a()
+>> print i.a	=>> "Slaby Value"
+
+>> i.a = "New Value"
+>> print i.a	=>> "New Value"
+
+# Сильный Дескриптор - в инстансе объект метода не менятеся
+class Srtong(object):
+    def __get__(self, obj, cls):
+        return "Strong Value"
+    def __set__(self, obj, cls):
+        pass
+class A(object):
+    a=Strong()
+
+>> i=a()
+>> print i.a	=>> "Strong Value"
+
+>> i.a = "New Value"
+>> print i.a	=>> "Strong Value"
+
+
+# Создание + Инициация Класса
+def __new__(cls, ..) - статический метод, создающий сам класс
+
+def __init__(self, ..) - метод класса, который инициирует создание инстанса (объекта)
+
+
+#МетаКлассы - напрямую создают классы
+type('B', (A,), {'foo': lambda self: 24})
+#то же самое:
+class B(A):
+    def foo(self):
+        42
+
+type(name, bases, attrs) 	# это конструктор класса с помощью метакласса type
+
+# МетаКлассы, которые создают списки, кортежи, словари
+list()
+tuple()
+dict()
+
+
+""" Создание МетаКласса для класса: 	type =>> object """
+class AMeta(type):
+    def foo(self):
+        print 'AMeta.foo'
+class A(object):
+    __metaclass__=AMeta
+
+A.foo()		=>> 'AMeta.foo'
+
+
+z=[1,2,3,4]
+id(z)	=>> выдаст id списка в памяти
+
+z=z+[5]	=>> создается новый список и меняется его id
+
+
+
+""" 
+Такая вот ерунда - кортеж не вывел список внутри себя. выдал ошибку, но список сохранился 
+"""
+>>> t=([],)
+>>> t[0]+=[3,4]
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: 'tuple' object does not support item assignment
+>>> t
+([3, 4],)
+
+
+from timeit import timeit 
+""" 
+функция которая тестит время вополнения функции указанное количество раз 
+"""
+def foo():
+    for item in range(1000):
+        p=0
+        p+=item
+    return p
+
+timeit(foo, number=1)		
+
+"""
+Открытие файлов
+"""
+f=open(filename, "rb") # "r" - открытие в режиме чтения, "b" - в бинарном виде (по умолчанию)
+
+
+
+"""
+Запись Исключений
+"""
+try:
+   ....
+except (Error1, Error2), e:
+    print e
+
+
+"""
+Новый формат поставления данных
+"""
+"I like {0}, {1} and {2}"".format("aggs", "bacon", "sausage")
+
+
+
+"""
+Еще раз провести тренировку по установке Python+Gjango проекта
+"""
+
+
+"""
+Освоить обез базы данных PostgreSLQ // MySQL
+"""
+
+
+"""
+Еще раз разобраться с установкой среди разработки (установки проекта) и запуска апликации 
+$ django-admin.py startproject DjangoProgect
+$ django-admin.py startapp MySite
+$ python manage.py runserver
+"""
+
+"""
+Каждая модель в Django (данные в таблицу БД) является наследником   django.db.models.Model
+"""
+
+
+"""
+Проверка модели на наличие ошибок
+$ python manage.py validate Model
+"""
+
+
+"""
+Синхронизация Модели с Базой Данных
+$ python manage.py syncdb Model
+"""
+
+>>> from django import template
+>>> template
+<module 'django.template' from '/home/ryndin/data/work/virtualenvs/studentsdb/lib/python2.7/site-packages/django/template/__init__.pyc'>
+>>> t=template.Template('My Name Is {{name}} ')
+>>> c=template.Context({'name':'Yurii'})
+>>> print t.render(c)
+My Name Is Yurii 
+
+
+
+"""
+1. Сначала создаем модуль Моделей, т.е. данных которые пойдут в базу Данных в Таблицы
+2. Затем создаем логику обработки и воода/вывода данных (вьюшка)
+3. Затем создаем Шаблоны (Темплейты) отображения в окне браузера для пользователя
+4. Связываем Вьюшку (логику обрабоки) и Шаблон (Темплейт) в УРЛратторне через регулярное выражение.
+Оно дает: 1) вырожение в сроке браузера, путь и название вьюшки, псевдоним вьюшки для Шаблона.
+"""
+
+
+"""
+Логика от Пользователя на Сервер:
+1. Приходит запрос от пользователя в виде Регулярного выражения в строке
+2. Джанго по регулярному выражению ищет привязку к Вьюшке и Шаблону
+3. Если Шаблон найден то активируется Вьюшка (Функция представления)
+4. Вьюшка возвращает (передает) HTTPResponse
+5/ Джанго преобразовывает HTTPResponse и реализоввывает его на Странице (в Шаблоне)
+"""
+
+
+
+from__future__import
+# Дает возможность импортировать функции Питона3 в Питон2
+
+
+multiprocessing
+# модуль для многопроцессорной работы 
+
+
+GUI Python
+# Библиотеки для Питона - Гуглятся в Инете
+
+
+web фреймворки
+	Django
+	Pylons
+	Pyramid
+	Web2py
+	Zope
+
+
+Темплейтные языки
+	Jinja2
+	Mako
+	Django
+
+
+Библиотеки вычислений
+	NumPy
+	SciPy
+import numpy as np # так принято импортировать модуль
+
+x = np.array(...) # так затем можно задать переменную в виде массина например
+
+sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose	# установка всех матиматических библиотек 
+				# http://www.scipy.org/install.html
+
+
+PIL	# библиотека работы с изображениями Python Image Library
+Image
+
+
+Модули расширения - это модули, которые написаны не на языке Python
+SWIG - модуль, который позволяет писать на языке С/С++ для Python, т.е создает обертку для
+ гового модуля с/с++, который интегрируется совими функциями в python.
+
+
+
+Pylint # Библиотека которая делает анализ кода на Python
+sudo apt-get install pylint
+$ pylint file.py 
+# выдает информацию об анализе файла и статистику по нему
+
+
+Время выполнения модулей / Оптимизация
+import profile		# глобальный модуль
+from dir import file
+profile.run("file(parametr)")	# выдаст инфо о времени выполнения отдельных операций в модуле
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

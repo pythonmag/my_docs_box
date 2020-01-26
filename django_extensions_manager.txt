@@ -1,0 +1,148 @@
+
+django-extensions
+========================
+Дополнительная апликация для работы с Кодом Django проекта
+Дает дополнительные комманды для менеджера
+    https://github.com/django-extensions/django-extensions
+
+
+1) в requirements.txt
+    > django-extensions==1.7.8
+    > Werkzeug
+
+
+2)
+    > pip install -r requirements.txt
+
+
+или 
+2.1)
+    $ pip install django-extensions
+        ...
+        Collecting django-extensions
+        Using cached django_extensions-1.7.8-py2.py3-none-any.whl
+        Requirement already satisfied: six>=1.2 in /home/ryndin/workprojects/sitecomments/sitecomments/lib/python2.7/site-packages (from django-extensions)
+        Installing collected packages: django-extensions
+        Successfully installed django-extensions-1.7.8
+    
+
+    $ pip install Werkzeug
+        ...        
+        Collecting Werkzeug
+        Using cached Werkzeug-0.12.1-py2.py3-none-any.whl
+        Installing collected packages: Werkzeug
+        Successfully installed Werkzeug-0.12.1
+    
+    $ pip freeze > requirements.txt 
+    
+
+
+
+3)
+    > INSTALLED_APPS = [
+    >    ...
+    >     'django_extensions',
+    >    ...
+    >     'crispy_forms',
+    >     'registration',
+    >     'students',
+
+
+
+4)
+ Сразу делает импорт основных аппликаций и моделей проекта, удобно:
+
+    =(studentsdb17)$ python manage.py shell_plus
+
+    # Shell Plus Model Imports
+    from django.contrib.admin.models import LogEntry
+
+    from django.contrib.auth.models import Group, Permission, User
+
+    from django.contrib.contenttypes.models import ContentType
+
+    from django.contrib.sessions.models import Session
+
+    from registration.models import RegistrationProfile
+
+    from students.models import Exam, Group, MonthJournal, Student
+
+    from studentsdb27.models import StudentProfile
+
+    # Shell Plus Django Imports
+
+    from django.urls import reverse
+
+    from django.utils import timezone
+
+    from django.conf import settings
+
+    from django.core.cache import cache
+
+    from django.contrib.auth import get_user_model
+
+    from django.db.models import Avg, Case, Count, F, Max, Min, Prefetch, Q, Sum, When
+
+    from django.db import transaction
+
+    Python 2.7.12 (default, Nov 19 2016, 06:48:10) 
+    [GCC 5.4.0 20160609] on linux2
+    Type "help", "copyright", "credits" or "license" for more information.
+    (InteractiveConsole)
+    >>>
+
+
+5)
+ это пока не совсем понятно, нет ошибок в шаблонах ?
+
+    =(studentsdb17)$ python manage.py validate_templates
+    0 errors found
+
+
+6)
+ запуск сервера с каким то еще дебагером ? потом разберусь
+
+    > =(studentsdb17)$ python manage.py runserver_plus
+
+    > Performing system checks...
+    > System check identified no issues (0 silenced).
+    > Django version 1.10.5, using settings 'studentsdb27.settings'
+    > Development server is running at http://127.0.0.1:8000/
+    > Using the Werkzeug debugger (http://werkzeug.pocoo.org/)          // что дает пока не знаю
+    > Quit the server with CONTROL-C.
+
+
+7)
+ все доступные url патторны - это реально круто 
+то есть показывает все функции/вьюшки которые доступны из шаблонов
+
+    > =(studentsdb17)$ python manage.py show_urls 
+
+    > /	students.views.students.students_list	home	
+    > /accounts/profile/	django.views.generic.base.RedirectView		
+    > /admin/	django.contrib.admin.sites.index	admin:index	
+    > /admin/<app_label>/	django.contrib.admin.sites.app_index	admin:app_list
+    ........
+
+
+8)
+'loggers': {
+
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+
+        ......
+
+        'werkzeug': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+-------------------------
+
+
+

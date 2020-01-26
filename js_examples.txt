@@ -1,0 +1,170 @@
+1)
+// SPY GAME
+// Есть 2 Условия которые проверяются
+// при этом вводятся 3 параметра
+// если тру то ОК ты Шпион, ести фалс - то ты убит
+
+var firstName = prompt('Your First Name');
+var lastName = prompt('Your Last Name');
+var yourAge = prompt('Your Age');
+alert('Thank You for Infirmation')
+
+nameCond = null;
+ageCond = null;
+
+if (firstName[0] == lastName[0]) {
+    nameCond = true;
+}else {
+    nameCond = false;
+}
+
+if (yourAge > 90 && yourAge < 150) {
+    ageCond = true;
+}else {
+    ageCond = false;
+}
+
+if (nameCond && ageCond) {
+    console.log('HELLO SPY');
+}else {
+    console.log('KILL HIM!');
+}
+
+
+
+2)
+// Задача по Добавлению / Удалению / Отображению
+// элементов Массива и Выход из программы-цикла
+
+var roster = []
+
+function addName() {
+    var newName = prompt("Add New Name")
+    roster.push(newName)
+}
+
+function remove() {
+    var remName = prompt("Add name to Remove")
+    var index = roster.indexOf(remName)
+    roster.splice(index, 1)
+}
+
+function display() {
+    console.log(roster);
+}
+
+var start = prompt('What do You like to Start, y/n?');
+var request = 'empty';
+
+if (start === 'y') {
+    while (request !== 'quit') {
+        request = prompt('Select Action: add/remove/display, or quit');
+        if (request === 'add') {
+            addName();
+        }else if (request === 'remove') {
+            remove();
+        }else if (request === 'display') {
+            display();
+        }else {
+            alert('No command')
+            request = 'quit';
+        }
+    }
+}
+
+alert('Thenks, may be Refresh page?')
+
+
+
+3)
+https://stackoverflow.com/questions/1484506/random-color-generator
+// Задача Рандомного изменения цвета элемента на странице
+
+// get element by h1
+var mySelect = document.querySelector('h1')
+
+// change color for css h1 element
+mySelect.style.color = 'green'
+
+// create random color for css style h1
+// color hex #0000FF exmpl
+function getRendomColor(){
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random()*16)];
+    }
+    return color
+}
+
+// transport random color to Element h1
+function changeColorElement(){
+    var colorInput = getRendomColor();
+    mySelect.style.color = colorInput;
+}
+
+// Activate Function Change Color whith Interval 
+setInterval("changeColorElement()", 700)
+
+
+
+4)
+// Управление Контентом Страницы по Событиям (Прослушивание)
+
+// Элемент заголовок h1
+headHower = document.querySelector('h1')
+
+// Реакция на наведение Мышки на Заголовок - меняется Текст и Цвет
+headHower.addEventListener('mouseover', function(){
+    headHower.textContent = "NEW TEXT HOWER";
+    headHower.style.color = 'green';
+})
+
+// Реакция на уход Мышки с Заголовка - меняется Текст и Цвет
+headHower.addEventListener('mouseout', function(){
+    headHower.textContent = "HOWER OVER ME! I AM CHANGING!";
+    headHower.style.color = 'black';
+})
+
+// Реакция Заголовка на Клик Мышки - меняется Текст и Цвет
+headHower.addEventListener('click', function(){
+    headHower.textContent = "CLICKED FOR TEXT";
+    headHower.style.color = "green"
+})
+
+
+5)
+// Tic Tac Toe game
+// игра Крестики-Нолики (использованы ячейки td в Таблице)
+// объект нажатой Кнопки Рестарт
+var restart =document.querySelector('#restart')
+
+// Выборка всех Клеток Таблицы
+var boxes = document.querySelectorAll('td');
+
+// логика Отчистки всех Клеток
+function clearBoxes(){
+  for (var i = 0; i < boxes.length; i++) {
+    boxes[i].textContent = '';
+  }
+}
+
+// Прослушка - если объект кнопки Нажат - то Очистка
+restart.addEventListener('click', clearBoxes)
+
+// логика функции заполнения клетки X O
+function changeMarker(){
+  if (this.textContent === '') {
+    this.textContent = 'X';
+  }else if (this.textContent === 'X') {
+    this.textContent = 'O';
+  }else {
+    this.textContent = '';
+  }
+}
+
+// цикл раздает логику на Все Клетки Таблицы
+for (var i = 0; i < boxes.length; i++) {
+  boxes[i].addEventListener('click', changeMarker);
+}
+

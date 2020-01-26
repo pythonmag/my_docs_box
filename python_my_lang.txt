@@ -1,0 +1,5119 @@
+--------------------------------Теоретическая часть ---------------------------------------
+
+2 главных типа программирования
+-------------------------------
+1) процедурный
+2) объекто-ориентированный (ООП)
+
+
+Фишки Python
+--------------------------------
+1) динамическая типизация (тип переменной в зависимости от значенния. не объявлять)
+2) автоматическое управление памятью (сборка мусока, хеширование)
+3) модульное программирование (модули, классы, исключения)
+4) встроенные типы объектов (строки, числа. списки. словри, множества, bool, regex)
+5) встроенные библиотеки (в них основная работа)
+6) сторонние билиотеки (все что угодно через объекты)
+7) склеиваемый с другими языками (обратить внимание на С / С++)
+
+Объекты в питоне - это Все!
+
+
+ДАО Питона
+====================
+Все, чем ценен Питон
+
+> import this
+
+Beautiful is better than ugly.          // Перевести
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+=====================
+
+
+Графический Интерфейс для Питон
+====================== 
+В Python входит стандартный объектно-ориентированный интерфейс к Tk GUI API, который называется tkinter (в Python 2.6 он называется Tkinter)
+
+другие инструменты создания графического интерфейса,
+ такие как Qt (с помощью PyQt),
+ GTK (с помощью PyGtk), 
+ MFC (с помощью PyWin32), 
+ .NET (с помощью IronPython), 
+ Swing (с помощью Jython  – реализации языка Python на Java,  или JPype).
+----------------------
+
+
+
+PVM - Виртуальная машина Python
+------------------------
+file.pyc - файл готовый для компиляции в байт-код для работы (делает компилятор питона)
+Тут нет класически компилтрованного пакета байт-кода для выполнения микропроцессором.
+но за счет .pyc как промежуточного хранилища кода процесс сукоряется.
+
+
+ВЕБ-Сценарии
+======================
+Сценарии могут производить взаимодействия через сокеты,
+ извлекать информацию из форм, отправленных серверным CGI-сценариям;
+ передавать файлы по протоколу FTP;
+ обрабатывать файлы XML;
+ передавать, принимать, создавать и производить разбор писем электронной почты;
+ загружать веб-страницы с указанных адресов URL;
+ производить разбор разметки HTML и XML полученных веб-страниц;
+ производить взаимодействия по протоколам XML-RPC, SOAP и Telnet и многое другое.
+
+пакеты веб-разработки, такие как
+   Django,
+   TurboGears,
+    web2py,
+    Pylons,
+    Zope 
+    WebWare,
+ поддерживающие возможность быстрого создания полнофункциональных высококачественных
+веб-сайтов на языке Python.
+
+MVC + AJAX -- законченная концепция фрейворков ВЕБ (клиент-сервер)
+--------------------------
+
+
+
+Базы Данных
+=====================
+В языке Python имеются интерфейсы доступа ко всем основным реляционным базам данных:
+    Sybase,
+    Oracle,
+    Informix,
+    ODBC,
+    MySQL,
+    PostgreSQL,
+    SQLite (стандартная в библиотеке Питон)
+
+Существуют также инструменты, такие как
+    SQLObject
+    и  SQLAlchemy,
+которые отображают реляционные таблицы в  Модель Классов языка Python.
+------------------------------
+
+
+
+Имена _ __ __/__    # соглашение
+================
+1)
+Имена, начинающиеся с одного символа подчеркивания (_X), не импортируются инструкцией
+from module import *
+2)
+Имена, имеющие два символа подчеркивания в  начале и  в конце (__X__), являются системными
+именами, которые имеют особый смысл для интерпретатора.
+3)
+Имена, начинающиеся с двух символов подчеркивания и не оканчивающиеся двумя символами
+подчеркивания (__X), являются локальными («искаженными») для объемлющего класса
+4)
+Имя, состоящее из единственного символа подчеркивания (_), хранит результат последнего
+выражения при работе в интерактивной оболочке.
+
+
+
+Проверка истинности
+===================
+довольно хитрые конструкции логики можно создать!!
+
+X and Y
+    Истина, если оба значения X и Y истинны.
+X or Y
+    Истина, если любое из значений X или Y истинно.
+not X
+    Истина, значение X ложно (выражение возвращает значение True или False)
+
+>>> 2 or 3, 3 or 2      # вернет первый True
+(2, 3)
+>>> [] or 3             # вернет первый True
+3
+>>> [] or {}            # вернет первый False
+[]
+
+>>> 2 and 3, 3 and 2    # вернет оба True
+(2, 3)
+>>> [] and {}           # вернет первый False
+[]
+>>> 3 and []            # вернет первый False
+[]
+
+
+
+Прочее Применение Питон
+http://www.python.org
+=======================
+Создавать игровые программы и анимационные ролики с помощью системы
+    pygame
+
+Обмениваться данными с другими компьютерами через последовательный порт с помощью расширения
+    PySerial
+
+Обрабатывать изображения с  помощью расширений
+    PIL, 
+    PyOpenGL,
+    Blender,
+    Maya
+
+Управлять роботом с помощью инструмента
+    PyRo
+
+Производить разбор XML-документов с помощью пакета xml, модуля 
+    xmlrpclib 
+
+Программировать искусственный интеллект с помощью эмулятора нейросетей и оболочек экспертных систем
+
+Анализировать фразы на естественном языке с помощью пакета
+    NLTK.
+-----------------------
+
+
+Альтернативные реализации Python
+=========================
+    CPython (C++)
+    JPython (Java)
+    IronPython (.NET Framework)
+    Динамический компилятор Psyco (C динамически)
+    PyPy - модернизирует код и Виртуальную машину, ускоряет Код
+
+
+
+
+-------------------------------Некоторые задачи------------------------------------------
+-----------------------------------------------------------------------------------------
+
+ряд Фибоначи (2 предыдущих числа в сумме дают следующее число)
+=============
+def fibon(numm):
+    result = []
+    a, b = 0, 1
+    while b < numm:
+        result.append(b)
+        a, b = b, a+b
+    return result
+
+>>> script1.fibon(1000)
+[1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987]
+
+
+стандарт как запустить функцию
+================
+1) script1.py
+def foo():                              # самаю функция / инструкции
+    file = open('saveto.txt', 'w')
+    file.write('Hello Wirld\n')
+    file.close()
+
+    file = open('saveto.txt', 'r')
+    print(file.readline())
+    file.close()
+
+    print('The End')
+
+if __name__ == '__main__':              # срабатывает при вызове скрипта в консоли
+    foo()                               # запускаю функцию
+
+2)
+ryndin@pc:~/venvs/test_py35/src$ python script1.py
+Hello Wirld
+The End
+
+
+сработка бесконечного цикла
+=================
+>>> while True:                                     # всегда Правда - всегда выполняется
+...     your_string = input('Enter your string:')
+...     if your_string == 'stop': break;            # условие выхода из цикла
+...     print(your_string.upper())
+...     
+Enter your string: kjkjs
+KJKJS
+Enter your string:>? dfdf
+DFDF
+Enter your string:>? 12131
+12131
+Enter your string:>? stop                           # break - выход за пределы цикла
+
+
+
+-------------------------------Основные типы и их методы---------------------------------
+-----------------------------------------------------------------------------------------
+
+Строки
+==================
+(неизменяемые последовательности символов / подстрок)
+
+Методы строк:
+ 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', 'expandtabs',
+ 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isdecimal', 'isdigit',
+ 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'isspace', 'istitle', 'isupper',
+ 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'partition', 'replace', 'rfind',
+ 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith',
+ 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill'
+
+>>> st = ''
+
+>>> st.replace('', 'spam')          # метод замены подстрок, но в новом объекте
+'spam'
+>>> st                              # строка - объект не изменяемый
+''
+
+>>> st = st.replace('', 'spam')     # для изменений создан новый объект
+>>> st
+'spam'
+
+>> st
+'spam'
+>>> st.find('pa')                   # найди подстроку / индекс начала
+1
+
+>>> st = 'my name is yurii'
+>>> st.split(' ')
+['my', 'name', 'is', 'yurii']       # разбить на список подстрок по разделителю
+
+>>> st
+'my name is yurii\n'
+>>> st.rstrip()                     # удаляет конечные символы зазметки
+'my name is yurii'
+
+форматирование стрроки
+..............
+>>> di = {'name': 'yurii', 'age': 40, 'job': 'programmer'}
+>>> '{0[age]} / {0[job]} / {0[name]}'.format(di)        ## элементы по ключу
+'40 / programmer / yurii'
+
+>>> from math import pi
+>>> '{0:.5}'.format(pi)                                 ## точность чисел
+'3.1416'
+>>> '{0:.5f}'.format(pi)
+'3.14159'
+
+
+>>> li = ['one', 'two', 'three']
+>>> '//'.join(li)                   # метод сборки строки по разделителю
+'one//two//three'
+
+
+r"C:\new\test.spm"                  # строка не форматируется - читается как есть
+myfile = open(r'C:\new\text.dat', 'w')      # не будет срабатывания  \n и  \t 
+
+
+>>> s = 'a\nb\tc'                   # метод Экранированных символов - таб и новая строка
+
+
+>>> 'spam' in 'abcspamdef'          # метод поиска подстроки
+True
+
+>>> li = ['my', 'name', 'is', 'yurii']
+>>> strr = '_'.join(li)             # метод склеивания Строки из Последовательности
+>>> strr
+'my_name_is_yurii'
+
+>>> strr
+'my_name_is_yurii'
+>>> strr.rstrip('_yurii')           # метод усечения Строки справа
+'my_name_is'
+
+
+# метод форматирования строки по указателям элементов
+>>> 'my comp {[name]} in the sys: {.platform}'.format({'name': 'home'}, sys)
+'my comp home in the sys: linux'
+
+>>> 'my comp {0[name]} in the sys: {1.platform}'.format({'name': 'home'}, sys)
+'my comp home in the sys: linux'
+
+# метод форматирования по метках по 3 разным объектам
+# по имени из словаря / метод объекта / по имени аргумента /
+>>> 'my comp {0[name]} in the sys: {1.platform} / author: {author}'.format({'name': 'home'}, sys, author='yurii')
+'my comp home in the sys: linux / author: yurii'
+
+# отображение вещественных чисел
+# обычно / 2 знака после запятой / 2 знака + всего 6 знаков / 4 знака + всего 6 знаков / обычно
+>>> '{0} / {1:.2f} / {2:06.2f} / {3:06.4f} / {4}'.format(numm6, numm6, numm6, numm6, numm6)
+'3.457868 / 3.46 / 003.46 / 3.4579 / 3.457868'
+
+# отоброжение целого числа в разних системах счисления
+# / 16ти / 8ми / 2чная /
+>>> '{0:x} / {1:o} / {2:b}'.format(555, 555, 555)
+'22b / 1053 / 1000101011'
+
+
+>>> '{0:,d}'.format(999888444777)       # формат разделителя большого числа 
+'999,888,444,777'
+>>> '{0:,.4f}'.format(999888444777)     # формат разделителя + формат разрядности
+'999,888,444,777.0000'
+
+
+
+Встроенная функция format()
+---------------------------
+>>> format(2.54879, '.2f')          # методы форматирования числа как - в сроке
+'2.55'
+>>> format(2.54879, '06.2f')
+'002.55'            
+>>> format(2578, 'b')               # только целые числа
+'101000010010'
+>>> format(2578, 'x')
+'a12'
+
+
+Последовательности (строки, списки, кортежи)
+Отображения (словари)
+Неизменяемые (числа, строки, кортежи, фиксированные множества)
+Изменяемые (списки, словари, множества)
+
+
+
+Списки
+===================
+(изменяемые последовательности / индексированные объектов (любых))
+
+Методы списков:
+'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove',
+'reverse', 'sort'
+
+>>> li
+[]
+
+>>> li.append(<object>)...
+>>> li
+[{'age': 40, 'job': 'programmer', 'name': 'yurii'}, 'stringg', [1, 2, 3, 4]]
+
+>>> [x**2 for x in range(7)]            # генератор списка
+[0, 1, 4, 9, 16, 25, 36]
+
+
+# создание списка из итерируемого объекта
+>>> li = list('spam')                   # list()
+>>> li
+['s', 'p', 'a', 'm']
+>>> li = list(range(-5, 5))             # list()
+>>> li
+[-5, -4, -3, -2, -1, 0, 1, 2, 3, 4]
+ 
+
+>>> li
+[-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 'qwe', 'asd', '6', '5', '4', ',', ',', 4, 5, 6]
+>>> li.remove(',')                      # удаление элемента по значению
+
+>>> li.reverse()                        # обратный порядок элементов вписка
+>>> li
+[6, 5, 4, '4', '5', '6', 'asd', 'qwe', 4, 3, 2, 1, 0, -1, -2, -3, -4, -5]
+
+>>> del li[3]                           # удаление по индексу в списке
+>>> li
+[6, 5, 4, '5', '6', 'asd', 'qwe', 4, 3, 2, 1, 0, -1, -2, -3, -4, -5]
+>>> li.pop()                            # удаление последнего  элемента
+-5
+>>> li.pop(4)                           # удаление по индексу
+'6'
+
+>>> li
+[6, 5, 4, '5', 'asd', 'qwe', 4, 3, 2, 1, 0, -1, -2, -3, -4]
+>>> li.remove(1)                        # удаление по значению
+
+>>> li[:4] = []                         # удаление среза в списке
+>>> li
+['asd', 'qwe', 4, 3, 2, 0, -1, -2, -3, -4]
+
+>>> li[2:5] = 'qwe'                     # добавление в список последовательности
+>>> li
+['asd', 'qwe', 'q', 'w', 'e', 0, -1, -2, -3, -4]
+
+>>> list(map(ord, 'spam'))              # / перевод в символы последовательно / в список 
+[115, 112, 97, 109]
+
+
+
+
+Словари
+==================
+(коллекции / изменяемые / не индексируемые / по парам ключ:значение)
+
+Словарь == Асоциативный массив == Хеш
+
+Методы словарей:
+ 'clear', 'copy', 'fromkeys', 'get', 'items', 'keys', 'pop', 'popitem', 'setdefault',
+ 'update', 'values'
+
+
+>>> di = {}
+
+>>> di = {'name': 'yurii', 'job': 'programmer', 'age': 40}
+
+>>> sorted(di)
+['age', 'job', 'name']                  # ключи в список
+
+>>> [ di[x] for x in sorted(di) ]       # генератор через ключи
+[40, 'programmer', 'yurii']
+
+>>> di = {}                             # создание словаря
+>>> di['name'] = 'yurii'
+>>> di['age'] = 40
+>>> di['hobby'] = ['prog', 'sport', 'books']
+>>> di
+{'hobby': ['prog', 'sport', 'books'], 'name': 'yurii', 'age': 40}
+
+>>> di.items()
+dict_items([('hobby', ['prog', 'sport', 'books']), ('name', 'yurii'), ('age', 40)])
+
+>>> di.keys()
+dict_keys(['hobby', 'name', 'age'])
+
+>>> di.values()
+dict_values([['prog', 'sport', 'books'], 'yurii', 40])
+
+>>> di.get('name')
+'yurii'
+>>> di.__getitem__('name')
+'yurii'
+
+>>> di.popitem()                    # удаление элемента словаря
+('hobby', ['prog', 'sport', 'books'])
+
+>>> di.clear()                      # чистка словаря
+>>> di
+{}
+
+>>> di
+{'name': 'yurii'}
+>>> di['name'] = 'lena'             # переопределение значения элемента по ключу
+>>> di
+{'name': 'lena'}
+
+>>> if not 'pet' in di: print('xxx')
+xxx
+>>> if 'pet' not in di: print('xxx')     # if оператор + not in
+xxx
+
+
+# items / itertable
+--------
+>>> di.items()                           # обект итератора - в список
+dict_items([('name', 'lena'), ('age', 40)])
+>>> list(di.items())
+[('name', 'lena'), ('age', 40)]
+
+# values / iterable
+>>> di.values()                          # обект итератора - в список  
+dict_values(['lena', 40])
+>>> list(di.values())
+['lena', 40]
+
+
+# get
+----------
+>>> di.get('error')                     # метод get дает на выходе или Значение или None
+>>> print(di.get('error'))
+None
+>>> if di.get('error') is not None: print('error')
+>>> di['error'] = 'its error'
+>>> if di.get('error') is not None: print('error')
+error
+>>> di
+{'name': 'lena', 'error': 'its error', 'age': 40}
+
+
+# проверка наличия Элемента в Словаре
+------------------
+>>> di
+{'job': 'progger', 'to del': None, 'name': 'lena', 'error': 'its error', 'age': 40}
+>>> di.get('job', 'netu')               # получить элемент / а если нет то Объект
+'progger'
+
+>>> di.get('jobb', 'netu')              # самый короткий способ
+'netu'
+
+>>> try:
+...     di['jobb']                      # аналог - попытка вызвать фейл элемент
+... except KeyError:                    # поймать ошибку - отработать
+...     print('netu')
+...     
+netu
+
+>>> if 'jobb' in di:                  # проверка условия наличия ключа в Словаре - классика
+...     print(di['jobb'])
+... else:
+...     print('netu')
+...     
+netu
+
+
+# update
+--------
+>>> di
+{'name': 'lena', 'error': 'its error', 'age': 40}
+>>> di1['job'] = 'progger'
+>>> di.update(di1)                      # update -- вливание в словарь другого словаря
+>>> di
+{'job': 'progger', 'name': 'lena', 'error': 'its error', 'age': 40}
+
+>>> di['to del'] = 'to del' 
+>>> di
+{'job': 'progger', 'to del': 'to del', 'name': 'lena', 'error': 'its error', 'age': 40}
+
+>>> di
+{'job': 'progger', 'name': 'lena', 'error': 'its error', 'age': 40}
+>>> di['to del'] = 'to del' 
+
+# pop
+--------
+>>> di.pop('to del')                # Удаление элемента словаря по ключу - то что надо
+'to del'
+
+>>> di['to del'] = ''               # так не работает - остается объект                   
+>>> di
+{'job': 'progger', 'to del': '', 'name': 'lena', 'error': 'its error', 'age': 40}
+
+>>> di['to del'] = None             # и так не работает - остается объект
+>>> di
+{'job': 'progger', 'to del': None, 'name': 'lena', 'error': 'its error', 'age': 40}
+
+
+# fromkeys
+----------
+>>> di.fromkeys(['job', 'age'], 100)        # установить дефолтное значение в коде
+{'job': 100, 'age': 100}
+>>> di                                      # в словарь не сохраняется
+{'job': 'progger', 'to del': None, 'name': 'lena', 'error': 'its error', 'age': 40}
+
+
+zip
+--------
+>>> li
+['111', '222', '333', '444']
+>>> di = dict(zip(range(4), li))            # фактически генератол словаря через zip
+>>> di
+{0: '111', 1: '222', 2: '333', 3: '444'}
+
+>>> di = list(zip(range(4), li))            # а вот так-же генератор списка
+>>> di
+[(0, '111'), (1, '222'), (2, '333'), (3, '444')]
+
+
+generator dict
+----------
+>>> li
+['111', '222', '333', '444']
+>>> di_gen = {x: y for x in range(len(li)) for y in li}     # 2 входящих последовательности
+>>> di_gen
+{0: '444', 1: '444', 2: '444', 3: '444'}
+
+>>> di = {k:None for k in 'stringgg'}       # генератор Словаря с неопределенными значениям
+>>> di
+{'s': None, 't': None, 'r': None, 'i': None, 'n': None, 'g': None}
+
+
+iterator objects dict
+----------------
+>>> di
+{'s': None, 't': None, 'r': None, 'i': None, 'n': None, 'g': None}
+>>> keys                                    
+dict_keys(['s', 't', 'r', 'i', 'n', 'g'])
+
+>>> keys = keys.__iter__()                  # создан объект итератора 
+>>> keys
+<dict_keyiterator object at 0x7fcd77c3c688>
+>>> keys.__next__()                         # вызов по 1 элементу из итератора
+'s'
+>>> keys.__next__()
+'t'
+>>> keys.__next__()
+'r'
+
+>>> for k in di.keys(): print(k, '\t');     # по простому: и Генерация + и Итерация
+s 	
+t 	
+r 	
+i 	
+n 	
+g 	
+
+>>> li = [x for x in di.keys()]             # еще проще: Генератор (итерация спрятана)
+>>> li
+['s', 't', 'r', 'i', 'n', 'g']
+
+
+# sorted()
+----------
+простой способ обработать Словарь по ключам
+>>> di = {'job': 'progger', 'to del': None, 'name': 'lena', 'error': 'its error', 'age': 40}
+>>> sorted(di)
+['age', 'error', 'job', 'name', 'to del']
+
+>>> for k in sorted(di):            # формирует последовательность пар значений
+...     print(k, di[k],)
+...     
+age 40
+error its error
+job progger
+name lena
+to del None
+
+
+пример
+-----------
+создание словарей через ключи и нулевые значения
+
+>>> di.fromkeys(range(5), 0)
+{0: 0, 1: 0, 2: 0, 3: 0, 4: 0}
+>>> di.update({x:0 for x in range(6,10)})
+>>> di
+{0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 6: 0, 7: 0, 8: 0, 9: 0}
+
+
+сравнение словарей
+------------------
+через sorted и items()
+>>> D1 = {'a':1, 'b':2}
+>>> D2 = {'a':1, 'b':3}
+
+>>> list(D1.items())                # на выходе - список кортежей с парами значений
+[('a', 1), ('b, 2)]
+>>> sorted(D1.items())              # список друг для sorted()
+[('a', 1), ('b', 2)]
+>>> sorted(D1.items()) < sorted(D2.items())
+True
+>>> sorted(D1.items()) > sorted(D2.items())
+False
+
+
+
+
+Кортежи
+===================
+(последовательности / неизменяемые / индексированные / мультиобъектные )
+
+методы кортежей:
+'count', 'index'
+
+tu = ()
+
+>>> type(tu)
+<class 'tuple'>
+
+>>> tu = (x for x in range(10))             # объект-генератор / итератор
+
+>>> tu = (1,2,3, [2,3,4], 'string')         # мультиобъектность
+>>> tu[1]                                   # индексирование
+2
+>>> tu[3][1]
+3
+
+>>> tu.count('string')                      # счетчик обекта в кортеже
+1
+>>> tu.count(20)
+0
+
+>>> tu.index('string')                      # позиционность элемента
+4
+
+>>> tu = ('string1', 1,2,3, [4,5,6], {'name': 'yurii', 'age': 40})
+>>> tu[0]
+'string1'                               # в кортеже доступ к элементам по индексу
+
+>>> tu[5]['name']
+'yurii'
+>>> tu[5]['name'] = 'lena'              # кортеж не изменяем по влженный список изменяем !!
+
+>>> tu
+('string1', 1, 2, 3, [4, 5, 6], {'name': 'lena', 'age': 40})
+
+>>> tu.count([4,5,6])                   # количество заданого объекта в кортеже
+1
+>>> tu.index([4,5,6])                   # индекс заданного объекта в кортеже
+4
+
+>>> 'string1' in tu                     # работает проверка на вхождение
+True
+
+>>> [x for x in tu]                     # последовательность - работает для генераторов
+['string1', 1, 2, 3, [4, 5, 6], {'name': 'lena', 'age': 40}]
+
+sorted
+--------
+>>> tu = tuple(range(10))
+>>> tu
+(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+>>> sorted(tu)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+
+(key,key,key)
+-------------
+кортежи - это фиксированные ассоциации объектов
+
+>>> di=dict()
+>>> di[(90,60,90)] = 'lena'             # ключ словаря как кортеж (набор данных)
+>>> di[(100,70,70)] = 'yurii'
+>>> di
+{(100, 70, 70): 'yurii', (90, 60, 90): 'lena'}
+
+>>> standart = (90,60,90)               # эталон
+>>> standart in di                      # проверка на вхождение по эталону
+True
+>>> di[standart]
+'lena'
+
+
+
+
+Файлы
+==================
+
+Методы объектов файлов (open):
+ 'buffer', 'close', 'closed', 'detach', 'encoding', 'errors', 'fileno', 'flush',
+ 'isatty', 'line_buffering', 'mode', 'name', 'newlines', 'read', 'readable', 'readline',
+ 'readlines', 'seek', 'seekable', 'tell', 'truncate', 'writable', 'write', 'writelines'
+
+
+read()
+---------
+>>> file = open('saveto.txt', 'r')
+>>> file.read()                     # метод чтения файла полностью
+'Test file\nSecond string\n3th string\n\n'
+
+>>> file = open('saveto.txt', 'r')
+>>> file.read(10)                   # метод чтения файла партиями по байтам / итерация
+'Test file\n'
+>>> file.read(10)
+'Second str'
+>>> file.read(10)
+'ing\n3th st'
+>>> file.read(10)
+'ring\n\n'
+>>> file.read(10)                   # конец отерации / далее *open* надо снова
+''
+>>> fo = open('saveto.txt', 'r')            # объект файла итерируемый объект 
+>>> text = fo.read()                        # потому для работы - сохранил в переменную
+>>> text
+'Test file\nSecond string\n<h>Last string</h1>\n\n'
+>>> text.split()
+['Test', 'file', 'Second', 'string', '<h>Last', 'string</h1>']
+
+
+readlines()
+------------
+>>> file = open('saveto.txt', 'r')
+>>> file.readlines()                # чтение все строк в Список
+['Test file\n', 'Second string\n', '3th string\n', '\n']
+
+
+readline()  / iter / next
+------------
+чтение строк файла по одной / итерация
+
+>>> file = open('saveto.txt', 'r')  # это объект файла - итерируемый объект
+>>> file.readline()                 # метод итерации построчно
+'Test file\n'
+>>> file.readline()
+'Second string\n'
+>>> file.readline()
+'3th string\n'
+>>> file.readline()
+'\n'
+
+>>> file                            # это итерируемый объект
+<_io.TextIOWrapper name='saveto.txt' mode='r' encoding='UTF-8'>
+>>> file.__iter__()
+<_io.TextIOWrapper name='saveto.txt' mode='r' encoding='UTF-8'>
+
+>>> file = open('saveto.txt', 'r')
+>>> file.__next__()                 # тоже метод итерации построчно
+'Test file\n'
+>>> file.__next__()
+'Second string\n'
+>>> file.__next__()
+'3th string\n'
+>>> file.__next__()
+'\n'
+
+# В этом случае функцией open создается временный объект файла, содержимое которого
+автоматически будет читаться итератором и  возвращаться по одной строке в каждой итерации
+цикла. Обычно такой способ компактнее, эффективнее использует память и может оказаться
+быстрее некоторых других вариантов
+
+>>> file = open('saveto.txt', mode='r')
+>>> for line in file: print(line);      # метод генератора/итератора через for 
+string 1
+string 2
+
+
+write   / writelines
+--------------
+string_to_file = 'my name is Yurii\n'       # строки для записи
+string_to_file_2 = 'my name is Lena\n'
+
+>>> file = open('saveto.txt', 'w')          # объект файла в режиме для записи
+>>> file.write(string_to_file)              # запись строки в объект файла (затирание)
+16
+>>> file.write(string_to_file_2)
+15
+>>> file.close()                            # сохранение и закрытие файла
+
+# модификация
+>>> list_of_lines = ['string 1', '\n', 'string 2', '\n']
+>>> file = open('saveto.txt', 'w')
+>>> file.writelines(list_of_lines)          # метод всех строк в файл из Списка
+>>> file.close()
+    
+>>> file = open('saveto.txt', 'r')
+>>> for line in file: print(line,);
+string 1
+string 2
+
+
+'a' mode
+--------
+добавление новых строк в режиме "add"
+>>> file = open('saveto.txt', 'a')
+>>> file.write("string 3 in mode 'a' \n  ")     # добавлена 1 строка в файл
+24
+>>> file.close()
+
+>>> list_of_string = ['string 4 \n', '\t string 5 \n']
+>>> file = open('saveto.txt', 'a')
+>>> file.writelines(list_of_string)             # добавлен список строк в файл
+>>> file.close()
+
+
+
+seek()
+------------
+>>> file = open('saveto.txt', 'r')
+>>> file.seek(5)                            # метод сдвига начала чтения файла (байты)
+5
+>>> 
+>>> file.readline()                         # в итоге - чтение первой строки не с начала
+'g 1\n'
+>>> file.readline()
+'string 2\n'
+>>> file.readline()
+''
+
+mode 'b'
+-----------
+Бинарное чтение файла
+>>> file = open('saveto.txt', mode='rb')    # мод в бинарном виде
+>>> for line in file: print(line);
+b'string 1\n'                               # строка в бинарном отображении
+b'string 2\n'
+b"string 3 in mode 'a' \n"
+b'  string 4 \n'
+b'\t string 5 \n'
+
+
+запись в файл основных объектов python
+----------------------
+>>> X, Y, Z = 45,46,47
+>>> S = 'Spam'
+>>> D = {'name', 'yurii'}
+>>> L = [1,2,3,4]
+
+>>> file = open('saveto.txt', mode='w')     # первая запись в режиме перезапись
+>>> file.write(S + '\n')                    # запись просто строки
+5
+>>> file.save()
+
+>>> file = open('saveto.txt', mode='a')     # режим добавления
+>>> file.write('{} / {} / {}\n'.format(X, Y, Z))    # форматирование строки из объектов
+13
+>>> file.write(str(L)+'\n')                 # метод перевода объекта в строку
+13
+>>> file.write(str(D)+'\n')                 # метод перевода объекта в строку
+18
+>>> file.close()
+
+
+pickle  / универсальное хранилище данных в бинарном виде
+---------------------
+>>> D                                       # даны данные для сохранения
+{'yurii', 'name'}
+>>> L
+[1, 2, 3, 4]
+>>> S
+'Spam'
+>>> X, Y, Z
+(45, 46, 47)
+
+>>> file = open('data_all.pkl', 'wb')       # создал файл для хранилища
+>>> import pickle
+
+>>> pickle.dump([D, L, S, X, Y, Z], file)   # передал данные в файл и закрыл файл / bytes
+>>> file.close()
+
+>>> file = open('data_all.pkl', 'rb')       # открытие файла в режиме бинарного чтения
+>>> file
+<_io.BufferedReader name='data_all.pkl'>    # это особый вид объекта
+
+file.read()
+b'\x80\x03]q\x00(cbuiltins\nset\nq\x01]q\x02(X\x05\x00\x00\x00yuriiq\x03X\x04\x00\x00
+\x00nameq\x04e\x85q\x05Rq\x06]q\x07(K\x01K\x02K\x03K\x04eX\x04\x00\x00\x00Spamq\x08K-K.K/
+e.'                                    # объект типа bytes - данные в бинарном байт коде
+
+>>> pickle.load(file)                       # метод чтения объектов как есть
+[{'yurii', 'name'}, [1, 2, 3, 4], 'Spam', 45, 46, 47]
+
+
+изучу позже
+-----------
++ shelve ...
+
++ whith open() as: ...
+
++ try:
+    ...
+finally:
+    file.close() ...
+
+
+
+
+Множества
+====================
+коллекции / неизменяемые (с конкатинацией) / неиндексируемые / уникальные элементы
+
+все на фоне уникальности элементов множеств
+
+>>> sett = set()
+
+Методы множеств:
+ 'add', 'clear', 'copy', 'difference', 'difference_update', 'discard', 'intersection',
+ 'intersection_update', 'isdisjoint', 'issubset', 'issuperset', 'pop', 'remove',
+ 'symmetric_difference', 'symmetric_difference_update', 'union', 'update'
+
+>>> sett1 = {1,2,3,4,5,6}
+>>> sett2 = {4,5,6,7,8,9}
+
+>>> sett1 & sett2                   # пересечение
+{4, 5, 6}
+
+>>> sett1 | sett2                   # объединение
+{1, 2, 3, 4, 5, 6, 7, 8, 9}
+
+>>> sett1 ^ sett2                   # 
+{1, 2, 3, 7, 8, 9}
+
+>>> sett1 - sett2                   # разность
+{1, 2, 3}
+
+>>> sett2 - sett1
+{8, 9, 7}
+
+>>> {x*2 for x in [1,2,3, 'spam', 4,5,6]}       # генератор множества
+{2, 4, 6, 'spamspam', 8, 10, 12}
+
+>>> sett1 = {1,2,3,4,5,6}
+>>> sett2 = {4,5,6,7,8,9}
+>>> sett1.remove(3)                 # метод удаления значения из Множества
+>>> sett1
+{1, 2, 4, 5, 6}
+>>> sett1.add(3)                    # метод добавления значения во Множество
+>>> sett1
+{1, 2, 3, 4, 5, 6}
+>>> sett1.union(sett2)              # метод объединения Множеств
+{1, 2, 3, 4, 5, 6, 7, 8, 9}
+
+есть еще много методов у множеств суть которых следует изучить.
+
+Списки и Словари в множества не добавляются.!
+Если надо то добавляются Кортежи.!
+Кортежи в  множествах могут использоваться, например, для хранения дат, записей,
+IP-адресов и так далее.
+
+>>> sett1
+{1, 2, 3, 4, 5, 6}
+    ## звмороженное / неизменяемое множество
+>>> sett1.add(frozenset(sett2))    # если надо вложить множество в множество  - то frozenset
+>>> sett1
+{1, 2, 3, 4, 5, 6, frozenset({4, 5, 6, 7, 8, 9})}
+
+
+
+>>> names = {'yurii', 'lena', 'pasha', 'masha'}
+>>> {'yurii'} < names               # метод проверки вхождения во Множество
+True
+>>> {'yuriii'} < names
+False
+
+>>> {'yurii', 'pasha'} < names
+True
+>>> {'yurii', 'pashaa'} < names
+False
+
+>>> {'yurii'} < names and {'pasha'} < names     # тоже проверка вхождения во Множество
+True
+>>> {'yurii'} < names and {'pashaa'} < names
+False
+
+
+
+Числа
+==================
+
+
+Вещественные числа с Фиксированной точностью
+(например 5 знаков после запятой)
+------------------
+>>> import decimal
+>>> numm = decimal.Decimal('5.84795')
+
+>>> numm                                # Конструкция Числа
+Decimal('5.84795')
+
+>>> numm + 2                            # точность сохраняется
+Decimal('7.84795')
+
+
+Рациональные числа
+(числитель / знаменатель)
+------------------------
+>>> import fractions
+>>> numm = fractions.Fraction(23, 111)  # Конструкция числа - Дробь
+>>> numm
+Fraction(23, 111)
+>>> numm * 2
+Fraction(46, 111)                       # Сохраняет вид дроби - это максимальная точность!
+
+>>> numm * 78 / 47
+Fraction(598, 1739)
+
+>>> numm * 78.847                       # но десятичние числа переводят в Десятичние
+16.337666666666664
+
+>>> numm = 3.46
+>>> numm1 = Fraction.from_float(numm)       # метод перевод в дробное число
+>>> numm1
+Fraction(3895613677675479, 1125899906842624)
+
+
+Десятичные / Шестьнадцатиричные / Восьмиричные / Двоичные
+--------------
+>>> numm = 128
+
+>>> hex(numm)                   # 16-ричное
+'0x80'
+
+>>> oct(numm)                   # 8-ричное
+'0o200'
+
+>>> bin(numm)                   # 2-чное
+'0b10000000'
+
+>>> int(numm)                   # 10-чное   целое
+128
+
+>>> float(numm)                 # 10-чное   дробное (вещественное)
+128.0
+
+>>> numm = 34
+>>> numm.bit_length()           # метод вывода длинны 2-битного числа
+6
+>>> bin(numm)
+'0b100010'
+
+
+Презентация чисел
+-----------------
+>>> num = 1/3
+
+>>> repr(num)
+'0.3333333333333333'            # вывыд числа как-оно-есть
+
+>>> str(num)                    # как строка
+'0.3333333333333333'
+
+>>> int(num)                    # усечение в целое число
+0
+
+>>> float(num)                  # дробное число
+0.3333333333333333
+
+
+Деление
+-----------------
+>>> 5 / 2, 5 / -2               # обычное деление
+(2.5, -2.5)
+
+>>> 5 // 2, 5 // -2             # деление с учечение дроби вниз
+(2, -3)
+
+
+округление
+-----------------
+>>> numm = 1/3
+
+>>> num
+0.3333333333333333
+
+>>> round(numm, 3)              # округление до 3 десят чисел
+0.333
+
+
+>>> (2.66).as_integer_ratio()       # перевод в дробный формат
+(748723438050345, 281474976710656)
+
+>>> from fractions import Fraction
+>>> numm = 2.67
+>>> nummF = Fraction(*numm.as_integer_ratio())      # метод перевода в дробное число
+>>> nummF
+Fraction(1503076375634903, 562949953421312)
+
+
+
+Инструкции
+====================
+приставивние 
+print
+if / else / elif / finally
+for / else
+while / else
+pass
+break                           # выход из цикла
+continue                        # переход к началу цикла
+def
+return                          # возврат (вывод) результата
+yield                           # функция - генератор
+global                          # видимость объекта глобально в модуле
+nonlocal                        # видимость объекта на уровень выше
+import                          # доступ к модулю
+from
+class                           # создание Объекта (под ООП) - Класса
+try / except / finally          # обработка кода и исключения
+raise                           # возбуждение Исключения
+assert                          # отладочные проверки
+with / as                       # менеджер контекста / создание контекста
+del                             # удаление ссылок 
+
+для python2 with / as:
+__future__ import with_statement
+
+
+упражнение начало
+-----------------
+1) script1.py
+def foo():
+    while True:
+        your_string = input('Enter your string: ')
+        if your_string == 'stop':               # выход их функции если пуст строка и стоп
+            break
+        elif your_string == '':
+            break
+        print('{} -> {}'.format(your_string, your_string.upper()))
+    print("End from Loop")
+
+if __name__ == '__main__':
+    foo()
+
+2)
+ryndin@pc:~/venvs/test_py35/src$ python3 script1.py foo
+Enter your string: cfd
+cfd -> CFD
+Enter your string: stop
+End from Loop
+
+
+print()
+-------------
+print - это инструкция вывода в консоль объекта через модуль sys.stdout
+print([object, ...][, sep=' '][, end='\n'][, file=sys.stdout])
+
+>>> import sys
+# Вывод более сложным способом
+>>> sys.stdout.write('hello world\n')       # истинная логика функции print()
+hello world
+
+# очень ценно - перенаправление всех принтов в файл - режим добавления
+import sys
+sys.stdout = open('print_log.txt', 'a')     # Перенаправить вывод в файл
+print(...)*n
+sys.stdout.close()
+
+# объект файла в режиме записи
+>>> import sys
+>>> sys.stdout
+<_io.TextIOWrapper name='<stdout>' mode='w' encoding='UTF-8'>
+
+
+# разделение потоков вывода print()
+---------------------
+>>> print_log = open('print_log.txt', 'a')
+>>> print('spam', 'ham')                    # стандартный print в консоль
+spam ham
+>>> print('spam', 'ham', file=print_log)    # принт в файл проекта
+>>> 
+>>> print_log.close()                       # закрыть и сохранить обязательно!
+
+для python2 / print()
+from __future__ import print_function
+
+
+if / elif / else
+===================
+1)
+# ступенька выборов
+if ...
+    ...
+elif ...
+    ...
+else ...
+    ...
+
+2)
+# выбор по ключу
+>>> choices = {'apple': 45, 'potato': 15, 'tomato': 20}
+>>> choice = 'tomato'
+>>> print(choices[choice])
+20
+
+
+3)
+# выбор из словаря через get
+>>> choices.get('banana', 'is epsent')
+'is epsent'
+
+4)
+# выбор через проверку вхождения в последовательность - 
+>>> if choice in choices:
+...     print(choices[choice])
+...     
+20
+
+
+5)
+if X:                       =>  A = Y if X else Z       ## аналогичная логика в 1 строку
+    A = Y
+else:
+    A = Z
+
+# такова логика в С и JS    =>  A = Y ? X : Z     
+
+
+6)
+X = A or B or C or None     # присовит первое не пустое значение
+
+
+
+while / for
+=====================
+Цикл for относится к категории счетных циклов. Обычно он выглядит проще и работает
+быстрее, чем цикл while, поэтому его нужно рассматривать в самую первую очередь,
+когда возникает необходимость выполнить обход последовательности.
+-------------------
+
++ range / zip / map
+===================
+
+1)
+>>> count = 0
+>>> while count < 50:
+...     print('{}'.format(count))
+...     count += 1
+
+2)
+>>> count = 0
+>>> while count < 50:
+...     print('{}'.format(count))
+...     count += 1
+...     continue                    # позволяет корректно выйти из цикла и продолжить код
+... print('End loop')               # продолжение кода вне цикла
+
+>>> count = 0
+>>> while count < 50:
+...     print('{}'.format(count))
+...     count += 1
+... else:                     # такой же эффект после завершения цикла - но нет продолжения
+...     print('End Loop')
+
+
+3)
+def foo():
+    while True:
+        mess1 = input('Enter name (or stop):')
+        if mess1 == 'stop': break                   # выход из цикла полностью (без принта)
+        mess2 = input('Your age (digit):')
+        print('Your name: {} / and age:{}'.format(mess1, mess2))
+
+
+4)
+>>> for (key, value) in D.items():      # обход всех элементов последовательности
+        print(key, '=>', value)
+
+5)
+>>> for ((a, b), c) in [((1, 2), 3), ((4, 5), 6)]:  # распаковка кортежей и суб-кортежей
+        print(a, b, c)
+
+
+6)
+def foo():
+    items = ['qwe', 'yurii', (30, 40), 34, 'string']
+    keys = ('string', (30, 40), 'lena')
+    for key in keys:
+        for item in items:
+            if key == item:             # логика проверки равенства значений
+                print(key, ' was found')
+                break
+        else:
+            print(key, ' not found')
+
+def foo():
+    items = ['qwe', 'yurii', (30, 40), 34, 'string']
+    keys = ('string', (30, 40), 'lena')
+    for key in keys:                    # та же логика но проще (проверка вхождения)
+        if key in items:
+            print(key, ' was found')
+        else:
+            print(key, ' not found')
+
+ryndin@pc:~/venvs/test_py35/src$ python3 script1.py foo
+string  was found
+(30, 40)  was found
+lena  not found
+
+
+range()
+-----------------
+>>> list(range(5)), list(range(2, 5)), list(range(0, 10, 2))
+([0, 1, 2, 3, 4], [2, 3, 4], [0, 2, 4, 6, 8])
+
+>>> list(range(5, -5, -1))
+[5, 4, 3, 2, 1, 0, -1, -2, -3, -4]
+
+>>> S = ‘abcdefghijk’
+>>> for i in range(0, len(S), 2): print(S[i], end=’ ‘)
+
+
+zip()
+---------------
+zip - суть в параллельности
+
+Длина списка, возвращаемого функцией zip, равна длине кратчайшей из последовательностей,
+если аргументы имеют разную длину.
+
+>>> A = 'qwertyu'
+>>> B = 'asdfghj'
+>>> C = 'zxcvbnm'
+>>> zip(A, B, C)
+<zip object at 0x7fec5f0f9a08>
+
+>>> list(zip(A, B, C))              # параллельная операция на 3 объекта
+[('q', 'a', 'z'), ('w', 's', 'x'), ('e', 'd', 'c'), ('r', 'f', 'v'), ('t', 'g', 'b'), ('y', 'h', 'n'), ('u', 'j', 'm')]
+
+>>> [x for x in zip(A, B, C)]       # параллельно генерация списков - то же
+[('q', 'a', 'z'), ('w', 's', 'x'), ('e', 'd', 'c'), ('r', 'f', 'v'), ('t', 'g', 'b'), ('y', 'h', 'n'), ('u', 'j', 'm')]
+
+>>> key = [1,2,3,4,5]
+>>> value = ['as', 'sas', 'ert', 'uyr', 'fgh']
+>>> Di = {}
+>>> for (key, value) in zip(key, value): Di[key] = value        # зипание списка кортежей
+>>> Di
+{1: 'as', 2: 'sas', 3: 'ert', 4: 'uyr', 5: 'fgh'}
+
+>>> key = [1,2,3,4,5]
+>>> value = ['as', 'sas', 'ert', 'uyr', 'fgh']
+>>> Di = {zip(key, value)}
+>>> Di
+{<zip object at 0x7fec5f160848>}
+>>> Di = dict(zip(key, value))              # супер простое Зипание словаря
+>>> Di
+{1: 'as', 2: 'sas', 3: 'ert', 4: 'uyr', 5: 'fgh'}
+
+map()
+---------------
+больше примера со встроенными функциями к последовательности придумать не смог
+>>> list(map(ord, 'spammy'))
+[115, 112, 97, 109, 109, 121]
+
+
+emumerate()
+-----------------
+фактически нумерует элементы последовательности
+-----------------
+>>> value = ['as', 'sas', 'ert', 'uyr', 'fgh']
+>>> [(x,y) for x,y in enumerate(value)]
+[(0, 'as'), (1, 'sas'), (2, 'ert'), (3, 'uyr'), (4, 'fgh')]
+
+
+
+итераторы
+====================
+
+1)
+>>> li = [1,2,3,4,5]
+>>> iter(li)                        
+<list_iterator object at 0x7fec5f14e9b0>
+>>> li_iter = iter(li)                  # Создание объекта Итератора Списка
+>>> li_iter.__next__()                  # обход по Итератору
+1
+>>> li_iter.__next__()
+2
+>>> li_iter.__next__()
+3
+>>> li_iter.__next__()
+4
+>>> li_iter.__next__()
+5
+>>> li_iter.__next__()
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+StopIteration
+
+2)
+for ... in Object       -- создает Итератор объекта Object
+
+
+
+генераторы списков
+==================
+Проще говоря, генераторы списков применяют к  элементам итерируемых объектов произвольные
+выражения – вместо применения функций.
+
+Не забывайте, что в  случае, когда генератор списков становится слишком сложным для
+понимания, вы всегда можете развернуть вложенные операторы for и if (добавляя отступы),
+чтобы получить эквивалентные инструкции. Программный код при этом получится более длинным,
+но более понятным.
+
+
+1)
+генератор списка строк файла
+>>> lines = [line.rstrip() for line in open(‘script1.py’)]      # отсечение '\n'
+>>> lines
+[‘import sys’, ‘print(sys.path)’, ‘x = 2’, ‘print(2 ** 33)’]
+
+2)
+>>> [(a,b,c) for a in 'ab' for b in 'de' for c in 'jh']         # несколько for
+[('a', 'd', 'j'), ('a', 'd', 'h'), ('a', 'e', 'j'), ('a', 'e', 'h'), ('b', 'd', 'j'), ('b', 'd', 'h'), ('b', 'e', 'j'), ('b', 'e', 'h')]
+
+3)
+# обход всех пар последовательностей  
+>>> [x*y for x in [1,2,3,4] for y in [3,4,5,6]]
+[3, 4, 5, 6, 6, 8, 10, 12, 9, 12, 15, 18, 12, 16, 20, 24]
+
+
+4) # + 3 if в произвольной конструкции
+>>> [x*y for x in [1,2,3,4,6] if x !=2 for y in [3,4,5,6] if y !=4 if x!=y]
+[3, 5, 6, 15, 18, 12, 20, 24, 18, 30]
+
+if: это как filter() примерно
+
+
+
+yield / функции-генераторы
+==========================
+
+1)
+>>> def foo(N):
+...     for x in range(N):
+...         yield x**2                  # создает объект итерации + return <res>
+
+>>> it = foo(10)
+>>> it
+<generator object foo at 0x7f9d9643b048>
+
+>>> it.__next__()                       # итерация с сохранением позиций итерации
+0
+>>> it.__next__()
+1
+>>> it.__next__()
+4
+.....
+
+
+2)
+>>> G = (x*2 for x in 'spam')
+>>> G                                   # объект-генератор
+<generator object <genexpr> at 0x7f9d96423ca8>
+
+>>> G1 = iter(G)
+>>> G1                                  # все тот же генератор
+<generator object <genexpr> at 0x7f9d96423ca8>
+
+>>> G2=iter(G1)
+>>> G2                                  # все тот же генератор
+<generator object <genexpr> at 0x7f9d96423ca8>
+
+>>> G1.__next__()               # все итераторы в рамках одной Итерации
+'ss'
+>>> G.__next__()
+'pp'
+>>> G2.__next__()
+'aa'
+>>> G.__next__()
+'mm'
+>>> G1.__next__()
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+StopIteration
+
+Списки поддерживают собсвтенные раздельные итерации
+
+начнем создавать итераторы на основе классов, то увидим, что мы в состоянии сами решать,
+какой тип итераций будут поддерживать наши объекты, если они будут итерационными.
+
+
+кастомная реализация zip / map (pad=None) / yield /
+--------------------
+стр. 579 Лутца
+
+
+
+итерация Словарей
+=================
+Итерация в Словарях - по ключам
+и при генерации циклов - for
+
+>>> di = dict(a=1, b=2, c=3)
+>>> iter(di)
+<dict_keyiterator object at 0x7fcd21cd0368>     # итератор ключей Словаря - так и пишет
+
+>>> dii = iter(di)
+>>> dii
+<dict_keyiterator object at 0x7fcd21cd03b8>
+
+>>> dii.__next__()
+'c'                                             # итерация по Ключам словаря
+>>> dii.__next__()
+'a'
+>>> dii.__next__()
+'b'
+>>> dii.__next__()
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+StopIteration                                   останов Итерации
+
+
+
+Хронометраж выполениния Итераторов / Генераторов / Циклов
+-----------------------
+см.файл python_time.txt 
+
+
+
+# / dir(<object>) / help(<objext>) /
+-----------------
+
+
+
+Функции
+====================
+кратко - для запуска кода неоднократно / принимает входные параметры / возвращает результат
+
+методы функций:
+    / def / return / global / nonlocal / yield / lambda /
+
+у функций - вложенные области видимости
+
+у модуля - глобальная область видимости
+у функции - локальная область видимости
+
+встроенные функции
+-------------------
+>>> import builtins
+
+>>> dir(builtins)
+['ArithmeticError', 'AssertionError', 'AttributeError', 'BaseException',
+'BlockingIOError', 'BrokenPipeError', 'BufferError', 'BytesWarning', 
+'ChildProcessError', 'ConnectionAbortedError', 'ConnectionError',
+'ConnectionRefusedError', 'ConnectionResetError', 'DeprecationWarning',
+'EOFError', 'Ellipsis', 'EnvironmentError', 'Exception', 'False', 'FileExistsError',
+'FileNotFoundError', 'FloatingPointError', 'FutureWarning', 'GeneratorExit',
+'IOError', 'ImportError', 'ImportWarning', 'IndentationError', 'IndexError',
+'InterruptedError', 'IsADirectoryError', 'KeyError', 'KeyboardInterrupt',
+'LookupError', 'MemoryError', 'NameError',
+'None',
+'NotADirectoryError', 'NotImplemented', 'NotImplementedError', 'OSError', 'OverflowError',
+'PendingDeprecationWarning', 'PermissionError', 'ProcessLookupError',
+'RecursionError', 'ReferenceError', 'ResourceWarning', 'RuntimeError',
+'RuntimeWarning', 'StopAsyncIteration', 'StopIteration', 'SyntaxError',
+'SyntaxWarning', 'SystemError', 'SystemExit', 'TabError', 'TimeoutError',
+'True',
+'TypeError', 'UnboundLocalError', 'UnicodeDecodeError', 'UnicodeEncodeError',
+'UnicodeError', 'UnicodeTranslateError', 'UnicodeWarning', 'UserWarning',
+'ValueError', 'Warning', 'ZeroDivisionError',
+'_', '__build_class__', '__debug__', '__doc__', '__import__', '__loader__', '__name__',
+'__package__', '__spec__',
+'abs', 'all', 'any', 'ascii', 'bin', 'bool', 'bytearray', 'bytes', 'callable',
+'chr', 'classmethod', 'compile', 'complex', 'copyright', 'credits', 'delattr', 'dict',
+'dir', 'divmod', 'enumerate', 'eval', 'exec', 'execfile', 'exit', 'filter', 'float',
+'format', 'frozenset', 'getattr', 'globals', 'hasattr', 'hash', 'help', 'hex', 'id',
+'input', 'int', 'isinstance', 'issubclass', 'iter', 'len', 'license', 'list', 'locals',
+'map', 'max', 'memoryview', 'min', 'next', 'object', 'oct', 'open', 'ord', 'pow',
+'print', 'property', 'quit', 'range', 'repr', 'reversed', 'round', 'runfile', 'set',
+'setattr', 'slice', 'sorted', 'staticmethod', 'str', 'sum', 'super', 'tuple', 'type',
+'vars', 'zip']
+
+
+
+global / nonlocal
+-----------------
+
+Инструкции, которые объявляют Пространство имен
+
+global - переносит переменную из функции в область видимости всего модуля
+
+nonlocal - переносит переменную из подфункции в область видимости "верхней" функции
+
+
+функция - фабрика
+-----------------
+заполняется вглубь логикой подфункций
+
+пример:
+1)
+логика
+def foo_family(last_name):                  # принимает фабричную переменную 1
+    def foo_person(first_name):             # подфункция вызывается фабричной функцией
+        print(last_name + ' ' + first_name)
+    return foo_person                       # возвращает подфункцию с переменной 1
+
+2)
+реализация
+>>> imp.reload(script1)
+<module 'script1' from '/home/ryndin/venvs/test_py35/src/script1.py'>
+
+# создается фабрика от фабричной функции / переменная 1
+>>> family = script1.foo_family('ryndin')   
+
+# запускается подфункция из фабрики / переменная 2
+>>> family('lena')                          
+ryndin lena                         # вывод - это связка 2 переменных (над / под)
+
+>>> family('pasha')                 # фабрика неизменная и передает переменную 1
+ryndin pasha
+
+
+агументы функций:
+-----------------
+болшие возможности по пердачи аргументов в функцию 
+/ позиционные / именованные / по умолчанию / в кортеж / в словарь /
+
+
+Важно! Как интерпретатор читает аргументы функций:
+    1.	 Сопоставление неименованных аргументов по позициям.
+    2.	 Сопоставление именованных аргументов по именам.
+    3.	 Сопоставление дополнительных неименованных аргументов с  кортежем *name.
+    4.	 Сопоставление дополнительных именованных аргументов со словарем **name.
+    5.	 Сопоставление значений по умолчанию с отсутствующими именованными аргументами.
+
+1)
+def foo(*args):                     # фактически картеж
+    print(args)
+
+>>> imp.reload(script1)
+<module 'script1' from '/home/ryndin/venvs/test_py35/src/script1.py'>
+>>> script1.foo([1,2,3,4,5], {'name': 'yurii', 'age': 40}, [x for x in range(10)])
+([1, 2, 3, 4, 5], {'age': 40, 'name': 'yurii'}, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+2)
+универсальная конструкция аргументов
+def foo(*args, **kwargs):           # либо в кортеж / либо в словарь
+    print(args, kwargs)
+
+>>> script1.foo()
+() {}
+
+3)
+def foo(*args, **kwargs):           # именнованые аргументы идут в словарь
+    print(args, kwargs)
+
+>>> script1.foo([1,2,34,4], {x for x in 'spam'}, name='my', age='40')
+([1, 2, 34, 4], {'p', 's', 'm', 'a'}) {'age': '40', 'name': 'my'}
+
+4)
+>>> args = [1,2,3,4]
+>>> kwargs = dict(name='yurii', age=40)     # создал кортеж и словарь зараниее
+
+>>> script1.foo(*args, **kwargs)            # пошли в аргументы функции
+((1, 2, 3, 4), {'name': 'yurii', 'age': 40})
+
+
+5)
+>>> def f(a, *b, c=6, **d): 
+        print(a, b, c, d)
+
+>>> f(1, 2, 3, x=4, y=5, c=7)           # вся суть позиционности для аргументов !!
+1 (2, 3) 7 {‘y’: 5, ‘x’: 4}
+
+>>> f(1, *(2, 3), **dict(x=4, y=5))     # можно аргументы распихать нагляднее !!
+1 (2, 3) 6 {‘y’: 5, ‘x’: 4}
+
+
+
+6)
+устаревшая apply
+>>> pargs = (1, 2)
+>>> kargs = {‘a’:3, ‘b’:4}
+
+>>> apply(echo, pargs, kargs)       # идентична
+(1, 2) {‘a’: 3, ‘b’: 4}
+
+>>> echo(*pargs, **kargs)           # идентична
+(1, 2) {‘a’: 3, ‘b’: 4}
+
+
+Функция поиска минимума:
+-----------------------
+полиморфизм
+
+1)
+конечно много значит логика / инструмунты питна хорошо позволяют работать с массивами
+
+def minimum1(*args):
+    baza = args[0]
+    ather = args[1:]
+    for item in ather:
+        if item < baza:
+            baza = item
+    return baza
+
+2)
+метод sort реализован оптимально на языке C потому это работает максимально быстро
+
+def minimum2(*args):
+    temp = list(args)
+    temp.sort()
+    return temp[0]
+
+
+2)
+>>> import imp
+>>> imp.reload(script1)
+<module 'script1' from '/home/ryndin/venvs/test_py35/src/script1.py'>
+
+>>> script1.minimum1(2,3,4,56,1,2,3,4,5)                # минимум из чисел
+1
+
+>>> script1.minimum1('spam', 'ham', 'heppy', 'lucky')   # минимум из слов
+'ham'
+
+
+функция пересечения
+--------------------
+как упражнение - ужем знаю как делать
+
+1)
+def intersect(*args):
+    res = []
+    for item1 in args[0]:
+        for item2 in args[1:]:
+            if item1 in item2:
+                res.append(item1)
+            else:
+                break
+    return res
+
+2)
+>>> imp.reload(script1)
+<module 'script1' from '/home/ryndin/venvs/test_py35/src/script1.py'>     
+
+>>> script1.intersect('spam', 'ham')            # пересесение символов в последовательн
+['a', 'm']
+
+
+Для Функций (например Встроенных) именнованные аргументы (те что идут в **rwargs) часто 
+используются как Настройки !!!
+например sorted(oject_iterabled, reverse=True)
+
+
+рекурсивная функция
+===================
+(вызывает сама себя с аргумнтами)
+
+1)
+def my_sum(Li):
+    print(Li)
+    if not Li:
+        return 0                        # если аргументов нет - стоп рекурсии
+    else:
+        return Li[0] + my_sum(Li[1:])   # как бы складываются все результаты Li[0]
+
+2)
+>>> script1.my_sum([1,2,3,4])
+[1, 2, 3, 4]
+[2, 3, 4]
+[3, 4]
+[4]
+[]
+10                                      # результат суммы / рекурсия пока есть аргументы
+
+
+3)
+>>> def my_sum(Li):
+...     return 0 if not Li else Li[0] + my_sum(Li[1:])      # реализация через выражение!!
+...     
+>>> my_sum([1,2,3,4,5,6])
+21
+
+
+4)
+но синтаткис питон дает возносжность через цикл сделать проще
+
+>>> Li
+[1, 2, 3, 4, 5, 6]
+>>> su = []
+>>> su = 0
+>>> for x in Li: su += x                # циклическое прирощение элементами последоват-ти
+>>> su
+21
+
+
+передача функций как Объектов
+-----------------------------
+>>> def echo(message):                  # функция принимает аргумент
+...     print(message + ' message.')
+...     
+
+>>> echo
+<function echo at 0x7fd5dd39d048>
+
+>>> data = [(echo, 'spam'), (echo, 'ham')]  # массив пар функция/аргумент
+
+>>> for (foo, mess) in data:            # цикличный вызов пары функция/значение
+...     foo(mess)
+...     
+spam message.
+ham message.
+
+
+lambda функции
+==============
+буквально выражение анонимной функции / с аргументами / с простой логикой / без return
+то что является объектом лямбда функции - принимает аргументы для нее
+
+
+1)
+>>> f = lambda x,y,z: x+y+z         # аргументы / логика сложения
+>>> f
+<function <lambda> at 0x7fd5dd35aae8>
+
+>>> f(1,2,3)                        # объект - как анонимная функция
+6
+
+
+2)
+>>> def foo():
+...     return lambda x: x**2       # лямбда функция в обычной функции
+...     
+
+>>> foo
+<function foo at 0x7fd5dd39d7b8>
+
+>>> la = foo()                      # инстанс функции как бы и есть лямбда функция
+>>> la                              # потому принимает аргумент лямбда функции
+<function foo.<locals>.<lambda> at 0x7fd5dd39d268>
+
+>>> la(10)
+100
+
+
+функция map
+=================
+применяет функцию/метод указанную как 1 аргумент ко всем элементам последовательности,
+которые во 2 аргументе
+причем элементы последовательности Входят в функцию (элемент 1) как аргументы
+
+1)
+>>> def foo(x): return x**2
+>>> li
+[1, 2, 3, 4, 5]
+
+>>> map(foo, li)                # применяет функцию (1 арг) к каждому элементу (2 арг)
+<map object at 0x7fece4023f60>
+
+>>> list(map(foo, li))
+[1, 4, 9, 16, 25]
+
+2)
+>>> li = [1,2,3,4,5]
+>>> map(lambda x: x**2, li)
+<map object at 0x7f9d9640fd30>
+
+>>> list(map(lambda x: x**2, li))       # лямбда функция на лету к элементам м послед-ти
+[1, 4, 9, 16, 25]
+
+
+3)
+>>> li = [1,2,3,4,5]
+
+>>> list(map(lambda x, y: x + y, li, li))   # 2 аргумента в лямбду из последовательностей
+[2, 4, 6, 8, 10]
+
+
+функция filter
+================
+
+1)
+>>> li = range(-5, 5)
+>>> li
+range(-5, 5)
+
+>>> list(li)
+[-5, -4, -3, -2, -1, 0, 1, 2, 3, 4]
+
+>>> filter(lambda x: x> 0, list(li))        # отберает Элементы при которых ф-ция Тру
+<filter object at 0x7f9d96438198>           # спец объект встроенной функции filter
+
+>>> list(filter(lambda x: x> 0, list(li)))
+[1, 2, 3, 4]
+
+
+2)
+тот же код отбора элементов последовательности по условию (но без filter/lambda)
+
+>>> li
+range(-5, 5)                            # последовательность
+>>> lo = []                             # список - сборщик элементов Тру
+
+>>> for x in list(li):
+...     if x > 0:
+...         lo.append(x)
+         
+>>> lo
+[1, 2, 3, 4]                            # тот же результат
+
+
+функция reduce
+=================
+как бы накапливает результ выполения функции (в 1 агумент) + 2 аргумет из последовательности
+
+1)
+>>> list(li)
+[-5, -4, -3, -2, -1, 0, 1, 2, 3, 4]
+
+>>> reduce((lambda x,y: x+y), list(li))
+                            # сохраняет результат функции в 1 аргумент + второй аргумент 
+-5
+
+2)
+>>> reduce((lambda x,y: x+y), list(li), 5)    # 3 аргумент добавляет элемент по умолчанию
+0
+
+
+Хитрость значений по умолчанию Функций
+------------------
+>>> def foo():
+...     namee = []
+...     namee.append(2)
+...     return namee
+...     
+>>> foo()
+[2]
+>>> foo()                       # значение локальное и не по умолчанию - каждый раз новое
+[2]
+
+>>> def foo1(namee = []):       # значение по умолчанию - сохранятеся между вызовами ф-ции!
+...     namee.append(1)
+...     return namee
+...     
+>>> foo1()
+[1]
+>>> foo1()
+[1, 1]
+>>> foo1()
+[1, 1, 1]
+
+
+
+Модули
+=====================
+
+sys.modules                 # покаывает все импортированные модули (доступные нва момент)
+-----------
+Если модуль отсутствует в словаре, выполняется трехэтапный процесс, описанный.
+1.	 Отыскивают файл модуля.
+2.	 Компилируют в байт-код (если это необходимо). / .pyc
+3.	 Запускают программный код модуля, чтобы создать объекты, которые он
+определяет.
+
+
+пример байт кода модуля script1.cpython-35.pyc
+----------------
+160d 0d0a 8d73 9459 6b01 0000 e300 0000
+0000 0000 0000 0000 0002 0000 0040 0000
+0073 3400 0000 6400 0064 0100 8400 005a
+0000 6402 0064 0300 8400 005a 0100 6404
+0064 0500 8400 005a 0200 6406 0064 0700
+....
+
+cpython-35 -- имя компилятора
+
+
+import imp
+-----------
+imp.reload(module)
+
+
+пути поиска модулей py
+-----------------------
+1.	 Домашний каталог программы.
+2.	 Содержимое переменной окружения PYTHONPATH (если таковая определена).
+3.	 Каталоги стандартной библиотеки.
+4.	 Содержимое любых файлов с расширением .pht (если таковые имеются).
+
+
+sys.path 
+--------------
+тут все пути видны (из 4 выше)
+
+>>> for item in sys.path: print(item,)
+/home/ryndin/programs_install/pycharm-community-5.0.4/helpers/pydev
+/home/ryndin/venvs/test_py35/lib/python3.5/site-packages/setuptools-18.1-py3.5.egg
+/home/ryndin/venvs/test_py35/lib/python3.5/site-packages/pip-7.1.0-py3.5.egg
+/home/ryndin/programs_install/pycharm-community-5.0.4/helpers/pydev
+/usr/lib/python35.zip
+/usr/lib/python3.5
+/usr/lib/python3.5/plat-x86_64-linux-gnu
+/usr/lib/python3.5/lib-dynload
+/home/ryndin/venvs/test_py35/lib/python3.5/site-packages        # в сайт-пакетах среды
+/home/ryndin/venvs/test_py35/src                                # кастомные пакеты
+
+
+например для Винды сделать:
+------------
+C:\Python30\pydirs.pth
+
+
+типы модуляй    / компиляция в байт код / С код /
+----------------
+могут быть соответствия
+
+script.py == script.pyc == script.so(linux C) == script.dll(win C) == .zip(иисплняемый)
+
+
+импортирование
+==============
+1) 
+import module
+
+2) from module import foo
+
+3)
+Вторая и все последующие операции импортирования не приводят к перезапуску программного
+кода модуля – они просто получают объект модуля из внутренней таблицы модулей
+интерпретатора.
+
+4)
+module.__dict__
+
+5)
+dir(module)         # тут еще в сравнении с __dict__ + наследованные имен классов
+
+
+6)
+где коппилированняй файл в байт коде
+
+>>> script1.__cached__
+'/home/ryndin/venvs/test_py35/src/__pycache__/script1.cpython-35.pyc'
+
+7)
+>>> script1.__file__
+'/home/ryndin/venvs/test_py35/src/script1.py
+
+8)
+>>> script1.__loader__
+<_frozen_importlib_external.SourceFileLoader object at 0x7f42894d7d68>
+
+9)
+>>> script1.__name__
+'script1'
+
+10)
+>>> script1.__spec__
+ModuleSpec(
+    name='script1',
+    loader=<_frozen_importlib_external.SourceFileLoader object at 0x7f42894d7d68>,
+    origin='/home/ryndin/venvs/test_py35/src/script1.py'
+    )
+
+11)
+>>> from imp import reload
+>>> reload(script1)
+
+12)
+обавьте путь C:\mycode в переменную окружения PYTHONPATH или в файл .pth
+from dir1.dir2 import module            # уже в кодообразующей дирректории
+
+13)
+пакет-дирректория содержит 
+__init__.py
+
+и если ипорт только на пакет по в __init__.py можно: from module1 import foo1
+и тогда
+from package1 import foo1
+
+14)
+>>> import dir1.dir2.test
+init dir1                   # 2 инструкции принта в инит файлах + в тест файле
+init dir2
+test py in dir2
+
+15)
+>>> from dir1 import x    # импорт переменной из пакета(папки) - фактически из __init__.py
+>>> x
+55
+
+16)
+импорт по относительному пути от каталога
+
+from ..dir3 import module3          # идет на папку вверх и там в папку dir3
+
+17)
+>>> import string
+>>> string
+<module 'string' from '/usr/lib/python3.5/string.py'>>>> import string
+        # испорт по абсолютному пути по переменной PYTHONPATH
+
+18)
+еще раз - абсолютные пути
+>>> from sys import path
+>>> type(path)
+<class 'list'>
+
+>>> for item in path: print(item)
+/home/ryndin/programs_install/pycharm-community-5.0.4/helpers/pydev
+/home/ryndin/venvs/test_py35/lib/python3.5/site-packages/setuptools-18.1-py3.5.egg
+/home/ryndin/venvs/test_py35/lib/python3.5/site-packages/pip-7.1.0-py3.5.egg
+/home/ryndin/programs_install/pycharm-community-5.0.4/helpers/pydev
+/usr/lib/python35.zip
+/usr/lib/python3.5
+/usr/lib/python3.5/plat-x86_64-linux-gnu
+/usr/lib/python3.5/lib-dynload
+/home/ryndin/venvs/test_py35/lib/python3.5/site-packages
+/home/ryndin/venvs/test_py35/src            # активная корневая папка Виртуальной среды
+
+
+19)
+__all__ = [..., ..., ..., ]     # указание что испортировать при / from mod import *
+
+
+20)
+
+if __name__ == '__main__':      # если импорт модуля - то запуск функции в модуле 
+    foo()                       # запускальщик 
+
+$ python3 runme.py              # вот запуск файла как исполнительного интерпритатором
+
+На практике программный код самопроверки в конце файла, заключенный в условную инструкцию,
+проверяющую атрибут __name__, является, пожалуй, самым распространенным и удобным способом
+модульного тестирования в языке Python.
+
+
+21)
+from / import / as
+import / as
+------------------
+from module1.module2 import foo_long_name as psevdo_foo     # импорт под псевдонимом
+
+
+21)
+Интроспекция
+метапрограммы (программы поверх программ)
+------------
+module.name                     # 4 разных способа доступа к одному методу модуля
+module.__dict__[‘name’]
+sys.modules[‘module’].name      # (интересно много методов) 
+getattr(module, ‘name’)
+
+
+22)
+импорт модуля можно сохранить в переменную
+
+>>> my_import = __import__('script2')           # спец метод импорта
+>>> my_import
+<module 'script2' from '/home/ryndin/venvs/test_py35/src/script2.py'>
+
+но необходимость в релоад после изменений кода остается
+>>> my_import = reload(__import__('script2'))
+>>> my_import.foo()
+test
+
+
+23)
+script_reload_all.py
+
+универсальный перезагружальщик модулей (показывает что перезагружается)
+можно увидеть зависимоть перезагрузок между моделем и импортами других модулей !!!
+
+import types
+from imp import reload
+
+def status(module):
+    print('reloading / ' + module.__name__)
+
+def transitive_reload(module, visited):
+    if not module in visited:
+        status(module)
+        reload(module)
+
+        visited[module] = None
+        for attrobj in module.__dict__.values():
+            if type(attrobj) == types.ModuleType:
+                transitive_reload(attrobj, visited)
+
+def reload_all(*args):
+    visited = {}
+    for arg in args:
+        if type(arg) == types.ModuleType:
+            transitive_reload(arg, visited)
+
+if __name__ == '__main__':
+    import script_reload_all
+    reload_all(script_reload_all)
+
+выполнение (пример):
+>>> reload(script_reload_all)
+<module 'script_reload_all' from '/home/ryndin/venvs/test_py35/src/script_reload_all.py'>
+>>> from script_reload_all import reload_all
+>>> reload_all(string)
+reloading / string
+reloading / re
+reloading / sre_parse
+reloading / copyreg
+reloading / sys
+reloading / _locale
+reloading / sre_compile
+reloading / _sre
+reloading / _string
+
+
+24)
+reload() любит from
+-------------------
+если перезагрузили модель, то надо сделать и импорт/копия метода через from !!!
+
+
+
+Классы
+(тип объектов - конструктор)
+============================
+
+Для ООП главное - иерархия наследования !!!
+self
+объект Класса
+Атрибуты класса
+Методы класса
+Особый тип для создания логики в Инстансах
+
+Для классов важно (как элементы ООП):
+    Наследование
+    Композиция
+
+    Объекты Как модули и функции но круче
+    + Множество экземпляров / Фабрики для создания Объектов
+    + Адаптация через наследование и переопределение
+    + перегрузка операторов
+
+Суперклассы / Базовые классы
+и
+Подклассы   / Дочерние классы
+
+1)
+>>> from script1 import MyClass
+>>> me1 = MyClass()                     # создание Экземпляра класса
+>>> me1
+<script1.MyClass object at 0x7f9e8e752eb8>
+
+>>> me2 = MyClass()                     # создание еще одного Экземпляра класса
+>>> me1, me2
+(<script1.MyClass object at 0x7f9e8e752eb8>, <script1.MyClass object at 0x7f9e8e752e10>)
+
+# два экземпляра класса (пока идентичные) лежат в разных блоках памяти 
+
+
+2)
+базовый набор атрибутов Экземпляра класса / Такой же у самого Класса
+
+>>> dir(MyClass)
+    -"-
+>>> dir(me1)
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__',
+'__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__',
+'__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__',
+'__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__']
+
+например, метод создания атрибута для Инстанса
+>>> me1.__setattr__('me', 'yurii')
+>>> me1.me
+'yurii'
+
+
+3)
+сторонние библиотеки Суперклассов - это и есть Фреймворки, например Django / Flask /
+(кто то уже сделал за тебя и можно воспользоваться за так)
+
+Программирование в мире ООП – это лишь вопрос сборки уже отлаженного программного кода и
+настройки его путем написания своих собственных подклассов.
+
+Шаблоны проектирования - наиболее востребованные решения в ООП 
+(вопрос архитектуры программирования)
+
+
+4)
+Объекты классов / создаются инструкциями (class - это выполняемая инструкция)
+Объекты инстансов классав / создаются вызывами объктов классов (как функций)
+
+
+5)
+Начало (как создать Класс и Инстанс):
+-------------------
+тут все понятно
+
+код:
+----
+class MyClass(object):
+    def __init__(self, data_init):          # что при создании Инстанса класса
+        self.data_init = data_init
+
+    def set_data(self, set_data):           # кастомный метод добавления данных
+        self.set_data = set_data
+
+    def print(self):                        # кастомный метод принта из Инстанса
+        print('init: {} / set: {}'.format(self.data_init, self.set_data))
+
+выполнение:
+----------
+>>> from script1 import MyClass
+>>> data1 = MyClass('yurii')        # создание инстанса как вызов класса
+>>> data1.set_data('ryndin')        # метод инстанса (добавление данных)
+>>> data1.print()                   # метод инстанса (принт)
+init: yurii / set: ryndin
+
+
+6)
+пример - наследование классов
+/ этот пример обширный - суть понятна. так много расписывать больше не буду /
+----------------
+
+class MyClass(object):
+    def __init__(self, data_init):
+        self.data_init = data_init
+
+    def set_data(self, set_data):
+        self.set_data = set_data
+
+    def print(self):
+        print('init: {} / set: {}'.format(self.data_init, self.set_data))
+
+
+class SecondClass(MyClass):
+    def set_data_too(self, set_data_too):
+        self.set_data_too = set_data_too
+
+    def print_too(self):
+        print('init: {} / set: {} / set_too {}'.format(
+            self.data_init, self.set_data, self.set_data_too))
+
+
+пример - выполнение
+--------------------
+>>> data2 = SecondClass('yurii')         # инстанс от второго класса (подкласса)
+
+>>> dir(data2)
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__',
+'__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__',
+'__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__',
+'__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'data_init',
+'print', 'print_too', 'set_data', 'set_data_too']
+    # доступны методы и Подкласса и Суперкласса
+
+>>> data2.print()
+init: yurii / set: <bound method MyClass.set_data of <script1.SecondClass object at 0x7ff071412b00>>
+    # метод принта от Суперкласса (2 аргумент не задан / но метод существует в памяти)
+
+>>> data2.print_too()
+init: yurii / set: <bound method MyClass.set_data of <script1.SecondClass object at 0x7ff071412b00>> / set_too <bound method SecondClass.set_data_too of <script1.SecondClass object at 0x7ff071412b00>>
+    # метод принта от Подкласса(2 аргумента не заданы но методы в памяти)
+
+>>> data2.set_data('ryndin')        # заданы аргументы по методам Подкласса и Суперкласса
+>>> data2.set_data_too('programmer')
+
+>>> data2.print()
+init: yurii / set: ryndin           # урезанный принт по Суперклассу
+
+>>> data2.print_too()
+init: yurii / set: ryndin / set_too programmer
+                                    # расширенный принт по Подклассу
+
+
+7)
+в Инстанс класса можно вставить аргумент извне (без self)
+(такая конструкция используется часто)
+
+>>> data2.new_data = 40
+>>> data2
+<script1.SecondClass object at 0x7ff071412b00>
+
+>>> data2.__dict__
+{'new_data': 40, 'data_init': 'yurii', 'set_data': 'ryndin', 'set_data_too': 'programmer'}
+
+
+8)
+перегрузка операторов - концепция классов
+---------------------
+__метод__(self, [])
+
+это в том числе и перехватка операций, их переопределение
+или кастомизация предусмотренных классами методов реализации Инстансев
+
+Классы имеют встроенную реализацию почти всех Встроенных методов языка Питон
+(__add__, например срабатывает при сложении для инстанса
+но фокус в том что __add__ можно и переделать то есть изменить саму суль сложения !!
+но лучше это не делать Джуну да даже и Мидлу :))  )
+
+__str__ - например срабатывает при вызове/отображении инстанса класса
+
+class SecondClass(MyClass):
+    ...
+    def __str__(self):
+        return 'Fucking Life'
+
+>>> from script1 import SecondClass
+>>> data1 = SecondClass('yurii')
+>>> data1
+<script1.SecondClass object at 0x7f59523b9c88>
+>>> print(data1)                # вызов метода __str__
+Fucking Life
+
+
+9)
+__init__
+практически всегда востребован в Классах и нужен для программирования начального
+состояния Инстанса класса.
+
+
+10)
+экземпляры классов можно использовать как Хранилища данных, создав экземпляр класса. пусть 
+даже пустой, а затем интерактивно создавать атрибуты инстанса класса со значениями
+
+>>> class MyTest: pass
+>>> data = MyTest()             # пустой инстанс
+
+>>> data.name = 'yurii'         # инстанс наполяю атрибутами
+>>> data.age = 40
+
+>>> data
+<MyTest object at 0x7f59523f0160>
+>>> data.__dict__               # атрибуты доступны как словарь
+{'age': 40, 'name': 'yurii'}
+>>> type(data.__dict__)
+<class 'dict'>
+>>> data_dict = data.__dict__
+>>> data_dict.values()
+dict_values([40, 'yurii'])
+
+аналог, но атрибуты уже определены при инициации инстанса
+-------------------
+
+class Storage:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __repr__(self):
+        return 'self.name // self.age'.format(self.name, self.age)
+
+>>> stor1 = Storage('yurii', 40)
+>>> stor1
+self.name // self.age
+
+
+Еще раз - основная идея ООП в Классах:
+----------------------------
+    поиск атрибутов по дереву наследования Классов  / вызвать метод правильно 
+    обращение к аргументу self                      / в рабете нужен Инстанс
+
+
+
+11)
+Класс + Хранилище данных
+------------------------
+
+начало:
+-------
+Выполенние операций над инстансами за пределами класса (не надо так)
+До инкапсуляции
+
+class Person(object):
+    def __init__(self, name, job=None, pay=0):      # создание Инстанса - только начальные
+        self.name = name
+        self.job = job
+        self.pay = pay
+
+    def __repr__(self):
+        return '{} {} {}'.format(self.name, self.job, self.pay)
+
+
+if __name__ == '__main__':                      # если вызвать через Терминал
+    pe = Person(name='petya')
+    pe1 = Person(name='yurii', job='programmer', pay=10000)
+    pe2 = Person(name='yurii', job='programmer', pay=10000)
+    pe2.name = 'lena'
+    pe2.pay *= 1.15                             # изменение Инстанса вне Класса (не надо)
+    print(pe, ' // ', pe1, ' // ', pe2)
+
+ryndin@pc:~/venvs/test_py35/src$ python3 script1.py
+petya None 0  //  yurii programmer 10000  //  lena programmer 11500.0
+
+
+12)
+Инкапсуляция + Полиморфизм / Сокрытие логики в Классах
+-------------
+Идея - Каждая логика к Инстансу - через метод Класса !!!
+
+Промежуточный код:
+-----------------
+class Person(object):
+    def __init__(self, name, job=None, pay=0):
+        self.name = name
+        self.job = job
+        self.pay = pay
+        self.percent = 0
+
+    def give_raise(self, percent=0):                # начальная логика расчета надбавок
+        self.percent = percent
+        self.pay = float(self.pay * (1+self.percent))
+
+    def __repr__(self):
+        return '{} {} {:.2f} raise:{:.2f}'.format(self.name, self.job, self.pay, self.percent)
+
+class Manager(Person):
+    def __init__(self, name, pay):
+        Person.__init__(self, name, 'mngr', pay)    # переопределение job='mngr'
+
+    def give_raise(self, percent, bonus=0.20):      # инкапсуляция и переопределение
+        Person.give_raise(self, (percent+bonus))
+        self.percent = percent
+        self.bonus = bonus
+        # self.pay = float(self.pay * (1+self.percent) * (1+self.bonus))
+
+    def __repr__(self):
+        return '{} {} {:.2f} raise:{} bonus:{}'.format(
+            self.name, self.job, self.pay, self.percent, self.bonus)
+
+
+if __name__ == '__main__':
+    pe1 = Person(name='yurii', job='dev', pay=10000)
+    pe2 = Person(name='lena', job='dev', pay=12000)
+    me1 = Manager(name='pasha', pay=15000)      # job уже задан и инит методе (переопред)
+
+    for obj in (pe1, pe2, me1):             # полиморфизм / логика зависит от объекта 
+        obj.give_raise(0.15)                # унификация вызова по объектам (переопределен)
+        print(obj)
+
+выполнение:
+-----------
+ryndin@pc:~/venvs/test_py35/src$ python3 script1.py
+yurii dev 11500.00 raise:0.15               # переопределен и расчет бонусов и вывод
+lena dev 13800.00 raise:0.15
+pasha mngr 20250.00 raise:0.15 bonus:0.2
+
+
+13)
+Вложенные объекты Классов в Классы
+-----------------
+class Department:
+    def __init__(self, *args):          # под прием инстансев Класса Персон (при инициации)
+        self.members = list(args)
+
+    def add_member(self, person):
+        self.members.append(person)     # добавление Инстанса класса явным методом
+
+    def give_raises(self, percent):     # логика передачи всем инстансам значения премии
+        for person in self.members:
+            person.give_raise(percent)  # логика вызова у всех Интсансев их методо расчета
+
+    def show_all(self):
+        for person in self.members:
+            print(person)
+
+if __name__ == '__main__':
+    yurii = Person('yurii', job='dev', pay=1000)       # создание 3х инстанса 2х классов
+    lena = Person('lena', job='dev', pay=1200)
+    pasha = Manager('pasha', pay=2000)
+
+    development = Department(yurii, lena)       # вложение 2х инстансев в объкт
+
+    development.add_member(pasha)               # пеедача методом инстанса в объект
+
+    development.give_raises(.30)                # вызов метода у всех инстансев
+
+
+В принципе, выше продемонстированны все основные методы ООП в Классах !!!
+-------------------------------------------------------------------------
+
+
+14)
+_method_of_class(self):             
+        # соглашение что данный метод не переопред-ся за пределами класса 
+
+__method_of_class(self):            
+        # автоматически привязывает к методу имя класса (это уникальность)
+-----------------------
+
+
+БД / DB / ORM / хранение данных в Базах Данных
+=================
+Реляционные (связи между таблицами) 
+mySQL / postgreSQL / SQLite / Oracle / shelve(упрощенно)
+
+ORM: / SQLObject и SQLAlchemy /
+Механизмы объектно-реляционного отображения (object-relational mapping, ORM),
+такие как SQLObject и SQLAlchemy, могут автоматически отображать реляционные таблицы
+и записи в классы и экземпляры на языке python и  обратно, благодаря чему мы можем
+обрабатывать хранимые данные, используя привычный синтаксис классов языка Python.
+
+Не реляционные БД / типа Хеш балицы / Словари пар значений ключ/значение
+тип: noSQL / mongoDB /
+
+
+
+15)
+Подробно про классы
+===================
+
+области видимости
+-----------------
+переменные / классы / иснтансы
+
+x = 11                  # print(x) / 11
+
+def foo():              # foo() / 11
+    print(x)
+
+def foo1():             # foo1() / 22
+    x = 22
+    print(x)
+
+class Super:            # inst1 = Super() / print(inst1.x) / 33
+    x = 33
+    def foo3(self):     # inst1.foo3()
+        x = 44          # чисто локальная переменная функции - извне никак доступа нет
+        self.x = x + 22 # переменная для инстанса / вызывается извне / print(inst1.x) / 66
+
+но есть
+global x                
+        # переменная становится глобальной в модуле   
+nonlocal x              
+        # переменная становится видимой в объемлющ функции (если во вложенной функции была)
+меняют область видимости для переменной (но не становится глобальной в модуле!!)
+------------------
+
+
+
+Статические методы классов - это локальные функции в отношении к классам / к инстансам не
+имеют отношения / нет в них self ссылки на инстанс /
+
+наследование и вложенность
+--------------------------
+class Super:
+    def method(self):              # собственный метод
+        print('Super class')
+    def deligate(self):            # спящий метод / в каким либо инстансов функция deligate
+        self.action()              # потому Абстрактынй Супер класс (спящие методы)
+
+# Абстрактый класс предпологает что его методы(часть) будут реализованы в подКлассах !!
+
+
+class Empty(Super):
+    pass                            # полное наследование (ничего не расширяет)
+
+class Replacer(Super):
+    def method(self):               # полное переопределение метода
+        print('class replace method')
+
+class Extender(Super):
+    def method(self):               # комбинация инструкций / и своя и из Супер класса
+        print('start extend class')
+        Super.method(self)
+        print('end extend class')
+
+class Provider(Super):
+    def action(self):               
+                # класс для создания инстанса с методом, который вызывается в супер классе
+        print('in provide class -> action foo')
+
+выполнение:
+-----------
+>>> from script3 import *
+
+>>> for item in (Empty, Replacer, Extender):    # последовательность классов
+...     print(item.__name__)                    # просто имя классав из последовательности
+...     item().method()
+...     
+Empty
+Super class                 # полное наследование класса super
+
+Replacer                    # полное переопределение метода класса
+class replace method
+
+Extender                    # комплксность метода / и переопределение / и вставка из супер 
+start extend class
+Super class
+end extend class
+
+>>> x = Provider()  
+                # особый инстанс - определяет метод который активируется в Супер классе
+>>> x.deligate()
+in provide class -> action foo
+
+
+16)
+@astractmethod      / (@декоратор - расширяет свойства объекта)
+==============
+
+это метод который задается в супер классе, и требуется чтобы этот метод переопрелялся
+в подклассах, иниче инстансы этик классов не будут создаваться (если метод не
+переопределен и подклассе)
+
+необходимые импорты
+-------------------
+from abc import abstractmethod, ABCMeta     / Декоратор + МетаКласс (см. ниже)
+
+class Super(metaclass=ABCMeta):         # такое наследование обязательно
+    @abstractmethod                     # деоратор - расширяет свойства класса
+    def method(self):                   # метод требует переопределения в подклассе
+        print('its abstract method')
+
+class SubClass(Super):
+    def method(self):                   # переопределение в подклассе
+        print('its subclass method')
+
+if __name__ == '__main__':
+    inst1 = SubClass()              # создан инстанс подкласса
+    inst1.method()                  # запущен метод подкласса (абстрактный - переопределен)
+
+проба метода
+------------
+if __name__ == '__main__':
+    inst1 = SubClass()
+    
+    inst1.method()                  # срабатывает все 3 вызова / так как через Инстанс 
+    SubClass.method(inst1)
+    Super.method(inst1)
+
+выводит
+-------
+/home/ryndin/venvs/test_py35/bin/python /home/ryndin/venvs/test_py35/src/script3.py
+its subclass method
+its subclass method
+its abstract method
+
+
+тексты ошибок 
+-------------    
+1) если в подклассе не переопределить абстракт метод
+inst1 = SubClass()
+TypeError: Can't instantiate abstract class SubClass with abstract methods method
+
+2) если вызвать метод инстанса без инстанса (без self)
+Super.method()
+TypeError: method() missing 1 required positional argument: 'self'
+
+
+17)
+классы: перегрузка операторов
+============================
+
+__init__        # метод инициации инстанса класса (класс создан методом __new__)
+
+__sub__         # метод при вычитании из инстанса
+
+__add__         # метод при добавлении к инстансу
+
+__del__         # метод при уничтожении объекта (инстанса)
+
+__or__          # метод при сравнении | побитовое ИЛИ
+
+__repr__        # вывод / перезентация объекта
+
+__call__        # метод при вызове функции
+
+__getattr__     # метод при обращении к атрибуту объекта (object.attr)
+
+__setattr__     # метод при присваивании атрибуту значения (object.attr = value)
+
+__delattr__     # метод при удалении атрибута объекта (del object.attr)
+
+__getitem__     # при доступе к эл-ту по индексу / по срезу / при итерации, циклы, __iter__
+
+__setitem__     # при присвоении значения элементу по индексу / или привоение срезу
+
+__delitem__     # при удалении элемента по индекусу / или среза (del obj[key] / obj[i:j])
+
+__len__         # метод при запросе длинны объекта (len(object))
+
+__bool__
+
+__lt__, __gt__, __le__, __ge__, __eq__, __ne__, 
+
+__radd__        # при правостороннем прибавлении (не_экземпляр + экземпляр)
+
+__iter__, __next__
+
+__contains__    # метод при проверке на вхождение (item in iterat_object)
+
+__index__       # целое чисто / hex(obj), bin(obj), oct(obj)
+
+__enter__, __exit__     # методы при работе менеджера контекста (with object as var)
+
+__get__, __set__, __delete__    # дескрипторы атрибутов
+
+__new__         # метод вызова при создании объекта (класса) / ровно до работы __init__
+
+
+обобщающий пример атрибутов класса
+=================
+class MyList:
+    def __init__(self, start):  
+    #self.wrapped = start[:] # Скопировать start: без побочных эффектов
+        self.wrapped = []                       # Убедиться, что это список
+        for x in start: self.wrapped.append(x)
+    def __add__(self, other):
+        return MyList(self.wrapped + other)
+    def __mul__(self, time):
+        return MyList(self.wrapped * time)
+    def __getitem__(self, offset):
+        return self.wrapped[offset]
+    def __len__(self):
+        return len(self.wrapped)
+    def __getslice__(self, low, high):
+        return MyList(self.wrapped[low:high])
+    def append(self, node):
+        self.wrapped.append(node)
+    def __getattr__(self, name):                # Другие члены: sort/reverse/и так далее
+        return getattr(self.wrapped, name)
+    def __repr__(self):
+        return repr(self.wrapped)
+
+
+начальный пример / для понимания:
+----------------
+class Construct:
+    def __init__(self, number):     # при инициации инстанс принимает значение
+        self.number = number
+
+    def __add__(self, other):       # при приращении к инстансу значения первый аргумент
+        self.number *= other        # инстанса не прирастает а умножается !! так прикол
+
+выполнение:
+-----------
+>>> from script3 import Construct
+>>> inst1 = Construct(10)           # Инстанс класса
+       
+>>> inst1 + 20                      # приращение инстанса
+>>> inst1
+<script3.Construct object at 0x7f10337cee10>
+>>> inst1.number                    # но аргумент Интсанса умножился (сохранен)
+200
+
+
+
+__getitem__ / __setitem__
+=========================
+
+__getitem__     # при запросе к эл-ту по индексу / по срезу / при итерации, циклы, __iter__
+__setitem__     # при присвоении значения элементу по индексу / или привоение срезу
+
+кратко - При индексировании элементов экземпляров
+
+код
+-------
+class Construct:
+    def __init__(self, item):               # инициация инстанса и аргумента
+        self.item = item
+
+    def __getitem__(self, item):            
+                                    # при вызове из инстанса мнимого объекта по индексу
+        self.item *= item
+        print('you ar get element {}'.format(item))
+
+выполение:
+----------
+>>> from script3 import Construct
+>>> inst1 = Construct('spam')           # создан инстанс и аргумент
+
+>>> inst1[2]                            # запукает логику __getattr__
+you ar get element 2
+>>> inst1.item                          # аргумент интсанса изменился (сохранен)
+'spamspam'
+
+На практике этот прием может использоваться для создания объектов, которые реализуют
+интерфейс последовательностей, и  для добавления логики к операциям над встроенными типами
+
+
+еще код
+-----------
+class Step:
+    def __getitem__(self, item):        # через инстанс принимается значение
+        return self.data[item]          # аргумент инстанса подразумевается
+
+выполнение
+----------
+>>> from script3 import Step
+>>> inst = Step()
+
+>>> inst.data = 'spammy'            # создан аргумент интсанса
+>>> inst[0]                         # срабатывает __getitem__ с индексом
+'s'
+>>> inst[1]
+'p'
+>>> inst[:]
+'spammy'
+>>> inst[1:-1]
+'pamm'
+
+>>> for item in inst:           # при обходе цикла тоже работает __getitem__
+...     print(item)
+
+
+
+__iter__ / __next__ / StopIteration
+===================
+
+если у объекта есть __iter__ / тогда срабатывает метод __next__ в псоледовательности
+
+next(I) / то же что и / I.__next__()
+
+
+реализация кода:
+----------------
+class IterClass:
+    def __init__(self, start, stop):       # код инициации инстанса
+        self.start = start - 1
+        self.stop = stop
+
+    def __iter__(self):                    
+                                        # вызывается при реализации Циклов (весть инстанс)
+        return self
+        
+    def __next__(self):                 # в объекте итератора логика метода __next__
+        if self.start == self.stop:
+            raise StopIteration
+        self.start += 1
+        return self.start * 10
+        
+выполнение:
+----------
+>>> for item in IterClass(2,9): print(item)     
+                        # активируется __init__ / for активириет __iter__ + __next__ / 
+20
+30
+40
+50
+60
+70
+80
+90
+
+>>> inst = IterClass(2,9)               # инстанс класса / он же объект-итератор 
+>>> inst
+<script3.IterClass object at 0x7fb8ade4aa20>
+>>> inst.__iter__()
+<script3.IterClass object at 0x7fb8ade4aa20>
+
+>>> inst1 = inst.__iter__()             # из инстанса создание объекта-итератора
+>>> next(inst1)                         # в итераторе доступен метод __next__
+20
+>>> next(inst1)
+30
+....
+
+>>> inst = IterClass(0, 10)             # новая итерация / кастомная логика в __next__
+>>> [x for x in inst]
+[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+
+
+__bool__ / __len__
+
+
+__contains__
+===============
+
+Проверка на входждение элемента в Последовательность выполняется по следующему приоритету:
+1) __contains__ / 2) __iter__ / 3) __getitem__ /
+
+
+
+__getattr__ / __setattr__ /
+===============
+
+Ниже в теории все сказано, да и пример достаточно понятный
+
+Метод __getattr__ выполняет операцию получения ссылки на атрибут. Если говорить более
+определенно, он вызывается с именем атрибута в виде строки всякий раз, когда
+обнаруживается попытка получить ссылку на неопределенный (несуществующий) атрибут.
+Этот метод не вызывается, если интерпретатор может обнаружить атрибут посредством
+выполнения процедуры поиска в дереве наследования.
+
+Родственный ему метод перегрузки __setattr__ перехватывает все попытки присваивания
+значений атрибутам. Если этот метод определен, выражение self.attr = value будет
+преобразовано в вызов метода self.__setattr_(‘attr’, value). Работать с этим методом
+немного сложнее, потому что любая попытка выполнить присваивание любому атрибуту
+аргумента self приводит к  повторному вызову метода __setattr__, вызывая бесконечный
+цикл рекурсивных вызовов (и, в конечном итоге, исключение переполнения стека!). Если вам
+потребуется использовать этот метод, все присваивания в нем придется выполнять посредством
+словаря атрибутов. Используйте self.__dict__[‘name’] = x, а не self.name = x !!!
+
+Код:
+----------------
+class GetSetClass:
+    def __init__(self):
+        pass
+
+    def __getattr__(self, item):
+        if item == 'me':
+            return 40
+        else:
+            raise AttributeError
+
+    def __setattr__(self, key, value):
+        if key == 'age':
+            self.__dict__[key] = value      # сохранение значения атрибута
+
+выполнение:
+----------
+>>> inst.me                 # вызов задуманного атрибута / сработка __getattr__
+40
+
+>>> inst.age = 50           # вызов задуманного атрибута / сработка __setattr__
+>>> inst.__dict__
+{'age': 50}
+
+>>> inst.name = 'yurii'     
+                # вызов не задуманного атрибута / __setattr__ - сохранение не сработает
+>>> inst.__dict__
+{'age': 50}                 # в словарь атрибутов не добавлен
+
+
+код2:
+----------
+class GetClass:
+    def __init__(self, name):
+        print('have ', name)
+        self.name = name
+
+    def __getattr__(self, item):
+        print('get', item)
+        self.item = item
+
+выполнение:
+----------
+>>> from script3 import DelClass
+>>> inst1 = DelClass(name='yurii')      # при создании инстанса
+have  yurii
+
+>>> inst1.test                          # при вызове атрибута инстанса (даже несуществ-го)
+get test
+
+>>> inst1.__dict__
+{'item': 'test', 'name': 'yurii'}       # сохраненные атрибуты инстанса
+
+
+
+__repr__ / __str__
+===============
+кратко - Строковое представление Инстанса класса
+
+код:
+----------
+class StrReprClass:
+    def __init__(self, item):
+        self.item = item
+
+    def __str__(self):
+        return 'str {}'.format(self.item)
+
+    def __repr__(self):
+        return 'repr {}'.format(self.item)
+
+выполение:
+----------
+>>> from script3 import StrReprClass
+>>> inst = StrReprClass([1,2,3,4])
+
+>>> inst                        # представление Инстанса в коде
+repr [1, 2, 3, 4]
+
+>>> print(inst)                 # представление инстанса в принте (клиенту)
+str [1, 2, 3, 4]
+
+
+
+__add__ / __radd__ / __iadd__ /
+==============================
+стр.814 .....
+
+потом разберусь, с __add__ все понятно. А __radd__ / __iadd__ - подождут.
+
+
+
+__call__
+===============
+
+Метод вызывается (акивируется) если обратиться к Инстансу как к функции / inst(*args)
+
+метод __call__ может оказаться удобнее при взаимодействии с  прикладными интерфейсами,
+где ожидается функция, – это позволяет создавать объекты, совместимые с интерфейсами,
+ожидающими получить функцию, которые к  тому же способны сохранять информацию о  своем
+состоянии между вызовами. Фактически этот метод занимает третье место среди наиболее
+часто используемых методов перегрузки операторов ­– после конструктора __init__
+и методов форматирования __str__ и __repr__.
+
+код:
+---------
+class StrReprClass:
+    def __call__(self, *args, **kwargs):
+        print('{} {}'.format(args, kwargs))
+
+выполнение:
+----------
+>>> from script3 import StrReprClass
+>>> inst = StrReprClass([1,2,3,4])                  # отрабатывает __init__
+
+>>> inst([1,2,3,4], name='lena', age='40')          # отрабатывает __call__
+([1, 2, 3, 4],) {'name': 'lena', 'age': '40'}
+
+
+еще код:
+-------
+class CallClass:
+    def __init__(self, name):
+        self.name = name
+
+    def __call__(self, value):
+        self.value = value
+
+    def __repr__(self):
+        return '{} {}'.format(self.name, self.value)
+
+выполение
+---------
+>>> from script3 import CallClass
+
+>>> inst1 = CallClass(name='car')       # Инстанс с атрибутом 
+
+>>> inst1(value='green')                # Вызов Инстанса с атрибутом вторым
+
+>>> inst1
+car green
+
+Фактически это один из лучших способов сохранения информации о  состоянии в языке
+Python – он намного лучше способов, обсуждавшихся ранее и применявшихся к функциям
+(глобальные переменные, ссылки в область видимости объемлющей функции и изменяемые
+аргументы со значениями по умолчанию). Благодаря ООП состояние можно сохранять явно,
+посредством присваивания значений атрибутам.
+
+
+__lt__, __gt__  / больше / меньше
+==============
+
+class C:
+    data = ‘spam’
+    def __gt__(self, other):            # срабатывает при сравнении на "больше"
+        return self.data > other
+    
+    def __lt__(self, other):            # срабатывает при сравнении на "меньше"
+        return self.data < other
+
+X = C()
+print(X > ‘ham’)                        # Выведет True (вызовет __gt__)
+print(X < ‘ham’)                        # Выведет False (вызовет __lt__)
+
+
+
+__bool__ и __len__
+==================
+
+class BoolClass:
+    def __bool__(self):
+        print('bool def')
+        return True
+
+>>> from script3 import BoolClass
+>>> inst1 = BoolClass()
+>>> bool(inst1)
+bool def
+True
+
+
+
+__del__     / (__init__)
+====================
+Конструктор __init__ вызывается во время создания экземпляра. 
+Противоположный ему метод __del__ вызывается автоматически, когда освобождается
+память, занятая объектом (то есть во время «сборки мусора»)
+
+код
+----------
+class DelClass:
+    def __init__(self, name):           # срабатывает при создании Инстанса
+        print('have ', name)
+        self.name = name
+
+    def __del__(self):                  # срабатывает при удалении Инстанса
+        print('delete ', self.name)
+
+выполение 1
+-----------
+>>> from script3 import DelClass
+>>> me = DelClass(name='yurii')         # создан Инстанс
+have  yurii
+
+>>> me = 'not yurii'                    # переменная переопредена (сработал сборщик мусора)
+delete  yurii
+
+выполнение 2
+------------
+>>> me = DelClass(name='yurii')         # создан Инстанс
+have  yurii
+>>> del(me)                             # Инстанс явно удален
+delete  yurii
+
+Этот метод (деструктор) удобно использовать для реализации некоторых заключительных
+действий (таких как завершение соединения с сервером).
+
+
+
+__enter__ / __exit__
+=================
+
+
+
+__get__ / __set__
+=================
+
+
+
+__new__
+=================
+
+
+
+
+Шаблоны проектирования в классах
+================================
+
+1)
+Наследование классов
+--------------------
+
+2) 
+Композиция
+-------------
+
+3)
+хранение инстансев классов как БД / файлы
+---------------------------------
+picle (как строка) / chelve (по ключу)
+
+import pickle
+object = someClass()
+file = open(filename, ‘wb’)             # Создать внешний файл
+pickle.dump(object, file)               # Сохранить объект в файле
+
+import pickle
+file = open(filename, ‘rb’)
+object = pickle.load(file)              # Позднее извлечь обратно
+
+
+import shelve
+object = someClass()
+dbase = shelve.open(‘filename’)
+dbase[‘key’] = object                   # Сохранить под ключом key
+
+import shelve
+dbase = shelve.open(‘filename’)
+object = dbase[‘key’]                   # Позднее извлечь обратно
+
+Во Фреймворках таких как Джанго реализовано храние данных Инстансов в БД 
+sqlite / mysql / postgresql / через ORM
+
+4)
+Делегирование / объекты-обертки
+--------------
+
+5)
+__X => _Class__X
+----------------
+псевдо-частные атрибуты класса
+искажение имен
+
+__X -- двойное подчеркивание в названии атрибута класса привязывает имя в инстансе к
+конкретному классу (спасает при пересечении имен во множественном наседовании)
+
+код:
+--------
+class Super1:
+    __X = 11
+
+class Super2:
+    __X = 22
+
+class SubClass(Super1, Super2):         # множество супер-классов 
+    __X = 33
+
+выполение:
+----------
+>>> from script3 import SubClass
+>>> inst = SubClass()                   # инстанс
+
+>>> inst._SubClass__X                   # все атрибуты-тезки доступны через Искажение имен
+33
+>>> inst._Super1__X                     # такая конструкция имени _Super1__X
+11
+>>> inst._Super2__X
+22
+
+
+
+6)
+Связанные методы / Несвязанные методы (это функции в классах)
+bound / unbound method
+-------------------------------
+
+код
+----------
+class BoundClass:
+    def __init__(self, arg):
+        self.arg = arg
+        print(__name__, self.arg)
+
+    def foo(arg, arg1):             # чисто статич ф-ция класса / без селфа
+        arg = arg
+        arg1 = arg1
+        print(__name__, arg, arg1)
+
+    def foo_self(self, arg, arg1):  # динамическая ф-ция для инстанса (есть селф)
+        self.arg = arg
+        self.arg1 = arg1
+        print(__name__, self)
+
+выполнение
+----------
+>>> from script3 import BoundClass
+>>> inst = BoundClass()
+
+>>> inst = BoundClass('spam')
+script3 spam
+
+>>> inst.foo_self('spam', [1,2,3])          # чисто метод инстанса - принял 2 аргумента
+script3 <script3.BoundClass object at 0x7f42da894f60>
+
+>>> inst.foo('snoopy')      # статическая функция / работет и с инстансов / и с классом
+                            # но работает без селфа, то есть не динамическая а статическая
+script3 <script3.BoundClass object at 0x7f42da894f60> snoopy
+>>> BoundClass.foo('snoopy', [1,2,3])
+script3 snoopy [1, 2, 3]
+
+
+7) Вызываемые объекты - Концепция
+---------------------
+Инстансы - вызываемые объекты
+Методы - вызываемые объекты
+Функции - вызываемые объекты
+
+код
+-----------------
+def foo_call(arg):                      # функция принимает аргмент (может сохраняться так)
+    return arg*2
+
+class CallClass:
+    def __init__(self, arg1):           # метод при создании Инстанса (начальние значение)
+        self.arg1 = arg1
+        print('init class / arg1: ', self.arg1)
+
+    def __call__(self, arg2):           # метод при вызове инстанса (с начальним значением)
+        self.arg2 = arg2
+        return self.arg1 ** self.arg2
+        print('class method __call__ / arg1 ** arg2',
+              (self.arg1**self.arg2))
+
+    def method_custom(self, arg3):      # просто метод вызывается из инстанса (тоже объект)
+        self.arg3 = arg3
+        return self.arg1 // self.arg2
+        print('class method custom / arg1//arg3', self.arg1//self.arg3)
+
+
+выполенние:
+-----------
+>>> from script3 import CallClass
+>>> from script3 import foo_call
+
+>>> inst = CallClass(10)                # объект инстанса (наконецто понял почему объект)
+init class / arg1:  10       
+
+>>> foo_child = foo_call(20)            # объект функции
+
+>>> actions = [foo_child, inst(15), inst.method_custom(3)]
+    # массив объектов на выполнение / фунуция - инстанс - метод инстанса / с входами значен
+
+>>> [action for action in actions]      # вызов объктов на выполенние  
+[40, 1000000000000000, 0]
+
+
+8)
+Множественное наследование / Примисные классы / Классы-Примеси
+
+В некотором смысле примесные классы напоминают модули: они предоставляют пакеты методов
+для использования в клиентских подклассах. Однако, в отличие от простых функций в модулях,
+методы в примесных классах обладают доступом к экземпляру self, что позволяет им
+использовать информацию, хранящуюся в экземпляре, и вызывать другие его методы.
+
+
+9)
+Фабрики
+================
+Функции / Классы
+
+def foo_factory(aClass, *args, **kwargs):
+    return aClass(*args, **kwargs)
+            
+            # функция - фабрика / Принимает любой класс / Его аргументы / Запускает Класс
+
+>>> object1 = foo_factory(Button, arg1, arg2, action='submit', color='red)
+            
+            # как пример из жизни - запуск кнопки как Класса с аргументами
+    
+
+10) 
+Свойства / Класса
+=================
+property()              # вызывается функцией
+
+свойства  – это тип объектов, который присваивается именам атрибутов класса.
+Они создаются вызовом встроенной функции property, которой передаются три метода
+(обработчики операций чтения, присваивания и удаления), и строкой документирования
+– если в каком-либо аргументе передается значение None, следовательно, эта операция
+не поддерживается.
+
+свойтсва - это почти аналог __getattr__ / __setattr__
+
+архитектура свойства
+inst.obj = property(fget=None, fset=None, fdel=None, doc=None)      !!!!!
+
+
+код: / __getattr__
+------------
+class ProperClass(object):
+    def __getattr__(self, item):        # если в иснтансе вызвать аргументы
+        if item == 'name':
+            return 'yurii'
+        elif item == 'age':
+            return 40
+        else:
+            raise AttributeError
+
+выполнение:
+-----------
+>>> from script3 import ProperClass
+>>> inst = ProperClass()
+>>> inst.name
+'yurii'
+>>> inst.age
+40
+>>> inst.method
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "/home/ryndin/venvs/test_py35/src/script3.py", line 9, in __getattr__
+    raise AttributeError
+AttributeError
+
+
+код: / property()
+-----------------
+class Test:
+    def get_attr(self, age=40):
+        self.my_age = age
+        self.total = 100
+        return 40
+        print('get: {} / {}'.format(self.my_age, self.total))
+
+    def set_attr(self, name='yurii', value='proger'):
+        self.name = name
+        self.job = value
+        print('set: {} / {}'.format(self.name, self.job))
+
+    def del_attr(self):
+        del self.total
+        print(self)
+
+    age = property(fget=get_attr, fset=set_attr, fdel=del_attr, doc=None)
+        # property(for_fet, for_set, for_del, doc)  - концепция
+        # в аргументы объекта в порядке задаются внутренние функции по событиям
+
+выполенение:
+-----------
+>>> from script3 import Test
+>>> inst = Test()                               # создан инстанс
+
+>>> inst
+<script3.Test object at 0x7fa8d176f550>
+>>> inst.age                                    # создан объект Свойства инстанса
+40                                              # сработало get_attr
+>>> inst.__dict__
+{'total': 100, 'my_age': 40}
+
+>>> inst.age = 50
+set: 50 / proger                                # сработало set_attr
+>>> inst.__dict__
+{'total': 100, 'job': 'proger', 'my_age': 40, 'name': 50}
+
+>>> del(inst.age)                               # сработало del_attr
+<script3.Test object at 0x7fa8d176f550>
+>>> inst.__dict__
+{'job': 'proger', 'my_age': 40, 'name': 50}
+
+
+
+11)
+staticmethod
+============
+FИспользование встроенной функции staticmethod позволяет вызывать метод, не принимающий
+аргумент self, через имя класса или через любой экземпляр
+
+код:
+-------
+class TestInstance:
+    num_instance = 0
+    def __init__(self):
+        TestInstance.num_instance += 1
+
+    def print_instance():                       # работает без self так как staticmethod
+        print('num of instance: ', TestInstance.num_instance)
+
+    print_instance = staticmethod(print_instance)
+                                                # псевдоним + обертывает в статик_метод
+
+выполнение:
+-----------
+>>> from script3 import TestInstance
+>>> inst1 = TestInstance()                      # создание двух инстансов Класса
+>>> inst2 = TestInstance()
+
+>>> TestInstance.print_instance()               # при статик методе рабоет и Класс и Инст
+num of instance:  2
+>>> inst1.print_instance()
+num of instance:  2
+
+>>> inst1.print_instance()
+                          # если бы статик метода не было, для инстанса не сработало бы !!
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+TypeError: print_instance() takes 0 positional arguments but 1 was given
+
+
+код / добавлен ПодКласс
+---------------
+...
+class SubClass(TestInstance):
+    pass
+
+выполнение
+-----------
+все равно статик метод Супер класса работает и после наследования
+
+>>> inst3 = SubClass()
+>>> inst3.print_instance()                  # вызов статик метода и Инстанса ПодКласса
+num of instance:  3
+
+>>> inst1.print_instance()                  # вызов метода из Инстанса СуперКласса
+num of instance:  3
+
+
+12)
+Проблема видимости пространства имен в Классах
+(еще раз об этом)
+-------------------
+
+def generate():                 # функция как запущенный объект Класса
+    return Spam()               # вызвать Класс повыше чтобы увидеть его пространство имен
+    
+    class Spam:
+    # Определение на верхнем уровне в модуле
+        count = 1
+        def method(self):
+        print(Spam.count)               # Работает: глобальное имя (вмещающий модуль)
+
+generate().method()                     # работает - виден метод внутри класса
+
+
+
+Исключения
+==================
+
+Фактические это события (в том числе и Ошибки)
+Происходит перехват Исключений, и изменение хода программы
+
+1)
+try / except / [else]
+Перехват исключений, возбужденных интерпретатором и выполнение альтернативнх операций 
+
+Если в процессе выполнения блока try не возникло исключение, интерпретатор выполнит
+инструкции в блоке else (если имеются) и затем выполнение продолжится с первой инструкции,
+находящейся за всей инструкцией try.
+
+except:                         # перехват всех типов исключений
+except name:                    # перехват исключения по имени
+except name as value:           # перехват исключения и создания Инстанса искл-я(класса)
+except (name1, name2):          # перехват любого из исключений
+
+try -> except -> else -> finally
+
+
+2)
+try / finally
+выполение заключительной операции вне зависимости от логики перехвата исключения
+
+3)
+raise
+Вызов исключения принудительно в коде программы
+
+4)
+assert
+Вызов исключения в коде при выполении определенного условия
+
+5)
+with / as
+менеджер контекста / псевдонимов
+
+
+пример кода / начало:
+---------------------
+def foo(object, index):
+    try:
+        print(object[index], ' : ', index)
+    except Exception:
+        print('got except')
+    finally:
+        print ('in finally')
+
+foo('programmer', 10)
+foo('spammy', 4)
+
+результат:
+---------------
+ryndin@pc:~/venvs/test_py35/src$ python3 script3.py
+got except                  # 1-й / перехвачено исключение
+in finally
+m  :  4                     # 2-й / try выполено
+in finally
+
+
+
+raise
+------------
+инструкция вызывает объект Исключения по Имени
+
+>>> raise IndexError
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+IndexError
+
+>>> raise ValueError
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+ValueError
+
+>>> raise TypeError
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+TypeError
+
+Вызов через сохраненный инстанс класса Исключения:
+
+exc = IndexError('exc test')            # создан инстанс / передана строка в Класс
+raise exc                               # вывод: IndexError: exc test
+
+excs = [IndexError('test test'), TypeError]
+raise excs[0]                           # вывод: IndexError: test test
+
+
+
+assert
+------------
+"Утверждение" на true / false 
+
+условная форма инструкции raise (если False) для отладок кода
+(используется только опытными разработщиками)
+
+>>> assert True, 'Its assert instruction'
+>>> assert False, 'Its assert instruction'
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+AssertionError: Its assert instruction
+
+
+raise / as / from
+-----------------
+объект класса Исключения может сохранятся под псевдонимом /
+а замем вызыватся логика из псевданима через from
+
+код
+---------
+try:
+    1/0
+except Exception as E:
+    raise TypeError('test string') from E           # передача Классу исключения Строки
+
+выполение
+---------
+Traceback (most recent call last):
+  File "script3.py", line 3, in <module>
+    1/0
+ZeroDivisionError: division by zero
+......
+TypeError: test string
+
+
+assert
+-----------------
+больше средство проверки для разработчика
+
+код, простой пример:
+--------
+def foo(index):
+    assert index>15, 'mast be bigger than 15'       # конструкция Исключения + Строка
+    return index*20
+
+выполение:
+---------
+>>> from script3 import foo
+>>> foo(16)
+320                             # все ок / условие True / операция умножения выполена
+
+>>> foo(15)                     # не ок / условие False / вызов Исключения со Стокой
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "/home/ryndin/venvs/test_py35/src/script3.py", line 3, in foo
+    assert index>15, 'mast be bigger than 15'
+AssertionError: mast be bigger than 15          # кастомная строка Исключения
+
+
+with / as
+-----------------
+менеджер контекста
+
+with используется для обертывания программного кода менеджерами контекстов, определяющими
+действия на входе и выходе
+срабатываюt методы __enter__ / __exit__ /
+
+код:
+--------
+class TestContex:
+    def message(self, arg):
+        print('running', arg)
+
+    def __enter__(self):                        # выполняется когда обрабатывается /with/
+        print('starting with block')
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if exc_type is None:
+            print('exit normally')
+        else:
+            print('raise exception: ', exc_type)
+            return False                        # повторное возбуждение (чего ? пока хз)
+                                                # можно и не писать
+
+with TestContex() as action:                    # менеджер контекста / вход в with
+    action.message('test 1')                    # метод инстанса
+    print('compleate')                          # print / выход из with    
+
+print('-'*10)
+
+with TestContex() as action:
+    action.message('test 2')
+    raise TypeError
+    print('not compleate')
+
+выполение:
+---------
+ryndin@pc:~/venvs/test_py35/src$ python3 script3.py
+starting with block                             # вход with / __enter__
+running test 1                                  # action.message
+compleate                                       # print()
+exit normally                                   # выход из with / __exit__ / not raise
+----------
+starting with block                             # with / __enter__
+running test 2                                  # action.message
+raise exception:  <class 'TypeError'>           # выход из with / raise / __exit__
+Traceback (most recent call last):               
+  File "script3.py", line 26, in <module>
+    raise TypeError
+TypeError
+
+
+множественный контекст менеджер with
+-------------
+with A() as a, B() as b:
+...инструкции...
+
+или то же самое
+
+with A() as a:
+    with B() as b:
+        ...инструкции...
+
+
+
+Объекты Исключений
+==================
+Исключения - это классы / им свойственно ООП / наследование
+
+BaseException -> Exception -> SubClass
+
+Не все исключения это ошибки:
+----------------------------
+1) sys.exit()   / SystemExit                # это больше предупреждения
+2) Cntrl+C      / KeyboarInterrupt
+
+
+Закрытие Файлов / Закрытие соединений с Серверами
+-----------------
+try / finnaly - лучшая коснтрукция для этого
+
+
+except Exception
+================
+try:
+    code
+except Exception:                       # способ перехватить именно нужные Исключения
+    code
+
+
+
+Юникод
+Строковые типы
+==================
+str / bytes / bytearray                 # 3 строковых типа данных в python3
+
+ASCII или UTF-8
+
+sys.getdefaultencoding()
+>>> import sys
+>>> sys.getdefaultencoding()            # узнать текущую кодировку интерпретатора
+'utf-8'
+
+
+Декодировка символов
+---------------------
+>>> ord('b')            # перевод символа в байт-код
+98
+
+>>> hex(98)             # перевод байт-кода в 16ти разрядный
+'0x62'
+
+>>> chr(98)             # перевод в символьный код
+'b'
+
+В ASCII все символы в кодировке умещаются в 1 8мибитный байт то есть значения от 0 до 127.
+
+Стандарт Юникод (Unicode) обеспечивает более гибкие возможности.
+Строки Юникода иногда называют строками «многобайтовых символов»,
+потому что каждый символ в таких строках может быть представлен несколькими байтами.
+
+!!!
+Широко используемая кодировка UTF-8, позволяет представить широкий диапазон символов,
+используя схему с  переменным числом байтов. Символы с кодами ниже 128 представляются
+одним байтом; символы с кодами в  диапазоне от 128 до  0x7ff(2047) преобразуются в
+двухбайтовые последовательности, где каждый байт имеет значение от 128 до 255; а символы
+с кодами выше 0x7ff преобразуются в трех- и четырехбайтовые последовательности, где
+каждый байт имеет значение от 128 до 255. Благодаря этой схеме строки с символами ASCII
+остаются компактными, ликвидируются проблемы с порядком следования байтов и исключается
+необходимость использовать байты с нулевым значением, которые могут вызывать проблемы
+при работе с библиотеками языка C и при организации сетевых взаимодействий.
+
+все текстовые файлы, состоящие из символов ASCII, будут считаться допустимыми текстовыми
+файлами, с точки зрения кодировки UTF-8, потому что ASCII – это подмножество 7-битных
+символов в кодировке UTF-8.
+
+в Python 3.X имеется три строковых типа – один служит для представления текстовых данных
+и два – для представления двоичных данных:
+    1) str – для представления текстовых строк, состоящих из символов Юникода 
+        (как 8-битных, так и многобайтовых)
+    2) bytes – для представления двоичных данных
+    3) bytearray – изменяемая версия типа bytes
+
+bytes/bytearray
+Если сценарий обрабатывает файлы с изображениями, упакованными двоичными данными,
+созданными другими программами, или потоки данных от каких-либо устройств, велика
+вероятность, что потребуется использовать объекты типа bytes и  открывать файлы в
+двоичном режиме. также имеется дополнительная возможность использовать тип bytearray,
+когда потребуется обновлять данные, не создавая промежуточные копии в памяти
+
+str
+HTML / CSV / XML
+
+
+>>> list(b'my time\n')                          # b - строка байтов
+[109, 121, 32, 116, 105, 109, 101, 10]
+
+>>> list('my time\n')                           # u - юникод/обычная строка
+['m', 'y', ' ', 't', 'i', 'm', 'e', '\n']
+
+>>> list(r'my time\n')                          # r - сырая строка экранирования знаков
+['m', 'y', ' ', 't', 'i', 'm', 'e', '\\', 'n']
+
+
+>>> st
+b'my time'
+>>> st.decode()                 # из байт кода в юникод
+'my time'
+>>> b'my code'.decode()
+'my code'
+
+
+>>> 'my string'.encode()        # из юникода в байт код
+b'my string'
+
+>>> b'my string'                # из юникода в байт код    
+b'my string'
+
+объект файла в Python 3.0 (созданный с помощью встроенной функции open) автоматически
+декодирует текстовые строки в процессе их чтения и кодирует в процессе записи – благодаря
+этому в своих сценариях можно работать со строками обычным способом, не нуждаясь в
+использовании специальных форм представления символов.
+
+
+кодировка по умолчанию
+----------------------
+Для представления строк в исходных текстах сценариев Python по умолчанию использует
+кодировку UTF-8, однако имеется возможность указать любую другую кодировку, включив
+комментарий с  названием требуемой кодировки.
+
+# -*- coding: latin-1 -*-
+# -*- coding: utf-8 -*-
+
+
+совместимость кодировок
+-------------
+>>> 'yurii' + ' ryndin'                 # обе строки - формат юникод
+'yurii ryndin'
+
+>>> b'yurii' + ' ryndin'                # строка + байт код -- ошибка
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+TypeError: can't concat bytes to str
+
+>>> b'yurii' + b' ryndin'               # байт код + байт код
+b'yurii ryndin'
+
+>>> str(b'yurii' + b' ryndin')          # так не пойдет
+"b'yurii ryndin'"
+
+>>> list(b'yurii' + b' ryndin')         # распаковка - байт код
+[121, 117, 114, 105, 105, 32, 114, 121, 110, 100, 105, 110]
+
+>>> list('yurii' + ' ryndin')           # распаковка - юникод
+['y', 'u', 'r', 'i', 'i', ' ', 'r', 'y', 'n', 'd', 'i', 'n']
+
+
+bytearray
+=========
+
+В результате мы получаем объекты bytearray, которые являются последова-
+тельностями коротких целых чисел, как bytes, и  изменяемыми, как списки.
+
+
+>>> st = 'my string'
+>>> by = bytearray(bytes(st,encoding='utf-8'))
+>>> by
+bytearray(b'my string')                 # объект байт-массив - изменяемый
+
+>>> by.append(12)                       # байт-массив дополнен (как байт код)
+>>> by
+bytearray(b'my string\x0c')
+
+>>> by = by *2                          # умножаю байт-архив
+>>> by
+bytearray(b'my string\x0cmy string\x0c')
+
+
+файлы / текстовые / двоичные
+------------------
+>>> file = open('test_file.txt', 'w')   
+>>> file.close()                        # просто создан пустой файл
+
+>>> file = open('test_file.txt', 'w')
+>>> size = file.write('test string\n')  # объект пишет строку в файл
+>>> file.close()
+>>> size
+12                  # вместе с палкой / пробел не шитается
+
+
+>>> file = open('test_file.txt', 'wb')      # открытие обекта файла в бинарном виде
+>>> size = file.write(b'test string too\n') 
+                                    # запись строки в бинарном виде / иначе не примет
+>>> size
+16
+>>> file.close()
+
+
+>>> file = open('test_file.txt', 'rb')
+>>> file.read()
+b'test string too\n'
+>>> file.read()
+b''
+>>> file.read()
+b''
+>>> file = open('test_file.txt', 'rb')      # чтение строк файла бинарно
+>>> file.readlines()
+[b'test string too\n']
+
+>>> file = open('test_file.txt', 'r')       # чтение стро файла юникодно
+>>> file.readlines()
+['test string too\n']
+
+
+re / модуль
+===========
+поиск в сроках по шаблонах
+>>> dir(re)
+['A', 'ASCII', 'DEBUG', 'DOTALL', 'I', 'IGNORECASE', 'L', 'LOCALE', 'M', 'MULTILINE',
+'S', 'Scanner', 'T', 'TEMPLATE', 'U', 'UNICODE', 'VERBOSE', 'X', '_MAXCACHE', '__all__',
+'__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__',
+'__package__', '__spec__', '__version__', '_alphanum_bytes', '_alphanum_str', '_cache',
+'_cache_repl', '_compile', '_compile_repl', '_expand', '_locale', '_pattern_type',
+'_pickle', '_subx', 'compile', 'copyreg', 'error', 'escape', 'findall', 'finditer',
+'fullmatch', 'match', 'purge', 'search', 'split', 'sre_compile', 'sre_parse', 'sub',
+'subn', 'sys', 'template']
+
+
+>>> SU = 'the door is open inside that hat'     # строка в юникоде и строка бинарная
+>>> SB = b'the door is open inside that hat' 
+
+>>> import re
+>>> re.match('(.*) is (.*) that (.*)', SU)      # поиск совпадений в юникоде
+<_sre.SRE_Match object; span=(0, 32), match='the door is open inside that hat'>
+>>> re.match('(.*) is (.*) that (.*)', SU).groups()
+('the door', 'open inside', 'hat')
+
+>>> re.match(b'(.*) is (.*) that (.*)', SB)     # поиск совпадений в бинарной строке
+<_sre.SRE_Match object; span=(0, 32), match=b'the door is open inside that hat'>
+>>> re.match(b'(.*) is (.*) that (.*)', SB).groups()
+(b'the door', b'open inside', b'hat')
+
+
+struct / module
+===============
+при необходимости стр. 1033 / Лутц - Изучаем python
+
+
+xml / parsing
+=============
+при необходимости стр. 1036 / Лутц - Изучаем python
+
+модули / dom / sax / ElementTree /
+
+Но вот простой пример как спомощью инструментов стандартной билиотеки ElementTree
+можно распарсить строки документа xml
+
+# Файл etreeparse.py
+from xml.etree.ElementTree import parse
+tree = parse(‘mybooks.xml’)
+for E in tree.findall(‘title’):
+    print(E.text)
+
+
+Атрибуты
+Управляемые атрибуты
+=====================
+
+возможность управления доступом к атрибутом может оказаться весьма важной особенностью,
+обеспечивающей значительную долю гибкости, особенно для разработчиков инструментальных
+средств.
+
+__getattr__ / __setattr__ / __getattribute__ / property / дескрипторы
+
+
+
+property()
+---------
+То есть переменная Класса уже имеет включеные методы по событиям, и эти методы доступны
+в Инстансе класса через эту Переменную со свойствами (как бы декоратор) !!! 
+
+Это интересно - полный код логики реализации property() как дескриптора -- стр.1058 Лутца!!
+
+
+код проба:
+----------
+
+class PropClass:
+    def __init__(self, value):
+        self.value = value
+        print('init value: ', self.value)
+
+    def get_prop(self):
+        return self.value ** 2
+        print('get get')
+
+    def set_prop(self, value):
+        self.value = value
+        print('set value: ', self.value)
+
+    def del_prop(self):
+        del  self.value
+        print('del value: ', self)
+
+    Prop = property(get_prop, set_prop, del_prop, 'doc string prop')
+
+prop1 = PropClass(22)                               # __init__
+prop2 = PropClass(33)
+
+print(prop1)                                        # объект инстанса       
+print(prop2)
+print('-'*10)
+
+print(prop1.Prop)                   # метод __get_prop__ / Вызов объекта со Свойством     
+print(prop2.Prop)
+print('='*10)
+
+prop1.Prop = 55                     # метод __set_prop__ / Вызов объекта со Свойством
+prop1.Prop = 66
+print('*'*10)
+
+del prop1.Prop                      # метод __del_prop__ / Вызов объекта со Свойством
+del prop2.Prop
+print('/'*10)
+
+результат
+---------
+ryndin@pc:~/venvs/test_py35/src$ python3 script1.py
+init value:  22                                     # метод __init__
+init value:  33
+<__main__.PropClass object at 0x7f04853459b0>       # объект инстанса
+<__main__.PropClass object at 0x7f0485345a20>
+----------
+484                                                 # метод __get_prop__
+1089
+==========
+set value:  55                                      # метод __set_prop__
+set value:  66
+**********
+del value:  <__main__.PropClass object at 0x7f04853459b0>       # метод __del_prop__
+del value:  <__main__.PropClass object at 0x7f0485345a20>
+//////////
+
+
+
+Дескрипторы     / типа property() / но через другой Класс 
+===========
+Дескри́птор (от лат. descriptor — описывающий) — лексическая единица (слово, 
+словосочетание) информационно-поискового языка, служащая для описания основного смыслового
+содержания документа или формулировки запроса при поиске документа (информации) в
+информационно-поисковой системе.
+
+То есть в питоне Дескриптор - это основное логическое содержание (отдельный класс) для
+назначенного атрибуда Супер класса. Ну как то так.
+
+Дескрипторы создаются как независимые классы и присваиваются атрибутам класса точно так
+же, как функции методов.
+
+дескриптор может вызывать не только методы клиентского класса, но и собственные методы,
+определенные в классе дескриптора.
+
+Класс Дескриптора вполне вкладывается в тело Супер Класса, если Дескриптор больше нигде
+в коде не нужен.
+
+Фактически дескрипторы могут одновременно использовать данные экземпляра и дескриптора
+или любые их комбинации:
+    • Данные дескриптора используются для управления внутренней работой дескриптора.
+    • Данные экземпляра хранят информацию, связанную с  клиентским классом и, возможно,
+    созданную этим классом.
+
+основное преимущество дескрипторов перед свойствами (property) – благодаря тому, что
+дескрипторы могут иметь собственные данные, они легко могут сохранять данные внутри себя,
+не засоряя пространство имен клиентского объекта экземпляра.
+
+Логика метода дескриптора:
+
+def __get__(self, instance, owner):
+    ...
+
+Атрибуты для Дескриптора:
+.........................
+    • self – экземпляр класса Дескриптора.
+    • instance – экземпляр класса Супер.
+    • owner – класс Супер.  (владелец/хозяин)
+
+
+код, пример:
+------------
+class Descript:
+    def __get__(self, instance, owner):
+        print('get method of descriptor')
+        return instance._name
+
+    def __set__(self, instance, value):
+        print('set method of descriptor')
+        instance._name = value
+
+class Person:
+    def __init__(self, name):
+        self._name = name
+
+    name = Descript()
+
+pers = Person('yurii')              # __init__ -- пока без логика дескриптора
+print('-'*10)
+print (pers)
+print(pers.name)                    # __get__ -- логика дескриптора в отношении инстанса
+print(pers._name)
+print('-'*10)
+pers.name = 'lena'                  # __set__ -- логика дескриптора в отношении инстанса
+print(pers.name)
+print(pers._name)
+
+выполнение:
+-----------
+ryndin@pc:~/venvs/test_py35/src$ python3 script1.py
+----------
+<__main__.Person object at 0x7ffb6b8359e8>
+get method of descriptor
+yurii
+yurii
+----------
+set method of descriptor
+get method of descriptor
+lena
+lena
+
+
+__getattr__ / __setattr__ / __delattr__ /
+__getattribute__
+=========================================
+стр. 1043 Лутца - много страниц - и все про методы переопределения Атрибутов классов 
+
+Операция чтения значения атрибута может быть перехвачена с помощью двух разных методов:
+    • __getattr__ вызывается при обращении к  неопределенным атрибутам  – то
+        есть к атрибутам, которые отсутствуют в экземпляре или в наследуемых им
+        классах.
+    • __getattribute__ вызывается при обращении к  любому атрибуту, поэтому
+        при его использовании следует проявлять особую осторожность, чтобы не
+        попасть в  бесконечный цикл рекурсивных вызовов этого метода, и  переа-
+        дресовать операцию чтения суперклассу.
+
+Чтобы перехватить операцию присваивания, нам также потребуется реализовать метод
+    __setattr__  – метод перегрузки операторов, который вызывается при попытке присвоить
+значение любому атрибуту и требующий особой осторожности, чтобы не попасть в  бесконечный
+цикл рекурсивных вызовов, выполняя присваивание посредством словаря пространства
+имен экземпляра.
+
+def __getattr__(self, name):                # на входе 1 аргумент - имя атрибута
+def __getattribute__(self, name): 
+def __setattr__(self, name, value):         # на входе 2 элемента - имя / значение
+def __delattr__(self, name):
+
+
+код база:
+--------
+class Super:
+    def __getattr__(self, item):
+        print('Get: ', item)
+
+    def __setattr__(self, key, value):
+        print('Set: ', key, value)
+
+    def __delattr__(self, item):
+        print('Del: ', item)
+
+inst1 = Super()                     # __init__ (тут не переопределен)
+print(inst1)
+inst1.name                          # __getattr__
+inst1.name = 'yurii'                # __setattr__
+del inst1.name                      # __delattr__
+
+результат:
+----------
+ ryndin@pc:~/venvs/test_py35/src$ python3 script1.py
+<__main__.Super object at 0x7f807f412a20>
+Get:  name
+Set:  name yurii
+Del:  name
+
+
+
+Декораторы функций
+=================
+
+Понимаем декораторы в Python'e, шаг за шагом. 
+https://habrahabr.ru/post/141411/
+https://habrahabr.ru/post/141501/
+
+
+
+Декорирование – это способ управления функциями и классами. 
+Сами декораторы имеют форму вызываемых объектов (таких, как функции), которые обрабатывают
+другие вызываемые объекты.
+
+Декораторы функций устанавливают объекты-обертки, перехватывающие вызовы функций и
+выполняющие необходимые операции.
+Декораторы классов устанавливают объекты-обертки, перехватывающие попытки создания
+экземпляров и выполняющие необходимые операции.
+
+
+class Class:
+    @ staticmethod     # и при этом функция становится Статической, например внутри Класса
+    def  foo():
+        ...
+
+то же что и 
+
+class Class:
+    def foo():
+        ...
+    foo = staticmethod(foo)         # классическое объявление
+
+
+Декораторы функций обеспечивают способ определения специальных режимов работы функций,
+обертывая их дополнительным слоем логики, реализованной в виде других функций.
+
+В некоторой степени декораторы функций напоминают шаблон проектирования делегирования,
+но их главная цель состоит в том, чтобы расширять определенные функции или методы, а не
+весь интерфейс объекта.
+
+Декораторы функций могут также управлять не только вызовами функций, но и самими объектами
+функций, например регистрировать функции в некотором прикладном интерфейсе.
+
+и  декораторы, и метаклассы добавляют логику, которая выполняется в конце процедуры
+создания класса.
+
+понятный маленький туториал
+https://www.youtube.com/watch?v=H1_GNTKPkSs
+
+
+Главная концепция декоратора
+============================!!!!
+@decorator
+def func(): ...                         # func = decorator(func)
+
+то есть декоратор создает объект по именем функции, который принимает расширенную
+декоратором логику (декоратор обрабатывает Выход функции) Функции!!!
+
+
+Концепция Кастомного декторатора
+--------------------
+def decorator(F):                   # На этапе декорирования @
+    def wrapper(*args):             # Обертывающая функция / декларация
+        # Использование F и аргументов
+        # F(*args) – вызов оригинальной функции
+    return wrapper                  # вызов 
+
+@decorator                          # func = decorator(func)
+def func(x, y):                     # func передается декоратору в аргументе F
+    ... 
+func(6, 7)                          # 6, 7 передаются функции wrapper в виде *args
+
+Когда позднее в программе будет встречен вызов функции func, в действительности будет
+вызвана функция wrapper, возвращаемая декоратором; функция wrapper в  свою очередь может
+вызвать оригинальную функцию func, которая остается доступной ей в области видимости
+объемлющей функции.
+
+class decorator:
+    def __init__(self, func):           # На этапе декорирования @
+        self.func = func
+    def __call__(self, *args):          # Обертка вызова функции
+                                        # Использование self.func и аргументов
+                                        # self.func(*args) – вызов оригинальной функции
+
+@decorator
+def func(x, y):                         # func = decorator(func)
+    ...                                 # func будет передана методу __init__
+
+func(6, 7)                              # 6, 7 передаются методу __call__ в виде *args
+
+
+код / начало: 
+-------------
+class Super:
+    count = 0
+    def __init__(self):
+        Super.count += 1
+
+    @staticmethod                       # это железобетонно метод Класса
+    def print_count():
+        print('conut of Instance: ', Super.count)
+
+class SubClass(Super):
+    pass
+
+выполение:
+----------
+>>> from script3 import Super, SubClass
+>>> inst1 = Super()                     # Инстанса от класса и Подкласса 
+>>> inst2 = Super()
+>>> inst3 = SubClass()
+>>> inst4 = SubClass()
+
+>>> inst2.print_count()                 # метод четко как стат метод СуперКласса
+conut of Instance:  4
+>>> inst4.print_count()
+conut of Instance:  4
+>>> Super.print_count()
+conut of Instance:  4
+>>> SubClass.print_count()
+conut of Instance:  4
+
+
+Внутренний механизм Декоратора
+--------------
+class tracer:
+    def __init__(self, func):
+    self.calls = 0
+    self.func = func
+
+    def __call__(self, *args):
+        self.calls += 1
+        print(‘call %s to %s’ % (self.calls, self.func.__name__))
+        self.func(*args)
+
+@tracer                     # То же, что и spam = tracer(spam)
+def spam(a, b, c):          # Обертывает spam в объект-декоратор
+    print a, b, c
+
+spam(1, 2, 3)               # В действительности вызывается объект-обертка               
+spam(‘a’, ‘b’, ‘c’)         # То есть вызывается метод __call__ в классе
+spam(4, 5, 6)               # Метод __call__ выполняет дополнит действия
+                            и вызывает оригинальную функцию                
+
+ход выполения:
+1) сначала __init__ декоратора
+2) затем __call__ декоратора
+3) затем функция
+
+
+Собственная реализация декоратора
+======================
+код:
+------
+class decorator_upper:
+    def __init__(self, func):
+        self.func = func
+
+    def __call__(self, *args, **kwargs):
+        args = [x.upper() for x in args]
+        self.func(args)
+
+@decorator_upper
+def foo(*args):
+    print(args)
+
+foo('name', 'yurii', 'lena')
+
+выполение:
+----------
+ryndin@pc:~/venvs/test_py35/src$ python3 script3.py
+(['NAME', 'YURII', 'LENA'],)
+
+
+
+Декораторы классов
+==================
+декораторы классов применяются к классам – они могут использоваться для управления самими
+классами или для перехвата операций создания экземпляров и реализации управления ими.
+
+Поскольку декораторы классов способны перехватывать операции создания экземпляров, они
+могут использоваться для управления всеми экземплярами класса или расширять интерфейс
+каждого экземпляра в отдельности.
+
+def decorator(aClass): ...
+@decorator
+class C: ...
+
+то же что и 
+
+def decorator(aClass): ...
+class C: ...
+C = decorator(C)
+
+
+Кастомный Декоратор Класса
+==========================
+Логика - дает сделать только один инстанс Класса
+
+код:
+----------
+def one_instance_per_class(aClass):
+    have_instance = 0                       # счетчик Инстансов
+    def on_call(*args, **kwargs):           # подфункция создания Интсанса
+        nonlocal have_instance              # вывожу счетчик в НонЛокал подфункции 
+        if have_instance == 0:
+            have_instance = aClass(*args, **kwargs)     
+            ## создается Инстанс (именно в Декораторе)  !!!
+        else:
+            print('we have instance, not more')
+        return have_instance                # возврат Инстанса
+    return on_call                          # возврат подфункции создания Инстанса
+
+@one_instance_per_class                     # декоратор создания Инстанса (только одного)
+class Person:
+    def __init__(self, name, age):          # фактически только аргументы для Инстанса
+        self.name = name
+        self.age = age
+        print('new instance: {}, name: {}'.format(self, self.name))
+
+inst1 = Person('yurii', 40)
+inst2 = Person('lena', 35)
+inst2 = Person('pasha', 18)
+
+выполенние:
+-----------
+ryndin@pc:~/venvs/test_py35/src$ python3 script1.py
+new instance: <__main__.Person object at 0x7f1c9bda59e8>, name: yurii
+we have instance, not more
+we have instance, not more
+
+
+Цепочка декораторов
+===================
+def dec1(F): return lambda: 'D1/'+ F()      # принимает объект функции и возвращает изменен
+def dec2(F): return lambda: 'D2/'+ F()      # принимает изменен объект и изменяет и его
+def dec3(F): return lambda: 'D3/'+ F()      # и так далее
+
+@dec1
+@dec2
+@dec3                                       # этот декоратор срабатывает Первым
+def foo():
+    return 'spam'
+
+print(foo())
+
+выполнение:
+-----------
+ryndin@pc:~/venvs/test_py35/src$ python3 script1.py
+D1/D2/D3/spam
+
+
+вызовы декораторов
+------------------
+class Tracer:
+    def __init__(self, func):
+        self.calls = 0
+        self.func = func
+    def __call__(self, *args, **kwargs):
+        self.calls += 1
+        print('calls: {}, {}'.format(self.calls, self.func.__name__))
+        self.func(*args)                    # вызов функции с аргументами
+
+@Tracer
+def foo(a,b,c):
+    print(a+b+c)
+
+выполнение:
+-----------
+>>> from script1 import foo
+
+>>> foo
+<script1.Tracer object at 0x7fc1fb4e6048>      # видно что Функция объект Декоратора
+
+>>> foo(1,2,3)                                 # __call__ декоратора срабатывает 
+calls: 2, foo
+6
+
+>>> foo('word1\t ', 'word2\t', 'word3\n')
+calls: 3, foo
+word1	 word2	word3
+
+>>> foo.name = 'yurii'                  # на лету - новый аргумент объекта функции
+>>> foo
+<script1.Tracer object at 0x7fc1fb4e6048>   # функция это объект декоратора
+
+>>> foo.__dict__
+{'name': 'yurii', 'calls': 4, 'func': <function foo at 0x7fc1fb4d1f28>}
+## новый аргумент / счетчик вызовов / 
+
+
+Дескрипторы для Декарирования Классов
+===============
+стр.1109 Лутца
+(Декараторы через Вложенные Функции кажутся понятнее)
+
+
+
+Кастомный Декоратор / Проверка скорости Функции
+====================
+(код Декоратора универсальный - применим к любой функции с Выводом и Параметрами !!!)
+
+import time
+
+class Timer:
+    def __init__(self, func):         # при инициации декоратора в коде / ф-ция в аргумент
+        self.func = func
+
+    def __call__(self, *args, **kwargs):    # при вызове декоратора и функции
+        start_oper = time.clock()
+        resoult_func = self.func(*args, **kwargs)
+        end_oper = time.clock()
+        speed = end_oper - start_oper
+        print('func: {} // speed: {} ms'.format(self.func, speed))
+        return resoult_func
+
+@Timer
+def gen_list(N):
+    return [x**2 for x in range(N)]
+
+@Timer
+def map_list(N):
+    return list(map((lambda x: x**2), range(N)))
+
+@Timer
+def for_list(N):
+    li = []
+    for x in range(N):
+        li.append(x**2)
+    return li
+
+выполнение
+----------
+>>> from script1 import *
+
+>>> gen_list(20)
+func: <function gen_list at 0x7fb368543f28> // speed: 3.799999999998249e-05 ms
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361]
+        # вышло самое быстрое выполнение через Генератор списка
+
+>>> map_list(20)
+func: <function map_list at 0x7fb36855d0d0> // speed: 9.500000000006725e-05 ms
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361]
+        # очень долго
+
+>>> for_list(20)
+func: <function for_list at 0x7fb36855d158> // speed: 4.099999999995774e-05 ms
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361]
+        # второе место
+
+
+Метки для декоратора / Аннотации декораторов
+====================
+(Декоратор универсален к любым функциям - можно в отдельный модуль, например timer.py)
+
+import time
+
+def timer(label='/my trace/', trace = True):        # метки / аннотации для Декоратора
+    class Timer:
+        def __init__(self, func):
+            self.func = func
+
+        def __call__(self, *args, **kwargs):
+            start_oper = time.clock()
+            resoult_func = self.func(*args, **kwargs)
+            end_oper = time.clock()
+            speed = end_oper - start_oper
+            if trace:                               # сработала Метка на Принт
+                print('{} func: {} // speed: {} ms'.format(label, self.func, speed))
+            return resoult_func
+    return Timer
+
+@timer(label='**', trace=True)                      # Метки декоратора - перебили Дефолтные
+def gen_list(N):
+    return [x**2 for x in range(N)]
+
+@timer(trace=True)                                  # Метка
+def map_list(N):
+    return list(map((lambda x: x**2), range(N)))
+
+@timer(trace=False)                                 # Метка / отключила Принт
+def for_list(N):
+    li = []
+    for x in range(N):
+        li.append(x**2)
+    return li
+
+выполнение
+----------
+>>> from script1 import *
+>>> gen_list(20)
+** func: <function gen_list at 0x7f0798a3cea0> // speed: 6.099999999997774e-05 ms
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361]
+    # перебита Подстрока (**)
+
+>>> map_list(20)
+/my trace/ func: <function map_list at 0x7f0798a56158> // speed: 4.2999999999904226e-05 ms
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361]
+    # есть Принт и подстрока - дефолтная    
+
+>>> for_list(20)
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361]
+    # выключен Принт
+
+
+стр 1156 Лутца - весь код расширенной реализации Декоратор (тут можно подсмотреть) !!!
+==============
+
+
+Еще раз о сложных моментах
+==========================
+
+Свойства классов
+----------------
+property()
+Встроенная функция property позволяет ассоциировать программный код с определенным
+атрибутом, который будет автоматически вызываться при попытке получить значение атрибута,
+присвоить ему новое значение или удалить его. Хотя этот инструмент не настолько
+универсальный, как описанные в предыдущем абзаце, тем не менее, свойства позволяют
+организовать автоматический вызов программного кода при попытке обращения к отдельным
+атрибутам.
+
+Дескрипторы атрибутов классов
+-----------------------------
+В действительности, функция property  – это простейший способ задать дескриптор атрибута,
+который автоматически вызывает функции, управляющие доступом к атрибуту. Дескрипторы
+позволяют определить методы обработчики __get__, __set__ и  __delete__ в  отдельном
+классе, которые автоматически вызываются при обращении к  атрибуту, которому присвоен
+экземпляр этого класса. Они предоставляют способ добавить программный код, вызываемый
+автоматически при обращении к определенному атрибуту, и вызываются после того, как атрибут
+будет найден обычной процедурой поиска.
+
+
+
+
+Метаклассы
+===============
+сама основа Метакласса - стр. 1173 Лутца
+
+МетаКласс == декоратор Класса == расширяет функциональность обьекта Класса
+
+протокол метаклассов, которые являются подклассами объекта type и  реализуют операции
+создания классов. Они обеспечивают отличную возможность управления объектами классов и
+их расширения.
+
+Обычно метакласс переопределяет метод __new__ или __init__ класса type (самый супер
+класс), с целью взять на себя управление созданием или инициализацией нового объекта
+класса. Как и при использовании декораторов классов, суть состоит в том, чтобы определить
+программный код, который будет вызываться автоматически на этапе создания класса.
+Оба способа позволяют расширять классы или возвращать произвольные объекты для его замены
+– протокол с практически неограниченными возможностями.
+
+class Meta_class(type):
+    
+class Caustom_class(metaclass=Meta_class):
+    ...
+
+В самых грандиозных воплощениях метаклассы могут использоваться даже для реализации
+альтернативных шаблонов проектирования, таких как аспект­но-ориентированное
+программирование, объектно-реляционные отображения (object/relational mappers, ORM)
+для баз данных и многого другого.     ## в Django реализовано Метапрограммирование ORM
+
+метаклассы позволяют добавлять логику, которая автоматически вызывается при создании
+классов, в  конце инструкции class. Эта логика не присваивает оригинальному имени класса
+вызываемый объект декоратора, а делегирует операцию создания самого класса 
+специализированной логике.
+Другими словами, метаклассы – это другой способ, позволяющий определить автоматически
+вызываемый программный код.
+
+Формулирую для себя правило:
+===========================
+1) Декораторы для расширения функционала Инстансев класса
+2) Метаклассы для расширения функционала самих Классов 
+    (не как наследование а именно приращение в конце выполнения оператора class)
+
+
+Процедура создания Классов
+==================
+class / type
+интерпретатор следует стандартному протоколу:
+-------------
+1)
+в конце инструкции class после выполнения всех вложенных инструкций и сохранения всех
+созданных имен в словаре пространства имен он вызывает объект type, чтобы создать объект
+класса:
+    class = type(classname, superclasses, attributedict)
+
+2)
+Объект type определяет метод __call__ перегрузки операторов, который вызывает два других
+метода, когда вызывается объект type:
+    type.__new__(typeclass, classname, superclasses, attributedict)
+    type.__init__(class, classname, superclasses, attributedict)
+
+Метод __new__ создает и  возвращает новый объект класса, а  затем этот вновь созданный
+объект инициализируется методом __init__. именно эти два метода обычно переопределяются
+в метаклассах, адаптирующих класс type, для расширения классов.
+
+3)
+Если вместо type задается Metaclass:
+class Spam(metaclass=Meta): ....                 # В версии 3.0 и выше
+то 
+class = Meta(classname, superclasses, attributedict)
+Meta.__new__(Meta, classname, superclasses, attributedict)
+Meta.__init__(class, classname, superclasses, attributedict)
+
+
+__new__ - срабатывает как создание самого нового объекта Класса
+__call__ - изначально принадлежить объекту type / срабатывает как вызов __init__
+__init__ - метод инициализации инстанса от уже созданного объекта Класса
+
+Следовательно Последовательность: __new__ => __call__ => __init__   !!!!
+
+
+Упрощение / МетаКласс как фабричная функция
+---------------------
+
+def MetaClass(cls, *args, **kwargs):
+    print('meta class:', cls, *args, **kwargs, sep='..')
+    return type(cls, *args, **kwargs)
+
+class Test(metaclass=MetaClass):
+    print('test class')
+    pass
+
+inst1 = Test()
+
+выполнение:
+-----------
+ryndin@pc:~/venvs/test_py35/src$ python3 script1.py
+test class
+meta class:..Test..()..{'__module__': '__main__', '__qualname__': 'Test'}
+    # порядок вывода: сначала что в Подклассе потом что в МетаКлассе
+    # 
+
+Есть разные возможности реализации МетаКлассов но,
+В большинстве случаев Метаклассы выполняют свою работу, переопределяя методы __new__
+и __init__ суперкласса type. !!!
+
+Объявление meta­class=M в пользовательском классе наследуется подклассами этого класса,
+поэтому метакласс будет вызываться при конструировании любых классов, наследующих это
+объявление в цепочке суперклассов.
+
+
+СуперКлассы != МетаКлассы
+Инстансы классоы наследуют методы только СуперКлассов
+МетаКлассы - это только для Классов (не для Инстансов классов)
+----------------------
+Атрибуты метакласса не наследуются экземплярами классов. Объявления метаклассов определяют
+отношения экземпляров, которые отличаются от отношений наследования. Так как классы
+являются экземплярами метаклассов, поведение, определяемое метаклассом, применяется к
+классу, но не к экземплярам этого класса. Экземпляры приобретают поведение от своих
+классов и суперклассов, но не от метаклассов.
+
+
+Навороченность языка
+====================
+Декораторы / Свойства / Дескрипторы / Мета Классы
+но
+прикладные программисты обычно тратят больше времени на изучение библиотек и расширений,
+а не на расширенные, и иногда таинственные особенности языка.
+
+
+
+
+
+
+----------------------------------Встроенные модули--------------------------------------
+-----------------------------------------------------------------------------------------
+imp
+=========
+import imp
+imp.reload()
+
+или
+
+import importlib
+importlib.reload()
+==============================
+перезагрузка модуля с кодом в интерактивную старку
+>>> reload(file.py)
+
+
+pdb
+==============================
+import pdb; pdb.set_trace()
+
+При использовании pdb можно выполнять программный код построчно, отображать значения
+переменных.
+
+
+import math
+==================
+
+
+
+import random
+==================
+>>> import random
+>>> random.random()                 # выбор случайного значения от 0 до 1
+0.44694718823781876
+>>> random.random()
+0.28970426439292829
+
+>>> random.randint(1, 10)           # выбор случайного целого значения в диапозоне
+5
+>>> random.randint(1, 10)
+4
+
+    # выбор случайного элемента последовательности
+>>> random.choice([‘Life of Brian’, ‘Holy Grail’, ‘Meaning of Life’])
+‘Life of Brian’
+>>> random.choice([‘Life of Brian’, ‘Holy Grail’, ‘Meaning of Life’])
+‘Holy Grail’
+
+
+import builtins     / встоенные классы / функции / методы / переменные
+===================
+>>> import builtins
+>>> dir(builtins)  
+[
+'ArithmeticError', 'AssertionError', 'AttributeError',
+ 'BaseException', 'BlockingIOError', 'BrokenPipeError',
+ 'BufferError', 'BytesWarning',  'ChildProcessError',
+ 'ConnectionAbortedError', 'ConnectionError',  'ConnectionRefusedError',
+ 'ConnectionResetError', 'DeprecationWarning',  'EOFError', 'Ellipsis',
+ 'EnvironmentError', 'Exception', 'False',  'FileExistsError',
+ 'FileNotFoundError', 'FloatingPointError',  'FutureWarning',
+ 'GeneratorExit', 'IOError', 'ImportError',  'ImportWarning',
+ 'IndentationError', 'IndexError', 'InterruptedError',  'IsADirectoryError',
+ 'KeyError', 'KeyboardInterrupt', 'LookupError',  'MemoryError', 'NameError',
+ 'None', 'NotADirectoryError', 'NotImplemented',  'NotImplementedError',
+ 'OSError', 'OverflowError',  'PendingDeprecationWarning', 'PermissionError',
+ 'ProcessLookupError',  'ReferenceError', 'ResourceWarning',
+ 'RuntimeError', 'RuntimeWarning',  'StopIteration', 'SyntaxError',
+ 'SyntaxWarning', 'SystemError',  'SystemExit', 'TabError', 'TimeoutError',
+ 'True', 'TypeError',  'UnboundLocalError', 'UnicodeDecodeError',
+ 'UnicodeEncodeError',  'UnicodeError', 'UnicodeTranslateError',
+ 'UnicodeWarning', 'UserWarning',  'ValueError', 'Warning',
+ 'ZeroDivisionError', '_',
+ 
+ '__build_class__',  '__debug__', '__doc__', '__import__', '__name__',
+ '__package__',
+
+ 'abs', 'all', 'any', 'ascii', 'bin', 'bool', 'bytearray', 'bytes',
+ 'callable',  'chr', 'classmethod', 'compile', 'complex', 'copyright',
+ 'credits',  'delattr', 'dict', 'dir', 'divmod', 'enumerate', 'eval',
+ 'exec', 'exit', 'filter', 'float', 'format', 'frozenset', 'getattr',
+ 'globals', 'hasattr',  'hash', 'help', 'hex', 'id', 'input', 'int',
+ 'isinstance', 'issubclass',  'iter', 'len', 'license', 'list', 'locals',
+ 'map', 'max', 'memoryview', 'min', 'next', 'object', 'oct', 'open',
+ 'ord', 'pow', 'print', 'property',  'quit', 'range', 'repr', 'reversed',
+ 'round', 'set', 'setattr', 'slice', 'sorted', 'staticmethod', 'str',
+ 'sum', 'super', 'tuple', 'type', 'vars', 'zip'
+]
+
+
+.format()
+====================
+>>> di = {'name': 'yurii', 'age': 40, 'job': 'programmer'}
+>>> '{0[age]} / {0[job]} / {0[name]}'.format(di)        ## элементы по ключу
+'40 / programmer / yurii'
+
+
+>>> from math import pi
+>>> '{0:.5}'.format(pi)                                 ## точность чисел
+'3.1416'
+>>> '{0:.5f}'.format(pi)
+'3.14159'
+
+
+sys
+===================
+1)
+sys.getrefcount(object)         # количество ссылок на объект в памяти
+-----------------------
+>>> import sys
+>>> sys.getrefcount(1)
+1681
+>>> sys.getrefcount('yurii')
+3
+
+2)
+>>> sys.argv
+
+
+------------------------------------Внешние Модули---------------------------------------
+-----------------------------------------------------------------------------------------
+
+
+copy
+===================
+import copy
+X = copy.copy(Y)            # Создание “поверхностной” копии любого объекта Y
+
+X = copy.deepcopy(Y)        # Создание полной копии: копируются все вложенные части
+
+>>> sett1
+{1, 2, 3, 4, 5, 6, frozenset({4, 5, 6, 7, 8, 9})}
+>>> cop1 = copy.copy(sett1)
+>>> cop2 = copy.deepcopy(sett1)
+>>> cop1 == cop2
+True
+>>> cop1 is cop2
+False
+
+
+
+numpy 
+====================
+модуль работы с числами
+
+
+
+numpy
+scipy (+numpy)
+====================
+модуль для научных вычислений
+http://cs231n.github.io/python-numpy-tutorial/#numpy-datatypes
+https://docs.scipy.org/doc/numpy-dev/user/quickstart.html
+https://pypi.python.org/pypi/numpy
+
+
+
+tkinter / +PMW
+=====================
+GUI API
+реализует графический интерфейс присущий активной ОС
+
+
+django
+======================
+web
+
+
+flask
+======================
+web
+
+
+pickle
+======================
+система хранения объектов
+хранить данные и вызывать в файлах и спец объектах
+
+
+
+pygame
+=======================
+
+
+
+обработка изображений
+=======================
+pil / pillow / blander / maya
+
+
+
+pyro4
+=======================
+управление удаленными объектами, например роботом
+
+
+
+xml
+=======================
+парсинг xml файлов
+
+
+

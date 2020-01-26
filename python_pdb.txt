@@ -1,0 +1,147 @@
+
+
+Питон Дебагер
+Python DeBug
+pdb
+=============
+
+Документация (достаточно подробная)
+------------
+https://docs.python.org/3/library/pdb.html
+
+https://docs.python.org/3/library/pdb.html#debugger-commands
+
+
+1)
+В коде Питон (лучше сразу за названием Функции)
+
+import pdb; pdb.set_trace()
+
+Запускает типа python shell останавливая выполнение Кода
+можно выводить на экран значения переменних (как бы инициализированных)
+============================
+
+С какой инструкции начинается Дебагер
+-------------------
+> ...
+-> def students_list(request):
+(Pdb) 
+
+
+2)
+ЛайтХак для pdb
+---------------
+request
+===============
+Модуль pdb позволяет работать с содержимым объекта request (глобально доступен во всех 
+модулях проекта/апликации)
+--------------------------
+
+(Pdb) print '\n'.join([k for k in request.__dict__])
+
+команда дает Ключи по всем параметрам, которые доступны в request
+
+session
+_post
+content_params
+_post_parse_error
+_messages
+resolver_match
+_stream
+COOKIES
+_files
+_read_started
+META
+environ
+path_info
+content_type
+path
+csrf_processing_done
+method
+user
+
+
+3)
+Выводит памятку о всех коммандах
+--------------------------------
+(Pdb) h
+
+Documented commands (type help <topic>):
+========================================
+EOF    c          d        h         list      q        rv       undisplay
+a      cl         debug    help      ll        quit     s        unt      
+alias  clear      disable  ignore    longlist  r        source   until    
+args   commands   display  interact  n         restart  step     up       
+b      condition  down     j         next      return   tbreak   w        
+break  cont       enable   jump      p         retval   u        whatis   
+bt     continue   exit     l         pp        run      unalias  where 
+
+
+
+4)
+Продолжает выполенние кода по строчно (continue)
+-------------------
+(Pdb) c
+
+5)
+На какой стоке кода ничинатеся Дебагер
+-------------------
+(Pdb) w
+
+> /home/ryndin/workprojects/studentsdb27/studentsdb27/src/studentsdb27/students/views/students.py(28)<module>()
+-> def students_list(request):
+
+
+6)
+Выводит активные аргументы / Объекты
+----------------
+(Pdb) a
+
+request = <WSGIRequest: GET '/'>
+
+
+7)
+Выводит ближайшие 11 строк кода
+-----------------
+(Pdb) l
+
+ 27  	# it is custom code - may be use ListView class later
+ 28  	def students_list(request):
+ 29  	    # assert False
+ 30  	    pdb.set_trace()
+ 31  	    # query set object from manager of Model
+ 32  ->	    current_group = get_current_group(request)
+ 33  	    if current_group:
+ 34  	        students = Student.objects.filter(student_group=current_group)
+ 35  	    else:
+ 36  	        # groups = Group.objects.all().order_by('title')
+ 37  	        students = Student.objects.all()
+
+
+8)
+dir()
+
+
+
+
+20)
+Выход из текущей сессии Дебагера
+----------------
+(Pdb) q
+
+
+
+СТАТЬИ
+===============
+
+1)
+Python. Отладка при помощи pdb
+------------------------------
+http://adw0rd.com/2012/10/7/python-pdb/
+
+Блог от Эдварда
+
+
+
+
+

@@ -1,0 +1,144 @@
+
+Интерактивные Учебные курсы обо всем
+====================================
+
+1)
+w3schools
+https://www.w3schools.com/
+--------------------------
+https://www.w3schools.com/html/default.asp
+https://www.w3schools.com/css/default.asp
+https://www.w3schools.com/js/default.asp
+https://www.w3schools.com/bootstrap/default.asp
+https://www.w3schools.com/sql/default.asp
+https://www.w3schools.com/jquery/default.asp
+https://www.w3schools.com/angular/default.asp
+https://www.w3schools.com/js/js_ajax_intro.asp
+.....
+и прочие web технологии
+
+
+
+2)
+tutorialspoint
+https://www.tutorialspoint.com/index.htm
+------------------------------
+https://www.tutorialspoint.com/angularjs/index.htm
+https://www.tutorialspoint.com/python3/index.htm
+https://www.tutorialspoint.com/ajax/index.htm
+https://www.tutorialspoint.com/jquery/index.htm
+https://www.tutorialspoint.com/css/index.htm
+......
+и еще много чего / практически все тохнологии
+
+
+
+
+3)
+Microservices with Docker, Flask, and React
+Мануал и пример размещения Проекта с использование пакета приложений
+http://54.89.0.180/
+---------------------
+http://testdriven.io/
+http://testdriven.io/part-one-intro/
+http://testdriven.io/part-two-intro/
+http://testdriven.io/part-three-intro/
+
+примененные Апликации:
+---------------------
+    Python v3.6.1
+    Flask v0.12.2
+    Flask-Script v2.0.5
+    Flask-SQLAlchemy v2.2
+    Flask-Testing v0.6.2
+    Gunicorn v19.7.1
+    Nginx v1.13.0
+    Docker v17.03.1-ce
+    Docker Compose v1.11.2
+    Docker Machine v0.10.0
+
+
+4)
+METANIT.COM
+Сайт о программировании
+C# / .NET / JAVA / WEB / IOS/OS / X / MONGODB / VB.NET / PYTHON / АССЕМБЛЕР
+(Python / MongoDB)
+(WEB // AngularJS / HTML5 и CSS3 / React / Изучаем jQuery / JavaScript)
+--------------------
+https://metanit.com/
+
+
+Теоритические Базовые Курсы
+============================
+
+1)
+Алгоритмы - Курс лекций
+-----------------------
+01 - Введение в алгоритмы. Что такое алгоритмы
+https://www.youtube.com/watch?list=PLwwk4BHih4fjIT5cT4i1s93b99aJScUGB&v=8JlTwMg1dyw
+
+02 - Введение в алгоритмы. Пример простого алгоритма
+https://www.youtube.com/watch?v=lvGRb72EExs
+
+03 - Введение в алгоритмы. Знакомство с алгоритмами сортировки
+https://www.youtube.com/watch?v=Hr-SbhF6apc
+
+04 - Введение в алгоритмы. Разделяй и властвуй
+https://www.youtube.com/watch?v=-orzFfWSI_8
+
+.... и так дале много лекций на развитие логики - это важно!
+
+
+
+2) Алгоритмы 
+(от казаха Давлеткалиева)
+------------
+Алгоритмы (Рахим Давлеткалиев) Часть 1
+https://www.youtube.com/watch?v=LCXXqdV0MLI
+
+Алгоритмы (Рахим Давлеткалиев) Часть 2
+https://www.youtube.com/watch?v=-IISRXrezN8
+
+
+
+3)
+Архитектура ЭВМ
+(Кирилл Кринкин)
+----------------
+01 - Архитектура ЭВМ. Введение. Принципы построения ЭВМ
+https://www.youtube.com/watch?v=C-7mi9YhNBU
+
+02 - Архитектура ЭВМ. Введение в язык ассемблера
+https://www.youtube.com/watch?v=BU7lX6ZoXgY
+
+03 - Архитектура ЭВМ. Базовые элементы операционной системы
+https://www.youtube.com/watch?v=Aahe_CPawac
+
+04 - Архитектура ЭВМ. Процессы, потоки, многозадачность
+https://www.youtube.com/watch?v=5WSxDw-M5wo
+
+05 - Архитектура ЭВМ. Организация памяти
+https://www.youtube.com/watch?v=CZaBl7iQLP0
+
+06 - Архитектура ЭВМ. Межпроцессное взаимодействие
+https://www.youtube.com/watch?v=XAODLLrV3uk
+
+
+
+4)
+Все о ВЕБ и Тестировании
+------------------------
+http://quality-lab.ru/key-principles-of-web-testing/
+
+И вообще Хорошая База знаний о Тетировании как отдельная Отрасль
+------------------------------
+http://quality-lab.ru/blog/page/2/
+
+
+ 
+5)
+Лекториум - Медиатека
+Фильмотека по разным курсам / Сборка из Ютюба
+Пока только Питон от Тузовой интересен, ну и Гуманитарные Науки
+============================
+https://www.lektorium.tv/medialibrary

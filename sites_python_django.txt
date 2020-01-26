@@ -1,0 +1,114 @@
+
+
+simple is better than complex
+====================
+https://simpleisbetterthancomplex.com/
+
+
+Class Base Views Django Site
+===================
+https://ccbv.co.uk/
+
+
+
+Джанго Документация по Украински
+================================
+http://www.chervol.com/django_uk_docs/index.html
+
+
+Realpython Blog
+===============
+https://realpython.com/blog/
+
+
+fullstack python
+==================
+https://www.fullstackpython.com/blog.html
+
+
+
+Интернет книга / Python Cookbook / 2013
+Крутейщая интерактивная книга по конструкциям в Питоне
+=======================
+http://chimera.labs.oreilly.com/books/1230000000393/index.html
+
+        
+
+Test-Driven Development with Python
+Интерактивный учебник по Тестам в Питоне (и в Джанго)
+========================
+http://chimera.labs.oreilly.com/books/1234000000754/index.html
+
+
+
+Сайт о Питоне в разных направлениях - супер
+======================
+web-development-tutorials/django/flask
+data-analysis-tutorials
+robotics-tutorials
+game-development-tutorials
+gui-development-tutorials/pyQt/Tkinter/Kivy
+----------------------
+https://pythonprogramming.net/
+
+
+
+Блог реального Питониста
+========================
+http://lucumr.pocoo.org/
+примеры:
+--------
+http://lucumr.pocoo.org/2016/12/29/careful-with-str-format/
+http://lucumr.pocoo.org/2016/7/10/rust-rest/
+http://lucumr.pocoo.org/2015/5/27/rust-for-pythonistas/
+
+
+
+
+Интерактивный Учебник Питон
+===========================
+http://www.tutorialspoint.com/python/index.htm
+
+
+
+Джанго Герлс Туториал
+=====================
+https://tutorial.djangogirls.org/ru/
+
+
+
+Питон - полезные Модули
+=======================
+shutil / unuttest / suprocess / cmach / glob / os.path / join / os / calendar / datitime /
+sys / random / math
+-----------------------
+https://pythonworld.ru/moduli
+
+
+
+Django - Документация Django
+=====================
+Большенство документации переведено на русский
+Есть несколько примеров кода от сообщества
+---------------------
+http://djbook.ru/
+
+
+Официальная документация Джанго
+=======================
+тоже есть примеры кода и рецепты от сообщества
+-----------------------
+https://www.djangoproject.com
+
+
+
+Ссылки на работу
+================
+
+42 сс
+----------------
+http://jobs.42coffeecups.com/
+https://www.facebook.com/notes/andrey-khavryuchenko/how-to-prepare-for-development-carreer-in-42-coffee-cups/10153470495568413
+
+
+

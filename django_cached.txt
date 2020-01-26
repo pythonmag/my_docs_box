@@ -1,0 +1,6 @@
+
+
+
+https://docs.djangoproject.com/en/3.0/topics/cache/
+
+django любит  memcached

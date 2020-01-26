@@ -1,0 +1,32 @@
+
+Matplotlib
+==========
+
+
+Matplotlib Tutorial – 
+Python Matplotlib Library with Examples
+-----------------------------
+https://www.edureka.co/blog/python-matplotlib-tutorial/
+
+
+Edureka
+Python Matplotlib Tutorial | Matplotlib Tutorial | 
+Python Tutorial | Python Training | 
+-------------------
+видео туториал на 35 мин
+https://www.youtube.com/watch?v=yZTBMMdPOww&t=568s
+
+
+пример
+-------------
+from matplotlib import pyplot as plt
+
+#Plotting to our canvas
+plt.plot([1,2,3],[4,5,1])
+
+#Showing what we plotted
+plt.show()
+
+
+
+

@@ -1,0 +1,58 @@
+
+(single page applications, далі SPA). 
+
+
+Документация
+================
+1)
+https://vuejs.org/v2/guide/
+
+
+
+Туториалы
+================
+1)
+на русском
+Vue.js с нуля (часть 1) - Hello World + Продолжения
+----------
+https://www.youtube.com/watch?v=k3yRfEw1pYk&list=PLSVqTfjvRr4S_UcwE1pX8oo69L4dyuBO_&index=4&t=6s
+
+2)
+Vue.js - Введение
+-----------------
+https://www.youtube.com/watch?v=Zwiu5yBU_Gk
+
+Learn Vue.js (RU) - Основы
+-----------------
+https://www.youtube.com/watch?v=b7r6JlLvF0Q
+
+Learn Vue.js (RU) - внутри Vue объекта
+----------------
+https://www.youtube.com/watch?v=msJfQsxJvVc
+
+
+3)
+Vue.js 2.0 In 60 Minutes
+от Traversy Media
+------------------------
+https://www.youtube.com/watch?v=z6hQqgvGI4Y&list=PLSVqTfjvRr4S_UcwE1pX8oo69L4dyuBO_&index=1&t=1106s
+
+
+
+
+
+Публикации
+==========
+1)
+Використання міксинів у Vue.js
+---------------------
+https://codeguida.com/post/1000
+
+2)
+Приступаючи до роботи з Vue Router
+---------------------
+https://codeguida.com/post/997
+
+3)
+
+

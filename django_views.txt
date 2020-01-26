@@ -1,0 +1,41 @@
+https://ccbv.co.uk/
+==================
+
+
+https://docs.djangoproject.com/en/3.0/topics/class-based-views/
+
+https://docs.djangoproject.com/en/3.0/topics/class-based-views/intro/
+
+https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-display/
+
+https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-editing/
+===================
+
+
+Mixins Views:
+-----------------
+
+https://docs.djangoproject.com/en/3.0/ref/class-based-views/mixins-editing/#formmixin
+
+https://docs.djangoproject.com/en/3.0/ref/class-based-views/mixins-editing/#modelformmixin
+
+.......
+
+
+
+1)
+views.py
+================
+from django.shortcuts import render
+from django.http import HttpResponse
+
+
+# test view
+# Create your views here.
+def index(request):
+    return HttpResponse('<h1>Hello World</h1>')
+
+
+
+
+

@@ -1,0 +1,854 @@
+Моя Установка Сайта на pythonanywhere.com - Это Хостинг и VPS одновременно, 
+еще и бесплатный (укороченный функционал): до 512 GB места и БД долько SQLite и mySQL.
+За доплату дает работать с БД PostgreSOL, расширение места и прочее.
+
+// Регистария обычна, но надо иметь в виду, что имя Аккаунта будет в url сайта, 
+	например <myaccount>.pythonanywhere.com
+
+
+===================
+// Снеачала разберусь в Базой Данных mySQL на Боевом Сервере
+1) иду во вкладку Databases >> Create a database >> Задаю имя Глобальной ДБ (пустой) >> myproject2016_db
+Затем стартую Консоль ДБ >> Start a console on: meg2mag$myproject2016_db
+
+Для settings.py Проекта вырисовываются Настройки:
+password	>> pythonmag76
+user		>> meg2mag@ip-10-144-177-160.ec2.internal
+database	>> meg2mag$myproject2016_db
+
+Смотрю Статус совей БД /
+
+Во вкладке Consoles есть возможность активировать 2 Консоли - Shell и DBSell (mysql)
+
+mysql >> \status
+mysql  Ver 14.14 Distrib 5.5.47, for debian-linux-gnu (x86_64) using readline 6.3
+Connection id:          30724826
+Current database:       meg2mag$myproject2016_db			// Имя моей БД
+Current user:           meg2mag@ip-10-144-177-160.ec2.internal	// Юзер
+SSL:                    Not in use
+Current pager:          stdout
+Using outfile:          ''
+Using delimiter:        ;
+Server version:         5.5.42-log Source distribution
+Protocol version:       10
+Connection:             anywheredb.clt1czfvlzlc.us-east-1.rds.amazonaws.com via TCP/IP
+Server characterset:    utf8
+Db     characterset:    utf8
+Client characterset:    utf8
+Conn.  characterset:    utf8
+TCP port:               3306
+Uptime:                 20 days 11 hours 12 min 23 sec
+Threads: 104  Questions: 1233790892  Slow queries: 16727  Opens: 1664971  Flush tables: 1
+Open tables: 1000  Queries per second avg: 697.710
+
+
+// Смотрю в Свою Корневую папку что в ней есть (+ скрытые файлы)
+09:15 ~ $ ls -la           
+	// Результат:
+	drwxrwxr-x 2 meg2mag registered_users 4096 Feb 15 09:14 .
+	drwxr-xr-x 1       0                0 4096 Feb 14 19:52 ..
+	-rwxr-xr-x 1 meg2mag registered_users  559 Feb 14 19:24 .bashrc
+	-rwxr-xr-x 1 meg2mag registered_users  266 Feb 14 19:24 .gitconfig
+	-rw------- 1 meg2mag registered_users   33 Feb 14 19:55 .my.cnf
+	-rw------- 1 meg2mag registered_users   15 Feb 14 19:53 .mysql_history
+	-rw-r--r-- 1 meg2mag registered_users   79 Feb 14 19:24 .profile
+	-rwxr-xr-x 1 meg2mag registered_users   77 Feb 14 19:24 .pythonstartup.py
+	-rw------- 1 meg2mag registered_users    5 Feb 15 05:54 .sqlite_history
+	-rwxr-xr-x 1 meg2mag registered_users 4693 Feb 14 19:24 .vimrc
+	-rwxr-xr-x 1 meg2mag registered_users  235 Feb 14 19:24 README.txt
+
+
+// Готовлюсь к Запускаю установку Виртуальной Среды
+09:15 ~ $ source virtualenvwrapper.sh
+	// Результат:
+	virtualenvwrapper.user_scripts creating /home/meg2mag/.virtualenvs/premkproject
+	virtualenvwrapper.user_scripts creating /home/meg2mag/.virtualenvs/postmkproject
+	virtualenvwrapper.user_scripts creating /home/meg2mag/.virtualenvs/initialize
+	virtualenvwrapper.user_scripts creating /home/meg2mag/.virtualenvs/premkvirtualenv
+	virtualenvwrapper.user_scripts creating /home/meg2mag/.virtualenvs/postmkvirtualenv
+	virtualenvwrapper.user_scripts creating /home/meg2mag/.virtualenvs/prermvirtualenv
+	virtualenvwrapper.user_scripts creating /home/meg2mag/.virtualenvs/postrmvirtualenv
+	virtualenvwrapper.user_scripts creating /home/meg2mag/.virtualenvs/predeactivate
+	virtualenvwrapper.user_scripts creating /home/meg2mag/.virtualenvs/postdeactivate
+	virtualenvwrapper.user_scripts creating /home/meg2mag/.virtualenvs/preactivate
+	virtualenvwrapper.user_scripts creating /home/meg2mag/.virtualenvs/postactivate
+	virtualenvwrapper.user_scripts creating /home/meg2mag/.virtualenvs/get_env_details
+
+
+// Запускаю установку Виртуальной Среды (без Сайт-Пакетов - их поставлю сам позже)
+09:16 ~ $ mkvirtualenv myproject2016 --no-site-packages 
+	// Результат:                                  
+	New python executable in /home/meg2mag/.virtualenvs/myproject2016/bin/python2.7
+	Also creating executable in /home/meg2mag/.virtualenvs/myproject2016/bin/python
+	Installing setuptools, pip, wheel...done.
+
+// Так я Активирую свою Виртуальную Среду (это можно делать находясь в любой папке - скрипт)
+	09:23 ~ $ workon myproject2016
+	(myproject2016) 09:29 ~ $ ls -la
+	// Результат и Смотрю в папку:
+	total 52
+	drwxrwxr-x 3 meg2mag registered_users 4096 Feb 15 09:16 .
+	drwxr-xr-x 1       0                0 4096 Feb 14 19:52 ..
+	-rwxr-xr-x 1 meg2mag registered_users  559 Feb 14 19:24 .bashrc
+	-rwxr-xr-x 1 meg2mag registered_users  266 Feb 14 19:24 .gitconfig
+	-rw------- 1 meg2mag registered_users   33 Feb 14 19:55 .my.cnf
+	-rw------- 1 meg2mag registered_users   15 Feb 14 19:53 .mysql_history
+	-rw-r--r-- 1 meg2mag registered_users   79 Feb 14 19:24 .profile
+	-rwxr-xr-x 1 meg2mag registered_users   77 Feb 14 19:24 .pythonstartup.py
+	-rw------- 1 meg2mag registered_users    5 Feb 15 05:54 .sqlite_history
+	-rwxr-xr-x 1 meg2mag registered_users 4693 Feb 14 19:24 .vimrc
+	drwxrwxr-x 3 meg2mag registered_users 4096 Feb 15 09:19 .virtualenvs	// вот мои Среды
+	-rwxr-xr-x 1 meg2mag registered_users  235 Feb 14 19:24 README.txt
+
+
+// Это путь к моей Виртуальной Среде - его я Указываю по Вкладке WEB:
+	Virtualenv:
+	Use a virtualenv to get different versions of flask, django etc from our default system
+	ones. More info here. You need to Reload your web app to activate it; NB - will do nothing
+	if the virtualenv does not exist.
+	/home/meg2mag/.virtualenvs/myproject2016
+	То есть Боевой Сервер ошибку не дает и уже видит где моя Виртуальная Среда - это ОК.
+
+
+// Возвращаюсь в Консоль
+// Пока моя Среда Практически не имеет внешних Пакетов (я их специально отменил)
+	// Посмотрю какие есть Сайт-пакеты:
+	(myproject2016) 09:30 ~ $ pip list
+		pip (8.0.2)
+		setuptools (19.6.1)
+		wheel (0.26.0)
+
+
+***********Размышления. Хотел так - Сделал по другому
+//	Наверное для Развертывания Моего проекта создам папку src как было на Уроках Виталия 
+	> home > meg2mag > .virtualenvs > myproject2016 > src
+	Так наверное будет понятнее когда Код Проекта лежит в структуры Виртуальной Среды
+
+	(myproject2016) 09:45 ~ $ cd .virtualenvs/myproject2016/
+	(myproject2016) 09:45 ~/.virtualenvs/myproject2016 $ pwd
+		/home/meg2mag/.virtualenvs/myproject2016
+	(myproject2016) 09:45 ~/.virtualenvs/myproject2016 $ ls
+		bin  include  lib  local  src
+************
+
+
+// Установил Django 1.8.8 - пошла в Сайт-Пакеты
+	(myproject2016) 09:49 ~/.virtualenvs/myproject2016 $ pip install Django==1.8.8
+	Collecting Django==1.8.8
+	/home/meg2mag/.virtualenvs/myproject2016/local/lib/python2.7/site-packages/pip/_vendor/
+	requests/packages/urllib3/util/ssl_.py:315: SNIMissingWarning: An HTTPS request has been made,
+	but the SNI (Subject Name Indication) extension to TLS is not available on this platform.
+	 This may cause the server to present an incorrect TLS certificate, which can cause 
+	validation failures. For more information, see https://urllib3.readthedocs.org/en/latest/
+	security.html#snimissingwarning.
+  	SNIMissingWarning
+	/home/meg2mag/.virtualenvs/myproject2016/local/lib/python2.7/site-packages/pip/_vendor/
+	requests/packages/urllib3/util/ssl_.py:120: InsecurePlatformWarning: A true SSLContext
+	object is not available. This prevents urllib3 from configuring SSL appropriately and
+	may cause certain SSL connections to fail. For more information, see https://urllib3.
+	readthedocs.org/en/latest/security.html#insecureplatformwarning.
+  	InsecurePlatformWarning
+	Installing collected packages: Django
+	Successfully installed Django-1.8.8
+	
+	// При устаноке django выдало что не хватает Сайт-Пакета urllib3 -- потом поставлю 
+	// Да, в папке / > home > meg2mag > .virtualenvs > myproject2016 > bin 
+		появился файл django-admin.py	-- администратор по django
+		управляет взаисмодействием с питоном и пакетами
+		
+		#!/home/meg2mag/.virtualenvs/myproject2016/bin/python2.7
+		from django.core import management
+		if __name__ == "__main__":
+    		management.execute_from_command_line()
+
+
+// Теперь Внимание! 
+	Моя Виртуальная Среда Ноходится здесь - это ее имя myproject2016.
+	Этот путь к среде Принят Боевым Сервером во вкладке WEB (значит ОК) 
+	/ > home > meg2mag > .virtualenvs > myproject2016 /
+
+	Решил, что Мой Код Проекта будет лежать параллельно папке Виртуальной среды то есть
+	/ > home > meg2mag > myproject2016 /
+
+	во вкладке WEB Боевой Сервер связывает мои Виртуальную Среду / Код проекта и mySQL 
+	через настройки:
+	Code:
+		What your site is running.
+		Source code:
+		You can use the Files tab to navigate to your app's source code.
+		WSGI configuration file:
+		/var/www/meg2mag_pythonanywhere_com_wsgi.py		
+			// настройки этого файла связывает Сайт-Пакеты с Проектом (settings, wsgi)
+		Python version:
+		2.7
+	
+	Virtualenv:
+		Use a virtualenv to get different versions of flask, django etc from our default
+		system ones. More info here. You need to Reload your web app to activate it; NB
+		- will do nothing if the virtualenv does not exist.
+		/home/meg2mag/.virtualenvs/myproject2016
+
+
+
+************Размышления. Хотел так - Сделал по другому (через Гитхаб но можно и Папками, архивами).
+// Насчет Клонирования с github
+	Есть искушение залить Клон проекта из Github полностью, но могут возникнуть ошибки которые
+	я не смогу решить с путями подключения модуле и апликаций из Пакетов Питон.
+	А вот при команде python manage.py startproject эти настройки сгенерируются корректно.
+	Потому решил ставить пустой проект через manage.py а потом переносить все кастомные папки кода
+************
+
+
+// Пока установлю недостающие Сайт-Пакеты (в начале я от них отказался для кастомной установки)
+	// что я имею в начале:
+	(myproject2016) 10:39 ~/.virtualenvs/myproject2016 $ pip list
+		Django (1.8.8)
+		pip (8.0.2)
+		setuptools (19.6.1)
+		wheel (0.26.0)
+
+// Ставлю пакет которого не хватало в начале - urllib3 
+	// всегда можно свериться с последней стабильной версией на сайте python pypi по типу	
+	https://pypi.python.org/pypi/urllib3
+	(myproject2016) 11:35 ~/.virtualenvs/myproject2016 $ pip install urllib3==1.14
+	Collecting urllib3==1.14
+	InsecurePlatformWarning			// все еще ругается на его отсутствие
+	Installing collected packages: urllib3
+	Successfully installed urllib3-1.14
+
+
+// Устанавливаю pillow(PIL) -- нужную версию
+	(myproject2016) 11:36 ~/.virtualenvs/myproject2016 $ pip install pillow==3.1.0
+	Collecting pillow==3.1.0
+	Installing collected packages: pillow
+	Successfully installed pillow-3.1.0
+
+
+//	Стаблю Пакет для Работы с Файлами python-magic
+	(myproject2016) 11:41 ~/.virtualenvs/myproject2016 $ pip install python-magic==0.4.10
+	Collecting python-magic==0.4.10
+	Installing collected packages: python-magic
+	Successfully installed python-magic-0.4.10
+
+
+//	Устанавливаю  MySQL-python -- нужную версию (менеджер для работы с глобальной БД mySQL)
+	(myproject2016) 11:43 ~/.virtualenvs/myproject2016 $ pip install MySQL-python==1.2.5
+	Collecting MySQL-python==1.2.5
+	Installing collected packages: MySQL-python
+	Successfully installed MySQL-python-1.2.5
+
+
+//	Устанавливаю  django-crispy-forms -- нужную версию
+	(myproject2016) 11:44 ~/.virtualenvs/myproject2016 $ pip install django-crispy-forms==1.5.2
+	Collecting django-crispy-forms==1.5.2
+	Downloading django-crispy-forms-1.5.2.tar.gz (114kB)
+    100% |████████████████████████████████| 114kB 800kB/s 
+	Building wheels for collected packages: django-crispy-forms
+  	Running setup.py bdist_wheel for django-crispy-forms ... done
+  	Stored in directory: /home/meg2mag/.cache/pip/wheels/35/c8/45/4c3e856aed73cfdf2ff25e600d95bdd20eba71b3d3cca38cb2
+	Successfully built django-crispy-forms
+	Installing collected packages: django-crispy-forms
+	Successfully installed django-crispy-forms-1.5.2
+
+
+//	Утанавливаю модуль dateutil(работа с датами) -- нужную версию
+	(myproject2016) 11:46 ~/.virtualenvs/myproject2016 $ pip install python-dateutil==2.4.2
+	Collecting python-dateutil==2.4.2
+	Collecting six>=1.5 (from python-dateutil==2.4.2)
+	Installing collected packages: six, python-dateutil
+	Successfully installed python-dateutil-2.4.2 six-1.10.0
+
+
+// Если ничего не забыл то кажется все необходимые Сайт-Пакеты утсановлены. Гляну что имею:
+	(myproject2016) 11:47 ~/.virtualenvs/myproject2016 $ pip list
+		Django (1.8.8)
+		django-crispy-forms (1.5.2)
+		MySQL-python (1.2.5)
+		Pillow (3.1.0)
+		pip (8.0.2)
+		python-dateutil (2.4.2)
+		python-magic (0.4.10)
+		setuptools (19.6.1)
+		six (1.10.0)
+		urllib3 (1.14)
+		wheel (0.26.0)
+	// через вкладку Files можно визуально глянуть что все пакеты находятся по пути: 
+		/ > home > meg2mag > .virtualenvs > myproject2016 > lib > python2.7 > site-packages 
+			Django-1.8.8.dist-info/ 	
+			MySQL_python-1.2.5.dist-info/ 	
+			MySQLdb/ 	
+			PIL/ 	
+			Pillow-3.1.0.dist-info/ 	
+			_markerlib/ 	
+			crispy_forms/ 	
+			dateutil/ 	
+			django/ 	
+			django_crispy_forms-1.5.2.dist-info/ 	
+			pip/ 	
+			pip-8.0.2.dist-info/ 	
+			pkg_resources/ 	
+			python_dateutil-2.4.2.dist-info/ 	
+			python_magic-0.4.10.dist-info/ 	
+			setuptools/ 	
+			setuptools-19.6.1.dist-info/ 	
+			six-1.10.0.dist-info/ 	
+			urllib3/ 	
+			urllib3-1.14.dist-info/ 	
+			wheel/ 	
+			wheel-0.26.0.dist-info/
+
+
+// Ах да, чуть не забыл (а потом дало ошибку при настройках проекта)
+	Апликация для Django для регистрации Пользователей - тоже можно сразу поставить
+	django-registration-redux
+	https://pypi.python.org/pypi/django-registration-redux/
+		(myproject2016) 12:21 ~ $ pip install django-registration-redux==1.3
+
+	Collecting django-registration-redux==1.3
+	Downloading django_registration_redux-1.3-py2-none-any.whl (136kB)
+    100% |████████████████████████████████| 139kB 838kB/s 
+	Installing collected packages: django-registration-redux
+	Successfully installed django-registration-redux-1.3
+
+
+// Еше раз Внимание!
+	Перед Стартом установки Проекта еще раз напомню что решил Папку Проекта решил вкладывать 
+	параллельно папке Виртуальной Среды
+
+Моя Виртуальная Среда Ноходится здеть - это ее имя myproject2016.
+	Этот путь к среде Принят Боевым Сервером во вкладке WEB (значит ОК) 
+	/ > home > meg2mag > .virtualenvs > myproject2016 /
+
+	Мой Код Проекта будет лежать параллельно папке Виртуальной среды то есть
+	/ > home > meg2mag > myproject2016 /
+
+
+// Всетаки решил нохдясь в коренвой папке / > home > meg2mag > / Залить Клон с Github/
+	Пакет в моер репозитории называется /myproject2016/ - как раз подходит
+
+Внимание! Делая Клон моего Проекта из Репозитория git на Боевой сервер я фактически пропускаю
+	Команды (python manage.py) startproject и startapp, так как они в даном случае не нужны.
+	Поскольку Проект и Априкация уже созданы - они в папке Проекта-Клона. 
+    
+	// Делаю Клон в коревую папку (рядом с /.virtualenv/)
+		(myproject2016) 12:21 ~ $ git clone https://github.com/<myname>/myproject2016.git
+	Произошла успешная установка Клона Репозитория - это теперь и есть Мой Проект (с Апликацией)
+	на Боевом сервере по адресу /home/meg2mag/myproject2016/ !!!
+	
+
+// Вкладка WEB.
+	Иду настрою Связь между Виртуальной Средой и Моим залитым Проектом.
+	Открываю файл, который за это отвечает:	
+	WSGI configuration file:
+	/var/www/meg2mag_pythonanywhere_com_wsgi.py
+	// В нем все удаляю и Вставляю код (списибо ***Григорию*** и Гуглу - прочитал несколько подобных
+	 статей чтобы убедиться в правильности подхода, ОК)
+	код файла /var/www/meg2mag_pythonanywhere_com_wsgi.py:
+	
+	------------------------------------------------------	
+	# TURN ON THE VIRTUAL ENVIRONMENT FOR YOUR APPLICATION
+	activate_this = '/home/meg2mag/.virtualenvs/myproject2016/bin/activate_this.py'
+	execfile(activate_this, dict(__file__=activate_this))
+
+	import os
+	import sys
+
+	# ADD YOUR PROJECT TO THE PYTHONPATH FOR THE PYTHON INSTANCE
+	path = '/home/meg2mag/myproject2016'
+	if path not in sys.path:
+    	sys.path.append(path)
+
+	os.chdir(path)
+
+	# TELL DJANGO WHERE YOUR SETTINGS MODULE IS LOCATED
+	os.environ['DJANGO_SETTINGS_MODULE'] = 'myproject2016.settings'
+	
+	# IMPORT THE DJANGO WSGI HANDLER TO TAKE CARE OF REQUESTS
+	from django.core.wsgi import get_wsgi_application
+	application = get_wsgi_application()
+	------------------------------------------------------	
+	
+	// не забываем на вкладке WEB нажимать Большую зеленую кнопку Reload.. после каждого изменения
+	настроек и кода проекта.
+	Также жмет на Ссылку на Домен - Там увидем тот же Дебагер ссобщения как при локаьной разработке.
+	Дебагер пишет ошибки которые последовательно устраняем.
+
+
+// После настройки WSGI и перезагрузки Первая Ошибка:
+	(2002, "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)") 
+	// именно эта ошибка возникла о том что Хост сервера не указан
+	// Также могут быть ошибки о неправильном пароле, юзере - проверял ломая по очереди
+	// Главное что локальный менеджер проекта python-mysql уже взаимодействует с Глобальным боевым
+		сервером mySQL что радует
+
+	// Все ошибки относительно сервера mySQL решены благодаря исправления settings.py
+	DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
+
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'meg2mag.mysql.pythonanywhere-services.com',
+        'USER': 'meg2mag',
+        'PASSWORD': '************',
+        'NAME': 'meg2mag$myproject2016_db',
+        }
+
+
+// Теперь Ошибка
+	(1146, "Table 'meg2mag$myproject2016_db.myproject2016app_team' doesn't exist")
+	Похоже что сервер сообщает о том что на глобальном сервере mySQL нет Таблиц с данными, и 
+	их там и нет поскольку я их туда пока еще не ставил.
+	// Буду пробывать переносить Базы данных на Боевой сервер командами manage.py c локальной 
+		машины:
+		dumpdata > json-file-fixture > loaddata
+
+
+// Сделаем легкую паузу и просто зайду через Консоль во вкладке Consoles (как через manage.py)
+	в консоль mysql и посмотрю что там, а там пустая глобальная База без Таблиц. 
+	Консоль при открытии дает статусное сообщение об активной БД, и хорошо что это mySQL,
+	значит settings.py настроил правильно. Раньше выдавало SQLite.
+	//
+	Welcome to the MySQL monitor.  Commands end with ; or \g.
+	Your MySQL connection id is 30724826
+	Server version: 5.5.42-log Source distribution
+	Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
+	Oracle is a registered trademark of Oracle Corporation and/or its
+	affiliates. Other names may be trademarks of their respective
+	owners.
+	Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+	mysql> \s
+	--------------
+	mysql  Ver 14.14 Distrib 5.5.47, for debian-linux-gnu (x86_64) using readline 6.3
+	Connection id:          30724826
+	Current database:       <user>$myproject2016_db
+	Current user:           <user>@ip-10-144-177-160.ec2.internal
+	SSL:                    Not in use
+	Current pager:          stdout
+	Using outfile:          ''
+	Using delimiter:        ;
+	Server version:         5.5.42-log Source distribution
+	Protocol version:       10
+	Connection:             anywheredb.clt1czfvlzlc.us-east-1.rds.amazonaws.com via TCP/IP
+	Server characterset:    utf8
+	Db     characterset:    utf8
+	Client characterset:    utf8
+	Conn.  characterset:    utf8
+	TCP port:               3306
+	
+	mysql> show tables;			// никаких таблиц (локальных БД) нет пока.
+	Empty set (0.00 sec)
+
+
+// Теперь моя задача перенести Мои Созданные Таблицы mySQL из разраб машины на Боевой сервер
+// Создам папку на Боевом проекте под названием fixtures/ по пути:
+	/ > home > meg2mag > myproject2016 > myproject2016app > fixtures /
+	В эту папку надо положить файл <mysql_data>.json 
+
+
+// Создаю на Разраб машине файл-фикстуру для переноса Таблиц БД mySQL 
+	почитать:
+	http://djbook.ru/rel1.8/ref/django-admin.html#dumpdata-app-label-app-label-app-label-model
+
+
+// Чтобы вспомнить как называется моя Локальная ДБ на разраб машине:
+	Менеджер откроет только ту Базу которая имеет отношение к Данному проекту:
+	//	
+	(myproject2016py)ryndin@pc:~/work/myproject2016py/src/myproject2016$ python manage.py dbshell
+	Reading table information for completion of table and column names
+	You can turn off this feature to get a quicker startup with -A
+	Welcome to the MySQL monitor.  Commands end with ; or \g.
+	Your MySQL connection id is 38
+	Server version: 5.5.47-0ubuntu0.14.04.1 (Ubuntu)
+	//
+	mysql> \s
+	--------------
+	mysql  Ver 14.14 Distrib 5.5.47, for debian-linux-gnu (x86_64) using readline 6.3
+	Connection id:		38
+	Current database:	myproject2016_db
+	Current user:		myproj2016_user@localhost
+	SSL:			Not in use
+	//
+	mysql> show tables;
+	+----------------------------------+
+	| Tables_in_myproject2016_db       |
+	+----------------------------------+
+	| auth_group                       |
+	| auth_group_permissions           |
+	| auth_permission                  |
+	| auth_user                        |
+	| auth_user_groups                 |
+	| auth_user_user_permissions       |
+	| django_admin_log                 |
+	| django_content_type              |
+	| django_migrations                |
+	| django_session                   |
+	| myproject2016app_monthjournal    |
+	| myproject2016app_programmer      |
+	| myproject2016app_team            |
+	| registration_registrationprofile |
+	+----------------------------------+
+	14 rows in set (0.00 sec)
+	// фактически все эти таблицы в рамках одной Базы и надо залить на Боевой сервер.
+
+
+Внимание!!! Ни в коем случае на Боевом сервере не применять Команду syncdb - она устарела 
+	(так и пишут в Документации) собъет структуры юзеров и аутентификации и все поломает,
+	loaddata потом не сработает. !!!
+
+
+// Создаю файл JSON - это Фикстура который пойдет для заливки БД на Боевой сервер
+(myproject2016py)ryndin@pc:~/work/myproject2016py/src/myproject2016$ 
+	python manage.py dumpdata --format=json --indent=4 > fix_data.json
+	
+	// файл появился в корневой папке проекта на разраб машине. В нем все вся 
+		БД myproject2016_db с таблицами  (Tables_in_myproject2016_db)  
+		Можно этот файл открыть в текстовом редакторе и посмотреть его наполнение
+		Там видны все таблицы по титулу например "model": "myproject2016app.programmer"
+
+
+// На Боевом сервере иду во вкладку Files и захожу в папку /fixtures/ в папке апликации
+	/ > home > meg2mag > myproject2016 > myproject2016app > fixtures /
+	Пока эта папка пустая и она предназначена для фикстур. 
+	Загружаю сюда мой файл fix_data.json
+
+
+// Скажу сразу - Лоаднуть Фикстуру на Боевой Сервер так и не получилось, выдавало ошибки
+	Потому просто покажу что делал а там и сами эти ошибки прочитетете
+	
+	myproject2016) 16:34 ~/myproject2016 $ python manage.py loaddata fixture fix_data.json
+
+	django.db.utils.ProgrammingError: Problem installing fixture '/home/meg2mag/myproject2016/
+	myproject2016app/fixtures/fix_data.json': Could not load contenttypes.ContentType(pk=1): (1146
+	, "Table 'meg2mag$myproject2016_db.django_content_type' doesn't exist")
+	
+
+// Тут я вспомнил что в Принципе мой проект на Боевом сервере и в Нем есть Модели, на основании
+	которых я стандартным образом могу сделать БД путем миграции. Так и сделал.
+	(myproject2016) 16:45 ~/myproject2016 $ python manage.py makemigrations
+	No changes detected
+	
+	(myproject2016) 16:46 ~/myproject2016 $ python manage.py migrate
+	Operations to perform:
+	Synchronize unmigrated apps: staticfiles, messages, crispy_forms
+  	Apply all migrations: sessions, admin, myproject2016app, auth, contenttypes, registration
+	Synchronizing apps without migrations:
+  	Creating tables...
+    Running deferred SQL...
+  	Installing custom SQL...
+	Running migrations:
+  	Rendering model states... DONE
+  	Applying contenttypes.0001_initial... OK
+  	Applying auth.0001_initial... OK
+  	Applying admin.0001_initial... OK
+  	Applying contenttypes.0002_remove_content_type_name... OK
+  	Applying auth.0002_alter_permission_name_max_length... OK
+  	Applying auth.0003_alter_user_email_max_length... OK
+  	Applying auth.0004_alter_user_username_opts... OK
+  	Applying auth.0005_alter_user_last_login_null... OK
+  	Applying auth.0006_require_contenttypes_0002... OK
+  	Applying myproject2016app.0001_initial... OK
+  	Applying myproject2016app.0002_monthjournal... OK
+  	Applying registration.0001_initial... OK
+  	Applying registration.0002_registrationprofile_activated... OK
+  	Applying registration.0003_migrate_activatedstatus... OK
+  	Applying sessions.0001_initial... OK
+
+
+
+// В mySQL заполнилась Таблицами (проверить командой в консоли dbshell) 
+// Можно создать нового СуперПользователя (команда в консоли createsuperuser) корорый будет
+	иметь доступ к Админке (спросит логин пароль).
+	(myproject2016) 17:57 ~/myproject2016 $ python manage.py createsuperuser
+	Username (leave blank to use 'meg2mag'): 
+	Email address: ryndin@i.ua
+	Password: 
+	Password (again): 
+	Superuser created successfully.
+
+
+
+// Не забываем про большую зеленую Кнопку во Вкладке WEB о перезагрузке и там еще выше справа 
+	клик ссылка на ваш Сайт. До сих пор работает режим DEBUG, что небезопасно.
+
+
+
+// 	Уже сейчас или в процессе изменения в settings.py режима DEDUG=True на DEBUG=False могут 
+	поламаться static файлы (не прицепляться, их не видно, css и js не срабатывают).
+	Для прешения проблемы Я применил команду  > python manage.py collectstatic которая, о чудо,
+	собрала все static папки по всему проекту и поместила в одну папку /static/ в корневой папке
+	проекта. (даже нашла папку /admin/ с админскими картинками). 
+	мой путь к корневой папке / > home > meg2mag > myproject2016 
+	Это Раз.
+
+	(myproject2016) 17:04 ~/myproject2016 $ python manage.py collectstatic
+	You have requested to collect static files at the destination
+	location as specified in your settings:
+    /home/meg2mag/myproject2016/static
+	This will overwrite existing files!
+	Are you sure you want to do this?
+	Type 'yes' to continue, or 'no' to cancel: yes
+	Copying '/home/meg2mag/.virtualenvs/myproject2016/local/lib/python2.7/site-packages/
+		django/contrib/admin/static/admin/js/actions.min.js'
+	Copying '/home/meg2mag/.virtualenvs/myproject2016/local/lib/python2.7/site-packages/
+		django/contrib/admin/static/admin/js/inlines.min.js'
+	Copying '/home/meg2mag/.virtualenvs/myproject2016/local/lib/python2.7/site-packages/
+		django/contrib/admin/static/admin/js/related-widget-wrapper.js'
+	...
+	Copying '/home/meg2mag/myproject2016/myproject2016app/static/js/jquery.cookie.js'
+	Copying '/home/meg2mag/myproject2016/myproject2016app/static/js/main.js'
+	Copying '/home/meg2mag/myproject2016/myproject2016app/static/img/piv.png'
+	Copying '/home/meg2mag/myproject2016/myproject2016app/static/img/Avatar_Bolen.jpg'
+	Copying '/home/meg2mag/myproject2016/myproject2016app/static/img/podoba3.jpg'
+	Copying '/home/meg2mag/myproject2016/myproject2016app/static/img/Avatar_Gorillas_90_90.jpg'
+	Copying '/home/meg2mag/myproject2016/myproject2016app/static/img/me.jpeg'
+	...
+	Copying '/home/meg2mag/myproject2016/myproject2016app/static/img/yurii_comp.jpg'
+	Copying '/home/meg2mag/myproject2016/myproject2016app/static/img/default_user_image.jpeg'
+	Copying '/home/meg2mag/myproject2016/myproject2016app/static/css/main_css.css'
+	99 static files copied to '/home/meg2mag/myproject2016/static'.
+	Ого, аж 99 файлов.
+
+
+	Два, Сервер дает возможность во вкладке WEB указать для URL /static/ путь где их искать
+	что и делаю:
+	
+	Files that aren't dynamically generated by your code, like CSS, JavaScript or uploaded
+	files, can be served much faster straight off the disk if you specify them here. You need
+	to Reload your web app to activate any changes you make to the mappings below.
+	URL 		Directory
+	/static/ 	/home/meg2mag/myproject2016/static/ 	 
+	/media/ 	/home/meg2mag/myproject2016/media/ 	    
+	Enter URL 	Enter path
+
+// DEBUG = True  в settings.py меняю на DEBUG = False -- все должно быть по взрослому.
+	также в settings.py добавляю переменную:
+	ALLOWED_HOSTS = ['meg2mag.pythonanywhere.com']
+
+	Теперь после перезагрузки Сайт работает в Нормальном Режиме. Все. 
+
+
+
+Инструкция от Григория (взял в Сети)
+======================
+Всем привет.
+Как то здесь на форуме предложили использовать pythonanywhere.com вместо heroku.com. 
+Почитал, подумал и вот наконец то решил задеплоить проект на pythonanywhere.com. Скажу сразу,
+это облако мне понравилось больше чем heroku.com. Во-первых, медиа файлы не удаляются при
+каждой перегрузке страниц. Работать на сервисе можно в консолях bash, python и mysql. 
+И это очень радует. Можно просмотреть структуру своего проекта, залить разными способами на
+сервер файлы, работать через git, а значит делать локально и заливать на сервер с github. 
+В обчем все как на боевом VPS. И самое главное, что установка новго Django проекта займет
+не более минуты и он будет доступен в браузере. А задеплоить готовый проект займет чуть больше
+времени и с меньшим количеством настроек чем на heroku.com.
+Но есть и минус. Во встроеной консоли нельза копипастить, так что нужно набраться терпения
+и набирать все команды ручками (хорошо для закрепления:)).
+Вывод из выше сказаного: быстро, легко и удобно.
+И после полученого опыта и вопросов: “Как задеплоить на pythonanywhere.com”, решил поделиться
+ своим опытом.
+Итак, начнем.
+
+P.S. Снова хочу повторить, что код который нужно вводить, идет после “$”, все остальное
+коментарии к коду, если таковые будут.
+P.S. В даном посте я расматриваю базовый (бесплатный) тариф.
+
+1. Создание PythonAnywhere аккаунта
+Во-первых, нужно на этой странице выбрать “Create a Beginer account” и зарегистрироваться.
+Это бесплатный план и если вы захотите, то всегда можете обновить вашу учетную запись до
+любого платного тарифа (например вам нужно будет разместить сайт со своим доменым именем
+или получить доступ по SSH).
+После того, как ваша учетная запись была создана, вы будете иметь свой проект по адресу
+http://<username>.pythonanywhere.com,`
+где ваше имя пользователя на PythonAnywhere. Именно по этому URL будет доступно ваше приложение.
+
+2. PythonAnywhere веб-интерфейс
+Веб-интерфейс PythonAnywhere содержит приборную панель, которая в свою очередь, обеспечивает
+ряд вкладок, позволяющих вам управлять приложением:
+    Вкладка Consoles позволяет создавать и работать с Python и Bash в консоли;
+    Вкладка Files позволяет добавлять файлы и организовать файлы;
+    Вкладка Web позволяет настроить параметры для размещения веб-приложения;
+    Вкладка Schedule позволяет установить задачи, которые будут выполняться в определенное время;
+    Вкладка Databases позволяет настроить MySQL для ваших приложений, если это необходимо.
+
+Для установки и запуска проекта достаточно будет вкладок “Consoles” и “Web”. Про другие вкладки
+ можете прочитать в PythonAnywhere вики.
+
+
+3. Создание виртуального окружения
+В стандартный комплект PythonAnywhere при установке Django проекта входит Python 2.7.6 и Django 1.3.
+Так как в корне каталога у вас не будет прав на какие либо действия, то для полноценной работы
+нужно установить виртуальное окружение. В которой можно обновить Django до нужной версии или
+установить любые библиотеки.
+
+
+Открываем Bash консоль на вкладке PythonAnywhere Console, нажав на ссылку Bash.
+ Когда терминал будет готов, вводим:
+
+$ source virtualenvwrapper.sh
+$ mkvirtualenv <name_your_virtualenv>
+
+С помощью первой команды активируем приложение Doug Hellmann для виртуального окружения, 
+которое делает все манипуляции с окружениям еще проще. Вторая команда создает новое виртуальное
+окружение . После выполнения команды вы должны увидеть в консоли следующее:
+
+(<name_your_virtualenv>)15:00 ~ $
+
+Теперь можно делать все что нам нужно. Устанавливаем обновляем до нужной версии Django все в
+той же Bash консоли (у меня это версия 1.7.7)
+
+$ pip install -U django==1.8.8
+
+После обновления вы должны найти файл django-admin.py в папке bin своего виртуального окружения:
+/home/<username>/.virtualenvs/<name_your_virtualenv>/bin/django-admin.py
+
+4. Переключение между виртуальными окружениями
+Если на практике у вас будет несколько виртуальных окружений, то с помощью virtualenvwrapper.sh
+можно легко переключаться между ними. Для этого нужно добавить в файл .bashrc добавить команду
+
+source virtualenvwrapper.sh
+
+После этого можно включить нужное окружение можно командой
+$ workon <name_your_virtualenv>
+
+Деактивировать или выключить знакомой уже командой
+(<name_your_virtualenv>) 15:00 ~ $ deactivate
+
+5. Клонирование Git репозитория
+Теперь, когда готово ваше виртальное окружение, можно разместить свой готовый проект. 
+Это можно сделать разными способами. Например, сделать архив проекта
+(<name_your_virtualenv>) $ tar czf folder.tar.gz folder/
+
+
+Архивирует и сжимает folder/ в файл folder.tar.gz.
+
+Залить на сервер и разархивировать
+(<name_your_virtualenv>) $ tar -zxvf mysite.tar.gz
+
+Мне был ближе вариант с клонированием проекта с github. Не пробывал, но думаю, что это реально,
+создать git репозиторий на сервере и заливать проект с github после правок внесеных в удаленный
+репозиторий с локальной машины
+.
+6. Настройка базы данных
+Это один из самых моментов. Советую заливать с базой SQLite. У меня в проекте был MySQL.
+После попыток настроить БД вылазили разные баги, которых я так и не поборол. Когда вернул к 
+SQLite, то все пошло как по маслу. Возможно нужно залить с SQLite, а потом как в книжке Виталия
+настроить и переходить на MySQL. Потестить еще не успел, поэтому здесь ничего не скажу.
+Возможно кто то расскажет, когда получиться настроить проект на MySQL.
+
+Идем дальше. После того, как проект уже находится на сервере настроим базу данных.
+Запустите знакомую вам команду из консоли
+
+(<name_your_virtualenv>) 16:55 ~/<your_project> $ python manage.py syncdb
+
+
+7. Настройка веб-приложения
+Теперь, когда база данных настроена, нужно настроить веб-сервер PythonAnywhere NGINX,
+который будет обслуживать ваше приложение. В веб-интерфейсе PythonAnywhere перейдите на
+вкладку Web. Слева нажмите кнопку Добавить новую веб-приложение. Следуйте инструкциям на
+экране, а когда прийдет выбор настройки, выберите опцию "manual configuration" и завершите
+работу мастера.
+
+Затем, перейдите к своему поддомену PythonAnywhere по адресу
+http://<username>.pythonanywhere.com
+
+
+в новой вкладке браузера. После этого вы должны увидеть страницу с надписью
+Hello, World!
+…
+Это значит, что сценарий WSGI не настроен на ваш проект Django.
+
+
+8. Настройка WSGI Script
+На той же вкладе Web выберите
+WSGI configuration file:
+В нем вы увидите примеры для разных проектов. После изучения, можно удалить все что там есть.
+ И вставить свой код с настройками
+
+# TURN ON THE VIRTUAL ENVIRONMENT FOR YOUR APPLICATION
+activate_this = '/home/<username>/.virtualenvs/<name_your_virtualenv>/bin/activate_this.py'
+execfile(activate_this, dict(__file__=activate_this))
+
+import os
+import sys
+
+# ADD YOUR PROJECT TO THE PYTHONPATH FOR THE PYTHON INSTANCE
+path = '/home/<username>/<name_django_project>'
+if path not in sys.path:
+    sys.path.append(path)
+
+os.chdir(path)
+
+# TELL DJANGO WHERE YOUR SETTINGS MODULE IS LOCATED
+os.environ['DJANGO_SETTINGS_MODULE'] = '<name_django_project>.settings'
+
+# TELL DJANGO WHERE YOUR SETTINGS MODULE IS LOCATED
+os.environ['DJANGO_SETTINGS_MODULE'] = 'gtsarik.settings'
+
+# IMPORT THE DJANGO WSGI HANDLER TO TAKE CARE OF REQUESTS
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+
+
+P.S. До версии, если я не ошибаюсь, Django==1.6, последни 3 строки выглядели так:
+# IMPORT THE DJANGO WSGI HANDLER TO TAKE CARE OF REQUESTS
+import django.core.handlers.wsgi
+application = django.core.handlers.wsgi.WSGIHandler()
+начиная с версии Django==1.6 они выглядят так, как я указал выше. Это информация, если вдруг,
+кто решит делать проект на 1.5, 1.4 и т.д.
+
+
+После это попробуйте перегрузить свое приложение в браузере
+http://<username>.pythonanywhere.com
+Вы должны увидеть свой проект. Но. Есть еще одно незавершеное дельце. Мы не указали,
+где находится папка со статикой для админки и для проекта.
+
+
+9. Настройка статических путей
+Все в той же вкладке Web найдите “Static files:”. И добавьте следующее
+    Нажмите “Enter URL” и введите “/static/admin”, а затем нажмите галочку для сохранения.
+	Нажмите Enter path и впишите путь к статике для админки 
+	/home//.virtualenvs//lib/python2.7/site-packages/django/contrib/admin/static/admin
+
+    Теперь создайте новый “Enter URL” и путь для статики вашего проекта /static/ и путь к нему.
+	 У меня это вышло так /home///static
+
+После этого попробуйте пергрузить проект нажав на кнопку зеленого цвета вверху страницы
+“Reload .pythonanywhere.com” в той же вкладе. Возможно буде присутствовать ошибка 502, или 500.
+Это может значит, что изменения еще не вступили в силу и нужно попробывать чуть позже. 
+У меня на ожидание ушло минут 5.
+
+
+10. Выключение режима отладки
+Когда ваш проект оживет можно отключить отладку. В settings.py измените
+
+DEBUG = True на DEBUG = False
+
+Но так у нас нет ни одного хоста в привязке к проекту, то Django вернет ошибку HTTP 400 Bad Request.
+Для устранения этой неприятности, в том же settings.py найдите переменную ALLOWED_HOSTS
+и измените ее значение на
+
+ALLOWED_HOSTS = ['<username>.pythonanywhere.com']
+
+Вот и все. Теперь у вас должен заработать полноценно ваш проект. С чем вас и поздравляю:)
+
+11. Файлы журнала
+И на последок немножко десерта.
+В той же вкладке Web есть возможность просмотреть логи работы вашего проекта.
+access.log - журнал запросов, сделанных на поддомен;
+error.log - регистрирует любые сообщения об ошибках Вашего веб-приложения;
+server.log - подробная информация журнала UNIX процессов, запущенных вашим приложением.
+Вот как то так. Надеюсь инфа окажется полезной. Будут вопросы, пишите, постараюсь ответить.
+Легкого хостинга)
+=====================
+
+
+
+
+
+
+
+
+
+

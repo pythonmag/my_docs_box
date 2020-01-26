@@ -1,0 +1,523 @@
+
+ВВедение от Виталия
+====================
+
+Об’єкт request, що отримує в’юшка має масу методів, атрибутів та інформації
+всередині. Починаючи від стандартних заголовків згідно протоколу HTTP і
+закінчуючи змінними віртульного середовища та інформацією про Django:
+
+    request.path:       шлях запиту;
+    request.GET:        дані, що прийшли частиною GET параметрів;
+    request.POST:       дані, що прийшли в тілі поста форми із браузера;
+    request.method:     тип запиту, напр. GET або POST;
+    request.COOKIES:    славнозвісні Cookies, які ми з вами оглянули в попере-
+        дніх секціях даної глави;
+    request.FILES:      файли, що прийшли до нас із форми, із полів типу file;
+    request.META:       заголовки запиту згідно HTTP протоколу;
+    request.user:       залогований Django користувач;
+    request.session:    сесія користувача;
+
+
+request
+=================
+Вот он родненький
+Струткруа объекта request
+=========================
+>>> from django.http import HttpRequest
+>>> request = HttpRequest()
+
+
+>>> request
+<HttpRequest>
+
+
+>>> dir(request)
+['COOKIES', 
+'FILES', 
+'GET', 
+'META', 
+'POST',
+ '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__',
+ '__iter__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__',
+ '__str__', '__subclasshook__', '__weakref__', '_encoding', '_get_raw_host', '_get_scheme',
+ '_initialize_handlers', '_load_post_and_files', '_mark_post_parse_error', '_post_parse_error', 
+'_upload_handlers', 
+'body', 
+'build_absolute_uri', 
+'close', 
+'content_params', 
+'content_type', 
+'encoding', 
+'get_full_path', 
+'get_host', 
+'get_port', 
+'get_raw_uri', 
+'get_signed_cookie', 
+'is_ajax', 
+'is_secure', 
+'method', 
+'parse_file_upload', 
+'path', 
+'path_info', 
+'read', 
+'readline', 
+'readlines', 
+'resolver_match', 
+'scheme', 
+'upload_handlers', 
+'xreadlines']
+
+
+
+response    / status 200
+=========
+Структура объекта response
+==========================
+>>> from django.http import HttpResponse
+>>> response = HttpResponse()
+
+>>> response
+<HttpResponse status_code=200, "text/html; charset=utf-8">
+
+>>> dir(response)
+['__class__', '__contains__', '__delattr__', '__delitem__', '__dict__', '__doc__', '__format__', 
+'__getattribute__', '__getitem__', '__hash__', '__init__', '__iter__', '__module__', '__new__', '__reduce__', 
+'__reduce_ex__', '__repr__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 
+'__weakref__', '_charset', '_closable_objects', '_container', '_convert_to_charset', '_handler_class', 
+'_headers', '_reason_phrase', 
+'charset', 
+'close', 
+'closed', 
+'content', 
+'cookies', 
+'delete_cookie', 
+'flush', 
+'get', 
+'getvalue', 
+'has_header', 
+'items', 
+'make_bytes', 
+'next', 
+'readable', 
+'reason_phrase', 
+'seekable', 
+'serialize', 
+'serialize_headers', 
+'set_cookie', 
+'set_signed_cookie', 
+'setdefault', 
+'status_code', 
+'streaming', 
+'tell', 
+'writable', 
+'write', 
+'writelines']
+
+
+responseredirect    / status 302
+================
+Структура класса HttpResponseRedirect
+похоже что то же что и response только + url
+=====================================
+>>> responseredirect = HttpResponseRedirect('home')
+
+>>> responseredirect
+<HttpResponseRedirect status_code=302, "text/html; charset=utf-8", url="home">
+
+
+>>> dir(responseredirect)
+['__class__', '__contains__', '__delattr__', '__delitem__', '__dict__', '__doc__', '__format__', 
+'__getattribute__', '__getitem__', '__hash__', '__init__', '__iter__', '__module__', '__new__', '__reduce__',
+ '__reduce_ex__', '__repr__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 
+'__weakref__', '_charset', '_closable_objects', '_container', '_convert_to_charset', '_handler_class', 
+'_headers', '_reason_phrase', 
+'allowed_schemes', 
+'charset', 
+'close', 
+'closed', 
+'content', 
+'cookies', 
+'delete_cookie', 
+'flush', 
+'get', 
+'getvalue', 
+'has_header', 
+'items', 
+'make_bytes', 
+'next', 
+'readable', 
+'reason_phrase', 
+'seekable', 
+'serialize', 
+'serialize_headers', 
+'set_cookie', 
+'set_signed_cookie', 
+'setdefault', 
+'status_code', 
+'streaming', 
+'tell', 
+'url', 
+'writable', 
+'write', 
+'writelines']
+
+
+Контекст / Методы и Параметры request
+==================
+смотрел через pdb.set_trace()
+------------------
+
+
+(Pdb) dir(request)
+------------------
+все содержимое
+['COOKIES',
+ 'FILES',
+ 'GET',
+ 'META',
+ 'POST',
+ '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__iter__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_encoding', '_files', '_get_files', '_get_post', '_get_raw_host', '_get_scheme', '_initialize_handlers', '_load_post_and_files', '_mark_post_parse_error', '_messages', '_post', '_post_parse_error', '_read_started', '_set_post', '_stream', '_upload_handlers',
+ 'body',
+ 'build_absolute_uri',
+ 'close',
+ 'content_params',
+ 'content_type',
+ 'csrf_processing_done',
+ 'encoding',
+ 'environ',
+ 'get_full_path',
+ 'get_host',
+ 'get_port',
+ 'get_raw_uri', 
+'get_signed_cookie',
+ 'is_ajax',
+ 'is_secure',
+ 'method',
+ 'parse_file_upload',
+ 'path', 'path_info',
+ 'read', 'readline', 'readlines',
+ 'resolver_match',
+ 'scheme',
+ 'session',
+ 'upload_handlers',
+ 'user',
+ 'xreadlines']
+
+
+(Pdb) request.path
+u'/'
+
+(Pdb) request.path_info
+u'/'
+
+(Pdb) request.method
+'GET'
+
+(Pdb) request.GET
+<QueryDict: {u'order_by': [u'last_name']}>
+
+(Pdb) request.POST
+<QueryDict: {}>
+
+(Pdb) request.COOKIES
+{'csrftoken': 'oLfJkFkUfnyMdUZhvxwTmFpAUViVo7oUvcHn7zqS6dPghtTc5KCG1Q5SsgFSnjuH', 'sessionid': 'e85np708n6s48qictgukfo01b14elyk2', 'current_group': '2'}
+
+(Pdb) request.is_ajax()
+False
+
+(Pdb) request.get_raw_uri()
+u'http://127.0.0.1:8000/'
+
+
+
+request.user
+==================
+(Pdb) request.user
+<SimpleLazyObject: <function <lambda> at 0x7fa40dd4c6e0>>
+
+(Pdb) request.user.username
+u'RyndinYuriy'
+
+(Pdb) dir(request.user)
+['DoesNotExist',
+ 'Meta',
+ 'MultipleObjectsReturned',
+ 'REQUIRED_FIELDS',
+ 'USERNAME_FIELD',
+ '__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', u'__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__unicode__', '__weakref__', '_check_column_name_clashes', '_check_field_name_clashes', '_check_fields', '_check_id_field', '_check_index_together', '_check_local_fields', '_check_long_column_names', '_check_m2m_through_same_relationship', '_check_managers', '_check_model', '_check_ordering', '_check_swappable', '_check_unique_together', '_do_insert', '_do_update', '_get_FIELD_display', '_get_next_or_previous_by_FIELD', '_get_next_or_previous_in_order', '_get_pk_val', '_get_unique_checks', '_meta', '_password', '_perform_date_checks', '_perform_unique_checks', '_save_parents', '_save_table', '_set_pk_val', '_state',
+ 'check',
+ 'check_password',
+ 'clean',
+ 'clean_fields',
+ 'date_error_message',
+ 'date_joined',
+ 'delete',
+ 'email',
+ 'email_user',
+ 'first_name',
+ 'from_db',
+ 'full_clean',
+ 'get_all_permissions',
+ 'get_deferred_fields',
+ 'get_full_name',
+ 'get_group_permissions',
+ 'get_next_by_date_joined',
+ 'get_previous_by_date_joined',
+ 'get_session_auth_hash',
+ 'get_short_name',
+ 'get_username',
+ 'groups',
+ 'has_module_perms',
+ 'has_perm',
+ 'has_perms',
+ 'has_usable_password',
+ 'id',
+ 'is_active',
+ 'is_anonymous',
+ 'is_authenticated',
+ 'is_staff',
+ 'is_superuser',
+ 'last_login',
+ 'last_name',
+ 'logentry_set',
+ 'natural_key',
+ 'normalize_username',
+ 'objects',
+ 'password',
+ 'pk',
+ 'prepare_database_save', 'refresh_from_db', 'registrationprofile',
+ 'save',
+ 'save_base', 'serializable_value',
+ 'set_password',
+ 'set_unusable_password',
+ 'social_auth',
+ 'studentprofile', 'unique_error_message', 'user_permissions',
+ 'username',
+ 'username_validator', 'validate_unique']
+
+
+(Pdb) request.user.last_login
+datetime.datetime(2017, 4, 21, 5, 0, 45, 436445, tzinfo=<UTC>)
+
+(Pdb) request.user.date_joined
+datetime.datetime(2017, 4, 2, 6, 47, 26, 228664, tzinfo=<UTC>)
+
+(Pdb) request.user.get_session_auth_hash()
+'7e111cde8fe3934a80e80c3b40a0151f1f5b089c'
+
+(Pdb) request.user.get_all_permissions()
+set([])
+
+(Pdb) request.user.is_anonymous
+CallableBool(False)
+    
+(Pdb) request.user.is_authenticated
+CallableBool(True)
+
+(Pdb) request.user.is_superuser
+False
+
+
+request.user.social_auth
+========================
+Pdb) dir(request.user.social_auth)
+['Meta', '__call__', '__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__slotnames__', '__str__', '__subclasshook__', '__unicode__', '__weakref__', '_apply_rel_filters', '_constructor_args', '_db', '_get_queryset_methods', '_hints', '_insert', '_queryset_class', '_set_creation_counter', '_update',
+'add', 'aggregate',
+'all',
+  'annotate', 'auto_created', 'bulk_create', 'check', 'complex_filter', 'contribute_to_class', 'core_filters',
+'count',
+'create',
+ 'creation_counter', 'dates', 'datetimes', 'db', 'db_manager', 'deconstruct', 'defer', 'distinct', 'do_not_call_in_templates', 'earliest', 'exclude', 'exists', 'extra', 'field', 
+'filter',
+'first',
+'from_queryset',
+'get',
+'get_or_create',
+'get_prefetch_queryset',
+'get_queryset',
+'get_social_auth', 
+'in_bulk',
+'instance',
+'iterator', 'last', 'latest', 'model', 'name', 'none', 'only', 'order_by', 'prefetch_related', 'raw', 'reverse', 'select_for_update', 'select_related', 'set', 'update', 'update_or_create', 'use_in_migrations', 'using', 'values',
+'values_list']
+
+(Pdb) request.user.social_auth.values_list()
+<QuerySet [(2L, 4L, u'twitter', u'844567149931', {u'access_token': {u'oauth_token_secret': u'FJ2JGwAvlPOFI0qiVH0uJo76784384ITjlLQLZrmNHVp4jEwUe', u'user_id': u'8473467149931', u'x_auth_expires': u'0', u'oauth_token': u'847125749931-oYqX4FNFdQuKebtrDbM7w2ES3Eqz9986cAKAzmbsrH', u'screen_name': u'RyndinYuriy'}, u'id': 849727149931, u'auth_time': 1492750844})]>
+
+(Pdb) request.user.social_auth.count()
+1
+
+(Pdb) request.user.social_auth.all()
+<QuerySet [<UserSocialAuth: RyndinYuriy>]>
+
+(Pdb) request.user.social_auth.values()
+<QuerySet [{'uid': u'84714934931', 'extra_data': {u'access_token': {u'oauth_token_secret': u'FJ2JGwAvlPOFI0qiVH0uJort784ITjlLQfsLZrmNHVp4jEwUe', u'user_id': u'847834149931', u'x_auth_expires': u'0', u'oauth_token': u'847874149931-oYqX4FNFdQuKeibtrDbM7w2ES3Eqz96ercAKAzmbsrH', u'screen_name': u'RyndinYuriy'}, u'id': 84714927931, u'auth_time': 149249750844}, u'user_id': 4L, u'id': 2L, 'provider': u'twitter'}]>
+
+
+
+(Pdb) request.META
+==================
+{
+    'PATH_INFO': u'/',
+    'RUN_MAIN': 'true',
+    'HTTP_REFERER': 'http://localhost:8000/groups/?order_by=title',
+    'XDG_GREETER_DATA_DIR': '/var/lib/lightdm-data/ryndin',
+    'QT4_IM_MODULE': 'xim',
+    'SERVER_SOFTWARE': 'WSGIServer/0.1 Python/2.7.12',
+    'UPSTART_EVENTS': 'xsession started',
+    'SCRIPT_NAME': u'',
+    'XDG_SESSION_TYPE': 'x11',
+    'REQUEST_METHOD': 'GET',
+    'CONTENT_LENGTH': '',
+    'SERVER_PROTOCOL': 'HTTP/1.1',
+    'HOME': '/home/ryndin',
+    'DISPLAY': ':0',
+    'LANG': 'ru_UA.UTF-8',
+    'VIRTUAL_ENV': '/home/ryndin/workprojects/studentsdb27/studentsdb27',
+    'SHELL': '/bin/bash',
+    'J2REDIR': '/usr/lib/jvm/java-8-oracle/jre',
+    'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop',
+    'QT_LINUX_ACCESSIBILITY_ALWAYS_ON': '1',
+    'MANDATORY_PATH': '/usr/share/gconf/ubuntu.mandatory.path',
+    'CLUTTER_IM_MODULE': 'xim',
+    'UPSTART_INSTANCE': '',
+    'JOB': 'unity-settings-daemon',
+    'SESSION': 'ubuntu',
+    'SERVER_PORT': '8000',
+    'XMODIFIERS': '@im=ibus',
+    'JAVA_HOME': '/usr/lib/jvm/java-8-oracle',
+    'GTK2_MODULES': 'overlay-scrollbar',
+    'XDG_RUNTIME_DIR': '/run/user/1000',
+    'COMPIZ_BIN_PATH': '/usr/bin/',
+    'J2SDKDIR': '/usr/lib/jvm/java-8-oracle',
+    'HTTP_CONNECTION': 'keep-alive',
+    'HTTP_HOST': 'localhost:8000',
+    'HTTP_UPGRADE_INSECURE_REQUESTS': '1',
+    'XDG_CURRENT_DESKTOP': 'Unity',
+    'XDG_SESSION_ID': 'c2',
+    'DBUS_SESSION_BUS_ADDRESS': 'unix:abstract=/tmp/dbus-Xr73UGxfks',
+    'GNOME_KEYRING_PID': '',
+    'HTTP_ACCEPT': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'DESKTOP_SESSION': 'ubuntu',
+    'LESSCLOSE': '/usr/bin/lesspipe %s %s',
+    'DEFAULTS_PATH': '/usr/share/gconf/ubuntu.default.path',
+    'wsgi.run_once': False,
+    'wsgi.errors': <open file '<stderr>', mode 'w' at 0x7faf92da81e0>,
+    'wsgi.multiprocess': False,
+    'HTTP_ACCEPT_LANGUAGE': 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4',
+    'INSTANCE': '',
+    'NODE_PATH': '/usr/lib/nodejs:/usr/lib/node_modules:/usr/share/javascript',
+    XDG_MENU_PREFIX': 'gnome-',
+    'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'XDG_SEAT': 'seat0', 'wsgi.version': (1, 0),
+    'HTTP_COOKIE': 'sessionid=e85np708n6s48qictgukfo01b14elyk2; csrftoken=oLfJkFkUfnyMdUZhvxwTmFpAUViVo7oUvcHn7zqS6dPghtTc5KCG1Q5SsgFSnjuH; current_group=2',
+    'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated',
+    'LESSOPEN': '| /usr/bin/lesspipe %s',
+    'QUERY_STRING': 'order_by=last_name',
+    'QT_IM_MODULE': 'ibus',
+    'LOGNAME': 'ryndin',
+    'USER': 'ryndin',
+    'GNOME_KEYRING_CONTROL': '',
+    'XDG_VTNR': '7',
+    'PATH': '/home/ryndin/workprojects/studentsdb27/studentsdb27/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin', 'PS1': '=(studentsdb17)\\[\\e]0;\\u@\\h: \\w\\a\\]${debian_chroot:+($debian_chroot)}\\u@\\h:\\w\\$ ',
+    'TERM': 'xterm-256color',
+    'HTTP_USER_AGENT': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
+    'XDG_SESSION_PATH': '/org/freedesktop/DisplayManager/Session0',
+    'XAUTHORITY': '/home/ryndin/.Xauthority',
+    'LANGUAGE': 'ru_UA:ru',
+    'SESSION_MANAGER': 'local/pc:@/tmp/.ICE-unix/2304,unix/pc:/tmp/.ICE-unix/2304',
+    'SHLVL': '1',
+    'QT_QPA_PLATFORMTHEME': 'appmenu-qt5',
+    'wsgi.url_scheme': 'http',
+    'QT_ACCESSIBILITY': '1',
+    'WINDOWID': '67108874',
+    'SESSIONTYPE': 'gnome-session',
+    'IM_CONFIG_PHASE': '1',
+    'GPG_AGENT_INFO': '/home/ryndin/.gnupg/S.gpg-agent:0:1',
+    'XDG_SESSION_DESKTOP': 'ubuntu',
+    'COMPIZ_CONFIG_PROFILE': 'ubuntu',
+    'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh',
+    'VTE_VERSION': '4205',
+    'GDMSESSION': 'ubuntu',
+    'UPSTART_JOB': 'unity7',
+    'wsgi.multithread': True,
+    'XDG_SEAT_PATH': '/org/freedesktop/DisplayManager/Seat0',
+    'TZ': 'UTC',
+    '_': '/home/ryndin/workprojects/studentsdb27/studentsdb27/bin/python',
+    'wsgi.input': <socket._fileobject object at 0x7faf8ce040d0>,
+    'GTK_IM_MODULE': 'ibus',
+    'DERBY_HOME': '/usr/lib/jvm/java-8-oracle/db',
+    'UPSTART_SESSION': 'unix:abstract=/com/ubuntu/upstart-session/1000/1787',
+    'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/usr/share/upstart/xdg:/etc/xdg',
+    'SERVER_NAME': 'localhost',
+    'GATEWAY_INTERFACE': 'CGI/1.1',
+    u'CSRF_COOKIE': 'oLfJkFkUfnyMdUZhvxwTmFpAUViVo7oUvcHn7zqS6dPghtTc5KCG1Q5SsgFSnjuH',
+    'OLDPWD': '/home/ryndin/workprojects/studentsdb27/studentsdb27',
+    'REMOTE_ADDR': '127.0.0.1',
+    'GDM_LANG': 'ru',
+    'GTK_MODULES': 'gail:atk-bridge:unity-gtk-module',
+    'PWD': '/home/ryndin/workprojects/studentsdb27/studentsdb27/src/studentsdb27',
+    'DJANGO_SETTINGS_MODULE': 'studentsdb27.settings',
+    'CONTENT_TYPE': 'text/plain',
+    'wsgi.file_wrapper': <class wsgiref.util.FileWrapper at 0x7faf8eac2738>,
+    'REMOTE_HOST': '',
+    'HTTP_ACCEPT_ENCODING': 'gzip, deflate, sdch, br'
+}
+
+
+request.session
+================
+(Pdb) request.session
+<django.contrib.sessions.backends.db.SessionStore object at 0x7fa40f6ca910>
+
+(Pdb) dir(request.session)
+['TEST_COOKIE_NAME', 
+'TEST_COOKIE_VALUE', 
+'_SessionBase__not_given', '_SessionBase__session_key', '__class__', '__contains__', '__delattr__', '__delitem__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_get_new_session_key', '_get_or_create_session_key', '_get_session', '_get_session_key', '_hash', '_session', '_session_cache', '_session_key', '_set_session_key', '_validate_session_key',
+ 'accessed', 
+'clear', 
+'clear_expired', 
+'create', 
+'create_model_instance', 
+'cycle_key', 
+'decode', 
+'delete', 
+'delete_test_cookie', 
+'encode', 
+'exists', 
+'flush',
+ 'get',
+ 'get_expire_at_browser_close', 
+'get_expiry_age', 
+'get_expiry_date', 
+'get_model_class', 
+'has_key',
+'is_empty',
+'items',
+'iteritems', 
+'iterkeys', 
+'itervalues',
+'keys', 
+'load', 
+'model', 
+'modified', 
+'pop', 
+'save', 
+'serializer', 
+'session_key',
+'set_expiry', 
+'set_test_cookie', 
+'setdefault', 
+'test_cookie_worked',
+ 'update',
+'values']
+
+(Pdb) request.session.items()
+[(u'twitterunauthorized_token_name', []), (u'_auth_user_id', u'4'), (u'social_auth_last_login_backend', u'twitter'), (u'_auth_user_backend', u'social_core.backends.twitter.TwitterOAuth'), (u'twitter_state', u'ClfhzbjID7JHvL89p4O3EjDNNwOuyWln'), (u'_language', u'uk'), (u'_auth_user_hash', u'7e111cde8fe3934a80e80c3b40a0151f1f5b089c')]
+
+(Pdb) request.session.get('_auth_user_id')
+u'4'
+
+(Pdb) request.session.get('_language')
+u'uk'
+
+

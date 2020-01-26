@@ -1,0 +1,34 @@
+Django Tests App
+
+
+https://docs.djangoproject.com/en/3.0/intro/tutorial05/#introducing-automated-testing
+
+https://docs.djangoproject.com/en/3.0/intro/tutorial05/#writing-our-first-test
+
+https://docs.djangoproject.com/en/3.0/intro/tutorial05/#the-django-test-client
+
+https://docs.djangoproject.com/en/3.0/intro/tutorial05/#further-testing
+
+
+https://selenium.dev/                                                                   ## selenium
+
+https://docs.djangoproject.com/en/3.0/topics/testing/tools/#liveservertestcase           ## selenium
+
+
+https://docs.djangoproject.com/en/3.0/topics/testing/#testing-in-django
+
+https://docs.python.org/3/library/unittest.html#module-unittest
+
+https://docs.djangoproject.com/en/3.0/topics/testing/tools/#testing-tools
+
+
+
+Модуль для Теста Покрытия Кода Тестами
+========================================
+
+https://docs.djangoproject.com/en/3.0/topics/testing/advanced/#integration-with-coverage-py
+
+https://coverage.readthedocs.io/en/coverage-5.0/
+
+https://pypi.org/project/coverage/
+

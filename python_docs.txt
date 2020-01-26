@@ -1,0 +1,158 @@
+
+Туториалы
+================
+
+1)
+Python 3.4 Programming Tutorials
+Коллосальный курс по соновам Питона и основам Модулей
+опять же от Бакки Робертса
+------------------
+https://www.youtube.com/playlist?list=PL6gx4Cwl9DGAcbMi1sH6oAMk4JHw91mC_
+
+Полный плейлист все Туториалов от Роббертса
+------------------------
+https://www.youtube.com/user/thenewboston/playlists
+
+
+2)
+Python 3 для начинающих
+Основне методы / основные модули
+-----------------------
+https://pythonworld.ru/
+
+
+4)
+python.org
+---------------------
+https://docs.python.org/3/tutorial/index.html       ## синтаксис
+https://docs.python.org/3/library/index.html        ## встроенные библиотека
+https://docs.python.org/3/reference/index.html      # конструкции
+
+
+5)
+Интерактивный курс Питон
+(по разделам, на русском, фибоначи и пр.)
+(подробно объяснены все типы и много задач по темам)
+-------------
+http://pythontutor.ru/lessons/inout_and_arithmetic_operations/
+
+
+6)
+Хороший печатный мануал по Питону на английском
+----------------
+http://www.tutorialspoint.com/python/index.htm
+
+
+
+7)
+http://www.pythonforbeginners.com/
+
+
+
+СТАТЬИ
+===============
+
+Дайджест по Питон обнчению
+(как памятка обо всем)
+-------------------
+https://proglib.io/p/python-from-newbie-to-professional/
+
+
+Data Science Blog
+Акадимический блог об Экосистеме Python
+-------------------
+https://www.dataquest.io/blog/
+
+
+
+
+
+
+
+
+
+
+
+Django Tutorials for Beginners
+----------------
+https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBlmzzFcLgDhKTTfNLfX1IK
+
+
+Derek Banas - весь плейлист
+---------------------------
+https://www.youtube.com/user/derekbanas/playlists
+
+
+Derek Banas про Python на YouTube
+25 уроков по основам Питона
+----------------------------
+https://www.youtube.com/watch?v=N4mEzFDjqtA
+
+
+
+Derek Banas про Django на YouTube
+----------------------
+https://www.youtube.com/watch?v=Ky59C5geOtg
+
+
+
+Corey Schafer
+-------------
+Python Tutorials - Разнообразные важные аспекты питона / Среды разработки / Фреймворки
+https://www.youtube.com/playlist?list=PL-osiE80TeTt2d9bfVyTiXJA-UTHn6WwU
+
+
+Официакльная Документация Python / Модули / Пакеты
+=============
+https://www.python.org
+Страницы открываются по Разделам (удобно Искать Конструкции)
+--------------------  
+https://docs.python.org/3.3/tutorial/index.html 
+https://docs.python.org/3.5/library/functions.html
+https://pypi.python.org/pypi 
+
+
+
+
+
+Интернет Онлайн Книга
+(базы много)
+==============
+http://www.diveintopython3.net/
+
+
+
+Статьи
+==================
+
+
+
+
+
+
+
+Питон Блоггеры
+==================
+
+http://www.lexev.org/
+--------------------
+    Блог питониста - живой
+
+Обширный блог по Питон
+----------------------
+https://realpython.com/blog/
+
+
+
+Питон Библиотеки из Гитхаб
+==========================
+
+1)
+Билиотеки от Эдварда
+Популярные библиотеки для Питона и Джанго
+Может даже им разработанные
+--------------------
+https://github.com/adw0rd
+
+
+

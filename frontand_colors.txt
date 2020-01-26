@@ -1,0 +1,32 @@
+w3 colors
+===================
+https://www.w3schools.com/colors/default.asp
+
+
+Плагины для Браузера
+===================
+https://coolors.co/
+https://chrome.google.com/webstore/detail/coolors/mgajdijnadmkoapndjaacifihabcnfgd
+(на первой странице внизу палитры лучших цветов)
+(можно градировать)
+
+
+https://chrome.google.com/webstore/detail/palette/kmmpbmjeppjohallgjmlbioblppgoikg/related
+(бесплатное)
+
+
+https://chrome.google.com/webstore/detail/palette-creator/oolpphfmdmjbojolagcbgdemojhcnlod
+(бесплатное / дает наборы модных цветов)
+
+
+https://chrome.google.com/webstore/detail/colorzilla/bhlhnicpbhignbdhedgjhgdocnmhomnp/related
+(бесплатно набр разных инструментов для работы с цветом)
+
+
+colors material pallete
+=======================
+https://material.io/guidelines/style/color.html#color-color-palette
+(просто палитра на странице)
+
+
+

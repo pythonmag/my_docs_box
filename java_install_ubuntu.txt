@@ -1,0 +1,50 @@
+https://www.digitalocean.com/community/tutorials/java-ubuntu-apt-get-ru
+
+sudo apt-get update
+
+java -version
+
+типа менеджера версий джава на компе
+В результате выполнения этой команды будет установлена 
+Java Runtime Environment (JRE).
+-------------
+sudo apt-get install default-jre
+
+
+Если вместо этого вам необходим Java Development Kit (JDK), который обычно
+требуется для компиляции Java-приложений (например, Apache Ant, Apache Maven,
+Eclipse and IntelliJ IDEA) выполните следующую команду:
+sudo apt-get install default-jdk
+
+
+делал так:
+-----------
+sudo apt-get install openjdk-8-jre
+sudo apt-get install openjdk-9-jre
+
+
+В результате всего будет выбор какую джаву использовать :
+------------------------------
+sudo update-alternatives --config java
+
+Есть 2 варианта для альтернативы java (предоставляет /usr/bin/java).
+
+  Выбор   Путь                                        Приор Состояние
+------------------------------------------------------------
+* 0            /usr/lib/jvm/java-9-openjdk-amd64/bin/java       1091      автоматический режим
+  1            /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java   1081      ручной режим
+  2            /usr/lib/jvm/java-9-openjdk-amd64/bin/java       1091      ручной режим
+
+Press <enter> to keep the current choice[*], or type selection number: 
+
+
+
+Опционно:
+----------------
+sudo apt-get install python-software-properties
+
+sudo add-apt-repository ppa:webupd8team/java
+
+sudo apt-get update
+
+sudo apt-get install openjdk-7-jre

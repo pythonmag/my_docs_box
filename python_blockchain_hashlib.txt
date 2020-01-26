@@ -1,0 +1,18 @@
+
+Документация
+============
+Крихітний блокчейн на Python. Частина 1
+https://codeguida.com/post/969
+
+Крихітний блокчейн на Python. Частина 2
+https://codeguida.com/post/985
+
+
+Импорты
+==============
+import hashlib as hasher
+import datetime as date
+from flask import Flask
+from flask import request
+
+

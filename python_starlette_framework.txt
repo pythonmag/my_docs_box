@@ -1,0 +1,9 @@
+﻿Мелкая питонячая радость #2: Starlette
+======================
+https://habr.com/ru/post/4544407/
+
+
+https://www.starlette.io/routing/
+
+
+

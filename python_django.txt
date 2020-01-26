@@ -1,0 +1,642 @@
+
+
+A Complete Beginner's Guide to Django - Part 1
+----------------------------------------------
+https://simpleisbetterthancomplex.com/series/2017/09/04/a-complete-beginners-guide-to-django-part-1.html
+
+A Complete Beginner's Guide to Django - Part 2
+----------------------------------------------
+https://simpleisbetterthancomplex.com/series/2017/09/11/a-complete-beginners-guide-to-django-part-2.html
+
+1)
+установка глобального Питона на комп / или Апгрейд
+============================
+
+ryndin@pc:~$ sudo add-apt-repository ppa:deadsnakes/ppa
+[sudo] пароль для ryndin:
+This PPA contains more recent Python versions packaged for Ubuntu.
+
+ryndin@pc:~$ sudo apt-get update
+
+ryndin@pc:~$ sudo apt-get install python3.6
+Чтение списков пакетов… Готово
+
+ryndin@pc:~$ python --version             # есть три версии глобального Питона на компе
+Python 2.7.12
+ryndin@pc:~$ python3.5 --version
+Python 3.5.2
+ryndin@pc:~$ python3.6 --version
+Python 3.6.2
+
+ryndin@pc:~$ which python                # я так понимаю и другие верии также можно
+/usr/bin/python
+ryndin@pc:~$ which python3.5
+/usr/bin/python3.5
+ryndin@pc:~$ which python3.6
+/usr/bin/python3.6
+
+
+2)
+установка пакета виртуальной среды
+=============================
+ryndin@pc:~$ virtualenv                 # у меня уже есть
+
+но можно поставить если что
+---------------------------
+ryndin@pc:~$ wget https://bootstrap.pypa.io/get-pip.py      # скачивание pip пакета
+
+ryndin@pc:~$ sudo python3.6 get-pip.py                      # установка pip пакета
+Successfully installed pip-9.0.1 wheel-0.30.0
+
+ryndin@pc:~$ sudo pip3.6 install virtualenv         # так можно установить
+Requirement already satisfied: virtualenv in /usr/lib/python3/dist-packages
+                                                    # но у меня уже установлен
+
+ryndin@pc:~$ cd venvs/
+ryndin@pc:~/venvs$ mkdir project36
+ryndin@pc:~/venvs$ cd project36/        # подготовка папки проекта
+
+Устанвка пакета виртуальной среды
+-------------------------------
+ryndin@pc:~/venvs/project36$ virtualenv venv36 -p python3.6
+            # установка вирт среды в папку venv36 с пакет питон версии 3.6
+
+
+Запуск пакета виртуальной среды
+-------------------------------
+ryndin@pc:~/venvs/project36$ cd venv36/
+ryndin@pc:~/venvs/project36/venv36$ source bin/activate
+(venv36) ryndin@pc:~/venvs/project36/venv36$ 
+
+
+3)
+Установка django    / Ставится в пакет с кодом python
+====================
+(venv36) ryndin@pc:~/venvs/project36/$ pip install django
+Collecting django
+  Downloading Django-1.11.5-py2.py3-none-any.whl (6.9MB)
+    100% |████████████████████████████████| 7.0MB 97kB/s 
+Collecting pytz (from django)
+  Using cached pytz-2017.2-py2.py3-none-any.whl
+Installing collected packages: pytz, django
+Successfully installed django-1.11.5 pytz-2017.2
+
+
+Подготовка папки для рабочего проекта / Для старта проекта
+--------------------
+(venv36) ryndin@pc:~/venvs/project36/venv36$ cd ..
+(venv36) ryndin@pc:~/venvs/project36$ ls
+venv36
+(venv36) ryndin@pc:~/venvs/project36$ mkdir src && cd src
+(venv36) ryndin@pc:~/venvs/project36/src$           # создана папка src рядом с venv36 
+
+
+4)
+Старт нового проекта Джанго
+===========================
+(venv36) ryndin@pc:~/venvs/project36/src$ django-admin startproject project36
+        # стартно нового проекта / команду находит в пакете кода виртуальной среды
+
+(venv36) ryndin@pc:~/venvs/project36/src$ tree
+.                                   # структура папок пустого проекта
+└── project36
+    ├── manage.py
+    └── project36
+        ├── __init__.py
+        ├── settings.py
+        ├── urls.py
+        └── wsgi.py
+
+
+5)
+Запуск сервера
+=================
+(venv36) ryndin@pc:~/venvs/project36/src/project36$ python manage.py runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 13 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+
+September 11, 2017 - 17:58:48
+Django version 1.11.5, using settings 'project36.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+            # можно в браузере уже открывать
+
+если так то
+http://127.0.0.1/
+-----------------
+Welcome to nginx!
+If you see this page, the nginx web server is successfully installed and working. Further configuration is required.
+For online documentation and support please refer to nginx.org.
+Commercial support is available at nginx.com.
+Thank you for using nginx.
+            # отклик от запущеного web сервера nginx
+
+а если с указанием порта то
+http://127.0.0.1:8000/
+----------------------
+It worked!
+Congratulations on your first Django-powered page.
+Next, start your first app by running python manage.py startapp [app_label].
+You're seeing this message because you have DEBUG = True in your Django settings file and you haven't configured any URLs. Get to work!
+            # отклик от запущенной страницы проекта (работает через nginx)
+
+
+6)
+Старт первой Аппликации проекта
+===============================
+(venv36) ryndin@pc:~/venvs/project36/src/project36$ django-admin startapp app1
+
+что имею
+----------
+(venv36) ryndin@pc:~/venvs/project36/src/project36$ tree
+.
+├── app1                                # папка аппликации 1
+│   ├── admin.py
+│   ├── apps.py
+│   ├── __init__.py
+│   ├── migrations
+│   │   └── __init__.py
+│   ├── models.py                       # модели для БД (можно срасширять как пакет)
+│   ├── tests.py
+│   └── views.py                        # вьюшки (можно расширять как пакет)
+├── db.sqlite3                          # файл базы данных (чисто под джанго)
+├── manage.py                           # файл управления (команды менеджмента)
+└── project36                           # главная всего папка проекта
+    ├── __init__.py
+    ├── __pycache__
+    │   ├── __init__.cpython-36.pyc
+    │   ├── settings.cpython-36.pyc
+    │   ├── urls.cpython-36.pyc
+    │   └── wsgi.cpython-36.pyc
+    ├── settings.py                     # файл сеттингов
+    ├── urls.py                         # файл администрирования url
+    └── wsgi.py                         # файл ворот сервера
+
+## WSGI (англ. Web Server Gateway Interface) — стандарт взаимодействия между Python-
+программой, выполняющейся на стороне сервера, и самим веб-сервером (nginx)
+
+
+7)
+settings.py
+-----------
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    'app1',                             # подключенная аппликация1
+]
+
+
+8)
+views.py
+===============
+from django.http import HttpResponse
+
+# Create your views here.
+def home(request):                          # первая вьюшка - передает в Ответ Строку
+	return HttpResponse('<h1>Hello Word!</h1>')
+
+
+9)
+urls.py
+===============
+from django.conf.urls import url
+from django.contrib import admin
+
+from app1 import views
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+
+    url(r'^$', views.home, name='home'),
+]
+
+
+10)
+Создание Моделей / лдя БД / в таблицу на Страницу
+models.py
+==================
+from django.db import models
+from django.contrib.auth.models import User
+
+
+class Board(models.Model):
+    name = models.CharField(max_length=30, unique=True)
+    description = models.CharField(max_length=100)
+
+
+class Topic(models.Model):
+    subject = models.CharField(max_length=255)
+    last_updated = models.DateTimeField()
+    board = models.ForeignKey(Board, related_name='topics')
+    starter = models.ForeignKey(User, related_name='topics')
+
+
+class Post(models.Model):
+    message = models.TextField(max_length=4000)
+    topic = models.ForeignKey(Topic, related_name='posts')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(null=True)
+    created_by = models.ForeignKey(User, related_name='posts')
+    updated_by = models.ForeignKey(User, related_name='+')
+
+
+11)
+makemigrations + migrate / models
+========================
+(venv36) ryndin@pc:~/venvs/project36/src/project36$ python manage.py makemigrations
+Migrations for 'app1':
+  app1/migrations/0001_initial.py
+    - Create model Board
+    - Create model Post
+    - Create model Topic
+    - Add field topic to post
+    - Add field updated_by to post
+
+ 
+## в sql синтаксисе показывает что мигрируется
+---------------------
+(venv36) ryndin@pc:~/venvs/project36/src/project36$ python manage.py sqlmigrate app1 0001
+BEGIN;
+--
+-- Create model Board
+--
+CREATE TABLE "app1_board" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(30) NOT NULL UNIQUE, "description" varchar(100) NOT NULL);
+--
+-- Create model Post
+--
+CREATE TABLE "app1_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "message" text NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NULL, "created_by_id" integer NOT NULL REFERENCES "auth_user" ("id"));
+--
+-- Create model Topic
+--
+CREATE TABLE "app1_topic" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "subject" varchar(255) NOT NULL, "last_updated" datetime NOT NULL, "board_id" integer NOT NULL REFERENCES "app1_board" ("id"), "starter_id" integer NOT NULL REFERENCES "auth_user" ("id"));
+--
+-- Add field topic to post
+--
+ALTER TABLE "app1_post" RENAME TO "app1_post__old";
+CREATE TABLE "app1_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "message" text NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NULL, "created_by_id" integer NOT NULL REFERENCES "auth_user" ("id"), "topic_id" integer NOT NULL REFERENCES "app1_topic" ("id"));
+INSERT INTO "app1_post" ("id", "message", "created_at", "updated_at", "created_by_id", "topic_id") SELECT "id", "message", "created_at", "updated_at", "created_by_id", NULL FROM "app1_post__old";
+DROP TABLE "app1_post__old";
+CREATE INDEX "app1_topic_board_id_dd59cc24" ON "app1_topic" ("board_id");
+CREATE INDEX "app1_topic_starter_id_12a23869" ON "app1_topic" ("starter_id");
+CREATE INDEX "app1_post_created_by_id_4f2aa1fe" ON "app1_post" ("created_by_id");
+CREATE INDEX "app1_post_topic_id_08de0e3b" ON "app1_post" ("topic_id");
+--
+-- Add field updated_by to post
+--
+ALTER TABLE "app1_post" RENAME TO "app1_post__old";
+CREATE TABLE "app1_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "message" text NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NULL, "created_by_id" integer NOT NULL REFERENCES "auth_user" ("id"), "topic_id" integer NOT NULL REFERENCES "app1_topic" ("id"), "updated_by_id" integer NOT NULL REFERENCES "auth_user" ("id"));
+INSERT INTO "app1_post" ("id", "message", "created_at", "updated_at", "created_by_id", "topic_id", "updated_by_id") SELECT "id", "message", "created_at", "updated_at", "created_by_id", "topic_id", NULL FROM "app1_post__old";
+DROP TABLE "app1_post__old";
+CREATE INDEX "app1_post_created_by_id_4f2aa1fe" ON "app1_post" ("created_by_id");
+CREATE INDEX "app1_post_topic_id_08de0e3b" ON "app1_post" ("topic_id");
+CREATE INDEX "app1_post_updated_by_id_b274c98a" ON "app1_post" ("updated_by_id");
+COMMIT;
+
+
+## первая полноценная миграция в БД
+------------------------------
+# admin -- встроенная апликация Админ Панели
+# app1 -- миграция кастомной аппликации
+# auth -- встроенная аппликация аутентификации
+# contenttypes -- встроенная аппликация 
+# sessions -- встроенная аппликация
+
+(venv36) ryndin@pc:~/venvs/project36/src/project36$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, app1, auth, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying app1.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying sessions.0001_initial... OK
+
+
+12)
+Ручное заполенние объекта в БД через Консоль (в контексте проекта)
+=========================
+(venv36) ryndin@pc:~/venvs/project36/src/project36$ python manage.py shell
+Python 3.6.2 (default, Jul 17 2017, 23:14:31) 
+[GCC 5.4.0 20160609] on linux
+
+
+>>> from app1.models import Board
+>>> board = Board(name='Django', description='This is a Board about Django')
+>>> board
+<Board: Board object>
+>>> board.save()                        # создание объекта с атрибутами + сохранение
+
+>>> set_board = Board.objects.all()
+>>> set_board
+<QuerySet [<Board: Board object>]>
+
+>>> set_board.get(id=1)                 # извлечение из БД пока единственного объекта
+<Board: Board object>
+>>> set_board.get(id=1).name
+'Django'
+>>> set_board.get(id=1).id
+1
+>>> set_board.get(id=1).description
+'This is a Board about Django'
+
+
+создание второго объекта в таблицу в БД
+----------------
+>>> new_board = Board(name='Python', description='Descussion about Python')
+>>> new_board
+<Board: Board object>
+>>> new_board.save()
+
+
+вывод объектов из БД
+--------------------
+>>> from app1.models import Board
+>>> set_board = Board.objects.all()
+>>> set_board
+<QuerySet [<Board: Django>, <Board: Python>]>
+
+>>> type(set_board)
+<class 'django.db.models.query.QuerySet'>
+
+# все методы объета множества объектов из БД
+# это Класс / как Список - есть встроенные и кастомные методы
+>>> dir(set_board)
+['__and__', '__bool__', '__class__', '__deepcopy__', '__delattr__', '__dict__',
+'__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__',
+'__getitem__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__',
+'__iter__', '__le__', '__len__', '__lt__', '__module__', '__ne__', '__new__',
+'__nonzero__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__',
+'__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_hints',
+'_batched_insert', '_clone', '_combinator_query', '_create_object_from_params',
+'_db', '_earliest_or_latest', '_extract_model_params', '_fetch_all', '_fields',
+'_filter_or_exclude', '_for_write', '_has_filters', '_hints', '_insert',
+'_iterable_class', '_known_related_objects', '_merge_known_related_objects',
+'_merge_sanity_check', '_next_is_sticky', '_populate_pk_values', '_prefetch_done',
+'_prefetch_related_lookups', '_prefetch_related_objects', '_prepare_as_filter_value',
+'_raw_delete', '_result_cache', '_sticky_filter', '_update', '_values', 
+'aggregate', 'all', 'annotate', 'as_manager', 'bulk_create', 'complex_filter', 'count',
+'create', 'dates', 'datetimes', 'db', 'defer', 'delete', 'difference', 'distinct',
+'earliest', 'exclude', 'exists', 'extra', 'filter', 'first', 'get', 'get_or_create',
+'in_bulk', 'intersection', 'iterator', 'last', 'latest', 'model', 'none', 'only',
+'order_by', 'ordered', 'prefetch_related', 'query', 'raw', 'reverse', 'select_for_update',
+'select_related', 'union', 'update', 'update_or_create', 'using', 'values', 'values_list']
+
+>>> set_board.values()
+<QuerySet [{'id': 1, 'name': 'Django', 'description': 'This is a Board about Django'}, {'id': 2, 'name': 'Python', 'description': 'Descussion about Python'}]>
+
+>>> for obj in set_board:
+...     print(obj.name, obj.description)
+... 
+Django This is a Board about Django
+Python Descussion about Python
+
+
+13) 
+Логика Вьюшки по вызову объектов из БД и передача в http response Клиенту
+================================
+from django.http import HttpResponse
+from .models import Board
+
+def home(request):
+	set_board = Board.objects.all()
+	board_names = []
+
+	for board in set_board:
+		board_names.append(board.name)
+
+	response_html = '<br>'.join(board_names)
+	return HttpResponse(response_html)
+## в браузере выведутся два имени объекта и разделителем строки
+
+
+14)
+Создание html шаблонов (которые будут передаваться через http)
+======================
+Есть некоторые правила / Базовая папка templates - в корневой папке проекта / 
++ подпапки - по аппликациям /
+
+(venv36) ryndin@pc:~/venvs/project36/src/project36$ ls
+app1  db.sqlite3  manage.py  project36
+
+(venv36) ryndin@pc:~/venvs/project36/src/project36$ mkdir templates
+(venv36) ryndin@pc:~/venvs/project36/src/project36$ cd templates/ && mkdir app1
+(venv36) ryndin@pc:~/venvs/project36/src/project36/templates/app1$ touch home.html
+
+home.html
+---------
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Boards</title>
+  </head>
+  <body>
+    <h1>Boards</h1>
+
+    {% for board in boards %}           # boards приходит по http response + язык шаблонов
+      {{ board.name }} <br>
+    {% endfor %}
+
+  </body>
+</html>
+
+
+15)
+settings.py / прописать tampates dir
+===========================
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),       # путь к папке templates
+        ],
+        'APP_DIRS': True,
+        .....
+
+проверка моих сеттингов
+-----------------------
+>>> from django.conf import settings                        # файл-объект настроек проекта
+>>> settings.BASE_DIR
+'/home/ryndin/venvs/project36/src/project36'
+
+>>> from project36 import settings as settings_proj         # тот же файл-объект
+>>> settings_proj.BASE_DIR
+'/home/ryndin/venvs/project36/src/project36'
+
+>>> import os
+>>> os.path.join(settings.BASE_DIR, 'templates')
+'/home/ryndin/venvs/project36/src/project36/templates'      # так проверять сроки сеттингов
+>>> os.path.join(settings_proj.BASE_DIR, 'templates')
+'/home/ryndin/venvs/project36/src/project36/templates'
+
+
+15)
+обработка Шаблона и Контекста как Словаря через render
+==============================
+(во вьюшке)
+def home(request):
+	set_board = Board.objects.all()
+	return render(request, 'app1/home.html', {'boards': set_board})
+
+
+
+16) 
+Юнит Тесты вьюшек Проекта
+tests.py
+==================
+
+from django.core.urlresolvers import reverse
+from django.urls import resolve
+from django.test import TestCase                    # класс для Тестов
+
+from.views import home
+
+# Create your tests here.
+class HomeTests(TestCase):                          # наследование Класса
+    def test_home_view_status_code(self):           # ф-я начинается с test_
+        url = reverse('home')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200, 'test home status')
+
+    def test_home_url_resolves(self):
+        view = resolve('/')
+        self.assertEqual(view.func, home, 'test home url')  
+                                                    # проверка на равенство аргументов
+
+
+запуск теста
+-----------------
+(venv36) ryndin@pc:~/venvs/project36/src/project36$ python manage.py test
+Creating test database for alias 'default'...           # временная БД для тестов
+System check identified no issues (0 silenced).
+..                                                      # 2 точки == 2 теста
+----------------------------------------------------------------------
+Ran 2 tests in 0.045s
+OK                                                      # OK == Ошибок нет
+Destroying test database for alias 'default'...
+
+
+запуск теста / расширенный режим /
+---------------------------------
+
+(venv36) ryndin@pc:~/venvs/project36/src/project36$ python manage.py test --verbosity=2
+
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+Operations to perform:
+  Synchronize unmigrated apps: messages, staticfiles
+  Apply all migrations: admin, app1, auth, contenttypes, sessions
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK                      # проверки миграций в БД
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying app1.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying sessions.0001_initial... OK
+System check identified no issues (0 silenced).
+test_home_url_resolves (app1.tests.HomeTests) ... ok            # мои функции тестов
+test_home_view_status_code (app1.tests.HomeTests) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.041s
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
+
+17)
+Статические Файлы / начало
+Static Files
+/ js / css / bootstrap / img / fonts /
+=================
+
+/ static / -- в корневой папке проекта
+
+(venv36) ryndin@pc:~/venvs/project36/src/project36$ ls
+app1  db.sqlite3  manage.py  project36  templates
+(venv36) ryndin@pc:~/venvs/project36/src/project36$ mkdir static        # папка + подпапка
+(venv36) ryndin@pc:~/venvs/project36/src/project36$ cd static/ && mkdir css
+
+
+в шаблоне
+--------------
+{% load static %}
+
+
+в сеттингах
+-----------
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.11/howto/static-files/
+
+STATIC_URL = '/static/'                 # наименование статик папка (по умолчанию)
+
+STATICFILES_DIRS = [                    # прописал путь с статик папке (корневая папка)
+    os.path.join(BASE_DIR, 'static'),
+]
+
+css
+----------------
+https://getbootstrap.com/docs/4.0/getting-started/download/#compiled-css-and-js
+bootstrap-4.0.0-beta-dist.zip
+css/bootstrap.min.css
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+
+18)
+Джанго Админка
+===============
+
+(venv36) ryndin@pc:~/venvs/project36/src/project36$ python manage.py createsuperuser
+Username (leave blank to use 'ryndin'): 
+Email address: ryndin@i.ua
+Password: 
+Password (again): 
+Superuser created successfully.
+
+http://127.0.0.1:8000/admin/
+or
+http://localhost:8000/admin
+
+
+19)
+admin.py    / регистрация Моделей для Админки
+=========================
+
+from django.contrib import admin
+from .models import Board
+
+# Register your models here.
+admin.site.register(Board)
+
+появится Модель в Админке
+http://localhost:8000/admin/app1/board/
+
+
+

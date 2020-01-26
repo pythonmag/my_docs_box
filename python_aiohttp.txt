@@ -1,0 +1,38 @@
+aiohttp: Asynchronous HTTP Client/Server
+=====================
+    http://aiohttp.readthedocs.io/en/stable/
+
+Features
+--------
+    Supports both Client and HTTP Server. 
+    - Supports both Server WebSockets and Client WebSockets out-of-the-box.
+    Web-server has Middlewares, Signals and pluggable routing.
+
+
+
+aiohttp: Asynchronous HTTP Client/Server¶
+HTTP client/server for asyncio (PEP 3156).
+
+Features
+Supports both Client and HTTP Server. - Supports both Server WebSockets and Client WebSockets out-of-the-box.
+Web-server has Middlewares, Signals and pluggable routing.
+
+
+пример / рекомендация
+-------------
+Якщо пайтон 3, то можеш банально заюзати aiohttp
+
+from aiohttp import web
+
+
+async def handle(request):
+    name = request.match_info.get('name', "Anonymous")
+    text = "Hello, " + name
+    return web.Response(text=text)
+
+app = web.Application()
+app.router.add_get('/', handle)
+app.router.add_get('/{name}', handle)
+web.run_app(app, host='127.0.0.1', port=8000)
+
+

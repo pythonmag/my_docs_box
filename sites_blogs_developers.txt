@@ -1,0 +1,146 @@
+
+1)
+Timmy O'Mahony
+Software Developer
+(Django and Ember.js)
+==============================
+https://timmyomahony.com/
+
+Uploading and validating an image from an URL with Django
+------------------------
+https://timmyomahony.com/blog/upload-and-validate-image-from-url-in-django/
+
+
+2)
+Vitor Freitas. I'm a passionate software developer and researcher from Brazil,
+currently living in Finland. 
+(Ex Python and Django)
+======================================
+https://simpleisbetterthancomplex.com/
+
+
+3)
+Блог по Питон / 
+JS /
+=================
+https://coderwall.com/t/python/popular
+
+
+3)
+Блогер  Питонист
+===============
+http://www.enlistq.com/
+
+
+4)
+Блогер по Dask Data (Python)
+====================
+http://matthewrocklin.com/blog/
+
+
+5)
+Блогер Питон (Очень много Питона + БД + Мат без Джанго)
+================
+https://www.dataquest.io/blog/
+
+
+6)
+Блогер РУ - куча статей нужных мне на РУ
+==========================
+http://dizballanze.com/ru/
+
+
+7)
+Блог о Питон
+=================
+http://www.machinalis.com/blog/tag/python/
+
+
+8)
+Блог / JS / Angular4 / JQUERY / AngularJS / 
+=========================
+https://www.dunebook.com/
+
+
+9)
+Блог команды разработчиков - Индусов /
+==========================
+Python / Django / Amazon / JS / Angular / Testing / 
+http://agiliq.com/blog/
+
+
+10)
+Болгер - по Категориям / 
+=======================
+http://orcunyilmaz.com/
+
+
+11)
+Блогер Питон
+==================
+http://orcunyilmaz.com/category/coding-python
+
+
+12)
+Блог по Джанго + Питон
+======================
+https://simpleisbetterthancomplex.com/
+
+
+13)
+Блог о Питоне (Голубенький)
+===========================
+https://pybit.es/pages/articles.html
+
+
+14)
+Блог чисто о Питоне
+===================
+http://pbpython.com/
+
+
+15)
+Блог Julien Danjou
+===================
+https://julien.danjou.info/blog/
+
+
+16)
+Статьи про Python
+=================
+https://opensource.com/tags/python
+
+
+17)
+Статьи по JS
+=================
+https://opensource.com/tags/javascript
+
+
+18)
+Статьи по LINUX
+================
+https://opensource.com/tags/linux
+
+
+19)
+DISCOVERSDK BLOG
+python / nosqldb / bd / react / android / spring / hibernate / 
+================
+http://www.discoversdk.com/blog
+
+
+20)
+James Lin's Blog
+python / django / other / 
+================
+http://james.lin.net.nz/category/technology/programming/python/
+http://james.lin.net.nz/category/technology/programming/django/
+
+
+21)
+Plumber Jack
+Stuff about Python's logging package.
+(блог чисто о Логгах в Питоне)
+============================
+http://plumberjack.blogspot.com.au/

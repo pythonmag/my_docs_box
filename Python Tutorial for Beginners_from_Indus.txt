@@ -1,0 +1,1193 @@
+Python Tutorial for Beginners 1
+===============
+Введение
+
+Django and flask
+
+Data Scince
+
+Scripting
+
+GUI - Graphic User Interface
+
+DevOps tools
+
+
+
+Python Tutorial for Beginners 2
+===============
+How to Install Python 3 on Windows 10
+
+
+
+Python Tutorial for Beginners 3
+================
+Basic Math, Mathematical Operators and Python 
+
+
+
+Python Tutorial for Beginners 4
+===============
+Python Variables and Types
+
+int float str type()
+
+
+
+Python Tutorial for Beginners 5
+================
+Python print() and input() Function
+
+print()
+input()
+int()
+float()
+форматирование строк - 2 способа
+
+
+
+Python Tutorial for Beginners 6
+===============
+Strings
+
+разные виды кавычек
+экранирование символов внутри строк
+len()
+
+
+
+Python Tutorial for Beginners 7
+===============
+Creating and Executing your First Python Script (Run .py file)
+
+сначала запуск через инсрументы IDLE
+тренируюсь на виндовсе10
+для выполения в шеле добавляем в конец
+input('Press any key for Exit')
+
+cmd
+python
+ConEmuls
+
+
+Python Tutorial for Beginners 8
+https://www.youtube.com/watch?v=cHa85et7LK0
+===============
+Install PyCharm ( Python IDE ) on Windows 10 + First Project
+
+
+
+Python Tutorial for Beginners 9
+https://www.youtube.com/watch?v=PLC_Jn9qCbU
+===============
+Python Strings and Comments
+
+x.capitalize()
+x.upper()
+x.lower()
+slice
+x.strip()
+x.islower() isupper()
+x.replace("A", "B")
+x.split('//')
+
+
+
+Python Tutorial for Beginners 10
+https://www.youtube.com/watch?v=0MBLkNlffT0
+================
+Boolean, Comparison Operators and Logical Operators in Python
+
+True
+False
+type(True)
+type(False)
+bool
+class "bool"
+and (True)
+or (true)
+not True
+not False
+None
+not None
+
+
+
+Python Tutorial for Beginners 11
+https://www.youtube.com/watch?v=qBpB_ve4sWo
+=================
+Python IF ELSE Statements
+
+
+
+Python Tutorial for Beginners 12
+https://www.youtube.com/watch?v=7P7KGVwMSIs
+===============
+Python IF...ELIF...ELSE Statements + nested IF statements
+input('')
+if elif else
+
+
+
+Python Tutorial for Beginners 13
+https://www.youtube.com/watch?v=MUJ1SuS-KoA
+================
+Python Lists
+[]
+list()
+.insert(,)
+.remove()
+.pop()
+del
+.clear()
+.sort()
+.reverse()
+.append()
+.copy()
+[:]
+.sort()
+.sort(reverse=True)
+.reverse()
+.count()
+
+
+
+Python Tutorial for Beginners 14
+https://www.youtube.com/watch?v=XQOWZidQSnE
+===============
+Python Tuples
+()
+tuple()
+.index()
+.count()
+len()
+.__len__()
+
+tup1 = ('hi')*5
+tup2 = ('hi',)*5
+tup1
+    'hihihihihi'
+tup2
+    ('hi', 'hi', 'hi', 'hi', 'hi')
+
+
+
+Python Tutorial for Beginners 15
+https://www.youtube.com/watch?v=OwDabRSs3h8
+===============
+Python Sets
+
+{}
+set([])
+.add()                  * 1 item
+.pop()
+.copy()
+len()
+.__len__()
+.clear()
+.update([1,2,3,4])      * many items
+.remove(100)            * ошибка (при удалении) если нет элемента
+.descard(100)           * нет ошибки (при удалении) если нет элемента
+del
+
+set1 | set2             * and
+set1.union(set2)        * and
+
+set1 & set2             * пересечение
+set1.intersection(set2) * пересечение
+
+set1 - set2             * то чего нет в сет1
+set1.difference(set2)
+
+set1 ^ set3             * все отличия множеств вместе
+set1.symmetric_difference(set3)
+
+
+
+Python Tutorial for Beginners 16
+https://www.youtube.com/watch?v=aohKO3ferVU
+================
+Python Dictionary
+
+dict1 = {'name': 'yurii', 'job': 'proger', 'age': 42}
+
+name = dict1.get('name')
+
+dict1.pop('name')
+
+dict1.values()
+    dict_values(['proger', 42])
+
+dict1.keys()
+    dict_keys(['job', 'age'])
+
+dict1['name'] = 'yurii'
+
+dict1[(2,3,4)] = 'my coord'
+
+dict1[15] = 15*2
+    dict1
+    {'job': 'proger', 'age': 42, 'name': 'yurii', (2, 3, 4): 'my coord', 15: 30}
+
+dict1.clear()
+
+del dict1
+
+dict1.update({'job': 'econ'})
+
+dict1.popitem()
+
+
+
+Python Tutorial for Beginners 17
+https://www.youtube.com/watch?v=L22zs3v6Rtg
+===============
+Python Slice and Negative index
+
+item1 = [1,2,3,4,5,6,7,8,9,0]
+item2 = (1,2,3,4,5,6,7,8,9,0)
+item3 = '1234567890'
+
+my_slice = slice(0,5)
+
+item1[my_slice]
+    [1, 2, 3, 4, 5]
+item2[my_slice]
+    (1, 2, 3, 4, 5)
+item3[my_slice]
+    '12345'
+
+item2[::-1]         * reverse - отрецательный шаг для среза
+item2[2::-1]        * отрецательный шаг, но от индекса 2 (то есть к 0)
+
+
+
+Python Tutorial for Beginners 18
+https://www.youtube.com/watch?v=aD_If3Lr6dw
+===============
+Python while Loop
+
+как то так )) цикл пока выполняется условие
+
+num = True
+sum = 0
+
+while num != 0:
+    num = float(input('Enter your number: '))
+    sum = sum + num
+    print('Summa is: ', sum)
+else:
+    print('Quit')
+
+
+
+Python Tutorial for Beginners 19
+https://www.youtube.com/watch?v=u0ylwy4Mv7A
+===============
+Python for Loop
+
+как то так )) манипуляция последовательностями
+
+list1 = [1,2,3,4,5,8]
+tuple1 = (1,2,3,4,5,7)
+set1 = {1,2,3,4,5,6}
+string1 = '12345'
+
+dict1 = {'name': 'yurii', 'job':'proger'}
+
+for x, y in dict1.items():
+    print(x, y)
+
+for x in dict1:
+    print(x, dict1[x])
+else:
+    ...
+
+for x in range(3,45,3):
+    print(x)
+else:
+    print('finished')
+
+
+
+Python Tutorial for Beginners 20
+https://www.youtube.com/watch?v=4qw5atfs_As
+===============
+Python break, continue statement
+
+как то так, вся суть
+
+list1 = [1,2,3,4,5,6]
+
+for x in list1:
+    if x == 4:
+        continue
+    print(x)
+print('======')
+
+for x in list1:
+    if x == 4:
+        break
+    print(x)
+
+>>>
+1
+2
+3           continue
+5
+6
+======
+1
+2
+3           break
+
+
+
+Python Tutorial for Beginners 21
+https://www.youtube.com/watch?v=EHzKEh74sJI
+===============
+Python Functions
+
+def
+return
+
+
+
+Python Tutorial for Beginners 22
+https://www.youtube.com/watch?v=3nrm-aTCwdQ
+===============
+Default Arguments, *args and **kwargs (Variable-length Arguments)
+
+суть кратко
+
+def student(name='lena', age=40, *args, **kwargs):
+    print('name: ', name)
+    print('age: ', age)
+    print('marks: ', args)
+    print('lessons: ', kwargs)
+
+    for x,y in kwargs.items():
+        print([x,y])
+
+student('yurii', 50, 3,4,5,6,7,  lesson1=20, lesson2=30, lesson3=40 )
+
+>>>
+name:  yurii
+age:  50
+marks:  (3, 4, 5, 6, 7)
+lessons:  {'lesson1': 20, 'lesson2': 30, 'lesson3': 40}
+['lesson1', 20]
+['lesson2', 30]
+['lesson3', 40]
+
+
+
+Python Tutorial for Beginners 23
+https://www.youtube.com/watch?v=QOryrmkr1tA
+===============
+Introduction to Object-Oriented Programming (OOP)
+
+В ООП используются Классы - это контейнер и Данных и Методов(функций) их обработки
+
+Функции содержат только Методы. данные приходят из Вне.
+
+В этом Отличие.
+
+ООП более современный подход к Программированию. Также Наследование Классов.
+создаение Экземпляров Классов (конкретный объект)
+
+В Объектах (Классах, Инстансах) Данные и Функции известны как "Атрибуты и Методы".
+
+
+
+
+Python Tutorial for Beginners 24
+https://www.youtube.com/watch?v=NL04MIIP0P0
+===============
+Classes and Objects in Python (OOP)
+
+class
+pass
+простые переменные Класса и Инстанса
+
+
+
+
+Python Tutorial for Beginners 25
+https://www.youtube.com/watch?v=oE_dWWWqxQ0
+===============
+Python __init__ and self in class
+
+__init__ method
+self atribute
+
+class Car:
+    engine = 'DVS'                  # в инстансе доступна через self
+
+    def __init__(self, speed, color):
+        print('init instance')
+
+        print(self)
+        print(self.engine)
+
+        self.speed = speed          # сохранение параметров Инстанса
+        self.color = color
+
+        self.info = 'speed: {}. color: {}. engine: {}'.format(self.speed,
+                                                  self.color, self.engine)
+
+ford = Car(180, 'red')              # ввод параметров Инстанса
+honda = Car(200, 'green')
+audi = Car(220, 'black')
+gm = Car(50, 'blue')
+
+print(ford.engine, ford.color, ford.speed)
+print(ford.info)
+
+>>>
+init instance
+<__main__.Car object at 0x7f10d47586d8>
+DVS
+DVS red 180
+speed: 180. color: red. engine: DVS
+
+
+
+Python Tutorial for Beginners 26
+https://www.youtube.com/watch?v=fQjopulaxME
+===============
+Is it possible to define multiple constructors in Python?
+
+
+class Hello:
+    
+    word_glob = 'word glob'
+
+    def __init__(self, word):
+        print('Init instance 1', word)
+        self.word = word
+        print('Init instance 2', self.word, self.word_glob)
+
+hello1 = Hello('test')
+
+>>>
+Init instance 1 test
+Init instance 2 test word glob
+
+
+
+class Hello:
+    word_glob = 'word glob'
+
+    def __init__(self, *args, **kwargs):
+        print(self)
+        self.args = args
+        self.kwargs = kwargs
+        print(self.args)
+        print(self.kwargs)
+        print(self.word_glob)
+
+    print(word_glob)
+
+hello1 = Hello(1,2,3,4, name='yurii', age=43)
+
+>>>
+word glob                                   # доступна как переменная Класса
+<__main__.Hello object at 0x7f52e5050860>
+(1, 2, 3, 4)
+{'name': 'yurii', 'age': 43}
+word glob                                   # доступна через self instance
+
+
+
+Python Tutorial for Beginners 27
+https://www.youtube.com/watch?v=TFLo9m0jFEg
+===============
+Python Encapsulation
+
+var1                // не скрытая переменная
+_var2               // скрытая защищенная переменная только по соглашению (но доступна)
+__var3              // скрытая защещенная переменная по сути
+
+class Car:
+    engine = 'DVS'
+
+    def __init__(self, speed, color):
+        print('init instance')
+
+        print(self)
+        print(self.engine)
+
+        self.__speed = speed
+        self.__color = color
+
+        self.info = 'speed: {}. color: {}. engine: {}'.format(self.__speed,
+                                                  self.__color, self.engine)
+
+    def set_speed(self, value):
+        self.__speed = value
+
+    def get_speed(self):
+        print(self.__speed)
+
+ford = Car(180, 'red')
+print(ford.info)
+print('======')
+
+ford.set_speed(250)             # кастомная функция Перезаписи параметра (Безопасно)
+ford.get_speed()                # кастомная функция Получения параметра
+print(ford.info)
+print('======')
+
+ford.speed = 400                # создастся новая переменная Вне логики Расчетов 
+ford.__speed = 400              # встроенная функцимя перезаписи - Не сработает
+print(ford.info)
+print(ford.speed)               # принт новой переменной (вне логики)
+
+>>>
+init instance
+<__main__.Car object at 0x7f8889c725c0>
+DVS
+speed: 180. color: red. engine: DVS
+======
+
+250
+speed: 180. color: red. engine: DVS
+======
+
+speed: 180. color: red. engine: DVS
+400
+
+
+class Rectangle:
+    def __init__(self, height, width):
+
+        self.__height = height
+        self.__width = width
+
+        print('init instance, area is: ', self.__height * self.__width)
+
+    def set_height(self, value):
+        self.__height = value
+
+    def set_width(self, value):
+        self.__width = value
+
+    def area(self):
+        print(self.__height * self.__width)
+
+rect1 = Rectangle(20, 30)
+rect1.area()
+print('=======')
+rect1.set_height(40)         # задаются новые значения через Кастомные ф-ции (Доступ)
+rect1.set_width(50)
+rect1.area()
+
+>>>
+init instance, area is:  600
+600
+=======
+2000
+
+
+
+
+Python Tutorial for Beginners 28
+https://www.youtube.com/watch?v=aQz9_V8aoEw
+===============
+Private methods in Python
+
+кратко:
+
+class Test:
+    def __init__(self, name):
+        self.a = 10                     # доступно
+        self._b = 20                    # доступно, но указано что лучше не менять
+        self.__c = 30                   # не существует (не доступно извне)
+        print(name)
+
+    def public_method(self):            # кастомный метод дает доступ
+        print(self.__c)
+        print('public run')
+        self.__privat_method()          # Внутри класса Приватный метод Досутпен
+
+        def __privat_method(self):      # приватный метод - не виден при вызове Инстанса
+        print(self.__c)
+        print('privat run')
+
+test1 = Test('yurii')
+print(test1.a)
+print(test1._b)
+print(test1.__c)
+test1.public_method()                   # вызов кастомного метода
+test1.__privat_method()                   # не доступен / ошибка
+
+>>>
+yurii
+10
+20
+30
+public run
+30
+privat run
+Traceback (most recent call last):
+  File "/home/ryndin/my_venvs/python_for_beginers_v3/code/cars.py", line 24, in <module>
+    test1.__privat_method()
+AttributeError: 'Test' object has no attribute '__privat_method'
+
+
+
+Python Tutorial for Beginners 29
+https://www.youtube.com/watch?v=rY7zQ0zv-SM
+===============
+Python Inheritance
+Наследование (в Классах)
+
+class Polygon:
+    __width = None                       // защиненные переменные / Приватные
+    __height = None
+
+    def set_values(self, width, height): // метод значений (для подклассов) / Публичный
+        self.__width = width
+        self.__height = height
+
+    def get_width(self):                 // методы Передачи защищен Значений / Публичный
+        return self.__width
+
+    def get_height(self):
+        return self.__height            // Публичный Метод
+
+
+class Rectangle(Polygon):               
+    def area(self):                         // Главная Логика Подкласса
+        return float(self.get_width() * self.get_height())      // метод пердачи данных
+
+class Triangle(Polygon):
+    def area(self):
+        return float(self.get_width() * self.get_height() / 2)
+
+
+rect = Rectangle()                          // Создание Инстанса
+tri = Triangle()
+
+rect.set_values(20,30)                      // Задавание Значения
+tri.set_values(20,30)
+
+print(rect.area())                          // Вызов Логики
+print(tri.area())
+
+
+
+
+Python Tutorial for Beginners 30
+https://www.youtube.com/watch?v=m6hhUBXcA-E
+===============
+How To Create Modules in Python 3
+
+from dir.polygon import Polygon
+from dir.rectangle import Rectangle
+from dir.triangle import Triangle
+...
+
+
+
+
+Python Tutorial for Beginners 31
+https://www.youtube.com/watch?v=o_GrDGjRUuQ
+===============
+Python Multiple Inheritance
+
+1)
+class Polygon:
+    __width = None
+    __height = None
+
+    def set_values(self, width, height):
+        self.__width = width
+        self.__height = height
+
+    def get_width(self):
+        return self.__width
+
+    def get_height(self):
+        return self.__height
+
+2)
+class Shape:
+    __color = None
+
+    def set_color(self, color):
+        self.__color = color
+
+    def get_color(self):
+        return self.__color
+
+3)
+from dir.polygon import Polygon
+from dir.shape import Shape
+
+class Rectangle(Polygon, Shape):            ## MULTI
+    def area(self):
+        return float(self.get_width() * self.get_height())
+
+4)
+from dir.rectangle import Rectangle
+from dir.triangle import Triangle
+
+rect = Rectangle()
+tri = Triangle()
+
+rect.set_values(20,30)
+tri.set_values(20,30)
+
+rect.set_color('blue')
+tri.set_color('red')
+
+print(rect.area())
+print(tri.area())
+
+print(rect.get_color())
+print(tri.get_color())
+
+
+
+
+Python Tutorial for Beginners 32
+https://www.youtube.com/watch?v=aBexJgZ6GjI
+===============
+Python super()
+
+super()
+mro()
+__init__
+__mro__
+
+
+1)
+class Parent:
+    def __init__(self, name):
+        print('Parent init', name)
+
+class Child(Parent):
+    # pass
+    def __init__(self):
+        super().__init__('lena')        # функция super() вызывает объект Суперкласса
+        print('Child init')
+
+class Child(Parent):
+    # pass
+    def __init__(self):
+        Parent.__init__(self, 'lena')   # то же самое что и через super() но +self 
+        print('Child init')
+
+parent = Parent('yurii')
+child = Child()
+print(Child.__mro__)                    # порядок Выполения методов Классов
+print(Child.mro())                      # порядок Выполения методов Классов
+
+>>>
+Parent init yurii
+Parent init lena
+Child init
+
+(<class '__main__.Child'>, <class '__main__.Parent'>, <class 'object'>)
+is just the tuple of: the class, its base, its base's base, and so on up to object
+(only works for new-style classes of course).
+# порядок Выполения методов Классов
+
+
+2)
+class Parent1:
+    def __init__(self, name):
+        print('Parent1 init', name)
+
+class Parent2:
+    def __init__(self, name):
+        print('Parent2 init', name)
+
+
+class Child(Parent1, Parent2):
+    # pass
+    def __init__(self):
+        super().__init__('lena')            # только для Первого Суперкласса
+        Parent2.__init__(self, 'pasha')     # Второй Суперкласс - Явно
+        print('Child init')
+
+parent1 = Parent1('yurii')
+parent2 = Parent2('pasha')
+child = Child()
+
+print(Child.__mro__)
+print(Child.mro())
+
+>>>
+Parent1 init yurii
+Parent2 init pasha
+Parent1 init lena
+Parent2 init pasha
+Child init
+(<class '__main__.Child'>, <class '__main__.Parent1'>, <class '__main__.Parent2'>, <class 'object'>)
+[<class '__main__.Child'>, <class '__main__.Parent1'>, <class '__main__.Parent2'>, <class 'object'>]
+
+
+
+Python Tutorial for Beginners 33
+https://www.youtube.com/watch?v=lhiH-6ygGl8
+===============
+Python Composition
+
+Немного Сложновато / Но суть понятна
+
+КОМПОЗИЦИЯ
+----------
+болеее логично поскольку Сущности Персоны и ее Зарплаты связаны в Объекте
+
+
+class Salary:                                       # как Контейнер Логики (для Объектов)
+    def __init__(self, pay_month, bonus_year):
+        self.pay_month = pay_month
+        self.bonus_year = bonus_year
+
+    def annual_salary(self):
+        return (self.pay_month*12) + self.bonus_year
+
+class Employee:
+    def __init__(self, name, age, pay_m, bonus_y):  # параметры для Контейнера
+        self.name = name
+        self.age = age
+        self.obj_salary = Salary(pay_m, bonus_y)    # Объект Логики Суперкласса / Class to Class   
+
+    def year_salary(self):                          # промежуточный метод (прокси)
+        print(self.obj_salary.annual_salary())
+
+persona1 = Employee('yurii', 42, 2500, 5000)        # объект-метод получил Данные
+persona1.year_salary()                              # Вызов результата Объекта Логики
+
+
+
+Python Tutorial for Beginners 34
+https://www.youtube.com/watch?v=rOo_BosuJBE
+===============
+Python Aggregation + Difference in Aggregation and Composition
+
+АГРЕГАЦИЯ
+---------
+
+class Salary:
+    def __init__(self, pay_month, bonus_year):
+        self.pay_month = pay_month
+        self.bonus_year = bonus_year
+
+    def annual_salary(self):
+        return (self.pay_month*12) + self.bonus_year
+
+class Employee:
+    def __init__(self, name, age, salary):
+        self.name = name
+        self.age = age
+        self.obj_salary = salary
+
+    def year_salary(self):
+        print(self.obj_salary.annual_salary())
+
+salary = Salary(2500, 5000)                     # Не Именованная Сущность
+persona1 = Employee('yurii', 42, salary)        # Передача Сущности Объекту
+persona1.year_salary()
+
+
+
+
+Python Tutorial for Beginners 35
+https://www.youtube.com/watch?v=PDMe3wgAsWg
+===============
+Python Abstract Classes
+
+from abc import ABC, abstractmethod
+@abstractmethod
+
+В Абстрактном классе и его методах Не удастся создать Инстанс
+Если есть Хотябы 1 Абстракт Метод - Инстанс не создастся (надо переопределять в СубКлассе)
+То есть это как бы Защита, если Суперкласс абстрактый - то переопределение методов
+в СубКлассе (для Инстанса) - Обязательно.
+Абстрактный Класс - это как Шаблон для создания Классов.
+
+
+from abc import ABC, abstractmethod
+
+class Shape(ABC):                    # not for create instance
+
+    @abstractmethod                  # пока есть метод с таким Дек-м - Инстанс не создастся
+    def area(self):
+        pass
+
+    def perimeter(self):
+        pass
+
+class Square(Shape):            # for create instance
+    def __init__(self, side):
+        self.__side = side
+
+    def area(self):                  # Переопрелелили метод - Инстанс теперь работает
+        return self.__side * self.__side
+
+
+square1 = Square(50)
+print(square1)
+print(square1.area())
+
+>>>
+<__main__.Square object at 0x7f622382e7f0>
+2500
+
+
+
+Python Tutorial for Beginners 36
+https://www.youtube.com/watch?v=hJcv9JwiPlA
+===============
+Python Exception handling + Python Try Except
+
+Катко: Исключения это Классы которые срабатывают когда нарушается
+нормальный ход программы. Как бы реакция на Ошибки, но Программа не зависает
+а вызывает Исключения, которые можно испрользовать для алтернативных Алгоритмов
+
+>>> 10/0
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ZeroDivisionError: division by zero                         # Исключение 
+
+
+>>> 10 + '10'
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for +: 'int' and 'str'    # Исключение 
+
+>>> фис
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'фис' is not defined                        # Исключение 
+
+>>> var1 = 'name'
+>>> var1.asdf
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'str' object has no attribute 'asdf'        # Исключение 
+
+И так далее. Исключения в ситуациях когда Инструкция не корректна
+
+
+
+>>> import builtins
+>>> help(builtins)
+Help on built-in module builtins:
+
+
+Все встроенные Классы в Питоне / В том числе Исключения
+
+CLASSES
+    object
+        BaseException
+            Exception
+                ArithmeticError
+                    FloatingPointError
+                    OverflowError
+                    ZeroDivisionError
+                AssertionError
+                AttributeError
+                BufferError
+                EOFError
+                ImportError
+                    ModuleNotFoundError
+                LookupError
+                    IndexError
+                    KeyError
+                MemoryError
+                NameError
+                    UnboundLocalError
+                OSError
+                    BlockingIOError
+                    ChildProcessError
+                    ConnectionError
+                        BrokenPipeError
+                        ConnectionAbortedError
+                        ConnectionRefusedError
+                        ConnectionResetError
+                    FileExistsError
+                    FileNotFoundError
+                    InterruptedError
+                    IsADirectoryError
+                    NotADirectoryError
+                    PermissionError
+                    ProcessLookupError
+                    TimeoutError
+                ReferenceError
+                RuntimeError
+                    NotImplementedError
+                    RecursionError
+                StopAsyncIteration
+                StopIteration
+                SyntaxError
+                    IndentationError
+                        TabError
+                SystemError
+                TypeError
+                ValueError
+                    UnicodeError
+                        UnicodeDecodeError
+                        UnicodeEncodeError
+                        UnicodeTranslateError
+                Warning
+                    BytesWarning
+                    DeprecationWarning
+                    FutureWarning
+                    ImportWarning
+                    PendingDeprecationWarning
+                    ResourceWarning
+                    RuntimeWarning
+                    SyntaxWarning
+                    UnicodeWarning
+                    UserWarning
+            GeneratorExit
+            KeyboardInterrupt
+            SystemExit
+        bytearray
+        bytes
+        classmethod
+        complex
+        dict
+        enumerate
+        filter
+        float
+        frozenset
+        int
+            bool
+        list
+        map
+        memoryview
+        property
+        range
+        reversed
+        set
+        slice
+        staticmethod
+        str
+        super
+        tuple
+        type
+        zip
+
+
+@classmethod            уже встроенные в Интерпретатор Питон
+@staticmethod
+
+help(Любой Встроенный Класс)
+
+
+пример
+-------------
+resoult = None
+
+a = float(input('Number 1: '))
+b = float(input("Number 2: "))
+
+try:                            # Базовая Конструкция Перехвата Исключения
+    resoult = a / b
+    print(resoult)
+except:                         # Можно указать Конкретный Класс Исключения
+    print('Not correct')
+
+
+вариант
+-------------
+resoult = None
+
+a = float(input('Number 1: '))
+b = float(input("Number 2: "))
+
+try:
+    resoult = a / b
+    print('Resoult Is: ', resoult)
+except Exception as e:          # на лету можно увидеть Суть возникшего Исключения
+    print('Error Is: ', e)
+
+>>>
+Number 1: 10
+Number 2: 0
+Error Is:  float division by zero
+
+
+
+
+Python Tutorial for Beginners 37
+https://www.youtube.com/watch?v=qc5ec7UJbeU
+===============
+Try Except Else Finally (Python Exception handling)
+
+
+resoult = None
+
+a = input('Number 1: ')
+b = input("Number 2: ")
+
+try:
+    resoult = a / b
+    print('Resoult Is: ', resoult)
+    
+except ZeroDivisionError as __z:    # блок except + ... + else
+    print('Error Is: ', type(__z))
+except TypeError as __t:
+    print('Error Is: ', type(__t))
+except ValueError as __v:
+    print('Error Is: ', type(__v))
+else:                               # работает как Альтернатива Эксепшенам
+    print('else logic is worked')
+    
+finally:                            # В Любом Случае Работает в Конце Логики
+    print('finally logic is worked')
+    print(resoult)
+
+
+>>>
+Number 1: 10
+Number 2: aa
+Error Is:  <class 'TypeError'>      # Ошибка Типа Введенных Данных
+finally logic is worked             # Все равно Сработало
+None                                # Начальная переменная не изменилась
+
+
+
+
+
+
+
+....................
+
+Javascript Tutorial For Beginners 1 # JavaScript Introduction
+https://www.youtube.com/watch?v=08yflg_VVO8
+====================
+
+
+Node.js Tutorial for Beginners 1 - Node.js Introduction
+https://www.youtube.com/watch?v=spPtAEmwys4&list=PLS1QulWo1RIb8IwHYfah5pxGU5jgNiEbK
+=====================
+
+
+
+Linux Command Line Tutorial For Beginners 1 
+https://www.youtube.com/watch?v=YHFzr-akOas&list=PLS1QulWo1RIb9WVQGJ_vh-RQusbZgO_As
+===========================
+Introduction
+
+
+
+MongoDB Tutorial for Beginners 1
+https://www.youtube.com/watch?v=GtD93tVZDX4&list=PLS1QulWo1RIZtR6bncmSaH8fB81oRl6MP
+==============================
+Introduction to MongoDB + Installing MongoDB
+
+
+
+Qt Tutorials For Beginners 1
+https://www.youtube.com/watch?v=EkjaiDsiM-Q&list=PLS1QulWo1RIZiBcTr5urECberTITj7gjA
+==========================
+Introduction
+

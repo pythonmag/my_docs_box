@@ -1,0 +1,18 @@
+
+1)
+Вводная статья
+Асинхронное программирование в Python
+---------------------
+https://tproger.ru/translations/asynchronous-programming-in-python/
+
+
+2)
+AsyncIO для практикующего python-разработчика
+---------------------
+https://habrahabr.ru/post/337420/
+
+
+3)
+документация
+---------------------
+https://docs.python.org/3/library/asyncio.html

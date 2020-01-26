@@ -1,0 +1,34 @@
+
+Установка Docker на Ubuntu 16.04
+-----------------
+http://isizov.ru/ustanovka-docker-na-ubuntu-16-04/
+
+
+Microservices with Docker, Flask, and React
+Мануал и пример размещения Проекта с использование пакета приложений
+http://54.89.0.180/
+====================
+http://testdriven.io/
+http://testdriven.io/part-one-intro/
+http://testdriven.io/part-two-intro/
+http://testdriven.io/part-three-intro/
+
+
+примененные Апликации:
+---------------------
+    Python v3.6.1
+    Flask v0.12.2
+    Flask-Script v2.0.5
+    Flask-SQLAlchemy v2.2
+    Flask-Testing v0.6.2
+    Gunicorn v19.7.1
+    Nginx v1.13.0
+    Docker v17.03.1-ce
+    Docker Compose v1.11.2
+    Docker Machine v0.10.0
+
+
+
+Docker
+======
+https://docs.docker.com/

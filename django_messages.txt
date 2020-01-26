@@ -1,0 +1,140 @@
+
+Документация
+=====================
+1)
+https://docs.djangoproject.com/en/3.0/ref/contrib/messages/
+
+
+
+2)
+Добавление сообщений в Контекст_процессов Месседжей
+-------------------------------
+from django.contrib import messages
+messages.add_message(request, messages.INFO, 'Hello world.')
+
+или
+
+messages.debug(request, '%s SQL statements were executed.' % count)
+messages.info(request, 'Three credits remain in your account.')
+messages.success(request, 'Profile details updated.')
+messages.warning(request, 'Your account expires in three days.')
+messages.error(request, 'Document deleted.')
+
+
+3)
+Стандартный вывод Сообщения в Шаблоне
+-----------------
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+4)
+Возможные конструкции Мессаджей
+---------------------
+messages.info(self.request, ' Send Your Mail is Success :)! ')
+
+message = 'Student saccess Edit and Save'
+messages.add_message(self.request, messages.INFO, message)
+---------------------
+
+
+5)
+Разноцветные Месседжи
+----------------------
+{% block status_message %}
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <p {% if message.success %} class="alert alert-success"{% endif %}
+           {% if message.error %}class="alert alert-danger"{% endif %}>
+            {{ message }}
+        </p>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock status_message %}
+
+
+
+6)
+код от Савченко
+=================
+
+students.py (вьюшка):
+--------------------
+
+from django.contrib import messages
+from django.contrib.messages import get_messages
+
+------
+storage = get_messages(request) #removing oll messages
+for message in storage:
+    pass
+
+------
+if errors:    
+#adding error messages to our template
+    for name_of_error in errors:
+        messages.add_message(request, messages.INFO, errors[name_of_error])
+
+
+student_add.html (шаблон):
+----------------
+
+<!--
+    {% if errors %}
+        <div class="alert alert-warning" role="alert">
+        Пожалуйста, исправьте следующие ошибки:
+        <ul>
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+        </div>
+    {% endif %}
+-->
+
+
+
+7)
+кастомные месседжи (вне мидлвары)
+===================
+так делать не надо часто но маленькие сообщения через GET параметр ингда можно
+
+html
+-----------
+{% block status_message %}
+{% if request.GET.status_message %}
+    <div class=”alert alert-warning” role=”alert”>
+        {{ request.GET.status_message }}
+    </div>
+{% endif %}
+{% endblock %}
+
+
+или
+-----------
+{% block status_message %}
+{% if errors %}
+    <div class=”alert alert-warning” role=”alert”>
+        Будь-ласка, виправте наступні помилки
+    </div>
+{% endif %}
+{% endblock status_message %}
+
+
+.py
+-----------
+return HttpResponseRedirect(
+    u’%s?status_message=Додавання студента скасовано!’ % reverse(’home’))
+
+
+
+
+
+

@@ -1,0 +1,135 @@
+
+Установка веб-сервера Apache в Ubuntu 18.04. [Краткое руководство.]
+=====================================
+
+https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-18-04-quickstart-ru
+
+
+
+0)
+Сначала просто проверка Конфигурации
+------------------------------------
+
+(base) ~$ sudo ufw app list                 # что сейчас работает над HTTP
+
+Доступные приложения:
+  CUPS
+  Nginx Full
+  Nginx HTTP
+  Nginx HTTPS
+
+
+
+0.1)
+Проверка работы подключенного Сервера
+-------------------------------------
+(Если подключить Apache то тут будет Апач, а пока Nginx)
+
+(base) $ sudo systemctl status nginx
+
+● nginx.service - A high performance web server and a reverse proxy server
+   Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+   Active: active (running) since Fri 2020-01-10 22:22:56 EET; 1 day 22h ago
+     Docs: man:nginx(8)
+  Process: 1253 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+  Process: 1220 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+ Main PID: 1254 (nginx)
+    Tasks: 5 (limit: 4915)
+   CGroup: /system.slice/nginx.service
+           ├─1254 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+           ├─1255 nginx: worker process
+           ├─1256 nginx: worker process
+           ├─1257 nginx: worker process
+           └─1258 nginx: worker process
+
+
+
+1)
+socket
+=========================
+Интерфейс, который прослушивает определенный порт на Сервере (пока в него кто то постучится от Клиента)
+
+https://habr.com/ru/post/149077/
+
+
+пример, код работы Сервера  (принимает Запрос)
+открытый сокет для прослушки порта 9090, 
+принятия запроса от клиента и передача запроса, 
+и закрытие порта
+-----------------
+
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import socket
+
+sock = socket.socket()
+sock.bind(('', 9090))
+sock.listen(1)
+conn, addr = sock.accept()
+
+print('connected:', addr, conn)                # принт при выполнении
+
+while True:
+    data = conn.recv(1024)
+    if not data:
+        break
+    conn.send(data.upper())
+
+conn.close()
+
+
+код, пример работы Клиента (Отправляет Запрос)
+---------------------------
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import socket
+
+sock = socket.socket()
+sock.connect(('localhost', 9090))
+sock.send(b'hello, yurii!')
+
+data = sock.recv(1024)
+sock.close()
+
+print(data)
+
+
+Принт в консоли про виполнени (Запрос от клиента пришел)
+------------------
+пример Двух запросов от Клиента -- разные порты Клиента каждый раз
+
+
+connected: ('127.0.0.1', 56528) <socket.socket fd=4, family=AddressFamily.AF_INET, 
+                                type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 9090), 
+                                raddr=('127.0.0.1', 56528)>
+
+connected: ('127.0.0.1', 56592) <socket.socket fd=4, family=AddressFamily.AF_INET, 
+                                type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 9090), 
+                                raddr=('127.0.0.1', 56592)>
+
+
+Принт Консоли на Стороне Запущенного Клиента (Данные пришли)
+-------------------------
+b'HELLO, YURII!'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

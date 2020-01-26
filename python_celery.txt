@@ -1,0 +1,12 @@
+﻿
+Celery: начинаем правильно
+==========================
+https://khashtamov.com/ru/celery-best-practices/
+
+
+в продолжение темы
+-------------------
+https://khashtamov.com/ru/django-channels-websocket/
+
+
+

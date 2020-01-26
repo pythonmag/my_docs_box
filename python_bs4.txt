@@ -1,0 +1,62 @@
+BeautifulSoup4 / Scraping
+
+
+Туториал в Utube  по Скрапингу   / От Индуса
+==============================
+1) 
+Python Web Scraping Tutorial 1 - Intro
+https://www.youtube.com/watch?v=pLoRrHEsHb0
+
+2)
+Python Web Scraping Tutorial 2 - Our First Web Scraper
+https://www.youtube.com/watch?v=PyqdoidfJ8w
+
+3)
+Python Web Scraping Tutorial 3 - BeautifulSoup4 Intro
+https://www.youtube.com/watch?v=qgDBLD7EChI&feature=share
+
+4)
+Python Web Scraping Tutorial 4 - BeautifulSoup4 & Exception Handling
+https://www.youtube.com/watch?v=ruu0Og33DwU
+
+5)
+Python Web Scraping Tutorial 5 - BeautifulSoup4 & Advanced digging
+https://www.youtube.com/watch?v=FlDAljWP7Do&index=5&list=PLmcBskOCOOFUmbUv0CIMuATDVKVrOhBMV
+
+6)
+Python Web Scraping Tutorial 6 - BeautifulSoup4 & find() and findAll functions
+https://www.youtube.com/watch?v=U7tN6Zs2UY4&list=PLmcBskOCOOFUmbUv0CIMuATDVKVrOhBMV&index=6
+
+7)
+Python Web Scraping Tutorial 7– BeautifulSoup4 & Navigating Trees
+https://www.youtube.com/watch?v=GC890_Rco3g&index=7&list=PLmcBskOCOOFUmbUv0CIMuATDVKVrOhBMV
+
+
+
+
+Beautiful Soup
+====================== 
+
+Документация (оригинал)
+------------
+https://www.crummy.com/software/BeautifulSoup/bs3/documentation.html
+
+Документация на русском (полнейшая)
+------------
+http://wiki.python.su/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8/BeautifulSoup
+
+https://www.crummy.com/software/BeautifulSoup/
+
+Beautiful Soup - это парсер для синтаксического разбора файлов HTML/XML, написанный на языке программирования Python, который может преобразовать даже неправильную разметку в дерево синтаксического разбора. Он поддерживает простые и естественные способы навигации, поиска и модификации дерева синтаксического разбора. В большинстве случаев он поможет программисту сэкономить часы и дни работы.
+
+pip install beautifulsoup4
+--------------------------
+https://pypi.python.org/pypi/beautifulsoup4/4.5.3
+
+Beautiful Soup sits atop an HTML or XML parser, providing Pythonic idioms for iterating, searching, and modifying the parse tree.
+
+
+
+
+
+

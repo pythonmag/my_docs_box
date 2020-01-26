@@ -1,0 +1,934 @@
+Install MySQL to UBUNTU (GLOBAL)
+=============
+https://support.rackspace.com/how-to/installing-mysql-server-on-ubuntu/
+
+https://support.rackspace.com/how-to/configuring-mysql-server-on-ubuntu/
+
+
+sudo apt-get update
+sudo apt-get install mysql-server
+
+
+Start the mysql shell
+=====================
+
+~$ /usr/bin/mysql -u root -p
+
+
+INFO
+===================
+
+mysql> SELECT User, Host, authentication_string FROM mysql.user;
+
++---------------------------------+-----------+-------------------------------------------+
+| User                            | Host      | authentication_string                     |
++---------------------------------+-----------+-------------------------------------------+
+| root                            | localhost | *ED3B4B07BC9C334E6A7F59D736F4E2398991A8D3 |
+| mysql.session                   | localhost | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |
+| mysql.sys                       | localhost | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |
+| debian-sys-maint                | localhost | *6BD0E811699FC86EA0F487A8C26EE68C20563394 |
+| students_service_user           | localhost | *A994A7AF16CA2A909D8B334C0503F199C71A81B4 |
+| students_service_user@localhost | %         | *A994A7AF16CA2A909D8B334C0503F199C71A81B4 |
++---------------------------------+-----------+-------------------------------------------+
+
+
+CREATE
+===================
+
+mysql>  CREATE DATABASE demodb;
+
+
+
+Add a database user
+===================
+
+mysql>  INSERT INTO mysql.user (User,Host,authentication_string,ssl_cipher,x509_issuer,x509_subject) VALUES('demouser','localhost',PASSWORD('demopassword'),'','','');
+
+mysql> FLUSH PRIVILEGES;
+
+mysql> SELECT User, Host, authentication_string FROM mysql.user;
++---------------------------------+-----------+-------------------------------------------+
+| User                            | Host      | authentication_string                     |
++---------------------------------+-----------+-------------------------------------------+
+| root                            | localhost | *ED3B4B07BC9C334E6A7F59D736F4E2398991A8D3 |
+| mysql.session                   | localhost | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |
+| mysql.sys                       | localhost | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |
+| debian-sys-maint                | localhost | *6BD0E811699FC86EA0F487A8C26EE68C20563394 |
+| students_service_user           | localhost | *A994A7AF16CA2A909D8B334C0503F199C71A81B4 |
+| students_service_user@localhost | %         | *A994A7AF16CA2A909D8B334C0503F199C71A81B4 |
+| demouser                        | localhost | *0756A562377EDF6ED3AC45A00B356AAE6D3C6BB6 |
++---------------------------------+-----------+-------------------------------------------+
+
+
+
+Grant database user permissions
+===============================
+
+mysql> GRANT ALL PRIVILEGES ON demodb.* to demouser@localhost;
+
+mysql> FLUSH PRIVILEGES;
+
+
+mysql> SHOW GRANTS FOR 'demouser'@'localhost';
+
++--------------------------------------------------------------+
+| Grants for demouser@localhost                                |
++--------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'demouser'@'localhost'                 |
+| GRANT ALL PRIVILEGES ON `demodb`.* TO 'demouser'@'localhost' |
++--------------------------------------------------------------+
+
+mysql> SHOW GRANTS FOR 'root'@'localhost';
++---------------------------------------------------------------------+
+| Grants for root@localhost                                           |
++---------------------------------------------------------------------+
+| GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION |
+| GRANT PROXY ON ''@'' TO 'root'@'localhost' WITH GRANT OPTION        |
++---------------------------------------------------------------------+
+
+
+CONFIGURATION SERVER
+====================
+
+ryndin@ubu:~$ cd /etc/mysql
+
+ryndin@ubu:/etc/mysql$ ls
+conf.d  debian.cnf  debian-start  my.cnf  my.cnf.fallback  mysql.cnf  mysql.conf.d
+
+$ /usr/sbin/mysqld --help --verbose
+
+
+
+mySQL Commands from Python
+(Tutorial Python Scripts)
+===========================
+
+https://www.w3schools.com/python/python_mysql_getstarted.asp
+
+
+$ python -m pip install mysql-connector
+
+$ python
+
+>>> import mysql.connector
+
+>>> dir(mysql.connector)
+['BINARY', 'Binary', 'CharacterSet', 'ClientFlag', 'Connect', 'DATETIME',
+ 'DataError', 'DatabaseError', 'Date', 'DateFromTicks', 'Error', 'FieldFlag',
+ 'FieldType', 'HAVE_CEXT', 'IntegrityError', 'InterfaceError', 'InternalError',
+ 'MySQLConnection', 'NUMBER', 'NotSupportedError', 'OperationalError', 'PoolError',
+ 'ProgrammingError', 'ROWID', 'RefreshOption', 'STRING', 'Time', 'TimeFromTicks',
+ 'Timestamp', 'TimestampFromTicks', 'Warning', '_CONNECTION_POOLS', '__all__',
+ '__builtins__', '__doc__', '__file__', '__name__', '__package__', '__path__',
+ '__version__', '__version_info__', '_get_failover_connection',
+ '_get_pooled_connection', 'abstracts', 'apilevel', 'authentication', 'catch23',
+ 'charsets', 'connect', 'connection', 'constants', 'conversion', 'cursor',
+ 'custom_error_exception', 'custom_types', 'dbapi', 'errorcode', 'errors', 'locales',
+ 'network', 'optionfiles', 'paramstyle', 'protocol', 'read_option_files',
+ 'threadsafety', 'utils', 'version']
+
+
+
+1)
+Установка mysql-server на машину
+==================
+
+ryndin@pc:~$ sudo apt install mysql-server mysql-client libmysqlclient-dev      **
+
+
+[sudo] пароль для ryndin:       // это пароль суперпользователя компьютера
+ставит версию myaql 5.7.16
+сразу спросил пароль root пользователя mySQL сервера == root pass  //  metal...2python
+
+
+Уже установлен пакет libmysqlclient-dev самой новой версии (5.7.21-0ubuntu0.16.04.1).
+Уже установлен пакет mysql-client самой новой версии (5.7.21-0ubuntu0.16.04.1).
+Уже установлен пакет mysql-server самой новой версии (5.7.21-0ubuntu0.16.04.1).
+
+
+Общий алгоритм установки mySQL серкера в Операционку / Некоторые моменты уже есть Выше
+------------------------------
+устанавливаем базу данных MySQL
+Теперь, когда у нас есть веб-сервер, нам необходимо установить MySQL - базу данных,
+где будет храниться информация для нашего сайта.
+
+Сделать это достаточно просто, открываем консоль и вбиваем:
+
+    $ sudo apt install mysql-server         **
+
+В процессе установки вам будет предложено ввести пароль администратора MySQL,
+который вам стоит запомнить или записать.
+
+Все, MySQL установлен, но еще не настроен до конца.
+Во-первых, необходимо создать первичную структуру для хранения данных самой MySQL.
+ Мы можем это сделать командой:
+
+    $ sudo mysql_install_db                 **
+
+Далее нам необходимо запустить сценарий безопасности, который изменит некоторые
+настройки идущие по умолчанию:
+
+    $ sudo mysql_secure_installation        **
+
+Вам нужно будет ввести пароль администратора MySQL, который Вы выбрали во время установки.
+
+Далее, вам будет предложено изменить его. Если в этом нет необходимости, введите "N"
+и нажмите "ENTER". После этого вам будет предложено удалить некоторых тестовых
+пользователей и базы данных. Вы должны просто нажимать "ENTER" при появлении вопросов,
+чтобы удалить опасные настройки по умолчанию.
+После того, как сценарий завершиться, MySQL готов к использованию.
+
+
+
+2)
+=====================
+Генерация структуры директорий для хранения баз и информации
+Создание таблиц привелегий
+Активация БД
+---------------------
+sudo mysql_install_db           **
+
+Далее, нам нужно запустить простой скрипт для обезпечения безопастности MySQL,
+который запросит разрешение модифицировать некоторые настройки по-умолчанию.
+
+Запускаем скрипт командой:
+
+Будет запрошен пароль root, который мы ввели во время инсталляции. Далее, программа
+спросит, хотите ли вы изменить пароль. Если пароль для root выбран правильный,
+надежный пароль, тогда его менать не нужно, нажимаем "N" и "ENTER". Далее, нам будет
+предложено удалить тестовых пользователей и тестовые базы данных. Нужно просто
+нажимать "ENTER", чтобы удалить опасные настройки по умолчанию. Как только скрипт
+будет завершен, установку MySQL можно считать оконченной.
+
+-----------------------
+    $ sudo /usr/bin/mysql_secure_installation           **
+
+	// Результат:
+
+	// Спросит текущий root пароль - вводим
+	Enter current password for root (enter for none):
+	OK, successfully used password, moving on...
+
+	// Меняем root пароль?
+	Change the root password? [Y/n] n
+
+	// Удаляем ананимных пользователей
+	Remove anonymous users? [Y/n] y
+
+	// Даем удаленные права доступа?
+	Disallow root login remotely? [Y/n] n
+
+	// Удаляем тестовые базы?
+	Remove test database and access to it? [Y/n] y
+
+	// Обновим привилегии?
+	Reload privilege tables now? [Y/n] y
+
+	All done!  If you've completed all of the above steps, your MySQL
+	installation should now be secure.
+	Thanks for using MySQL!
+
+
+3)
+======================
+Заходим в mySQl клиент (глобально на компьютере)
+-----------------------
+
+    $ mysql -u root -p              **
+
+    //                                          user root //  root@localhost
+    Enter password:							root password //   me.....2python
+	Welcome to the MySQL monitor.  Commands end with ; or \g.
+	Your MySQL connection id is 48
+	Server version: 5.5.47-0ubuntu0.14.04.1 (Ubuntu)
+	Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
+	Oracle is a registered trademark of Oracle Corporation and/or its
+	affiliates. Other names may be trademarks of their respective
+	owners.
+	Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+	mysql>
+    // мы в клиенте mysql
+
+
+
+4)
+========================
+Команда состояния работы Клиента (в данном случае рабочая БД не Выбрана)
+
+---------------------------------
+    mysql> status;                           **
+
+    --------------
+    mysql  Ver 14.14 Distrib 5.7.21, for Linux (x86_64) using  EditLine wrapper
+
+    Connection id:		4
+    Current database:
+    Current user:		root@localhost
+    SSL:			Not in use
+    Current pager:		stdout
+    Using outfile:		''
+    Using delimiter:	;
+    Server version:		5.7.16-0ubuntu0.16.04.1 (Ubuntu)
+    Protocol version:	10
+    Connection:		Localhost via UNIX socket
+    Server characterset:	latin1
+    Db     characterset:	latin1
+    Client characterset:	utf8
+    Conn.  characterset:	utf8
+    UNIX socket:		/var/run/mysqld/mysqld.sock
+    Uptime:			3 hours 9 min 59 sec
+    Threads: 2  Questions: 19  Slow queries: 0  Opens: 107  Flush tables: 1  Open tables: 26
+    Queries per second avg: 0.001
+
+
+
+Просмотр всех БД в Клиенте
+--------------------------
+    mysql> show databases;                  **
+
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | information_schema |
+    | myproject2016_db   |
+    | mysql              |
+    | performance_schema |
+    | students_db        |
+    | sys                |
+    +--------------------+
+    6 rows in set (0,00 sec)
+
+
+
+Выбор активной БД
+--------------------------
+    mysql> use students_db;                 **
+
+    Reading table information for completion of table and column names
+    You can turn off this feature to get a quicker startup with -A
+
+
+
+Создал Пустую БД (Таблицу)
+--------------------------
+    mysql> create database yurii_db;        **
+
+    Query OK, 1 row affected (0,07 sec)
+
+5)
+Все основные команды mySQL которые могут понадобиться:
+позже надо набить руку на командах:
+===================================
+    https://rtfm.co.ua/mysql-commands/
+    http://www.internet-technologies.ru/articles/article_106.html
+    http://www.w3schools.com/sql/default.asp
+
+http://www.mysql.ru/docs/man/Tutorial.html
+    // Тотально учебное пособие по mySQL - пройти полностью
+
+
+
+http://dev.mysql.com/doc/refman/5.7/en/
+==============================
+Сервер mySQL надо установить на рабочей машине Глобально под root пользователем.
+
+
+
+6)
+====================================
+
+Далее Конфигурируем Базу на mySQL
+	 Заходим в консоль MySQL под root пользователем:
+	Current user:		root@localhost			      user root //  root@localhost
+
+	ryndin@pc:~/work$ mysql -u root -p          **
+
+	Enter password:								root password //   me.....2python
+	Welcome to the MySQL monitor.  Commands end with ; or \g.
+	Your MySQL connection id is 48
+	Server version: 5.5.47-0ubuntu0.14.04.1 (Ubuntu)
+	Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
+	Oracle is a registered trademark of Oracle Corporation and/or its
+	affiliates. Other names may be trademarks of their respective
+	owners.
+	Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+	mysql>
+
+
+7)
+Конфигурация как Отдельный пакет в mySQL
+===================================
+Под каждый отдельный проект
+Тут для проекта myproject2016
+
+------------------
+Cоздаем Глобальную таблицу Базы Данных в кодировке utf8 (она одна для моего проекта)
+далее эта БД, имя и пароль root пользователя будут в settings.py проекта.
+											            имя БД	 //	 myproject2016_db
+
+mysql> CREATE DATABASE myproject2016_db CHARACTER SET utf8 COLLATE utf8_general_ci;   **
+
+	Query OK, 1 row affected (0.00 sec)
+
+											Имя БД database:  //	myproject2016_db
+
+--------------------
+создаем пользователя именно этой БД myproj2016_user с новым паролем именно
+под эту базу								    user	password 	// myprojectuser
+
+mysql> CREATE USER 'myproj2016_user'@'localhost' IDENTIFIED BY 'myprojectuser';    **
+
+	Query OK, 0 rows affected (0.00 sec) (только 16 символов принимает под имя)
+														user	//	myproj2016_user
+
+
+8)
+===========================
+ЭТО настройки для DATABASES
+в settings.py Джаного проекта:
+
+Предоставляем все права нашему Локальному пользователю(myproj2016_user)
+по паролю (myprojectuser)
+над нашей локальной ДБ  (myproject2016_db)
+
+---------------
+Даем Привелегии локальному Юзеру:
+
+mysql> GRANT ALL PRIVILEGES ON myproject2016_db.* TO 'myproj2016_user'@'localhost';   **
+
+	Query OK, 0 rows affected (0.00 sec)
+
+---------------
+рестартуем Привелегии для немедленной их активации
+
+mysql> FLUSH PRIVILEGES;            **
+	Query OK, 0 rows affected (0.00 sec)
+
+mysql> quit;                        **
+
+Пока это все в отношении mySQL сервера, пока не запустим проект с рабочей средой
+
+
+
+9)
+Пример Установки
+================================
+АВГУСТ 2016 установка БД под новый проект август 2016
+
+------------------
+вход в глобальнуый сервер mySQL под суперпользователем
+
+ryndin@pc:~/work$ mysql -u root -p                  **
+
+Enter password:	    					root password //   prostomag76
+
+    // какая версия:
+        Welcome to the MySQL monitor.  Commands end with ; or \g.
+        Your MySQL connection id is 6
+        Server version: 5.7.13-0ubuntu0.16.04.2 (Ubuntu)
+
+    // Cоздаем Глобальную таблицу Базы Данных в кодировке utf8 (она одна для моего проекта)
+
+    mysql> create database avgust2016_db character set utf8 collate utf8_general_ci;   **
+
+        Query OK, 1 row affected (0,00 sec)
+
+    // создаем пользователя именно этой БД myproj2016_user с новым паролем именно
+		под эту базу								    user	password 	// avgust2016
+
+    mysql> CREATE USER 'avgust2016_user'@'localhost' IDENTIFIED BY 'avgust2016';     **
+
+        Query OK, 0 rows affected (0,08 sec)
+
+
+---------------
+ЭТО настройки для DATABASES  в settings.py Джаного проекта:
+
+---------------
+Предоставляем все права нашему Локальному пользователю(avgust2016_user)
+					    			// по паролю (avgust2016)
+  								   //	над нашей локальной ДБ  (avgust2016_db)
+
+---------------
+Даем Привелегии локальному Юзеру:
+
+mysql> GRANT ALL PRIVILEGES ON avgust2016_db.* TO 'avgust2016_user'@'localhost';   **
+
+       Query OK, 0 rows affected (0,00 sec)
+
+---------------
+рестартуем Привелегии для немедленной их активации
+
+    mysql> FLUSH PRIVILEGES;            **
+
+        Query OK, 0 rows affected (0,00 sec)
+
+    mysql> quit;                        **
+
+	Пока это все в отношении mySQL сервера, пока не запустим проект с рабочей средой
+
+
+
+10)
+Пример
+Июнь 2017 - Чистая устанока БД
+в экосреде mysql на домашнем компе
+=================================
+
+#)
+ryndin@pc:~/work$ mysql -u root -p                  **
+
+	    Enter password:	    					root password //   prostomag76
+
+
+#)
+> create database myprojects_db character set utf8 collate utf8_general_ci;    **
+
+// создаем пользователя именно этой БД myproj2016_user с новым паролем именно
+// database: myprojects_db
+
+
+#)
+> CREATE USER 'myprojects_user' IDENTIFIED BY 'myprojects2017';         **
+
+// user: myprojects_user  // password: myprojects2017
+
+
+#)
+> GRANT ALL PRIVILEGES ON myprojects_db.* TO 'myprojects_user';   **
+
+#)
+> FLUSH PRIVILEGES;             **
+
+#)
+> quit;                         **
+
+#)
+requirements.txt
+
+https://stackoverflow.com/questions/14087598/python-3-importerror-no-module-named-configparser
+
+https://pypi.python.org/pypi
+
+MySQL-python==1.2.5         ## только для python2 (на python3 не работает) -- устарело
+mysqlclient==1.3.10         ## работает python3
+
+python-magic==0.4.15
+
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+src/students_service$ pip install -r requirements.txt               **
+....
+Successfully installed mysqlclient-1.3.10 python-magic-0.4.15
+
+
+
+11)
+Пример Настроект БД mysql
+=========================
+
+Общие данные по Глобальному серверу mySQL под root пользователем:
+
+---------------------
+mysql> show databases;              **
+
+        +--------------------+
+        | Database           |
+        +--------------------+
+        | information_schema |
+        | avgust2016_db      |
+        | commentssite_db    |
+        | myproject2016_db   |
+        | mysql              |
+        | performance_schema |
+        | students_db        |
+        | sys                |
+        +--------------------+
+        8 rows in set (0,08 sec)
+
+
+--------------
+mysql> status;                  **
+
+	mysql  Ver 14.14 Distrib 5.7.13, for Linux (x86_64) using  EditLine wrapper
+
+	Connection id:		38
+	Current database:
+	Current user:		root@localhost
+	SSL:			Not in use
+	Current pager:		stdout
+	Using outfile:		''
+	Using delimiter:	;
+	Server version:		5.5.47-0ubuntu0.14.04.1 (Ubuntu)
+	Protocol version:	10
+	Connection:		Localhost via UNIX socket
+	Server characterset:	latin1
+	Db     characterset:	latin1
+	Client characterset:	utf8
+	Conn.  characterset:	utf8
+	UNIX socket:		/var/run/mysqld/mysqld.sock
+	Uptime:			5 hours 46 min 5 sec
+
+	Threads: 1  Questions: 121  Slow queries: 0  Opens: 60  Flush tables: 1  Open tables: 53
+	Queries per second avg: 0.005
+
+
+
+12)
+ОСТОРОЖНО!!!
+Мощная комманда
+Полностью Вычистить БД на языке SQL
+==================================
+
+Надо использовать данный алгоритм:
+(в консоли mySQL)
+-----------------------
+
+SET FOREIGN_KEY_CHECKS = 0;
+SET @tables = NULL;
+SELECT GROUP_CONCAT(table_schema, '.', table_name) INTO @tables
+  FROM information_schema.tables
+  WHERE table_schema = 'database_name';         // тут указать имя БД (myproject2016_db)
+SET @tables = CONCAT('DROP TABLE ', @tables);
+PREPARE stmt FROM @tables;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+SET FOREIGN_KEY_CHECKS = 1;
+drop database myproject2016_db;                 // тут указать имя БД (mproject2016_db)
+
+===================================
+проверено работает!!!!
+===================================
+
+
+
+13)
+Как удалить все Таблицы из настроенной БД (под проект) если надо сделать
+стороннюю loaddata
+
+How to remove all MySQL tables from the command-line without DROP
+database permissions?
+================================
+
+SET FOREIGN_KEY_CHECKS = 0;
+SET @tables = NULL;
+SELECT GROUP_CONCAT(table_schema, '.', table_name) INTO @tables
+    FROM information_schema.tables
+    WHERE table_schema = 'students_service_db'; 	 // тут указать имя БД (myproject2016app)
+SET @tables = CONCAT('DROP TABLE ', @tables);
+PREPARE stmt FROM @tables;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+SET FOREIGN_KEY_CHECKS = 1;
+            // название базы данных Проекта на 5 строчке (settings.py)
+
+---------------------------
+http://stackoverflow.com/questions/12403662/how-to-remove-all-mysql-tables-from-the-command-line-without-drop-database-permi
+
+Затем сделать Менеджером migrate
+
+Затем сделать Менеджером loaddata из файла-фикстуры JSON
+
+
+
+14)
+Текущее состояние mySQL сервера
+(В контексте запущенной Джанго апликации)
+===============================
+
+(myproject2016py)ryndin@pc:~/work/myproject2016py/src/myproject2016$
+        python manage.py dbshell
+
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 96
+Server version: 5.5.47-0ubuntu0.14.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>
+
+
+
+15)
+Удадение Базы Данных под проект
+=================================
+
+mysql> drop database avgust2016_db;         **
+
+Query OK, 0 rows affected (0,08 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| commentssite_db    |
+| myproject2016_db   |
+| mysql              |
+| performance_schema |
+| students_db        |
+| sys                |
++--------------------+
+7 rows in set (0,01 sec)
+
+
+16)
+Мануал Обучение SQL
+====================
+
+http://www.w3schools.com/sql/default.asp
+
+
+
+17)
+Некоторые актуальные вопросы по mySQL
+====================
+
+#)
+Как преобразовать весь набор символов базы данных MySQL и сортировку в UTF-8?
+How to convert an entire MySQL database characterset and collation to UTF-8?
+
+http://stackoverflow.com/questions/6115612/how-to-convert-an-entire-mysql-database-characterset-and-collation-to-utf-8
+
+Ответ:
+    Make a backup!
+    Then you need to set the default char sets on the database. This does not convert existing tables, it only sets the default for newly created tables.
+
+    ALTER DATABASE dbname CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+    Then, you will need to convert the char set on all existing tables and their columns. This assumes that your current data is actually in the current char set. If your columns are set to one char set but your data is really stored in another then you will need to check the MySQL manual on how to handle this.
+
+    ALTER TABLE tbl_name CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+    (такие устанвки юникода есть в книге Виталия при Регистрации БД в mySQL)
+
+
+
+18)
+СТАТЬИ
+==========================
+
+1)
+MySQL. Восстановление пароля при физическом доступе к серверу
+----------------------------
+http://adw0rd.com/2012/6/12/mysql-recovery-password/
+Блог от Эдарда
+
+
+
+19)
+Январь 2018 года
+Последние настройки БД в mySQL под проект students_service
+================
+
+mysql> CREATE DATABASE students_service_db CHARACTER SET utf8 COLLATE utf8_general_ci;
+Query OK, 1 row affected (0,00 sec)
+
+mysql> CREATE USER 'students_service_user'@'localhost' IDENTIFIED BY 'students_service_user';
+Query OK, 0 rows affected (0,00 sec)
+
+mysql> GRANT ALL PRIVILEGES ON students_service_db.* TO 'students_service_user'@'localhost';
+Query OK, 0 rows affected (0,00 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0,00 sec)
+
+---------------------
+mysql> show databases;              // есть пустая аппликация students_service_db
++---------------------+
+| Database            |
++---------------------+
+| information_schema  |
+| mysql               |
+| performance_schema  |
+| students_service_db |
+| sys                 |
++---------------------+
+5 rows in set (0,09 sec)
+
+------------------------
+mysql> use students_service_db;     // буду ее использовать для Джанго проекта
+Database changed
+
+Данную апликацию можно заполнить, думаю:
+    1) настроив в сеттингах джанго проекта путь к данной аппилкации в mySQL
+    2) коммандой loaddata и кинуть сюда JSON файл
+
+-------------------
+mysql> show tables;
+Empty set (0,00 sec)
+
+-------------------
+mysql> drop database students_service_db;
+Query OK, 0 rows affected (0,05 sec)
+
+Удалил полность Апликацию students_service_db из БД
+Надо бы ее снова создать как есть мануал выше
+
+
+--------------------
+Создание Снова (для практики) пустой Аппликации students_service_db в mySQL:
+
+mysql> CREATE DATABASE students_service_db CHARACTER SET utf8 COLLATE utf8_general_ci;
+Query OK, 1 row affected (0,00 sec)
+
+mysql> CREATE USER 'students_service_user'@'localhost' IDENTIFIED BY 'students_service_user';
+ERROR 1396 (HY000): Operation CREATE USER failed for 'students_service_user'@'localhost'
+// ну типа это уже не надо юзера создавать - он наверное уже есть
+
+mysql> GRANT ALL PRIVILEGES ON students_service_db.* TO 'students_service_user'@'localhost';
+Query OK, 0 rows affected (0,00 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0,01 sec)
+
+mysql> show databases;
++---------------------+
+| Database            |
++---------------------+
+| information_schema  |
+| mysql               |
+| performance_schema  |
+| students_service_db |
+| sys                 |
++---------------------+
+5 rows in set (0,00 sec)
+
+
+----------------------
+Фактичесмки видно что Аппликация students_service_db в mySQL базе не содержит
+ни одной таблицы - годна для заполния через ORM или loaddata
+
+
+20)
+Настройка mySQL в сеттингах Джанго проекта
+Создание Структры и Миграция данных в Аппликацию mySQL
+===========================
+
+#)
+# mySQL DB
+DATABASE_mysql = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        # name app in mySQL
+        'NAME': 'students_service_db',
+        # name superuser for mySQL
+        'USER': 'root',
+        # password for mysql superuser
+        'PASSWORD': '****pass for root user mysql****',
+        # Or an IP Address that  DB is hosted on
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+
+
+#)
+Фактически Видно что Джанго Сервер имеет доступ к аппликации mySQL
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+src/students_service$   python manage.py dbshell
+
+mysql> status
+--------------
+mysql  Ver 14.14 Distrib 5.7.21, for Linux (x86_64) using  EditLine wrapper
+
+Connection id:		12
+Current database:	students_service_db             // Вот она из Сеттингов
+Current user:		root@localhost
+SSL:			Not in use
+Current pager:		stdout
+Using outfile:		''
+Using delimiter:	;
+Server version:		5.7.21-0ubuntu0.16.04.1 (Ubuntu)
+Protocol version:	10
+Connection:		Localhost via UNIX socket
+Server characterset:	latin1
+Db     characterset:	utf8
+Client characterset:	utf8
+Conn.  characterset:	utf8
+UNIX socket:		/var/run/mysqld/mysqld.sock
+Uptime:			4 hours 39 min 7 sec
+
+
+#)
+
+при комманде runserver пишет что нет инфраструктуры в БД и есть 23 не выполненные
+миграции на стороне Джанго Сервера
+Можно пойти этим путем (сделать миграции и аппликация в mysql установится)
+но тогда как практика показывает сложно будет запихнуть уже сохранные данные
+
+django.db.utils.ProgrammingError: (1146, "Table 'students_service_db.students_db_student' doesn't exist")
+
+потому пробую делать комманду loaddate на файлом JSON (в нем и Структура и Данные)
+
+
+#)
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+src/students_service$    python manage.py makemigrations         **
+No changes detected
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+src/students_service$    python manage.py migrate               **
+
+# создает всю Структуры Джанго Сервера
+(админка / авроризация / сессии / аппликация сервис студентов и пр.)
+
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions, students_db
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying sessions.0001_initial... OK
+  Applying students_db.0001_initial... OK
+  Applying students_db.0002_auto_20180318_2031... OK
+  Applying students_db.0003_auto_20180324_1702... OK
+  Applying students_db.0004_group... OK
+  Applying students_db.0005_auto_20180324_1813... OK
+  Applying students_db.0006_student_student_group... OK
+  Applying students_db.0007_group_teacher... OK
+  Applying students_db.0008_auto_20180324_1940... OK
+  Applying students_db.0009_auto_20180324_2058... OK
+
+
+#)
+создал суперюзера для Проекта - теперь все ок, можно Заполнять данные
+(например через админку)
+
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+src/students_service$    python manage.py createsuperuser
+
+Username (leave blank to use 'ryndin'): ryndin
+Email address: ryndin@ukr.net
+Password:
+Password (again):
+
+#)
+НО комманда loaddata так и НЕ сработала:
+(django_students) ryndin@ubu:~/my_projects/django_students_srvice/django_students/
+src/students_service$     python manage.py loaddata project_data.json
+.....
+django.db.utils.IntegrityError: Problem installing fixture '/home/ryndin/my_projects/
+django_students_srvice/django_students/src/students_service/project_data.json':
+Could not load contenttypes.ContentType(pk=2): (1062, "Duplicate entry 'auth-permission'
+for key 'django_content_type_app_label_model_76bd3d3b_uniq'")

@@ -1,0 +1,2204 @@
+1.4 lect
+========
+
+WSC
+Atom
+Chrome
+
+
+1.6
+=========
+
+Front end
+---------
+JS
+HTML
+CSS
+DOM
+
+Back End
+---------
+Lang
+FrameWork
+DB
+
+
+3.9
+=========
+
+w3schools.com
+-------------
+HTML
+CSS
+Bootstrap 4
+Colors
+jQuery
+JS
+JSON
+AJAX
+SQL
+Python
+Java
+Node.JS
+
+
+https://developer.mozilla.org/ru/docs/Web
+-----------------
+HTML
+CSS
+JS
+WEB API / DOM (window element)
+SWG
+WebGL
+HTTP
+WebExtension (расширения для Браузеров)
+
+
+3.13
+=============
+https://www.djangoproject.com/
+
+
+4.18
+==============
+TABLE
+
+https://www.w3schools.com/html/html_tables.asp
+
+<tr>
+<th>
+<td>
+<thead>
+<tbody>
+
+<caption>
+
+
+
+4.19
+=============
+FORMS
+    
+https://www.w3schools.com/html/html_forms.asp
+
+<form action method >       get // post
+<input type value name>     // text / radio / submit / password / color / month / etc.
+
+<select>
+    <option></option>
+</select>
+
+
+пример get данных формы
+-----------
+file:///home/ryndin/my_projects/udemy_python_django/proj/get?radioButt=two&serviceLevel=2&feedback=fgfgf
+
+есть три значения параметров
+
+
+
+6.35
+==========
+FONTS
+
+Хорошие Шрифты для HTML
+=======================
+https://fonts.google.com/
+
+
+Крутые Шрифты для HTML
+=======================
+https://fontlibrary.org
+
+
+
+6.35
+==========
+COLORS
+
+https://colors.co
+
+
+
+8.45
+==========
+Bootstrap Navbar Tags
+
+https://www.w3schools.com/bootstrap/bootstrap_navbar.asp
+
+
+
+9.50
+=============
+JS
+
+clear()
+
+var
+console.log()
+alert()
+prompt()
+
+if(true){} else if(ture){} else(false){}
+
+
+
+9.50
+=============
+JS
+
+while(true){}
+
+for (state, state, state)   
+
+for / in -- in JS objects
+
+for / of -- in JS Arreys
+
+пример
+--------
+var word = "ASDFGHYTR";
+
+for (var i=0; i<word.length; i++) {
+    console.log(word[i])
+    
+}
+
+
+9.63
+=============
+JS
+
+
+function name(param){
+    var var1 = param * 5    
+    return var1
+}
+
+var myVar = name('some')
+
+
+
+9.69
+=============
+JS
+
+Objects
+Hash-tables
+
+-----------
+person
+{firstName: "John", lastName: "Doe", age: 50, eyeColor: "blue"}
+
+person.age
+50
+
+person['age']       // одинаково вызов метода атрибута/ключа
+50
+
+----------
+var person = {
+  firstName: "John",
+  lastName : "Doe",
+  id       : 5566,
+  fullName : function(word) {
+    return this.firstName + " " + this.lastName + "__" + word;
+  }
+};
+
+
+person.fullName('hello')        // атрибут объекта как функция с параметром
+"John Doe__hello"
+
+
+
+9.70
+=============
+JS
+
+var myObj = {name: 'yurii', printMyName: function(){console.log(this.name)}}
+
+myObj.printMyName()     // если внутри Объекта - то через this
+yurii
+
+
+9.70
+=============
+JS
+DOM
+
+https://www.w3schools.com/js/js_htmldom.asp
+
+document.URL
+document.body 
+document.head 
+document.links
+
+document.anchors
+document.body
+document.documentElement
+document.embeds
+document.forms
+document.head
+document.images
+document.links
+document.scripts
+document.title
+
+document.getElementById()
+document.getElementByClassName()
+document.getElementsByTagName()
+document.querySelector()
+document.querySelectorAll()
+
+https://developer.mozilla.org/en-US/docs/Web/Events
+
+
+console.dir(document)
+    // отображение содержания документа в виде объектов и атрибутов
+
+
+ВСЕ АТРИБУТЫ В ВИДЕ ОБЪЕКТОВ - ПОТОМу можно копать внутрь как атрибуты Коллекций/Объектов
+
+
+пример
+------------
+document.URL
+"https://www.w3schools.com/js/js_htmldom_eventlistener.asp"
+
+document.origin
+window.origin
+"https://www.w3schools.com"
+
+document.cookie
+"G_ENABLED_IDPS=google; ASPSESSIONIDQQQQCACQ=OLLNJDBCICFNHBDNKDMPEBBM; ASPSESSIONIDSSRRCADR=CJMACHBCFAMFFMEDIJGKHEMH; ASPSESSIONIDSQSQCBDR=OBBLMKKCAMBHJDININNCALHD; ASPSESSIONIDSQSSAADQ=KPGAFOKCHNLJPEKKHHBNPBKG; ASPSESSIONIDSSSSAADQ=HEBKGBBAAGDECDGCGIAJPJDE; _ga=GA1.2.7927140.1544640126; __gads=ID=c51bd3084ad0c960:T=1544640128:S=ALNI_MZDjB0uABDXWGIRp5odQP9gIay20w; ASPSESSIONIDQQTTCACQ=HANEPNBDPBCGOMHCKKIAPHFK; ASPSESSIONIDQQSRBDCR=DLNJJBPBIDMAMOGLJMMPLFAL"
+
+document.forms
+
+
+
+9.74
+=============
+JS
+DOM
+
+
+var p = document.querySelector('p')     // Находит Элемент htmp по тегу
+
+p.textContent = 'my text'               // Новый текст на Стринице в Парграфе
+
+p.innerText = '<b>my bold text</b>'     // Текс Не станет Жирным, просто тект
+
+p.innerHTML = '<b>my bold text</b>'     // Текст Станет Жирным, как блок HTML
+
+
+
+var lister = document.querySelector('p')       // объект Параграф
+
+lister.addEventListener('click', function(){console.log('YUPSSS')})
+
+        // при Клике на Объекте выполянет Событие 
+
+
+
+9.74
+=============
+JS
+JQUERY
+
+https://api.jquery.com/
+
+https://www.w3schools.com/jquery/default.asp
+https://www.w3schools.com/jquery/jquery_get_started.asp
+
+
+Google CDN:
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+Microsoft CDN:
+<head>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+</head>
+
+
+
+13.87
+==============
+Back - End
+
+
+
+lambda foo
+---------------
+
+my_list = range(20)
+
+print(list(my_list))
+
+resoult = list(filter(lambda item: item%2 == 0, my_list))
+
+print(resoult)
+
+>>>
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+
+
+
+15.108
+==============
+class
+suclass
+super()
+
+
+
+class Animal():
+    def __init__(self):
+        print("Animal Create")
+    
+    def animal_eat(self):
+        print('animal eat')
+
+class Dog(Animal):
+    def __init__(self):
+        super(Dog, self).__init__()         ## 2 идентичных Инструкции 
+        Animal.__init__(self)               ##  - но Синтаткис разный 
+        print("Dog Create")
+
+class Cat(Animal):
+    def __init__(self):
+        Animal.__init__(self)
+        print("Cat Create")
+
+    def animal_eat(self):
+        print('cat eat')
+
+dog1 = Dog()
+dog1.animal_eat()
+print("=====")
+cat1 = Cat()
+cat1.animal_eat()
+
+>>>
+Animal Create
+Animal Create
+Dog Create
+animal eat
+=====
+Animal Create
+Cat Create
+cat eat
+
+
+==============
+__len__(self)
+
+__del__(self)
+
+
+
+class Animal():
+    def __init__(self):
+        print("Animal Create")
+    
+    def __len__(self):                  ## если вызать метод len(obj)
+        return 200
+
+    def __del__(self):                  ## если вызвать метод del obj
+        print('animal died')
+
+    def animal_eat(self):
+        print('animal eat')
+
+class Dog(Animal):
+    def __init__(self):
+        # super(Dog, self).__init__()
+        Animal.__init__(self)
+        print("Dog Create")
+
+class Cat(Animal):
+    def __init__(self):
+        Animal.__init__(self)
+        print("Cat Create")
+
+    def __len__(self):
+        return 300
+
+    def __del__(self):
+        print('cat died')
+
+    def animal_eat(self):
+        print('cat eat')
+
+dog1 = Dog()
+
+print(len(dog1))
+print("=====")
+cat1 = Cat()
+
+print(len(cat1))
+del cat1
+
+>>>>
+Animal Create
+Dog Create
+200
+=====
+Animal Create
+Cat Create
+300
+cat died                   ## срабатывает дважды как метод Подкасса и при Удалении
+animal died
+
+
+
+111
+===================
+код логики классов и методов - Игра в карты
+разобрать потом очень полезно
+
+
+
+
+112
+Regular Expressions
+====================
+
+1)
+import re
+
+patterns = ['yurii', 'lena', 'pasha', 'maria', ' ']
+
+text = 'In this text is have name maria only'
+
+for pattern in patterns:
+    print('search pattern: {}'.format(pattern))
+
+    print(re.search(pattern, text))
+
+>>>>
+search pattern: pasha
+None
+
+search pattern: maria
+<re.Match object; span=(26, 31), match='maria'>
+
+search pattern:
+<re.Match object; span=(2, 3), match=' '>
+
+
+113
+Decorators
+===============
+Вся суть в одном примере
+Функция обрастяет дополнительной логикой
+за счет оберточной функции - декоратора
+
+
+def foo_decorator(func):
+    print('in foo decoratir')
+
+    def foo_wraper():
+        print('in foo wraper')
+        func()
+
+    return foo_wraper
+
+def foo_decorator_too(func):
+    print('in foo decoratir too')
+
+    def foo_wraper():
+        print('in foo wraper too')
+        func()
+
+    return foo_wraper
+
+
+@foo_decorator
+@foo_decorator_too
+def foo_need_decorator():
+    print('in foo need decorator')
+
+# foo_need_decorator = foo_decorator(foo_need_decorator)        # эдентично
+
+foo_need_decorator()
+
+
+>>>>>
+in foo decoratir too
+in foo decoratir
+in foo wraper
+in foo wraper too
+in foo need decorator
+
+
+114
+if __name__ == '__main__'
+=========================
+Фактически способ запуска Скриптов как файла с набором инструкций
+
+if __name__ == '__main__':
+    print('call file testpy.py')
+else:
+    print('import file')
+
+
+
+116
+Install Django
+=======================
+
+$ conda create --name env_udemy_django django       ***
+
+примерно 220 МБ при установук через МиниКонду 3
+
+ryndin@ubu:~/miniconda3/envs$ ls
+env_udemy_django
+
+ryndin@ubu:~/miniconda3/envs/env_udemy_django$ ls
+bin  compiler_compat  conda-meta  include  lib  proj  share  ssl  x86_64-conda_cos6-linux-gnu
+
+proj -- сам создал попку для Создания и Кастомного Кода проекта
+
+
+$ conda init                                ***
+
+
+(base) ryndin@ubu:~$ conda env list         ***
+
+# conda environments:
+#
+                         /home/ryndin/anaconda3
+base                  *  /home/ryndin/miniconda3
+env_udemy_django         /home/ryndin/miniconda3/envs/env_udemy_django
+
+
+(base) ryndin@ubu:~$ conda activate env_udemy_django            ***
+и идем в наши папки работать с кодом
+
+(env_udemy_django) ryndin@ubu:~$ conda deactivate               ***
+
+
+https://conda.io/projects/conda/en/latest/user-guide/getting-started.html#starting-conda
+
+
+в итоге установленный пакет:
+----------------------------
+
+ryndin@ubu:~/miniconda3/envs/env_udemy_django$ ls               ***
+bin  compiler_compat  conda-meta  include  lib  proj  share  ssl  x86_64-conda_cos6-linux-gnu
+
+ryndin@ubu:~/miniconda3/envs/env_udemy_django$ conda activate env_udemy_django  **
+
+
+117
+DJANGO PROJECT
+===================
+
+(env_udemy_django) ryndin@ubu:~/miniconda3/envs/env_udemy_django$ conda list    ***
+# packages in environment at /home/ryndin/miniconda3/envs/env_udemy_django:
+#
+# Name                    Version                   Build  Channel
+ca-certificates           2019.1.23                     0  
+certifi                   2018.11.29               py37_0  
+django                    2.1.5                    py37_0           ***  
+libedit                   3.1.20181209         hc058e9b_0  
+libffi                    3.2.1                hd88cf55_4  
+libgcc-ng                 8.2.0                hdf63c60_1  
+libstdcxx-ng              8.2.0                hdf63c60_1  
+ncurses                   6.1                  he6710b0_1  
+openssl                   1.1.1a               h7b6447c_0  
+pip                       19.0.1                   py37_0           ***  
+python                    3.7.2                h0371630_0           ***  
+pytz                      2018.9                   py37_0  
+readline                  7.0                  h7b6447c_5  
+setuptools                40.7.3                   py37_0  
+sqlite                    3.26.0               h7b6447c_0  
+tk                        8.6.8                hbc83047_0  
+wheel                     0.32.3                   py37_0  
+xz                        5.2.4                h14c3975_4  
+zlib                      1.2.11               h7b6447c_3 
+
+
+$ conda install pkg
+or 
+$ pip install pkg
+
+
+(env_udemy_django) ryndin@ubu:~/miniconda3/envs/env_udemy_django/proj$
+    django-admin startproject udemy_project         ***
+
+
+
+
+
+udemy_project$ python manage.py runserver           ***
+
+
+http://127.0.0.1:8000/
+
+
+
+118
+DJANGO APPLICATIONS
+===================
+
+# Application definition
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'first_appp',                       ***
+]
+
+
+
+122
+Templates Path
+====================
+
+proj/templates/some_app
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')          ****
+
+
+
+125
+STATIC
+====================
+
+STATIC_URL
+
+
+{% load staticfiles %}
+
+
+{% static "...." %}
+
+
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    STATIC_DIR,
+]
+
+
+http://127.0.0.1:8000/static/images/django.jpg
+
+
+{% load staticfiles %}
+<p> <img src="{% static "images/django.jpg" %}" alt="JANGO IMG"></p>
+
+
+<link rel="stylesheet" type="text/css" media="screen" 
+            href="{% static 'css/my_css.css' %}" />
+
+
+script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script 
+    src="{% static 'js/my_js.js' %}"></script>
+
+
+$(document).ready(function(){
+    alert('HELLO WORLD');
+    });
+
+
+
+126
+views
+====================
+
+views.py
+----------
+def index(request):
+    my_dict = {'insert_content': 'CONTENT FROM FIRST APP'}
+    return render(request, 'first_app/index.html', context=my_dict)
+
+
+index.html
+----------
+<p>{{ insert_content }}</p>
+
+
+urls.py
+----------
+from first_app import views
+urlpatterns = [
+    path('', views.index, name='index'),
+]
+
+
+
+127-128
+models
+====================
+
+models.py
+---------
+class WebPage(models.Model):
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    name = models.CharField(max_length=264, unique=True)
+    url = models.URLField(unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+admin.py
+---------
+from django.contrib import admin
+from first_app.models import Topic, WebPage, AccessRecord
+
+# Register your models here.
+admin.site.register(Topic)
+admin.site.register(WebPage)
+admin.site.register(AccessRecord)
+
+
+129
+=================
+$ pip install Faker
+
+Заполнение БД тестовыми данными
+
+
+https://faker.readthedocs.io/en/latest/index.html
+
+
+from faker import Faker
+fake = Faker()
+
+fake.name()
+# 'Lucy Cechtelar'
+
+fake.address()
+# '426 Jordy Lodge
+#  Cartwrightshire, SC 88120-6700'
+
+fake.text()
+# 'Sint velit eveniet. Rerum atque repellat voluptatem quia rerum. Numquam excepturi
+#  beatae sint laudantium consequatur. Magni occaecati itaque sint et sit tempore. Nesciunt
+#  a......
+
+туториал как заполнить тестовыми данными Модели ДБ
+-----------------------
+https://www.youtube.com/watch?v=Nq5JXFpQ2jE
+
+
+пример кода
+add_fake_data.py
+----------------
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "first_proj.settings")
+
+import django
+django.setup()
+
+import random
+
+from faker import Faker
+
+from first_app.models import Topic, WebPage, AccessRecord 
+
+fakegen = Faker()
+topics = ['Search', 'Social', 'News', 'Games']
+
+# import pdb; pdb.set_trace()
+def add_topic():
+    t = Topic.objects.get_or_create(top_name=random.choice(topics))[0]
+    t.save()
+    return t
+
+# import pdb; pdb.set_trace()
+def add_data(N=5):
+    
+    for entry in range(N):
+
+        # get topic from list to entry
+        top = add_topic()
+
+        # gen fake data
+        fake_url = fakegen.url()
+        fake_date = fakegen.date()
+        fake_name = fakegen.company()
+        
+        # create web page entry
+        web_page = WebPage.objects.get_or_create(topic=top, url=fake_url,          
+                     name=fake_name)[0]
+        print('web page: ', web_page)
+        #print(fake_url, fake_date, fake_name, web_page)
+
+        acc_rec = AccessRecord.objects.get_or_create(name=web_page,
+                    date=fake_date)[0]
+        #print('access: ', acc_rec)
+
+if __name__ == '__main__':
+    print('start add data')
+    add_data()
+    print('compleate add data')
+
+
+130
+MTV Paradigma
+==================
+
+views.py
+----------
+def index(request):
+    wp_list = AccessRecord.objects.order_by('date')
+    date_dict = {'access_record': wp_list, 'my_name': 'yurii'}      ## ключи доступны
+    return render(request, 'first_app/index.html', context=date_dict)
+
+-----------
+<tbody>
+{% for item in access_record %}         ## контекст как элементы Словаря
+<tr>
+  <td>{{ item.name }}</td>
+  <td>{{ item.name.topic }}</td>
+  <td>{{ item.name.url }}</td>
+  <td>{{ item.date }}</td>
+</tr>
+{% endfor %}
+</tbody>
+         
+<p>{{my_name}}</p>                      ## контекст как элементы Словаря
+
+
+
+134
+Django Froms
+====================
+
+
+
+135
+FORMS 
+======================
+https://docs.djangoproject.com/en/2.1/topics/forms/
+
+https://docs.djangoproject.com/en/2.1/ref/forms/api/
+
+https://docs.djangoproject.com/en/2.1/ref/forms/fields/
+
+https://docs.djangoproject.com/en/2.1/topics/forms/modelforms/
+
+https://docs.djangoproject.com/en/2.1/ref/forms/widgets/#hiddeninput
+
+
+# пример формы для отправки данных на сервер - в шаблоне
+<div class='container'>
+    <form class="" action="{% url 'form_name' %}" method="POST">
+      {% csrf_token %}
+      <p>{% url 'form_name' %}</p>
+      <p>{{request.POST}}</p>
+      {{ form.as_p }}
+    <input type="submit" name=""
+    class="btn btn-outline-primary" value="SUBMIT">
+    </form>
+</div>
+
+
+# пример вьюшки
+def form_name_view(request):
+    form_obj = forms.FormPerson()
+    return render(request, 'first_app/forms.html', {'form': form_obj})
+
+
+# пример урл-паттерна
+urlpatterns = [
+    ......,
+    path('form', views.form_name_view, name='form_name'),
+]
+ 
+
+
+136
+FORMS   VALIDATORS
+==================
+
+forms.py
+---------
+from django import forms
+from django.core import validators
+
+def custom_validate_for_z(value):               ## кастомный Проверщик(Валидатор)
+    if value[0].lower() != 'z':
+        raise forms.ValidationError('field must be starting from Z')
+
+class FormPerson(forms.Form):
+    name = forms.CharField(label='your Name ',
+                           validators=[custom_validate_for_z])
+    email = forms.EmailField(label='your Email ')
+    text = forms.CharField(widget=forms.Textarea)
+    botcatcher = forms.CharField(required=False,
+                                 widget=forms.HiddenInput,
+                                 initial='test bott',
+                                 validators=[validators.MaxLengthValidator(4)])
+                                        ## встроенный Проверщик
+
+браузер страница формы
+Над формой выдает
+-----------------
+(Hidden field botcatcher) Ensure this value has at most 4 characters (it has 9)
+field must be starting from Z
+
+
+forms.py
+--------
+class FormPerson(forms.Form):
+    name = forms.CharField(label='your Name ',
+                           validators=[custom_validate_for_z])
+    email = forms.EmailField(label='your Email ')
+    verify_email = forms.EmailField(label='Enter email again ')
+    text = forms.CharField(widget=forms.Textarea)
+
+    def clean(self):                                ## переопределение метода класса
+        all_clean_data = super().clean()            ## прямой запуск метода класса
+        email = all_clean_data['email']
+        v_email = all_clean_data['verify_email']
+
+        if email != v_email:                        ## кастомная логика
+            raise forms.ValidationError("MAKE SURE AMAILS MATCH.")
+
+
+
+137
+MODELS   FORMS   VIEWS
+======================
+
+views.py
+-----------------
+def users(request):
+
+    if request.method == 'POST':
+        form = PersonForm(request.POST)     # пока это просто Объект в Реквесте
+
+        if form.is_valid():
+            form.save()                     # Создание Данных в БД
+            return index(request)
+
+        else:
+            print('ERROR FORM INVALID')
+
+    else:
+        form = PersonForm()                # Структурный Объект без Данных
+
+    return render(request, 'first_app/forms.html', {'form': form})
+
+
+models.py
+-----------
+from django.db import models
+from django import forms
+# Create your models here.
+
+
+class PersonModel(models.Model):            # Модель как Основа Структуры Данных
+
+    name = models.CharField(max_length=128)
+    email = models.EmailField()
+    verify_email = models.EmailField()
+    text = models.CharField(max_length=268)
+
+
+forms.py
+--------------
+from django import forms
+# from django.core import validators
+from first_app.models import PersonModel
+
+
+class PersonForm(forms.ModelForm):
+
+    class Meta:
+model = PersonModel                           # Форма принимает Модель как Метакласс
+        fields = ['name', 'email', 'verify_email']
+
+
+
+
+Связанные УРД сстылки на Шаблонах
+=================================
+
+1)
+------------
+app_name = 'first_app'                          # Имя Апликации для УРЛ роутера в Шаблоне
+
+urlpatterns = [
+    path('', views.index, name='index'),        # Имя связанного Шаблона
+    path('other', views.other, name='other'),
+
+    ]
+
+2)
+------------
+<p>
+  <a href="{%  url 'first_app:index' %}">TO INDEX PAGE</a>  # УРЛ через имя Апликации
+</p>
+    <a href="{% url 'admin:index' %}">TO ADMIN PAGE</a>   # Установленный УРЛ в АдминПанель
+
+
+3)
+чисто имя шаблона в папке
+------------
+def index(request):
+    return render(request, 'first_app/index.html')
+
+
+
+Пути Апликаций для Шаблонов html
+===========================
+
+<!DOCTYPE html>             // для всех шаблонов 1 строка
+
+
+{% extends "first_app/base.html" %}
+
+
+<body>
+    {% block content %}{% endblock content %}
+</body>
+
+
+<a href="{% url 'first_app:other' %}">TO OTHER PAGE</a>     // указание на Апликацию
+
+
+app_name = 'first_app'                      // для указания в Шаблонах на Апликацию
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('other/', views.other, name='other'),
+    ]
+
+
+
+Теги для Шаблонов
+==================
+https://docs.djangoproject.com/en/2.1/ref/templates/builtins/
+
+
+1)
+----------
+
+{% url 'app-views-client' client.id %}
+
+path('client/<int:id>/', app_views.client, name='app-views-client')
+
+
+2)
+----------
+фильтры - примеры
+
+{{ value|center:"15" }}
+
+{{ value|date:"D d M Y" }}
+
+{{ value|default:"nothing" }}
+
+{{ value|dictsort:"name" }}
+
+{% for book in books|dictsort:"author.age" %}
+    * {{ book.title }} ({{ book.author.name }})
+{% endfor %}
+
+{{ value|first }}
+
+{{ value|floatformat:3 }}
+
+{{ value|join:" // " }}
+
+{{ value|length }}
+
+{{ value|linebreaksbr }}
+
+{{ value|linenumbers }}
+
+{{ value|ljust:"10" }}
+
+{{ value|lower }}
+
+{{ num_walruses|pluralize:"es" }}
+
+{{ value|random }}
+
+{{ value|slugify }}
+
+{{ value|title }}
+
+{{ value|truncatewords:2 }}
+
+{% load i18n %}
+
+{% load tz %}
+
+{% load static %}
+
+{% get_static_prefix as STATIC_PREFIX %}
+
+
+
+Кастомные Теги
+=================
+
+extra_tags.py
+-------------
+from django import template
+
+register = template.Library()
+
+@register                                   // регистрация Тега
+def cut(value, arg):                        // логика кастомного Тега
+    """
+    this foo cuts all vulues of "arg" from string.
+    """
+    return value.replace('arg', '')
+
+
+шаблон
+----------
+<p>{{ my_text|cut:'a' }}</p>                // вырежит все символы 'a' из текста
+
+
+
+
+LOG IN / LOG OUT
+User Authentication
+================
+148
+https://docs.djangoproject.com/en/2.1/topics/auth/passwords/
+
+
+PBKDF2 algorithm  + SHA256 hash         // вид хранения паролей
+
+
+pip install argon2-cffi
+pip install bcrypt
+
+
+settings.py
+------------
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+
+
+PASWORD_HASHERS = [
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+    'django.contrib.auth.hashers.SHA1PasswordHasher',
+    'django.contrib.auth.hashers.MD5PasswordHasher',
+    'django.contrib.auth.hashers.UnsaltedSHA1PasswordHasher',
+    'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher',
+    'django.contrib.auth.hashers.CryptPasswordHasher',
+    ]
+
+
+'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 9,            // кастомно
+        }
+
+
+STATIC_URL = '/static/'
+STATIFILES_DIR = [STATIC_DIR]
+
+
+((                                      // из документации
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/static/',
+]
+))
+
+
+STATIC_URL = '/media/'
+MEDIA_ROOT = MEDIA_DIR
+
+
+{% load static %}
+<img src="{% static "my_app/example.jpg" %}" alt="My image">
+
+
+
+USERS MODELS
+=================
+148
+
+$ pip install pillow
+    Installing collected packages: pillow
+    Successfully installed pillow-5.4.1
+
+
+1)
+Модель Профиля Привязывается к Модели Юзера (фактически 2 Модели Связаны)
+----------------
+
+from django.db import models
+from django.contrib.auth.models import User
+
+
+# Create your models here.
+class UserProfileInfo(models.Model):
+
+    user = models.OneToOneField(User, primary_key=True,
+                             on_delete=models.CASCADE,)
+
+    portfolio_site = models.URLField(blank=True)
+    profile_pic = models.ImageField(blank=True,
+                                    upload_to='profile_pics')
+
+    def __str__(self):
+        return self.user.username
+
+
+2)
+Модель Формы для Заполнения как 2 Формы для одной Отправки
+----------------------------
+
+from django import forms
+from django.contrib.auth.models import User
+from basic_app.models import UserProfileInfo
+
+
+# import pdb; pdb.set_trace()
+class UserForm(forms.ModelForm):
+
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password', 'last_name',
+                  'is_superuser']
+
+
+class UserProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = UserProfileInfo
+        fields = ['portfolio_site', 'profile_pic']
+
+
+И Шаблон
+-------------
+
+{% block content_body %}
+  <div class="jumbotron">
+    <h1>PAGE REGISTER</h1>
+    <p>{{name}}</p>
+
+    {% if registered %}                         // Параметр из Вьюшки Формы Модели
+      <h1>Thank you for Registration!</h1>
+    {% else %}
+      <h3>Fill out the form: </h3>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}                    // 2 Формы Моделей + в Одной форме + 1 Кнопка
+        {{ profile_form.as_p }}
+        <button type="submit" class="btn btn-primary">REGISTER</button>
+      </form>
+    {% endif %}
+  </div>
+{% endblock content_body %}
+
+
+И Вьшка
+-------------
+def register(request):
+
+    registered = False
+
+    if request.method == 'POST':
+
+        user_form = UserForm(data=request.POST)
+        profile_form = UserProfileForm(data=request.POST)
+
+        if user_form.is_valid() and profile_form.is_valid():
+
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+
+            if 'profile_pic' in request.FILES:
+                profile.profile_pic = request.FILES['profile_pic']
+
+            profile.save()
+
+            registered = True
+            
+        else:
+            print(user_form.errors, profile_form.errors)
+
+    else:
+        user_form = UserForm()
+        profile_form = UserProfileForm()
+
+    return render(request, 'basic_app/register.html',
+                  context={'user_form': user_form,          // 3 объекта в Шаблон
+                           'profile_form': profile_form,
+                           'registered': registered
+                           }
+                  )
+
+
+Валидаторы Паролей в Сеттингах
+------------------
+https://docs.djangoproject.com/en/2.1/topics/auth/passwords/
+
+
+
+154
+LOGINS
+===============
+
+
+0)
+Сеттинги
+----------
+LOGIN_URL = '/basic_app/user_login'             // Кастомное переопределение
+
+
+1) вьюшка
+-----------
+from django.shortcuts import render
+from basic_app.forms import UserForm, UserProfileForm
+
+
+# FOR LOGIN view
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import reverse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+
+
+# Create your views here.
+def index(request):
+    return render(request, 'basic_app/index.html', context={'name': 'yurii'})
+
+
+@login_required                             // Если Залогирован Юзер
+def special(request):
+    return HttpResponse("You are Logged In, Nice!")
+
+
+@login_required                             // Если Залогирован Юзер
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('basic_app:index'))
+
+
+def register(request):
+
+    registered = False
+
+    if request.method == 'POST':
+
+        user_form = UserForm(data=request.POST)
+        profile_form = UserProfileForm(data=request.POST)
+
+        if user_form.is_valid() and profile_form.is_valid():
+
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+
+            if 'profile_pic' in request.FILES:
+                profile.profile_pic = request.FILES['profile_pic']
+
+            profile.save()
+
+            registered = True
+
+        else:
+            print(user_form.errors, profile_form.errors)
+
+    else:
+        user_form = UserForm()
+        profile_form = UserProfileForm()
+
+    return render(request, 'basic_app/register.html',
+                  context={'user_form': user_form,
+                           'profile_form': profile_form,
+                           'registered': registered
+                           }
+                  )
+
+
+def user_login(request):
+
+    if request.method == "POST":
+        username = request.POST.get('username')
+        print(username)
+        password = request.POST.get('password')
+        print(password)
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                login(request=request, user=user)
+                return HttpResponseRedirect(reverse('basic_app:index'))
+
+            else:
+                return HttpResponse('ACCOUNT NOT ACTIVE')
+
+        else:
+            print('SomeOne tried to login and faild')
+            print('Username {} and Password {}'.format(username, password))
+            return HttpResponse('Invalid Login')
+
+    else:
+        return render(request, 'basic_app/login.html', {})
+
+
+2)
+Урл - Паттерны
+--------------
+
+from django.contrib import admin
+from django.urls import path, include
+from basic_app import views
+
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('basic/', include('basic_app.urls')),
+    path('logout/', views.user_logout, name='user_logout'),
+    path('special/', views.special, name='special'),
+]
+-----------
+
+
+from django.urls import path, include
+from basic_app import views
+
+app_name = 'basic_app'
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('register/', views.register, name='register'),
+    path('user_login/', views.user_login, name='user_login'),
+]
+
+
+
+3)
+шаблоны
+--------------
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="{% url 'basic_app:index' %}">TO INDEX PAGE</a>
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'admin:index' %}">ADMIN</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'basic_app:register' %}">REGISTER</a>
+      </li>
+
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'user_logout' %}">LOGOUT</a>
+      </li>
+
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'basic_app:user_login' %}">LOGIN</a>
+      </li>
+      {% endif %}
+
+    </ul>
+  </nav>
+
+-------------------
+
+{% block content_body %}
+  <div class="jumbotron">
+    <h1>Please LOGIN</h1>
+    <form class="" action="{% url 'basic_app:user_login' %}"
+          method="post">
+      {% csrf_token %}
+
+      <label for="">UserName:</label>
+      <input type="text" name="username" placeholder="Enter UserName">
+
+      <label for="password">Password:</label>
+      <input type="password" name="password" placeholder="Enter Password">
+
+      <button class="btn btn-primary" type="submit">SUBMIT</button>
+    </form>
+  </div>
+{% endblock content_body %}
+
+
+--------------
+{% block content_body %}
+  <div class="jumbotron">
+    <h1>PAGE REGISTER</h1>
+    <p>{{name}}</p>
+
+    {% if registered %}
+      <h1>Thank you for Registration!</h1>
+    {% else %}
+      <h3>Fill out the form: </h3>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <button type="submit" class="btn btn-primary">REGISTER</button>
+      </form>
+    {% endif %}
+  </div>
+{% endblock content_body %}
+
+
+
+Туториалы по Деплойменту на VPS  - на удаленных Виртуальных Выделенных Серверах
+===============================
+https://help.pythonanywhere.com/pages/DeployExistingDjangoProject/
+
+https://devcenter.heroku.com/articles/deploying-python
+
+https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-django.html
+
+https://www.digitalocean.com/community/tutorials/how-to-deploy-a-local-django-app-to-a-vps
+
+
+
+156
+GITHUB
+================
+tutorial_git.txt
+
+там все есть.
+
+
+
+
+Python Anywhere
+Раздел 21, лекция 157
+=====================
+
+https://www.pythonanywhere.com/user/meg2mag/
+
+bash ...
+
+
+17:57 ~ $ ls
+README.txt
+
+
+17:57 ~ $ pwd
+/home/meg2mag
+
+
+18:14 ~ $ mkvirtualenv --python=python3.5 udemy_env     ## создание виртуальной среды
+
+
+Installing setuptools, pip, wheel...
+done.
+virtualenvwrapper.user_scripts creating /home/meg2mag/.virtualenvs/udemy_env/bin/predeactivate
+....
+## видно что создается вирт среда через Враппер в папке /home/meg2mag/
+## В этой же папке будет и Папка с кодом проекта 
+
+
+(udemy_env) 18:23 ~ $
+## сразу активировалась вирт среда в консоли
+
+
+(udemy_env) 18:28 ~ $ pip install -U django==2.1.7
+## установка джанго на Сервере такой же как и в локальной среде разработки
+
+
+Installing collected packages: pytz, django
+Successfully installed django-2.1.7 pytz-2018.9
+
+
+(udemy_env) 18:39 ~ $ which django-admin.py         ## где скрипт для запуска джаного проекта
+/home/meg2mag/.virtualenvs/udemy_env/bin/django-admin.py
+
+
+(udemy_env) 18:50 ~ $ cd udemy_django/
+(udemy_env) 18:39 ~ $ git clone https://github.com/pythonmag/udemy_django.git
+Unpacking objects: 100% (33/33), done.
+Checking connectivity... done.
+## клонирование репозитория из гитхаб
+
+
+(udemy_env) 18:52 ~/udemy_django (master)$ pip install Pillow
+##  установка билиотеки
+
+ 
+(udemy_env) 18:58 ~/udemy_django (master)$ python manage.py migrate
+.....
+Applying basic_app.0003_auto_20190326_1758... OK
+Applying sessions.0001_initial... OK
+## миграции данных прошли успешно
+
+
+НО ПОКА ЕЩЕ СЕРВЕР ЗАПУСКАТЬ РАНО, ТАК КАК НЕ НАСТРОЕННЫ ПУТИ И СВЯЗИ
+
+
+(udemy_env) 18:58 ~/udemy_django (master)$ python manage.py createsuperuser
+
+
+
+WEB
+==============
+Есть у меня мануал по настройке сайта на pythonanywhere.com
+
+
+### старая работающая настройка wsgi файла
+###
+/var/www/meg2mag_pythonanywhere_com_wsgi.py
+********************
+# TURN ON THE VIRTUAL ENVIRONMENT FOR YOUR APPLICATION
+
+activate_this = '/home/meg2mag/sitecomments/sitecomments/bin/activate_this.py'
+execfile(activate_this, dict(__file__=activate_this))
+
+import os
+import sys
+
+# ADD YOUR PROJECT TO THE PYTHONPATH FOR THE PYTHON INSTANCE
+
+path = '/home/meg2mag/sitecomments/sitecomments/src/sitecomments/'
+if path not in sys.path:
+    sys.path.append(path)
+
+os.chdir(path)
+
+# TELL DJANGO WHERE YOUR SETTINGS MODULE IS LOCATED
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'sitecomments.settings'
+
+# IMPORT THE DJANGO WSGI HANDLER TO TAKE CARE OF REQUESTS
+
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+********************
+
+
+
+## Настройка на вкладке WEB
+Virtualenv:
+/home/meg2mag/.virtualenvs/udemy_env
+
+
+## там же указываю основную папку проекта (где сеттинги и wsgi.py)
+/home/meg2mag/udemy_django/level_five_proj
+
+
+
+
+158
+введение в CBV
+===================
+
+https://ccbv.co.uk/
+------------------
+
+
+
+160
+Tamplate View
+===================
+очень просто передать объект html шаблона на Клиент
+
+
+класс как вьюшка
+-----------------
+path('', views.IndexView.as_view(), name='index'),
+
+
+
+переопределили контекст и как вызов объекта класса, его наполнение
+и возврат как нового объекта
+-----------------------------
+class IndexView(TemplateView):
+    template_name = 'basic_app/index.html'
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['inject_data'] = 'my test string'
+        return context
+
+
+объекты в шаблоне
+-----------------
+<p>{{ inject_data }}</p>
+
+
+
+
+161-162
+Models // Detail View // List View // CreateView
+========================
+
+1)
+---------------
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('basic_app.urls'), name='basic_app'),
+    path('__debug__/', include(debug_toolbar.urls)),
+]
+
+
+
+2)
+----------------
+app_name = 'basic_app'
+
+urlpatterns = [
+    # path('', views.CBView.as_view(), name='index'),
+    path('', views.IndexView.as_view(), name='index'),
+    path('schools/', views.SchoolListView.as_view(),
+         name='school-list'),
+    path('schools/<int:pk>', views.SchoolDetailView.as_view(),
+         name='school-detail')
+]
+
+
+
+3)
+--------------
+class SchoolListView(ListView):
+    context_object_name = 'schools'
+    model = models.School
+
+
+class SchoolDetailView(DetailView):
+    context_object_name = 'school_detail'
+    model = models.School
+    
+    template_name = 'basic_app/school_detail.html'
+
+
+4)
+--------------
+# Create your models here.
+class School(models.Model):
+    name = models.CharField(max_length=256)
+    principal = models.CharField(max_length=256)
+    location = models.CharField(max_length=256)
+
+    def __str__(self):
+        return self.name
+
+
+class Student(models.Model):
+    name = models.CharField(max_length=256)
+    age = models.PositiveIntegerField()
+    school = models.ForeignKey(School,
+                               related_name='studentss',
+                               on_delete=models.CASCADE)
+
+    def __str__(self):
+        return 'student: {} from shool: {}'.format(
+            self.name.upper(), self.school.name.upper())
+
+
+5)
+----------------
+{% block title_page %}SCHOOLS LIST{% endblock title_page %}
+
+{% block body_content %}
+
+  <h1>SCHOOLS:</h1>
+
+  <ol>
+    {% for school in schools %}
+    <h2>
+    <li><a href="{{school.id}}">{{ school.name }} ID: {{ school.id}}
+    </a></li>
+    </h2>
+    {% endfor %}
+  </ol>
+
+  <br>
+
+  <ol>
+    {% for school in schools %}
+    <h2>
+    <li><a href="{% url 'basic_app:school-detail' school.id %}">{{ school.name }} ID: {{ school.id}}
+    </a></li>
+    </h2>
+    {% endfor %}
+  </ol>
+{% endblock body_content %}
+
+
+
+6)
+-----------------
+{% block title_page %}SCHOOL DETAIL {% endblock title_page %}
+
+{% block body_content %}
+
+<div class="jumbotron">
+
+  <h1>School Details:</h1>
+  <h2>School ID: {{ school_detail.id}}</h2>
+  <h2>School Name: {{ school_detail.name}}</h2>
+
+  <br>
+
+  <h1>Students of this School:</h1>
+  <h3>{{school_detail.studentss.all}}</h3>
+  <br>
+
+  {% for student in school_detail.studentss.all %}
+  <h2>{{ student.name|upper }} {{ student.id }}
+     {{ student.age }} {{student.school|upper }}</h2>
+  {% endfor %}
+
+  <br>
+
+  <p>{% lorem 3 p %}</p>
+  <p>It is {% now "jS F Y H:i" %}</p>
+
+</div>
+{% endblock body_content %}
+
+
+
+163
+CRUD views
+(create, update, delete)
+================
+
+основа
+--------------
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from myapp.models import Author
+
+class AuthorCreate(CreateView):
+    model = Author
+    fields = ['name']
+
+class AuthorUpdate(UpdateView):
+    model = Author
+    fields = ['name']
+
+class AuthorDelete(DeleteView):
+    model = Author
+    success_url = reverse_lazy('author-list')
+
+
+-------------
+from django.urls import path
+from myapp.views import AuthorCreate, AuthorDelete, AuthorUpdate
+
+urlpatterns = [
+    # ...
+    path('author/add/', AuthorCreate.as_view(), name='author-add'),
+    path('author/<int:pk>/', AuthorUpdate.as_view(), name='author-update'),
+    path('author/<int:pk>/delete/', AuthorDelete.as_view(), name='author-delete'),
+]
+
+
+
+-----------------
+app_name = 'basic_app'
+
+urlpatterns = [
+    # path('', views.CBView.as_view(), name='index'),
+    path('', views.IndexView.as_view(), name='index'),
+    path('schools/', views.SchoolListView.as_view(),
+         name='school-list'),
+    path('schools/<int:pk>', views.SchoolDetailView.as_view(),
+         name='school-detail'),
+    path('schools/create/', views.SchoolCreateView.as_view(),
+         name='school-create'),
+    path('schools/update/<int:pk>', views.SchoolUpdateView.as_view(),
+         name='school-update'),
+    path('schools/delete/<int:pk>', views.SchoolDeleteView.as_view(),
+         name='school-delete'),
+]
+
+
+----------------
+
+class SchoolListView(ListView):
+    context_object_name = 'schools'
+    model = models.School
+
+
+class SchoolDetailView(DetailView):
+    context_object_name = 'school_detail'
+    model = models.School
+
+    template_name = 'basic_app/school_detail.html'
+
+
+class SchoolCreateView(CreateView):
+    model = models.School
+    fields = ('name', 'principal', 'location')
+    context_object_name = 'school_create'
+    # success_url = '/schools/'         ## def get_absolute_url в самой Модели
+    template_name = 'basic_app/school_form.html'
+
+
+class SchoolUpdateView(UpdateView):
+    model = models.School
+    fields = ('name', 'principal', 'location')
+    context_object_name = 'school_update'
+    success_url = '/schools/'
+    template_name = 'basic_app/school_form.html'
+
+
+class SchoolDeleteView(DeleteView):
+    model = models.School
+    # success_url = '/schools/'
+    success_url = reverse_lazy('basic_app:school-list')
+    # success_url = reverse('basic_app:school-delete')
+    template_name_suffix = '_confirm_delete'
+
+
+
+---------------
+
+from django.db import models
+from django.urls import reverse
+
+
+# Create your models here.
+class School(models.Model):
+    name = models.CharField(max_length=256)
+    principal = models.CharField(max_length=256)
+    location = models.CharField(max_length=256)
+
+    def get_absolute_url(self):
+        return reverse('basic_app:school-detail', kwargs={'pk': self.pk})
+
+    def __str__(self):
+        return self.name
+
+
+class Student(models.Model):
+    name = models.CharField(max_length=256)
+    age = models.PositiveIntegerField()
+    school = models.ForeignKey(School,
+                               related_name='studentss',
+                               on_delete=models.CASCADE)
+
+    def __str__(self):
+        return 'student: {} from shool: {}'.format(
+            self.name.upper(), self.school.name.upper())
+
+
+
+------------
+и шаблоны html с тегами Джанго с объектами из Моделей
+
+
+
+состояние request
+--------------
+request.path:       шлях запиту;
+request.GET:        дані, що прийшли частиною GET параметрів;
+request.POST:       дані, що прийшли в тілі поста форми із браузера;
+request.method:     тип запиту, напр. GET або POST;
+request.COOKIES:    славнозвісні Cookies, які ми з вами оглянули в попере-
+                    дніх секціях даної глави;
+request.FILES:      файли, що прийшли до нас із форми, із полів типу file;
+request.META:       заголовки запиту згідно HTTP протоколу;
+request.user:       залогований Django користувач;
+request.session:    сесія користувача;
+
+
+
+состояние Глобальных Переменных Джанго
+--------------
+from django.conf import global_settings
+print(dir(global_settings))
+
+[
+'ABSOLUTE_URL_OVERRIDES',
+ 'ADMINS',
+ 'ALLOWED_HOSTS',
+ 'APPEND_SLASH',
+ 'AUTHENTICATION_BACKENDS',
+ 'AUTH_PASSWORD_VALIDATORS',
+ 'AUTH_USER_MODEL',
+ 'CACHES',
+ 'CACHE_MIDDLEWARE_ALIAS',
+ 'CACHE_MIDDLEWARE_KEY_PREFIX',
+ 'CACHE_MIDDLEWARE_SECONDS',
+ 'CSRF_COOKIE_AGE',
+ 'CSRF_COOKIE_DOMAIN',
+ 'CSRF_COOKIE_HTTPONLY',
+ 'CSRF_COOKIE_NAME',
+ 'CSRF_COOKIE_PATH',
+ 'CSRF_COOKIE_SAMESITE',
+ 'CSRF_COOKIE_SECURE',
+ 'CSRF_FAILURE_VIEW',
+ 'CSRF_HEADER_NAME',
+ 'CSRF_TRUSTED_ORIGINS',
+ 'CSRF_USE_SESSIONS',
+ 'DATABASES',
+ 'DATABASE_ROUTERS',
+ 'DATA_UPLOAD_MAX_MEMORY_SIZE',
+ 'DATA_UPLOAD_MAX_NUMBER_FIELDS',
+ 'DATETIME_FORMAT',
+ 'DATETIME_INPUT_FORMATS',
+ 'DATE_FORMAT',
+ 'DATE_INPUT_FORMATS',
+ 'DEBUG',
+ 'DEBUG_PROPAGATE_EXCEPTIONS',
+ 'DECIMAL_SEPARATOR',
+ 'DEFAULT_CHARSET',
+ 'DEFAULT_CONTENT_TYPE',
+ 'DEFAULT_EXCEPTION_REPORTER_FILTER',
+ 'DEFAULT_FILE_STORAGE',
+ 'DEFAULT_FROM_EMAIL',
+ 'DEFAULT_INDEX_TABLESPACE',
+ 'DEFAULT_TABLESPACE',
+ 'DISALLOWED_USER_AGENTS',
+ 'EMAIL_BACKEND',
+ 'EMAIL_HOST',
+ 'EMAIL_HOST_PASSWORD',
+ 'EMAIL_HOST_USER',
+ 'EMAIL_PORT',
+ 'EMAIL_SSL_CERTFILE',
+ 'EMAIL_SSL_KEYFILE',
+ 'EMAIL_SUBJECT_PREFIX',
+ 'EMAIL_TIMEOUT',
+ 'EMAIL_USE_LOCALTIME',
+ 'EMAIL_USE_SSL',
+ 'EMAIL_USE_TLS',
+ 'FILE_CHARSET',
+ 'FILE_UPLOAD_DIRECTORY_PERMISSIONS',
+ 'FILE_UPLOAD_HANDLERS',
+ 'FILE_UPLOAD_MAX_MEMORY_SIZE',
+ 'FILE_UPLOAD_PERMISSIONS',
+ 'FILE_UPLOAD_TEMP_DIR',
+ 'FIRST_DAY_OF_WEEK',
+ 'FIXTURE_DIRS',
+ 'FORCE_SCRIPT_NAME',
+ 'FORMAT_MODULE_PATH',
+ 'FORM_RENDERER',
+ 'IGNORABLE_404_URLS',
+ 'INSTALLED_APPS',
+ 'INTERNAL_IPS',
+ 'LANGUAGES',
+ 'LANGUAGES_BIDI',
+ 'LANGUAGE_CODE',
+ 'LANGUAGE_COOKIE_AGE',
+ 'LANGUAGE_COOKIE_DOMAIN',
+ 'LANGUAGE_COOKIE_NAME',
+ 'LANGUAGE_COOKIE_PATH',
+ 'LOCALE_PATHS',
+ 'LOGGING',
+ 'LOGGING_CONFIG',
+ 'LOGIN_REDIRECT_URL',
+ 'LOGIN_URL',
+ 'LOGOUT_REDIRECT_URL',
+ 'MANAGERS',
+ 'MEDIA_ROOT',
+ 'MEDIA_URL',
+ 'MESSAGE_STORAGE',
+ 'MIDDLEWARE',
+ 'MIGRATION_MODULES',
+ 'MONTH_DAY_FORMAT',
+ 'NUMBER_GROUPING',
+ 'PASSWORD_HASHERS',
+ 'PASSWORD_RESET_TIMEOUT_DAYS',
+ 'PREPEND_WWW',
+ 'SECRET_KEY',
+ 'SECURE_BROWSER_XSS_FILTER',
+ 'SECURE_CONTENT_TYPE_NOSNIFF',
+ 'SECURE_HSTS_INCLUDE_SUBDOMAINS',
+ 'SECURE_HSTS_PRELOAD',
+ 'SECURE_HSTS_SECONDS',
+ 'SECURE_PROXY_SSL_HEADER',
+ 'SECURE_REDIRECT_EXEMPT',
+ 'SECURE_SSL_HOST',
+ 'SECURE_SSL_REDIRECT',
+ 'SERVER_EMAIL',
+ 'SESSION_CACHE_ALIAS',
+ 'SESSION_COOKIE_AGE',
+ 'SESSION_COOKIE_DOMAIN',
+ 'SESSION_COOKIE_HTTPONLY',
+ 'SESSION_COOKIE_NAME',
+ 'SESSION_COOKIE_PATH',
+ 'SESSION_COOKIE_SAMESITE',
+ 'SESSION_COOKIE_SECURE',
+ 'SESSION_ENGINE',
+ 'SESSION_EXPIRE_AT_BROWSER_CLOSE',
+ 'SESSION_FILE_PATH',
+ 'SESSION_SAVE_EVERY_REQUEST',
+ 'SESSION_SERIALIZER',
+ 'SHORT_DATETIME_FORMAT',
+ 'SHORT_DATE_FORMAT',
+ 'SIGNING_BACKEND',
+ 'SILENCED_SYSTEM_CHECKS',
+ 'STATICFILES_DIRS',
+ 'STATICFILES_FINDERS',
+ 'STATICFILES_STORAGE',
+ 'STATIC_ROOT',
+ 'STATIC_URL',
+ 'TEMPLATES',
+ 'TEST_NON_SERIALIZED_APPS',
+ 'TEST_RUNNER',
+ 'THOUSAND_SEPARATOR',
+ 'TIME_FORMAT',
+ 'TIME_INPUT_FORMATS',
+ 'TIME_ZONE',
+ 'USE_I18N',
+ 'USE_L10N',
+ 'USE_THOUSAND_SEPARATOR',
+ 'USE_TZ',
+ 'USE_X_FORWARDED_HOST',
+ 'USE_X_FORWARDED_PORT',
+ 'WSGI_APPLICATION',
+ 'X_FRAME_OPTIONS',
+ 'YEAR_MONTH_FORMAT',
+ ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

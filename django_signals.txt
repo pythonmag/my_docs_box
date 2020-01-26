@@ -1,0 +1,58 @@
+
+Чуть теории:
+============
+На стороне браузера все события(сигналы) автоматически мониторятсся Браузером и к ним есть доступ.
+На строне сервера сигналы инициируются и мониторятся кастомной логикой кода
+
+1) создают сигналы(о событии) на сервере - Сендеры / Отправители (sender)
+2) мониторят сигналы  - Ресиверы / Получатели (receiver)
+
+
+Группы Сигналов
+---------------
+1) Сигналы Моделей:             / pre_save / post_save / pre_delete / post_delete
+2) Сигналы Комманд:             / pre_migrate / post_migrate / 
+3) Сигналы request/response:    / request-started / requrest_finished / get_reuqest_exception /
+4) Сигналы подключения к БД     / connection_created /
+5) Сигналы запуска Тестов
+
+
+Пример кода
+------------------
+from django.core.signals import request_finished        ## тип сигнала
+from django.dispatch import receiver                    ## модуль ресивер - для декоратора
+from . models import Student                            ## конкретная модель для Прослушки
+
+@receiver(request_finished, sender=Student)
+def my_receiver(sender, **kwargs):                      
+    print("Request finished!")
+
+
+Пример регистрации кастомного мониторинга сигнала
+-----------------------------
+from django.core.signals import request_finished
+from django.dispatch import receiver
+
+@receiver(request_finished)         
+## декоратор - доп.свойство функции (тут - какой сигнал слушаем)
+def hello_world_callback(sender, **kwargs):
+    print(”Hello World”)
+
+
+
+Документация
+================
+https://djbook.ru/rel1.9/topics/signals.html
+https://djbook.ru/rel1.9/ref/signals.html#signals
+
+https://docs.djangoproject.com/en/1.11/topics/signals/
+https://docs.djangoproject.com/en/1.11/ref/signals/#signals
+
+
+статьи
+================
+Getting Started With Django Channels
+    https://realpython.com/blog/python/getting-started-with-django-channels/#.WPdpM9I52NM.linkedin
+
+
+

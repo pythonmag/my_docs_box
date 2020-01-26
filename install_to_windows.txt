@@ -1,0 +1,82 @@
+Установка python3 под виндовс
+=============================
+
+1)
+https://www.python.org/
+качаю exe пакеты python36 python27 
+путь установки будет C:\\python27 и  C:\\python36
+В меню Пуск появились 2 папки python27 python36 в которых есть консоли зля запуска интерпретаторов
+а также есть упрощенная среда разработки IDLE
+
+2)
+Если установлена pycharm то в процессе создания нового проекта можно собрать виртуальную среду, указав 
+е место положение и укзав на версию питона по указанному выше адресу.
+
+3)
+Пуск\Свойства Моего Компьютера\Дополнительные параметры системы\Переменные среды\Системные переменные\Path
+тут можно настроить переменную path для запуска нужной веррсии питон из коммандной строки виндовс
+
+4)
+Терминал Интерпретатора Питон нужной версии работает с менеджером пакетов pip - через него можно ставить что надо
+
+5)
+Лутше скачать git клиент который дает в пакете не полько инструмент создания git репозитория
+но и дает удобный терминал под linux - git bash
+https://git-scm.com/download/win
+
+
+Установка Виртуальной среды
+(через git bush под win)
+===========================
+ryndin@ryndin-pc MINGW64 ~
+$ virtualenv test-virtenv --no-site-packages --prompt='(virtent)'		# установка папака / без глоб сайт пакетов / +псевдоним
+
+ryndin@ryndin-pc MINGW64 ~
+$ cd test-virtenv/
+
+ryndin@ryndin-pc MINGW64 ~/test-virtenv
+$ pwd
+/c/Users/ryndin/test-virtenv				# расположение
+
+$ which python
+/c/Python35-32/python						# какой глоб питон использован
+
+ryndin@ryndin-pc MINGW64 ~/test-virtenv
+$ ls
+Include/  Lib/  pip-selfcheck.json  Scripts/  tcl/
+
+ryndin@ryndin-pc MINGW64 ~/test-virtenv
+$ source Scripts/activate					# запускаем виртуальную среду (не bin а Scripts)	
+
+ryndin@ryndin-pc MINGW64 ~/test-virtenv
+$ mkdir src
+(virtent)
+ryndin@ryndin-pc MINGW64 ~/test-virtenv
+$ cd src
+(virtent)
+ryndin@ryndin-pc MINGW64 ~/test-virtenv/src		# создал папку для кода проекта
+
+
+/ Putty / Создаю приватный ключ ssh / кидаю ключ на github / настроки по мануалам ниже /
+How do I setup ssh on Windows?
+https://habrahabr.ru/post/217869/
+http://siteadmin.gforge.inria.fr/ssh_windows.html
+https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
+
+
+/ сначала) /
+pip install django
+
+/ а затем уже) /
+git clone git@github.com:pythonmag/studentsdb27.git
+
+
+/ Создам Новый Проект в IDE Pycharm /
+
+Путь к Виртуальной среде
+	C:\Users\ryndin\test-virtenv\src
+путь к интерпретатору
+	C:\Users\ryndin\test-virtenv\Scripts\python.exe
+
+	
+

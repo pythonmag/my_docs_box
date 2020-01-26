@@ -1,0 +1,43 @@
+
+https://habr.com/ru/post/160117/
+
+https://simpleisbetterthancomplex.com/tutorial/2018/11/22/how-to-implement-token-authentication-using-django-rest-framework.html
+
+https://simpleisbetterthancomplex.com/tutorial/2018/12/19/how-to-use-jwt-authentication-with-django-rest-framework.html
+
+https://simpleisbetterthancomplex.com/tutorial/2019/04/07/how-to-save-extra-data-to-a-django-rest-framework-serializer.html
+
+http://www.django-rest-framework.org/
+======================
+
+1)
+pip install djangorestframework
+pip install markdown                # Markdown support for the browsable API.
+pip install django-filter           # Filtering support
+
+
+2)
+INSTALLED_APPS = (
+    ...
+    'rest_framework',
+)
+
+
+3)
+urlpatterns = [
+    ...
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+]
+
+
+4)
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
+
+
+
+

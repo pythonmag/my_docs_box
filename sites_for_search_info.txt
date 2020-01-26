@@ -1,0 +1,15 @@
+
+ДиджитОушен - Туториалы 
+-----------------------------
+https://www.digitalocean.com/community/tutorials
+
+
+8host ИНФОРМАТОРИЙ
+----------------
+https://www.8host.com/blog/
+
+
+Django. Знакомство с ElasticSearch
+-------------------
+http://adw0rd.com/2015/12/16/django-elasticsearch/
+блог от Эдварда

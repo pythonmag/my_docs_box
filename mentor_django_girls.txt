@@ -1,0 +1,200 @@
+﻿Начало от Ментора
+=================
+
+Закачал пустой репозиторий по его ссылке.
+Во втором сообщении написал мне что прочитать по GIT
+
+git config --global user.email "ryndin@i.ua"
+
+
+$ git commit --allow-empty -m 'Initial commit'
+
+
+избегать использовать ключ -m
+
+
+1)
+=============
+http://chris.beams.io/posts/git-commit/
+
+$ git log
+
+
+	Author: ryndin <you@example.com>
+	Date:   Sun Jun 9 20:46:39 2019 +0300
+
+	    Initial commit
+
+	commit a9237eaa33c7b9c85e71bc648cc9de3c2c4638d7
+	Author: ryndin <you@example.com>
+	Date:   Sun Jun 9 20:39:12 2019 +0300
+
+
+$ git log --oneline -5
+
+	ea0cd4f (HEAD -> master, origin/master) Initial commit
+	a9237ea first commit
+
+
+Команды для ознакомления с историей Коммитов
+------------------------------------------
+
+$ git log
+
+$ git log —oneline
+
+$ git shortlog
+
+
+2)
+===============
+http://alistapart.com/article/the-art-of-the-commit
+https://help.github.com/en/articles/associating-text-editors-with-git
+
+
+Статья расширяет суть предыдущей статьи.
+Приведены насройки редактора для удобного написания гит коммита
+
+$ git config --global core.editor "atom --wait"
+
+Теперь при написании git commit открывается редактор Атом и там все пишешь, а при закрытии редактора сразу делается коммит автоматически, что видно в коммандной строке.
+
+
+3)
+===========
+https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message
+5 Useful Tips For A Better Commit Message
+
+
+https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+A Note About Git Commit Messages
+
+
+
+4)
+===========
+ https://github.com/erlang/otp/wiki/writing-good-commit-messages
+Writing good commit messages
+Done
+
+
+
+5)
+===========
+https://wiki.openstack.org/wiki/GitCommitMessages
+Фундаментальное описание сути коммитов
+Done
+
+
+
+6)
+===========
+ http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+A Note About Git Commit Messages
+Done
+
+
+7)
+===========
+https://dev.to/gonedark/when-to-make-a-git-commit
+When to make a Git Commit
+
+
+
+
+ Install XUbuntu
+    •  Learn about APT. Here and there
+    •  Install Kitty terminal emulator
+    • Install Google Chrome but scroll to the section "Install Google Chrome on Ubuntu 18.04 LTS from the Command Line" and use it. No GUI-based install, please
+    •  Install Git from PPA
+    •  Install VS Code using this instruction, but without downloading *.deb file so find the line "The repository and key can also be installed manually with the following script:" and go from there
+================
+DONE
+
+
+See:
+    • https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#generating-a-new-ssh-key (you may omit adding a password)
+    • https://help.github.com/articles/connecting-to-github-with-ssh/
+After completing instructions, post the result of the following command in a comment to this issue:
+ssh -T git@github.com
+=================
+Generating a new SSH key and adding it to the ssh-agent
+https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#generating-a-new-ssh-key
+
+1)
+Generating a new SSH key
+
+$ curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+$ ssh-keygen -t rsa -b 4096 -C "you@example.com"
+
+2)
+Adding your SSH key to the ssh-agent
+
+$ eval "$(ssh-agent -s)"
+$ ssh-add ~/.ssh/id_rsa
+$ sudo apt-get install xclip
+$ xclip -sel clip < ~/.ssh/id_rsa.pub
+
+3)
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDMf8WDUXFEo1BE1bgwmWnMZmxTBJ40jpTeYE+T5t0SgsA2D6HGk/kgKhwKRyh4TREXO/Dg8afYovYVk/VX7S1ULHwNdTidS5enJ6ZLkNyLmWS8uQ7dNlij2cTcR1EXcO7dEI1ygZcFXpjAk8+rvSj5DiP7CR6SMy2OUCEe5zEJ0jmXUUXleBKnm+xnEdc8hpLST20GJRaKc0KVh1petjMipUnzWFbg1FypGJFM0AgPEAEQZnauhO9Ior6cxEFUGRwDYvmxLTl0dIgtuyrC7FRS473lOpInQmO3RbPvdV+t3+ofrIf5IEhUwWzEL5RXzPIBnWLlR4FmWlw+XhYQ1N65ECJA7JdZl9v3O3MOO0xvz1T3ndxKCqfpOIMgPWDM0JmCwTTWCe1yaJMLzl/ab55WGsuytPAF5AIlHuaHBr0pc97xRpdfE6lzIjAWoubkfZhT9YbVhHhMNyZ3V6HjBu0t5M4Nuu/mq4ki2VR0hqkvAN2/+DGz4jBJaN/Lslo6pPa/+Tep2GovEeTswGI+labraLjtWg+XpVPfjJc7BUDIDlMKCYHxktacZAhdyrQXCpnq6ZDR3XtaCCGRoGHeA6UEI983ExIj3GVvPtJoPqtiVExcxXE6L5GLHT0D+EqVU/xG9ypqkaGnvBJACevICKv2dq+W481FiE9MGzHwddaSjQ== you@example.com
+
+4)
+https://help.github.com/en/articles/connecting-to-github-with-ssh
+=============
+TESTING
+
+$ ssh -T git@github.com
+
+The authenticity of host 'github.com (140.82.118.3)' can't be established.
+
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no)? y
+Please type 'yes' or 'no': yes
+
+Warning: Permanently added 'github.com,140.82.118.3' (RSA) to the list of known hosts.
+Hi pythonmag! 
+You've successfully authenticated, but GitHub does not provide shell access.
+
+
+
+Please read&learn the following:
+    •  ProGit 2 
+    •  Try Git
+    •  Try Git Branching
+    •  Interactive diagram/cheatsheet about git
+    •  You're using git wrong
+Extras:
+    •  A useful template for commit messages
+    •  Understanding the GitHub Flow
+    •  Closing issues using keywords
+===============
+
+
+
+
+Pro tip: git commit -v will extend your commit template with a diff preview of what you're about to commit so that it's easier to come up with the commit description.
+============
+Совет для профессионалов: git commit -v расширит ваш шаблон коммитов с предварительным просмотром diff того, что вы собираетесь коммитить, чтобы было проще составить описание коммита.
+
+
+
+Installing Neovim
+=================
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt-get update
+sudo apt-get install neovim
+
+
+tutorial vim editor
+-------------------
+https://github.com/vim/vim/blob/master/runtime/tutor/tutor.ru
+
+
+
+
+
+
+
+
+

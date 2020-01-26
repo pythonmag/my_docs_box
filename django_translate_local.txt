@@ -1,0 +1,726 @@
+
+i18n - internationalization - подготовка Апликации проекта к Переводу (логика)
+l10n - localization         - набор текста с возможным переводом (создание фраз)
+===========================
+
+
+https://docs.djangoproject.com/en/3.0/topics/i18n/translation/
+
+https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#switching-language-in-templates
+
+https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#using-the-javascript-translation-catalog
+    
+https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#language-prefix-in-url-patterns
+
+https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#localization-how-to-create-language-files
+
+
+
+
+https://djbook.ru/rel1.7/topics/i18n/translation.html#overview
+(тут очень полная документация)
+
+1)
+Логическая работа программиста это:
+    1) логика графического интерфейса сайта
+    2) адаптация содержимого сайта в зависисти от локализации
+    3) форматы дат и чисел
+    4) часовые зоны в датах, в зависимости от локации пользователя
+
+Каноночный (базовый) язык для кода - Английский
+
+
+ugettext_lazy
+=============
+Для локализации (подготовки к переводу) необходимо использовать функциб + псевдоним
+---------------------------------------
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
+
+class MyThing(models.Model):
+    name = models.CharField(_('name'), help_text=_('This is the help text'))
+
+    class Meta:
+        verbose_name = _('my thing')            ## _ это оно
+        verbose_name_plural = _('my things')
+
+
+
+from django.apps import AppConfig
+from django.utils.translation import ugettext_lazy as _     // назначен псевдоним
+    
+class StudentsAppConfig(AppConfig):
+    name = ’students’
+    verbose_name = _(u”Students Database”)      // вызван перевод Контекста
+def ready(self):
+    from students import signals
+
+
+
+Логика Интернациализации в Шаблонах
+------------------------
+
+{% load i18n %}
+{% trans "..." %}
+{% blocktrans %} This string will have {{ value }} inside. {% endblocktrans %}
+
+
+{% load i18n %}     // обязательный тег вставки модуля
+
+<p>{% trans ”Demo String” %}</p>        // тег перевода (фактически замены) строки
+    
+<p>{% trans demo_variable %}</p>        // пример перевода любой входящей переменной
+
+<p>{% trans ”Demo String” as var1 %}</p>    // приемер перевода + сохранение значения
+
+
+
+
+стр.536 Подобы - подробно про {% blocktrans %} 
+====================
+Иннтернациализация / Подготовка (маркирование) к переводу в Шаблонах
+--------------------
+<title>{% trans "This is the title." %}</title>
+<title>{% trans myvar %}</title>
+
+
+i18n в Javascript коді
+======================
+django.views.i18n.javascript_catalog
+
+js_info_dict = {
+'packages': ('my.package',),
+}
+
+urlpatterns = patterns('',
+(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),)
+
+
+<script type="text/javascript"
+    src="{% url ’django.views.i18n.javascript_catalog’ %}"></script>
+
+
+
+
+Домены для Локализации
+======================
+    django
+    djangojs
+
+
+
+2)
+выбор для работы в проекте языков для перевода и отображений
+(по умолчанию в голобальных настройках выбраны все языки / их много)
+---------------------------
+LANGUAGES = [
+    ('uk', ('Ukrainian')),
+    ('en', ('English')),
+    ('ru', ('Russian'))
+]
+
+
+Абривиатуры всех языков
+-----------------------
+List of ISO 639-1 codes
+https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+
+
+
+3)
+MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',            # for locale in response
+
+
+4)
+на всякий пожарный лучше явно указать где локально лежит папка locale (где будут все переводы)
+    LOCALE_PATHS = ['comments']
+
+
+
+
+5)
+Как сделать Селект языка в Шаблоне
+==================================
+
+https://stackoverflow.com/questions/18392405/issue-trying-to-change-language-from-django-template
+
+
+1)
+https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#switching-language-in-templates
+
+
+
+2) 
+https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#switching-language-in-templates
+
+работа в шаблоне с глобальными переменными через язык джанго + запрос на сервер
+<div class="row" >
+
+<div class="col-xs-8" style="margin-bottom: 20px;">
+
+    {% get_current_language as LANGUAGE_CODE %}
+
+    <h4>{% trans 'current language' %}: {{ LANGUAGE_CODE }}</h4>
+
+    <form action="{% url 'set_language' %}" method="post" class="form-inline">
+    {% csrf_token %}
+
+    <input name="next" type="hidden" value="{{ request.get_full_path|slice:':' }}"/>
+
+    <ul class="nav navbar-nav language menu">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+
+            <li>
+                <div class="btn-group" >
+                <button type="submit"
+                        name="language"
+                        value="{{ language.code }}"
+                        class="btn-default{% if language.code == LANGUAGE_CODE %} btn-warning {% endif %}">
+                    {{ language.name_local }}
+                </button>
+                </div>
+            </li>
+
+        {% endfor %}
+    </ul>
+
+</form>
+
+</div>
+</div>
+
+
+или вот так Выбор Языка (новее конструкция)
+-----------------------
+
+{% load i18n %}
+
+<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+
+    <select name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+
+        {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+        {% endfor %}
+
+    </select>
+
+    <input type="submit" value="Go">
+</form>
+
+
+
+3)
+функция-обработтчик запроса от клиента
+
+# Test Select Language Locale
+    url(r'^i18n/*?', include('django.conf.urls.i18n')),
+
+
+
+4)
+выбор набора языков для сайта в сеттингах. 
+LANGUAGES = [
+    ('uk', ('Ukrainian')),
+    ('en', ('English')),
+    ('ru', ('Russian'))
+]
+
+
+5)
+вьюшка работатет встроенная django.conf.urls.i18n, так что питон код тут не понадобился
+---------------------------
+
+
+6) 
+locale/ -- папка
+формирование структуры данных для локилизации (перевод вручную)
+на выходе - файлы .po (не компелированные)
+
+Файли перекладу мають розширення “.po”. Також можете зауважити поруч
+файли із розширенням “.mo”. Це скомпільовані в спеціальний бінарний код
+файли, що безпосередньо використовуються при перекладі тексту (далі роз-
+глянемо як їх створювати).
+----------------------
+
+=(scomments)...$ python manage.py makemessages --locale=en --locale=uk --locale=ru 
+    --domain=django
+processing locale ru
+processing locale en
+processing locale uk
+
+
+7)
+теперь можно установить вспомогательный иинтерфейс-библиотеку кода django_rosetta 
+(см. отдельный документ)
+Если есть залогиненый пользователь по russeta запускается
+
+
+8) 
+На выходе файлы-компилированные  .mo  (готовые к работе)
+Это когда уже в папке locale вручную сделашь перевод или с помощью апликации rosetta
+тогда компилируется пакет с переведенными словами - он доступен по выбранному языку
+----------------------
+$ python manage.py compilemessages
+
+processing file django.po in /home/ryndin/workprojects/sitecomments/sitecomments/src/sitecomments/comments/locale/ru/LC_MESSAGES
+processing file django.po in /home/ryndin/workprojects/sitecomments/sitecomments/src/sitecomments/comments/locale/en/LC_MESSAGES
+processing file django.po in /home/ryndin/workprojects/sitecomments/sitecomments/src/sitecomments/comments/locale/uk/LC_MESSAGES
+
+
+9)
+подготовить к локализации js файлы
+------------------
+$ python manage.py makemessages -d djangojs -l uk -l en
+
+
+10)
+HTTP заголовок о языках клиента (устанавливается в браузере)
+(потому сервер знает о приоритетах языков клиента)
+-------------------------------
+Accept-Language:uk,en;q=0.8,en-US;q=0.6,ru;q=0.4
+
+
+
+11)
+Частина веб-сайтів дозволяє переключатись між мовами з допомогою візу-
+альних органів управління: мовних флажків, випадаючого меню з мовами.
+З їх допомогою, навіть анонімний користувач може переглядати веб-сайт на
+різних мовах.
+
+Альтернативно, частина веб-аплікацій реалізує форму налаштувань користу-
+вача, де зареєстрований користувач може вибирати мову відображення на веб-
+сайті. Таким чином, залоговані користувачі використовують веб-аплікацію на
+своїй рідній мові.
+
+В обидвох останніх випадках, такий вибір користувача має перевагу над
+заголовком Accept-Language.
+
+Альтернативно, тепер браузери підтримують визначення локації користувача.
+Якщо відвідувач сайту дозволяє надати свою геолокацію веб-сайту, тоді він
+може отримати спеціалізований вміст, мову і часову зону на сторінках даного
+ресурсу.
+
+
+
+
+ЛОКАЛИЗАЦИЯ Часовых зон / Дат / Чисел
+=======================
+
+1)
+Временные зоны
+-------------------
+Стандарт UTC+0 / UTC-0
+
+Украина UTC+2
+
+
+дополнительная серьезная библиотека по работе с часовыми зонами / pytz
+------------------------
+https://pypi.python.org/pypi/pytz
+
+
+Работаем с таймзонами в Python
+------------------------------
+https://habrahabr.ru/company/mailru/blog/242615/
+
+
+settings
+--------------------
+# Internationalization
+# https://docs.djangoproject.com/en/1.11/topics/i18n/
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'       ## текущая временная зона на сервере
+
+USE_I18N = True         ## поддержка интернациализации (подгововка к переводам)
+
+USE_L10N = True         ## локализация формата чисел
+
+USE_TZ = True           ## локазиция временных зон
+
+
+Локализация чисел
+-----------------
+1)
+вариант активации в шаблонах
+------------------
+{% load l10n %}
+
+{% localize on %}                   ## блок активации Локализации
+    {{ mynumber }}
+    {{ mydate }}
+{% endlocalize %}
+
+
+2)
+вариант активации в полях моделей
+-----------------
+class DemoForm(forms.Form):
+
+height = forms.DecimalField(
+            max_digits=3,
+            decimal_places=2,
+            localize=True)          ## аргумент активации Локализации числа
+
+3)
+активация / деактивация локализации чисел (по месту)
+-----------------------
+{% load l10n %}
+
+{{ mydate|localize }}
+
+{{ mynumber|unlocalize }}
+Конец Теории 
+=================================================================
+
+
+
+
+
+Практика 
+==================================================================
+
+1)
+settings
+-------------------
+# Internationalization
+# https://docs.djangoproject.com/en/1.11/topics/i18n/
+
+# LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'uk'
+
+TIME_ZONE = 'Europe/Kiev'
+# TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+
+2)
+создать пакет locale в папке Апликации
+--------------------
+ryndin@pc:~/projects/students2017/src/students2017/students$ mkdir locale           **
+
+
+3)
+подготовка пакета интенациализации
+(комманду запускаю из папки апликации, где создана папка locale,
+где и будет пакет локализации - это важно)
+
+Пока нет маркеров на перевод - ничего не произойдет
+------------------
+=(students)ryndin@pc:~/projects/students2017/src/students2017/students$ 
+    python ../manage.py makemessages --locale=en --locale=uk --locale=ru --domain=django        **
+
+processing locale ru
+processing locale uk
+processing locale en
+
+
+4)
+подготовка перевода в шаблонах
+-------------------
+{% load i18n %}
+{% load static from staticfiles %}
+
+<title>{% block meta_title %}{% trans 'Base Template' %}{% endblock %}</title>
+...
+
+<li  class=" {% if request.path == '/' %}active{% endif%} to-big">
+    <a href="{% url 'students_page' %}">{% trans 'Home page' %}</a>
+</li>
+...
+
+и так далее во всех шаблонах
+
+
+5)
+подгатовка перевода для Строк в питон коде:
+(например строки в Моделях)
+-----------------------
+from django.db import models
+from django.utils.translation import ugettext_lazy as _         ## импорт функции под Псевдонимом _
+
+# Create your models here.
+
+# Group Model
+class Group(models.Model):
+
+    class Meta(object):
+        verbose_name=_("GROUP")                                 ## реализация функции - Маркер на перевод
+        verbose_name_plural=_("GROUPS")
+
+
+6)
+запускаяю еще раз
+(поскольку есть маркеры на перевод в Шаблонах и в питон коде - то формирует структуру)
+------------------
+=(students)ryndin@pc:~/projects/students2017/src/students2017/students$ 
+    python ../manage.py makemessages --locale=en --locale=uk --locale=ru --domain=django        **
+
+processing locale ru
+processing locale uk
+processing locale en
+
+=(students)ryndin@pc:~/projects/students2017/src/students2017/students$ tree locale             **
+locale
+├── en
+│   └── LC_MESSAGES
+│       └── django.po
+├── ru
+│   └── LC_MESSAGES
+│       └── django.po
+└── uk
+    └── LC_MESSAGES
+        └── django.po
+
+6 directories, 3 files
+
+
+7)
+нюанс - робот предлагает похожие названия - если не согласен - удаляй!
+--------------------
+#: templates/students/base.html:36
+#, fuzzy                                ## удалить - метка похожести
+#| msgid ”Group:”                       ## удалить - предложен похожий вариан
+msgid ”New Group:”
+msgstr ””
+
+
+8)
+Подготовка к переводу JS кода
+-----------------------------
+https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#internationalization-in-javascript-code
+
+
+8.1)
+urls.py
+-------
+## js translate for
+from django.views.i18n import JavaScriptCatalog
+
+js_info_dict = {                                ## в новых версиях явно указывать не надо
+    'domain': 'djangojs',
+    'packages': ('students',),
+}
+
+url(r'^jsi18n/$', JavaScriptCatalog.as_view(), js_info_dict, name='javascript_catalog'),
+
+
+
+8.2)
+base.html
+-----------
+<script src="{% url 'javascript_catalog' %}"></script>          ##  подключение скрипта js в шаблоне
+
+
+
+8.4
+просмостр в Браузере
+(если адрес показывает js код то настройки правильные)
+----------
+http://localhost:8000/jsi18n/
+
+
+
+признаки что есть перевод на js
+---------------------
+/* gettext library */
+
+  django.catalog = django.catalog || {};
+  
+  var newcatalog = {
+    "There was an error on the server. Please, try again a bit later.": "\u041f\u043e\u043c\u0438\u043b\u043a\u0430 \u043d\u0430 \u0421\u0435\u0440\u0432\u0435\u0440\u0456, \u0441\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0431\u0443\u0434\u044c-\u043b\u0430\u0441\u043a\u0430 \u043f\u0456\u0437\u043d\u0456\u0448\u0435 :))"
+  };         // - это перевод строки из js кода
+
+INFO / 2017-07-27 19:58:28,988 / basehttp / 29356 / 139876638258944 / "GET /jsi18n/ HTTP/1.1" 200 3189
+
+
+
+8.5
+собственно подготовка к переводу в самом js коде
+----------------------
+...
+'success': function(data, status, xhr){
+                if (status != 'success'){
+                    alert(gettext('Error inside Server. Try later!'));      ## gettext
+                    return false;
+                }
+
+
+students$ python ../manage.py makemessages -d djangojs -l uk -l en -l ru           ***
+
+processing locale ru
+processing locale uk
+processing locale en
+
+
+9)
+Результат: Подготовлены к переводу
+Шаблоны + Python код + JS код
+---------------------
+=(students)ryndin@pc:~/projects/students2017/src/students2017/students$ tree locale
+
+locale
+├── en
+│   └── LC_MESSAGES
+│       ├── djangojs.po
+│       └── django.po
+├── ru
+│   └── LC_MESSAGES
+│       ├── djangojs.po
+│       └── django.po
+└── uk
+    └── LC_MESSAGES
+        ├── djangojs.po
+        └── django.po
+
+
+...
+20)
+После Всего перевода - Компилирую перевод
+-------------------------------
+.../students$ python ../manage.py compilemessages
+
+
+
+
+Язык по выбору Клиента
+=================================
+
+Документация
+--------------------
+https://docs.djangoproject.com/en/1.10/topics/i18n/translation/#switching-language-in-templates
+
+
+теги
+----------
+<p>{% get_current_language as cur_lang %}Current language: {{ cur_lang }}</p>
+<p>{% get_available_languages as languages %}Available languages: {{ languages }}</p>
+<p>{% get_language_info for cur_lang as cur_info %}language Info: {{ cur_info }}</p>
+
+
+дают вывод
+----------
+Current language: en
+Available languages: [('uk', 'Ukrainian'), ('en', 'English'), ('ru', 'Russian')]
+language Info: {'bidi': False, 'name': 'English', 'name_local': 'English', 'code': 'en', 'name_translated': 'English'}
+
+
+фильтры
+-------
+{{ cur_lang|language_name }} (“German”)
+{{ cur_lang|language_name_local }} (“Deutsch”)
+{{ cur_lang|language_bidi }} (False)
+{{ cur_lang|language_name_translated }} (“německy”, when active language is Czech)
+
+
+
+1)
+язык по умолчанию (если пользователь без локации и в запросе браузера нет приоритета)
+-------------------
+LANGUAGE_CODE = 'en'
+
+
+2)
+досутпные языки для выбора
+--------------------
+LANGUAGES = [
+    ('uk', ('Ukrainian')),
+    ('en', ('English')),
+    ('ru', ('Russian'))
+]
+
+
+
+3)
+'django.middleware.locale.LocaleMiddleware',
+
+Вона перевірятиме ‘Accept-Language’ заголовок, що приходить з браузера і активо-
+вуватиме потрібну мову.
+
+
+
+4)
+код в шаблоне по выбору и выводу Языка
+(кратко: функционал тегов - из документации
+при лестании страниц выбор языка остается - похоже это прописанно с кукки сессии)
+-----------------------
+
+<!--Block Select Current Language-->
+        <li>
+          <form action="{% url 'set_language' %}" method="post" class="form-inline">
+          {% csrf_token %}
+          <input name="next" type="hidden" value="{{ request.get_full_path|slice:':' }}"/>
+          {% get_current_language as LANGUAGE_CODE %}
+          {% get_available_languages as LANGUAGES %}
+          {% get_language_info_list for LANGUAGES as languages %}
+          {% get_language_info for LANGUAGE_CODE as cur_info %}
+
+          <div class="dropdown">
+            <button
+                    class="btn btn-default dropdown-toggle"
+                    id="current-lang"
+                    data-toggle="dropdown"
+                    type="button"
+                    name="language">
+
+              {% trans 'Current language' %}: {{ cur_info.name_local }}
+
+              <span class="caret"></span></button>
+
+              <ul class="dropdown-menu">
+                {% for language in languages %}
+                <li>
+                  <div class="btn-group" >
+                
+                <button type="submit"
+                        name="language"
+                        value="{{ language.code }}"
+                        class="btn {% if language.code == LANGUAGE_CODE %}btn-primary{% else %}btn-link{% endif %}">
+                    {{ language.name_local }}
+                </button>
+
+                </div>
+
+                </li>
+                {% endfor %}
+              </ul>
+
+          </div>
+          </form>
+        </li>
+        <!--End Block Select Current Language-->
+
+
+5)
+что бы выбор языка работал то есть урл экшон action="{% url 'set_language' %}" method="post"
+срабатывал прописываем мурл-функцию
+----------------------------------
+
+
+# for select active language
+url(r'^i18n/*?', include('django.conf.urls.i18n')),
+
+
+

@@ -1,0 +1,127 @@
+0)
+https://www.w3schools.com/icons/default.asp
+===========================================
+Есть Отдельный Курс по Иконкам
+
+
+)0.1
+
+https://www.w3schools.com/icons/icons_reference.asp
+=========================
+
+По этой Ссылке репозиторий по 4 Библиотекам Иконок (есть Сортировка)
+
+ТУТ ЕСТЬ ВСЕ ИКОНКИ ДЛЯ РАБОТЫ КАКИЕ НАДО !!!
+
+(все что ниже это опционно)
+
+
+
+
+
+1)
+https://www.w3schools.com/icons/default.asp
+=====================
+
+пример из этого источника (отлично работает, хорошее решение):
+-------------------------
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<i class="fa fa-cloud"></i>
+<i class="fa fa-heart"></i>
+<i class="fa fa-car"></i>
+<i class="fa fa-file"></i>
+<i class="fa fa-bars"></i>
+
+</body>
+</html>
+
+
+2)
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+https://material.io/resources/icons/
+=====================================
+
+
+гид
+------------
+
+https://google.github.io/material-design-icons/
+
+
+сами иконки
+-----------
+
+https://material.io/resources/icons/?style=round
+
+
+пример
+----------------
+
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+</head>
+<body>
+
+<i class="material-icons">face</i>
+
+
+</body>
+</html>
+
+
+
+3)
+https://icons8.com/
+========================
+можно Вставить иконки либо скачать на сервер, Либо ссылка на картинку, Либо локальный стиль в CSS с УРЛом
+
+пример Стиль в CSS
+----------------
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<link href="style.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="icons8-twitter"></div>
+
+
+</body>
+</html>
+
+---------------
+
+.icons8-twitter { 
+display: inline-block;
+width: 144px;
+height: 144px;
+background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMTQ0IiBoZWlnaHQ9IjE0NCIKdmlld0JveD0iMCAwIDQ4IDQ4IgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxwYXRoIGZpbGw9IiMwM0E5RjQiIGQ9Ik00MiwxMi40MjljLTEuMzIzLDAuNTg2LTIuNzQ2LDAuOTc3LTQuMjQ3LDEuMTYyYzEuNTI2LTAuOTA2LDIuNy0yLjM1MSwzLjI1MS00LjA1OGMtMS40MjgsMC44MzctMy4wMSwxLjQ1Mi00LjY5MywxLjc3NkMzNC45NjcsOS44ODQsMzMuMDUsOSwzMC45MjYsOWMtNC4wOCwwLTcuMzg3LDMuMjc4LTcuMzg3LDcuMzJjMCwwLjU3MiwwLjA2NywxLjEyOSwwLjE5MywxLjY3Yy02LjEzOC0wLjMwOC0xMS41ODItMy4yMjYtMTUuMjI0LTcuNjU0Yy0wLjY0LDEuMDgyLTEsMi4zNDktMSwzLjY4NmMwLDIuNTQxLDEuMzAxLDQuNzc4LDMuMjg1LDYuMDk2Yy0xLjIxMS0wLjAzNy0yLjM1MS0wLjM3NC0zLjM0OS0wLjkxNGMwLDAuMDIyLDAsMC4wNTUsMCwwLjA4NmMwLDMuNTUxLDIuNTQ3LDYuNTA4LDUuOTIzLDcuMTgxYy0wLjYxNywwLjE2OS0xLjI2OSwwLjI2My0xLjk0MSwwLjI2M2MtMC40NzcsMC0wLjk0Mi0wLjA1NC0xLjM5Mi0wLjEzNWMwLjk0LDIuOTAyLDMuNjY3LDUuMDIzLDYuODk4LDUuMDg2Yy0yLjUyOCwxLjk2LTUuNzEyLDMuMTM0LTkuMTc0LDMuMTM0Yy0wLjU5OCwwLTEuMTgzLTAuMDM0LTEuNzYxLTAuMTA0QzkuMjY4LDM2Ljc4NiwxMy4xNTIsMzgsMTcuMzIxLDM4YzEzLjU4NSwwLDIxLjAxNy0xMS4xNTYsMjEuMDE3LTIwLjgzNGMwLTAuMzE3LTAuMDEtMC42MzMtMC4wMjUtMC45NDVDMzkuNzYzLDE1LjE5Nyw0MS4wMTMsMTMuOTA1LDQyLDEyLjQyOSI+PC9wYXRoPjwvc3ZnPg==') 50% 50% no-repeat;
+background-size: 100%; }
+
+
+
+
+4)
+https://www.iconfinder.com/
+====================
+
+Данный источник дает бесплатные наборы иконок, Удобнее всего скачать картинку на сервер
+
+
+
+

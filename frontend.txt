@@ -1,0 +1,165 @@
+
+Это все Бекенд
+    --------------
+    Python, Flask, Django, node.js, mongoDB
+    SQL, PostgreSQL, MySQL, Redis, Elasticsearch
+
+    
+Это Фронтенд
+    -------------    
+    Javascript, jQuery, AngularJS, React, vue.js
+    HTML, HTML5, DOM
+    CSS, CSS3
+
+Розробники реалізували масу Javascript бібліотек та фреймворків:
+	Backbone,
+    AngularJS,
+    Ember.
+    Vue.js
+    React.js
+Дозволяють ефективніше розробляти динамічні аплікації в режимі ООП і не губитись у десятках
+тисяч Javascript коду. 
+Саме тому останнім часом фронтенд розробка стала окремим напрямком і хороші HTML/CSS/Javascript
+спеціалісти є дуже затребувані на ринку.
+
+
+
+HTML Туториалы + Статьи о фичах
+================================
+    https://htmlacademy.ru
+    ----------------------
+        Курс на русском - много что прошел / через Акк Фейсбука    
+
+    htmlbook.ru    
+
+    Основной Туториал для меня
+    --------------------------
+    http://www.w3schools.com/html/default.asp
+    
+    Кодакадеми Курс HTML/CSS
+    ------------------------
+    https://www.codecademy.com/learn/web  
+
+    
+    https://habrahabr.ru/post/153613/
+        Ещё семь фич HTML5, о которых вы могли не знать tutorial 
+    
+
+    Make a Website - Курс
+    ---------------------
+        Explore HTML & CSS fundamentals as you build a website in this introductory course to web development.
+        https://www.codecademy.com/learn/make-a-website
+
+
+      
+Bootstrap - Фреймворк под HTML
+=============================
+    http://getbootstrap.com
+    http://getbootstrap.com/getting-started/
+    -----------------------
+    Главная документация
+    
+    http://www.w3schools.com/bootstrap
+    ----------------------------------
+    Хороший Туториал - Наверное Основной для меня
+
+
+
+JS JQuery
+===========================
+    http://www.w3schools.com/jquery/default.asp
+    ---------------------------    
+    Основной Туториал по jquery
+
+
+    http://www.w3schools.com/jquery/trysel.asp
+    http://www.w3schools.com/jquery/jquery_ref_selectors.asp
+    ------------------------
+    Наглядный Тестер Селекторов + Сборник Селекторов 
+
+
+    http://www.w3schools.com/jquery/jquery_ref_events.asp
+    -------------------------
+    Сборник Событий (Методов) jquery
+
+
+    http://www.w3schools.com/jquery/jquery_ref_effects.asp
+    ------------------------
+    Сборник Эффектов (Методы) jquery
+
+
+JS
+http://www.w3schools.com/js/default.asp
+====================================
+    Основной Туториал для меня по JS
+
+
+    Кодакадеми курс JS
+    ------------------    
+    https://www.codecademy.com/learn/javascript
+
+
+    КодАкадеми курс JQuery  
+    ----------------------  
+    https://www.codecademy.com/learn/jquery 
+
+
+    Make an Interactive Website / HTML + JQuery
+    ---------------------------
+    https://www.codecademy.com/skills/make-an-interactive-website    
+
+
+CSS - чистый
+===========================
+    http://www.w3schools.com/css/default.asp
+    -----------------------
+    Основной Туториал для меня
+
+    Основные Шрифты (font-famaly)
+    --------------------------
+    https://www.w3.org/TR/CSS21/fonts.html#generic-font-families
+   
+
+
+Прочее
+=========================
+    Learn Sass
+    ----------------------
+    https://www.codecademy.com/learn/learn-sass
+
+
+EmberJS
+==================
+    Api / Tutorials
+    ---------------    
+        http://emberjs.com  
+        https://guides.emberjs.com/v2.7.0/getting-started/quick-start/
+    
+    EmberJS - на русском
+    --------------------
+        http://emjs.ru
+
+    Разработка → Начинаем работать с Ember.js перевод     
+        https://habrahabr.ru/post/149036/
+
+    Разработка → Философия Ember.js 
+        https://habrahabr.ru/post/249195/
+
+
+
+ReactJS
+====================
+    Introduction to React.js: Part I
+    --------------------------------
+    https://www.codecademy.com/learn/react-101
+
+    Introduction to React.js: Part II
+    --------------------------------
+    https://www.codecademy.com/learn/react-102
+
+
+
+
+
+
+

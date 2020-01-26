@@ -1,0 +1,192 @@
+Crispy forms для Форм Джанго/Питон
+    
+1)
+Документация
+===================
+http://django-crispy-forms.readthedocs.io/en/latest/#
+
+https://pypi.python.org/pypi/django-crispy-forms/1.6.1
+   
+1/1 
+helper
+http://django-crispy-forms.readthedocs.io/en/latest/form_helper.html
+
+1/2
+layout
+http://django-crispy-forms.readthedocs.io/en/latest/layouts.html
+
+
+Кастомизация Криспи Форм
+Django form customization using Crispy Forms
+-------------------
+https://www.dreamsolution.nl/2014-09-21-django-crispy-forms.html
+
+
+2)
+моя установка
+==================
+в команд строке
+$ pip install django-crispy-forms
+
+pip freeze > requirements.txt 
+    django-crispy-forms==1.6.1
+
+
+в сеттингах
+INSTALLED_APPS = [
+    ...
+    'registration',
+    'crispy_forms',
+    'comments',
+    'debug_toolbar',
+]
+
+
+в сеттингах
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+
+2 Основных объекта в Кристи Формах:
+1) пакет helper (class Helper)
+2) пакет layout (classes ...)
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
+...
+
+
+{% load crispy_forms_tags %}
+
+в контенте
+{% crispy form %}
+-----------------------------
+
+
+методы класса FormHelper
+==============
+>>> from crispy_forms import helper
+>>> dir(helper.FormHelper)
+
+['__class__', '__delattr__', '__delitem__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', 
+'__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__le__', '__len__', 
+'__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', 
+'__setitem__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_check_layout', 
+'_check_layout_and_form', '_error_text_inline', '_form_action', '_form_method', '_form_style', 
+'_help_text_inline',
+ 
+'add_input',
+'add_layout',
+'all',
+'build_default_layout',
+'disable_csrf',
+'error_text_inline',
+'exclude_by_widget',
+'field_class',
+'field_template',
+'filter',
+'filter_by_widget',
+'form',
+'form_action', 
+'form_class',
+'form_error_title',
+'form_id',
+'form_method',
+'form_show_errors',
+'form_show_labels',
+'form_style',
+'form_tag',
+'formset_error_title',
+'get_attributes',
+'help_text_inline',
+'html5_required',
+'include_media',
+'label_class',
+'layout', 
+'render_hidden_fields',
+'render_layout',
+'render_required_fields',
+'render_unmentioned_fields',
+ 'template']
+
+
+методы классы модуля layout
+==============
+>>> from crispy_forms import layout
+>>> dir(layout)
+
+['BaseInput', 'Button', 'ButtonHolder',
+'Column', 'Div', 'Field', 'Fieldset',
+'HTML', 'Hidden', 'Layout', 'LayoutObject',
+'MultiField', 'MultiWidgetField', 'Reset',
+'Row', 'Submit', 'TEMPLATE_PACK', 'Template',
+'TemplateNameMixin',
+'__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__',  '__package__', '__spec__',
+
+'conditional_escape', 'flatatt', 'get_template_pack',
+'render_field', 'render_to_string', 'string_types',
+'text_type', 'unicode_literals']
+
+
+
+Мой Код
+=====================
+1) 
+Форма отправки Письма к Администратору Сайта
+
+В Шаблоне - все что приходит в шаблон
+----------
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% crispy form %}
+{% endblock %}
+
+
+
+Во Вьюшке - это все что надо от Криспи Формс
+---------
+class ContactForm(forms.Form):
+    
+    # расширяем методы при инициализации Инстанса
+    def __init__(self, *args, **kwargs):
+
+        # call original initializator
+        super(ContactForm, self).__init__(*args, **kwargs)
+
+        # instance
+        self.helper = FormHelper()
+
+        # instance atributes
+        self.helper.form_class = 'form-horizontal'
+        self.helper.form_method = 'post'
+        self.helper.form_action = reverse('contact_admin')
+
+        # bootstrap styles
+        self.helper.help_text_inline = True
+        self.helper.html5_required = True
+        self.helper.label_class = 'col-sm-2 control-label'
+        self.helper.field_class = 'col-sm-8'
+        
+        # form button
+        self.helper.add_input(Submit('send_button', 'Submit'))
+    .....
+    далее логика Валидации и Отправки Сообщения
+
+
+1.1)
+Альтернативная реализация - Уже готовая Форма (со стилями и bootstrap)
+------------
+На домашнє завдання: переробіть контакт форму з використанням вже існу-
+ючої Django аплікації: https://pypi.python.org/pypi/django-contact-form По-
+суті, вам практично не прийдеться розробляти кастомного коду, а лише
+інтегрувати існуючий у свою аплікацію.
+
+
+Документация
+------------
+https://pypi.python.org/pypi/django-contact-form/1.4.2
+http://django-contact-form.readthedocs.io/en/1.4.2/
+
+
+
+

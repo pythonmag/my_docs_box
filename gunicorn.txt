@@ -1,0 +1,17 @@
+
+@sensar7 У вас два варіанти, Або ж самому писати сервер за допомогою пакету socket
+але на даному етапі рекомендую взагалі відкинути цей варіант і не дивитись в цю
+сторону. Вам достатньо буде gunicorn'. І мікро фреймворка для побудови RESTful API,
+для написання своїх ендпойнтів. І ваші ендпойнти просто буде дьоргати клієнт:wink:
+
+Стосовно якого фреймворку який вам допоможе в написані АПІШКИ, це вже мабуть вам вибирати.
+
+http://gunicorn.org/
+====================
+Gunicorn 'Green Unicorn' is a Python WSGI HTTP Server for UNIX.
+It's a pre-fork worker model. The Gunicorn server is broadly compatible with
+various web frameworks, simply implemented, light on server resources, and fairly speedy.
+
+
+
+

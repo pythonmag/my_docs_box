@@ -1,0 +1,72 @@
+0) 
+=========================
+https://docs.djangoproject.com/en/3.0/topics/http/decorators/#module-django.views.decorators.http
+
+https://docs.djangoproject.com/en/3.0/topics/class-based-views/intro/#decorating-the-class
+
+https://www.bedjango.com/blog/top-6-django-decorators/
+
+
+примеры собственных декораторов в Джаного:
+--------------------
+https://simpleisbetterthancomplex.com/2015/12/07/working-with-django-view-decorators.html
+
+
+
+
+Примеры вызова Декораторов в коде питон
+------------------------------
+from django.contrib.auth.decorators import login_required, permission_required
+from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView
+
+
+class ProtectedView(TemplateView):
+    template_name = 'secret.html'
+
+    @method_decorator(login_required)                       // декарированяю функции доп свойствами
+    def dispatch(self, *args, **kwargs):
+        return super(ProtectedView, self).dispatch(*args, **kwargs
+
+    или
+
+@method_decorator(login_required, name='dispatch')
+class ProtectedView(TemplateView):
+    template_name = 'secret.html'
+
+    или
+
+decorators = [never_cache, login_required]
+
+@method_decorator(decorators, name='dispatch')
+class ProtectedView(TemplateView):
+    template_name = 'secret.html'
+
+@method_decorator(never_cache, name='dispatch')
+@method_decorator(login_required, name='dispatch')
+class ProtectedView(TemplateView):
+    template_name = 'secret.html'
+--------------------------------
+
+
+
+from django.utils.decorators
+============================
+    Следующие декораторы @:
+
+    classonlymethod
+    method_decorator
+    decorator_from_middleware_with_args
+    decorator_from_middleware
+    available_attrs
+    make_middleware_decorator
+    classproperty
+
+
+from django.contrib.auth.decorators
+========================
+    Следующие декораторы @:
+    user_passes_test
+    login_required
+    permission_required
+    

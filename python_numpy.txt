@@ -1,0 +1,17 @@
+
+numpy
+===========
+
+edureka
+----------------
+достойный туториал
+https://www.edureka.co/blog/python-numpy-tutorial/
+
+
+
+Python NumPy Tutorial | NumPy Array | Python Tutorial For Beginners |
+ Python Training | Edureka
+----------------
+неплохой туториал на 30 мин
+https://www.youtube.com/watch?v=8JfDAm9y_7s
+

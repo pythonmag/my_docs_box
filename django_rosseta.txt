@@ -1,0 +1,41 @@
+
+Rosetta is a Django application that eases the 
+translation process of your Django projects.
+==============
+https://django-rosetta.readthedocs.io/
+
+https://pypi.org/project/rosetta/
+
+
+
+
+1)
+pip install django-rosetta==0.7.13
+
+    Collecting django-rosetta
+  Downloading django-rosetta-0.7.13.zip (1.8MB)
+    ...
+    Installing collected packages: polib, microsofttranslator, django-rosetta
+    Successfully installed django-rosetta-0.7.13 microsofttranslator-0.8 polib-1.0.8
+
+pip freeze > requirements.txt
+
+2)
+INSTALLED_APPS = [
+    ...
+    'students',
+    'studentsdb27',
+    'debug_toolbar',
+    'rosetta',
+    ]
+
+3)
+    import rosetta.urls
+    # for trans in admin panel
+    url(r'^rosetta/', include('rosetta.urls')),
+
+4)
+    http://127.0.0.1:8000/rosetta/
+
+
+

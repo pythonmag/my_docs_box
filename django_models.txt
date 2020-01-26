@@ -1,0 +1,329 @@
+
+Документация
+=============
+
+https://docs.djangoproject.com/en/3.0/topics/db/models/
+
+
+https://docs.djangoproject.com/en/3.0/topics/db/models/#relationships
+
+https://docs.djangoproject.com/en/3.0/topics/db/examples/many_to_many/
+
+https://docs.djangoproject.com/en/3.0/topics/db/examples/many_to_one/
+
+https://docs.djangoproject.com/en/3.0/topics/db/examples/one_to_one/
+
+
+
+https://docs.djangoproject.com/en/dev/ref/models/options/#model-meta-options
+
+
+
+https://docs.djangoproject.com/en/3.0/topics/db/managers/
+
+https://docs.djangoproject.com/en/3.0/topics/db/queries/
+
+https://docs.djangoproject.com/en/3.0/topics/db/queries/#field-lookups
+
+https://docs.djangoproject.com/en/3.0/topics/db/queries/#the-pk-lookup-shortcut
+
+
+
+
+##)
+Задумывайтесь всегда над вопросом: "может ли (первый) содержать несколько (второй)? 
+Может ли (второй) содержать несколько (первый)?".
+
+
+
+И тут смотрите:
+1) Если нет-нет - то это One-To-One relationship. (Можно использовать               OneToOneField).
+2) Если да-нет иди нет-да - то это One-To-Many relationship. (Нужно использовать    ForeignKey).
+3) Если да-да - то это Many-To-Many relationship. (Можно использовать               ManyToManyField).
+
+
+
+Поэтому, исходя из выше перечисленного, если один комментарий может содержать несколько под-комментариев,
+ которые будут ссылаться непосредственно на него - это One-To-Many. Если комментарии идут просто таблицей 
+и нельзя написать комментарий на комментарий - это One-To-One, при чем связь это будет между комментарием
+ и записью (блогом, постом, т.д.).
+
+
+А вообще, комментарии, как по мне, не особо приятно держать в реляционных базах данных. Я бы предпочел что то
+ из Documented Oriented Databases, Монго как пример. Они поддерживают шикарную вложенность. 
+Но не мудрите с тестовым заданием, а выполняйте поставленные условия в первую очередь. Я просто поделился мнением.
+
+
+##)
+Хмм, как на счет того, чтоб хранить комментарии в виде JSON в таблице? Постгрес с этим прекрасно справляется.
+https://blog.codeship.com/unleash-the-power-of-storing-json-in-postgres/
+
+
+Я совсем забыл про это, но это позволит вам соединить сильные части Монго и сильные части Postgres. 
+Как работать с json, парсить его и наоборот - думаю вы знаете. 
+
+
+
+СТАТЬИ
+=====================
+
+1)
+Django. Кастомный QuerySet и Manager для добавления в цепь вызова дополнительных методов
+--------------------------
+http://adw0rd.com/2012/8/24/django-custom-queryset-and-manager-for-chainable-methods/
+
+https://djangosnippets.org/snippets/562/
+
+Блог от Эдварда
+
+
+2)
+Unleash the Power of Storing JSON in Postgres
+https://blog.codeship.com/unleash-the-power-of-storing-json-in-postgres/
+
+
+
+Теория - Практика
+==================
+
+ORM - Object Relatoin Mapping
+-----------------------------
+
+Комманды:
+
+$ python3 manage.py
+
+$ python3 manage.py makemigrations
+
+$ python3 manage.py migrate
+
+$ python3 manage.py inspectdb
+
+$ python3 manage.py sqlmigrate
+
+$ python3 manage.py dbshell                 # только mysql postgresql
+
+
+Класс Модели            -->     Таблица SQL
+
+объект/атрибут Модели   -->     Строка таблицы
+
+QuerySet                -->     Запрос (множество запроса)
+
+
+простой запрос в ДБ через модель:
+
+for user in User.objects.filter(age__gt=21):
+    print(user.name)
+
+
+Основные классы полей:
+---------------------
+CharField / EmailField / TextField / BooleanField / IntegerField / 
+DateField / DateTimeField
+
+
+Свойства Полей (популярные)
+---------------------------
+blank           # поле может быть пустым (None)
+
+null            # при этом хранится в базе как NULL (как хранить пустое значение) (или "")
+
+max_length      # максимальная длинна поля
+
+primary_key     # это поле - первичный ключ (если автоприращение pk=id не подходит)
+
+unique          # поле уникально (например номер паспорта - нет дубликатов в БД)
+
+db_index        # для этого поля нужен индекс в базе   (дял оптимизации - отд тема)
+
+default         # значение по умолчанию (даже может быть привязан вызов функции особой)
+
+choices         # варианты значений [('s', 'small'), ('m', 'middle'),...]
+                    # 's' - сохраняется в БД / 'small' - хранится в питон-коде 
+
+
+Свойства полей моделей - важный функционал, которые хранит в себе Мета информацию о полях,
+даже такую которая не сохраняется в БД, но сохраняется на уровне питон-кода и доступна
+фреймворку
+
+
+Связи между Моделями
+--------------------
+(на примере класса Модели)
+
+Post --> (Category, PostStatus, Tag)
+
+
+class Post(models.Model):
+
+    title = models.CharField(max_length = 255)
+    ...
+
+    cartegory = models.ForeignKey(Category,                     # OneToMany
+                                null = True, 
+                                on_delete = models.SET_NULL)
+
+            # внешняя связь для выбора Категирии для Поста
+            # категория может быть NULL - то есть может быть не выбрана
+            # on_delete -- при удалении Категории. значение устанавливается в NULL
+
+    status = models.OneToOneField(PostStatus)                   # OneToOne
+
+            # внешняя связь на поле вспомогательной таблицы
+            # например статистика про пост / комменты / показы / лайки и пр.
+            #
+
+    tags = models.ManyToManyField(Tag)                          # ManyToMany
+
+            # в БД создается промужет таблица со ссылками на post и tag (posttags) 
+            # данная таблица не имеет представления в виде Класса но хранит в бвзе 
+            # обоюдные связи
+
+
+Настройки для внешних ключей
+----------------------------
+(касается ForeignKey, OneToOneField)
+
+1) models.PROTECT
+        # если поле внешней модели удаляется, то срабатывает Запрет на удаление внешнего поля 
+
+2) models.CASCADE
+        # если внешнее поле удаляется, то удаляются все объекты которые на него ссылались !!
+        # и даже те поля удаляются которые ссылются каскадно на дочерние поля от ссылки 
+
+3) models.SET_NULL
+        # если внешнее поле удаляется, то его значение в дочерн поле устанавливается
+            в NULL
+
+4) models.DO_NOTHING
+        # если внешнее поле удаляется, то в связанном поле ничего не происходит
+            (остается ссылка ?)
+
+
+Использование Отношений Моделей в Коде
+------------------------------
+
+https://docs.djangoproject.com/en/3.0/ref/models/relations/
+
+
+Post --> (Category, PostStatus, Tag)
+
+post = Post.objects.get(pk=1)           # выборка строки главной таблицы
+
+
+category = post.category                # внешний (ForignKey) атрибут/объект строки
+
+category_id = post.category_id          # число/номер внешнего атрибута (сгенерировано Джанго)
+
+
+category.post_set.all()                 # обратное обращение к post (массив инстансев Post )
+
+
+status = post.status                    # атрибут/объект(уникальный) 
+
+status_id = post.status_id              #   число/номер внешнего атрибута
+
+
+tags_manager = post.tags                # Менеджер связей (ManyToMany obj) 
+
+post.tags.all()                         # массив внешних атрибутов (через Менеджер)
+
+
+tag.post_set.all()                      # обратное обращение к post (массив инстансев Post )
+                                        # Доступ к задающему Связи объекту 
+
+примеры обратных отношений
+--------------------------
+
+https://docs.djangoproject.com/en/3.0/ref/models/relations/#related-objects-reference
+
+>>> b = Blog.objects.get(id=1)
+>>> e = Entry.objects.get(id=234)
+>>> b.entry_set.add(e)                  # Associates Entry e with Blog b.
+
+
+>>> b = Blog.objects.get(id=1)
+>>> e = Entry.objects.get(id=234)
+>>> b.entry_set.remove(e)               # Disassociates Entry e from Blog b.
+
+
+>>> b = Blog.objects.get(id=1)
+>>> b.entry_set.clear()                 # Removes all objects from the related object set
+
+
+
+
+загрузка множеств объектом Таблицы
+----------------------------------
+post_queryset = Post.objects.all()      # объект QuerySet / Невыполненный запрос в БД
+post_set = Post.objects.all()[0:4]      # выборка из Множества
+
+
+Выборка по объекту
+------------------
+categ = Category.objects.get(id=3)
+post_set = Post.objects.filter(category=categ)
+    # выборка всех постов по категории
+
+
+
+Model _meta API
+================
+
+https://docs.djangoproject.com/en/3.0/ref/models/meta/#module-django.db.models.options
+
+
+Модель _meta API лежит в основе Django ORM. Это позволяет другим частям системы, таким как поиск, запросы,
+ формы и администратор, понимать возможности каждой модели. API доступен через атрибут _meta каждого класса
+ модели, который является экземпляром объекта django.db.models.options.Options. Методы, которые он
+ предоставляет, могут использоваться для: Извлечения всех экземпляров поля модели. Извлечение одного 
+ экземпляра поля модели по имени.
+
+
+примеры
+-------------
+
+>>> from django.contrib.auth.models import User
+
+# A field on the model
+>>> User._meta.get_field('username')
+<django.db.models.fields.CharField: username>
+
+
+--------------
+
+>>> StudentModel._meta.get_fields()
+
+(
+    <django.db.models.fields.AutoField: id>,
+    <django.db.models.fields.CharField: first_name>,
+    <django.db.models.fields.CharField: last_name>,
+    <django.db.models.fields.CharField: middle_name>,
+    <django.db.models.fields.DateField: birth_date>,
+    <django.db.models.fields.files.ImageField: photo>,
+    <django.db.models.fields.CharField: ticket>,
+    <django.db.models.fields.BooleanField: is_leader_of_groupe>,
+    <django.db.models.fields.TextField: notes>
+)
+
+
+
+Model Manager [Custom]
+=======================
+
+class StudentMnager(models.Manager):
+
+    def best_students(self):                        # new method of model
+        return self.filter(rating__gt = 70)
+
+    def create_draft(self, **kwargs):               # new method of model
+        kwargs['draft'] = True
+        return self.create(**kwargs)
+
+
+class Sudent(models.Model):
+    name = models.CharField(...)
+    rating = models.CharField(...)
+
+    objects = StudentManager()                      # new Model Manager

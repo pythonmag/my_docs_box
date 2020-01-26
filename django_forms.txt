@@ -1,0 +1,100 @@
+
+Пакет дял автоматического создания Форм
+(начал с создания Формы Письма к Админу)
+
+
+Документация
+=====================
+https://docs.djangoproject.com/en/3.0/topics/forms/
+
+https://docs.djangoproject.com/en/3.0/ref/forms/fields/#module-django.forms.fields
+
+https://docs.djangoproject.com/en/3.0/ref/forms/widgets/#module-django.forms.widgets
+
+https://docs.djangoproject.com/en/3.0/topics/forms/formsets/
+
+https://docs.djangoproject.com/en/3.0/topics/forms/modelforms/
+
+https://docs.djangoproject.com/en/3.0/topics/forms/media/
+
+
+
+База по созданию Форм с помощью Джаного
+(поля, валидация, виджеты)
+==========================
+https://djbook.ru/rel1.7/topics/forms/index.html#working-with-forms
+
+
+Полный функционал Методов и Лигики Форм
+(from / is_valid / cleaned_data / as_p / widgets / errors / is_bound и прочее)
+==========================
+https://djbook.ru/rel1.7/ref/forms/api.html#module-django.forms
+
+
+
+книга Подобы стр.325
+(там есть база и ссылка на документацию)
+=====================
+
+
+Валидация Файлов в Формах
+=========================
+https://pypi.python.org/pypi/django-validated-file/2.0
+
+
+
+Валидация Файлов код от Савченко
+================
+
+pip install python-magic
+
+
+validation.py: (модуль обработки)
+----------------------
+import magic
+
+    mime = magic.Magic(mime=True)
+def get_mimetype(fobject):
+    mimetype = mime.from_buffer(fobject.read(1024))
+    fobject.seek(0)
+    return mimetype
+
+def valid_image_mimetype(fobject):
+    mimetype = get_mimetype(fobject)
+    if mimetype:
+        return mimetype.startswith('image')
+    else:
+        return False 
+
+MAX_SIZE = 2048000  #2mb
+
+def valid_image_size(image, max_size=MAX_SIZE):
+    image_size = len(image)
+    if image_size > max_size:
+        return False
+    else:
+        return True
+
+
+
+student.py: (вьюшка)
+--------------------
+from .validation import valid_image_mimetype, valid_image_size
+
+ photo = request.FILES.get('photo')
+ if photo:
+     correct_image = valid_image_mimetype(photo)  #valid image file
+     if correct_image:
+         correct_file_size = valid_image_size(photo) #valid image size
+         if correct_file_size:
+             data['photo']=photo
+         else:
+             errors['photo'] = u"Файл слишком большой"
+     else:
+         errors['photo'] = u"Выбирите файл-изображение"
+
+
+
+
+
+

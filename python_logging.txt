@@ -1,0 +1,377 @@
+
+Логгинг - концепция работающая в Питон на глобальной уровне (и без Джанго)!!!
+потому Логги пишутся и в консоль(ос) и в файлы
+------------------------------------------
+
+
+Документация
+============
+https://docs.djangoproject.com/en/1.11/topics/logging/
+https://docs.djangoproject.com/en/1.11/topics/logging/#configuring-logging
+
+https://djbook.ru/rel1.9/topics/logging.html
+https://docs.python.org/3.5/library/logging.html#module-logging
+
+
+Теория
+стр.492
+============
+Логування - це збереження активності програми у певному узгодженому фор-
+маті. Логування придумали та використовують для трьох основних завдань:
+
+    • дослідження різного роду помилок та проблем роботи програми на
+    продакшин системах;
+
+    • збір та візуалізація статистики роботи користувачів з програмою;
+
+    • під час розробки програми для відлову помилок та дебагу коду.
+
+
+У першому випадку логи дозволяють знаходити причину поточних або потен-
+ційних майбутніх помилок в аплікації, можливі діри в безпеці, різного роду
+атаки та факти неправильного використання програми.
+
+У другому випадку логи дозволяють моніторити як саме програма використо-
+вується, будувати тренди та прогнозувати майбутні потреби як по удоскона-
+ленню програми так і для кращого задоволення потреб користувачів.
+
+У найпростішому випадку лог - це файл із записами прив’язаними до дати та
+часу.
+
+Отображение Логов
+-----------------
+    в консолі програми;
+    
+    у файли;
+    
+    відправляти електронними листами адміністраторам програми;
+
+    HTTP або TCP/IP запитами на віддалений сервер чи веб-сайт;
+    
+    і різноманітними іншими каналами передачі даних.
+
+
+Типы Логов:
+-----------
+    • логи веб-сервера: лог доступу до сервера, лог помилок, лог стану сервера
+    (старт, зупинка, рестарт);
+
+    • логи бази даних: стан бази, лог запитів у базу даних;
+
+    • логи безпеки сервера: доступ до сервера (наприклад по протоколу ssh чи
+    ftp), спроби несанкціонованого доступу;
+
+    • системні логи: функціонування сервера (старт, зупинка, перезавантаже-
+    ння), завантаження сервера (операційної пам’яті, процесора), додаткові
+    логи плагінів для моніторингу комп’ютера;
+
+    • логи роботи мережі: використання мережі, доступ по мережі, старт і
+    зупинка мережевих сервісів.
+
+
+Фича
+----------
+Для моніторингу лог-файлу “вживу” з файлової системи, на Лінуксі є коман-
+да
+    tail -f path/to/file.log
+По мірі заповнення лог-файла новими записами ви їх одразу бачитимете в консолі завдяки команді tail.
+
+
+log rotation
+------------
+Щоб уникати подібних проблем, придумали так званий підхід log rotation. Бу-
+демо перекладати його як “обертання логів” або ротація логів. Як тільки файл
+досягає певного максимально встановленого розміру, або як тільки проходить
+певна фіксована кількість часу, файл перейменовується (наприклад з event.log
+на event.log.1), архівується, а для поточного логу створюється новий порожній
+файл. Коли головний лог-файл знову час оновлювати на порожній, тоді усі по-
+передні лог-файли посуваються на одиничку так, що файл event.log.1 перейде
+у файл event.log.2 і так далі. Таким чином, кожен із таких архівних файлів буде
+обмеженим у розмірі.
+
+
+debug / info / warning / error / critical
+
+DEBUG (10): інформація корисна, здебільшого, при діагностуванні проблем;
+
+INFO (20): підтвердження того, що усе йде як потрібно;
+
+WARNING (30): все працює добре, але є незначна проблема, або вона може виникнути незабаром;
+
+ERROR (40): через доволі серйозну проблему програма не змогла виконати певну функцію;
+
+CRITICAL (50): проблема, через яку програма не може працювати.
+
+
+Пример Простого Логгинга
+------------------------
+код:
+import logging
+
+name = 'Yurii'
+age = 40
+
+logging.warning('name: {} / age: {}'.format(name, age))
+
+вывод:
+~/my_docs$ python test.py
+WARNING:root:name: Yurii / age: 40
+
+
+Пример Логгинга в Файл
+----------------------
+код:
+import logging
+
+# configure file logging
+logging.basicConfig(filename='mytest.log', level=logging.DEBUG)
+logging.debug('We log into file')
+logging.info('INFO message we log there too')
+logging.warning('WARNING we log into file as well!')
+
+в файле mytest.log:
+DEBUG:root:We log into file
+INFO:root:INFO message we log there too
+WARNING:root:WARNING we log into file as well!
+
+код:
+import logging
+
+logging.basicConfig(format='%(asctime)s %(levelname)s:%(message)s', level=logging.DEBUG)
+logging.debug('This is message with custom format')
+logging.info('And this one too')
+
+вывод в консоль:
+2017-07-25 23:26:21,018 DEBUG:This is message with custom format
+2017-07-25 23:26:21,018 INFO:And this one too
+
+
+Базовая конфигурация / Основной класс Конфигурации Логгинга
+( logging.basicConfig() )
+---------------------
+https://docs.python.org/3.5/library/logging.html#logging.basicConfig
+
+
+
+Форматы Логгинга
+(атрибуты как выводится сообщение)
+-----------------
+https://docs.python.org/3.5/library/logging.html#logrecord-attributes
+
+
+
+Компоненты
+---------------
+логери (loggers):
+    об’єкти, які виконують основну роботу з логування;
+
+обробники (handlers): 
+    об’єкти, які передають і зберігають повідомлення у потрібному місці;
+
+компоненти форматування (formatters):
+    дозволяють визначати кастомні формати для повідомлень;
+
+фільтри (filters): 
+    визначають чи пропускати повідомлення чи ігнорувати;
+
+
+settings.py Django:
+------------------
+https://docs.djangoproject.com/en/1.11/ref/settings/#logging
+
+
+Django project
+=================
+
+1) settings
+----------------
+LOG_FILE = os.path.join(BASE_DIR, 'students_log.log')
+
+
+2) settings
+----------------
+LOGGING = {
+    'version': 1,
+
+    'disable_existing_loggers': True,
+
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s .. %(asctime)s .. %(module)s .. %(process)d .. %(thread)d .. %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s .. %(message)s'
+        }
+    },
+
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'console': {
+            'level': 'INFO',
+            # 'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': LOG_FILE,
+            'formatter': 'verbose',
+        }
+        # 'mail_admins': {
+        #     'level': 'ERROR',
+        #     'class': 'django.utils.log.AdminEmailHandler',
+        #     'filters': ['special']
+        # }
+    },
+
+    'loggers': {
+        'django': {
+            'handlers': ['null'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        # 'django.request': {
+        #     'handlers': ['console'],
+        #     'level': 'INFO',
+        #     'propagate': False,
+        # },
+        'students.signals': {                       ## следим логи из файла
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+        },
+        'students.contact_admin': {                 ## следим логги из файла
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+        }
+    }
+}
+
+
+3)
+(создаем файл за которым следим - он в логгерах)
+----------------------
+ryndin@pc:~/projects/students2017/src/students2017/students$ touch signals.py
+ryndin@pc:~/projects/students2017/src/students2017/students$ ls
+admin.py                   contact_admin.py    migrations     paginate.py  static     util.py
+app_context_processors.py  file_validation.py  models         __pycache__  templates  views.py
+apps.py                    __init__.py         models_old.py  signals.py   tests.py
+
+
+4)
+(signals.py:)
+-----------------
+from django.db.models.signals import post_save      ## сигнал после save() модели
+from django.dispatch import receiver
+
+from .models import Student
+
+
+@receiver(post_save, sender = Student)              ## декоратор указывает что слушаем
+def log_student_data_updated_created(sender, **kwargs):
+    print(sender)
+
+
+5)
+(apps.py:)
+-------------------
+# -*- coding: utf-8 -*-
+from django.apps import AppConfig
+
+
+class StudentsConfig(AppConfig):
+    name = 'students'
+    verbose_name = 'Database Students'
+
+    def ready(self):                     ## как в js - когда все модули django запущены
+        from students import signals
+
+
+6)
+(students/__init__.py:)
+-----------------------
+default_app_config = 'students.apps.StudentsAppConfig'
+
+
+7)
+(рабочий код signals.py:)
+-------------------------
+import logging
+
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
+
+from .models import Student
+
+@receiver(post_save, sender=Student)
+def log_student_data_updated_created(sender, **kwargs):
+
+    logger = logging.getLogger(__name__)
+
+    student = kwargs['instance']
+    if kwargs['created']:
+        logger.info('Student created: {} {} (ID: {}) (group: {})'.format(student.last_name,
+                                                            student.first_name, student.pk,
+                                                                         student.student_group.title))
+    else:
+        logger.info('Student updated: {} {} (ID: {}) (group: {})'.format(student.last_name,
+                                                            student.first_name, student.pk,                                                                         student.student_group.title))
+
+
+@receiver(post_delete, sender=Student)
+def log_student_data_deleted(sender, **kwargs):
+
+    logger = logging.getLogger(__name__)
+
+    student = kwargs['instance']
+    logger.info('Student deleted: {} {} (ID: {}) (group: {})'.format(student.last_name,
+                                                            student.first_name, student.pk,                                                                         student.student_group.title))
+
+
+8)
+contact_admin.py:
+-----------------
+(рабочий код при отправке письма админу) 
+class SendMailAdminView(FormView):
+    template_name = 'students/contact_admin/form_contact.html'
+    form_class = ContactForm
+    success_url = '/contact-admin/'
+
+    def form_valid(self, form):
+        subject = form.cleaned_data['subject']
+        message = form.cleaned_data['message']
+        from_email = form.cleaned_data['from_email']
+
+        try:
+            send_mail(subject,
+                      (message+'\n massage was send from: '+from_email),
+                      from_email,
+                      [ADMIN_EMAIL]
+                      )
+            logger = logging.getLogger(__name__)
+            logger.info('Send mail Success: from email {}'.format(from_email))
+
+        except Exception:
+            message('An error occurred while sending the message')
+            logger = logging.getLogger(__name__)
+            logger.exception(message)
+
+        else:
+            messages.info(self.request, ' Send Your Mail is Success :)! ')
+
+        return super(SendMailAdminView, self).form_valid(form)
+
+9)
+Домашки некоторые моменты
+-------------------------
+http://devgroup.vitaliypodoba.com/t/glava-10-dima-dvk-zv-t-po-domashkam/1588
+
+
+
+пример как сделать Логи цветными в Терминале
+-----------------------
+http://plumberjack.blogspot.com.au/2010/12/colorizing-logging-output-in-terminals.html
+

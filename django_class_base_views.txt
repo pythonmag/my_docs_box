@@ -1,0 +1,394 @@
+
+1)
+Все Классы-Вьюшки
+-------------------
+https://ccbv.co.uk/
+// Очень хорошая ссылка показывает все Аргументы, доступные Методы, Классы-родители и пр.
+
+
+
+3)
+Документация Английская
+Built-in class-based views API
+-----------------------
+https://docs.djangoproject.com/en/1.11/ref/class-based-views/
+https://docs.djangoproject.com/en/1.11/topics/class-based-views/
+
+
+
+4)
+Основные Классы-Вьюшки
+----------------------
+    ListView:       ## Логика отображения Списка Объектов из БД
+    DetailView:     ## Логика отображения одного объекта и з БД (и его элементов)
+    RedirectView:   ## Логика Редиректа на другую страницу (забавно)
+    CreateView:     ## Логика добавления / Создания объекта в БД 
+    UpdateView:     ## Логика Редактирования / изменения объекта в БД
+    DeleteView:     ## Логика удаления объекта из БД
+
+    ArchiveIndexView,
+    YearArchiveView,
+    MonthArchiveView,
+    WeekArchiveView,
+    DayArchiveView,
+    TodayArchiveView,
+    DateDetailView      ## Вьюшки для реализации Страниц Блога (из Архива)
+
+Все Вьюшки-Представления используют логику базовых Классов:
+    FormView,
+    View,
+    TemplateView.
+
+
+
+5)
+Сторонняя апликация (выглядит интересно)
+http://django-vanilla-views.org/
+-- Документация
+----------------
+Стороння апликация для улучшения вида генерированных Представлений
+pip install django-vanilla-views
+from vanilla import CreateView, DeleteView, ListView, UpdateView
+
+
+
+6)
+Валидация Даты
+======================
+	// Модуль datetime
+	http://pythonworld.ru/moduli/modul-datetime.html
+	// strtime()
+	http://stackoverflow.com/questions/311627/how-to-print-date-in-a-regular-format-in-python	
+		
+	// примеры
+	>>> import time
+	>>> time.strftime("%Y %m %d")
+		'2016 02 03'	
+
+
+
+7)
+Циклы в Формах (немного Кастома)
+--------------
+Использование тега {% for %} для прохода по полям формы.
+	// Пример
+	{% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+    </div>
+	{% endfor %}
+
+Теги в Шаблоне Форм
+	{{ field.label }}
+    	Метка поля, т.е. Email address.
+
+	{{ field.label_tag }}
+		Метка поля, обёрнутая в соответствующий HTML тег <label>.
+		Также включает атрибут формы label_suffix. Например, по умолчания
+		label_suffix содержит двоеточие :
+
+	{{ field.id_for_label }}
+		ID, которое будет использоваться для этого поля (id_email в примере выше). 
+		Можно использовать его вместо label_tag, если самостоятельно генерируете <label>
+		для поля. Так полезно при генерации JavaScript, если вы не хотите “хардкодить” ID.
+
+	{{ field.value }}
+		Значение поля, например someone@example.com.
+
+	{{ field.html_name }}
+		Имя поля, которое будет использовано в HTML-поле. Здесь учитывается префикс формы,
+		если он был установлен.
+
+	{{ field.errors }}
+		Вывод <ul class="errorlist">, содержащий все ошибки валидации, относящиеся к полю. 
+		Вы можете настраивать представление списка ошибок с помощью цикла
+		 {% for error in field.errors %}. В этом случае, каждый объект в цикле является
+		 простой строкой, содержащей сообщение об ошибке.
+
+
+// Пример:
+{% block content %}
+<form action="{% url "contact_admin" %}" method="post">				// Тег Формы
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Надіслати" name="send_button" />	// Тег Инпута Кнопки
+</form>
+{% endblock content %}
+
+
+8)
+Указывем Какие Поля для формы - Явно
+----------------
+fields = '__all__'
+----------------
+Настоятельно рекомендуем явно указать все поля отображаемые в форме, используя параметр fields.
+В параметре fields указать специальное значение '__all__', которое указывает использовать 
+все поля модели. Например:
+	from django.forms import ModelForm
+	class AuthorForm(ModelForm):
+    	class Meta:
+    	    model = Author
+    	    fields = '__all__'
+
+
+exclude = ['...']
+-------------------
+Используйте атрибут exclude внутреннего класса ModelForm.Meta. Этот атрибут, если он указан,
+должен содержать список имён полей, которые не должны отображаться на форме.
+	Например:
+	class PartialAuthorForm(ModelForm):
+    	class Meta:
+    	    model = Author
+    	    exclude = ['title']
+	Так как модель Author содержит три поля: ‘name’, ‘title ‘ и ‘birth_date’, то форма будут
+	отображать поля name и birth_date.
+
+
+9)
+Локализация в полях
+-------------------
+http://djbook.ru/rel1.8/topics/forms/modelforms.html#enabling-localization-of-fields
+По умолчанию поля в ModelForm не локализируют свои данные.
+Для локализации полей можно использовать параметр localized_fields класса Meta.
+>>> from django.forms import ModelForm
+>>> from myapp.models import Author
+>>> class AuthorForm(ModelForm):
+...     class Meta:
+...         model = Author
+...         localized_fields = ('birth_date',)
+
+Если в localized_fields указать '__all__', будут локализированы все поля.
+
+
+
+10)
+Реализация Формы и HttpResponse и AJAX   (and JQUERY)
+-------------------
+https://simpleisbetterthancomplex.com/tutorial/2016/08/29/how-to-work-with-ajax-request-with-django.html
+
+https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-editing/#ajax-example
+
+https://simpleisbetterthancomplex.com/tutorial/2016/11/15/how-to-implement-a-crud-using-ajax-and-json.html
+
+https://stackoverflow.com/questions/7335780/how-to-post-a-django-form-with-ajax-jquery
+
+http://jquery.malsup.com/form/
+
+
+
+11)
+Основные методы:
+---------------
+
+as_view(**initkwargs)
+----------------------
+	Возвращает выполняемое(callable) представление, которое принимает запрос(request)
+	и возвращает ответ(response) (как функция-вьюшка в кастомном коде)
+	as_view: статичний метод (має декоратор staticmethod) використовується в URL шаблонах,
+	адже ми не можемо напряму передати клас в url функцію в модулі urls.py
+
+
+dispatch(request, *args, **kwargs)¶
+-----------------
+    view часть представления – метод, который принимает аргумент request плюс
+    дополнительные аргументы, и возвращает HTTP ответ(response).
+    Реализация по умолчанию анализирует HTTP метод запроса и делегирует его соответствующему
+    методу класса; GET будет обработан методом get(), запрос POST делегируется к post(),
+    и т.д.
+    По умолчанию, запрос HEAD будет делегирован в метод get()
+    Если вам необходимо обработать HEAD запрос другим способом, вы можете переопределить
+    метод head(). Смотри Поддержка других методов HTTP для примера.
+
+
+http_method_not_allowed(request, *args, **kwargs)
+-----------------------
+	Если представление было вызвано с неподдерживаемым методом HTTP, будет вызван данный
+    метод. Реализация по умолчанию возвращает HttpResponseNotAllowed со списком разрешенных
+    методов в виде простого текста.
+
+
+options(request, *args, **kwargs)
+----------------
+	Обрабатывает запросы на определение “глаголов”(методов) OPTIONS HTTP. 
+	Возвращает список всех разрешенных для представления методов HTTP.
+
+
+get_context_data()
+------------------
+	get_context_data: метод повертає словник із додатковими даними для шаблона
+    Возвращает словарь, представляющий контекст шаблона. Предоставленные аргументы
+    ключевого слова составят возвращаемый контекст. 
+    
+	
+
+get_redirect_url(*args, **kwargs)
+----------------
+		Создает целевой URL для редиректа. Реализация по умолчанию использует url в качестве
+		отправной строки, выполняет подстановку % параметров в этой строке из именованных
+		параметров, полученных из URL.
+
+
+get_queryset()
+--------------
+    Возвращает объект queryset, который буден использован для получения объекта для данного
+    представления. По умолчанию, метод get_queryset() возвращает значение атрибута queryset
+    (если он установлен), - в противном случае будет создан экземпляр класса QuerySet
+    вызовом метода all() у атрибута :attr:`model`( с помощью менеджера по умолчанию).
+    
+
+initial:
+-----------
+    атрибут, словник із початковими даними для форми;
+
+
+success_url:
+------------
+    атрибут, адреса сторінки для редіректу після успішної обробки форми; 
+    замість нього можна використовувати метод get_success_url()
+	
+
+paginate_by:
+------------
+    атрибут, який вказує на кількість елементів на сторінці; так, даний клас
+	реалізує для нас посторінкову навігацію;
+
+
+object_list:
+------------
+    список об’єктів під даною назвою доступний в шаблоні;
+	також даний клас передає шаблону змінні для роботи із посторінковою
+	навігацією по списку: is_paginated, paginator, page_obj;
+
+	усі інші методи подібні як у класі DetailView: get_context_data, get_-queryset.
+
+
+
+Пример объект ListView
+=======================
+from django.views.generic import ListView
+from students.models.students import Student
+
+class StudentList(ListView):
+    model = Student
+    context_object_name = ’students’                ## имя в швблоне не object_list
+    template = ’students/student_class_based_view_template’
+
+    def get_context_data(self, **kwargs):   ## трансформировал набор контекстных данных    
+    ”””This method adds extra variables to template”””
+        # get original context data from parent class
+        context = super(StudentList, self).get_context_data(**kwargs)
+        
+        # tell template not to show logo on a page
+        context[’show_logo’] = False        ## добавил значение Переменной 
+        
+        # return context mapping
+        return context
+
+    def get_queryset(self):                 ## переопределение объекта queryset (сортировка)
+    ”””Order students by last_name.”””
+        
+        # get original query set
+        qs = super(StudentList, self).get_queryset()
+        
+        # order by last name
+        return qs.order_by(’last_name’)     ## тут сортировка
+--------------------------
+
+
+
+Пример объект FormView / с messages
+======================
+
+class SendMailAdminView(FormView):
+    template_name = 'students/contact_admin/form_contact.html'
+    form_class = ContactForm
+    success_url = '/contact-admin/'
+
+    def form_valid(self, form):         ## метод валидации и сохранения Входных данных
+        subject = form.cleaned_data['subject']
+        message = form.cleaned_data['message']
+        from_email = form.cleaned_data['from_email']
+
+        send_mail(subject,              ## чистый метод отправки сообщения через smtp
+                  (message+'\n massage was send from: '+from_email),
+                  from_email,
+                  [ADMIN_EMAIL])
+        messages.info(self.request, ' Send Your Mail is Success :)! ')      
+                                ## чистый метод заполеничя контекст-процессора messages
+
+        return super(SendMailAdminView, self).form_valid(form)
+--------------------------------
+
+
+
+Класи UpdateView, CreateView i DeleteView
+=============================
+
+model
+
+get_object
+
+queryset
+
+
+
+пример переопределения метода post()
+(добавление редиректра при отмене поста)
+=======================
+class StudentUpdateView(UpdateView):
+
+    model = Student
+    template_name = ’students/students_edit.html’
+    
+    def get_success_url(self):
+        return u’%s?status_message=Студента успішно збережено!’% reverse(’home’)
+
+    def post(self, request, *args, **kwargs):
+        
+        # альтернативная логика
+        if request.POST.get(’cancel_button’):
+            return HttpResponseRedirect(
+            u’%s?status_message=Редагування студента відмінено!’ % reverse(’home’))
+        
+        # вызов оригинального метода класса
+        else:
+            return super(StudentUpdateView, self).post(request, *args, **kwargs)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

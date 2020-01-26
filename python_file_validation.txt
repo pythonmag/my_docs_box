@@ -1,0 +1,62 @@
+
+Пакет для Валидации Файлов
+python-magic
+===================
+1)
+python-magic==0.4.13
+
+2)
+$ pip install -r requirements.txt 
+
+
+3)
+settings.py
+-----------
+FILE_MAX_SIZE = 204800  #200kb
+
+
+4) 
+file_validation.py
+-------------
+import magic
+from students2017.settings import FILE_MAX_SIZE
+
+
+def get_mimetype(fobject):
+    mime = magic.Magic(mime=True)
+    mimetype = mime.from_buffer(fobject.read(1024))
+    fobject.seek(0)
+    return mimetype
+
+
+def valid_image_mimetype(fobject):
+    mimetype = get_mimetype(fobject)
+    if mimetype:
+        return mimetype.startswith('image')
+    else:
+        return False
+
+
+def valid_image_size(image, max_size=FILE_MAX_SIZE):
+    image_size = len(image)
+    if image_size > max_size:
+        return False
+    else:
+        return True
+
+5)
+views.py
+--------
+photo = request.FILES.get('photo')
+    if photo:
+        correct_image_mimetype = valid_image_mimetype(photo)
+        if correct_image_mimetype:
+            correct_file_size = valid_image_size(photo)
+            if correct_file_size:
+                data['photo'] = photo
+            else:
+                errors['photo'] = 'The file is too large, Must be before %d Kb' % (
+                    FILE_MAX_SIZE/1024)
+        else:
+            errors['photo'] = 'Select Correct File Image'
+

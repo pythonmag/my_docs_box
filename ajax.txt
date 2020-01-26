@@ -1,0 +1,236 @@
+JS Ajax
+===================
+
+1)
+XMLHttpRequest      // класс в js
+================
+https://uk.wikipedia.org/wiki/XMLHttpRequest
+
+
+2)
+AJAX            // концепция
+================
+https://uk.wikipedia.org/wiki/AJAX
+
+
+
+3)
+JSON
+================
+текстовый формат данных для AJAX
+----------------
+https://uk.wikipedia.org/wiki/JSON
+
+AJAX — це не самостійна технологія, а швидше концепція використання декількох
+суміжних технологій. AJAX-підхід до розробки, який призначений для користувачів
+інтерфейсів, комбінує кілька основних методів і прийомів:
+    Використання DHTML для динамічної зміни змісту сторінки.
+    Використання XMLHttpRequest для звернення до сервера «на льоту», 
+    не перезавантажуючи всю сторінку повністю
+альтернативний метод — динамічне підвантаження коду JavaScript в тег <SCRIPT> 
+з використанням DOM, що здійснюється із використанням формату JSON)
+
+AJAX — асинхронний, тому користувач може переглядати далі контент сайту, поки
+сервер все ще обробляє запит. Браузер не перезавантажує web-сторінку і дані
+посилаються на сервер без візуального підтвердження (крім випадків, коли ми самі
+захочемо показати процес з'єднання з сервером). Використання AJAX стало популярним
+після того, як компанія Google почала активно використовувати його при створенні
+своїх сайтів, таких як Gmail, Google Maps 
+
+XMLHttpRequest — API-запит веб-клієнта (браузера) до веб-сервера за протоколом
+HTTP у фоновому режимі, для мов програмування JavaScript, JScript, VBScript і
+подібних. Використовується для синхронного або асинхронного обміну інформацією
+в довільному текстовому форматі (наприклад, XML, JSON, HTML). Дозволяє здійснювати
+HTTP-запити до віддаленого сервера без потреби перезавантажувати сторінку.
+Застосування XMLHttpRequest справляє враження «миттєвої» відповіді сервера,
+у порівнянні з класичними методом перезавантаження всієї сторінки для оновлення
+представленої на ній інформації.
+
+
+
+4)
+AJAX Crash Course (Vanilla JavaScript)
+=================
+https://www.youtube.com/watch?v=82hnvUYY6QA&t=589s
+
+
+
+5)
+JSON Crash Course
+=================
+https://www.youtube.com/watch?v=wI1CWzNtE-M&t=17s
+
+
+
+
+6)
+jQuery
+=================
+https://ru.wikipedia.org/wiki/JQuery
+http://api.jquery.com/jQuery.ajax/
+----------------
+$.ajax и соответствующие функции позволяют использовать методы AJAX.
+
+
+
+Пример / Рабочий код Отправки Асинхронного запроса на Сервер
+(если сервер не готов - то выдаст Модальное окно с ошибкой)
+------------------------
+// xhr == XML Http Request/Response
+
+function initJournal(){
+    $('.day-box input[type="checkbox"]').click(function(){
+
+       // object checkbox
+       var box = $(this);
+       // to body of post async request
+       $.ajax(box.data('url'), {
+            'type': 'POST',
+            'async': true,
+            'dataType': 'json',
+            'data': {
+                'pk': box.data('student-id'),
+                'date': box.data('date'),
+                'present': box.is(':checked') ? '1' : '',
+                'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
+             },
+             'error': function(xhr, status, error){
+                alert(error+'// test');
+             },
+             'success': function(data, status, xhr){
+                alert(data['key']);
+             },
+             'timeout': 700,
+        });
+    });
+}
+
+
+
+
+7)
+Django Ajax
+===================
+Доступные инструменты в Django относительно AJAX response / request:
+        
+    1)
+    request.is_ajax()
+    -----------------
+    // true / false 
+    //  метод возвращает True если с клиента пришел спец заголовок ajax
+
+    2)
+    json
+    ---------
+    // python-библиотека на стороне сервера
+    >>> import json
+    >>> dir(json)
+    ['JSONDecodeError', 'JSONDecoder', 'JSONEncoder', '__all__', '__author__',
+    '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__',
+    '__package__', '__path__', '__spec__', '__version__', '_default_decoder',
+    '_default_encoder', 'decoder', 'dump', 'dumps', 'encoder', 'load', 'loads', 'scanner']
+
+    3)
+    django.core.serializers.json
+    ----------------------------
+    // преобразователь Данных из БД в JSON-формат
+    >>> from django.core.serializers import json
+    >>> dir(json)
+    ['CallableBool', 'DeserializationError', 'Deserializer', 'DjangoJSONEncoder', 'Promise',
+    'PythonDeserializer', 'PythonSerializer', 'Serializer', '__builtins__', '__cached__',
+    '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__',
+    'absolute_import', 'datetime', 'decimal', 'duration_iso_string', 'is_aware', 'json',
+    'six', 'sys', 'unicode_literals', 'uuid']
+
+    4)
+    django.http.JsonResponse
+    ------------------------
+    // объект правильного ответа в формате JSON на клиент
+    >>> from django.http import JsonResponse
+    >>> JsonResponse
+    <class 'django.http.response.JsonResponse'>
+    >>> dir(JsonResponse)
+    ['__bytes__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dict__',
+    '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__',
+    '__getitem__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__lt__',
+    '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__',
+    '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__',
+    '__weakref__', '_content_type_for_repr', '_convert_to_charset', 'charset', 'close',
+    'content', 'delete_cookie', 'flush', 'get', 'getvalue', 'has_header', 'items',
+    'make_bytes', 'readable', 'reason_phrase', 'seekable', 'serialize',
+    'serialize_headers', 'set_cookie', 'set_signed_cookie', 'setdefault', 'status_code',
+    'streaming', 'tell', 'writable', 'write', 'writelines']
+
+    5)
+    django-ajax
+    ==============
+    Нашел чудесную библиотеку django-ajax, 
+    берет на себя всю рутину, связанную с ajax во вьюшках Django.
+    -----------------
+    туториал
+    -----------------
+    http://blog.102web.ru/tips-tricks/django-ajax/
+    документация
+    ------------------
+    https://github.com/yceruto/django-ajax
+
+
+
+8)
+django ajax modal form
+======================
+стр.461 Подобы
+
+
+1)
+общая концепция
+---------------
+https://www.w3schools.com/bootstrap/bootstrap_modal.asp
+
+
+
+2)
+В помощь ббибилотека расширяющая jqjuery
+Jquery Form Plugin
+------------------
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.1/jquery.form.min.js"></script>
+
+
+3)
+Организация Линка на Модальное окно
+------------------
+<td><a href="{% url 'student_update' student.id %}" class="student-update-form-modal">
+                {{ student.last_name }} // id: {{ student.id }}</a></td>
+
+
+4)
+шаблон Модельного окна
+(по умолчанию свойства скрывают в html разметке)
+----------------------
+<!-- Modal Form -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+<!--End Modal Form-->
+
+
+
+
+

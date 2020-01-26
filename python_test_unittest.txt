@@ -1,0 +1,259 @@
+unittest
+=========
+
+Фактически функции тестов настраиваются под логику функций аппликации, чтобы все было точки
+и не бы ло Фейлов. 
+Тогда если что то поломать в логике, то при запуске тестов это сразу видно.
+
+
+документация
+------------
+https://docs.python.org/3.5/library/unittest.html
+
+туториалы
+---------
+https://www.youtube.com/watch?v=6tNS--WetLI&t=104s
+
+>>> import unittest
+
+>>> dir(unittest)
+['BaseTestSuite', 'FunctionTestCase', 'SkipTest', 'TestCase', 'TestLoader',
+ 'TestProgram', 'TestResult', 'TestSuite', 'TextTestResult', 'TextTestRunner',
+ '_TextTestResult', '__all__', '__builtins__', '__cached__', '__doc__', '__file__',
+ '__loader__', '__name__', '__package__', '__path__', '__spec__', '__unittest',
+ 'case', 'defaultTestLoader', 'expectedFailure', 'findTestCases', 'getTestCaseNames',
+ 'installHandler', 'load_tests', 'loader', 'main', 'makeSuite', 'registerResult',
+ 'removeHandler', 'removeResult', 'result', 'runner', 'signals', 'skip', 'skipIf',
+ 'skipUnless', 'suite', 'util']
+
+
+начало
+----------------
+
+1) 
+script2.py
+----------
+import unittest                             # библиотека тестов
+import script1                              # в том модуле - работающие функции
+
+
+class TestScript1(unittest.TestCase):      # Наследование логики через Класс 
+
+    def test_add(self):                    # обязательно началоназвания test_...()
+        result = script1.foo_add(10,20)
+        self.assertEqual(result, 30)
+
+    def test_devide(self):
+        result = script1.foo_devide(10, 10)
+        self.assertEqual(result, 1)
+
+
+if __name__ == '__main__':                 # для запуска в отладчике
+    unittest.main()
+
+2)
+console
+успешный тест (2 штуки)
+-------
+/home/ryndin/venvs/test_py35/bin/python /home/ryndin/venvs/test_py35/src/script2.py
+..                                              # 2 точки - 2 теста успешных
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+OK
+
+3)
+1 успешний + 1 неудачный тест
+/home/ryndin/venvs/test_py35/bin/python /home/ryndin/venvs/test_py35/src/script2.py
+.F                                              # успешный + неуспешный
+======================================================================
+FAIL: test_devide (__main__.TestScript1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ryndin/venvs/test_py35/src/script2.py", line 13, in test_devide
+    self.assertEqual(result, 2)
+AssertionError: 1.0 != 2
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.002s
+
+FAILED (failures=1)
+
+
+расширенно
+----------------
+
+1)
+Это будет 1 тест и одна успешна я ., но проверит условия с разными знаками
+
+    def test_devide(self):
+        self.assertEqual(script1.foo_devide(10, 5), 2)
+        self.assertEqual(script1.foo_devide(10, -5), -2)
+        self.assertEqual(script1.foo_devide(0, 10), 0)
+
+2)
+А это подтверждает (тест удачен) вызов Исключения при делении на 0
+
+        self.assertRaises(ValueError, script1.foo_devide, 20, 0) # 
+
+
+3)
+та же инструкция проверки деления на 0, но через контекст-менеджер /
+кажется более понятной
+        # self.assertRaises(ValueError, script1.foo_devide, 20, 0)
+        with self.assertRaises(ValueError):
+            script1.foo_devide(20, 0)
+
+
+4)
+можна утсановить начальные данных, например для всех функций_тестов / вызывать через self
+        def setUp(self):
+            pass
+
+5)
+        def tearDown(self):
+            pass
+
+
+не изучено / но далее еще есть в уроке:
+---------------------
+@classmethod
+def setUpClass(cls):
+    ...
+
+@classmethod
+def tearDownClass(cls):
+    ...
+
+
+Публикации
+================
+
+Профилирование и отладка Python, инструменты
+-------------------------------
+много прикладных бибилотек для отладки и тестов кода python
+практически все про отладку и тестирование от maill.ru
+
+https://habrahabr.ru/company/mailru/blog/202832/
+https://habrahabr.ru/company/mailru/blog/201778/
+https://habrahabr.ru/company/mailru/blog/201594/
+http://www.moscowpython.ru/meetup/13/profiling-django/
+
+
+
+Из другого файла - разобрать....
+============================
+Документация
+============
+https://docs.python.org/3/library/unittest.html#module-unittest
+or
+https://docs.python.org/2/library/unittest.html#module-unittest
+or
+https://djbook.ru/rel1.9/intro/tutorial05.html#introducing-automated-testing
+
+
+
+Струткура тестирования
+======================
+from django.test import TestCase, Client                # unittest в контексте Джанго 
+
+class TestClass(TestCase):    
+    def setUp(self)
+        ...
+    def test_foo(self):
+        ...
+
+debug()
+-------
+Run the test without collecting the result. 
+The TestCase class provides several assert methods to check for and report failures.
+
+Method	                    Checks that	  
+  
+assertEqual(a, b)           a == b	 
+assertNotEqual(a, b)	    a != b	 
+assertTrue(x)	            bool(x) is True	 
+assertFalse(x)	            bool(x) is False	 
+assertIs(a, b)	            a is b	
+assertIsNot(a, b)	        a is not b	
+assertIsNone(x)	            x is None
+assertIsNotNone(x)	        x is not None
+assertIn(a, b)	            a in b
+assertNotIn(a, b)	        a not in b
+assertIsInstance(a, b)	    isinstance(a, b)
+assertNotIsInstance(a, b)	not isinstance(a, b)
+
+
+И еще очень много методов для проверки переменных и выражений.
+-----------------
+
+
+Теория по тестированию Классов-Впредставлений (Вьюшек)
+----------------------
+https://djbook.ru/rel1.9/intro/tutorial05.html#test-a-view
+
+
+Важная теория по Автоматическому тестированию
+================================
+https://djbook.ru/rel1.9/intro/tutorial05.html#introducing-automated-testing
+
+Нет никакой разницы как тестировать: через shell (как показано в Части 2) или через приложение, которое само вводит данные.
+Отличие автоматизированных тестов заключается в том, что вся работа выполняется за вас
+системой. Вы один раз создаёте набор тестов, а затем, внеся некоторые изменения в код
+приложения, вы можете проверить, осталось ли приложение работоспособным в целом, без 
+муторной ручной проверки.
+1) Тесты не находят проблемы, они их предотвращают
+2) Тесты делают код более привлекательным
+3) Тесты упрощают совместную работу
+Если вы хотите зарабатывать на жизнь в качестве разработчика на Django, вы обязаны быть
+хороши в написании тестов!
+
+
+Чем больше тестов, тем лучше
+============================
+Может показаться, что количество тестов выходит из-под контроля. Их объём превысит размер
+кода, а методы будут ужасны, по сравнению с кодом приложения.
+Это не важно! Пускай они растут. В основном, вы будете писать тест всего раз и забывать про
+него. Он же будет работать и помогать развивать приложение.
+Иногда тесты должны быть обновлены. Например, когда меняется логика функций или объектов.
+В этом случае многие существующие тесты будут провалены - это означает, что эти тесты
+необходимо обновить, чтобы поддерживать в актуальном состоянии.
+В худшем случае может оказаться, что тесты проверяют один и тот же функционал. Не обращайте
+на это внимание, в тестировании избыточность - хорошая вещь.
+Пока ваши тесты логично организованы, они управляемы. Хорошие привычки подразумевают:
+
+    1) разделять TestClass для каждой модели или представления
+    2) делать отдельный метод для каждого проверяемого условия
+    3) имена тестовых методов должны описывать их функционал
+
+
+Selenium
+========
+Например, пока наши тесты покрывают внутреннюю логику, вы можете использовать сторонние
+инструменты для тестирования, например,
+    Selenium.
+
+Он позволяет проверять уже конечный результат генерации страницы непосредственно в браузере.
+Это очень пригодится при тестировании JavaScript. Выглядит это как будто человек открывает
+сайт и начинает с ним работать. 
+У Django есть класс для интеграции - LiveServerTestCase.
+
+
+
+Статьи по unittest
+==================
+
+Beginning Test-Driven Development in Python
+---------------------
+https://code.tutsplus.com/tutorials/beginning-test-driven-development-in-python--net-30137
+
+
+Test-Driven Development with Python - Book
+----------------------------
+http://chimera.labs.oreilly.com/books/1234000000754/index.html
+
+
+Test-Driven Web Development with Python - Book (другой источник)
+----------------------------
+http://www.obeythetestinggoat.com/pages/book.html
+
+

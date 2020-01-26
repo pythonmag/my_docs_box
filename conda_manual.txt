@@ -1,0 +1,205 @@
+ANACONDA
+================
+
+
+0)
+Python Tutorial: Anaconda - Installation and Using Conda
+================
+https://www.youtube.com/watch?v=YJC6ldI3hWk
+
+
+Документация по Анаконда
+========================
+https://docs.anaconda.com/anaconda/
+
+
+ryndin@ubu:~$ anaconda-navigator           *** Графический Интерфейс
+
+
+
+1)
+=================
+Anaсonda это:
+Включает предустановленный Python 2.7 , 3.4. 3.5
+
++-150 предустановленных библиотек, и более 200-300 готовых к "легкой" установке библиотек командой conda install name_lib
+
+Включает в себя IDLE Spider 2
+
+В каких случаях я нашел применение для себя: Писал код на Ubuntu, там с установкой библиотек не было проблем. Решив скомпилировать под Windows, начал устанавливать библиотеки и естественно натыкался на все камни\грабли. В отличии от Ubuntu в Windows приходится просто ужасно. Установив Anaconda я с легкостью запустил весь код написанный на Ubuntu, доставив одной-двумя командами недостающие библиотеки (через Anaconda prompt). Поэтому думаю новичкам Анаконда очень пригодиться, и сэкономит вам пару дней жизни.
+
+Список поддерживаемых пакетов (библиотек) и их версии. При этом учтите, что там по порядку идут 3 версии от Python 2.7 - 3.5).
+
+Pip - стандартный менеджер пакетов питона, позволяет устанавливать бинарные wheel сборки пакетов. Если их нет (ни в самом Pip, ни где-то еще), Pip компилирует пакеты локально. При этом могут возникнуть проблемы при сложных зависимостях, когда требуются сторонние не питон библиотеки. В этом случае удобно использовать Conda.
+
+Команды Pip:
+
+pip search package_name - поиск пакета через pip
+
+pip install package_name - установка пакета через pip
+
+Conda - менеджер пакетов питона, позволяет устанавливать уже скомпилированные пакеты (может работать и в режиме компиляции пакетов перед установкой). Также Conda - менеджер окружений системы, позволяет создавать окружения с разными версиями чего угодно (библиотеки C, низкоуровневые библиотеки и т.д.).
+
+Conda бывает в двух версиях:
+
+Анаконда - более 150 предустановленных пакетов (около 3 Гб) + более 250 пакетов, готовых к установке командой conda install package_name
+Миниконда - более 400 пакетов, готовых к установке командой conda install package_name
+
+и Анаконда и Миниконда включают:
+
+conda
+интерпретатор питона
+pip
+
+Команды Conda:
+
+conda search package_name - поиск пакета через conda
+
+conda install package_name - установка пакета через conda
+
+conda install - установка всего стандартного набора пакетов - более 150, около 3 Гб
+
+conda list - список установленных пакетов
+
+conda update conda - обновление conda
+
+conda clean -t - удаление кеша - архивов .tar.bz2, которые могут занимать много места и не нужны
+--------------------------------
+https://ru.stackoverflow.com/questions/504319/%D0%A7%D1%82%D0%BE-%D1%82%D0%B0%D0%BA%D0%BE%D0%B5-anaconda-%D0%B4%D0%BB%D1%8F-python
+
+
+
+2)
+=====================
+https://anaconda.org/anaconda/python
+https://www.anaconda.com/download/
+https://docs.anaconda.com/anaconda/install/linux
+
+
+3)
+установка пакета
+=======================
+ryndin@ubu:~/Загрузки$ sh Anaconda3-5.1.0-Linux-x86_64.sh
+
+
+4)
+запуск виртуальной среды
+=======================
+ryndin@ubu:~/anaconda3$ source bin/activate 
+
+(base) ryndin@ubu:~/anaconda3$ conda install django             ***
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    django-2.0.2               |   py36hd476221_0         4.7 MB
+    openssl-1.0.2o             |       h20670df_0         3.4 MB
+    ca-certificates-2018.03.07 |                0         124 KB
+    anaconda-custom            |   py36hbbc8b67_0           6 KB
+    ------------------------------------------------------------
+                                           Total:         8.2 MB
+
+The following NEW packages will be INSTALLED:
+
+    django:          2.0.2-py36hd476221_0 
+
+The following packages will be UPDATED:
+
+    anaconda:        5.1.0-py36_2          --> custom-py36hbbc8b67_0
+    ca-certificates: 2017.08.26-h1d4fec5_0 --> 2018.03.07-0         
+    openssl:         1.0.2n-hb7f436b_0     --> 1.0.2o-h20670df_0 
+
+
+ryndin@ubu:~/anaconda3$ conda activate my_app                    *****
+(my_app) ryndin@ubu:~/anaconda3$ 
+
+
+(my_app) ryndin@ubu:~/anaconda3$ conda deactivate                *****
+ryndin@ubu:~/anaconda3$ 
+
+
+(base) ryndin@ubu:~/anaconda3$ conda list                       *****
+
+
+установка рабочего проекта
+======================
+ryndin@ubu:~/anaconda3$ conda create -n my_app -m django        ***
+
+ryndin@ubu:~/anaconda3$ conda activate my_app
+(my_app) ryndin@ubu:~/anaconda3$ 
+
+(my_app) ryndin@ubu:~/anaconda3$ which python3                  ***
+/home/ryndin/anaconda3/envs/my_app/bin/python3
+
+(my_app) ryndin@ubu:~/anaconda3$ conda list                     ***
+
+# packages in environment at /home/ryndin/anaconda3/envs/my_app:
+#
+# Name                    Version                   Build  Channel
+ca-certificates           2018.03.07                    0  
+certifi                   2018.1.18                py36_0  
+django                    2.0.2            py36hd476221_0  
+libedit                   3.1                  heed3624_0  
+libffi                    3.2.1                hd88cf55_4  
+libgcc-ng                 7.2.0                hdf63c60_3  
+libstdcxx-ng              7.2.0                hdf63c60_3  
+ncurses                   6.0                  h9df7e31_2  
+openssl                   1.0.2o               h20670df_0  
+pip                       9.0.3                    py36_0  
+python                    3.6.5                hc3d631a_0  
+pytz                      2018.4                   py36_0  
+readline                  7.0                  ha6073c6_4  
+setuptools                39.0.1                   py36_0  
+sqlite                    3.22.0               h1bed415_0  
+tk                        8.6.7                hc745277_3  
+wheel                     0.31.0                   py36_0  
+xz                        5.2.3                h55aa19d_2  
+zlib                      1.2.11               ha838bed_2  
+
+(my_app) ryndin@ubu:~/anaconda3$ pip list                   ******
+
+Package    Version  
+---------- ---------
+certifi    2018.1.18
+Django     2.0.2    
+pip        10.0.1   
+pytz       2018.4   
+setuptools 39.0.1   
+wheel      0.31.0 
+
+
+
+
+requirements.txt
+================
+================
+
+
+0)
+ryndin@ubu:~$ conda env list            **
+
+# conda environments:
+#
+                         /home/ryndin/anaconda3
+base                  *  /home/ryndin/miniconda3
+env_udemy_django         /home/ryndin/miniconda3/envs/env_udemy_django
+
+
+
+1)
+Экспорт списка пакетов вирт среды в файл
+
+$ conda list --export > env_udemy_django_req.txt        **
+
+
+
+2)
+Установка пакетов в вирт среду из списка
+
+$ conda create -n my_env_django  --file  env_udemy_django_req.txt   **
+
+
+
+
+

@@ -1,0 +1,66 @@
+Mercurial (англ. ртутный, подвижный),
+он же Hg
+(от обозначения химического элемента ртути) — кроссплатформенная распределённая
+система управления версиями, разработанная для эффективной работы с очень большими 
+репозиториями кода. В первую очередь она является консольной программой.
+
+https://ru.wikipedia.org/wiki/Mercurial
+
+https://www.mercurial-scm.org/
+
+
+// Туториал по Mercurial
+------------------------ 
+https://www.mercurial-scm.org/wiki/RussianTutorial
+
+
+
+// Как установить Mercurial на Компьютер
+    ryndin@pc:~/work/$ sudo apt install mercurial
+    
+    ryndin@pc:~/work/$ hg               // вызов установленной программы
+        Mercurial Distributed SCM
+        
+        basic commands:
+        
+        add           add the specified files on the next commit
+        annotate      show changeset information by line for each file
+        clone         make a copy of an existing repository
+        commit        commit the specified files or all outstanding changes
+        diff          diff repository (or selected files)
+        export        dump the header and diffs for one or more changesets
+        forget        forget the specified files on the next commit
+        init          create a new repository in the given directory
+        log           show revision history of entire repository or files
+        merge         merge another revision into working directory
+        pull          pull changes from the specified source
+        push          push changes to the specified destination
+        remove        remove the specified files on the next commit
+        serve         start stand-alone webserver
+        status        show changed files in the working directory
+        summary       summarize working directory state
+        update        update working directory (or switch revisions)
+        
+        (use "hg help" for the full list of commands or "hg -v" for details)
+
+    
+
+// Как скачать сторонний Репозиторий
+------------------------------------
+$ hg clone http://selenic.com/repo/hello
+$ cd hello
+$ (edit files)
+$ hg add (new files)
+$ hg commit -m 'My changes'
+$ hg push
+
+
+// Как создать свой Репозиторий
+-------------------------------
+Create a project and commit
+$ hg init (project-directory)
+$ cd (project-directory)
+$ (add some files)
+$ hg add
+$ hg commit -m 'Initial commit'
+

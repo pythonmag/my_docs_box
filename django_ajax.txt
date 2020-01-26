@@ -1,0 +1,114 @@
+
+Все рекомендованные технологии AJAX для DJANGO
+===================
+https://code.djangoproject.com/wiki/AJAX
+
+Django REST Framework
+django-tastypie
+django-nap
+django-ajax
+https://djangopackages.org/grids/g/api/
+
+
+https://docs.djangoproject.com/en/dev/topics/serialization/
+
+
+
+1)
+Django REST Framework
+=====================
+https://www.django-rest-framework.org/
+
+
+2)
+django-ajax
+============
+простейший способ в коде питон получить JSON формат данных и отправить запрос
+https://github.com/yceruto/django-ajax
+
+
+3)
+django-tastypie
+===============
+https://django-tastypie.readthedocs.io/en/latest/
+
+
+4)
+django-nap
+===========
+https://django-nap.readthedocs.io/en/latest/
+
+
+Актуальные API
+==============
+https://djangopackages.org/grids/g/api/
+
+Django REST Framework -- на первом Месте
+
+
+
+5)
+Но сам Джанго имеет все инструменты для создания и валидации JSON данных и
+отправки их между Клиентом и Сервером
+================
+Объекты
+
+request.is_ajax()
+import json
+import django.core.serializers.json
+django.http.JsonResponse
+
+
+6)
+jQuery.ajax()
+===============
+чистый JQuery -- отправляет запрос на сервер
+
+http://api.jquery.com/jquery.ajax/
+
+
+Функція jQuery.ajax виконує для нас не лише запит на сервер, але й забирає
+від нас усі проблеми щодо відмінностей між реалізаціями об’єкта запиту у
+різних браузерах. Також дана функція дає нам можливість навішувати до-
+даткові обробники при отриманні відповіді від сервера значно простішим
+інтерфейсом (параметри success, error і тому подібні).
+
+
+
+
+пример кода:
+-------------
+function initJournal() {
+
+$(’.day-box input[type=”checkbox”]’).click(function(event){
+    
+    var box = $(this);
+    
+    $.ajax(box.data(’url’), {
+
+        ’type’: ’POST’,
+        ’async’: true,
+        ’dataType’: ’json’,
+
+        ’data’: {
+            ’pk’: box.data(’student-id’),
+            ’date’: box.data(’date’),
+            ’present’: box.is(’:checked’) ? ’1’: ’’,
+            ’csrfmiddlewaretoken’: $(’input[name=”csrfmiddlewaretoken”]’).val()
+        },
+    
+        ’error’: function(xhr, status, error){
+            alert(error);
+        },
+        ’success’: function(data, status, xhr){
+            alert(data[’key’]);
+        }
+    });
+});
+}
+
+
+
+
+
+

@@ -1,0 +1,175 @@
+
+1) krusader
+sudo apt install krusader
+
+2) chrome
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+sudo apt-get update 
+sudo apt-get install google-chrome-stable
+
+3) java
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+sudo apt-get install oracle-java9-installer
+sudo update-alternatives --config java
+
+sudo add-apt-repository ppa:openjdk-r/ppa  
+sudo apt-get update   
+sudo apt-get install openjdk-7-jdk  
+
+
+4) terminator
+sudo apt install terminator
+
+
+5) atom
+sudo add-apt-repository ppa:webupd8team/atom
+sudo apt update; sudo apt install atom
+
+
+6) для инсталяции пакетов - менеджер
+sudo apt-get install gdebi
+sudo apt-get -f install
+sudo apt install gdebi-core
+cd ... dir
+ryndin@ubu:~/Загрузки$ sudo gdebi code_1.19.3-1516876437_amd64.deb 
+ryndin@ubu:~/Загрузки$ sudo gdebi megasync-xUbuntu_16.04_amd64.deb 
+
+
+6) ms vs code
+ryndin@ubu:~/Загрузки$ sudo gdebi code_1.19.3-1516876437_amd64.deb 
+
+
+7) mega
+ryndin@ubu:~/Загрузки$ sudo gdebi megasync-xUbuntu_16.04_amd64.deb 
+
+
+8) глоб пакеты для работы с python
+$ sudo apt install build-essential make cmake scons     
+$ sudo apt install autoconf automake autoconf-archive   
+$ sudo apt install gettext libtool                      
+$ sudo apt install libbz2-dev zlib1g-dev                
+$ sudo apt install libexpat-dev libncurses-dev          
+$ sudo apt install libjpeg62-dev libcurl4-openssl-dev   
+$ sudo apt install libssl-dev python python-dev curl    
+$ sudo apt build-dep python-imaging            
+$ sudo apt install libjpeg8 libjpeg62-dev libfreetype6 libfreetype6-dev     
+$ sudo apt install build-essential libssl-dev python curl libbz2-dev libsqlite3-dev     
+$ sudo apt install libsqlite-dev                
+$ sudo apt install liblzma-dev
+
+
+sudo apt install -y gcc-multilib g++-multilib libffi-dev libffi6 libffi6-dbg python-crypto python-mox3 python-pil python-ply libssl-dev zlib1g-dev libbz2-dev libexpat1-dev libbluetooth-dev libgdbm-dev dpkg-dev quilt autotools-dev libreadline-dev libtinfo-dev libncursesw5-dev tk-dev blt-dev libssl-dev zlib1g-dev libbz2-dev libexpat1-dev libbluetooth-dev libsqlite3-dev libgpm2 mime-support netbase net-tools bzip2
+
+
+9) пакеты виртуальных сред для питона 2 / 3
+
+sudo apt install python-virtualenv
+ryndin@ubu:~$ virtualenv --version
+15.0.1
+
+sudo apt install python3-venv
+
+для утсановки непосредственно пакетов есть отдельные файлы-мануалы
+
+10) показать все пакеты установленные в систему
+ryndin@ubu:~$ sudo dpkg -l
+
+
+10) doker
+http://isizov.ru/ustanovka-docker-na-ubuntu-16-04/
+
+sudo apt-get update
+sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
+sudo apt-get update
+apt-cache policy docker-engine
+sudo apt-get install -y docker-engine
+sudo apt-get -y install python-pip
+sudo pip install --upgrade pip
+sudo pip install docker-compose
+
+
+11) mysql
+
+sudo apt install mysql-server mysql-client libmysqlclient-dev
+
+установлено:
+ii  mysql-client                5.7.21-0ubuntu0.16 all                MySQL database client (metapackage depending on the latest 
+ii  mysql-client-5.7            5.7.21-0ubuntu0.16 amd64              MySQL database client binaries
+ii  mysql-client-core-5.7       5.7.21-0ubuntu0.16 amd64              MySQL database core client binaries
+ii  mysql-common                5.7.21-0ubuntu0.16 all                MySQL database common files, e.g. /etc/mysql/my.cnf
+ii  mysql-server                5.7.21-0ubuntu0.16 all                MySQL database server (metapackage depending on the latest 
+ii  mysql-server-5.7            5.7.21-0ubuntu0.16 amd64              MySQL database server binaries and system database setup
+ii  mysql-server-core-5.7       5.7.21-0ubuntu0.16 amd64              MySQL database server binaries
+
+sudo mysql_install_db
+sudo /usr/bin/mysql_secure_installation
+mysql -u root -p 
+
+Создание конктретной БД и наделения Пользователя правами и настройка БД - отдельные мануалы
+
+
+12) sublime 3
+
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
+sudo apt-get update
+sudo apt-get install sublime-text-installer
+
+
+13) postgresql
+
+sudo apt install postgresql postgresql-contrib
+sudo apt install python-pip python-dev libpq-dev postgresql postgresql-contrib
+ryndin@ubu:~$ sudo -i -u postgres
+postgres@ubu:~$ psql
+postgres=# CREATE DATABASE studentsproject_db;
+    CREATE DATABASE
+postgres=# CREATE USER studentsprojectuser WITH PASSWORD 'metalmag2python';
+    CREATE ROLE
+postgres=# GRANT ALL PRIVILEGES ON DATABASE studentsproject_db TO studentsprojectuser;
+    GRANT
+
+установлено:
+ii  postgresql-9.5              9.5.10-0ubuntu0.16 amd64              object-relational SQL database, version 9.5 server
+ii  postgresql-client-9.5       9.5.10-0ubuntu0.16 amd64              front-end programs for PostgreSQL 9.5
+ii  postgresql-client-common    173ubuntu0.1       all                manager for multiple PostgreSQL client versions
+ii  postgresql-common           173ubuntu0.1       all                PostgreSQL database-cluster manager
+ii  postgresql-contrib          9.5+173ubuntu0.1   all                additional facilities for PostgreSQL (supported version)
+ii  postgresql-contrib-9.5      9.5.10-0ubuntu0.16 amd64              additional facilities for PostgreSQL
+
+
+
+14) графические редакторы
+sudo apt install gimp
+sudo apt install inkscape
+sudo apt install pinta
+
+
+15) tree
+sudo apt install tree
+
+
+16) mc
+sudo add-apt-repository ppa:eugenesan/ppa
+sudo apt-get update
+sudo apt-get install mc
+
+
+16) менеджер всех пакетов в ubuntu
+sudo apt install synaptic
+gksu synaptic
+
+
+17) тема ос Cinnamon 
+Cinnamon, это окружение по умолчанию в дистрибутиве Linux Mint.
+sudo add-apt-repository ppa:embrosyn/cinnamon
+sudo apt update
+sudo apt install cinnamon blueberry
+sudo apt install numix-gtk-theme
+
+
+
+

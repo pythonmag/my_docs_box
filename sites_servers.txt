@@ -1,0 +1,5 @@
+
+Django. Запуск проекта в связке uWSGI и Nginx
+======================
+http://adw0rd.com/2016/2/2/django-nginx-uwsgi/
+С Блога Эдварда

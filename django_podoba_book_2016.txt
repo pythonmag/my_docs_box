@@ -1,0 +1,4425 @@
+
+Глава 1
+==============
+Які технології розглянемо у даній книзі?:
+    мова програмування Python;
+    веб-фреймворк Django;
+    бази даних sqlite та MySQL;
+    мова розмітки HTML;
+    каскадні таблиці стилів CSS;
+    мова програмування Javascript;
+    Javascript бібліотека jQuery;
+    HTML/CSS фреймворк Twitter Bootstrap;
+    репозиторій коду Git
+
+
+
+Глава 2
+=======================
+
+Иконки          ## в этих двух источниках есть просто куча иконок. все что надо!
+-----------
+
+0)
+Все иконки из 3 Источников здесь !!!
+---------------------------------
+https://www.w3schools.com/icons/default.asp
+
+
+1)
+Basic Icons / Google Icons
+===========
+https://material.io/icons/          ## там названия строк
+
+2)
+http://fontawesome.io/icons/
+http://fontawesome.io/examples/
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<i class="fa fa-dropbox" aria-hidden="true"></i>
+
+3)
+http://getbootstrap.com/components/
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+
+
+
+
+
+Глава 6 Подобы
+========================
+HTTP
+URL
+request - > GET - запрос от Клиента на Сервер о получении информации от Сервера на Клиент
+request - > POST - запрос от Клента на Сервер в виде передачи информации на сервер (обычно через Формы)
+response    -- возвратный ответ от Сервера на Клиент
+'http://example.com/?key1=value1”  -- все что после адреса сайта - GET запрос 
+
+
+Пример запроса и ответа метода GET на локальном хосте - пустая страница проекта джанго:
+
+Заголовки Запроса:
+GET / HTTP/1.1
+Host: 127.0.0.1:8000
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:50.0) Gecko/20100101 Firefox/50.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+Cache-Control: max-age=0
+
+Заголовки Ответа с Сервера:
+HTTP/1.0 200 OK
+Date: Wed, 11 Jan 2017 19:02:01 GMT
+Server: WSGIServer/0.1 Python/2.7.12        // встроенный сервер на Джанго / nginx обфчно
+X-Frame-Options: SAMEORIGIN
+Content-Type: text/html
+--------------------------------
+Cookies - сохраняются на стороне клиента(браузера) по запросу из Сервера, чтобы при разных запросах идентифицировать Пользователя на Сервере (Куки возвращаются в теле запроса от Клиента). Период жизни куки от минимального - одна сессия (запущен клиент)
+В Куках часто используется и гинерируется Ключ Безопасности Клиента.
+
+Примеры Куки (на 1 сессию) - это просто строка с символами:
+fr=0QzuKZJyuS5jgsYlG.AWXRN7ospfNJ-QpLjwB3iDgrIqk.BYdnRF.si.AAA.0.0.BYdnRc.AWUfgM0y; path=/; domain=.facebook.com; HttpOnly 
+x-src=%2Fyuriy.ryndin.5%7Cpagelet_bluebar; path=/; domain=.facebook.com
+---------------------------------
+
+
+Пример HTTP запроса на Сервер
+-----------------------------
+Accept	
+text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Encoding	
+gzip, deflate, br
+Accept-Language	
+en-US,en;q=0.5
+
+Cookie	
+fr=0QzuKZJyuS5jgsYlG.AWXRN7ospfNJ-QpLjwB3iDgrIqk.BYdnRF.si.AAA.0.0.BYdnRc.AWUfgM0y; datr=RXR2WIiXEBbK-dzB3DUtz1VE
+; sb=XHR2WDca0PJFn42aSstPho-q; c_user=100003396089313; xs=21%3AlpFLkLSeSc_ibg%3A2%3A1484158044%3A17214
+; csm=2; s=Aa5KUnivjROTkbnb.BYdnRc; pl=n; lu=ggOeRs9Ex1OLdQNZwzWbhlzg; p=-2; presence=EDvF3EtimeF1484158062EuserFA21B03396089313A2EstateFDutF1484158062824CEchFDp_5f1B03396089313F2CC
+; wd=1225x526
+
+Host	
+www.facebook.com
+Referer	
+https://www.facebook.com/
+User-Agent	
+Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:50.0) Gecko/20100101 Firefox/50.0
+-------------------------------  
+
+
+Cookies
+===================
+Cookies - це невеликий кусок інформації, що зберігається у вашому веб-переглядачі.
+Його встановлює веб-браузер на прохання сервера. Дана інформація зберігається під певним
+ключом (іменем куки), певний період часу (або протягом браузерної сесії, тобто після
+перезапуску веб-переглядача така кука пропаде) та для певного домену і підшляху веб-
+сторінки. Встановлені куки браузер кожного разу відсилає на сервер. Таким чином
+Cookies зазвичай використовуються, щоб ідентифікувати користувача. З їх допомогою
+реалізуються користувацькі сесії, налаштування під користувача та будь-який функціонал
+пов’язаний із збором інформації щодо поточного користувача.
+
+У нашому проекті ми скористаємось куками, коли будемо реалізували меню Груп.
+
+
+--------------------
+MVC -- 
+Model (Работа с БД) / View (Представление HTML для Клиента) / Controller (Логика на питоне)  -- концепция устарела
+
+MTV -- 
+Model (Модели + БД) / Tamplate (Шаблоны HTML) / View (Преставления, Логика, код Питон)
+-- Это Новая актуальная Концепция
+--------------------
+
+
+Противоречие / Логика в Моденлях !!
+==============
+Єдине зауваження, яке я персонально маю до MVC в Django, є те, що згідно
+кращих практик Django розробки, потрібно частину логіки вкладати у
+класи моделей. Це суперечить MVC підходу, адже дані ніколи не повинні
+знати про те, як, хто і коли використовуватиме їх. Це все повинно бути
+частиною котроллера... В будь-якому випадку маєте їжу для роздумів...
+
+
+---------------------------
+Регулярные Выражения для URL Диспетчера(py)
+Можно разобраться на сайте с комбинациями рег выражений
+https://regex101.com/
+
+пример строки regex для URL дистпетчера 
+"ˆstudents/(/?P<sid>[0-9]+)/edit/?$"
+
+Соответствие:
+^/?groups/student_(?P<student_id>[0-9]+)/edit/?$
+    на выходе параметр <student_id=какое либо число>
+groups/student_123/edit/
+---------------------------  
+
+
+---------------------------
+Django Аплікація - це Python пакет, який містить окремий аспект чи авто-
+номний функціонал Django проекту. Згідно кращих практик кожна апліка-
+ція повинна містити окремий функціонал Django проекту. Наприклад, якщо
+у вас на сайті є блог, розділ новин, розділ подій, розділ магазину, тоді кожен
+із даних розділів повинен бути реалізованим як окрема Django аплікація.
+
+
+
+Интерполяция Строк в Питоне / Генерация строк
+===========================
+Хорошая статья расширяющая понимание Генерации Строк
+http://www.internet-technologies.ru/articles/article_220.html
+
+
+
+static
+====================
+До статичних ресурсів на веб-сторінці зазвичай належать CSS, Javascript
+файли, а також зображення. Кожен із даних ресурсів підтягується браузе-
+ром, в окремому запиті після отримання головної HTML сторінки. Згідно
+останніх практик усі ці типи ресурсів краще тримати на зовнішніх CDN
+сервісах, або як мінімум обслуговувати поза Django URL диспетчетор (тобто
+напряму через фронт-енд сервер, напр. Nginx або Apache).
+
+по-замовчуванню фреймворк заглядає у кожну заінстальовану аплікацію (startapp)
+і перевіряє чи часом там немає підпапки “static”; якщо вона є, тоді Django
+автоматично додасть її у свій реєстр статичних папок і відповідно кожен
+внутрішній файл і папка будуть доступні через браузер під певною
+адресою;
+
+по-замовчуванню змінна STATIC_URL в модулі settings.py проекта є
+рівна стрічці “/static/”; це означає, що статичні ресурси у веб-переглядачі
+обслуговуються в під-секції URL адрес “/static/”.
+
+
+http://localhost:8000/static/css/custom.css
+    // Эта строка сработала по относительному пути и открыла Мой Кастомный файл Стилей
+
+
+    // После создания папки static внутри Апликации эта папка стала достуана в проекте глобально - но это еще не конец, будет еще доступ через тег Джаного {% static ...%}
+<td><img src="static/img/abama.jpg" height="30" width="30" class="img-circle"></td>
+
+
+    // Добавил в urls.py -- Я так понял Что если нет Дебаг режима - это надо для работы
+Serving static files during development¶
+If you use django.contrib.staticfiles as explained above, runserver will do this automatically when DEBUG is set to True. If you don’t have django.contrib.staticfiles in INSTALLED_APPS, you can still manually serve static files using the django.contrib.staticfiles.views.serve() view.
+This is not suitable for production use! For some common deployment strategies, see Deploying static files.
+For example, if your STATIC_URL is defined as /static/, you can do this by adding the following snippet to your urls.py:
+from django.conf import settings
+from django.conf.urls.static import static
+
+
+urlpatterns = [
+    # ... the rest of your URLconf goes here ...
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+
+media ...
+Насправді папка static служить для зберігання статичних ресурсів, що
+належать до функціоналу самої аплікації. Будь-який контент, що є даними
+аплікації, а не частиною функціоналу, має йти або в базу даних, або у папку
+media. Проте, допоки ми не реалізували моделей для студентів, ми викори-
+стовуємо для них статичні зображення замість зображень розташованих у
+папці media.
+
+
+
+В итоге в HTML документе работатет тег {% static %} который дает абсолютный путь к папке
+static
+-----------------------------------
+    {% load static from staticfiles %}
+
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}"/>
+
+    <td><img src="{% static 'img/abama.jpg' %}" height="30" width="30"
+                                     class="img-circle"></td>
+-----------------------------------
+
+
+Через язык Джанго шаблонов делается Цикл для объекта из БД-словаря
+Таблица в html заполяется подобными строками данных о студентах по единой логике
+---------------------------------
+<tbody>
+{% for student in students_data %}      // доступны тестовые данные из функции render()
+<tr>
+<td>{{ forloop.counter }}</td>          // forloop.counter дає нам порядковий номер ітерації циклу починаючи з 1;
+<td><img class=”img-circle”
+src=”{% static student.image %}” height=”30”    // у объекта доступны атрибуты из БД(словаря)
+width=”30” /></td>
+<td><a href=”{% url ”students_edit” student.id %}”> // у объекта доступны атрибуты из БД(словаря)
+{{ student.last_name }}</td>                    // у объекта доступны атрибуты из БД(словаря)
+<td><a href=”{% url ”students_edit” student.id %}”>
+{{ student.first_name }}</td>
+<td>{{ student.ticket }}</td>
+----------------------------
+
+
+
+Наследование Джанго Шаблонов (html)
+==================================
+Речь об общих элементах на кождой странице Интерфейса.
+-----------------------
+В Django шаблонах є концепція унаслідування, яка дозволяє мати один базовий шаблон із
+спільними для більшості шаблонів елементами, а унікальні для кожної окремої сторінки
+елементи мають спеціально відведені блоки в цьому базовому шаблоні, куди ці сторінки можуть
+вносити власні зміни.
+
+{ % block name % } в базовому шаблоні він декларує блок, який може перебити шаблон, що його
+унаслідує; в кінцевому шаблоні цей тег перебиває власним контентом контент блока із такою
+самою назвою в базовому шаблоні;
+    
+{ % extends % } використовується в кінцевому шаблоні, щоб вказати з якого шаблону даний
+шаблон унаслідується.
+
+{% comment %} - ми огорнули рядок статусу в тег коментаря таким чином прибравши даний
+елемент тимчасово із сторінки; ми до нього повернемось в одній із наступних глав
+
+{{ block.super }}  -- Если вам необходимо содержимое блока родительского шаблона,
+используйте переменную {{ block.super }}. Эта полезно, если вам необходимо дополнить
+содержимое родительского блока, а не полностью переопределить его. 
+
+--------------------------
+Все самое главное о логике работы Джанго Шаблонов (Структура html) и их Наследования:
+    http://djbook.ru/rel1.4/topics/templates.html#template-inheritance
+--------------------------
+
+
+Стутктура HTML Шаблона - как Неизменяемого Каркаса для всех страниц Интерфейса
+======================
+{% extends "students/base.html" %}          // Указание на Родительский шаблон
+
+{% load static from staticfiles %}          // Импорт Статик Директории
+
+{% block meta_title %}Студенты{% endblock meta_title %}
+
+{% block title_h2 %}База Студентов{% endblock title_h2 %}
+
+{% block content %} Уникальный код для каждой Строницы {% block content %}
+
+
+Теперь в Дочерних Страницах Везде нужны Блоки Джанго Шабона {% block...%} - без Обертания
+в Блок ни одна строка или Инструкция не сработают
+-----------------------
+
+
+
+Автоматическое экранирование HTML
+---------------------
+    http://djbook.ru/rel1.4/topics/templates.html#automatic-html-escaping
+По-умолчанию в Django, каждый шаблон экранирует все переменные.
+Опять же, мы подчеркиваем, что такое поведение используется по-умолчанию. Если вы используете систему шаблонов Django, вы в безопасности.
+Как это отключить
+Для отдельных переменных
+Для отключения авто-экранирования для отдельных переменных, используйте фильтр safe:
+This will be escaped: {{ data }}
+This will not be escaped: {{ data|safe }}
+---------------------
+
+
+
+Процессоры Контекста 
+======================
+Кастомные функциии, которые генерируют Глобальные переменные-объекты, которые доступны
+во всех Модулях и Шаблонах Проекта и Апликации
+Привязка модуля с кастомными контекст процессорами происходит через settings.py
+(как и request)
+
+
+Создание собственного контекст_процессора / функция которая возвращает Глобальную
+переменную по все Шаблоны и Вьюшки
+-------------------------
+в папке проекта (где settings.py)
+создаю модуль context_processors.py
+
+
+# return global atribute of http host of app like PORTAL_URL
+def url_students(request):
+    return {'PORTAL_URL': 'http://'+request.META['HTTP_HOST']}
+
+
+в самой settings.py к списку Действующих Контекст-процессоров добавляю свой:
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'studentsdb27.context_processors.url_students',
+                'studentsdb27.context_processors.students_data',
+            ],
+        },
+    },
+
+В итоге в любом Шаблоне html доступна переменная {{ PORTAL_URL }}
+и при постановке в тег
+<link rel="stylesheet" href="{{PORTAL_URL}}{% static 'css/custom.css' %}"/>
+
+выдает на строне клиента
+<link rel="stylesheet" href="http://localhost:8000/static/css/custom.css">
+
+
+также можно поступить с пробными базами данных для моей апликации, дать Глобальную
+переменнную в виде словаря через контекст-процессор, зарегистрированный в settings.py
+ def students_data(request):
+    students_data = (
+                {'id':1,
+                 'first_name': u'Юрий',
+                 'last_name': u'Рындин',
+                 'ticket': 2332,
+                 'image': 'img/yurii.jpg'},
+
+                {'id': 2,
+                 'first_name': u'Олена',
+                 'last_name': u'Зуева',
+                 'ticket': 6854,
+                 'image': 'img/helen.jpg'},
+
+                {'id': 3,
+                 'first_name': u'Виталий',
+                 'last_name': u'Подоба',
+                 'ticket': 8745,
+                 'image': 'img/podoba.jpg'},
+                    )
+    return {"students_data" : students_data}
+---------------------------------
+
+
+Глава 7
+Базы Данных 
+===============================
+-- Реляцийные (то есть упорядоченные в Таблицах)
+В Стобцах Таблицы - Структура Таблицы (наименование колонок)
+В стоках Таблицы - единицы информации - 1 стока == 1 запрос 
+
+
+SQL -- Structured Query Language -- Язык Структурированных Запросов
+
+Документация по ДБ в Джанго
+---------------------
+    https://docs.djangoproject.com/en/1.10/ref/databases/
+
+
+
+Типы данных (полей) Таблиц в mySQL
+----------------------------------
+    https://uk.wikibooks.org/wiki/SQL/%D0%A2%D0%B8%D0%BF%D0%B8_%D0%B4%D0%B0%D0%BD%D0%B8%D1%85_MySQL
+
+3 Вида данных в ячейках: / Строковые / Числовые / Формат Дата и Время /
+
+Кожна таблиця має одне обов’язкове поле, яке унікально ідентифікує рядок в таблиці.
+Дане поле встановлюється автоматично в 1 для першого рядка даних в таблиці і +1 для
+кожного наступного (режим: autoincrement).
+А саме поле називають також первинним ключом (primary key).
+
+MySQL база даних підтримує різні двигунці. Кожен із них має свої плюси та мінуси.
+Ми використовуватимемо саме “InnoDB”, який дає пітримку транзакцій. До MySQL 5.5.4 включно
+дефолтним двигуном був “MyISAM”, але починаючи з 5.5.5 версії, ним став “InnoDB”.
+Тому, якщо ви встановили новішу версію MySQL, нічого додатково конфігурувати не потрібно.
+
+В Django спільноті чомусь популярнішою є інша реляційна база з відкритим кодом - PostgreSQL.
+Вона має трохи більше властивостей та багатший функціонал, але і є дещо складнішою для
+налаштування. Тому ми користуємось саме MySQL. Перейти на PostgreSQL маючи Django не складе
+особливих проблем, адже Django ORM (далі ми розберемо, що таке ORM) однаково добре працює з
+обидвома базами даних.
+
+Есть отдельный файл который описывает основные команды SQL
+---------------------------
+
+
+
+ORM (Object Relational Mapping)
+===============================
+ - Об’єктно Реляційне Відображення. 
+Надстройка в Джанго, которая позволяет манипулируя Классами Моделей в Питоне
+Изменять данные в БД (mySQL, postgreSQL, oracle, sqlite) -- смотря какая база подключена
+
+Для переноса БД используется JSON - спец формат текстового файла, который можно
+импортировать/экспортировать между клиентами БД.
+
+SQLAlchemy
+----------
+Іншою ORM системою є SQLAlchemy, яка є незалежна від фреймворків (отдельно от Django)
+і її можна використовувати будь-де, де у вас є справа з мовою програмування Python та
+реляційною базою даних.
+Как и ORM в Django - SQLAlchemy (библиотека) импортируется в код и через Классы работает 
+с БД (только вопрос как подключается БД)
+-----------------------
+    https://uk.wikipedia.org/wiki/SQLAlchemy
+
+Суть:
+    Таблица БД создается по структуре Класса Модели
+    1 Класс == 1 Таблица (аргументы класса == заголовки столбцов + типы ячеек к заполнению)
+    1 инстанс Класса == 1 Строка Таблицы с данными по ключам (заголовки столбцов)
+
+
+from django.db import models        -- все там лежит
+
+
+Когда Создается Класс-Модель-Таблица то автоматически ORM набравляет запрос в БД типа:
+---------------
+CREATE TABLE demoapp_product (
+    ”id” integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    ”title” VARCHAR(256) NOT NULL,
+    ”price” integer DEFAULT 0 NOT NULL
+    );
+---------------
+
+
+Все типы и Атрибуты полей Моделей (Ячейки Таблиц БД)
+----------------------------------
+    http://djbook.ru/rel1.9/ref/models/fields.html
+
+Поля для Классов принято использовать from django.db import models
+и обращаться к полям, как models.<Foo>Field.
+
+
+
+Глава 7
+Модели-Классы / БД ORM
+======================
+
+относительно поля модели FileField добавляю в settings.py настройки Источники хранения
+Загружаемых файлов для данного поля - настроенно что за пределами директории проекта
+-- файлы не должны попасть в Репозиторий кода
+
+Таким чином в браузері під адресою “http://localhost:8000/media/” можна буде отримувати
+файли, що лежатимуть у медіа директорії.
+------------------------
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+
+
+Все понятно с Созданием Классов Моделей / Набивкой полей / командами для ДБ makemigrations /
+migrate / dbshell и прочее
+
+
+Заполняю ДБ Строкою Студента через Инстанс Класса Студент в Интерактивной строке Питона:
+----------------------------
+В процессе выполения Импортирую Класс / импортирую модуль Таймзон для текущей даты /
+создаю Инстанс Класса с входными атрибутами для Полей Таблицы / тем самым создаю 1 студента
+как одну строку с данными в Таблицу / Вижу весь словарь пар значений созданного Инстанса / 
+сохраняю объект в БД / Данные ячеек таблиц доступны как артибуты Инстанса
+-----------------------
+    =(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py shell
+    Python 2.7.12 (default, Nov 19 2016, 06:48:10) 
+    [GCC 5.4.0 20160609] on linux2
+    Type "help", "copyright", "credits" or "license" for more information.
+    (InteractiveConsole)
+
+    >>> from students.models import Student
+    >>> Student
+    <class 'students.models.Student'>
+
+    >>> from django.utils import timezone
+    >>> timezone
+    <module 'django.utils.timezone' from '/home/ryndin/workprojects/studentsdb27/studentsdb27/local/lib/python2.7/site-packages/django/utils/timezone.pyc'>
+
+    >>> stud = Student(first_name = 'Yurii', last_name = 'Ryndin', birthday = timezone.now(), ticket = '4578')
+    >>> stud
+    <Student: Student object>
+
+    >>> stud.__dict__
+{'first_name': 'Yurii', 'last_name': 'Ryndin', 'middle_name': u' ', 'photo': <ImageFieldFile: None>, 'notes': u'', '_state': <django.db.models.base.ModelState object at 0x7f64e0951690>, 'birthday': datetime.datetime(2017, 1, 17, 20, 24, 53, 209605, tzinfo=<UTC>), 'ticket': '4578', 'id': None}
+
+    >>> stud.save()
+    
+    >>> stud.id
+    1
+    >>> stud.last_name
+    'Ryndin'
+        
+
+Сейчас у меня подключена ДБ mySQL / после команды save() можно увидеть наполение БД
+----------------------
+
+mysql> select * from students_student;
++----+------------+-----------+-------------+------------+-------+-------+--------+
+| id | first_name | last_name | middle_name | birthday   | notes | photo | ticket |
++----+------------+-----------+-------------+------------+-------+-------+--------+
+|  1 | Yurii      | Ryndin    |             | 2017-01-17 |       |       | 4578   |
++----+------------+-----------+-------------+------------+-------+-------+--------+
+1 row in set (0,01 sec)
+
+
+
+Можно переопределить Значения Атрибутов Инстанса / то есть Изменить данные ячеек Таблицы
+-----------------------------
+    >>> stud.last_name = 'Rundin'
+    >>> stud.save()
+    >>> stud.__dict__
+    {'first_name': 'Yurii', 'last_name': 'Rundin', 'middle_name': u' ', 'photo': <ImageFieldFile: None>, 'notes': u'', '_state': <django.db.models.base.ModelState object at 0x7f64e0951690>, 'birthday': datetime.datetime(2017, 1, 17, 20, 24, 53, 209605, tzinfo=<UTC>), 'ticket': '4578', 'id': 1}
+
+mysql> select * from students_student;
++----+------------+-----------+-------------+------------+-------+-------+--------+
+| id | first_name | last_name | middle_name | birthday   | notes | photo | ticket |
++----+------------+-----------+-------------+------------+-------+-------+--------+
+|  1 | Yurii      | Rundin    |             | 2017-01-17 |       |       | 4578   |
++----+------------+-----------+-------------+------------+-------+-------+--------+
+1 row in set (0,00 sec)
+        // Значение в ДБ переопределилось.
+
+
+
+Получение заполненных данных из БД
+==================================
+Правило: 
+    Заполнение Данных в БД через Инстанс Класса /
+    Получение данных из БД - через Класс и методы
+
+
+>>> Student.objects             // Менеджер данных из БД
+    <django.db.models.manager.Manager object at 0x7f10a3a9e750>
+
+
+>>> Student.objects.all()       // метод дает Множесто Объектов из БД
+    >>> Student.objects.all()
+    <QuerySet [<Student: Student object>, <Student: Student object>]>
+        // получено 2 объекта Студентов
+
+    >>> Student.objects.all()[0].first_name
+        u'Yurii'
+    >>> Student.objects.all()[1].first_name
+        u'Helen'
+    >>> Student.objects.all()[2].first_name
+        u'Pasha'
+        // доступ к Элеменут Списка по Индексу
+
+
+>>> Student.objects.get(pk=2).first_name
+   u'Helen'
+        // Из множества Объектов сортировка по ключу + указание атрибута объекта
+
+
+>>> [item.first_name for item in Student.objects.order_by('first_name')]
+[u'Helen', u'Yurii']
+>>> [item.first_name for item in Student.objects.order_by('first_name').reverse()]
+[u'Yurii', u'Helen']
+        // Генерация строки из значений атрибутов объектов
+
+
+
+Удаление Данных об Объекте - Строке из БД
+---------------------------
+Убедился что в БД три объекта Студентов / Длинна Менеджера объектов при этом - 3 /
+Подготовил объект для удаления из БД с сорторовкой по значению атрибута / 
+Применил команду удаления объекта / Проверил БД и длинну Менеджера объектов = 2 /
+Все сработало 
+
+
+    mysql> select * from students_student;
+    +----+------------+-----------+-------------+------------+-------+-------+--------+
+    | id | first_name | last_name | middle_name | birthday   | notes | photo | ticket |
+    +----+------------+-----------+-------------+------------+-------+-------+--------+
+    |  1 | Yurii      | Rundin    |             | 2017-01-17 |       |       | 4578   |
+    |  2 | Helen      | Zueva     |             | 2017-01-17 |       |       | 777    |
+    |  3 | Alex       | Stalone   |             | 2017-01-17 |       |       | 1245   |
+    +----+------------+-----------+-------------+------------+-------+-------+--------+
+    3 rows in set (0,00 sec)
+
+    >>> len(Student.objects.all())
+    3
+
+    >>> to_delete = Student.objects.get(first_name='Alex')
+    >>> to_delete.delete()                      // .save() уже учтено
+    (1L, {u'students.Student': 1L})
+
+    >>> len(Student.objects.all())
+    2
+----------------------------------
+
+
+Класс QuerySet - это целое API
+==============================
+Все это Код Питон / В нем куча методов сортировки / обработки / сравнения / удаления / добавления
+Такая ситуация имхо позоляте писать код питон ан строне сервера и как угодно работать 
+с содержимым БД проекта.
+В документации описано куча операторов на все случаи жизни. Очень круто !
+Даже есть фильтр для полноценного поиска флагмента строки.
+
+
+    http://djbook.ru/rel1.7/ref/models/querysets.html#queryset-api-reference
+
+
+QuerySet использует множество фильтров, которые всегда возвращают новый объект QuerySet
+
+Еще раз - чтобы достучатся до БД через модель надо импортировать Класс модели
+Чтобы использовать менеджер QuerySet Класса модели - надо объект objects
+Есть методы которые возвращают новый QuerySet, а есть методы которые модернизируют QuerySet  
+
+    >>> from students.models import Student
+    >>> Student.objects
+        <django.db.models.manager.Manager object at 0x7f53cf09c650>
+    >>> Student.objects.count()
+        2
+
+    >>> len(Student.objects.all())
+        2
+
+    >>> list(Student.objects.all())
+        [<Student: Student object>, <Student: Student object>]
+            // Возвращает копию QuerySet объекта, также кеширует данные их ДБ, потому
+                если вызвать метод еще раз, то обновятся данные из БД
+
+
+    >>> Student.objects.values()
+        <QuerySet [{'first_name': u'Yurii', 'last_name': u'Rundin', 'middle_name': u' ', 'photo': u'', 'notes': u'', 'birthday': datetime.date(2017, 1, 17), 'ticket': u'4578', u'id': 1L}, {'first_name': u'Helen', 'last_name': u'Zueva', 'middle_name': u' ', 'photo': u'', 'notes': u'', 'birthday': datetime.date(2017, 1, 17), 'ticket': u'777', u'id': 2L}]>
+        // Указывает все поля объекта в виде Словаря, в т.ч. не заполненные поля
+
+
+    >>> Student.objects.values('last_name', 'id')
+        <QuerySet [{'last_name': u'Rundin', 'id': 1L}, {'last_name': u'Zueva', 'id': 2L}]>
+        // встроена выборка по атрибутам
+
+
+    >>> Student.objects.values().order_by('ticket')
+        <QuerySet [{'first_name': u'Yurii', 'last_name': u'Rundin', 'middle_name': u' ', 'photo': u'', 'notes': u'', 'birthday': datetime.date(2017, 1, 17), 'ticket': u'4578', u'id': 1L}, {'first_name': u'Helen', 'last_name': u'Zueva', 'middle_name': u' ', 'photo': u'', 'notes': u'', 'birthday': datetime.date(2017, 1, 17), 'ticket': u'777', u'id': 2L}]>
+        // после values() доступны все методы сортировки()
+
+
+
+Вывод строк информации об Объектах в нужном формате
+----------------------
+    >>> for item in Student.objects.values().order_by('first_name'): print(str(item) + '\n')
+...         // и Генерация строк / и сортировка по значению
+{'first_name': u'Helen', 'last_name': u'Zueva', 'middle_name': u' ', 'photo': u'', 'notes': u'', 'birthday': datetime.date(2017, 1, 17), 'ticket': u'777', u'id': 2L}
+
+{'first_name': u'Pasha', 'last_name': u'Ryndin', 'middle_name': u' ', 'photo': u'', 'notes': u'', 'birthday': None, 'ticket': u' ', u'id': 3L}
+
+{'first_name': u'Yurii', 'last_name': u'Rundin', 'middle_name': u' ', 'photo': u'', 'notes': u'', 'birthday': datetime.date(2017, 1, 17), 'ticket': u'4578', u'id': 1L}
+
+
+    >>> for item in Student.objects.values_list().order_by('pk'): print(str(item) + '\n')
+... 
+(1L, u'Yurii', u'Rundin', u' ', datetime.date(2017, 1, 17), u'', u'4578', u'')
+
+(2L, u'Helen', u'Zueva', u' ', datetime.date(2017, 1, 17), u'', u'777', u'')
+
+(3L, u'Pasha', u'Ryndin', u' ', None, u'', u' ', u'')
+
+
+    >>> Student.objects.values_list()
+        <QuerySet [(1L, u'Yurii', u'Rundin', u' ', datetime.date(2017, 1, 17), u'', u'4578', u''), (2L, u'Helen', u'Zueva', u' ', datetime.date(2017, 1, 17), u'', u'777', u'')]>
+        //  Все значения полей в виде кортежа (без Ключей)
+
+
+
+Обычно работа с QuerySet состоит в использовании цепочек фильтров. 
+Для этого большинство методов QuerySet возвращает новый “queryset”.
+
+    >>> Student.objects.order_by('first_name')
+        <QuerySet [<Student: Student object>, <Student: Student object>]>
+
+    >>> Student.objects.get(pk=2)
+        <Student: Student object>
+     
+    >>> Entry.objects.filter(pub_date__year=2005).order_by('headline')
+        // Цепочка - выборка по значению года + сортировка по значеням атрибута 
+    
+
+
+Методы которые не возвращают Не QuerySet и обычно не используют Кеш и работатю напрямую
+с объектами ДБ
+        
+        // метод сразу создает объект в БД без save()
+    >>> Student.objects.create(first_name='Pasha', last_name='Ryndin')
+        <Student: Student object>
+    >>> Student.objects.count()
+        3
+    >>> Student.objects.values().get(id=3)
+        {'first_name': u'Pasha', 'last_name': u'Ryndin', 'middle_name': u' ', 'photo': u'', 'notes': u'', 'birthday': None, 'ticket': u' ', u'id': 3L}
+
+
+Подитожу цитатой из учебника:
+    1) основні методи менеджера об’єктів, які найчастіше використовуються, це:
+    all, filter, exclude, get, get_or_create, order_by, reverse, exists;
+    
+    2) кожен із вище перечислених методів (окрім get) повертає множину елементів з таблиці
+    - об’єкт типу QuerySet;
+        http://djbook.ru/rel1.7/ref/models/querysets.html#methods-that-do-not-return-querysets
+    
+    3) методи менеджера об’єктів, які повертають об’єкт типу QuerySet (множину з
+    результатами з бази даних) також можна викликати ланцюжком один за одним для
+    застосування одразу кількох фільтрів та умов в запиті до бази 
+    (напр. all().filter(name=”MtM”).order_by(“title”));
+
+    4) параметри всередині методів менеджера об’єктів можуть мати додаткові фільтри, щоб
+    дозволити створювати гнучкіші та динамічніші запити в базу: __exact, __contains, __in,
+    __gt, __lt, __startswith, __endswith, __year, __regex i ще багато інших.
+            http://djbook.ru/rel1.7/ref/models/querysets.html#field-lookups
+
+
+В классе Модели можно задать встроенный метод для Наглядного представления Объекта Модели:
+    ...    
+    def __unicode__(self):
+        return '* %s  %s *' % (self.first_name, self.last_name) 
+
+Теперь можно наглядно увидель методы соритровки по значениям атрибутов
+    >>> Student.objects.all()
+    <QuerySet [<Student: * Yurii  Rundin *>, <Student: * Helen  Zueva *>, <Student: * Pasha  Ryndin *>]>
+    >>> Student.objects.all().order_by('last_name')
+    <QuerySet [<Student: * Yurii  Rundin *>, <Student: * Pasha  Ryndin *>, <Student: * Helen  Zueva *>]>
+    >>> Student.objects.all().order_by('first_name')
+    <QuerySet [<Student: * Helen  Zueva *>, <Student: * Pasha  Ryndin *>, <Student: * Yurii  Rundin *>]>
+
+
+Фильтры в Фильтрах или фильтры в атрибутах через __
+-------------------
+    >>> Student.objects.all().filter(birthday__year = 2017)
+        <QuerySet [<Student: * Yurii  Rundin *>, <Student: * Helen  Zueva *>]>
+    >>> Student.objects.all().filter(birthday__month = 01)
+        <QuerySet [<Student: * Yurii  Rundin *>, <Student: * Helen  Zueva *>]>
+
+================================
+
+
+
+
+
+
+Миграции из ORM в контексте комманды SQL
+==================
+информативно можно увидить все подготовленные миграции в БД в виде команд SQL
+    (env)$ python manage.py sqlmigrate -апликация- -номер миграции-
+
+
+Интересно, что все действия пошагово прокоментированы!
+
+
+1-я миграция
+------------
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py sqlmigrate students 0001
+BEGIN;
+--
+-- Create model Student
+--
+CREATE TABLE `students_student` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY, `first_name` varchar(256) NOT NULL, `last_name` varchar(256) NOT NULL);
+COMMIT;
+
+
+2-я миграция
+------------
+BEGIN;
+--
+-- Add field middle_name to student
+--
+ALTER TABLE `students_student` ADD COLUMN `middle_name` varchar(256) DEFAULT   NOT NULL;
+ALTER TABLE `students_student` ALTER COLUMN `middle_name` DROP DEFAULT;
+COMMIT;
+
+
+3-я миграция
+------------
+BEGIN;
+--
+-- Add field birthday to student
+--
+ALTER TABLE `students_student` ADD COLUMN `birthday` date NULL;
+ALTER TABLE `students_student` ALTER COLUMN `birthday` DROP DEFAULT;
+--
+-- Add field notes to student
+--
+ALTER TABLE `students_student` ADD COLUMN `notes` longtext NOT NULL;
+--
+-- Add field photo to student
+--
+ALTER TABLE `students_student` ADD COLUMN `photo` varchar(100) NULL;
+ALTER TABLE `students_student` ALTER COLUMN `photo` DROP DEFAULT;
+--
+-- Add field ticket to student
+--
+ALTER TABLE `students_student` ADD COLUMN `ticket` varchar(256) DEFAULT   NOT NULL;
+ALTER TABLE `students_student` ALTER COLUMN `ticket` DROP DEFAULT;
+COMMIT;
+
+    
+4-я миграция
+------------
+BEGIN;
+--
+-- Alter field ticket on student
+--
+ALTER TABLE `students_student` ALTER COLUMN `ticket` SET DEFAULT ;
+ALTER TABLE `students_student` ALTER COLUMN `ticket` DROP DEFAULT;
+COMMIT;
+
+
+5-я миграция
+------------
+BEGIN;
+--
+-- Alter field middle_name on student
+--
+ALTER TABLE `students_student` ALTER COLUMN `middle_name` SET DEFAULT ;
+ALTER TABLE `students_student` ALTER COLUMN `middle_name` DROP DEFAULT;
+COMMIT;
+
+
+6-я миграция
+------------
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py sqlmigrate students 0006
+CommandError: Cannot find a migration matching '0006' from app 'students'. Is it in INSTALLED_APPS?
+        // 6 миграции не было ))
+=====================================
+
+
+
+интерфейс Администартора БД в Джанго
+====================================
+Тоже работа с БД но не через командную строку а через Визуальный интерфейс
+в модуле admin.py:
+
+from django.contrib import admin
+from . models import Student
+
+# Register your models here.
+admin.site.register(Student)
+
+
+
+Задал для Админ Интерфейса Псевдонимы отображения для Всей Базы Данных (Класс Модели)
+--------------------------
+    http://djbook.ru/rel1.7/ref/models/options.html#available-meta-options
+
+    class Student(models.Model):
+        """Student Model"""
+
+        class Meta(object):
+            verbose_name = u'СТУДЕНТ'
+            verbose_name_plural = u'СТУДЕНТЫ'
+
+
+
+Настройка MEDIA
+========================
+settings.py
+-----------
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+
+
+urls.py
+-------
+from django.conf.urls.static import static
+
+urlpatterns = [
+# View for Admin Panel
+   
+# Views for Students
+    
+# Views for Groups
+    
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+html
+-------
+{% if student.photo %}
+<td><img src="{{ student.photo.url }}" height="30" width="30"
+         class="img-circle"></td>
+{% else %}
+<td><img src="{% static "img/avatar_python.jpg" %}" height="30" width="30"
+         class="img-circle"></td>
+{% endif %}
+---------------------
+
+
+
+Встоенные Шаблоны Django Теги / Фильтры
+========================
+http://djbook.ru/rel1.7/ref/templates/builtins.html#built-in-template-tags-and-filters
+    // там все есть
+
+вот мой код где много Тегов Джанго уже набралось    / with / if / elif / end... /
+логика работы вся понятна / оставил как образец
+with -- псевдонимы
+----------------------------------
+<thead>
+            {% with req_order_by=request.GET.order_by req_reverse=request.GET.reverse %}
+            <tr>
+
+                <th><a href="#">№</a></th>
+                <th>Фото</th>
+
+                <th><a href="{% url 'home' %}?order_by=last_name{% if req_order_by == 'last_name' and req_reverse != 'yes' %}&amp;reverse=yes{% endif %}">
+                    <span>Фамилия</span>
+                    {% if req_order_by == 'last_name' and req_reverse != 'yes' %}<span class="glyphicon glyphicon-sort-by-alphabet">sort</span>
+                    {% elif req_order_by == 'last_name' and req_reverse == 'yes' %}<span class="glyphicon glyphicon-sort-by-alphabet-alt">sort</span>
+                    {% endif %}
+                    </a></th>
+
+                <th><a href="{% url 'home' %}?order_by=first_name{% if req_order_by == 'first_name' and req_reverse != 'yes' %}&amp;reverse=yes{% endif %}">
+                    <span>Имя</span>
+                    {% if req_order_by == 'first_name' and req_reverse != 'yes' %}<span class="glyphicon glyphicon-sort-by-alphabet">sort</span>
+                    {% elif req_order_by == 'first_name' and req_reverse == 'yes' %}<span class="glyphicon glyphicon-sort-by-alphabet-alt">sort</span>
+                    {% endif %}
+                    </a></th>
+
+                <th><a href="{% url 'home' %}?order_by=ticket{% if req_order_by == 'ticket' and req_reverse != 'yes' %}&amp;reverse=yes{% endif %}">
+                    <span>№Билета</span>
+                    {% if req_order_by == 'ticket' and req_reverse != 'yes' %}<span class="glyphicon glyphicon-sort-by-order">sort</span>
+                    {% elif req_order_by == 'ticket' and req_reverse == 'yes' %}<span class="glyphicon glyphicon-sort-by-order-alt">sort</span>
+                    {% endif %}
+                    </a></th>
+
+                <th>Действия</th>
+
+            </tr>
+            {% endwith %}
+</thead>
+-------------------------
+
+<a href="/?order_by=first_name&reverse=yes">  /
+<a href="/?order_by=first_name">
+        // такой или такой линки формируется в html на основании кода:
+
+<a href="{% url 'home' %}?order_by=last_name{% if req_order_by == 'last_name' and req_reverse != 'yes' %}&amp;reverse=yes{% endif %}">
+------------------------
+
+
+
+Пейджинатор / Пагинатор / Постраничный вывод
+========================
+http://djbook.ru/rel1.9/topics/pagination.html
+
+django.core.paginator
+
+-----------------------
+    // Это модуль (Файл) с Классами 'EmptyPage', 'InvalidPage', 'Page', 'PageNotAnInteger', 'Paginator', 'QuerySetPaginator'
+
+>>> from django.core import paginator
+>>> paginator
+<module 'django.core.paginator' from '/home/ryndin/workprojects/studentsdb27/studentsdb27/local/lib/python2.7/site-packages/django/core/paginator.pyc'>
+>>> type(paginator)
+<type 'module'>
+>>> dir(paginator)
+['EmptyPage', 'InvalidPage', 'Page', 'PageNotAnInteger', 'Paginator', 'QuerySetPaginator', '__builtins__', '__doc__', '__file__', '__name__', '__package__', 'cached_property', 'ceil', 'collections', 'six']
+---------------------
+    
+    // доступные методы Классов Пагинатора  
+    // 'count', 'num_pages', 'page', 'page_range', 'validate_number'
+
+>>> dir(paginator.Paginator)
+['__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_get_page', 'count', 'num_pages', 'page', 'page_range', 'validate_number']
+>>> dir(paginator.QuerySetPaginator)
+['__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_get_page', 'count', 'num_pages', 'page', 'page_range', 'validate_number']
+----------------------------
+
+    // Работа с Классом Пагинатора через Консоль
+    // Все методы Пагинтора дают возможность Передать Объект из Базы данных
+    // Из этого объекта сформировать Страницы данных и работать с ними
+
+>>> from students.models import Student
+>>> Student            
+>>> p = paginator.Paginator(Student.objects.all(), 4)       // 4 Инстанса на Странице
+>>> p
+<django.core.paginator.Paginator object at 0x7fb0a998d7d0>  // Объект для Пагинации
+
+>>> dir(p)
+['__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_get_page', 'allow_empty_first_page', 'count', 'num_pages', 'object_list', 'orphans', 'page', 'page_range', 'per_page', 'validate_number']
+    // все методы и параметры объекта пагинатора
+
+
+>>> p.count         // количество Инстансев Студента всего
+6
+
+
+>>> p.num_pages     // количество объектов пагинатора ели по 4 Инстанса на 1 объект
+2
+
+
+>>> p.object_list
+<QuerySet [<Student: * Yurii  Rundin *>, <Student: * Helen  Zueva *>, <Student: * Pasha  Ryndin *>, <Student: * Арни  Шварц *>, <Student: * Рикки  Бальбоа *>, <Student: * Джекки  Чайна *>]>
+    // Все Инстансы объекта пагинатора / Из БД Студенты
+
+
+>>> p.per_page      // по 4 объекта Студента на объект Пагинатора (4 студента на Страницу)
+4
+
+
+    // Создание Объекта Странины через метод Пагинатора с входным параметром
+>>> page1 = p.page(1)
+>>> page1
+<Page 1 of 2>
+>>> page1.object_list
+<QuerySet [<Student: * Yurii  Rundin *>, <Student: * Helen  Zueva *>, <Student: * Pasha  Ryndin *>, <Student: * Арни  Шварц *>]>
+
+>>> page2 = p.page(2)
+>>> page2
+<Page 2 of 2>
+>>> page2.object_list
+<QuerySet [<Student: * Рикки  Бальбоа *>, <Student: * Джекки  Чайна *>]>
+
+>>> page2
+<Page 2 of 2>
+>>> dir(page2)
+['__abstractmethods__', '__class__', '__contains__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__hash__', '__init__', '__iter__', '__len__', '__metaclass__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_abc_cache', '_abc_negative_cache', '_abc_negative_cache_version', '_abc_registry', 'count', 'end_index', 'has_next', 'has_other_pages', 'has_previous', 'index', 'next_page_number', 'number', 'object_list', 'paginator', 'previous_page_number', 'start_index']
+
+>>> page2.has_previous
+>>> page2.has_previous()
+True
+
+>>> page2.number
+2
+
+>>> page2.next_page_number()
+    ...
+    raise EmptyPage('That page contains no results')
+EmptyPage: That page contains no results
+
+>>> page1.next_page_number()
+2
+
+>>> page1.has_next()
+True
+
+>>> page1.has_other_pages()
+True
+---------------------------
+
+
+Домашние задания после работы Пагинатора / Навигации по страницам:
+------------------------------
+На домашнє завдання. Реалізуйте посторінкову навігацію повністю викинувши використання
+Paginator пакету. Так, перепишіть всю логіку з нуля, де будете обчислювати і формувати
+під-список студентів, що відповідає поточній сторінці. А також прийдеться вичисляти
+повну кількість сторінок і тому подібні параметри.
+        // просмотрел модуль django/core/paginator.py
+
+Трохи забігаючи наперед пропоную самостійно спробувати розібратись із Javascript та
+технологією Ajax, і спробувати реалізувати навігацію з допомогою кнопки “Load
+More...” (Завантажити Більше). Думаю ви вже неодноразово бачили такий тип навігації, коли
+доскролюєте до кінця списку елементів, а там внизу бачите кнопку “Load More...”, при кліку
+по якій, динамічно довантажується наступна пачка елементів. І так продовжується до тих пір
+поки ви не витягнете усіх елементів із сервера. В такому випадку кнопка “Load More...”
+зникає.
+        // Пришло время выучить еще раз JS а особенно jQuery !!
+
+Ще трохи ускладнюючи приклад із кнопкою “Load More...” пропоную зробити варіант, коли цієї
+кнопки немає, а натомість наступна пачка елементів завантажується автоматично, коли ви
+проскролили до кінця сторінки. І так продовжується допоки елементи на серверві не
+вичерпаються повністю. Тут вам допоможе Javascript подія “onscroll” та наступний вираз:
+“(window.innerHeight + window.scrollY) >= document.body.offsetHeight”. Розберіться із даним
+виразом самостійно. І рекомендую не писати даний функціонал на “голому” Javascript,
+а користуватись бібліотекою jQuery.
+        // Пришло время выучить еще раз JS а особенно jQuery !!
+-------------------------------
+
+
+
+Поля отношений в Моделях / Между Полями в БД
+===================
+Django предоставляет набор полей для определения связей между моделями.
+    http://djbook.ru/rel1.8/ref/models/fields.html#module-django.db.models.fields.related
+
+Кожного разу, коли ми використовуватимемо один із типів полів зв’язку між таблицями, Django
+для нас створюватиме в базі поле з назвою “[field_name]_id”, де зберігатиме значення
+первинного ключа рядка тої таблиці, на яку зсилається дане поле зв’язку.
+
+В мові SQL зв’язок між таблицями зазвичай декларується ключовим словом FOREIGN KEY, який,
+в свою чергу, зазвичай зсилається на унікальне поле (PRIMARY KEY) рядка іншої таблиці.
+Приклад декларації FOREIGN KEY (з англ. FOREIGN - зовнішній):
+
+CREATE TABLE groups (
+    id integer AUTO_INCREMENT NOT NULL PRIMARY KEY,     // автоматическая нумерация таблице
+    title VARCHAR(256) NOT NULL,
+    leader_id integer,
+    FOREIGN KEY (leader_id) REFERENCES students(id)     
+            // Связь Лидера с внешней таблице Студенты (по их id)
+);
+
+
+
+
+
+ForeignKey
+Багато до Одного та Один до Багатьох
+----------------------
+http://djbook.ru/rel1.8/ref/models/fields.html#django.db.models.ForeignKey
+
+У нашому випадку із базою студентів ми маємо студента, який може належати лише до однієї
+групи.
+Адже студент навчалального закладу не може одразу навчатись в двох і більше групах, це
+нонсенс.
+Проте кожна із груп має багато студентів призначених.
+Отже, отримуємо із сторони студента з’язок лише на один рядок в таблиці груп, проте більше,
+ніж один студент може зсилатись на одну і ту ж саму групу.
+Таким чином створюючи зворотній зв’язок однієї групи із багатьма студентами.
+
+
+
+OneToOneField
+Один до Одного
+----------------------
+http://djbook.ru/rel1.8/ref/models/fields.html#onetoonefield
+
+Уявимо, що маємо базу клієнтів, а в окремій табличці тримаємо список даних по їхніх
+паспортах.
+Людина може мати лише один паспорт.
+Таким чином на один рядок в таблиці із паспортами може зсилатись не більше, ніж один рядок
+із таблиці клієнтів.
+І навпаки, один паспорт може належати не більше, ніж одній людині.
+Цей тип зв’язку будемо називали “один до одного” (англ. One To One).
+
+!!!!!
+Поле OneToOneField зробить неможливим призначення одного і того ж студента більше, ніж
+одній групі в Django адмінці. Таким чином усі налаштування полів моделей логічно
+відображаються в адміністративній частині фреймворка.
+!!!!!
+
+Django ORM створює додаткові атрибути також і на об’єктах моделі, на яку посилається те чи
+інше поле зв’язку. Таким чином не лише група знає, якого їй старосту призначили, але й
+студент знає, що він являється старостою групи.
+Це ми називаємо зворотніми автоматичними зв’язками.
+Для полів OneToOneField в об’єкті моделі, на яку посилаються, створюється атрибут із назвою
+класу моделі, яка посилається на нього. Таким чином “leader” поле в моделі групи також
+створює поле “group” в об’єкті моделі студента. Дане поле “group” міститиме об’єкт групи,
+для якої даний студент є старостою.
+
+
+
+ManyToManyField
+Багато до Багатьох
+----------------------
+http://djbook.ru/rel1.8/ref/models/fields.html#manytomanyfield
+
+Уявіть, що маємо блог, де багато різних авторів регулярно дописує статті.
+При цому час до часу вони між собою кооперуються і працюють над однією статтею і публікують
+під спільним авторством.
+Таким чином на даному блозі один автор зазвичай є власником більше, ніж однієї статті.
+А стаття, в свою чергу, інколи може мати більше, ніж одного автора - список авторів.
+В даному випадку маємо більше одного елемента у зв’язку “автор - стаття”.
+
+
+
+Сам на себе.      / Связи между полями в Одной таблице
+-------------
+(self)
+Для создания рекурсивной связи – объект со связью многое-к-одному на себя – 
+используйте models.ForeignKey('self')
+
+Якщо клієнт привів нам іншого клієнта, тоді ми це позначаємо в таблиці як зв’язок рядка із
+іншим рядком цієї ж таблиці.
+Такий тип зв’язку називаємо ще посиланням на себе.
+Тобто таблиця містить рядок, що посилається на рядок з цієї ж таблиці.
+В Django ORM для цього використовуємо також поле ForeignKey, але першим аргументом, замість
+назви класу моделі, передаємо стрічку ‘self’.
+Ця стрічка повідомляє ORM систему, що дане поле буде посилатись на рядки всередині тієї
+самої таблиці (на об’єкти моделі, в якій міститься дане поле).
+
+
+ForeignKey.on_delete
+--------------------
+Методы что делать, если удаляется свазанное с молелью внешнее поле
+
+    http://djbook.ru/rel1.8/ref/models/fields.html#django.db.models.ForeignKey.on_delete
+ CASCADE / PROTECT / SET_NULL / SET_DEFAULT / DO_NOTHING
+-----------------------------------
+
+
+
+Создание Молели "Группы" -- Расщифровка SQL команды
+=======================
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py sqlmigrate students 0011
+
+BEGIN;
+--
+-- Create model Group
+--
+CREATE TABLE `students_group` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY, `title` varchar(256) NOT NULL, `notes` longtext NOT NULL, `leader_id` integer NULL UNIQUE);
+ALTER TABLE `students_group` ADD CONSTRAINT `students_group_leader_id_41cb2861_fk_students_student_id` FOREIGN KEY (`leader_id`) REFERENCES `students_student` (`id`);
+COMMIT;
+
+Видна сложная логика создание дополнительной таблицы со связями между полями:
+Вот Таблица Связей
+mysql> show tables;
++----------------------------------+
+| Tables_in_myproject2016_db       |
++----------------------------------+
+...          |
+| myproject2016app_monthjournal    |
+| myproject2016app_programmer      |
+| myproject2016app_team            |
+| registration_registrationprofile |
+| students_group                   |
+| students_student                 |
++----------------------------------+
+16 rows in set (0,00 sec)
+
+mysql> select * from myproject2016app_team;
++----+------------------+---------------------+-----------+
+| id | name             | notes               | leader_id |
++----+------------------+---------------------+-----------+
+|  1 | Альфа            | Первая              |        14 |
+|  2 | Омега            | Вторая              |         5 |
+|  3 | Центавра         | Третья              |         6 |
+|  4 | Тритон           | Четвертая           |         4 |
+|  5 | Аполло           | Пятая               |         3 |
+|  6 | Гиганда          | Шестая              |         2 |
+|  7 | Церера           | Нова Група          |         1 |
+|  8 | xxx              |                     |        23 |
+| 11 | zzz              |                     |        19 |
+| 12 | ccc              |                     |      NULL |
+| 14 | cdffgf           |                     |      NULL |
+| 16 | fgfgf            |                     |      NULL |
++----+------------------+---------------------+-----------+
+12 rows in set (0,00 sec)
+-------------------------
+
+После Создания модели Группы и Миграции в БД Объекты дступны через Питон методы:
+Но в Админке пока Групп нет потому как они не назначены
+-----------------------
+>>> from students.models import Student, Group
+>>> Group
+<class 'students.models.Group'>
+>>> Student
+<class 'students.models.Student'>
+
+>>> Student.objects.all()
+<QuerySet [<Student: * Yurii  Rundin *>, <Student: * Helen  Zueva *>, <Student: * Pasha  Ryndin *>, <Student: * Арни  Шварц *>, <Student: * Рикки  Бальбоа *>, <Student: * Джекки  Чайна *>, <Student: * Samanta  Fox *>, <Student: * Оксана  Боярина *>]>
+>>> Group.objects.all()
+<QuerySet []>
+
+
+Создаю Первую Группы интерактивно (через методы Питона):
+ORM делает так же:
+--------------------
+>>> leader1 = Student.objects.all()[2]      // Выбрал Либера для Первой группы из Студентов
+>>> leader1
+<Student: * Pasha  Ryndin *>
+
+>>> group1 = Group(title='EM-1', leader=leader1)   // Иснтанс Группы (именованные параметры)
+>>> group1.save()           // Метод Сохранения на Инстанс - Добавление объекта в БД
+>>> Group.objects.all()
+<QuerySet [<Group: * EM-1  Ryndin *>]>
+    // Появилась Группа в БД
+
+mysql> select * from students_group;
++----+-------+-------+-----------+
+| id | title | notes | leader_id |
++----+-------+-------+-----------+
+|  1 | EM-1  |       |         3 |
++----+-------+-------+-----------+
+1 row in set (0,00 sec)
+----------------------------
+
+
+Домашнее задание по Модели Групп:
+================================
+Тепер, коли маємо завершену модель для групи можемо оновити нашу сторінку із списком груп
+та реалізувати у в’юшці роботу із базою даних. Це вам на домашнє завдання. Таким самим
+чином, як ми це зробили для списку студентів, реалізуйте список груп із бази даних, його
+сортування та посторінкову навігацію.
+    -- выполенно
+    -- еще раз практика по языку шаблона Джаного и передаче в request параметров для url запроса (в том числе if elif)
+--------------------------------
+
+
+Фикстуры / JSON
+====================
+
+JSON (англ. JavaScript Object Notation, укр. об'єктний запис JavaScript, вимовляється
+джейсон) — це текстовий формат обміну даними між комп'ютерами. JSON базується на тексті,
+може бути прочитаним людиною. Формат дозволяє описувати об'єкти та інші структури даних.
+
+JSON знайшов своє головне призначення у написанні веб-програм, а саме при використанні
+технології AJAX. JSON, що використовується в AJAX, виступає як заміна XML (використовується
+в AJAX) під час асинхронної передачі структурованої інформації між клієнтом та сервером.
+При цьому перевагою JSON перед XML є те, що він дозволяє складні структури в атрибутах,
+займає менше місця і прямо інтерпретується за допомогою JavaScript в об'єкти.
+
+fixture, з агл. заготовка, арматура.
+
+Подробно о dumpdata / loaddata
+--------------------
+    https://coderwall.com/p/mvsoyg/django-dumpdata-and-loaddata
+
+
+dumpdata (--format)
+    By default, dumpdata will format its output in JSON
+    You can specify the format using --format option
+    Command supports for following formats(serialization formats)
+        json
+        xml
+
+
+loaddata
+    This command can be use to load the fixtures(database dumps) into database
+    ./manage.py loaddata user.json
+------------------------
+
+
+Шаблон команды (общий вид)
+---------------
+python manage.py /  dumbdata --indent 4 --format json   > srudents_db.json / loaddata ...
+
+
+Сохраннение в JSON только определенной Апликации Джаного (например Апликация students)
+------------------
+python manage.py /  dumbdata students --indent 4 --format json   > srudents_app.json / loaddata ...
+
+
+Мои действия с Фикстурами:
+=========================
+
+Сделал 2 фистуры 1) полностью моя ДБ 2) Фикстура только с Апликацией students
+------------------------------------
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py dumpdata --indent 4 --format json > students_db.json
+
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py dumpdata students --indent 4 --format json > students_app.json
+
+
+Полностью Вычистил Всю БД / flush
+---------------------------------
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py flush
+
+You have requested a flush of the database.
+This will IRREVERSIBLY DESTROY all data currently in the 'myproject2016_db' database,
+and return each table to an empty state.
+Are you sure you want to do this?
+    Type 'yes' to continue, or 'no' to cancel: yes
+
+
+После flush все таблицы моей ДБ пусты:
+------------------------
+mysql> select * from students_group;
+Empty set (0,00 sec)
+
+mysql> select * from students_student;
+Empty set (0,00 sec)
+
+mysql> select * from auth_user;
+Empty set (0,00 sec)
+    // Пропало все: Данные о Студентах и Группах на Сайте / Доступ к Админке
+
+
+Вернул настройки и Данные БД    / loaddata
+----------------------------
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py loaddata students_db.json
+Installed 133 object(s) from 1 fixture(s)
+    // Все Базы вернулись, данные о Студентах и Группах на Сайте, доступ к Админке
+
+
+
+Теория по заполнению БД Фикстурами (JSON) / 
+не забываем про migraite при первой загрузке начистый проект
+-----------------------
+    http://djbook.ru/rel1.7/howto/initial-data.html#providing-initial-data-with-fixtures
+
+Если создать файл предварительной настройки с именем initial_data.[xml/yaml/json],
+то он будет загружен автоматически при каждом запуске migrate.
+Конечно это очень удобно, но стоит помнить, что данные будут обновляться каждый раз при
+запуске migrate, поэтому лучше не использовать initial_data с данными, которые вы
+планируете редактировать. 
+(Прим. пер. : если автозагрузку надо временно “отключить”, то удобно просто добавить символ
+нижнего подчеркивания перед _initial_data).
+
+
+Домашнее задание:
+=================
+Хочете ще практики з базами даними і почуватись як риба у воді налашто-
+вуючи їх? Заінсталюйте та налаштуйте базу даних PostgreSQL. Промігруйте
+дані на неї та запустіть ваш Django проект на PostgreSQL. Прийдеться також
+навчити ваш Python говорити із PostgreSQL базою.
+------------------
+    // выполнено: весь мануал и код в файле postgresql_manual.txt
+
+
+Выполнил Домашнее задание по подключению JS функционала - Кнопки LoadMod для пошагового отображения списка Струдентов (без Перезагрузки) на Шаблоне html /
+==================
+В шаблоне students_list.html
+пагинатор не должен раьотать а то будет обрезанный список
+
+------------------
+
+#1)
+{% block more_css %}
+    <!--Style for Logic and Botton LoadMore list-->
+    <style>
+        tr.hd{
+        display:none;
+        }
+
+        #loadMore:hover {
+        background-color: #fff;
+        color: #33739E;
+        }
+    </style>
+    <!--End Style for Logic and Botton LoadMore-->
+{% endblock more_css %}
+
+#2)
+{% for student in students %}
+            <tr class="hd">
+            ....
+
+#3)
+<!--Logic to work Button LoadMore of items List-->
+{% block more_js %}
+<script >
+    $(function () {
+        var per_page = 4
+        $("tr.hd").slice(0, per_page).show();
+        $("#loadMore").on('click', function (e) {
+            e.preventDefault();
+            $("tr:hidden").slice(0, per_page).slideDown();
+            if ($("tr:hidden").length == 0) {
+                $("#loadMore").fadeOut('slow');
+            }
+        });
+    });
+</script>
+{% endblock more_js %}
+----------------------
+
+
+Итог по Главе 7
+======================
+Наступна глава буде третьою базовою главою даної книги. Таким чином, якщо ви успішно
+освоїте 6-у, 7-у та 8-му глави книги, Django практично у вас в кишені.
+
+Побудова URL структури сайту, в’юшки, шаблони, робота з базою даних, робота з формами - це
+основа веб-розробки з Django.
+
+!!! Урл Запрос (GET) / Вьюшка (Логика) / Шаблон (отображение) / БД (хранение данных) / Формы (метод POST) !!!
+-----------------------
+
+
+
+Формы, Валидация
+Глава 8
+====================
+
+Веб-форми - це інструмент, з допомогою якого користувач може відправити дані на сервер.
+
+Этапы работы с Формами в Джанго:
+    1) вестка html формы
+    2) Обработка Формы на сервере (от клиента POST на сервер), Валидация данных 
+    3) встроенные в Джанго Классы Форм
+    4) Формы из Twitter Bootstrap и с помощью Апликации Django Crispy Forms
+    5) Кастомизация Админки Джанго
+
+План главы:
+    - реалізуємо форму додавання студента практично з нуля;
+    - побудуємо форму редагування студента використовуючи Django форми моделей;
+    - реалізуємо функцію видалення існуючих студентів;
+    - створимо форму контактування адміністратора на закладці Контакт;
+    - покращимо список студентів в адміністративній частині та допишемо валідатори для
+        поля “Група” на формі редагування студента.
+
+
+База
+------------
+<form action=”/submit_form.html”
+        method=”post”
+        enctype=”multipart/form-data”
+        name=”myform”>
+</form>
+
+action - адрес, куда идут данные формы (POST)
+method - вид запроса (POST)
+enctype - кодировка формы / если есть файлы в форме - multipart/form-data /  
+name - каждая форма должна иметь имя (проще для сервера если форм много от клиента)
+target - назвние html шаблона куда сервер вернет данные после обработки поста   
+        target="_blank" -- атрибут - откроет форму в новой вкладке браузера
+        _blank -- Загружает страницу в новое окно браузера.
+        _self -- Загружает страницу в текущее окно.
+        _parent -- Загружает страницу во фрейм-родитель, если фреймов нет, то это значение
+        работает как _self.
+        _top -- Отменяет все фреймы и загружает страницу в полном окне браузера, если
+        фреймов нет, то это значение работает как _self.
+----------------
+
+
+Атрибуты тегов для указания Кодирования Формы
+------------------
+<form enctype="application/x-www-form-urlencoded | multipart/form-data | text/plain">
+...
+</form>
+
+Значения
+application/x-www-form-urlencoded
+    Вместо пробелов ставится +, символы вроде русских букв кодируются их шестнадцатеричными значениями (например, %D0%90%D0%BD%D1%8F вместо Аня).
+multipart/form-data
+    Данные не кодируются. Это значение применяется при отправке файлов.
+text/plain
+    Пробелы заменяются знаком +, буквы и другие символы не кодируются. 
+--------------------
+
+
+Теги Форм
+------------------
+<input> -- найпоширеніший тег всередині форм; може мати кілька різних типів взалежності
+від атрибуту “type” (checkbox, radio, text, hidden, submit і ще багато інших);
+
+<textarea> -- дозволяє вводити користувачу не лише стрічку тексту, а цілі параграфи тексту;
+
+<select> -- набір опцій для вибору доступних у так званій “випадайці” (випадаюче меню);
+працює у двох режимах дозволяючи вводити як лише одне значення, так і кілька значень
+одночасно (атрибут “multiple”); опції для вибору формуються з допомогою вкладених тегів
+“option”;
+
+<button> -- або input[type=submit]: кнопки на формі; в основному використовуються для
+відправки форми на сервер;
+
+<label> -- підписує поле пояснювальним текстом; за допомогою атрибуту “for” можна
+фокусувати поле при кліку по тегу “label”.
+
+
+<!--Имя-->
+    <div>
+        <label for="first_name">Имя **</label>
+        <input type="text" value=""     // поле может принимать уже внесенное значение
+         name="first_name" id="first_name"
+        placeholder="Обязательно"/>
+        <span>{{ errors.first_name }}</span>
+    </div>
+
+    <!--Фамилия-->
+    <div>
+        <label for="last_name">Фамилия **</label>
+        <input type="text" value="{{ data.last_name }}"     // поле приняло уже внесенное значение
+         name="last_name"               // наименование Ключа для словаря request.POST
+         id="last_name"                 // id для привязкиЛайблы Названия Поля
+        placeholder="Обязательно"/>
+    </div>
+---------------------
+
+
+GET / POST
+=======================
+Коли ми навігуємо в інтернеті, відкриваючи сторінки з допомогою URL адреси браузера,
+а також клікаючи по лінках, ми автоматично робимо запити на сервер типу GET.
+
+Для відправки даних на сервер у формі частіше використовується метод POST. Він дозволяє
+відправити більшу кількість даних, в той час як метод GET має дуже обмежений об’єм даних
+для відправки на сервер.
+
+Також метод POST кращий тоді, коли форма містить поля, які не варто відображати в URL адресі браузера. Наприклад пароль.
+
+Таким чином POST буде підходящим для форм додавання, редагування та видалення студента.
+В той час, як GET краще підійде для форми пошуку на сайті.
+
+
+http://djbook.ru/rel1.7/topics/forms/index.html#get-and-post
+-----------------------
+GET или POST
+GET и POST – единственные HTTP методы, которые используются для форм.
+Форма авторизации в Django использует POST метод. При отправке формы браузер собирает
+все данные формы, кодирует для отправки, отправляет на сервер и получает ответ.
+При GET, в отличии от POST, данные собираются в строку и передаются в URL.
+URL содержит адрес, куда отправлять данные, и данные для отправки.
+Пример работы можно посмотреть на странице поиска по документации Django.
+При оправке формы поиска, вы будете перенаправлены на URL 
+https://docs.djangoproject.com/search/?q=forms&release=1.
+
+GET и POST обычно используются для разных действий.
+Любой запрос, который может изменить состояние системы - например, который изменяет данные
+в базе данных - должен использовать POST.
+GET должен использоваться для запросов, которые не влияют на состояние системы.
+
+Не следует использовать GET для формы с паролем, т.к. пароль появится в URL, а
+следовательно в истории браузера и логах сервера. Также он не подходит для отправки
+большого количества данных или бинарных данных, например, изображения. Web-приложение,
+которое использует GET запросы в админке, подвержено атакам: не сложно подделать форму
+для запроса на сервер и получить важные данные о системе. POST использует дополнительные
+механизмы защиты, например, CSRF защиту, и предоставляет больше контроля за доступом к
+данным.
+
+GET удобен для таких вещей, как форма поиска, т.к. URL, который представляет GET запрос, можно легко сохранить в избранное или отправить по почте.
+
+
+
+
+Валидация данных
+------------------
+Самые востребованные Валидации:
+    1) перевірка на введення даних у обов’язкові поля форми;
+    2) перевірка на правильний формат телефонів, емейлів, дат;
+    3) перевірка на достатньо складний та правильний ввід пароля;
+    4) правильний тип файлу та обмеження на розмір файлу.
+
+!!!   Наше завдання, як розробників, на сервері, перед виконанням будь-яких операцій над
+даними із форми, перевірити їхню коректність. І лише, якщо усі дані користувача
+задовільняють необхідним умовам, продовжувати обробку даних.  !!!
+
+Якщо дані введені некоректно, подальша робота із ними припиняється і форма відправляється
+користувачу повторно. Поля форми зберігають попередньо введені користувачем дані. Також
+оновлена форма повинна вивести деталі помилок.
+
+
+HTTPS / CSRF
+================
+Необходим минимум защиты от злоумышленников к Формам:
+    1) кодування даних форм при відправці на сервер з допомогою SSL сертифікатів та
+        протоколу HTTPS;
+    2) захист від підробки запиту від імені користувача; так званий CSRF 
+        (Cross Site Request Forgery атака).
+
+в settings.py
+---------------
+MIDDLEWARE = [
+    ....
+    'django.middleware.csrf.CsrfViewMiddleware',
+
+
+в шаблоне Формы
+----------------
+<form action="{% url "students_add" %}"
+                method="post"
+                enctype="multipart/form-data">
+
+    <!--Protect item-->
+    {% csrf_token %}
+
+
+в итоге в html шаблоне Скрытое поле / Дает Защиту от Подделки Межсайтового Запроса
+-----------------------
+<input type="hidden" name="csrfmiddlewaretoken"
+    value="u4jlncU5ihFmCvcxpfmScvOFbYgZ2LybD6yR166MKPSnvNJBAbimNPOBGP6phK7P">
+
+
+
+
+GIT -- дорос до Гита / Надо внимательно почитать книгу-мануал по ссылке на сайте git
+---------------------
+    
+
+
+
+Теги Формы
+---------------
+Кастомно вроде разбираюсь в значении тегов Формы:
+form / label / input / select / option / textarea / button
+и методах тегов:
+action / method / enctype / for / type / value / name / id / placeholder / type=submit /
+type=checkbox / type=file /
+
+
+*action* на форме:
+action="{% url "students_add" %}":
+---------------------------------
+атрибут action вказує на цю ж саму сторінку, на якій знаходиться наша форма додавання
+студента; тобто генератор форми і обробник форми у нас буде той самий - функція в’юшки
+додавання студента; взалежності від типу запиту (GET чи POST) наша в’юшка робитиме дві
+різні речі; метод запиту є POST, адже ми змінюватимемо дані на сервері з допомогою даної
+форми; тип кодування даних перед відправкою на сервер: “multipart/form-data”, адже нам
+потрібно буде відправляти файл зображення студента
+
+
+Логика при работе с Формами от Клиента на Сервер и Обратно:
+-------------------
+    - перевіряти чи відбувся пост форми;
+    - якщо відбувся, тоді перевірити вхідні дані;
+    - якщо дані правильні, створити і зберегти нового студента в базу;
+    - вернутись на список із студентами;
+    - якщо дані неправильні, вернути форму і вказати користувачеві на вказані помилки;
+    - при цьому бажано залишити попередні значення полів введені користувачем;
+    - якщо пост форми відбувся, але кнопка “Відмінити” була натиснута, тоді просто
+        переводимо користувача на сторінку із списком студентів;
+    - якщо ж поста форми не було, просто показуємо початкову порожню форму.
+
+
+
+
+# TODO: 0 Если форма запощена / имеет метод POST
+    if request.method == "POST":
+        # TODO: 1 Если была нажата кнопка Отменить
+        if request.POST.get('')
+    
+            # TODO: 2 Возврат на Шаблон Списка студентов
+    
+        # TODO: 1 Если была нажата кнопка Добавить
+    
+            # TODO: 2 Проверка данных на корректность и сбор Ошибок
+    
+            # TODO: 2 Если данные в форму введены Некорректно
+                # TODO: 3 Возвращаю Шаблон Формы с данными ошибок
+    
+            # TODO: 2 Если данные в форму введены Корректно
+                # TODO: 3 Создаю и Сохраняю студента в Базу
+    
+                # TODO: 3 Возвращаю пользователя на Шаблон Списка студентов
+    
+    # TODO: 0 Если форма не была Запощена / нет метода POST
+        # TODO: 1 Возвращаю код начального состояния Формы
+
+
+Новая конструкции во вьюшке HttpResponseRedirect / пренаправление по УРЛку на Шаблон html:
+----------------------------
+from  django.core.urlresolvers import reverse
+
+student.save()
+return HttpResponseRedirect(reverse('home'))
+
+після успішного збереження студента перенаправляємо користувача на список студентів;
+для цього повертаємо із нашої функції об’єкт класу HttpResponseRedirect з переданим йому
+параметром: адресою сторінки, на яку перенаправити користувача; дану адресу ми
+сформували з допомогою функції reverse, яку імпортували на початку модуля; мінімальний
+набір аргументів даної функції - це назва URL шаблона, який ми задекларували у модулі
+urls.py; функція reverse є аналогом шаблонного тегу url;
+----------------------------
+
+
+Натомість отримали помилку “CSRF verification failed. Request aborted.”? 
+-----------------
+Так і було задумано ;-) Як ми уже з вами розібрались в першій секції даної глави,
+Django фреймворк обов’язково перевіряє кожну форму на наявність певного коду, щоб
+уникати CSRF хаку. Щоб доробити нашу форму для даної валідації просто додайте ось цей
+тег де-небудь всередині тегу form: “
+{% csrf_token %}
+-----------------
+
+
+Валидация Форм
+================
+В основном вся логика в моем Коде, Тут только базовые концепции
+
+Для більш-менш пристойної валідації на нашій формі нам потрібно:
+    -- позначити обов’язкові поля на формі;
+    -- перевірити поля на коректно введені дані;
+    -- кожне невірно введене поле, або поле, яке є обов’язковим для введення, але
+        користувач його пропустив, повинне бути згаданим в словнику ‘errors’; в даному
+        словнику ми вписуватимемо ключі одноіменні з назвами полів, а значеннями будуть
+        стрічки тексту (повідомлення) для користувача з деталями помилок;
+    -- якщо є хоча б одна помилка, тоді віддаємо шаблон форми;
+    -- при цьому показуємо помилки біля кожного поля із некоректними даними;
+    -- а також, для зручності користувача, зберігатимемо в полях форми попередньо введені
+        дані; інакше користувачеві прийдеться щоразу вводити навіть ті дані, які були
+        введені коректно попереднього разу.
+
+
+Больше всего проблемм возникло с Валидацие поля "Группа Студента" - это связль между Моделями
+----------------------
+
+Нам надо вернуть в Форму № группы студента чтобы по этому номеру сохранился выбор Группы
+
+
+Вот так номер вытягиватеся нормально
+--------------------------
+>>> from students.models import Group
+>>> Group
+<class 'students.models.Group'>
+>>> group = Group.objects.filter(pk=1)
+>>> group
+<QuerySet [<Group: PythonCode // Чайна Джекки>]>
+>>> group = Group.objects.filter(pk=2)
+>>> group
+<QuerySet [<Group: PhpCode // Бальбоа Рикки>]>
+>>> group = Group.objects.filter(pk=3)
+>>> group
+<QuerySet [<Group: RubyCode // Fox Samanta>]>
+
+
+Домашнее Задание:
+-----------------
+На домашнє завдання реалізувати валідацію поля Фото. Файл фото повинен бути не більше 2
+мегабайт у розмірі та бути дійсно файлом зображення. Підказка: найпримітивніший варіант
+валідації типу файла може бути по розширенню назви файла. Складніший і більш надійний метод
+буде валідація через вміст файла. Це можна зробити або з допомогою Python бібліотеки PIL,
+або використовуючи Django валідатор. Почніть із простішого варіанту, а далі спробуйте
+складніший. Складніший варіант вимагатиме від вас немалого часу для реалізації.
+    // Отметка - пока не делал
+
+
+Все что есть в POST в GET из request  -- Байт-Строки
+------------------------------------
+Это строки в Байт-Коде, которые оперируются как Строки
+Потому если строки надо сравнить с Числами в html шаблоне
+нод так добавить фильтр |add:0 (строка +0 = число)
+
+
+<option 
+    value="{{ group.id }}" 
+    {% if group.id == request.POST.student_group|add:0 %}selected="1"{% endif %}>{{ group.title }} </option>
+
+group.id - это объект Группы из БД и id - это число
+request.POST.student_group - это объект из request и это байт-строка
+
+А ставнить надо потову лайтхак для конвертации в число - фильтр |add:0
+-------------------------------------
+
+
+Статусные сообщения / Сообщения о совершенных Событиях
+====================
+Моя реализация /  примеры
+
+base.htlm
+-------------------------
+<!--Block Status Message-->
+{% block status_message %}
+{% if request.GET.status_message %}
+<div class="alert alert-warning">{{ request.GET.status_message }}</div>
+{% endif %}
+{% endblock status_message %}
+<!--End Block Status Message-->
+
+
+students_add.html -- переопределение контекста
+-------------------------
+{% block status_message %}
+{% if errors %}
+<div class="alert alert-info"><strong>Исправьте Ошибки заполенния Формы!</strong></div>
+{% endif %}
+{% endblock status_message%}
+
+
+Логика формирования контекст-процессора  
+request.GET.status_message  / во вьюшке
+------------------------
+if not errors:
+    student = Student(**data)
+    student.save()
+    return HttpResponseRedirect(u'{0}?status_message=Стедент **{1}** в Базу успешно Добавлен. Группа Студента - **{2}**. Добавлен **{3}**'.format(
+        reverse('home'), last_name, groups[0], datetime.now()))
+------------------------
+
+
+Домашнее задание:
+================
+На домашнє завдання пропоную вам переробити статусні повідомлення з використанням
+вбудованої Django аплікації “django.contrib.messages”. Вони спеціально призначені для
+даного завдання та надають як серверну логіку, так і тег для шаблонів, щоб з легкістю і
+гнучко відображати статусні повідомлення. Найпоширеніше їхнє застосування - це робота із
+формами.
+        // Пока не выполнил
+
+
+
+Класс Формы 
+==========================
+Наконец-что Классы Django
+
+
+Теория Создания Форм в Джанго
+--------------------
+http://djbook.ru/rel1.7/topics/forms/index.html#building-a-form-in-django
+
+
+Автоматичними називаємо ті форми, які:
+    1) генеруєють HTML код
+    2) та надають усю валідацію даних без додаткового кастомного коду із сторони розробни-
+ка.
+
+
+https://tutorial.djangogirls.org/ru/django_forms/
+    // туториал на русском
+
+
+http://djbook.ru/rel1.7/ref/forms/fields.html#module-django.forms.fields
+    // Базовые знания по инициации полей класса Формы
+    Поля формы / 
+    Базовые аргументы поля /
+        required
+        label
+        initial
+        widget
+        help_text
+        error_messages
+        validators
+        localize
+     
+    Классы встроенных полей / 
+        BooleanField
+        CharField
+        ChoiceField
+        TypedChoiceField
+        DateField
+        DateTimeField
+        DecimalField
+        EmailField
+        FileField
+        FilePathField
+        FloatField
+        ImageField
+        IntegerField
+        IPAddressField
+        GenericIPAddressField
+        MultipleChoiceField
+        TypedMultipleChoiceField
+        NullBooleanField
+        RegexField
+        SlugField
+        TimeField
+        URLField
+
+    Достаточно сложные встроенные классы /
+        Field
+        ComboField
+        MultiValueField
+        SplitDateTimeField
+    
+    Поля для обработки связей /
+        ModelChoiceField
+        ModelMultipleChoiceField
+
+
+
+Вы можете использовать следующие варианты рендеринга <label>/<input>:
+    {{ form.as_table }}     // выведет их в таблице, в ячейках тега <tr>
+
+    {{ form.as_p }}         // обернет их в тег <p>
+
+    {{ form.as_ul }}        // выведет в теге <li>
+
+
+
+Инстанс Формы Джанго есть объект кода html с тегами, то есть часть Шаблона html
+---------------------
+Пример:
+>>> from django import forms
+>>> class CommentForm(forms.Form):
+...     name = forms.CharField(label='Your name')
+...     url = forms.URLField(label='Your Web site', required=False)
+...     comment = forms.CharField()
+>>> f = CommentForm(auto_id=False)
+>>> print(f)
+<tr><th>Your name:</th><td><input type="text" name="name" /></td></tr>
+<tr><th>Your Web site:</th><td><input type="url" name="url" /></td></tr>
+<tr><th>Comment:</th><td><input type="text" name="comment" /></td></tr>
+---------------------
+
+
+Вся теория про Формы в Джанго и Кастомные формы
+-------------------
+    http://djbook.ru/rel1.7/topics/forms/index.html#forms-in-django
+
+
+Полезные атрибуты {{ field }}:
+============================
+
+{{ field.label }}
+    // Метка поля, т.е. Email address.
+
+{{ field.label_tag }}
+    // Метка поля обёрнута в соответствующий HTML-тег <label>.
+
+{{ field.id_for_label }}        
+    // ID, которое будет использоваться для этого поля (id_email в примере выше).
+    Вы можете использовать его вместо label_tag, если самостоятельно генерируете
+    <label> для поля. Так полезно при генерации JavaScript, если вы не хотите
+    “хардкодить” ID.
+
+{{ field.value }}
+    // Значение поля, напрмеир someone@example.com.
+
+{{ field.html_name }}
+    // Имя поля, которое будет использовано в HTML-поле. Здесь учитывается префикс
+    формы, если он был установлен.
+
+{{ field.help_text }}
+    // Любой вспомогательный текст, который привязан к полю.
+
+{{ field.errors }}
+    // Вывод <ul class="errorlist">, содержащий все ошибки валидации, относящиеся к полю.
+    Вы можете настраивать представление списка ошибок с помощью цикла {% for error in
+    field.errors %}. В этом случае, каждый объект в цикле является простой строкой,
+    содержащей сообщение об ошибке.
+
+{{ field.is_hidden }}
+    // Значение этого атрибута равно True, если поле является скрытым, и False в противном
+    случае. Данный атрибут обычно не используется при выводе формы, но может быть полезен
+    в условиях подобных этому:
+    {% if field.is_hidden %}
+        {# Do something special #}
+    {% endif %}
+
+{{ field.field }}
+    // Экземпляр Field из класса формы, который обёрнут с помощью BoundField. Он
+    предоставляет доступ к атрибутам Field, например {{ char_field.field.max_length }}.
+
+
+
+SMTP сервер відправки листів
+============================
+Настройка на gmail, yahoo
+-------------------------
+    http://ru.email-unlimited.com/help/mailer/smtp-settings-samples.html
+Как настроить IMAP
+    Шаг 1. Включите IMAP-доступ
+    Откройте Gmail на компьютере.
+    В правом верхнем углу нажмите на значок Настройки.
+    Нажмите Настройки.
+    Откройте вкладку Пересылка и POP/IMAP.
+    В разделе "Доступ по протоколу IMAP" выберите Включить IMAP.
+    Нажмите Сохранить изменения.
+
+    Шаг 2. Измените настройки IMAP в клиенте
+    Укажите в своем клиенте данные из этой таблицы. Дополнительную справочную информацию о параметрах IMAP для вашего клиента ищите в Интернете.
+    Сервер входящей почты (IMAP):   imap.gmail.com
+    Требуется SSL: да
+    Порт: 993
+    Сервер исходящей почты (SMTP):  smtp.gmail.com
+    Требуется SSL: да
+    Требуется TLS: да (при наличии)
+    Требуется аутентификация: да
+    Порт для SSL: 465
+    Порт для TLS/STARTTLS: 587
+    Полное или отображаемое имя:	Ваше имя
+    Учетная запись, имя пользователя или адрес электронной почты:
+        Ваш адрес электронной почты полностью
+    Пароль:  Ваш пароль Gmail
+
+
+
+Також:
+-------------
+    https://mandrillapp.com - користуюсь ним найбільше в даний момент;
+    https://sendgrid.com/ - один із найпопулярніших сервісів розсилки листів
+        на даний момент;
+    http://www.icontact.com/ - ще один непоганий сервіс відправки листів.
+
+У меня настроено через EMAIL_HOST = 'smtp.mandrillapp.com'
+ADMIN_EMAIL = 'meg2mag@gmail.com'
+EMAIL_HOST = 'smtp.mandrillapp.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'meg2mag@gmail.com'
+EMAIL_HOST_PASSWORD = '3NPdTaAcJB662IzgPMEFNQ'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+Кажется что mandrill.com на сегодня не работает - перенаправляет на стрнаницу и сервис:
+https://mandrillapp.com/login/?referrer=%2F -> 
+http://kb.mailchimp.com/mandrill/add-or-remove-mandrill
+
+
+
+Власний SMTP сервер / Локальный
+-------------------
+Вкінці-кінців можете спробувати встановити і налаштувати власний SMTP сервер на локальній машині.
+На Лінуксі одними із найпопулярніших є:
+
+sendmail
+--------
+    https://uk.wikipedia.org/wiki/Sendmail
+
+
+postfix
+--------
+    https://uk.wikipedia.org/wiki/Postfix
+Почтовый сервер Postfix - Настройки
+    http://help.ubuntu.ru/wiki/postfix
+Грейлистинг с помощью postgrey
+    http://help.ubuntu.ru/wiki/postgrey
+
+
+
+
+Домашнее задание
+----------------
+Якщо дійсно хочете спробувати даний варіант, тоді інсталяція та конфігурація
+даних серверів залишається вам повністю на самостійне опрацювання.
+
+sendmail install
+----------------
+ryndin@pc:~$ sudo apt install sendmail
+[sudo] пароль для ryndin: 
+Чтение списков пакетов… Готово
+
+postfix install
+-----------------
+ryndin@pc:~$ sudo apt install postfix
+Чтение списков пакетов… Готово
+Построение дерева зависимостей       
+Чтение информации о состоянии… Готово
+
+Для локальных серверов:
+----------------
+# email settings
+# please, set here you smtp server details and your admin email
+ADMIN_EMAIL = ’admin@studentsdb.com’
+EMAIL_HOST = ’localhost’
+EMAIL_PORT = ’25’
+EMAIL_HOST_USER = ’’
+EMAIL_HOST_PASSWORD = ’’
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = False
+----------------------
+
+
+О настройках SMTP сервер
+------------------------
+    http://djbook.ru/rel1.7/ref/settings.html#email-host
+
+
+В итоге я настроил SMPT сервер Sendgrid
+===================
+настройка по ссылке 
+https://app.sendgrid.com/guide/integrate/langs/smtp
+
+settings.py:
+ADMIN_EMAIL = 'meg2mag@gmail.com'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'meg2mag@gmail.com'
+EMAIL_HOST_PASSWORD = 'SG.2XuKvyrBQia0RsqRoJllTQ.....'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+----------------------
+
+
+Объект Формы            
+
+/ см.отдельный файл в этой папке мануалов - django_Forms_Manual_documintation.txt
+===================
+Об’єкт форми надає нам кілька корисних методів для генерації HTML коду форми:
+    {{ form.as_p }}:    огортає поля (мітку + поле вводу) в теги параграфів (p);
+    {{ form.as_table }} представляє форму у вигляді таблиці;
+    {{ form.as_ul }}:   представляє поля у вигляді списку (теги “ul/li”);
+    -- ну і на кінець: якщо вставити об’єкт форми в шаблон без використання вищеперечислених
+    методів, тоді теги полів не будуть огорнуті в жодні додаткові теги.
+
+
+contact_admin/form.html:
+------------------------
+{% block content %}
+<form action=”{% url ”contact_admin” %}” method=”post”>
+{% csrf_token %}                // Защита обязательно вставляется отдельным тегом
+{{ form.as_p }}                 // сам тег формы из вьюшки
+<input type=”submit” value=”Надіслати” name=”send_button” />        // кнопи тоже отдельно
+</form>
+{% endblock content %}
+    
+
+
+crispy forms
+==================
+
+Апликация для Джанго, которая позволяет управлять html тегами в Классах Форм Джанко
+То есть навешивает на них Стили Bootstrap.
+
+https://readthedocs.org/projects/django-crispy-forms/
+    страница проекта в Интернете - там уточнить стабилую версию  (1.6.1)
+
+http://django-crispy-forms.readthedocs.io/en/stable/
+    мануал от Автора по crispy forms    
+
+https://github.com/django-crispy-forms/django-crispy-forms
+    репозиторий от Автора
+
+
+установка через requirements.txt (обычно ставлю через apt install или через интерфейс PyCharm)
+--------------------------
+requirements.txt
+...
+django-crispy-forms==1.6.1
+
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ ls
+\manage.py  README.md  requirements.txt  students  studentsdb27  students_db.json
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ pip install -r requirements.txt 
+...
+Downloading django_crispy_forms-1.6.1-py2.py3-none-any.whl (103kB)
+    100% |████████████████████████████████| 112kB 569kB/s 
+Installing collected packages: django-crispy-forms
+Successfully installed django-crispy-forms-1.6.1
+
+setting.py:
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'students',
+    'crispy_forms',
+]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+--------------------------
+
+Криспи Формс Апликация дает 2 вида объектов : 
+    1) Класс ФормХелпер 
+    2) Классы-Лейауты
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
+
+
+В шаблоне html форма до вставки crispy form было вот такая форма:
+-------------------
+{% block content %}
+<form action="{% url 'contact_admin' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Отправить Админу" name="send_button"/>
+</form>
+{% endblock content %}{% block content %}
+<form action="{% url 'contact_admin' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Отправить Админу" name="send_button"/>
+</form>
+{% endblock content %}
+
+
+В шаблоне стала такая форма / по имени Инстанса:
+---------------------
+{% block content %}
+{% crispy forma %}
+{% endblock content %}
+----------------------
+
+
+Домашнее задание по джанго Формам:
+-----------------
+Для совсем продвинутых:
+Ну і для зовсім “просунутих”. Реалізувати можливість видалення одразу кількох студентів.
+Для цього треба буде додати чекбокси до списку із студентами, а також кнопки Видалити
+внизу або зверху даного списку.
+-----------------
+
+
+Django Admin Интерфейс - Кастомизация
+======================
+ - см. отдельный Файл
+django_AdminPanel_Кастомизация.txt
+
+
+
+Глава 9 
+==================
+Некоторые моменты про js + jquery
+------------------
+
+ООП в js реализуется через концепцию Прототипов
+---------------------
+http://javascript.ru/tutorial/object/inheritance
+
+
+DOM
+-------------------
+Коли браузер завантажує HTML код сторінки, він формує ієрархічне дерево об’єктів, що
+відповідає HTML структурі документа. Даний набір об’єктів сторінки називається DOM
+(Document Object Model, Об’єктна Модель Документа).
+
+
+document    -- глобальная переменная из DOM
+-------------------
+На сторінці наш Javascript код має доступ до глобальної змінної document,
+яка і надає доступ до решти елементів, атрибутів та властивостей сторінки.
+Через них ми можемо шукати елементи на сторінці, видаляти, додавати нові
+та змінювати існуючі.
+пример:
+    var apple = document.getElementById(’apple’);
+    apple.style.display = ’none’;
+// Создали объект по id и присвоили ему свойство css - невидимый
+
+
+BOM
+------------------
+Крім DOM, Javascript також має доступ до різноманітних аспектів самого браузера. 
+Ось деякі із найпоширеніших речей, до яких ми маємо доступ із Javascript коду:
+    screen:         робочий екран браузера;
+    location:       об’єкт, що відповідає за адресу поточної сторінки;
+    history:        історія навігації користувача в інтернеті;
+    window:         вікно браузера.
+Усі ці об’єкти називаються BOM (Browser Object Model, Об’єктна Модель Браузера).
+
+Таким чином через мову Javascript ми маємо усе необхідне, щоб реалізувати по-справжньому
+динамічні інтерфейси у веб-переглядачі.
+
+
+AJAX
+===================
+Дослідвно AJAX розшифровується як Асинхронний Javascript та XML. 
+Javascript - керує логікою і робить запит на сервер, а XML - це формат передач даних.
+Хоча XML вже давно не є єдиним форматом передачі даних. 
+Окрім нього використовують JSON, HTML, Javascript код та простий текст.
+
+
+jQuery.ajax()
+--------------
+http://jquery.page2page.ru/index.php5/Ajax-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81
+Осуществляет запрос к серверу без перезагрузки страницы. Это низкоуровневый метод,
+обладающий большим количеством настроек. Он лежит в основе работы всех остальных методов
+ajax. 
+
+
+http://jquery.page2page.ru/index.php5/Ajax
+--------------
+ссылка на поисание основных методов реализации ajax в библиотеке jquery - то что надо
+jQuery имеет ряд функций, позволяющих обмениваться данными с сервером без перезагрузки
+страницы (технология ajax).  -- всего представлены 16 методов
+
+
+JSON
+------------------
+При цьому одним із найпопулярніших форматів передачі даних між клієнтом та сервером став
+формат JSON. Якщо по-простому, то в термінах мови програмування Python, JSON - це словник
+або список із даними. Дані можуть бути вкладеними, а ключ словника може містити ще один
+словник. Ми використовуватимемо JSOn, а також формат HTML для передачі даних між клієнтом
+та сервером при AJAX запитах.
+Описание сути json
+-------------------
+https://uk.wikipedia.org/wiki/JSON
+
+
+XMLHttpRequest
+-----------------
+https://uk.wikipedia.org/wiki/XMLHttpRequest
+
+XMLHttpRequest — API-запит веб-клієнта (браузера) до веб-сервера за протоколом HTTP у
+фоновому режимі, для мов програмування JavaScript, JScript, VBScript і подібних.
+Використовується для синхронного або асинхронного обміну інформацією в довільному
+текстовому форматі (наприклад XML, JSON, HTML). Дозволяє здійснювати HTTP-запити до
+віддаленого сервера без потреби перезавантажувати сторінку. Застосування XMLHttpRequest
+справляє враження «миттєвої» відповіді сервера, у порівнянні з класичними методом
+перезавантаження всієї сторінки для оновлення представленої на ній інформації.
+
+XMLHttpRequest є невід'ємною частиною технології AJAX і використовується багатьма сайтами
+для створення динамічних веб-застосунків, що швидко реагують на запити користувача.
+
+
+Сложная реализация AJAX запрос/ответа на чистом js:
+------------------------------
+    • динамічно валідувати кожне поле форми ще до відправки на сервер;
+    • якщо дані некоректні, не постити форму, а вказати на помилки;
+    • якщо дані коректні, зробити запит на сервер із заповненими даними;
+    • в той час як іде запит потрібно заблокувати кнопки і поля на формі, щоб
+    уникнути подальших змін;
+    • також показати індикатор, що запит в процесі;
+    • коли прийшли дані від сервера - обробити їх і, якщо пост форми був
+    успішно оброблений на сервері, показати повідомлення з результатом;
+    • також очистити форму;
+    • якщо не успішно - вказати на помилки і не очищати поля форми;
+    • в будь-якому випадку потрібно також заховати індикатор того, що запит
+    в процесі, адже він уже закінчився;
+    • також знову активувати кнопки і поля форми.
+
+
+Упростить эту логику действия спомобены Фреймворки под js - например, jQuery
+
+
+jQuery
+=====================
+см. отдельный файл с мануалом по jquery 
+jquery_my_manual.txt
+---------------------
+
+jQuery — библиотека JavaScript, фокусирующаяся на взаимодействии JavaScript и HTML.
+Библиотека jQuery помогает легко получать доступ к любому элементу DOM, обращаться к
+атрибутам и содержимому элементов DOM, манипулировать ими. Также библиотека jQuery
+предоставляет удобный API для работы с AJAX. Сейчас разработка jQuery ведётся командой
+jQuery во главе с Джоном Резигом.
+https://ru.wikipedia.org/wiki/JQuery
+
+учебник по jquery -- там все есть!
+----------------------------------
+http://jquery.page2page.ru/index.php5/%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0
+
+пример jQuery -- последовательное применение методов и трансформация объектов
+$(”div.test”).add(”p.quote”).addClass(”blue”).slideDown(”slow”);
+// У вищенаведеному прикладі ми знайшли і отримали тег div із класом “test” на сторінці.
+Додали всередину нього тег параграфа p із класом “quote”. Потім додали ще один клас до
+цього параграфа - “blue”. І вкінці показали даний елемент на сторінці з допомогою ефекту
+розгортання елемента плавно зверху донизу.
+
+
+Bootstrap 3 Datepicker v4 Docs
+------------------------------
+http://eonasdan.github.io/bootstrap-datetimepicker/
+
+Плагин-Календарик (для выбора дат)
+
+
+jQuery Form Plugin
+--------------------------
+http://malsup.com/jquery/form/
+Плагин под jquery для динамичной работы с Формами
+
+
+jQuery Cookie
+---------------------------
+http://plugins.jquery.com/cookie/
+A simple, lightweight jQuery plugin for reading, writing and deleting cookies.
+Для реалізації випадайки груп нам потрібно буде встановлювати та змінювати куки в браузері.
+(постоянные данные-строки которые доступны для разных страниц браузера в пределах одной
+сессии например)
+Документация jquery cookie
+почитать методы:
+--------------------------
+https://github.com/carhartl/jquery-cookie
+примеры:
+<script src="/path/to/jquery.cookie.js"></script>
+// подключение скрипта
+$.cookie('name', 'value');
+// создание куки
+$.cookie('name'); // => "value"
+$.cookie('nothing'); // => undefined
+// прочитать куки по атрибуту
+$.cookie(); // => { "name": "value" }
+// прочитать все куки
+
+
+
+js debugging
+================
+https://www.w3schools.com/js/js_debugging.asp
+    console.log()
+    debugger Keyword
+
+
+как Django работает через ajax с Клиентсокй стороной:
+===================
+1) “request.is_ajax()”: метод на об’єкті запиту, який повертає True для запитів типу AJAX;
+    даний метод працює на базі спеціального заголовка, який браузер відсилає на сервер у
+випадку запиту через Javascript код;
+2) “json”: Python бібліотека, з допомогою якої будемо перетворювали Python дані у JSON 
+    формат перед відправкою на клієнт;
+3) “django.core.serializers.json”: перетворювач даних з бази в JSON формат.
+4) “django.http.JsonResponse”: об’єкт відповіді, що правильно і з правильними заголовка
+    надішле на клієнт JSON дані.
+для справки:
+    методы работы через ajax в библиотеке jquery - без привязк и к django
+    http://jquery.page2page.ru/index.php5/Ajax
+    
+В django уже есть все необходимое для ajax (асинхронных запрос/отвтетом между клиентом и серевером):
+--------------------------------
+    1) відрізняти звичайні запити від AJAX запитів;
+    2) правильно форматувати AJAX відповіді;
+    3) розбирати дані на сервері під час AJAX запиту.
+
+
+
+Новые поля моделей для Журнала посещенией   / unique_for
+========================
+http://djbook.ru/rel1.9/ref/models/fields.html#unique-for-date
+
+unique_for_date
+(Field.unique_for_date)
+
+unique_for_month¶
+(Field.unique_for_month)
+
+unique_for_year¶
+(Field.unique_for_year)
+
+Этот параметр должен быть равен названию DateField или DateTimeField поля, для которого значение должно быть уникальным.
+
+Например, если модель имеет поле student с unique_for_month="date", тогда Django позволит сохранять записи только с уникальной комбинацией student и date.
+
+Це означає, що не може бути в таблиці двох рядків журналу з однаковим студентом і однаковим
+місяцем; завдяки даному полю ми на рівні бази даних та Django форм вказали не пропускати
+дублюючі журнали для студента за однакові місяці;
+
+
+
+Страница Журнала посещений Студентов
+==========================
+до применения технологии ajax код python+html_tags+css+django_tamplate применил по книге
+ - разобраться можно по коду + пояснения в книге. Дошел до ajax.
+
+
+Мучился целый час пока правильно не вставил ссылки на сорсы
+решил записать тут:
+---------------------------------
+
+<head>
+    ...
+    <!-- Свіжа збірка мінімізованих CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrit
+y="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Global CSS Style -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Custom CSS Style in this App -->
+    <link rel="stylesheet" href="{{PORTAL_URL}}{% static 'css/custom.css' %}"/>
+
+    {% block more_css %}{% endblock more_css %}
+</head>
+
+
+<body>
+    ...
+<!-- Javascripts Inclusion -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="{% static 'js/jquery.cookie.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.0.0/js/bootstrap-datetimepicker.min.js"></script>
+    
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'test.js' %}"></script>
+    ...
+</body>
+
+
+
+ajax()
+=====================
+
+Наконец-то приступаю к ajax запросам/ответам без перезагруски всей структуры Документа
+---------------------------
+
+ссылка на теорию:
+http://jquery.page2page.ru/index.php5/Ajax-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81
+jQuery.ajax()
+
+
+
+get_or_create()
+=================
+http://djbook.ru/rel1.7/ref/models/querysets.html#django.db.models.query.QuerySet.get_or_create
+
+
+
+jquery cookies
+================
+https://github.com/carhartl/jquery-cookie#usage
+
+так загрузить можно:    / потом вставить в static/js
+-------------------
+wget https://raw.githubusercontent.com/carhartl/jquery-cookie/v1.4.1/jquery.cookie.js
+
+
+
+window.location
+======================
+Получает/устанавливает URL окна и его компоненты
+
+http://javascript.ru/window-location
+
+location.reload(true);
+
+BOM (об’єктна модель браузера) дає в нашому Javascript коді доступ до глобального об’єкта location**; він відповідає за адресу поточної сторінки; також з його допомогою можна
+оновлювати поточну сторінку і переходити на іншу; в даній стрічці ми скористались його
+методом reload, щоб оновити поточну сторінку; переданий параметр true змушує метод reload
+робити справжній запит на сервер, навіть, якщо є попередньо закешований запит на цю ж сторінку;
+
+Свойства объекта Location
+Свойство / Описание / Пример
+hash	/ часть URL, которая идет после символа решетки '#', включая символ '#' /	#test
+host / хост и порт /	www.google.com:80
+href /	весь URL /	http://www.google.com:80/search?q=javascript#test
+hostname / хост (без порта) /	www.google.com
+pathname / строка пути (относительно хоста)	/search
+port /	номер порта /	80
+protocol /	протокол /	http:
+search / часть адреса после символа ?, включая символ ? / ?q=javascript
+
+Методы объекта Location
+assign(url)  
+    / загрузить документ по данному url
+
+reload([forceget])
+    перезагрузить документ по текущему URL. Аргумент forceget - булево значение, если оно
+    true, то документ перезагружается всегда с сервера, если false или не указано, то
+    браузер может взять страницу из своего кэша.
+
+replace(url)
+    заменить текущий документ на документ по указанному url. Разница, по сравнению с
+    assign() заключается в том, что после использования replace() страница не записывается
+    в истории посещений. В частности, это значит, что посетитель не сможет использовать для
+    возврата кнопку браузера "Назад".
+
+toString()
+    возвращает строковое представление URL для объекта Location
+    При изменении любых свойств window.location, кроме hash, документ будет перезагружен,
+    как если бы для модифицированного url был вызван метод window.location.assign().
+
+
+
+Виджет Календаря:
+====================
+
+тут по ссылке Визуальное оббражение Календаря и как Выбрать через js
+--------------------
+http://eonasdan.github.io/bootstrap-datetimepicker/ 
+
+
+общая родительская ссылка на разнообразные бибилотеки js
+==================
+https://cdnjs.com/
+    а там уже искать по названию
+
+Для Календаря устанавливаю 2 библиотеки:
+----------------------------
+<!--Source for Date and Calendar-->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    // бибилиотека для различных форм дат
+
+http://momentjs.com/docs/#/displaying/format/
+-----------------------
+    // документация по настройке moments
+
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.0.0/js/bootstrap-datetimepicker.min.js"></script>
+    // js файл самого плагина Календаря
+
+А также одна библиотека стилей для Календаря
+-----------------------
+<!--CSS Style for Widjet Calendar-->
+    href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.0.0/css/bootstrap-datetimepicker.min.css">
+
+
+Домашнее задание:       // не выполено
+------------------
+Щоб користувач бачив, що від даного поля варто очікувати календарик,
+можна поставити додаткову кнопку справа від поля. Вона служитиме ін-
+дикатором додаткового функціоналу. Для цього прийдеться розібратись як
+кастомізнути HTML код поля дати, що є згенероване з допомогою автома-
+тичної форми. Реалізацію HTML/CSS коду можна взяти із Twitter Bootstrap.
+------------------
+
+
+
+Форма редагування студента в режимі AJAX
+==========================
+Вызов формы редактированям Студента в отдельном окне через js/jquery
+-------------------------- 
+В наш час є надзвичайно розповсюджені динамічні веб-аплікації, які містять 50% коду і
+логіки на стороні клієнта. Соцмережі активно використовують чати, динамічні стіни та
+нотифікації, які є частиною “живого” інтерфейсу. Для подібного роду проектів та завдань
+розробники реалізували масу Javascript бібліотек та фреймворків: 
+-------------------------- 
+    *********************Backbone, AngularJS, Ember і т.п.***************************
+--------------------------
+Усі вони дозволяють ефективніше розробляти динамічні аплікації в режимі ООП і не губитись
+у десятках тисяч Javascript коду. Саме тому останнім часом фронтенд розробка стала окремим
+напрямком і хороші HTML/CSS/Javascript спеціалісти є дуже затребувані на ринку. Як
+розробляти подібні аплікації є окремим великим предметом і не охоплений матеріалами даної книги.
+
+Надо
+---------------------
+написати Javascript код, який перевикористає вже існуючий код на сервері і виконає
+необхідні модифікації із HTML кодом, щоб підпасувати його до потреб AJAX сторінок і
+функціоналу;
+    1) підключити плагін для роботи форм в режимі AJAX; (модальные окна)    
+    2) вирішити, що використовуватимемо в якості Javascript вікон для нашої форми;
+    3) додати заготовку вікна в HTML шаблони;
+    4) ну і, звичайно, написати Javascript код, який відкриватиме вікно із формою і
+    динамізуватиме її обробку.
+
+Сама бібліотека jQuery не надає подібного функціоналу, але існує досить популярний плагін,
+що дозволить нам перевести будь-яку вебформу на AJAX режим:
+    **************** jQuery Form Plugin  ********************
+документация:    
+    http://malsup.com/jquery/form/
+сорс:
+    <script src="http://malsup.github.com/jquery.form.js"></script> 
+    или
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+
+====================
+Вся терия по js/jquery и практические пояснения в рамках учебного проекта представлены
+в отбельных файлах с мануалами по js/jquery
+====================
+
+
+
+
+Глава 10  /  События (Signals) на стороне сервера Django  /  Log (журнал) Событий
+====================
+2 основных компонента:
+--------------------
+1) в обном месте на сервере (программная оболочка) происходят События
+2) специальный код на python мониторит События на нужные и реагирует
+    // Часто ведется log (журнал) событий - это очень важно для рабочих проектов
+В Джанго  есть Диспетчер Сигналов (Действий) - мониторинг
+
+
+Логгирование - Документация на ркуссвком
+---------------------------
+    https://djbook.ru/rel1.9/topics/logging.html
+
+
+4 Главных компонента:
+--------------------
+    Логгеры - Loggers
+    Обработчики - Handlers
+    Фильтры - Filters
+    Форматоры - Formatters
+
+
+Логгеры - Loggers
+-----------------
+    Логгер – это точка входа в систему логгирования. Каждый логгер как именованный канал для сообщений, в который они отправляются для обработки.
+     У каждого логгера есть уровень логгирования (log level).
+    Уровень логгирования указывает важность принимаемых сообщений.
+    Python определяет следующие уровни логгирования:
+    
+    DEBUG: Низкий уровень логгирования системной информации для последующего
+        использования в отладке
+    INFO: Общая системная информация
+    WARNING: Информация о мелких проблемах возникших при работе приложения
+    ERROR: Информация об ошибках возникших при работе приложения
+    CRITICAL: Информация о критических ошибках    
+
+
+    Каждое сообщение записанное в логгер называется Log Record(Запись).
+    Каждая запись содержит уровень логгирования, который указывает важность сообщения.
+    Сообщение также может содержать метаданные, которые описывают произошедшее событие.
+    Метаданные могут содержать код ошибки или отладочную информацию.
+
+    Когда сообщение передается в логгер, уровень логгирования сообщения сравнивается с
+    уровнем логгирования логгера.
+    Если уровень логгирования сообщения равен или выше уровню логгирования логгера,
+    сообщение будет обработано, иначе - проигнорировано.
+
+    После того, как логгер принял сообщение на обработку, оно передается в Handler
+    (Обработчик).
+
+    Именование логгеров
+    *******************
+    
+    logging.getLogger()
+        возвращает (создает при необходимости) экземпляр логгера.
+    
+Экземпляру логгера может назначить имя. Это имя используется при настройке логгирования.
+
+    Для удобства обычно используется __name__ в качестве названия – название модуля,
+    который содержит логгер. Это позволяет вам управлять логгированием на уровне модулей.
+    Однако, если вы используете другую систему организации сообщений, вы может использовать
+    любое составное название, разделенное точками:
+        # Get an instance of a specific named logger
+        logger = logging.getLogger('project.interesting.stuff')
+
+
+
+Обработчики - Handlers
+---------------------
+    Обработчик определяет что делать с сообщением пришедшим из логгера.
+    Он определяет поведение логгирования, например: вывести сообщение на экран,
+    записать в файл или сокет.
+
+    Как и логгеры, обработчики имеют уровень логгирования.
+    Если уровень логгирования сообщения ниже уровня логгирования обработчика,
+    сообщение будет проигнорировано.
+
+    Логгер может содержать несколько обработчиков, которые могут иметь различный уровень
+    логгирования. 
+    Это позволяет обрабатывать сообщения в соответствии с их уровнем важности.
+    Например, вы можете установить обработчик для ERROR и CRITICAL сообщений,
+    который будет отправлять через какой-то сервер сообщений, и в то же время
+    обработчик записывающий все сообщения (включая ERROR и CRITICAL) в файл.
+
+
+Форматоры - Formatters
+----------------------
+    В результате сообщение должно быть представлено в виде текста. 
+    Форматеры определяют точный формат этого текста. Обычно это строка форматирования
+    Python, содержащая атрибуты LogRecord;но вы также можете создать собственный класс
+    форматера для реализации необходимого поведения.
+
+
+Функции логгирования
+--------------------
+Логгер предоставляет методы для каждого уровня логгирования:
+    logger.debug()
+    logger.info()
+    logger.warning()
+    logger.error()
+    logger.critical()
+Также есть два дополнительных метода:
+    logger.log():
+        отправить сообщение с указанным уровнем логгирования
+    logger.exception():
+        Создать ERROR сообщение из последнего исключения
+        (пер. the current exception stack frame).
+
+
+Настройка логгирования
+----------------------
+    Конечно же не достаточно просто добавить вызов функций логгирования в ваш код.
+    Вы также должны настроить логгеры, обработчики, фильтры и форматеры, чтобы сообщения
+    попали в нужное место.
+    
+    Библиотека логгирования Python предоставляет несколько способов настроить логгирования
+    – от программного интерфейса и до конфигурационных файлов.
+    По умолчанию Django использует dictConfig формат. (передача настроек как Словаря)
+
+    Для настройки логгирования используется настройка LOGGING. 
+    та настройка описывает логгеры, обработчики, фильтры и форматеры а также их параметры.
+    
+    Настройка логгирования происходит в момент инициализации Django функцией setup().
+    Поэтому можно быть увереннем, что логгирование всегда доступно в коде вашего проекта.
+
+    Изменено в Django 1.9:
+    Были изменены настройки журналирования по умолчанию. Смотрите список изменений.
+    Наконец, здесь показан пример достаточно сложной конфигурации журналирования:
+
+LOGGING = {
+    'version': 1,
+    
+    'disable_existing_loggers': False,
+    
+    // Тип объектов - Форматоры - то в каком формате делается запись Лога    
+    'formatters': {
+        // verbose, выведет уровень логгирования, сообщение, время, название процесса,
+        // потока и модуля, который создал сообщение.
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        // simple, просто возвращает уровень логгирования сообщения (например, DEBUG)
+        // и содержимое сообщения.
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    
+    // Тип объектов - Фильтры - дополнительные манипуляции над логгерами
+    'filters': {
+        'special': {
+            '()': 'project.logging.SpecialFilter',
+            'foo': 'bar',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+
+    // Тип объекта - Обработчики Логгеров
+    'handlers': {
+        // Стримит логгинг в консоли в процессе выполнения
+        'console': {
+            'level': 'INFO',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        // обработчик создает спец сообщения логана емаил админа (уровня ERROR и выше)
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['special']
+        }
+    },
+
+    // Начальный тип объектов - Логгеры
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'myproject.custom': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'INFO',
+            'filters': ['special']
+        }
+    }
+}
+
+
+    Джаного (+ к питону) дает также дополнительные расширения для рабты Логгинга
+    ********************
+    https://djbook.ru/rel1.9/topics/logging.html#django-s-logging-extensions
+
+
+
+Начало: посмотреть как выводятся записи в логе
+==================
+
+>>> import logging      // глобальный модуль с кодом для логирования (журналирования :))
+>>> logging
+<module 'logging' from '/usr/lib/python2.7/logging/__init__.pyc'>
+
+
+>>> import imp
+>>> imp.reload(test_logging)    // вспомнил метод перезагрузки кода модуля
+
+содержимое кастомного модуля test_logging.py
+--------------
+import logging
+age = 40
+name = 'Yirii'
+x = logging.warning('{} has {} years old'.format(name, age))
+y = logging.info('Test Message')
+print(x, y)
+print('its test logging script')
+
+выполение кастомного модуля
+--------------------
+>>> imp.reload(test_logging)
+WARNING:root:Yirii has 40 years old     // 3 строки записей
+(None, None)
+its test logging script
+<module 'test_logging' from '/home/ryndin/workprojects/studentsdb27/studentsdb27/src/test_logging.py'>
+
+
+Сигналы
+==================
+    https://djbook.ru/rel1.9/topics/signals.html
+
+
+Настройка Логов в Джанго / Дебаг режим / Продакшн
+------------------
+    http://www.lexev.org/2013/django-logging-settings/
+
+
+Документация по Логгингу / Сайт Питон
+------------------
+    https://docs.python.org/2/library/logging.html
+
+
+
+Настройки подключенных Апликаций    / ready (self)  дял включения Слеки за сигналами
+-------------------
+    https://djbook.ru/rel1.7/ref/applications.html
+
+Например,
+    Если вы разрабатываете приложение, которое называется “Rock ’n’ roll”,
+    вот как вы можете указать правильное название для админки:
+    # rock_n_roll/apps.py
+    from django.apps import AppConfig
+    class RockNRollConfig(AppConfig):
+        name = 'rock_n_roll'
+        verbose_name = "Rock ’n’ roll"
+
+    Вы можете указать Django использовать этот класс по умолчанию следующим образом:
+    # rock_n_roll/__init__.py
+    default_app_config = 'rock_n_roll.apps.RockNRollConfig'
+
+    def ready(self):
+        from students import signals
+    // так в настройках приложения включается Слежка за сигналами (Сыбитиями) на сервере
+    // !!! это очень важно - без этого Логи кастомные работать не будут !!!
+
+
+В случае ошибок на сервере особенно (или событий в частности) программист обязан накодить:
+---------------------------
+    1) у зручному форматі повідомити користувача про помилку та запропонувати наступну
+    дію для нього;
+    2) запам’ятати помилку з максимальною кількістю деталей, щоб пізніше програміст міг
+    її виправити.
+    
+    !!!
+    Якщо ви зможете з легкістю писати ваш код зважаючи на вищенаведені правила, тоді це
+    свідчитиме про ваш хороший рівень та професіоналізм. Робота з порожніми сторінками
+    (коли ще немає контенту в базі) та помилкамм програми - це ті важливі деталі, які
+    відрізняють початківця від професіонала.
+    !!!
+
+
+Как подстветить Логи в Консоли разными цветами
+----------------
+    http://plumberjack.blogspot.com.au/2010/12/colorizing-logging-output-in-terminals.html
+    // пока сложная задача, не все понимаю логику подключения классов и передачи данных
+
+
+Логи можно сохранить в созданную тадлицу Базы данных и оттуда потом эти сроки брать
+--------------------
+    Также выводить потом эти Логи терез Отбельную вкладку Действия    
+    ДЗ: подумать как это сделать
+    
+
+Потом можно долелат следующие Логи / сохранять их в Файл / в БД / Выводить / Сортировать
+----------------------------------
+    1) migrate
+    2) отправлять email администратору
+ 
+
+Домашки по главе 10 / Лог-Сообщения / Пока подсмотрел но разберусь потом
+====================
+
+человек который это все писал
+----------------------------
+    https://github.com/dimadvk/studentsdb/tree/master/students
+
+p522
+Ми обмежимось записом помилки в лог файл, а відправка емейла адміні-
+стратору залишається вам на домашнє завдання. Для цього в Django уже є
+все необхідне і вам залишається лише правильно поєднати існуючі компо-
+ненти використовуючи інформацію теоретичної частини даної глави.
+    Зробив. Щоб запрацювала відправка на мейл, треба додати в settings.py
+    змінні ADMINS та SERVER_EMAIL
+
+
+p526
+Створіть власний сигнал і розсилайте його кожного разу, коли відсилається
+лист адміністратору із форми контакту. Тоді реалізуйте обробник даного
+сигналу, який логуватиме дію успішної розсилки в лог-файл.
+    
+    Зроблено.
+    signals.py
+    # custom signal contact_admin
+    contact_admin_sent = Signal()
+    @receiver(contact_admin_sent)
+    def log_contact_admin(sender, **kwargs):
+        logger = logging.getLogger(__name__)
+        logger.info('A message via Contact Form was sent. Sender: %s; Subject: %s',
+                kwargs['message_sender'],
+                kwargs['message_subject'],
+    
+    views/contact_admin.py:
+    from ..signals import contact_admin_sent
+    
+    Клас ContactAdminView, метод form_falid() дописав
+    else:
+        ...
+        # send a signal
+        form_data = self.get_form_kwargs().get('data')
+        message_subject = form_data.get('subject')
+        message_sender = form_data.get('from_email')
+        contact_admin_sent.send(sender=self.__class__,
+                            message_subject=message_subject,
+                            message_sender=message_sender
+
+
+p526
+Розробіть обробник сигналу команди migrate330, який після кожного запуску
+даної команди виводитиме в консоль і лог файл повідомлення про поточну
+базу даних. Даний сигнал надсилає параметр ‘using’, який дасть вам інформа-
+цію про поточну базу даних
+
+    зробив    
+    в signals.py
+    @receiver(post_migrate)
+    def log_migrate(sender, **kwargs):
+        logger = logging.getLogger(__name__)
+        logger.info('Migration done. Application: "%s". Using database: %s',
+                kwargs['app_config'].label,
+                kwargs['using'],
+               )
+    видає в консоль таке:
+    INFO 2016-03-02 15:49:59,808 signals: Migration done. Application: "admin". Using database: default
+    INFO 2016-03-02 15:49:59,821 signals: Migration done. Application: "auth". Using database: default
+    INFO 2016-03-02 15:49:59,838 signals: Migration done. Application: "contenttypes". Using database: default
+    INFO 2016-03-02 15:49:59,852 signals: Migration done. Application: "sessions". Using database: default
+    INFO 2016-03-02 15:49:59,861 signals: Migration done. Application: "crispy_forms". Using database: default
+    INFO 2016-03-02 15:49:59,865 signals: Migration done. Application: "students". Using database: default
+
+
+p526
+І на завершення, завдання із сигналом запиту request_started331. Напишіть
+обробник даного сигналу, який рахуватиме кількість запитів. Лічильник мо-
+жете зберігати в операційній пам’яті (тобто на рівні змінної модуля із сигна-
+лами), в базі даних або у файлі. На ваш вибір.
+    
+    в sygnals.py:
+    from django.core.signals import request_started
+    ...
+    # requests counter
+    REQUESTS_COUNT = 0
+    @receiver(request_started)
+    def count_requests(sender, *args, **kwargs):
+        global REQUESTS_COUNT
+        REQUESTS_COUNT += 1
+
+
+p525
+Трохи об’ємніше завдання, щоб потренуватись більше із моделями, базою
+та в’юшками. Зробіть його в окремій Git гілці, щоб не ламати основної
+розбницької master бренчі. Якщо все вийде і ви будете задоволені результатом,
+змерджіть зміни в master. Пропоную переробити логування, щоб кожен запис, замість файлу, йшов у базу даних у вигляді моделі LogEntry. Додайте усі
+необхідні на ваш розсуд поля і логуйте усі події в базу. Друга частина зав-
+дання: розробіть ще одну закладку Події і відображайте там список LogEntry у
+хронологічному порядку. Застосуйте такі стилі і формат, щоб ви могли пиша-
+тись проробленою роботою і отримати естетичне задоволення від візуальної
+частини.
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+Глава 11 - Интернацианализауция / + Локализация /
+===============================
+
+i18n - internationalization - подготовка Апликации проекта к Переводу (логика)
+l10n - localization - набор текста с возможным переводом (создание фраз)
+
+Логическая работа программиста это:
+    1) логика графического интерфейса сайта
+    2) адаптация содержимого сайта в зависисти от локализации
+    3) форматы дат и чисел
+    4) часовые зоны в датах, в зависимости от локации пользователя
+
+Каноночный (базовый) язык для кода - Английский
+
+
+django.utils.translation    / методы
+------------------------
+    https://djbook.ru/rel1.7/ref/utils.html#module-django.utils.translation
+
+
+Если кратоко, то при настроенной логике интернационализации перевод фраз происходит через
+мункцию "медленную взять перевод текста":
+(правда предварительно нужна настройка языков)
+============================
+    from django.apps import AppConfig
+    from django.utils.translation import ugettext_lazy as _     // назначен псевдоним
+    
+    class StudentsAppConfig(AppConfig):
+        name = ’students’
+        verbose_name = _(u”Students Database”)      // вызван перевод Контекста
+    def ready(self):
+        from students import signals
+
+
+Логика Интернациализации в Шаблонах
+------------------------
+{% load i18n %}     // обязательный тег вставки модуля
+
+<p>{% trans ”Demo String” %}</p>        // тег перевода (фактически замены) строки
+    
+<p>{% trans demo_variable %}</p>        // пример перевода любой входящей переменной
+
+<p>{% trans ”Demo String” as var1 %}</p>    // приемер перевода + сохранение значения
+
+
+Перевод целого Блока Текста + Множественность
+---------------------------
+
+{% blocktrans with count apples=tree.apples|length %}   
+                            // тег перевода Блока + проверка перемен на значение > 1
+    
+    We have the only apple on the tree.         // Просто перевод Строки
+{% plural %}
+    We have {{ apples }} apples on the tree.    // Перевод при условии Множественности
+{% endblocktrans %}
+
+
+Тег перевода моежет видеть значение внешего тега url
+--------------------------
+{% load i18n %}
+
+{% url ’homepage_view’ as home_url %}
+
+{% blocktrans %}
+    Homepage URL: {{ home_url }}        // переведет строку + вставит значение url
+{% endblocktrans %}
+
+
+Куча других полезных Тегов Интернациализации
+====================
+    https://djbook.ru/rel1.7/topics/i18n/translation.html#other-tags
+
+
+
+
+locale /
+(формирование структуры данных для локилизации)
+на выходе - файлы .po (не компелированные)
+-------------------------
+    (venv)>>> python manage.py makemessages --locale=ru --locale=en --domain=django
+
+
+На выходе файлы-компилированные  .mo  (готовые к работе)
+----------------------
+    (venv)>>> python manage.py compilemessages
+
+
+
+List of tz database time zones
+------------------------------
+    https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+Настройка в Сеттингах:
+
+LANGUAGE_CODE = 'ru'
+
+TIME_ZONE = 'Europe/Kiev'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+
+
+Практика по Интернациализации  // html шаблоны
+========================
+
+1) создаю папку locale в папке апликации (students)
+
+
+2) создаю в Шаблонах Теги для трнаслейта:
+{% load i18n %}
+...
+{% trans "Service Count of Students" %}
+
+
+3) создаю структуру для интернациализации (создатся в locale) с укзанием языков (подпапок)
+и глобальным хранилищем доменом (django)
+    =(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py makemessages -d=django -l=en -l=ru -l=uk
+    // создадутся файлики .po в которых можно вставлять аналоги-значения
+
+
+4) вставляю аналоги-значения в файликах .po (uk / ru / ..)
+
+
+5) локализирую / компилирую / синхронизирую переводы блоков в Шаблонах
+    =(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py compilemessages
+    // создаются файлики .mo которые скомпилированы и работают для транслейта
+------------------------
+
+
+Интернацианализация     //  python code
+==========================
+ugettext    // мягкая перезагрузка данных с сервера
+from django.utils.translation import ugettext as _
+    // создаем функцию под псевдонимом которая делает интернацилизация для контекста
+
+errors['last_name'] = _(u'Input Last Name of student - its Required')
+    // перевод строки
+
+_(varieble)
+    // или перевод значения переменной, если переменной ранее дано строковое значение
+
+
+интернациализация для объектов Молелей (БД)
+------------------------------
+ugettext_lazy       // делает перезагрузку с базы данных
+from django.utils.translation import ugettext_lazy as _
+
+
+
+Как Django определяет языковую настройку
+========================================
+    https://djbook.ru/rel1.7/topics/i18n/translation.html#how-django-discovers-language-preference
+    
+
+Как в Браузер доставить JS библиотеку с переводами
+==========================
+
+1) base.html
+----------------
+<!--Dict javascript_catalog from Server-->
+    <script src="{{PORTAL_URL}}{% url 'javascript_catalog' %}"></script>
+
+
+2) urls.py
+---------------
+# пакеты которые необходимо активировать вмесе с js кодом
+js_info_dict = {
+    'packages': ('students',)
+}
+
+
+url(r'^jsi18n\.js$', javascript_catalog, js_info_dict, name='javascript_catalog'),
+# согласно синтаксису функции url(regex, view, kwargs, name)
+
+
+3) custom.js
+--------------
+// строка в функции gettext()
+'error': function(){
+            alert(gettext('There was an error on the server. Please, try again a bit later.'));
+            return false;
+        }
+
+4) Локализация библиотеки строк из js (в домен djangojs)
+------------------------
+$ python manage.py makemessages -l=en -l=uk -l=ru -d=djangojs
+$ python manage.py compilemessages
+
+
+5) http://localhost:8000/jsi18n.js - смотрю что доступно
+--------------------
+  /* gettext library */
+
+  django.catalog = django.catalog || {};
+  
+  var newcatalog = {
+    "There was an error on the server. Please, try again a bit later.": "\u041f\u043e\u043c\u0438\u043b\u043a\u0430 \u043d\u0430 \u0421\u0435\u0440\u0432\u0435\u0440\u0456, \u0441\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0431\u0443\u0434\u044c-\u043b\u0430\u0441\u043a\u0430 \u043f\u0456\u0437\u043d\u0456\u0448\u0435 :))"
+  };
+        // - это перевод строки из js кода
+
+
+System check identified no issues (0 silenced).
+March 25, 2017 - 17:14:51
+Django version 1.10.5, using settings 'studentsdb27.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+** 2017-03-25 17:15:02 // INFO // basehttp // "GET /jsi18n.js HTTP/1.1" 200 3991 **
+=======================
+
+
+
+Как сделать Селект языка в Шаблоне
+==================================
+https://docs.djangoproject.com/en/1.10/topics/i18n/translation/#switching-language-in-templates
+
+http://files.elderscrollsonline.com/images/flags/en-us.png
+http://files.elderscrollsonline.com/images/flags/fr.png
+
+
+1) работа в шаблоне с глобальными переменными через язык джанго + запрос на сервер
+<div class="row" >
+<div class="col-xs-8" style="margin-bottom: 20px;">
+    {% get_current_language as LANGUAGE_CODE %}
+    <h4>{% trans 'current language' %}: {{ LANGUAGE_CODE }}</h4>
+
+    <form action="{% url 'set_language' %}" method="post" class="form-inline">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{{ request.get_full_path|slice:':' }}"/>
+    <ul class="nav navbar-nav language menu">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+            <li>
+                <div class="btn-group" >
+                <button type="submit"
+                        name="language"
+                        value="{{ language.code }}"
+                        class="btn-default{% if language.code == LANGUAGE_CODE %} btn-warning {% endif %}">
+                    {{ language.name_local }}
+                </button>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+</form>
+
+
+2) функция-обраюотчик запроса от клиента
+# Test Select Language Locale
+    url(r'^i18n/*?', include('django.conf.urls.i18n')),
+
+
+3)  выбор набора языков для сайта в сеттингах. 
+LANGUAGES = [
+    ('uk', ('Ukrainian')),
+    ('en', ('English')),
+    ('ru', ('Russian'))
+]
+
+4) вьюшка работатет встроенная django.conf.urls.i18n, так что питон код тут не понадобился
+==========================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+глава 12 - Логирование пользователей
+===========================
+
+Проверить дефлотные апликации афтентификации и сессий
+---------------------
+INSTALLED_APPS = [
+    ...,
+    'django.contrib.auth',
+    'django.contrib.sessions',
+    ...
+Кожна із даних аплікацій приносить так звані “мідлвари” (middleware), які реалізують
+механізм сесій та користувача і роблять їх доступними в якості атрибутів на кожному 
+запиті (request).
+
+
+Проверить наличие небоходимых Мидлвар:
+------------------
+
+MIDDLEWARE_CLASSES = (
+    ...
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    ...
+    )
+
+Становятся доступные объекты:
+    request.session
+    request.user
+
+Такой можно тест сделать на шаблоне
+    <!--Test request-->
+        <div class="col-xs-2" style="margin-bottom: 20px;">
+            <p>{{ request.session }} // request.session </p>
+            <p>{{ request.user }} // request.user </p>
+        </div>
+    <!--End Col 2-->
+
+
+Внешние апликации для функционала Регистрации на Джаного
+---------------------
+тут список апликаций, хороший сайт для поиска апликаций
+    https://djangopackages.org/grids/g/registration/
+
+
+
+Добавить апликации в проект через pip install -r requirements.txt
+но в начале проверить акуатльыне версии на python.org   /  https://pypi.python.org/pypi
+--------------------- 
+    django-registration-redux==1.4
+    """
+    надає реєстрацію користувачів на веб-сайті; тобто з допомогою даної аплікації вам не
+    прийдеться самостійно писати код з реєстрації нових користувачів; в даній секції ми
+    скористаємось даною аплікацією;
+
+    https://django-registration.readthedocs.io/en/2.2/
+    """
+
+
+    python-social-auth==0.3.6
+    """
+    documintation  http://python-social-auth.readthedocs.io/en/latest/
+    settings for django        
+    http://python-social-auth.readthedocs.io/en/latest/configuration/django.html
+    
+    колишня Django аплікація django-social-auth промігрувала у даний пакет і надає широкий
+    спектр реєстрацій користувачів з допомогою зовнішніх веб-сервісів (Facebook, Twitter,
+    Google+ і т.д.); даною аплікацією ми скористаємось наприкінці даної глави, коли
+    займемось інтеграцією Facebook логіну;
+    """
+
+    django-allauth==0.31.0
+    """
+    повністю інтегроване комплексне рішення, що надає і логування, і реєстрацію, і логін
+    через сторонні сервіси.
+    documintation    
+    http://www.intenct.nl/projects/django-allauth/
+
+
+
+Добавляем первую Апликацию в зарегистрированные апликации проекта:
+после чего потребуется python manage.py migrate
+-----------------------
+    INSTALLED_APPS = [
+        ...
+        'registration',
+        ...
+        ]
+
+    You have 3 unapplied migration(s). Your project may not work properly until you apply
+    the migrations for app(s): registration.
+    Run 'python manage.py migrate' to apply them.
+
+    =(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$
+         python manage.py migrate           ***
+    Operations to perform:
+    Apply all migrations: admin, auth, contenttypes, registration, sessions, students
+    Running migrations:
+    Applying registration.0001_initial... OK
+    Applying registration.0002_registrationprofile_activated... OK
+    Applying registration.0003_migrate_activatedstatus... OK
+
+В админке проекта появится вкладка Registration с Вкладкой "Регистрационные карточки"
+
+
+Включаем возможность кастомной регистрации в сеттингах
+--------------------
+# django-registration
+REGISTRATION_OPEN = True
+
+
+Простой способ создать кастомную априкация для Регамтраций
+=======================
+в папке проекта - studentsdb создадим каскад папок
+-----------------------
+mkdir -p templates/registration
+
+...
+
+
+
+Линк на Админ Интерфейс в Шаблоне
+=================================
+только за логированых пользователей
+---------------------
+1)
+url(r'^admin/', include(admin.site.urls) ),
+
+2) 
+{% if user.is_authenticated %}
+    <a class="nav col-xs-3" style="margin-top: 15px;" href="{% url 'admin:index' %}">
+    {% trans 'to Admin Interface' %}</a>
+{% endif %}
+
+
+
+Пермишшены / Политика Разрешений для Юзера
+================================
+Задается в Интерфейсе Админке для пользователя 
+Наверное можно реализовать на уровне кода
+
+По-замовчуванню, аплікація django.contrib.auth автоматично генерує дозвола для кожної
+зареєстрованої моделі: add (додати), change (змінити), delete (видалити). Вони створюються
+під час команди migrate, коли фреймворк ідентифікував ваші нові моделі.
+
+    students.add_student: для створення нового студента;
+    students.change_student: для оновлення існуючого студента;
+    students.delete_student:
+
+************************
+То есть синтатксис такой / Апликация.Действие_модель /
+************************
+
+{{perms }}
+<django.contrib.auth.context_processors.PermWrapper object at 0x7fbe245bdfd0>
+
+
+Все разрешения доступны под значениями True / False
+(смотря как настроены)
+-----------------------
+Так можно ставить логику в шаблоны по активации/деактивации тегов в зависимости
+от Прав Юзера
+
+Атрибуты переменной 
+--------------------
+{{ perms.auth }}
+    set([u'auth.add_user',
+         u'auth.add_permission',
+         u'auth.delete_permission',
+         u'auth.add_group',
+         u'auth.change_user',
+         u'auth.delete_group',
+         u'auth.delete_user',
+         u'auth.change_permission',
+         u'auth.change_group',
+
+         u'students.change_group',
+         u'students.delete_student',
+         u'students.change_exam',
+         u'students.add_exam',
+         u'students.delete_group',
+         u'students.change_student',
+         u'students.change_monthjournal',
+         u'students.add_monthjournal',
+         u'students.delete_monthjournal',
+         u'students.delete_exam',
+         u'students.add_student',
+         u'students.add_group']
+
+         u'sessions.change_session',
+         u'sessions.delete_session',
+         u'sessions.add_session',         
+
+         u'registration.change_registrationprofile',
+         u'registration.add_registrationprofile',         
+         u'registration.delete_registrationprofile',
+
+         u'contenttypes.change_contenttype',
+         u'contenttypes.delete_contenttype',         
+         u'contenttypes.add_contenttype',         
+
+         u'admin.change_logentry',
+         u'admin.delete_logentry',
+         u'admin.add_logentry',   
+        )
+
+Проверка Значения Атрибута Пермишшена
+------------------
+<p>perms.students.change_group // 
+    <b>{{ perms.students.change_group }}</b></p>        // True/False
+
+
+Код кастомизации Пермишшенов (Разрешений) для Юзеров
+----------------------------
+{% if perms.auth.change_group %}
+    <a href="{% url 'contact_admin' %}">{% trans 'Contact' %}</a></li>
+{% endif %}
+
+
+Реализация Пермишшенов (Разрешений) к Коде питон:
+==================================
+from django.contrib.auth.decorators import permission_required
+
+@permission_required(’auth.add_user’)
+    def contact_admin(request):
+
+То есть применяем декаратор-функцию по обязательности разрешения 
+(с входным параметром Апликация.Действие_Модель) 
+на кастомную функцию-обработчик 
+
+
+
+Профиль Пользователя
+============================
+Реализация кода представлена через {{ user }}
+    https://docs.djangoproject.com/en/1.10/ref/contrib/auth/#user-model
+Параметры user:
+    username
+    first_name
+    last_name
+    email
+    password
+    groups
+    user_permissions
+    is_staff
+    is_superuser
+    last_login
+
+
+Использование Прокси Моделей
+----------------------------
+Создается дочерная модель со специфическими свойствами.
+Она привязана к родительской модели, например дает новое поле данных.
+Прокси ммодель (БД) напрамую не доступна, а только в состеве родительской модели.
+    https://djbook.ru/rel1.7/topics/db/models.html#proxy-models
+
+
+
+По ходу дела - os.path.join()
+=============================
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py shell
+Python 2.7.12 (default, Nov 19 2016, 06:48:10) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> 
+
+>>> import os
+
+>>> os.path
+<module 'posixpath' from '/home/ryndin/workprojects/studentsdb27/studentsdb27/lib/python2.7/posixpath.pyc'>
+
+>>> dir(os.path)        // это модуль с методами
+['__all__', '__builtins__', '__doc__', '__file__', '__name__', '__package__',
+ '_joinrealpath', '_unicode', '_uvarprog', '_varprog', 'abspath', 'altsep', 'basename',
+ 'commonprefix', 'curdir', 'defpath', 'devnull', 'dirname', 'exists', 'expanduser',
+ 'expandvars', 'extsep', 'genericpath', 'getatime', 'getctime', 'getmtime', 'getsize',
+ 'isabs', 'isdir', 'isfile', 'islink', 'ismount', 'join', 'lexists', 'normcase',
+ 'normpath', 'os', 'pardir', 'pathsep', 'realpath', 'relpath', 'samefile', 'sameopenfile',
+ 'samestat', 'sep', 'split', 'splitdrive', 'splitext', 'stat',
+ 'supports_unicode_filenames', 'sys', 'walk', 'warnings']
+
+>>> os.path.join('zzz', 'yyy', 'zzz')
+'zzz/yyy/zzz'
+
+>>> import studentsdb27
+>>> studentsdb27.settings
+<module 'studentsdb27.settings' from '/home/ryndin/workprojects/studentsdb27/studentsdb27/src/studentsdb27/studentsdb27/settings.pyc'>
+
+>>> from studentsdb27.settings import BASE_DIR
+>>> BASE_DIR
+'/home/ryndin/workprojects/studentsdb27/studentsdb27/src/studentsdb27'
+
+>>> os.path.join(BASE_DIR, '..', 'zzz')
+'/home/ryndin/workprojects/studentsdb27/studentsdb27/src/studentsdb27/../zzz'
+
+
+
+Еще раз если делаем новые модели
+может возникнуть проблема с миграциями и созданием таблиц.
+На стадии тестирования можно вычестить БД проекта и сделать новые миграции
+
+
+То есть вот вся моя База Данных - надо удалить все таблицы но просто так не получится:
+mysql> show tables;
++----------------------------------+
+| Tables_in_myproject2016_db       |
++----------------------------------+
+| auth_group                       |
+| auth_group_permissions           |
+| auth_permission                  |
+| auth_user                        |
+| auth_user_groups                 |
+| auth_user_user_permissions       |
+| django_admin_log                 |
+| django_content_type              |
+| django_migrations                |
+| django_session                   |
+| registration_registrationprofile |
+| students_exam                    |
+| students_group                   |
+| students_monthjournal            |
+| students_student                 |
++----------------------------------+
+15 rows in set (0,01 sec)
+
+
+
+полностью вычистить БД на языке SQL
+==================================
+Надо использовать данный алгоритм:
+-----------------------
+SET FOREIGN_KEY_CHECKS = 0; 
+SET @tables = NULL;
+SELECT GROUP_CONCAT(table_schema, '.', table_name) INTO @tables
+  FROM information_schema.tables 
+  WHERE table_schema = 'database_name';     // тут указать имя БД (myproject2016_db)
+SET @tables = CONCAT('DROP TABLE ', @tables);
+PREPARE stmt FROM @tables;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+SET FOREIGN_KEY_CHECKS = 1; 
+------------------------        проверено работает
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Логування через Социальные сети
+=========================
+
+social-auth-app-django==1.1.0
+$ pip install -r requirements.txt
+    Installing collected packages: social-auth-app-django
+    Successfully installed social-auth-app-django-1.1.0
+
+https://pypi.python.org/pypi/social-auth-app-django/1.1.0
+
+http://python-social-auth.readthedocs.io/en/latest/configuration/django.html
+
+
+API Facebook
+------------
+блок Фейсбук для разработчиков (Апликации)
+https://developers.facebook.com
+https://axiacore.com/blog/how-retrieve-facebook-extra-info-from-django/
+https://simpleisbetterthancomplex.com/tutorial/2016/10/24/how-to-add-social-login-to-django.html
+http://python-social-auth.readthedocs.io/en/latest/backends/index.html#social-backends
+
+
+
+1)
+$ pip install social-auth-app-django
+
+
+2)
+INSTALLED_APPS = (
+    ...
+    'social_django',
+    ...
+)
+
+
+
+3)
+    (studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py migrate
+    Operations to perform:
+    Apply all migrations: admin, auth, contenttypes, registration, sessions, social_django,
+    students, studentsdb27
+    Running migrations:
+    Applying social_django.0001_initial... OK
+    Applying social_django.0002_add_related_name... OK
+    Applying social_django.0003_alter_email_max_length... OK
+    Applying social_django.0004_auto_20160423_0400... OK
+    Applying social_django.0005_auto_20160727_2333... OK
+    Applying social_django.0006_partial... OK
+
+
+
+4)
+MIDDLEWARE_CLASSES = [
+    ...
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+]
+
+
+5)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            PROJECT_DIR.child('templates'),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                ....
+
+                'social_django.context_processors.backends',        # Тут
+                'social_django.context_processors.login_redirect',  # Тут
+            ]
+        },
+    },
+]
+
+
+6)
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+
+7)
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',         # Github
+    'social_core.backends.twitter.TwitterOAuth',        # Twitter
+    'social_core.backends.facebook.FacebookOAuth2',     # Facrbook
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+7.1) настройки для всех Соц Сетей
+https://python-social-auth.readthedocs.io/en/latest/backends/index.html
+
+
+8) проверить наличие в Админке
+http://localhost:8000/admin/social_django/
+
+
+9)
+from django.conf.urls import url, include
+from django.contrib import admin
+from django.contrib.auth import views as auth_views
+from mysite.core import views as core_views
+urlpatterns = [
+    url(r'^$', core_views.home, name='home'),
+    url(r'^login/$', auth_views.login, name='login'),
+    url(r'^logout/$', auth_views.logout, name='logout'),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),  # Тут
+    url(r'^admin/', admin.site.urls),
+]
+
+
+7) подтянулось куча вьюшек
+$ python manage.py show_urls
+    ...
+    /admin/social_django/association/	django.contrib.admin.options.changelist_view	admin:social_django_association_changelist	
+    /admin/social_django/association/<var>/	django.views.generic.base.RedirectView		
+    /admin/social_django/association/<var>/change/	django.contrib.admin.options.change_view	admin:social_django_association_change	
+    /admin/social_django/association/<var>/delete/	django.contrib.admin.options.delete_view	admin:social_django_association_delete	
+    /admin/social_django/association/<var>/history/	django.contrib.admin.options.history_view	admin:social_django_association_history	
+...
+ 
+
+8) 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'
+
+9)
+<!--Block Login via Social-->
+    <div class="panel panel-success">
+    <div class="panel-heading"><h4>{% trans 'OR .. Login via Social' %}</h4></div>
+    <div class="panel-body">
+
+    <div class="btn btn-group btn-group-justified">
+
+        <!--Via Facebook-->
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default"><a href="{% url 'social:begin' 'facebook' %}" >
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                <h4>{% trans 'Login via Facebook' %}</h4></a></button>
+        </div>
+
+        <!--Via GitHub-->
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default"><a href="{% url 'social:begin' 'github' %}" >
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                <h4>{% trans 'Login via GitHub' %}</h4></a></button>
+        </div>
+
+        <!--Via Twitter-->
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default"><a href="{% url 'social:begin' 'twitter' %}" >
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                <h4>{% trans 'Login via Twitter' %}</h4></a></button>
+        </div>
+
+        <!--Via Google+-->
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default"><a href="{% url 'social:begin' 'steam' %}" >
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                <h4>{% trans 'Login via Steam' %}</h4></a></button>
+        </div>
+
+    </div>
+</div>
+</div>
+<!--End Block Login via Social-->
+------------------------------------
+
+
+Еще одна прикладная апликация
+django-facebook-connect
+-----------------------
+    https://github.com/noamsu/django-facebook-connect
+
+1)
+django-facebook-connect==1.0.1django-facebook-connect==1.0.1
+
+$ pip install -r requirements.txt 
+Successfully built django-facebook-connect
+Installing collected packages: django-facebook-connect
+Successfully installed django-facebook-connect-1.0.1
+
+2)
+INSTALLED_APPS = [
+    ...
+    'django_extensions',
+    'crispy_forms',
+    'registration',
+    # 'social.apps.django_app.default',
+    'social_django',
+    'facebook_connect',
+    ...
+    ]
+====================================
+
+
+
+глава 13. - Додатковий функціонал:
+мілдвара, команда,
+кастомний тег та фільтр
+==================================
+
+    1) middleware  -- промедуточный слой логики от клиента к серверу и обратно
+                    (request / response)
+       фактически мидлвары это классы с функциями которые последовательно преобразуют
+        объекты request и объекты response
+    2) django-admin скрипт  / команды про статистич данные на сервере / в молелях
+    3) кастомные теги и фильтры для шаблонов  django
+
+
+MIDDLEWARE_CLASSES
+-------------------------
+    https://djbook.ru/rel1.9/topics/http/middleware.html#middleware
+
+Подключенные уже Мидлвары в проекту делают: базовый уровень защиты от атак и ошибок /
+система пользователей / переводи и локализация /  логировпание + социальные сети
+
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+
+
+Собственная Мидлвара
+===========================
+ - то есть Объект класса который активируется как прослойка при прохождении через нее request и response объектов
+
+
+/home/ryndin/workprojects/studentsdb27/studentsdb27/lib/python2.7/site-packages/django/conf/global_settings.py
+
+
+Там все о response/request
+------------------
+    http://docs.python-requests.org/en/master/api/#requests.Response
+
+
+
+
+
+
+
+
+
+
+
+
+
+Собственные Админ Команды
+=========================
+
+обязателен путь локации:
+studentsdb27/students/management/commands/itemscount.py
+
+документация:
+    https://djbook.ru/rel1.7/howto/custom-management-commands.html
+
+Для этого добавим в приложение каталог management/commands. Для каждого модуля в этом каталоге, который не начинается с подчёркивания, Django создаст соответствующую команду. 
+
+Для модуля closepoll.py должно быть соблюдено лишь одно требование - наличие в нём класса Command, который унаследован от BaseCommand или его потомков.
+
+from django.core.management.base import BaseCommand, CommandError
+
+вся робота команди відбувається в методі handle; він отримує args (список аргументів
+команди, у нашому випадку це список моделей, для яких потрібно вивести статистику) та
+options (список опцій переданих команді, наприклад –verbosity, –help і т.д.); наша команда
+не має жодних власних опцій, і лише унаслідує стандартний набір типу –no-color, –help,
+–verbosity і тому подібні;
+
+BaseCommand надає нам два файли виводу: stdout i stderr; варто користуватись саме ними, а
+не системними файлами вводу та виводу; це допоможе нам пізніше написати тести для команди.
+
+
+
+1)
+Кастомная менедж комманда подключилась:
+manage.py itemscount: error: unrecognized arguments: student
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py
+...
+[students]
+    itemscount
+
+3)
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py shell
+Python 2.7.12 (default, Nov 19 2016, 06:48:10) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> import students
+>>> from students.management.commands import itemscount
+>>> dir(itemscount)
+['BaseCommand', 'Command', 'Exam', 'Group', 'MonthJournal', 'Student', 'User', '__builtins__', '__doc__', '__file__', '__name__', '__package__']
+>>> test = itemscount.Command()
+>>> test.handle('student')
+Number of students in database: 3
+>>> test.handle('user')
+Number of users in database: 6
+>>> test.handle('student', 'group', 'exams')
+Number of students in database: 3
+Number of groups in database: 2
+
+
+2) Комманда в через менеджер админ не срабатывает
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py itemscount student
+usage: manage.py itemscount [-h] [--version] [-v {0,1,2,3}]
+                            [--settings SETTINGS] [--pythonpath PYTHONPATH]
+                            [--traceback] [--no-color]
+manage.py itemscount: error: unrecognized arguments: student
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Кастомные теги Джаного {% custumteg %}
+=====================
+
+обязателен путь локации:
+studentsdb27/students/templatetags/addpaginate.py
+
+Django фреймворк автоматично просканує папку templatetags на спробі першого завантаження
+тегів в шаблоні. Щоб дана папка додалась до реєстру папок, що містять кастомні теги,
+потрібно, щоб аплікація була серед заінстальованих в проеткі: INSTALLED_APPS.
+
+Теперь доступна
+{% load addpaginate %}
+
+Django шаблони працюють у два етапи: етап компіляції (compilation) та етап
+виконання (render).
+
+Важная Теория
+Етап компіляції аналізує код шаблону, перетворює кожен із шаблонних тегів в об’єкт класу
+django.template.Node. І кожен із даних нодів (з англ. Node - це вузол, елемент) має метод
+render, який запускається на етапі виконання шаблону. Таким чином, після компіляції маємо
+набір нодів. Під час виконання шаблону викликається метод render кожного із нодів і
+результат складається в одну стрічку.
+Даний двоетапний підхід дозволяє зекономити час на повторну компіляцію.
+Адже аналіз шаблону займає найбільше часу у всьому процесі.
+Таким чином, щоб створити кастомний тег, потрібно реалізувати обидва
+етапи:
+    • функцію компіляції і підготовки кастомного нода (об’єкта, що унаслідується від Node);
+    • клас самого нода з методом render.
+Кожного разу, коли шаблонний компілятор зустрічає Django тег, він запускає відповідну
+функцію компіляції даного тегу і передає їй два аргументи: об’єкт шаблонного парсера
+(аналізатора, parser) та об’єкт стрічки тега (token).
+
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Глава 13 - Кастомные Тесты
+==========================
+Тестамы покрывают важные модули проекта и апликаций чтобы буть увереными что нет критических ошибок
+Тестами стараются покрыть:
+    моделі,
+    в’юшки,
+    форми,
+    обробник сигналу,
+    команду, 
+    кастомний фільтр
+    и пр.
+
+Есть тесты серверной стороны (в даннойь книге)
+Есть тесты клиентской стороны ( например  http://robotframework.org/)
+
+Тестирование - это наука, отдельное направление, автоматические тесты - это основа.
+    1) функциональное тестирование - работает ли вся логига проекта (функции) корректно
+    2) тестирование производительности - как быстро работает и под какой нагрузкой
+    3) тестирование конфигруации - правильные настройки для рабты на разных системах
+    4) тестирование юзабилити - удобство и очевидность для пользователей
+    5) тестирование безопаснсти - уязвимость для атак / платежно системы/ бек офисы и пр.
+    6) тетсирование локализации - первод и работа транс на нескольких языках
+    7) тестирование совместимости - между модулями проекта и внешними сорсами
+    8) тестирование черного ящика - со стороны клиента / невозможность влезть в серверную логику, переменные. данные    -- то есть для пользователя только request / response 
+
+Автоматическое тестирование - это програмные модули которые согласно алгоритму периодически проводят тести модулей проекта
+
+Юнит тестирование (Востребовано) - это модули тустирование, которые тестируют отдельные модули Проекта. елательно с исключение влияния других модулей проекта.
+
+Интергационное тестирование (в Джанго востребовано) - тестирование модулей проекта в связке с другими модулями проекта.
+
+Моя задача - Автоматические Функциональные Тесты!
+------------------------------------------------
+
+20% тесто выявят 80% ошибок, а остальные 80% тестов - малоэффективны - Закон Мура и тут.
+
+Есть инструменты для Автоматической интеграйцции и запустка проекта из Репозитория на сервер / /сразу видно, как посел очередного коммита кода проект ьомается:
+    - https://jenkins.io/index.html
+    - http://hudson-ci.org/
+    - http://cruisecontrol.sourceforge.net/
+
+
+unittest — Unit testing framework
+---------------------------------
+https://docs.python.org/2/library/unittest.html
+
+
+инструменты для Тестов в рамках языка Python
+-----------------------
+версии 2.7-3.5 - набор утилит отличаются (можно выбрать)
+https://docs.python.org/3.5/library/development.html
+
+
+
+Testing in Django       -- инструменты для теста во рамках Дроекта джанго
+------------------
+https://docs.djangoproject.com/en/1.10/topics/testing/
+
+    1) Writing and running tests
+    2) Testing tools
+    3) Advanced testing topics
+
+
+Стандарт вызова модуля тестов
+---------------
+import unittest
+class TestStringMethods(unittest.TestCase):
+
+
+Каждая функция в пакете Класса тестов начинается на test_
+--------------
+def test_upper(self):
+
+
+Каждая функция теста в пакете класса принимает только self
+тут уже стандартные методы
+--------------------------
+    self.assertEqual(’apple’.upper(), ’APPLE’)      // подтвержнение Равенста
+    self.assertTrue(’ORANGE’.isupper())             // подстверждение на True
+    self.assertFalse(’Orange’.isupper())            // подтверждение на False
+    s = ’hello world’  
+    self.assertEqual(s.split(), [’hello’, ’world’]) // тут ок  
+    self.assertRaises(TypeError, s.split, 2)        // подтверждение на наличие Исключения
+
+
+Вся глубокая Теория про тесты
+-----------------------------
+    http://www.protesting.ru/
+
+
+
+Создание Тестового Фреймворка
+=============================
+1) 
+mkdir && touch:  students/tests/__init_.py
+
+2) 
+rm students/tests.py
+
+
+3)
+DATABASES = {
+
+
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'localhost',
+        # 'USER': 'myprojectuser',          // поменял на рут
+        'USER': 'root',
+        # 'PASSWORD': 'myprojectuser',      // поменял на рут
+        'PASSWORD': 'prostomag76',
+        'NAME': 'myproject2016_db',
+        'TEST': {                           // добавил настройки для БД Тест
+            'CHARSET': 'utf8',
+            'COLLATION': 'utf8_general_ci',
+            }
+        }
+
+
+4)
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py test
+Creating test database for alias 'default'...
+
+----------------------------------------------------------------------
+Ran 0 tests in 0.000s
+
+OK
+Destroying test database for alias 'default'...
+    // Как я понимаю Создало / Прогнало / Удалило / ББ по тестам всего Проекта
+
+
+5)
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py test students
+Creating test database for alias 'default'...
+
+----------------------------------------------------------------------
+Ran 0 tests in 0.000s
+
+OK
+Destroying test database for alias 'default'...
+    // Как я понимаю Создало / Прогнало / Удалило / ББ по тестам под апликацию students
+
+
+6)
+touch  students/test/test_util.py
+Префікс test в назві модуля є обов’язковим, щоб тестовий фреймворк ідентифікував наші
+тести. Другу частину назви файла ми намагаємось тримати аналогічною до назви модуля, в
+якому знаходиться код, який ми тестуємо. Це допомагає доволі швидко ідентифікувати
+місцезнаходження тих чи інших тестів в пакеті tests.
+
+
+7)
+создание Кода по тестированию функций апликации в test_util.py 
+
+
+8)
+после успешного создания функций тестирования
+----------------
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py test students
+Creating test database for alias 'default'...
+{'update_fields': None, 'instance': <Group: Group1>, 'signal': <django.db.models.signals.ModelSignal object at 0x7fc885b21f50>, 'created': True, 'raw': False, 'using': 'default'}
+** 2017-04-09 19:47:26 // INFO // signals // Group added: Group1 None (ID: 1) **
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.144s
+
+OK
+Destroying test database for alias 'default'...
+
+
+9)
+ юнит тесты лучше бить на модули по смыслу и тогда можно запустить на тест одельный
+ модуль, например
+
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py test students.tests.test_util
+
+Creating test database for alias 'default'...
+{'update_fields': None, 'instance': <Group: PythonCode>, 'signal': <django.db.models.signals.ModelSignal object at 0x7f731328ef90>, 'created': True, 'raw': False, 'using': 'default'}
+** 2017-04-12 08:07:38 // INFO // signals // Group added: PythonCode None (ID: 1) **
+.{'update_fields': None, 'instance': <Group: PythonCode>, 'signal': <django.db.models.signals.ModelSignal object at 0x7f731328ef90>, 'created': True, 'raw': False, 'using': 'default'}
+** 2017-04-12 08:07:38 // INFO // signals // Group added: PythonCode None (ID: 1) **
+.
+----------------------------------------------------------------------
+Ran 2 tests in 0.821s
+
+OK
+Destroying test database for alias 'default'...
+
+
+
+
+Еще раз о Фикстурах
+===================
+$python manage.py dumpdata --indent=4 --format=json > students/fixtures/students_db.json
+===================
+
+
+
++++++++++++++++++++++++++++
+
+Разработка через тестирование: Использование PyUnit(unittest)
+-----------------------------
+https://www.ibm.com/developerworks/ru/library/l-python_tdd_begin/index.html
+
+
+ 
+Программирование на Python: Часть 8. Файловая система
+--------------------------
+https://www.ibm.com/developerworks/ru/library/l-python_part_8/
+
+
+Очаровательный Python: Собираем данные в Web с помощью mechanize и Beautiful Soup
+---------------------
+https://www.ibm.com/developerworks/ru/library/l-python-mechanize-beautiful-soup/index.html
+
+
+Программирование на Python. Часть 7: Специальные методы и атрибуты классов
+--------------------------
+https://www.ibm.com/developerworks/ru/library/l-python_part_7/index.html
+
+
+
+Программирование на Python: Часть 9. Процессы и потоки
+--------------------------
+https://www.ibm.com/developerworks/ru/library/l-python_part_9/index.html
+
+
+Программирование на Python. Часть 2: Строки в питоне
+--------------------------
+https://www.ibm.com/developerworks/ru/library/l-python_part_2/index.html
+
+
+Очаровательный Python: Итераторы и простые генераторы
+---------------------
+https://www.ibm.com/developerworks/ru/library/l-pycon/index.html
+
+++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+

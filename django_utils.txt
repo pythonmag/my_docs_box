@@ -1,0 +1,92 @@
+Буду записывать методы которые изучил
+=====================================
+
+
+Документация
+============
+https://docs.djangoproject.com/en/3.0/ref/utils/
+
+
+django.utils.cache
+==================
+
+
+
+django.utils.dateparse
+======================
+
+
+
+django.utils.decorators
+=======================
+
+
+
+django.utils.encoding
+=====================
+
+
+
+django.utils.feedgenerator
+==========================
+
+
+
+django.utils.functional
+=======================
+
+
+
+django.utils.html
+=======================
+
+
+
+django.utils.http
+=================
+
+
+
+django.utils.timezone
+=====================
+
+
+
+django.utils.module_loading
+===================
+
+
+
+django.utils.safestring
+=======================
+
+
+
+django.utils.text
+=================
+
+1)
+slugify('same text')
+--------------
+>>> import django.utils.text as textt
+>>> textt.slugify('My name is Yurii')
+'my-name-is-yurii'
+
+
+
+django.utils.timezone
+=====================
+
+1)
+timezone.now()
+----------------
+>>> from django.utils import timezone
+>>> now = timezone.now()
+>>> now
+datetime.datetime(2017, 7, 27, 7, 13, 11, 381494, tzinfo=<UTC>)
+
+
+
+
+django.utils.translation
+========================

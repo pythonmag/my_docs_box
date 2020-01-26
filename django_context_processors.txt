@@ -1,0 +1,136 @@
+
+Если нужен Словарь данных на всех Страницах Сайта (на многих) 
+- то его в Контекст-Процессор !!
+==============================
+
+1)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                "myapp.my_processors.process1",
+            ],
+        },
+    },
+]
+
+
+или 
+
+2)
+from django.conf import global_settings
+
+TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+    "myapp.my_processors.process1",
+)
+
+
+
+
+
+Упражнение / Собственный контекст-процессор
+========================
+(на продакшене в сеттингах меняем одну настройку)
+
+1)
+в сеттингах
+---------------
+# for cactom context processors
+
+PORTAL_URL = 'http://localhost:8000'
+
+
+2) в корневой папке проекта (там где сеттинги)
+
+custom_context_processors.py
+----------------------------
+
+from . settings import PORTAL_URL
+
+def site_portal_url(request):
+    return {'portal_url': PORTAL_URL}
+
+
+3)
+опять в сеттинга но в списке подключенных контекс-процессоров
+---------------------
+'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'students2017.custom_context_processors.site_portal_url',
+            ],
+
+4)
+переменная доступна в шаблонах
+-------------------
+{{ portal_url }}
+
+
+5)
+<link rel="stylesheet" href="{{ portal_url }}{% static 'css/custom.css' %}">
+
+
+выдаст типа
+“http://localhost:8000/static/css/custom.css”
+
+
+
+Еще раз Упражнение - собственный Контекст Процессор / Выбор активной группы (+Кукки)
+====================
+1)
+settings
+---------------
+TEMPLATES = ...
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'students2017.custom_context_processors.site_portal_url',
+                
+                'students.app_context_processors.groups_processor',
+            ],
+        },
+    },
+]
+
+
+2)
+app_context_processors.py
+-----------------
+from .util import get_groups
+
+def groups_processor(request):
+    return {'GROUPS': get_groups(request)}
+
+
+3)
+util.py
+------------------
+def get_current_group(request):
+    """
+    Get pk of current group from cookie list from browser
+    """
+
+    pk =    .get('current_group')
+
+    if pk:
+        from .models import Group
+        try:
+            group = Group.objects.get(pk=pk)
+        except Group.DoesNotExist:
+            return None
+        else:
+            return group
+
+    else:
+        return None

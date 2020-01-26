@@ -1,0 +1,212 @@
+
+1)
+=============
+Шаблоны Django
+--------------
+
+https://docs.djangoproject.com/en/3.0/topics/templates/
+
+https://docs.djangoproject.com/en/3.0/ref/templates/language/
+
+https://docs.djangoproject.com/en/3.0/ref/templates/language/#variables
+
+https://docs.djangoproject.com/en/3.0/ref/templates/language/#filters
+
+https://docs.djangoproject.com/en/3.0/ref/templates/language/#tags
+
+https://docs.djangoproject.com/en/3.0/ref/templates/language/#comments
+
+============
+https://docs.djangoproject.com/en/3.0/ref/templates/builtins/#built-in-template-tags-and-filters
+
+
+
+интереснаяя работа с массивами
+
+{% regroup %}
+-----------------------------
+https://docs.djangoproject.com/en/3.0/ref/templates/builtins/#regroup
+
+
+
+
+
+
+Язык Шаблонов Джанко дает 3 основных инструмента:
+---------------------------
+    - Переменные ({{  }})
+    - Теги  ({% %}) - блок Логики
+    - Фильтры (|)
+
+Пример Тегов Джанго и Реализации Логики:
+Но, логика в Джанго шаблонах может быть простая, все что сложное - во Вьюшках Питона
+<ul>
+    {% for student in students %}
+        {% if student.age > 22 %}
+            <li>{{ student.first_name }}</li>
+        {% endif %}
+    {% endfor %}
+</ul>
+
+
+
+4)
+url - тег
+================
+<a class="btn btn-primary" href="{% url 'students_add' %}">Добавить Студента</a>
+    // В urls.py есть паттерны url - оосновная логика обработки запросов, патерны
+    сохранены под именем. Это имя можно испьзовать в шаблонах html для связи с логикой
+
+<td><a href="{% url 'students_edit' 1 %}">Юрий</a></td>
+    // В урл паторне первым параметром идет РегВыражение которое может принимать 
+    индексированное значение ((<stu_id>\d+) например > stu_id = 1) которое потом доступно как
+    входящий параметр в Логики Вьюшек (views.py)
+
+
+
+5)
+================
+// Расширить Тегами и Фильтрами
+// Наследование Шаблонов
+	{% extends "base.html" %}
+	Если использую {% extends %}, он должен быть первым тегом в шаблоне.
+	 Иначе наследование не будет работать.
+
+	Чем больше тегов {% block %} в вашем шаблоне, тем лучше. Помните, дочерний шаблон не обязан
+	определять все блоки родительского, вы можете указать значение по умолчанию для всех блоков,
+	а затем определить в дочернем шаблоне только те, которые необходимы.
+
+	Если вы дублируете содержимое в нескольких шаблонах, возможно вы должны перенести его в
+	тег {% block %} родительского шаблона.
+
+	Если вам необходимо содержимое блока родительского шаблона, используйте переменную
+	{{ block.super }}. Эта полезно, если вам необходимо дополнить содержимое родительского
+	блока, а не полностью переопределить его. 
+	Содержимое {{ block.super }} не будет автоматически экранировано так как оно уже было
+	экранировано, при необходимости, в родительском шаблоне.
+	// Пример:
+	
+	// html-наследник
+	{% extends "template_html/base_navtab.html" %}
+	{% block status_message %}						// Переопределяем Родительский Шаблон
+    {% if form.errors %}
+        <div class="alert alert-warning" role="alert">
+            <p>Пожалуйства исправьте ошибки</p>
+        </div>
+    {% endif %}
+	{{ block.super }}								// Вставляем Родительский Шаблон
+	{% endblock status_message %}
+	
+	// html-родитель
+	{% block status_message %}
+        {% if request.GET.status_message %}
+        <div class="alert alert-info" role="alert">
+            <strong>{{request.GET.status_message}}</strong>
+        </div>
+        {% endif %}
+    {% endblock status_message %}
+	// То есть в Наследнике сначала переопрелелили блок Статусного Сообщения
+	// А затем сного его добавили для Родительских Конструкций Статусного сообщения
+
+
+Язык шаблонов Django: для Python программистов
+(+ собственные теги шаблогов)
+
+
+
+6)
+Процессоры Контекста
+=====================
+https://djbook.ru/rel1.9/topics/templates.html#context-processors
+http://djbook.ru/rel1.8/ref/templates/api.html
+
+
+Процессоры контекста – это функции, которые принимают текущий HttpRequest,
+и возвращают dict данными, которые будут добавлены в контекст.
+
+
+
+7)
+Кастомные теги Джаного {% custumteg %}
+=====================
+
+обязателен путь локации:
+myproject/myapp/templatetags/<customteg>.py
+
+
+
+8)
+===============
+Пример 2 - переводит Строку в Число
+
+from django import template
+
+register = template.Library()
+
+@register.filter
+def str2int(value, *args):
+    try:
+        value = int(value)
+    except ValueError:
+        value = 0
+    return value
+
+
+
+2)
+============
+папку шаблонов кастомно настраиваю в рутовой папке
+
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')          # add my templates path
+# print(TEMPLATE_DIR)
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [TEMPLATE_DIR,],                            # add path variable
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+--------------------------
+фактически папка templates для всего проекта предлагается в корневой папке проекта!!!
+
+(udemyProjectEnv) ryndin@ubu:~/anaconda3/envs/udemyProjectEnv/src/udemy_project$ ls
+db.sqlite3  first_app  manage.py  second_app  udemy_project templates
+
+(udemyProjectEnv) ryndin@ubu:~/anaconda3/envs/udemyProjectEnv/src/udemy_project/udemy_project$ python3 settings.py 
+(Принт Пути Папки Templates)
+/home/ryndin/anaconda3/envs/udemyProjectEnv/src/udemy_project/templates
+
+
+3)
+=====================
+во вьюшке путь к шаблонам указан так
+
+def index(request):
+    return render(request, 'first_app/index.html',          # templates + ''
+                  {'add_item': 'added item'})
+
+или
+
+def index(request):
+    context_dict = {'add_item': 'added item'}
+    return render(request, 'first_app/index.html', context=context_dict)
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,34 @@
+1)
+
+https://wsvincent.com/django-slug-tutorial/
+
+https://docs.djangoproject.com/en/1.11/ref/models/fields/#slugfield
+
+
+2)
+What is a “slug” in Django?
+--------------------------
+https://stackoverflow.com/questions/427102/what-is-a-slug-in-django
+
+
+3)
+Are you lazy to do slug process ? don't worry, this plugin will help you. django-autoslug
+---------------------
+https://github.com/neithere/django-autoslug
+
+
+пример:
+-------
+class Tag(models.Model):
+    slug = models.SlugField(unique = True)      # создается slug 
+    ...
+
+    def get_url(self):                          # для {{ tag.get_url }}
+        return reverse('blog:tag-details', kwargs={'slug': self.slug})
+
+
+
+
+
+
+

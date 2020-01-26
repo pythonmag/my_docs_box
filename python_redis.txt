@@ -1,0 +1,8 @@
+
+Python-RQ: очередь задач на базе Redis
+======================================
+https://khashtamov.com/ru/python-rq-howto/
+
+
+
+

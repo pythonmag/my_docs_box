@@ -1,0 +1,888 @@
+
+Моя Среда Разработки
+(так было)
+====================
+
+Python		                            // Язык программирования
+virtualenv		                        // Пакет Установки Рабочей среды
+		
+pip			                            // менеджер пакетов Питон
+PIL  (Pillow)                           //  Python Image Librery
+
+Django			                        // Веб-Фреймворк (Бибилиотека Классов Питон для Веб)
+git			                            // Репозиторий Кода
+FireFox	+ FireBug                       //  Браузер + Плагин Дебага
+
+MySQL			                        //  Реляцийные Базы Данных
+PosgreSQL
+
+JavaScript		                        // Язык программирования
+node.js			                        // Интерпретатор в консоли  (Веб Фреймворк)
+jQuery			                        // Бибилотека JavaScript для Веб (Веб Фреймворк)
+
+PyCharm                                 //  IDE  (Среда разработки)
+SublimeText2                            //
+
+gedit			                        // текстовый редактор
+
+
+Хороший манул по работе с пакетом в Общем
+=======================
+http://docs.python-guide.org/en/latest/dev/virtualenvs/
+
+
+
+
+
+
+УКРОЧЕННАЯ ВЕРСИЯ - когда все глобальные пакеты есть и все понятно
+========================
+ryndin@pc:~/workprojects$ mkdir virtualenv27         **
+(ryndin@pc:~/workprojects$ mkdir sitecomments)
+ryndin@pc:~/workprojects$ cd virtualenv27/          **
+    
+
+ryndin@pc:~/workprojects/virtualenv27$ virtualenv -p /usr/bin/python2.7 studentsdb27 --no-site-packages --prompt=="(studentsdb27)"              **
+ 
+или
+ryndin@pc:~/workprojects/virtualenv27$ virtualenv -p /usr/bin/python2.7 sitecomments --no-site-packages --prompt=="(sitecomments)" 
+ 
+или
+ryndin@pc:~/projects$ virtualenv -p /usr/bin/python3.5 students2017 --no-site-packages --prompt=="(students)" 
+
+
+Running virtualenv with interpreter /usr/bin/python2.7
+New python executable in /home/ryndin/workprojects/virtualenv27/studentsdb27/bin/python2.7
+Also creating executable in /home/ryndin/workprojects/virtualenv27/studentsdb27/bin/python
+Installing setuptools, pkg_resources, pip, wheel...done.
+
+ryndin@pc:~/workprojects/virtualenv27$ cd studentsdb27/
+ryndin@pc:~/workprojects/virtualenv27/studentsdb27$ cd && ls    **
+bin  include  lib  local  pip-selfcheck.json  share
+
+ryndin@pc:~/workprojects/virtualenv27/studentsdb27$ source bin/activate     **
+
+=(studentsdb27)ryndin@pc:~/workprojects/virtualenv27/studentsdb27$ which python     **
+/home/ryndin/workprojects/virtualenv27/studentsdb27/bin/python
+
+=(studentsdb27)ryndin@pc:~/workprojects/virtualenv27/studentsdb27$ mkdir src        **
+
+=(studentsdb27)ryndin@pc:~/workprojects/virtualenv27/studentsdb27$ cd src/      **
+
+
+=(studentsdb27)ryndin@pc:~/workprojects/virtualenv27/studentsdb27/src$ git clone git@github.com:pythonmag/studentsdb27.git                  ** (опционно если есть база)
+----------
+Клонирование в «studentsdb27»…
+remote: Counting objects: 316, done.
+remote: Compressing objects: 100% (57/57), done.
+remote: Total 316 (delta 21), reused 0 (delta 0), pack-reused 255
+Получение объектов: 100% (316/316), 713.97 KiB | 484.00 KiB/s, готово.
+Определение изменений: 100% (160/160), готово.
+Проверка соединения… готово.
+
+=(studentsdb27)ryndin@pc:~/workprojects/virtualenv27/studentsdb27/src$ cd studentsdb27/
+=(studentsdb27)ryndin@pc:~/workprojects/virtualenv27/studentsdb27/src/studentsdb27$ pip install -r requirements.txt
+----------
+Collecting Django==1.10.5 (from -r requirements.txt (line 1))
+  Using cached Django-1.10.5-py2.py3-none-any.whl
+Collecting django-registration-redux==1.4 (from -r requirements.txt (line 2))
+Collecting MySQL-python==1.2.5 (from -r requirements.txt (line 3))
+Collecting olefile==0.44 (from -r requirements.txt (line 4))
+Collecting Pillow==4.0.0 (from -r requirements.txt (line 5))
+....
+---------
+
+=(studentsdb27)ryndin@pc:~/workprojects/virtualenv27/studentsdb27/src/studentsdb27$ pip freeze
+appdirs==1.4.2
+Django==1.10.5
+django-crispy-forms==1.6.1
+django-registration-redux==1.4
+MySQL-python==1.2.5
+olefile==0.44
+packaging==16.8
+Pillow==4.0.0
+pkg-resources==0.0.0
+psycopg2==2.6.2
+pyparsing==2.1.10
+python-dateutil==2.6.0
+python-magic==0.4.12
+six==1.10.0
+
+=(studentsdb27)ryndin@pc:~/workprojects/virtualenv27/studentsdb27/src/studentsdb27$ ls
+manage.py  README.md  requirements.txt  students  studentsdb27  students_db.json
+=(studentsdb27)ryndin@pc:~/workprojects/virtualenv27/studentsdb27/src/studentsdb27$ python manage.py runserver
+Performing system checks...
+
+
+
+
+
+РАСШИРЕННАЯ НАЧАЛЬНАЯ ВЕРСИЯ
+=========================
+// Установка Глобальных пакетов
+// Установку Глобальных пакетов никто не отменял
+
+$ sudo apt install build-essential make cmake scons     **
+$ sudo apt install autoconf automake autoconf-archive   **
+$ sudo apt install gettext libtool                      **
+$ sudo apt install libbz2-dev zlib1g-dev                **
+$ sudo apt install libexpat-dev libncurses-dev          **
+$ sudo apt install libjpeg62-dev libcurl4-openssl-dev   **
+$ sudo apt install libssl-dev python python-dev curl    **
+		//  build-essential - gcc компілятор C коду;
+        //  make, cmake, scons - бібліотеки побудови бінарних пакетів в Linux;
+        //  conf пакети - утиліти ефективного створення конфігурацій;
+        //  gettext - бібліотека перекладів;
+        //  libbz2-dev - хідера для архіватора;
+        //  libtool - інструменти по роботі із shared бібліотеками;
+        //  libssl-dev - розробницькі хідера для ssl підтримки в python;
+        //  libexpat-dev - розробницікі хідера для xml парсера;
+        //  libncurses-dev - хідера бібліотеки для побудови термінальних GUI;
+        //  python - сам python;
+        //  curl - утиліта, з допомогою якої далі під час інсталяції ми будемо 
+            отримувати дані з інтернету в командній стрічці;
+
+$ sudo apt build-dep python-imaging             **
+$ sudo apt install libjpeg8 libjpeg62-dev libfreetype6 libfreetype6-dev     **
+$ sudo apt install build-essential libssl-dev python curl libbz2-dev libsqlite3-dev     **
+$ sudo apt install libsqlite-dev                **
+$ sudo apt install liblzma-dev                  **
+
+
+
+
+
+
+=================================
+Установка Менеджера Виртуалной Среды  -- virtualenv
+Официальная странция проекта:
+    http://virtualenv.readthedocs.io/en/latest/
+    // Там есть инструкции по установки как глобального так и локалых Сред
+    // Также можно выбрать версии Питона при установки среды 
+
+
+1) $ sudo apt install python-virtualenv             **              
+
+	выполено август 2016
+
+	// Результат
+	ryndin@pc:/$ sudo apt install python-virtualenv  
+        //ставится глобально не в кастомной папке
+
+	[sudo] password for ryndin: 
+	Чтение списков пакетов… Готово
+	Построение дерева зависимостей       
+	Чтение информации о состоянии… Готово
+	Следующие пакеты устанавливались автоматически и больше не требуются:
+  	kde-l10n-engb kde-l10n-ru libavahi-client-dev libavahi-common-dev
+  	libdbus-1-dev libexif-dev libgphoto2-dev libieee1284-3-dev libjbig-dev
+  	libjs-jquery libtiffxx5 libusb-1.0-0-dev libv4l-dev libv4l2rds0
+	Для их удаления используйте «apt-get autoremove».
+	Будут установлены следующие дополнительные пакеты:
+  	python-chardet-whl python-colorama python-colorama-whl python-distlib
+  	python-distlib-whl python-html5lib python-html5lib-whl python-pip
+  	python-pip-whl python-requests-whl python-setuptools-whl python-six-whl
+  	python-urllib3-whl python-wheel
+	Предлагаемые пакеты:
+  	python-genshi
+	Рекомендуемые пакеты:
+  	python-dev-all
+
+	НОВЫЕ пакеты, которые будут установлены:
+  	python-chardet-whl python-colorama python-colorama-whl python-distlib python-distlib-whl python-html5lib python-html5lib-whl python-pip python-pip-whl python-requests-whl python-setuptools-whl python-six-whl python-urllib3-whl python-virtualenv python-wheel
+
+
+	обновлено 0, установлено 15 новых пакетов, для удаления отмечено 0 пакетов, и 0 пакетов не обновлено.
+	Необходимо скачать 2.937 kБ архивов.
+	После данной операции, объём занятого дискового пространства возрастёт на 5.289 kB.
+	Хотите продолжить? [Д/н] y
+	...
+	Настраивается пакет python-chardet-whl (2.2.1-2~ubuntu1) …
+	Настраивается пакет python-colorama (0.2.5-0.1ubuntu2) …
+	Настраивается пакет python-colorama-whl (0.2.5-0.1ubuntu2) …
+	Настраивается пакет python-distlib (0.1.8-1ubuntu1) …
+	Настраивается пакет python-distlib-whl (0.1.8-1ubuntu1) …
+	Настраивается пакет python-html5lib (0.999-3~ubuntu1) …
+	Настраивается пакет python-html5lib-whl (0.999-3~ubuntu1) …
+	Настраивается пакет python-six-whl (1.5.2-1ubuntu1) …
+	Настраивается пакет python-urllib3-whl (1.7.1-1ubuntu4) …
+	Настраивается пакет python-requests-whl (2.2.1-1ubuntu0.3) …
+	Настраивается пакет python-setuptools-whl (3.3-1ubuntu2) …
+	Настраивается пакет python-pip-whl (1.5.4-1ubuntu3) …
+	Настраивается пакет python-pip (1.5.4-1ubuntu3) …
+	Настраивается пакет python-virtualenv (1.11.4-1ubuntu1) …
+	Настраивается пакет python-wheel (0.24.0-1~ubuntu1) …
+    ... август 2016
+    Настраивается пакет python-pip-whl (8.1.1-2ubuntu0.1) …
+    Настраивается пакет python-pip (8.1.1-2ubuntu0.1) …
+    Настраивается пакет python-virtualenv (15.0.1+ds-3) …
+    Настраивается пакет python3-virtualenv (15.0.1+ds-3) …  // два Питона глобальных (2 & 3)
+    Настраивается пакет virtualenv (15.0.1+ds-3) …
+
+
+Альтернативная ссылка - не разбиралься пока
+---------------------
+	http://docs.python-guide.org/en/latest/dev/virtualenvs/
+
+
+
+=================================
+по желанию.
+Кастомная установка Глобального Python 2.7.9 (для прикручивания к virtualenv вместо 2.7.6)
+// это опционно, если возиться не хочется можно оставить python 2.7.6 (по дефолту)
+
+Установка Глобального Python 2.7.9
+https://renoirboulanger.com/blog/2015/04/upgrade-python-2-7-9-ubuntu-14-04-lts-making-deb-package/
+
+Procedure
+    Install build dependencies
+    Those were the ones I ran last before a successful build on Ubuntu 14.04 LTS, if you aren’t using the same distribution, you might get a different list.
+
+лучше сразу перейти в Корневую папку
+	ryndin@pc:/Python-2.7.9$ cd /
+	ryndin@pc:/$ 
+
+	ryndin@pc:/$ sudo apt install -y gcc-multilib g++-multilib libffi-dev libffi6 libffi6-dbg python-crypto python-mox3 python-pil python-ply libssl-dev zlib1g-dev libbz2-dev libexpat1-dev libbluetooth-dev libgdbm-dev dpkg-dev quilt autotools-dev libreadline-dev libtinfo-dev libncursesw5-dev tk-dev blt-dev libssl-dev zlib1g-dev libbz2-dev libexpat1-dev libbluetooth-dev libsqlite3-dev libgpm2 mime-support netbase net-tools bzip2
+        // такая длинная комманда для установки всех пакетов для кастомного глобального 
+        // python 2.7.9 -- уже не актуально
+
+
+Get Python sources and compile
+	ryndin@pc:/$ sudo wget https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz
+	ryndin@pc:/$ tar xfz Python-2.7.9.tgz
+    ryndin@pc:/$ cd Python-2.7.9/
+    			$ sudo ./configure --prefix /usr/local/lib/python2.7.9 --enable-ipv6
+    			$ make
+    			$ make install
+	// Там где не даст доступа значит я пропустил sudo
+===================================
+
+
+
+
+Лучший Способ создать Виртуальную Среду Проекта
+#################################
+Создаю Папку моего проекта куда также пойдет Папака локальной ВиртуальнойСреды
+    ryndin@pc:~/workprojects$ mkdir studentsdb2017      **
+    ryndin@pc:~/workprojects$ cd studentsdb2017/        **
+
+
+Устанавливаю Виртуальную Рабочую Среду с помощью пакета ВиртуалЕнв в мою созданную папку,
+При этом указываю размещение Глобальной версии Питона, потом наименование
+Папки-ВиртуальнойСреды, затем указываю что без ГлобальныхПакетов (потом сам поставлю
+Пакеты), затем Псевдоним Проекта при его Активации    
+Я так понимаю что Путь к Пакету Питона можна указать Любой где этот Питон лежит
+  
+    ryndin@pc:~/workprojects/studentsdb2017$ virtualenv -p /usr/bin/python2.7 studentsdb27 --no-site-packages --prompt=="(studentsdb17)"      **********
+Результат:
+=========
+Running virtualenv with interpreter /usr/bin/python3.5
+Using base prefix '/usr'
+New python executable in /home/ryndin/workprojects/studentsdb2017/studentsdb2017/bin/python3.5
+Also creating executable in /home/ryndin/workprojects/studentsdb2017/studentsdb2017/bin/python
+Installing setuptools, pkg_resources, pip, wheel...done.
+
+
+То что Виртуальная Среда Проекта установлена можно убедиться наличием Папок и Файлов
+    ryndin@pc:~/workprojects/studentsdb2017/studentsdb2017$ ls      **
+    -- bin  include  lib  pip-selfcheck.json  share
+
+
+Запуская Виртуальную Среду и Вижу что Она активирована через ее Псевдоним в скобках
+Также запустил в Среде Питони чтобы увидеть его Версию
+    ryndin@pc:~/workprojects/studentsdb2017/studentsdb2017$ source bin/activate     **
+Результат:
+==========
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb2017/studentsdb2017$ python
+Python 3.5.2 (default, Nov 17 2016, 17:05:23) 
+[GCC 5.4.0 20160609] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+А Вот можно спросить где лежит Питон для ВиртСреды -- все правильно
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb2017/studentsdb2017$ which python     **
+/home/ryndin/workprojects/studentsdb2017/studentsdb2017/bin/python
+###################################
+
+
+
+Установка Django нужной версии -- все стандартно
+==============================
+ 
+// Устанавливаю Django -- нужную версию
+    выполено январь 2017
+    // Все версии пакетов лучше всерять по примеру (меняя название пакета)
+	https://pypi.python.org/pypi/Django
+
+    // вибирать стабильные версии (может не самые последние) чтобы совместими с python 2.7.6
+
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb2017/studentsdb2017$ pip install Django==1.10.5       **
+
+	Collecting Django==1.10.5
+    Downloading Django-1.10.5-py2.py3-none-any.whl (6.8MB)
+    100% |████████████████████████████████| 6.8MB 83kB/s 
+    Installing collected packages: Django
+    Successfully installed Django-1.10.5
+
+
+Установка Сайт-Пакетов по пунктам
+Все что далее на примере более старого проекта - Лень было исправлять
+Главное что актуальные пакеты надо сверять на сайте python.org
+============================
+// Устанавливаю pillow(PIL) -- нужную версию
+    https://pypi.python.org/pypi/Pillow	
+    выполено август 2016
+(myproject2016)ryndin@pc:~/work/myproject2016$ pip install pillow==4.0.0	        **
+	...	
+	To check the build, run the selftest.py script.
+    changing mode of build/scripts-2.7/thresholder.py from 664 to 775
+    changing mode of build/scripts-2.7/pilfont.py from 664 to 775
+    changing mode of build/scripts-2.7/pilfile.py from 664 to 775
+    changing mode of build/scripts-2.7/viewer.py from 664 to 775
+    changing mode of build/scripts-2.7/pildriver.py from 664 to 775
+    changing mode of build/scripts-2.7/createfontdatachunk.py from 664 to 775
+    changing mode of build/scripts-2.7/explode.py from 664 to 775
+    changing mode of build/scripts-2.7/pilconvert.py from 664 to 775
+    changing mode of build/scripts-2.7/gifmaker.py from 664 to 775
+    changing mode of build/scripts-2.7/enhancer.py from 664 to 775
+    changing mode of build/scripts-2.7/pilprint.py from 664 to 775
+    changing mode of build/scripts-2.7/painter.py from 664 to 775
+    changing mode of build/scripts-2.7/player.py from 664 to 775
+    changing mode of /home/ryndin/work/myproject2016/bin/thresholder.py to 775
+    changing mode of /home/ryndin/work/myproject2016/bin/pilfont.py to 775
+    changing mode of /home/ryndin/work/myproject2016/bin/pilfile.py to 775
+    changing mode of /home/ryndin/work/myproject2016/bin/viewer.py to 775
+    changing mode of /home/ryndin/work/myproject2016/bin/pildriver.py to 775
+    changing mode of /home/ryndin/work/myproject2016/bin/createfontdatachunk.py to 775
+    changing mode of /home/ryndin/work/myproject2016/bin/explode.py to 775
+    changing mode of /home/ryndin/work/myproject2016/bin/pilconvert.py to 775
+    changing mode of /home/ryndin/work/myproject2016/bin/gifmaker.py to 775
+    changing mode of /home/ryndin/work/myproject2016/bin/enhancer.py to 775
+    changing mode of /home/ryndin/work/myproject2016/bin/pilprint.py to 775
+    changing mode of /home/ryndin/work/myproject2016/bin/painter.py to 775
+    changing mode of /home/ryndin/work/myproject2016/bin/player.py to 775
+	Successfully installed pillow
+	Cleaning up...
+
+
+// Устанавливаю python-magic -- нужную версию
+    выполнено август 2016
+(myproject2016)ryndin@pc:~/work/myproject2016$ pip install python-magic==0.4.12     **
+
+	Downloading/unpacking python-magic==0.4.10
+	Downloading python-magic-0.4.10.tar.gz
+	Running setup.py (path:/home/ryndin/work/myproject2016/build/python-magic/setup.py)
+	egg_info for package python-magic
+	no previously-included directories found matching 'test'
+	Installing collected packages: python-magic
+	Running setup.py install for python-magic
+	no previously-included directories found matching 'test'
+	Successfully installed python-magic
+	Cleaning up...
+
+
+// Устанавливаю  MySQL-python -- нужную версию
+    выполено август 2016
+(myproject2016)ryndin@pc:~/work/myproject2016$ pip install MySQL-python==1.2.5      **
+
+	Downloading/unpacking MySQL-python==1.2.5
+	Downloading MySQL-python-1.2.5.zip (108kB): 108kB downloaded
+	...
+	Successfully installed MySQL-python
+	Cleaning up...
+
+
+// Устанавливаю  django-crispy-forms -- нужную версию
+    выполнено август 2016
+(myproject2016)ryndin@pc:~/work/myproject2016$ pip install django-crispy-forms==1.5.2   **
+
+	Downloading/unpacking django-crispy-forms==1.5.2
+	Downloading django-crispy-forms-1.5.2.tar.gz (114kB): 114kB downloaded
+	Running setup.py (path:/home/ryndin/work/myproject2016/build/django-crispy-forms/setup.py)
+	 egg_info for package django-crispy-forms
+    warning: no files found matching '*' under directory 'crispy_forms/static'
+	Installing collected packages: django-crispy-forms
+	Running setup.py install for django-crispy-forms
+    warning: no files found matching '*' under directory 'crispy_forms/static'
+	Successfully installed django-crispy-forms
+	Cleaning up...
+
+
+// Утанавливаю модуль dateutil(работа с датами) -- нужную версию
+    выполнено август 2016
+(studentsdb279)ryndin@pc:~/work/studentsdb279/src/studentsdb$ pip install python-dateutil==2.4.2        **
+
+	Downloading/unpacking python-dateutil==2.4.2
+  	Downloading python_dateutil-2.4.2-py2.py3-none-any.whl (188kB): 188kB downloaded
+	Downloading/unpacking six>=1.5 (from python-dateutil==2.4.2)
+  	Downloading six-1.10.0-py2.py3-none-any.whl
+	Installing collected packages: python-dateutil, six
+	Successfully installed python-dateutil six
+	Cleaning up...
+==============================
+
+
+
+// Утанавливаю модуль wsgiref(работа с датами) -- нужную версию     **
+    выполнено август 2016
+    ?? не сработало (может не надо)
+
+
+
+// Устанавливаем модуль для регистрации Пользователей в апликации джанго 
+    (Уточнить последнюю версию)
+    An extensible user-registration application for Django
+
+    (my_proj_2016)ryndin@pc:~/work/my_mew_project_2016/src$ pip install django-registration-redux==1.4      **
+
+    Collecting django-registration-redux==1.4
+    Downloading django-registration-redux-1.4.tar.gz (83kB)
+    100% |████████████████████████████████| 92kB 659kB/s 
+    ...
+    Successfully built django-registration-redux
+    Installing collected packages: django-registration-redux
+    Successfully installed django-registration-redux-1.4
+===========================
+Закончили с установкой Сайт-Пакетов
+
+
+
+4) Установка Структуры моего проекта (дает manage.py settings.py urls.py и другое)
+// Создаю и открываю Папку src где и будет весть проект
+    (myproject2016)ryndin@pc:~/work/myproject2016$ mkdir src/ && cd src/
+    (myproject2016)ryndin@pc:~/work/myproject2016/src$
+
+
+// через django-admin.py Создаю структуру моего проекта
+(myproject2016)ryndin@pc:~/work/myproject2016/src$
+					 ../bin/django-admin startproject myproject2016     ******
+
+
+
+Самая простая Установка Сайт-Пакетов (уже в Проекте создать папку requirements.txt
+и уже в ней Все Сайт-Пакеты и прописать)
+====================================
+// pip установден изначально в Виртуальной среде но его можно обновить
+	https://pypi.python.org/pypi/pip		pip 8.0.2
+
+// это вначале по любому
+pip install Django==1.8.8 + python manage.py startproject
+
+
+// Также на Сайте Питона можно проверить последние стабильные версии всех Сайт-Пакетов
+	https://pypi.python.org/pypi/Pillow			Pillow 3.1.1
+	https://pypi.python.org/pypi/python-magic	python-magic 0.4.10
+	и так далее ..
+
+
+// Затем все Сайт-Пакеты лучше Ставить а также Переустанавливать через requirements.txt 
+	pip install -U -r /path/to/requirements.txt	(. не забыть в пути) (-Апдет и -рекурсивно)
+
+// А в Самом requirements.txt:
+	Django==1.8.8
+	pip==8.0.2
+	setuptools==19.6.1
+	wheel==0.26.0
+	pillow==3.1.0
+	python-magic==0.4.10
+	MySQL-python==1.2.5
+	django-crispy-forms==1.5.2
+	python-dateutil==2.4.2
+	django-registration-redux==1.3
+
+
+// Например спрошу какие пакеты стоят в моем Презент проекте (через pip ставил):
+    (my_proj_2016)ryndin@pc:~/work/my_mew_project_2016/src$ pip list
+        Django (1.10)
+        django-crispy-forms (1.6.0)
+        django-registration-redux (1.4)
+        MySQL-python (1.2.5)
+        Pillow (3.3.0)
+        pip (8.1.2)
+        pkg-resources (0.0.0)
+        python-dateutil (2.5.3)
+        python-magic (0.4.12)
+        setuptools (25.2.0)
+        six (1.10.0)
+        wheel (0.29.0)
+
+
+
+// Посмотрим откуда Питон
+	(myproject2016)ryndin@pc:~/work/myproject2016/src/myproject2016$ which python
+
+		/home/ryndin/work/myproject2016/bin/python
+	(myproject2016)ryndin@pc:~/work/myproject2016/src/myproject2016$ python -V
+		Python 2.7.6
+// то есть Питон из локального пакета Виртуальной среды, но туда он попал исключительно
+// из Глобального пакета моего Компьютера, потому и 2.7.6 а не выше.
+
+ 
+
+// Попробую активировать manage.py - очень волнительно :)
+	(myproject2016)ryndin@pc:~/work/myproject2016/src/myproject2016$ ls
+		manage.py  myproject2016
+	(myproject2016)ryndin@pc:~/work/myproject2016/src/myproject2016$ python manage.py
+
+	// Доступны команды менеджера - Это очень хорошо 
+	Type 'manage.py help <subcommand>' for help on a specific subcommand.
+	Available subcommands:
+	[auth]
+    	changepassword
+    	createsuperusercreatesuperuser
+	[django]
+    	check
+    	compilemessages
+    	createcachetable
+    	dbshell
+    	diffsettings
+    	dumpdata
+    	flush
+    	inspectdb
+    	loaddata
+    	makemessages
+    	makemigrations
+    	migrate
+    	runfcgi
+    	shell
+    	showmigrations
+    	sql
+    	sqlall
+    	sqlclear
+    	sqlcustom
+    	sqldropindexes
+    	sqlflush
+    	sqlindexes
+    	sqlmigrate
+    	sqlsequencereset
+    	squashmigrations
+    	startapp
+    	startproject
+    	syncdb
+    	test
+    	testserver
+    	validate
+	[sessions]
+    	clearsessions
+	[staticfiles]
+    	collectstatic
+    	findstatic
+    runserver
+
+
+// Запущу Питон через Менеджера (локально через Виртуальную среду)
+(myproject2016)ryndin@pc:~/work/myproject2016/src/myproject2016$ python manage.py shell
+	Python 2.7.12 (default, Nov 19 2016, 06:48:10) 
+    [GCC 5.4.0 20160609] on linux2
+    Type "help", "copyright", "credits" or "license" for more information.
+    (InteractiveConsole)
+
+
+
+// Это То о чем чем говорил,  Скрипт virtualenv при установке Виртуальной среды бедет 
+	Глобальный Установленный на Компе Питон версии 2.7.6 . 
+	Пока не знаю как Глобально Установить более новую версию. 
+
+
+Если пользуюсь БД mySQL, которую глобально установили на строил под мой проект
+================================
+// Изменю Настройки settings.py по базе данных mySQL чтобы Менеджер увидел 
+	ранее настроенную Глобальную БД mySQL
+	# Database
+	# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+	DATABASES = {
+    		
+    	'default': {
+    	    'ENGINE': 'django.db.backends.mysql',
+    	    'HOST': 'localhost',
+    	    'USER': 'myproj2016_user',
+    	    'PASSWORD': 'myprojectuser',
+    	    'NAME': 'myproject2016_db',
+    	    }
+		}	
+
+
+Если не пользуюсь БД mySQL по клиент Джанго создась БД локально в проектк в виде файлика db.sqlite3
+=====================================
+=(myproj2016)ryndin@pc:~/work/myproj2016_python2712/code/myproj2016_python2712$ python manage.py migrate
+
+    Operations to perform:
+      Apply all migrations: admin, auth, contenttypes, sessions
+    Running migrations:
+      Rendering model states... DONE
+      Applying contenttypes.0001_initial... OK
+      Applying auth.0001_initial... OK
+      Applying admin.0001_initial... OK
+      Applying admin.0002_logentry_remove_auto_add... OK
+      Applying contenttypes.0002_remove_content_type_name... OK
+      Applying auth.0002_alter_permission_name_max_length... OK
+      Applying auth.0003_alter_user_email_max_length... OK
+      Applying auth.0004_alter_user_username_opts... OK
+      Applying auth.0005_alter_user_last_login_null... OK
+      Applying auth.0006_require_contenttypes_0002... OK
+      Applying auth.0007_alter_validators_add_error_messages... OK
+      Applying auth.0008_alter_user_username_max_length... OK
+      Applying sessions.0001_initial... OK
+
+=(myproj2016)ryndin@pc:~/work/myproj2016_python2712/code/myproj2016_python2712$ ls
+    db.sqlite3  manage.py  myproj2016_python2712
+
+
+
+
+// Если все правильно то Менеджер через Команду dbshell сможет заглянут на Сервер mySQL 
+	в разрезе БД моего Проекта
+// Приведенное ниже показывает что настройки БД приняты успешно.
+	 
+(myproject2016)ryndin@pc:~/work/myproject2016/src/myproject2016$ python manage.py dbshell
+	Reading table information for completion of table and column names
+	You can turn off this feature to get a quicker startup with -A
+	Welcome to the MySQL monitor.  Commands end with ; or \g.
+	Your MySQL connection id is 36
+	Server version: 5.5.47-0ubuntu0.14.04.1 (Ubuntu)
+	Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
+	Oracle is a registered trademark of Oracle Corporation and/or its
+	affiliates. Other names may be trademarks of their respective
+	owners.
+	Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+	mysql> show databases;
+	+--------------------+
+	| Database           |
+	+--------------------+
+	| information_schema |
+	| myproject2016_db   |
+	+--------------------+
+	2 rows in set (0.00 sec)
+
+
+// Тоже все в порядке
+(myproject2016)ryndin@pc:~/work/myproject2016/src/myproject2016$ python manage.py runserver
+
+Performing system checks...
+System check identified no issues (0 silenced).
+February 01, 2016 - 17:46:09
+Django version 1.8.8, using settings 'myproject2016.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+
+
+// И еще одно, если До этого момента в глобальной БД mySQL таблицы пустые то syncdb делать не нужно
+// для Доступа в Админку через http://localhost:8000/admin/ необходима насройка Юзера-администратора
+// Это делается через Команду ()$ python manage.py createsuperuser
+// При настройке надо будет задать Имя и Пароль(2 раза)
+// После Этого надо сделать команды ()$ python manage.py makemigrations 
+
+// и ()$ python manage.py migrate
+  чтобы настройки юзера-администратора сохранились в БД mySQL
+// затем эти настройки сохранятся даже если придетсе переустанавливать Проект при этом не меняя
+// БД mySQL и прикручиваясь к ней снова.
+
+Мне одному показалось что этов вариант проще чем buildout ?
+
+-------------------------------------
+Остается открытым вопрос как прикрутить к такой Виртуальной Среде версию питона выше 2.7.6 ??
+
+Вопрос решен и Закрыт ранее по тексту
+-------------------------------------
+
+
+6) Создаю Django Апликацию:
+	// Django Аплікація - це Python пакет, який містить окремий аспект чи автономний функціонал
+    	Django проекту. Згідно кращих практик кожна аплікація повинна містити окремий функціонал
+    	Django проекту. Наприклад, якщо у вас на сайті є блог, розділ новин, розділ подій, 
+       	розділ магазину, тоді кожен із даних розділів повинен бути реалізованим як 
+       	окрема Django аплікація.  
+	
+	// В дану аплікацію ми складатимемо наші моделі, в’юшки, шаблони та, зрештою, 
+		статичні ресурси. А під’єднуватимемо усі дані ресурси через налаштування самого проекту
+    	не забываем о подключенной виртуальной среде
+
+
+	// Создаем Джаного-апликацию (в рамках одного проекта их может быть несколько)
+	(myproject2016py)ryndin@pc:~/work/myproject2016py/src/myproject2016$
+									 python manage.py startapp myproject2016app
+
+
+	// Проверю содержимое папки Проекта и Апликации
+	(myproject2016py)ryndin@pc:~/work/myproject2016py/src/myproject2016$ ls
+			manage.py  myproject2016  myproject2016app
+	(myproject2016py)ryndin@pc:~/work/myproject2016py/src/myproject2016$ cd myproject2016app
+	(myproject2016py)ryndin@pc:~/work/myproject2016py/src/myproject2016/myproject2016app$ ls
+			admin.py  __init__.py  migrations  models.py  tests.py  views.py
+================================
+
+Вопросы по настройке БД mySQL, Миграций, Администрирования для меня сняты но их описание есть 
+в других моих Мануалах.
+
+
+
+
+Полезно - дополнение к  pip install (вариация установки пакетов)
+=================================
+requirements.txt				// в корневой папке проекта
+	Django==1.8.8
+	MySQL-python
+	Pillow
+	django-crispy-forms==1.4.0
+
+(virtenv)$ pip install -r requirements.txt
+==================================
+
+
+
+После создания Проекта Джанго
+=============================
+август 2016
+Поскольку я не привязывал глобальную базу mySQL в сеттингах созданного проекта
+А остовил привязку упрощенной базы sqlite
+Следовательно сделал следующие команды по регистрации Суперпользователя для управления джанго
+Присовил ему логин и пароль (нужны в админке Джанго)
+
+Назначение Суперпользователя и Пароля (Админка)
+----------------------------
+=(myproj2016)ryndin@pc:~/work/myproj2016_python2712/code/myproj2016_python2712$ python manage.py createsuperuser
+
+    Username (leave blank to use 'ryndin'):     логин // ryndin 
+    Email address: ryndin@ryndin.com
+    Password:                                   пароль // prostomag
+    Password (again): 
+    Superuser created successfully.
+
+Переназначение Пароля (Админка)
+---------------------
+=(myproj2016)ryndin@pc:~/work/myproj2016_python2712/code/myproj2016_python2712$ python manage.py changepassword
+
+    Changing password for user 'ryndin'
+    Password:                           новый пароль // prostomag76
+    Password (again): 
+    Password changed successfully for user 'ryndin'
+
+
+
+Создание Апликации 
+============================
+- Их может быть несколько на одном сайте - если отдельные сути
+----------------------------
+Django Аплікація - це Python пакет, який містить окремий аспект чи авто-
+номний функціонал Django проекту. Згідно кращих практик кожна апліка-
+ція повинна містити окремий функціонал Django проекту. Наприклад, якщо
+у вас на сайті є блог, розділ новин, розділ подій, розділ магазину, тоді кожен
+із даних розділів повинен бути реалізованим як окрема Django аплікація.
+----------------------------
+(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ ls -la
+итого 28
+drwxrwxr-x 4 ryndin ryndin 4096 Янв  9 00:04 .
+drwxrwxr-x 3 ryndin ryndin 4096 Янв  9 12:49 ..
+drwxrwxr-x 8 ryndin ryndin 4096 Янв  9 23:03 .git
+-rw-rw-r-- 1 ryndin ryndin   39 Янв  9 00:04 .gitignore
+-rwxrwxr-x 1 ryndin ryndin  810 Янв  8 22:47 manage.py
+-rw-rw-r-- 1 ryndin ryndin   15 Янв  8 23:56 README.md
+drwxrwxr-x 3 ryndin ryndin 4096 Янв  9 13:10 studentsdb27
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ python manage.py startapp students      **
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ ls
+manage.py  README.md  students  studentsdb27
+    -- то есть создаем апликацию рядом с папкой логики / по дереву ниже чем .git /
+    / по дереву ниже чем  manage.py
+
+=(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27/students$ ls
+admin.py  apps.py  __init__.py  migrations  models.py  tests.py  views.py
+
+admin.py -- в этом модуле регистириются Модели-Классы для работы с БД
+migrations -- в этой папке копятся файлы-миграции данных от Моделей в БД
+models.py -- в этом модуле Создаются Модели-Классы
+tests.py -- в этом модцле создается логика Тестов
+views.py -- в этом модуле (можно папка-пакет с таким же именем + модули) создается основная логика Представлений (код python)
+
+
+request
+====================
+Об’єкт request, що отримує в’юшка має масу методів, атрибутів та інформації
+всередині. Починаючи від стандартних заголовків згідно протоколу HTTP і
+закінчуючи змінними віртульного середовища та інформацією про Django:
+    request.path:       шлях запиту;
+    request.GET:        дані, що прийшли частиною GET параметрів;
+    request.POST:       дані, що прийшли в тілі поста форми із браузера;
+    request.method:     тип запиту, напр. GET або POST;
+    request.COOKIES:    славнозвісні Cookies, які ми з вами оглянули в попере-
+                        дніх секціях даної глави;
+    request.FILES:      файли, що прийшли до нас із форми, із полів типу file;
+    request.META:       заголовки запиту згідно HTTP протоколу;
+    request.user:       залогований Django користувач;
+    request.session:    сесія користувача;
+                        і ще багато інших...
+
+
+На всякий пожарный логики Создания ответов из пары Шаблон+Контекст на клиент:
+=========================
+from django.http import HttpResponse
+from django.template import RequestContext, loader
+
+def students_list(request):
+    template = loader.get_template(’demo.html’)
+    context = RequestContext(request, {})
+    return HttpResponse(template.render(context))
+
+А тепер порівняйте як можна зробити ту ж дію використовуючи єдину фун-
+кцію, так званий Django shortcut, під назвою render із пакета django.shortcuts:
+Готуємо відповідь із Django шаблона використовуючи функцію render
+
+from django.shortcuts import render
+
+def students_list(request):
+    return render(request, ’demo.html’, {}) 
+
+---------------------------
+
+
+
+Доустановка Модулей/Библиотек через requirements
+=============================
+
+Создаю файл в корневой папке Проекта (То что идет в Репозиторий)
+-----------------------
+    $ touch requirements.txt
+
+
+Проверяю какие уже Пакеты установлены и вношу эту Информацию в файл
+-------------------------
+    =(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ pip freeze
+    Django==1.10.5
+    django-registration-redux==1.4
+    MySQL-python==1.2.5
+    olefile==0.44
+    Pillow==4.0.0
+    pkg-resources==0.0.0
+    psycopg2==2.6.2
+    python-dateutil==2.6.0
+    python-magic==0.4.12
+    six==1.10.0
+
+    =(studentsdb17)ryndin@pc:~/workprojects/studentsdb27/studentsdb27/src/studentsdb27$ pip install -r requirements.txt
+
+    Requirement already satisfied: Django==1.10.5 in /home/ryndin/workprojects/studentsdb27/studentsdb27/lib/python2.7/site-packages (from -r requirements.txt (line 1))
+       // в моем случае пишет что все Указанные Пакеты уже Установлены
+
+
+Теперь наименования всх Новых пакетов надо писать в файл requirements.txt
+предварительно уточних последнюю стабильную версию в python.org pil
+и все время запускать обновление командой:
+    pip install -r requirements.txt
+===================================
+
+
+
+СТАТЬИ
+===================
+
+1)
+Python. Строим виртуальное окружение с помощью virtualenv
+--------------------------
+http://adw0rd.com/2012/6/19/python-virtualenv/
+Блог от Эдварда
+
+
+
+
+
+    
+
+

@@ -1,0 +1,74 @@
+<!-- Bootstrap4 Stile -->
+
+{% block content_page %}
+
+<form action="{% url 'student_add' %}" method="POST"
+      enctype="multipart/form-data" class="col-sm-7">
+  
+  <div class="form-group">
+    <label for="FirstNameField"><strong>Имя</strong></label>
+    <input type="text" class="form-control border border-secondary"
+           id="FirstNameField" placeholder="First Name" autocomplete="off">
+  </div>
+  
+  <div class="form-group">
+    <label for="LastNameField"><strong>Фамилия</strong></label>
+    <input type="text" class="form-control border border-secondary"
+           id="LastNameField" placeholder="Last Name">
+  </div>
+  
+  <div class="form-group">
+    <label for="MiddleNameField"><strong>Отчество</strong></label>
+    <input type="text" class="form-control border border-secondary"
+           id="MiddleNameField" placeholder="Middle Name">
+  </div>
+  
+  <div class="form-group">
+    <label for="berthDateField"><strong>Дата Рождения</strong></label>
+    <input type="text" class="form-control border border-secondary"
+           id="berthDateNameField" placeholder="YYYY-MM-DD">
+    <small class="form-text text-muted">
+      Введите Дату Рождения в Формате Год(4)-Месяц(2)-Дата(2)</small>
+  </div>
+  
+  <div class="form-group">
+    <label for="PhotoField"><strong>Фото Студента</strong></label>
+    <input type="file" class="form-control border border-secondary"
+           id="PhotoField">
+  </div>
+  
+  <div class="form-group">
+    <label for="TicketField"><strong>№ Билета</strong></label>
+    <input type="text" class="form-control border border-secondary"
+           id="TicketField" placeholder="# Ticket">
+  </div>
+  
+  <div class="form-group">
+    <label for="SelectGroup"><strong>Выберите Группу Студента</strong></label>
+    <select class="form-control border border-secondary"
+            id="SelectGroup">
+      <option>Group #1</option>
+      <option>Group #2</option>
+      <option>Group #3</option>
+      <option>Group #4</option>
+    </select>
+  </div>
+  
+  <div class="form-group">
+    <label for="Notes"><strong>Дополнительные Данные</strong></label>
+    <textarea class="form-control border border-secondary"
+              id="Notes" rows="3"></textarea>
+  </div>
+  
+  <button type="submit" class="btn btn-outline-primary"
+          name="button_add">Добавить Студента</button>
+  
+  <button type="submit" class="btn btn-outline-info"
+          name="button_cancel">Отменить</button>
+
+</form>
+
+{% endblock content_page %}
+
+
+

@@ -1,0 +1,39 @@
+
+17 лучших однострочников на Python
+---------------------------
+https://proglib.io/p/greatest-python-one-liners/
+
+
+
+Руководство: Используем AngularJS с Django
+---------------------------
+http://toly.github.io/blog/2014/03/08/tutorial-using-angularjs-with-django/
+
+
+
+Ускоряем разработку на AngularJS с помощью Yeoman, Grunt и Bower
+---------------------------
+http://toly.github.io/blog/2014/03/26/kickstart-your-angularjs-development-with-yeoman/
+
+
+
+Передовые паттерны проектирования в Python
+---------------------------
+http://toly.github.io/blog/2014/03/05/advanced-design-patterns-in-python/
+
+
+
+Очень крутой Блог про Питон и модные Апликации
+===========================
+redis / pandas / selery / telegram / dgango / channels / postgreslq шпоргалка / http request
+https://khashtamov.com/ru/
+
+
+Таблица - Все про Питон и про его апликации
+---------------------------
+https://ru.wikipedia.org/wiki/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD:Python
+
+
+
+
+

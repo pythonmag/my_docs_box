@@ -1,0 +1,78 @@
+
+Апликация Комментарии
+одна страница где комментарии идут каскадно
+==================
+
+
+
+рекомендации как делать Каскадные комментарии
+==================
+1)
+Ось цей приклад описує як зробити кількість вкладень "необмеженою" 
+https://www.reddit.com/r/django/comments/3ar3ga/what_is_the_best_way_to_do_nested_comments_in/
+
+2)
+В моделі присутнє одне поле з ForeignKey('self', ...) - тобто замикається заме на себе 
+
+3)
+В шаблоні рекурсивне вкладення. Як тут 
+https://stackoverflow.com/a/11644588/66866121
+Using with template tag, I could do tree/recursive list.
+
+Sample code:
+
+main template: assuming 'all_root_elems' is list of one or more root of tree
+
+<ul>
+{%for node in all_root_elems %} 
+    {%include "tree_view_template.html" %}
+{%endfor%}
+</ul>
+tree_view_template.html renders the nested ul, li and uses node template variable as below:
+
+<li> {{node.name}}
+    {%if node.has_childs %}
+        <ul>
+         {%for ch in node.all_childs %}
+              {%with node=ch template_name="tree_view_template.html" %}
+                   {%include template_name%}
+              {%endwith%}
+         {%endfor%}
+         </ul>
+    {%endif%}
+</li>
+
+
+
+4)
+Utilities for implementing a modified pre-order traversal tree in django.
+https://github.com/django-mptt/django-mptt/
+https://django-mptt.github.io/django-mptt/index.html
+
+
+
+5)
+Tree navigation in Django
+https://www.marcofucci.com/blog/tree-navigation-django/
+
+6)
+Как это работает: parent = models.ForeignKey('self', blank=True ... )?
+https://djbook.ru/forum/topic/4361/
+
+7)
+Model 'Child' is inherited from 'Parent', expecting to get only Child results
+https://code.djangoproject.com/ticket/16135
+...
+I'm accepting the bug for two reasons:
+Parent.objects.filter(child__isnull=False) and Parent.objects.exclude(child__isnull=True) should always give
+ the same results.
+Model inheritance and OneToOneField should give the same results
+...
+The test I used to bisect is:
+Parent.objects.create()
+self.assertEqual(Parent.objects.filter(child__isnull=False).count(), 0)
+self.assertEqual(Parent.objects.filter(child__isnull=True).count(), 1)
+
+
+
+

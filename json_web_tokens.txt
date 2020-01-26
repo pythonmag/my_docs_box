@@ -1,0 +1,33 @@
+
+JSON - Текстовый Формат Обмена данными между Клиетом и Серверов (между Серверами)
+
+JSON используется для AJAX      (асинхронные запрос/ответы между серверами и клиентами)
+
+JSON используется для фикстур Моделей в Джанго (мобильные слепки БД)
+
+
+Билиотека для python 
+2 метода по шифорованию и расшифровке данных по ключу в формате JSON
+====================
+An Introduction to JSON Web Tokens (JWT) in Python
+https://www.youtube.com/watch?v=tfKatqbZicA
+
+
+Тестировкщик шифровки кода + Документация
+===============
+https://jwt.io/
+
+
+Документация
+======================
+https://uk.wikipedia.org/wiki/JSON
+
+    var ajaxData = '{"name": "wiki", "fname": "pedia", "rates": [1, 4, 5, 6]}';
+    var ajaxObj = JSON.parse( ajaxData );           # парсинг массива
+    alert (ajaxObj.name + ajaxObj.rates[2]);        # вывод алерта
+    /* Виведе "wiki5"*/
+
+
+
+
+

@@ -1,0 +1,74 @@
+
+mixer                           ## Супер вещь для быстрого заполнения БД для теста
+----------------
+Инструмент для автоматического заполнения полей моделей (через инстансы)
+Причем логическим валидным образом
+---------------- 
+https://pypi.python.org/pypi/mixer/5.6.6
+
+
+mixer==5.6.6
+
+
+https://github.com/klen/mixer
+----------------
+Mixer -- Is a fixtures replacement. Supported Django ORM, SqlAlchemy ORM, Mongoengine ODM and custom python objects.
+
+
+
+$ pip install -r requirements.txt 
+Successfully installed Faker-0.7.3 mixer-5.6.6 python-dateutil-2.6.0
+
+
+
+>>> from mixer.backend.django import mixer
+
+
+>>> mod = mixer.blend('second_app.Student')         ## Создание Инстанса -- Заполняет БД
+>>> mod
+<Student: row#8 /name: David Glass /email: taylorapril@bowen.biz>
+
+
+>>> mods = mixer.cycle(10).blend('second_app.Student')  ## создание много Инстансев -- в БД
+>>> mods
+
+[<Student: row#10 /name: Kyle Hall /email: brianharvey@murphy-allen.com>, <Student: row#11 /name: Jerry Ward /email: xfaulkner@gmail.com>, <Student: row#12 /name: Nicholas Martinez /email: stephaniemoore@gmail.com>, <Student: row#13 /name: Misty Miller /email: jon94@gmail.com>, <Student: row#14 /name: Anthony Moore /email: carlsonlawrence@bryant.net>, <Student: row#15 /name: Rebecca Smith /email: rgarza@tran.com>, <Student: row#16 /name: William Peters /email: amycalhoun@hotmail.com>, <Student: row#17 /name: Caitlin Cruz /email: hudsonmarcus@hotmail.com>, <Student: row#18 /name: Christina Green /email: lharris@gmail.com>, <Student: row#19 /name: Michael Huang /email: cmorales@thompson.biz>]
+
+
+>>> dir(mixer)                      ## операторы Миксера
+['FAKE', 'MIX', 'RANDOM', 'SELECT', 'SKIP', '_Mixer__factory', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattr__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_params__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_guard', 'blend', 'ctx', 'cycle', 'faker', 'get_typemixer', 'guard', 'middleware', 'params', 'postprocess', 'register', 'reload', 'sequence', 'type_mixer_cls']
+
+
+
+реально сработал код по наполению Юзеров
+=====================
+>>> from mixer.backend.django import mixer
+>>> user_in_db = mixer.blend('auth.user')
+
+>>> user_in_db
+<User: phillip95>
+
+>>> user_in_db.set_password(user_in_db.__class__.objects.make_random_password())
+
+>>> user_in_db.password
+'pbkdf2_sha256$36000$gFrTIZ3HLEee$lRU5DMBonQqzOomrdmJHJAu/Hvtue7djWAjef1mysEo='
+
+>>> user_in_db.save()
+
+
+реально сработал код    по Кастомным моделям
+====================
+>>> from students.models import Student
+
+>>> from mixer.backend.django import mixer
+
+>>> mods = mixer.cycle(10).blend(Student)
+
+>>> from students.models import Group
+
+>>> mods = mixer.cycle(10).blend(Group)
+
+>>> mods = mixer.cycle(10).blend(Student)
+
+
+

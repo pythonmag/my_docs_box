@@ -1,0 +1,651 @@
+Глава 12
+Аутентификация
+======================
+
+Мои задачи если Пользователь Авторизирован:
+----------------
+1) Может добавлять Студентов / Группы
+2) Может менять язык
+3) Отображается меню профиля
+
+
+Сделать Страницу профиля Пользователя
+
+
+Теория
+================
+Для незагогирванного пользовтеля с защищенного сервера придет ответ через http
+401 (Access Denied, Доступ Заборонено).
+
+
+Base64
+-------
+https://uk.wikipedia.org/wiki/Base64
+У форматі електронної пошти MIME base64 — це спосіб, за яким довільну послідовність байт буде перетворено
+ на послідовність друкованих символів ASCII. Це визначає MIME як спосіб транспортного кодування вмісту для
+ застосування в електронній пошті. Застосовуються лише символи латинського алфавіту у верхньому та нижньому 
+регістрі — символи (A-Z, a-z), цифри (0-9), і символи «+» та «/». Символ «=» застосовується для відокремлення 
+вкладених файлів від звичайного тексту листа
+
+
+Как логинится
+-------------
+Форма повинна містити два поля: ідентифікатор користувача (це може бути
+телефон, емейл, нікнейм, і т.д.) та пароль. Сервер приймає ці два поля і
+звіряється із базою користувачів, щоб дозволити чи відмовити у вході в
+систему.
+
+
+HTTPS   (+ криптозащита через сокет SSL)
+---------------
+SSL (Secure Sockets Layer).
+https://ru.wikipedia.org/wiki/SSL
+
+
+
+Аутентификация за счет аккаунте в соц.сетях
+----------------------
+На даний момент одними із найпопулярніших протоколів, що дозволяють
+реалізувати децентралізовану автентифікацію є: OpenID, OpenAuth, OAuth.
+
+Більшість соціальних мереж використовують протокол OAuth 2-ї версії.
+
+
+
+Запоминающая Сессия
+------------------
+Коли користувач логується, сервер створює нову сесію і присвоює їй унікаль-
+ний ідентифікатор (часто його називають token англійською). Саме цей іден-
+тифікатор і “гуляє” між запитами, щоб обійти обмеження протоколу HTTP.
+
+По-замовчуванню Django зберігає користувацькі сесії в базі даних.
+
+Альтернативно, оскільки користувацькі сесії - це тимчасові об’єкти, їх можна
+зберігати в кешах, у файловій системі, в оперативній пам’яті.
+
+
+
+django.contrib.auth
+===================
+https://docs.djangoproject.com/en/1.11/ref/contrib/auth/
+
+'django.contrib.auth.middleware.AuthenticationMiddleware',
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+
+{{ request.user }}
+https://docs.djangoproject.com/en/1.11/ref/contrib/auth/#user-model
+
+
+Атрибуты:
+/ username /  first_name / last_name / email / password / groups / user+permissions / is_stuff / is_active
+ / is_superuser / last_login / date_joined /  
+
+
+/ is_authenticated / is_anonymous / username_validator / 
+
+В отношении Юзеров очень широкий функционал Методов / параметров / Настроек / !!
+
+
+django.contrib.sessions
+=======================
+https://docs.djangoproject.com/en/1.11/topics/http/sessions/
+
+'django.contrib.sessions.middleware.SessionMiddleware',
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+
+
+{{ request.session.values }}</br>
+{{ request.session.items }}
+
+выдает 
+dict_values(['uk'])
+dict_items([('_language', 'uk')])
+
+
+Поскльку и auth и user сохраняются в БД, то после изменений делаем Миграции
+======================
+$ python manage.py migrate
+
+
+Прослушка сигнала комманды миграции в БД дала следующие результаты:
+/ students / crispy_forms / django_extensions / sessions / contenttype / auth / admin /
+
+--------------------------
+INFO / 2017-07-28 12:35:52,094 / signals / 18776 / 140117075371776 / Migration done. Application: "students". Using database: default
+
+INFO / 2017-07-28 12:35:52,062 / signals / 18776 / 140117075371776 / Migration done. Application: "crispy_forms". Using database: default
+
+INFO / 2017-07-28 12:35:52,052 / signals / 18776 / 140117075371776 / Migration done. Application: "django_extensions". Using database: default
+
+INFO / 2017-07-28 12:35:52,044 / signals / 18776 / 140117075371776 / Migration done. Application: "sessions". Using database: default
+
+INFO / 2017-07-28 12:35:52,026 / signals / 18776 / 140117075371776 / Migration done. Application: "contenttypes". Using database: default
+
+INFO / 2017-07-28 12:35:52,000 / signals / 18776 / 140117075371776 / Migration done. Application: "auth". Using database: default
+
+INFO / 2017-07-28 12:35:51,909 / signals / 18776 / 140117075371776 / Migration done. Application: "admin". Using database: default
+
+
+
+django-registration
+===================
+https://pypi.python.org/pypi/django-registration
+
+https://django-registration.readthedocs.io/en/2.2/
+
+
+сторонняя апликация для регистрации пользователя на сайте (дает весь функционал)
+
+1)
+django-registration-redux==1.7
+
+
+2)
+INSTALLED_APPS = (
+    ...
+    'registration',
+    'students',
+)
+
+
+3)
+$ python manage.py migrate
+
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, registration, sessions, students
+Running migrations:
+  Applying registration.0001_initial... OK
+  Applying registration.0002_registrationprofile_activated... OK
+  Applying registration.0003_migrate_activatedstatus... OK
+  Applying registration.0004_supervisedregistrationprofile... OK
+
+
+4)
+REGISTRATION_OPEN = True
+
+
+5)
+LOGIN_URL = ['login', 'users:auth_login']           # второе значение - для этой апликации
+LOGOUT_URL = ['logout', 'users:auth_logout']
+LOGIN_REDIRECT_URL = 'students_page'
+
+
+6)
+view.py:
+-------
+from django.contrib.auth import views as auth_views
+from django.views.generic.base import RedirectView
+
+url(r'^login/$', auth_views.login, name='login'),
+url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
+
+# for redirect to home_page after login users
+url(r'^accounts/profile/$', RedirectView.as_view(pattern_name='home')),
+
+# login to site for register Users
+url(r'^register/complete/$', RedirectView.as_view(pattern_name='home'),
+    name='registration_complete'),
+
+url(r'^users/', include('registration.backends.simple.urls',
+    namespace='users')),
+
+
+Найважливішим є останній регулярний вираз, який підключає усі шаблони з аплікації
+django-registration. А підключаємо їх у секцію URL адрес “users” із одноіменною назвою
+простору імен (namespace). Зверніть увагу, що ми звертаємось до набору URL шаблонів
+через ‘registration.backends.simple.urls’. В підпакеті simple лежить простіший варіант 
+реєстрації користувачів - миттєвий. Після форми реєстрації людина одразу може входити
+на сайт.
+
+
+Модуль urls аплікації django-registration перевіряє наявність змінної в налаштуваннях
+проекту INCLUDE_AUTH_URLS. Якщо дана змінна не є у False (а ми її взагалі не чіпали),
+тоді аплікація підключає усі вбудовані в’юшки з модуля django.contrib.auth:
+login, logout і решту. Таким чином django-registration підключить їх для нас та ще й
+у область URL адрес: “/users/”.
+Тепер маємо працюючі адреси users/login, users/logout, users/register і тому подібні.
+Єдине, що варто тут пам’ятати: дані в’юшки підключаються із іншими іменами URL шаблонів.
+django-registration додає до них префікси “auth_”. Так, наприклад, URL шаблон під назвою
+login буде називатись auth_login.
+З допомогою попередніх двох URL шаблонів (auth_logout i registration_complete) ми перекрили
+дефолтний функціонал django.contrib.auth та django-registration аплікацій. Оригінальна
+в’юшка auth_logout редіректить користувача на інформаційну сторінку про вихід із сайту.
+Натомість ми просто редіректимо його на головну сторінку. Робимо це з допомогою передачі
+додаткового ключа ‘next_page’ в аргументі kwargs функції url. А значенням даного ключа є
+назва URL шаблона, на який переводити користувача після дії Logout (в нашому випадку це
+home).
+
+
+Подібним чином ми перекрили в’юшку registration_complete, щоб не показувати користувачу
+форму підтвердження реєстрації після заповнення форми. Натомість ми просто редіректимо
+його на головну сторінку після успішної реєстрації та логіну. Адже у спрощеному режимі
+реєстрації (режим simple в django-registration) користувачу не потрібно підтверджувати
+жодні дані і перевіряти поштові скриньки. А для редіректу ми скористались вбудованою
+Django в’юшкою RedirectView передавши їй аргументом pattern_name назву URL шаблона куди
+редіректити. У нашому випадку це, знову ж таки, домашня сторінка веб-сайту.
+
+
+7)
+шаблоны регистрации создаю в корневой папке проекта
+src/students2017$ mkdir -p templates/registration
+
+8)
+структура шаблонов / перекрывает дефолтные из апликации
+=(students)ryndin@pc:~/projects/students2017/src/students2017/students2017$ tree templates/
+templates/
+└── registration
+    ├── login.html
+    ├── logout.html
+    ├── registration_base.html
+    └── 
+
+9)
+подключение папки шаблонов
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'students2017', 'templates'),
+        ],
+
+
+10)
+создание шаблона для регистрации
+src/students2017$ touch templates/registration/login.html
+   
+а также шаблона registration_form.html
+
+
+
+11)
+структура login.html
+--------------------
+{% extends "students/base.html" %}
+{% load i18n %}
+
+{% extends "students/base.html" %}
+{% load i18n %}
+
+{% block meta_title %}{% trans 'Login' %}{% endblock %}
+
+
+{% block content %}
+
+<h1>Login page</h1>
+
+<div class="row">
+
+  <!--Block Simple Login-->
+  <div class="col-sm-6">
+      <h2 class="btn-info">Simple Login</h2>
+      <div class="well well-lg">
+
+        <!--Form Simple Login-->
+        <form class="form-horizontal" method="post" action="{% url 'users:auth_login' %}">
+        {% csrf_token %}
+        <input type='hidden' name='next' value="{% url 'students_page' %}"/>
+
+            <div class="form-group {% if form.errors %}has-error{% endif %}">
+                <label for="username">{% trans 'Your Username' %}</label>
+                <input type="text" class="form-control" id="username" value="" name="username"/>
+                <span class="help-block">{{ form.errors.username.as_text }}</span>
+            </div>
+
+            <div class="form-group {% if form.errors %}has-error{% endif %}">
+                <label for="password">{% trans 'Your Password' %}</label>
+                <input type="password" class="form-control" id="password" value="" name="password"/>
+                <span class="help-block">{{ form.errors.password.as_text }}</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                {% trans 'Login via Site (Simple Login)' %}</button>
+        </form>
+        <!--End Form Simple Login-->
+          <h4>If You are not Registered in this Site - >
+              <a href="{% url 'users:registration_register' %}">Registration</a></h4>
+      </div>
+  </div>
+  <!--End Block Simple Login  -->
+
+
+
+12)
+структура registration_form.html
+--------------------------------
+{% extends "students/base.html" %}
+{% load i18n %}
+
+{% block meta_title %}{% trans 'Registration' %}{% endblock %}
+
+
+{% block content %}
+
+<h1>Registration Page</h1>
+
+<div class="row">
+
+  <!--Block Simple Registration-->
+  <div class="col-sm-6">
+      <h2 class="btn-success">Simple Registration</h2>
+      <div class="well well-lg">
+
+        <!--Form Simple Registration-->
+        <form class="form-horizontal" method="post"
+              action="{% url 'users:registration_register' %}">
+        {% csrf_token %}
+        <input type='hidden' name='next' value="{% url 'students_page' %}"/>
+
+            <div class="form-group {% if form.errors %}has-error{% endif %}">
+                <label for="username">{% trans 'Your Username' %}</label>
+                <input type="text" class="form-control" id="username" value="" name="username"/>
+                <span class="help-block">{{ form.errors.username.as_text }}</span>
+            </div>
+
+            <div class="form-group {% if form.errors %}has-error{% endif %}">
+                <label for="email">{% trans 'Your Email' %}</label>
+                <input type="text" class="form-control" id="email" value="" name="email"/>
+                <span class="help-block">{{ form.errors.email.as_text }}</span>
+            </div>
+
+            <div class="form-group {% if form.errors %}has-error{% endif %}">
+                <label for="password">{% trans 'Your Password' %}</label>
+                <input type="password" class="form-control" id="password" value=""
+                       name="password1"/>
+                <span class="help-block">{{ form.errors.password1.as_text }}</span>
+            </div>
+
+            <div class="form-group {% if form.errors %}has-error{% endif %}">
+                <label for="password-confirm">{% trans 'Your Password' %}</label>
+                <input type="password" class="form-control" id="password-confirm" value=""
+                       name="password2"/>
+                <span class="help-block">{{ form.errors.password2.as_text }}</span>
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                {% trans 'Registration' %}</button>
+        </form>
+        <!--End Form Simple Registration-->
+        <hr>
+          <h4>{% 'Or Return to Login via Social Net' %} ->
+              <a href="{% url 'login' %}">{% trans 'Login via Social Net' %}</a></h4>
+
+      </div>
+  </div>
+  <!--End Block Simple Login  -->
+
+    </div>
+{% endblock %}
+
+
+
+13) А из базовой панели Выход на login или logout
+{% if user.is_authenticated %}
+    <li class="to-big"><a href="#">
+      <span class='glyphicon glyphicon-user'></span>
+      {% trans 'Your Username' %}: {{user.username}}</a></li>
+    <li class="to-big"><a href="{% url 'logout' %}">
+      <span class='glyphicon glyphicon-log-out'></span>
+      Logout</a></li>
+{% else %}
+    <li class="to-big"><a href="{% url 'login' %}"><span class='glyphicon glyphicon-log-in'></span>
+      Login</a></li>
+{% endif %}
+
+
+
+python-social-auth
+==================
+https://pypi.python.org/pypi/python-social-auth/
+https://python-social-auth-docs.readthedocs.io/en/latest/
+https://python-social-auth-docs.readthedocs.io/en/latest/backends/index.html#supported-backends
+    // поддерживаемые безенды (в т.ч. соцсети)
+
+
+Хороший мануал
+--------------
+https://simpleisbetterthancomplex.com/tutorial/2016/10/24/how-to-add-social-login-to-django.html
+
+
+Django. Авторизация через социальные сети с помощью django-social-auth
+--------------------------
+http://adw0rd.com/2013/2/27/django-social-auth/
+Блог от Эдварда
+
+
+сторонняя апликация по регистрации пользователей через Соц.Сети
+апликация может устанавливаеться по-компонентно, потому кажется так правильно 
+
+
+
+API Facebook
+------------
+блок Фейсбук для разработчиков (Апликации)
+https://developers.facebook.com
+https://axiacore.com/blog/how-retrieve-facebook-extra-info-from-django/
+https://simpleisbetterthancomplex.com/tutorial/2016/10/24/how-to-add-social-login-to-django.html
+http://python-social-auth.readthedocs.io/en/latest/backends/index.html#social-backends
+
+
+Настройка python-social-auth
+----------------------------
+
+1)
+social-auth-app-django==1.1.0
+social-auth-core==1.2.0
+
+
+2)
+INSTALLED_APPS = (
+    ...
+    'social_django',
+    ...
+)
+
+
+3)
+MIDDLEWARE_CLASSES = [
+    ...
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+]
+
+
+3)
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',         # Github
+    'social_core.backends.twitter.TwitterOAuth',        # Twitter
+    'social_core.backends.facebook.FacebookOAuth2',     # Facebook
+    'social_core.backends.steam.SteamOpenId',           # SteamID    
+
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+3.1) настройки для всех Соц Сетей
+https://python-social-auth.readthedocs.io/en/latest/backends/index.html
+
+
+4)
+периодически
+------------
+$ python manage.py migrate
+
+
+5) проверить наличие в Админке
+http://localhost:8000/admin/social_django/
+
+
+6)
+from django.conf.urls import url, include
+from django.contrib import admin
+from django.contrib.auth import views as auth_views
+from mysite.core import views as core_views
+
+urlpatterns = [
+    url(r'^$', core_views.home, name='home'),
+    
+    url(r'^login/$', auth_views.login, name='login'),
+    url(r'^logout/$', auth_views.logout, name='logout'),
+ 
+   url(r'^oauth/', include('social_django.urls', namespace='social')),    # Тут
+
+    url(r'^admin/', admin.site.urls),
+]
+
+# старое
+urlpatterns = patterns('',
+    ...
+    url('', include('social_django.urls', namespace='social'))
+    ...
+)
+
+
+7) подтянулось куча вьюшек
+$ python manage.py show_urls
+
+
+8)
+<a href="{% url "social:begin" "google-oauth2" %}">Google+</a>
+
+
+9) 
+LOGIN_URL = ['login', 'users:auth_login']           # первый параметр  - для этой апликации
+LOGOUT_URL = ['logout', 'users:auth_logout']
+LOGIN_REDIRECT_URL = 'students_page'
+
+
+10)
+TEMPLATES = [
+    {
+        ...
+        'OPTIONS': {
+            ...
+            'context_processors': [
+                ...
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
+                ...
+            ]
+        }
+    }
+]
+
+
+11) 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'
+
+
+12)
+в сеттингах
+-----------
+import os
+import secret_settings
+
+SECRET_KEY = secret_settings.SECRET_KEY
+
+# secret block of variables
+# via Facebook Ligin
+SOCIAL_AUTH_FACEBOOK_KEY = secret_settings.SOCIAL_AUTH_FACEBOOK_KEY         # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = secret_settings.SOCIAL_AUTH_FACEBOOK_SECRET   # App Secret
+
+# via Github Ligin
+SOCIAL_AUTH_GITHUB_KEY = secret_settings.SOCIAL_AUTH_GITHUB_KEY
+SOCIAL_AUTH_GITHUB_SECRET = secret_settings.SOCIAL_AUTH_GITHUB_SECRET
+
+# via Twitter Ligin
+SOCIAL_AUTH_TWITTER_KEY = secret_settings.SOCIAL_AUTH_TWITTER_KEY
+SOCIAL_AUTH_TWITTER_SECRET = secret_settings.SOCIAL_AUTH_TWITTER_SECRET
+
+# via Steam Login
+SOCIAL_AUTH_STEAM_API_KEY = secret_settings.SOCIAL_AUTH_STEAM_API_KEY
+SOCIAL_AUTH_STEAM_EXTRA_DATA = secret_settings.SOCIAL_AUTH_STEAM_EXTRA_DATA
+
+
+
+13) 
+.gitignore
+----------
+указать в исключения файл, который в корневой папке проекта
+-------------------
+databases.py
+secret_settings.py
+
+
+
+14)
+<div class="btn btn-group btn-group-justified">
+    
+    <!--Via Facebook-->
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default"><a href="{% url 'social:begin' 'facebook' %}">
+        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+        <h4>{% trans 'Login via Facebook' %}</h4></a></button>
+    </div>
+
+    <!--Via GitHub-->
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default"><a href="{% url 'social:begin' 'github' %}" >
+        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+        <h4>{% trans 'Login via GitHub' %}</h4></a></button>
+    </div>
+
+    <!--Via Twitter-->
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default"><a href="{% url 'social:begin' 'twitter' %}" >
+        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+        <h4>{% trans 'Login via Twitter' %}</h4></a></button>
+    </div>
+
+    <!--Via Steam-->
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default"><a href="{% url 'social:begin' 'steam' %}">
+        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+        <h4>{% trans 'Login via Steam' %}</h4></a></button>
+    </div>
+</div>
+
+
+
+15)
+панель login / logout
+{% if user.is_authenticated %}
+    <li class="to-big"><a href="#">
+      <span class='glyphicon glyphicon-user'></span>
+      Your Username: {{user.username}}</a></li>
+    <li class="to-big"><a href="{% url 'logout' %}">
+        <span class='glyphicon glyphicon-log-out'></span>
+      Logout</a></li>
+{% else %}
+    <li class="to-big"><a href="{% url 'login' %}">
+    <span class='glyphicon glyphicon-log-in'></span>
+      Login</a></li>
+{% endif %}
+
+
+
+django-allauth
+==================
+https://pypi.python.org/pypi/django-allauth
+http://django-allauth.readthedocs.io/en/latest/
+
+И Логування, и Регистрация, Логин на Соц.Сети
+Не разбирался.
+
+
+
+

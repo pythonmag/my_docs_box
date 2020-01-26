@@ -1,0 +1,159 @@
+django-debug-toolbar
+====================
+
+Документация
+============
+https://django-debug-toolbar.readthedocs.io/en/stable/installation.html
+
+https://pypi.python.org/pypi/django-debug-toolbar/1.7
+
+https://www.youtube.com/watch?v=XdArRS9kP6U
+
+http://stackoverflow.com/questions/10517765/django-debug-toolbar-not-showing-up
+
+
+1)
+django-debug-toolbar==1.7
+$ pip install -r requirements.txt 
+
+
+1.1) или 
+$ pip install django-debug-toolbar==1.7
+$ pip freeze > requirements.txt 
+
+
+
+2) 
+INSTALLED_APPS = [
+    # ...
+    'django.contrib.staticfiles',
+    # ...
+    'debug_toolbar',
+]
+
+
+3)
+from . import settings
+from django.conf.urls import url, include
+
+if settings.DEBUG is True:
+    import debug_toolbar
+
+urlpatterns = [
+    # View for Admin Panel
+    url(r'^admin/', include(admin.site.urls) ),
+    url(r'^__debug__/', include(debug_toolbar.urls)),
+    ...
+    ]
+
+4)
+после SessionMiddleware
+----------------------- 
+MIDDLEWARE = [
+    # 'studentsdb27.students.middleware.RequestTimeMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',              ####
+    ...
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
+5)
+$ python manage.py
+Available subcommands:
+[auth]
+    changepassword
+    createsuperuser
+[debug_toolbar]
+    debugsqlshell
+...
+
+
+6)
+Это значения по дефолту, можно продублировать и  себе напомнить в сеттигах
+------------------------
+DEBUG_TOOLBAR_PANELS = [
+    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar.panels.settings.SettingsPanel',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    'debug_toolbar.panels.logging.LoggingPanel',
+    'debug_toolbar.panels.redirects.RedirectsPanel',
+]
+
+
+7)
+в Сеттингах добавить
+---------------------
+def show_toolbar(request):
+    return True
+
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK" : show_toolbar,
+}
+
+
+8)
+ИЛИ вместо 7)
+-------------
+INTERNAL_IPS = ('127.0.0.1',)
+или
+INTERNAL_IPS = ['127.0.0.1']
+
+
+
+СИГНАЛЫ
+================
+https://docs.djangoproject.com/en/1.11/topics/signals/
+https://djbook.ru/rel1.9/topics/signals.html                ## через Тор
+
+Есть подробный документ туториал по Сигналам + книга Виталия (оба изучить)
+
+
+
+В разработке
+============
+1)
+django channels
+--------------
+https://channels.readthedocs.io/en/stable/
+https://khashtamov.com/ru/django-channels-websocket/
+https://github.com/andrewgodwin/channels-examples/tree/master/multichat
+https://codeguida.com/post/744
+
+
+
+
+Мои Ориентиры
+=============
+unuttest
+https://docs.python.org/2/library/unittest.html#unittest.TestCase.debug
+
+signals
+
+scrapy
+https://scrapy.org/
+
+BeautifulSoup
+https://www.crummy.com/software/BeautifulSoup/bs4/doc/
+
+channels
+
+ajax
+
+jquery
+
+
+
+
+
+
+
+

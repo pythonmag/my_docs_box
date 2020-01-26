@@ -1,0 +1,14 @@
+https://fonts.google.com/
+=========================
+
+
+html
+-----------
+<link href="https://fonts.googleapis.com/css?family=Cormorant+Unicase|Poppins|Source+Sans+Pro" rel="stylesheet">
+
+
+css
+------------
+font-family: 'Poppins', sans-serif;
+font-family: 'Source Sans Pro', sans-serif;
+font-family: 'Cormorant Unicase', serif;

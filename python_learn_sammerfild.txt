@@ -1,0 +1,2419 @@
+Самерфилд - Программирование на Питон
+=====================================
+
+#!/usr/bin/env python3
+
+или 
+
+#!/usr/bin/env python2
+
+пишется в фале .py до начала кода и выполняется программной оболочкой, то есть 
+запускает определенную верчию интерпритатора
+
+
+type()
+
+id()
+
+
+is
+is not
+
+in
+not in
+
+2 < x < 10
+
+
+and 
+or
+not
+
+
+
+if (True)
+
+while (True)
+
+for (in последовательность)
+
+
+iter_number = 0
+while iter_number < 10:
+    print('This is iteration:', iter_number)
+    iter_number +=1
+
+    if iter_number == 7:    ## полный выход из цикла
+        break
+
+    continue                ## переход в начало цикла
+
+
+
+for item in range(10):
+    print(item*2)
+    
+    if item == 7:           ## полный выход из цикла
+        break
+
+    continue                ## переход в начало цикла
+
+
+
+
+пример программы расчет среднего числа
+-----------------------
+print('Enter your number, if not int - error, if empty data - quit')
+
+count = 0
+total = 0
+
+while True: 
+    line = input('enter your data:')
+    if line:
+        try:
+            number = int(line)
+        except ValueError as err:
+            print(err)
+            continue
+        total += number
+        count += 1
+    else:
+        break
+
+if count:
+    print('count = ', count, 'total = ', total, 'mean = ', total/count)
+
+
+Любая Функция по умолчнию (без ретурн) возвращает None
+
+
+Функция это тоже Объект Ссылка на который легко передается в Коллекциях
+
+
+
+2
+Типы ДАнных
+======================
+ключевые слова питон:
+
+and as assert break class continue def dell elif else except False finally for from
+global if import in is lambda None nonlocal not or pass raise return True try while
+with yield
+
+print(0b1111111)        2x
+print(0o1111111)        8x
+print(0x1111111)        16x
+
+127
+299593
+17895697
+
+
+bin(22)     x2
+hex(22)     x16
+oct(22)     x8
+
+
+
+3 способа округления чисел
+---------------------------
+from decimal import Decimal
+
+my_number = 3.147895860002          // исходное знаяение
+
+num1 = int(my_number)               // до целого числа
+num2 = float(my_number)             // до плавающей точки
+num3 = Decimal(my_number)           // максимально точное значение (50 знаков)
+
+print(num1, num2, num3)
+
+>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+3   3.147895860002   3.147895860001999945865236441022716462612152099609375
+
+
+import math
+math.floor(3.57)        // округляет вниз до 3
+(math.ceil(3.57)        // округляет вверх до 4
+
+
+my_num = 3.58
+float.is_integer(my_num)        // True or False
+
+
+my_num = 3.5
+float.as_integer_ratio(my_num)      // Преобразование в Десятичную дробь
+>>>
+(7, 2)
+
+
+комплексные числа
+(очень забавно)
+-----------------
+my_num = +45.12+45.87j              // представление комплексного числа
+print(my_num.real, my_num.imag)
+>>>
+45.12   45.87
+
+my_num = +45.12+45.87j              // сложение двух комплексных чисел
+new_num =  my_num + -12.10+12.10j 
+print(new_num)
+>>>
+(33.019999999999996+57.97j)
+
+
+
+числа в виде десятичной дроби - максимально точные но медленные
+-----------------------------
+import decimal
+
+my_num = decimal.Decimal(45/784)
+print(my_num)
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+0.057397959183673470662245819085001130588352680206298828125
+
+
+my_num = decimal.Decimal(math.pi/math.e)
+print(my_num)
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+1.155727349790921731909065783838741481304168701171875
+
+
+
+СТРОКИ
+================
+str()
+
+''
+
+r''             // сырая строка (спец значение символов анулируется - экранирование не нужно)
+
+\a              // сигнал
+\b              // бекспейс
+\f              // перевод формата
+\n              // перевод строки
+\r              // возврат каретки
+\t              // табуляция
+\v              // вертикальная табуляция
+
+
+Лучний способ печати длинных строк и многострочных
+--------------------------------------------------
+my_string = ("my first string, \n" 
+            "my second string")
+
+print(my_string)
+>>>>
+(base) ryndin@ubu:~/my_docs$ python my_test.py
+my first string, 
+my second string
+
+
+срезы в строках
+---------------
+
+my_string = ("my first string, \n" 
+            "my second string")
+
+print(my_string)
+print(len(my_string))
+print(my_string.index('\n'))
+
+new_string = my_string[0:(34-17)] + my_string[(17+1):]
+
+print(new_string)
+
+>>>>
+my first string, 
+my second string
+34
+17
+my first string, my second string
+
+
+метод join
+--------------
+"сущности последовательности слепляются через Литерал"
+
+first_string = "first string, "
+second_string = 'second string, '
+therd_string = "therd string. "
+
+new_string = ' '.join([first_string, second_string, therd_string])   // база пустая строка
+strange_string = 'X '.join([first_string, second_string, therd_string])
+print(new_string)
+print(strange_string)
+
+>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+first string,  second string,  therd string. 
+first string, X second string, X therd string. 
+
+
+методы строк
+------------------
+
+new_string.capitalize()        // Первый символ заглавный остальные прописные
+
+some_string.endswith('.')      // если в конце Строки . то Тру
+
+some_string.split(',')         // ['First string', 'x second string', 'x therd string.']
+
+some_string.center(50)         // размещает по центру в пределах 50 символов добавлят пробелы с краев
+
+string.ljust(50)                // вырвнивает строку влево с обрезание до 50 символов
+
+string.rjust(30)                // выравнивает строку вплаво с обрезанием до 30 символов
+
+
+some_string.replace('x', ' zzzz')       // замена блоков наборов символов
+>>>
+First string, zzzz second string, zzzz therd string.
+
+
+some_string.strip()         // метод удаления пробелов в начале и в конце строки
+some_string.lstrip()        // метод удаления пробелов в начале строки
+some_string.rstrip()        // метод удаления пробелов в конце строки
+
+some_string.title()         // все слова в строке Заглавными буквами 
+
+форматирование строк
+--------------------
+
+print('my {} test {} string {}'.format('ONE', 'TWO', 'THREE'))
+>>>>
+my ONE test TWO string THREE
+
+
+print('my {2} test {0} string {1}'.format('ONE', 'TWO', 'THREE'))
+>>>>
+my THREE test ONE string TWO
+
+
+обращение к элементу по индексу
+-------------------------------
+li1 = ['one', 'two', 'three', 'fore']
+
+my_string = 'my string {0[1]} and they compleate {0[3]}'.format(li1)
+print(my_string)
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+my string two and they compleate fore
+
+
+обращение к элементу по ключу
+-----------------------------
+di1 = {'name': 'yurii', 'age': 40, 'job': 'proger'}
+
+my_string = 'my name is {0[name]} and i am {0[job]}. '.format(di1)
+print(my_string)
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+my name is yurii and i am proger. 
+
+
+обрашение к модулю по имени аргумента
+-------------------------------------
+import math
+
+my_string = 'number PI is {0.pi} and number E is {0.e} '.format(math)
+print(my_string)
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+number PI is 3.141592653589793 and number E is 2.718281828459045
+
+
+
+пример извлечения из Строки Подстроки под Тегом
+------------------
+html_string = "this is string where exist <i>some italic text</i> and that is all"
+
+def extract_from_tag(tag, line):
+    opener = "<"+tag+">"
+    closer = "</"+tag+">"
+    
+    try:
+        i = line.index(opener)
+        start = i + len(opener)
+        j = line.index(closer, start)
+        return line[start:j]
+    
+    except ValueError:
+        return None
+
+resoult = extract_from_tag('i', html_string)
+print(resoult)
+
+>>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+some italic text
+
+
+!s  !r  !a  - форматы вывода значений
+================
+Вывод значения в виде Сроки, Репрезентативно (как для Челоека) и в формате ASCII
+
+from decimal import Decimal
+
+my_number = Decimal(48/23)
+print(my_number)
+
+my_string = 'Number like string: {0!s}\n, like repres: {0!r}\n, like ASII: {0!a}\n'.format(my_number)
+
+print(my_string)
+
+>>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+2.086956521739130376857929149991832673549652099609375
+
+Number like string: 2.086956521739130376857929149991832673549652099609375           // !s
+, like repres: Decimal('2.086956521739130376857929149991832673549652099609375')     // !r
+, like ASII: Decimal('2.086956521739130376857929149991832673549652099609375')        // !a
+
+
+
+Спецификаторы Форматирования Строк
+(подробно стр.105 учебника Самерфилда)
+----------------------------------
+from decimal import Decimal
+
+my_item = [['yurii', 45, ], 25.87587, {'name': 'lena', 'age': 40}, ('class', Decimal(78/451))]
+
+my_string = 'printing is {0[3][1]:.10}'.format(my_item)     // ограничение длинны 10 символов
+print(my_string)
+
+>>>>>
+printing is 0.1729490022
+
+
+
+пример форматирования числа с длинной, заполнителями и количесвом знаком после ,
+---------------------------
+import math
+my_number = math.pi
+
+my_string = 'my number in format {0:*<20.8f}'.format(my_number)
+print(my_string)
+
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+my number in format 3.14159265**********
+
+
+Битность хранения данных в памяти компьютера
+========================
+import sys
+print(sys.maxunicode)
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+1114111  
+                   
+// на моем компе - в формате UCS-4 (32-битовые целые числа), способном представить
+все коды символов, которых к моменту написания этих строк было 1 114 111.
+
+
+пример кодировки азиатских символов (в байтном формате)
+и обратное их декодирование встроенными методами языка
+-----------------
+string1 = '注音符号'.encode('utf-8')
+print(string1)
+
+string2 = string1.decode('utf-8')
+print(string2)
+
+>>>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+b'\xe6\xb3\xa8\xe9\x9f\xb3\xe7\xac\xa6\xe5\x8f\xb7'
+注音符号
+
+
+Для файлов с расширением .ру используется кодировка UTF-8,  поэтому Python всегда 
+знает, какая кодировка используется для представления строковых литералов.
+
+
+
+CSV (Comma Separated Value - данные разделенные запятыми)
+------------------------
+
+
+
+КОЛЛЕКЦИИ
+Последовательнсти, Множества, Отображения
+Кортежи, Списки, Словари, Множества
+==========================================
+
+Последовательности работают с - in, len(), [:], iteration
+
+последовательности - bytes, list, string, tuple
+
+
+кортеж ведет себя как множество, странно
+-----------------
+tup1 = 'green', 'yellow', 'broun', 'gray'
+print(type(tup1))
+
+tup2 = tup1[:] + ('red',) + tup1[-1:-3]         // конкатинация кортежей 
+print(tup2)
+
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+<class 'tuple'>
+('green', 'yellow', 'broun', 'gray', 'red')
+
+
+именнованные кортежи (новое и нечто очень интересное!!!)
+первое прикосновение
+фактически являются классами с возможностью создавать собственные методы
+--------------------
+from collections import namedtuple
+
+print(namedtuple)
+
+Person = namedtuple('PersonData', 'name age job city')
+
+print(Person)
+
+person1 = Person('yurii', 41, 'proger', 'ZAP')
+
+print(person1)
+print(type(person1))
+
+person2 = Person('lena', 39, 'manager', 'DNIPRO')
+
+print(person2)
+
+persons = []
+
+persons.append(person1)
+persons.append(person2)
+
+print(persons)
+print(type(persons))
+print(dir(persons))
+for item in persons:
+    print(item)
+    print(dir(item))
+
+>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+<function namedtuple at 0x7fdd79e5ec80>
+
+<class '__main__.PersonData'>
+PersonData(name='yurii', age=41, job='proger', city='ZAP')
+
+<class '__main__.PersonData'>
+PersonData(name='lena', age=39, job='manager', city='DNIPRO')
+
+[PersonData(name='yurii', age=41, job='proger', city='ZAP'), PersonData(name='lena', age=39, job='manager', city='DNIPRO')]
+
+<class 'list'>
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+PersonData(name='yurii', age=41, job='proger', city='ZAP')
+
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__module__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmul__', '__setattr__', '__sizeof__', '__slots__', '__str__', '__subclasshook__', '_asdict', '_fields', '_fields_defaults', '_make', '_replace', 'age', 'city', 'count', 'index', 'job', 'name']
+PersonData(name='lena', age=39, job='manager', city='DNIPRO')
+
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__module__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmul__', '__setattr__', '__sizeof__', '__slots__', '__str__', '__subclasshook__', '_asdict', '_fields', '_fields_defaults', '_make', '_replace', 'age', 'city', 'count', 'index', 'job', 'name']
+
+
+
+СПИСКИ
+================
+
+LI.append(x)                // добавление элемента в конец Списка
+LI.count(x)                 // Индекс положения Элемента в Списке
+LI.extend(x) == LI += x     // Добавление Элемента в конец Списка
+LI.index(x,[start,stop])    // Нахождение Индекса Элемента в Списке [в диапозоне]
+LI.insert(I, x) == LI[I:I]  // Добавление Элемента в Список по Индексу
+LI.pop()                    // Удаление последнего Элемента из Списка и его Возвращает
+LI.pop(I)                   // Удаление Элемената из Списка по индексу и его Возвращает
+LI.remove(x)                // Удаляет первый найденный Элемент или Возвращает Исключение
+LI.reverse()                // Переставляет в Памяти элементы Списка в обратном порядке
+LI.sort()
+LI.sorted()
+
+
+
+распаковка списков
+------------------
+
+LI = [1, 2, 3, ('name', 'yurii', 45), {4,5,6,7}, True]
+x, *other, y = LI
+print(x, other, y)
+
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+1 [2, 3, ('name', 'yurii', 45), {4, 5, 6, 7}] True
+
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+1 [2, 3, ('name', 'yurii', 45), {4, 5, 6, 7}] True
+
+
+Модернизация Списков через Приращение
+--------------------
+1. Изменение каждого элемента Списка
+LI1 = [1,2,3,4,5,6,7]
+
+LI2 = LI1[:]
+print(LI2)
+
+for i in range(len(LI2)):
+    LI2[i] *= 3
+
+print(LI2)
+
+>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+[1, 2, 3, 4, 5, 6, 7]
+[3, 6, 9, 12, 15, 18, 21]
+
+
+2. Склеивание Списков
+LI = ['yurii', 'lena', 'pasha']
+
+LI += ['leonid', 'slava']
+
+print(LI)
+
+>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+['yurii', 'lena', 'pasha', 'leonid', 'slava']
+
+
+3. Изменение Нечетных Элементов Списков
+LI = [x for x in range(20)]
+print(LI)
+
+for i in LI:
+    if LI.index(i) % 2 == 0:
+        LI[i] = 0
+
+print(LI)
+
+>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+[0, 1, 0, 3, 0, 5, 0, 7, 0, 9, 0, 11, 0, 13, 0, 15, 0, 17, 0, 19]
+
+
+
+МНОЖЕСТВА
+====================
+
+
+Метод Чистки Списков от Повторов
+------------
+string1 = 'my name is yurii'
+
+li1 = list(set(string1))
+
+print(li1)
+
+>>>>
+['y', 'm', 'e', 's', 'n', 'a', ' ', 'u', 'i', 'r']      // только неповторяющ символы
+
+
+Логические Операторы
+--------------------
+-  ^ & |
+
+Все методы Множеств - на стр.147 Саммерфилда
+
+1.
+string1 = 'my name is yurii'
+string2 = 'your name are lena'
+
+se1 = set(string1) | set(string2)           // Логическое Объединение (собрал все)
+print(se1)
+
+>>>>
+{'u', 'r', 'l', 's', ' ', 'a', 'n', 'o', 'e', 'm', 'i', 'y'}
+
+
+2.
+string1 = 'my name is yurii'
+string2 = 'your name are lena'
+
+se1 = set(string1) & set(string2)           // Логическое Пересечение (Есть и там и там)
+print(se1)
+
+>>>>
+{'r', 'e', 'm', 'n', ' ', 'y', 'a', 'u'}
+
+
+3.
+string1 = 'my name is yurii'
+string2 = 'your name are lena'
+
+se1 = set(string1) - set(string2)           // Логическая Разность (Есть в 1м но не во 2м)
+print(se1)
+
+>>>>
+{'i', 's'}
+
+
+4.
+string1 = 'my name is yurii'
+string2 = 'your name are lena'
+
+se1 = set(string1) ^ set(string2)           // Исключающее ИЛИ (есть или в 1м или во 2м)
+print(se1)
+
+>>>>
+{'i', 's', 'o', 'l'}
+
+
+Фиксированное Множество
+frozenset
+=======================
+
+Отличается от set() тем что является неизменяемым, но сравнимым, созданным единежды
+В нем Нет следующих методов, которые есть у set() что логично
+
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+{'add', 'difference_update', '__ior__', '__iand__', '__ixor__', '__isub__', 'clear', 'intersection_update', 'update', 'remove', 'discard', 'symmetric_difference_update', 'pop'}
+
+
+
+СЛОВАРИ (коллекции)
+====================
+
+my_dict = {'name': 'yurii', 'age': 34, 'job': 'proger'}
+my_dict1 = [('city', "ZAP"), ('sport', True)]
+my_dict3 = {'citizen': "Ukrainian"}
+
+my_dict.update(my_dict1)
+print(my_dict)
+
+my_dict.update(my_dict3)
+print(my_dict)
+
+my_dict4 = my_dict.copy()
+print(my_dict4)
+
+print(my_dict == my_dict4)
+print(my_dict is my_dict4)
+print(id(my_dict), id(my_dict4))
+
+>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+{'name': 'yurii', 'age': 34, 'job': 'proger', 'city': 'ZAP', 'sport': True}
+{'name': 'yurii', 'age': 34, 'job': 'proger', 'city': 'ZAP', 'sport': True, 'citizen': 'Ukrainian'}
+{'name': 'yurii', 'age': 34, 'job': 'proger', 'city': 'ZAP', 'sport': True, 'citizen': 'Ukrainian'}
+True
+False
+140168354703184 140168354704408
+
+
+my_dict.clear()                 // в итоге - пустой словарь
+my_dict.copy()                  // поверхностная копия словаря (разные id)
+my_dict.fromkeys([keys,])
+my_dict.get('key')              // возвращает значение пары по ключу
+my_dict.items()                 // выводит пары значений в виде списка последовательностей (в tuple)
+my_dict.keys()                  // выводит список с наименованиями имен ключей (подлежит в tuple)
+my_dict.pop(k)                  // удаляет пару по ключу из словаря, и возвращяет значение ключа
+my_dict.popitem()              // Удаляет произвольную пару. и возвращяет пару удаленную в виде последовательности
+my_dict.setdefault(k,v)         // если пара есть по ни меняет, если новый ключ - добавляет пару
+my_dict.values()                // выдает список значений (подлежит в tuple)
+
+
+концепция итерируемых объектов
+------------------------------
+items = my_dict4.items()        // создан итерируемый объект
+print(items)
+
+iterr = items.__iter__()        // итератор
+print(iterr)
+
+print(iterr.__next__())         // имеет метод next - возвращает объект
+print(iterr.__next__())
+print(iterr.__next__())
+
+>>>>>
+{'name': 'yurii', 'age': 34, 'job': 'proger', 'city': 'ZAP', 'sport': True, 'citizen': 'Ukrainian', 'names': 'We Are'}
+
+<dict_itemiterator object at 0x7f073f163188>        // итератор
+
+('name', 'yurii')               // имеет метод next - возвращает объект
+('age', 34)
+('job', 'proger')
+
+
+Генератор Словаря
+-----------------
+
+dict1 = {'name': "yurii", 'job': 'proger' }
+
+dict_revers = {k:v for k, v in dict1.items()}      // Концепция генератора Словаря
+print(dict_revers)
+
+>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+{'name': 'yurii', 'job': 'proger'}
+
+
+
+ЦИКЛЫ и Копирование Коллекций
+=============================
+
+Итерация как она есть
+---------------------
+
+__iter__()   __getitem__()   __next__()
+
+enumerate()   reversed()   sorted()
+
+1.
+dict1 = {'name': "yurii", 'job': 'proger' }
+print(dict1.__getitem__('name'))
+print(dict1.__iter__())
+
+dict_iter = dict1.__iter__()            // создан объект итератора - от него Некст
+print(dict_iter.__next__())             // name
+print(dict_iter.__next__())             // job
+print(dict_iter.__next__())             // Тут будет СтопИтерейшн
+
+>>>>
+'yurii'
+<dict_keyiterator object at 0x7f41fb444188>
+
+name
+job
+
+Traceback (most recent call last):
+  File "/home/ryndin/my_docs/my_test.py", line 13, in <module>
+    print(dict_iter.__next__())
+StopIteration
+
+
+2.
+string1 = 'my string'                       // нумеруются все символы
+dict1 = dict(name='yurii', job='proger')    // нумеруются ключи
+
+tup1 = tuple(enumerate(string1))
+tup2 = tuple(enumerate(dict1))
+print(tup1)
+print(tup2)
+
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+((0, 'm'), (1, 'y'), (2, ' '), (3, 's'), (4, 't'), (5, 'r'), (6, 'i'), (7, 'n'), (8, 'g'))
+((0, 'name'), (1, 'job'))
+
+
+3.
+string1 = 'my string'
+string2 = reversed(string1)                 // Реверсивный но Итерируемый объект
+print(list(string2))
+
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+['g', 'n', 'i', 'r', 't', 's', ' ', 'y', 'm']
+
+
+4.
+string1 = 'my string'
+string2 = sorted(reversed(string1))     // Реверсивный Сортированный Итерируемый Объект
+print(list(string2))
+
+>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+[' ', 'g', 'i', 'm', 'n', 'r', 's', 't', 'y']
+
+
+
+------------------------
+import os
+os.sep                  // наклонный разделитель / в стиле UNIX
+
+path.replace('\', os.sep)
+чтобы заменить наклонные линии в стиле WIN на LINUX
+
+
+
+zip()
+создает матрицы из набора последовательностей
+------------------------
+
+1.
+print(tuple(zip('ryndin', 'yurii', 'nataly')))
+
+>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+(('r', 'y', 'n'), ('y', 'u', 'a'), ('n', 'r', 't'), ('d', 'i', 'a'), ('i', 'i', 'l'))
+
+
+2.
+names = ['yurii', 'lena', 'maria']
+age = [40,30,20]
+
+dict1 = dict(zip(names, age))
+print(dict1)
+
+>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+{'yurii': 40, 'lena': 30, 'maria': 20}
+
+
+
+sorted()
+----------------------
+возвращает сортированную последовательность
+ключ функции определяет алгоритм сортировки (есть по умолчанию)
+
+
+my_dict = {'a': 3, 'c': 1, 'b': 2}
+
+# Упорядочим элементы словаря по ключам.
+sorted(my_dict.items(), key=lambda item: item[0])  
+# [('a', 3), ('b', 2), ('c', 1)]
+
+# Упорядочим элементы словаря по значениям.
+sorted(my_dict.items(), key=lambda item: item[1])  
+# [('c', 1), ('b', 2), ('a', 3)]
+
+my_dict = {'a': 3, 'c': 1, 'b': 2, '0': 3}
+
+# Упорядочим по значениям и ключам.
+sorted(my_dict.items(), key=lambda item: (item[1], item[0]))
+# [('c', 1), ('b', 2), ('0', 3), ('a', 3)]
+
+# А теперь по значениям по убыванию и ключам.
+sorted(my_dict.items(), key=lambda item: (-item[1], item[0]))
+# [('0', 3), ('a', 3), ('b', 2), ('c', 1)]
+
+
+
+ФУНКЦИИ
+====================
+
+if  elif  else finnaly
+
+
+Циклы
+------------
+
+while True
+
+for in
+
+try   except
+
+
+
+Иерархия типов Исключений:
+===========================
+
+# The class hierarchy for built-in exceptions is:
+
+BaseException
+
+ +-- SystemExit         # исключение выхода их интерпретатора python
+ +-- KeyboardInterrupt
+ +-- GeneratorExit
+
+ # Ветка исключений без выхода из программы
+     (Exception можно использовать без влезания вглубь)
+-----------------------------
+
+ +-- Exception          
+      +-- StopIteration
+
+      +-- StandardError
+
+      |    +-- BufferError
+
+      |    +-- ArithmeticError
+      |    |    +-- FloatingPointError
+      |    |    +-- OverflowError
+      |    |    +-- ZeroDivisionError
+      |    +-- AssertionError
+
+      |    +-- AttributeError
+
+      |    +-- EnvironmentError
+      |    |    +-- IOError
+      |    |    +-- OSError
+      |    |         +-- WindowsError (Windows)
+      |    |         +-- VMSError (VMS)
+
+      |    +-- EOFError
+
+      |    +-- ImportError
+
+      |    +-- LookupError
+      |    |    +-- IndexError
+      |    |    +-- KeyError
+
+      |    +-- MemoryError
+
+      |    +-- NameError
+      |    |    +-- UnboundLocalError
+
+      |    +-- ReferenceError
+
+      |    +-- RuntimeError
+      |    |    +-- NotImplementedError
+
+      |    +-- SyntaxError
+      |    |    +-- IndentationError
+      |    |         +-- TabError
+
+      |    +-- SystemError
+
+      |    +-- TypeError
+
+      |    +-- ValueError
+      |         +-- UnicodeError
+      |              +-- UnicodeDecodeError
+      |              +-- UnicodeEncodeError
+      |              +-- UnicodeTranslateError
+
+      +-- Warning
+           +-- DeprecationWarning
+           +-- PendingDeprecationWarning
+           +-- RuntimeWarning
+           +-- SyntaxWarning
+           +-- UserWarning
+           +-- FutureWarning
+
+	   +-- ImportWarning
+
+	   +-- UnicodeWarning
+
+	   +-- BytesWarning
+
+---------------------------
+
+
+ФУНКЦИИ
+===================
+
+- глобальные
+- локальные (вложенные в другие функции)
+- лямбда - выражения, создаются сразу в месте использования
+- функции - методы
+
+
+>>>help()
+Q
+
+
+help>>> list                // выдает описание встроенной функции (сущности)
+
+
+В конце каждой Функции:
+return Obj  (результат работы функции)
+    или
+return None (даже если не написать return)
+
+
+понятный мне пример
+------------------
+
+def string_do_shotter(text, length = 10, indicator = '***'):
+    if len(text) > length:
+        text = text[:(length-len(indicator))] + indicator
+    return text                                             // функция дает только return obj
+
+my_string = input('Input your string: ')                    // тут объект ввода в функцию
+
+foo_return = string_do_shotter(my_string)                   // тут объект вывода из функции
+print(foo_return)                                           // тут уже представление объекта
+
+>>>>
+(base) ryndin@ubu:~/my_docs$ python3 my_test.py 
+Input your string: my string is so lond and stuped
+my stri***
+
+
+то же но через Тернарный Оператор
+---------------------------------
+def string_do_shotter(text, length = 15, indicator = '***'):
+    text = (text[:(length-len(indicator))] + indicator) if (len(text) > length) else text 
+    return text
+
+
+Правильное имя Функции говорит о том что она Делает и что Возвращает (но не как делает) !!!
+
+В стоку описания Функции можно добавить что Возвращает, как обрабатывает Исключения, 
+
+
+
+Функции / Аргументы / * / ** / Запаковка / Распаковка
+====================
+
+Пример
+------------
+def my_foo(*args, **kwargs):
+    print(args)
+    print(kwargs)
+    return (args, kwargs)
+
+my_data = (1,2,3,4,5)
+my_dict = dict(name='yurii', age=40)
+
+to_return = my_foo(my_data, my_dict, wife='lena')
+print(to_return)
+
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+((1, 2, 3, 4, 5), {'name': 'yurii', 'age': 40})             // args
+{'wife': 'lena'}                                            // kwargs
+
+(((1, 2, 3, 4, 5), {'name': 'yurii', 'age': 40}), {'wife': 'lena'})
+
+
+Еще пример Распаковка Акгументов Функции
+---------------------
+def my_foo(name, age, *args, job='proger', **kwargs):
+    print(name, age, job, args, kwargs)
+
+my_foo('yurii', 40, 50, job = 'econ')
+
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+yurii 40 econ (50,) {}
+
+На выходе: Позицион и Именнованные аргументы, Затем созданный Кортеж, Затем созданный Словарь
+!!!
+
+
+
+ЛЯМБДА-ФУНКЦИИ
+===================
+
+Функции не именованные
+Нет в синтаксисе return или yield
+Лямда-функция просто возвращает результат вычисления
+
+
+суть 
+----------
+
+my_foo = lambda x, y: x*y               // объект как функция (без имени) принимает 2 параметра
+
+resoult = my_foo(5, 10)
+
+print(resoult)
+
+>>>>
+50
+
+
+еще пример
+Если логич выражение является кортежем то надо круглые скобки 
+------------
+my_foo = lambda x, y: (x*2, y*3)    // Логика вычислений как Кортеж
+
+resoult = my_foo(5, 10)
+
+print(resoult)                      // Вернула Результаты вычислений как Кортеж
+
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+(10, 30)
+
+
+
+еще пример
+-------------
+my_tup = tuple(enumerate(list(range(10))))
+print(my_tup)                               // создается Кортеж
+
+my_foo = lambda x: print(x)                 // Создана Логика для Элемента
+
+def my_foo1(element):                       // Передается Элемент и Логика на Него срабатывает
+    for item in element:
+        resoult = my_foo(item)
+        continue
+
+my_foo1(my_tup)                             // Точка Запуска Процесса
+
+>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+((0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9))
+(0, 0)
+(1, 1)
+(2, 2)
+(3, 3)
+(4, 4)
+(5, 5)
+(6, 6)
+(7, 7)
+(8, 8)
+(9, 9)
+
+
+
+assert
+-----------
+https://stackoverflow.com/questions/5142418/what-is-the-use-of-assert-in-python
+
+assert True
+
+>>>
+ничего не происходит, инструкция подтверждена как Истинная
+
+
+assert False, 'Hallo'
+
+>>>
+(base) ryndin@ubu:~/my_docs$ python3 my_test.py 
+Traceback (most recent call last):
+  File "my_test.py", line 1, in <module>
+    assert False, 'Hallo'
+AssertionError: Hallo                       // If not True - Вызывает Исключение со Строкой
+
+
+пример
+string
+escape
+спец.символы
+-------------
+from xml.sax.saxutils import escape
+
+obj = escape('My test & string < >')
+
+print(obj)
+
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+My test &amp; string &lt; &gt;
+
+
+import re
+
+my_string = 'my test string < > &'
+print(my_string)
+
+obj = re.escape(my_string)
+print(obj)
+
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+my test string < > &
+my\ test\ string\ <\ >\ \&                  // защищенная строка
+
+
+
+
+пример
+парсинг списка файлов в папке с указание пути
+================
+
+import os
+obj = os.listdir('./')
+print(obj)
+
+>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+['my_test.txt', '.git', 'my_test.css', 'my_test.log', 'my_test.html', 'my_test.py', 'my_test.js', '.idea']
+
+
+
+МОДУЛИ
++ Станадртная Библиотека Питон
+==============================
+
+path
+----------
+import sys
+
+print(sys.path)
+
+>>>>
+['/home/ryndin/my_docs', '/home/ryndin/miniconda3/lib/python37.zip', '/home/ryndin/miniconda3/lib/python3.7', '/home/ryndin/miniconda3/lib/python3.7/lib-dynload', '/home/ryndin/miniconda3/lib/python3.7/site-packages']
+
+в путях импорта модулей есть Текущая папка, папка Пакетов Питон, Стандартная билиотека Питона
+
+PYTHONPATH - переменная, в которой тоже ищутся пути для импорта. но пока она не определена
+
+
+проверка наличия модуля в Стандартной библиотеке
+-----------------------
+
+(base) ryndin@ubu:~/my_docs$ python3 -c 'import sys'
+(base) ryndin@ubu:~/my_docs$ python3 -c 'import os'
+(base) ryndin@ubu:~/my_docs$ python3 -c 'import os.path'
+
+(base) ryndin@ubu:~/my_docs$ python3 -c 'import os.pah'     // Такого Модуля Нет (Исключение)
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+ModuleNotFoundError: No module named 'os.pah'; 'os' is not a package
+
+(base) ryndin@ubu:~/my_docs$ python3 -c 'print(2+2)'       // выполнение Интерпритатора Питон
+>>>>
+4
+
+
+Файл Питон
+--------------
+.py             // файл питон еще до компиляции
+.pyc            // скомпилированный байт-код модулей
+.pyo            // оптимизированный байт-код модулей
+
+
+Пакеты Питон
+-------------
+
+__init__.py     // в папке присутствует этот файл объявления
+
+__all__ = [....]    // в файле есть эта переменная содержащая имена файлов для тотального импорта
+
+
+__all__
+import *
+---------------
+
+1) from package import *
+    __init__.py
+    __all__ = [....]
+
+
+2) from module import *
+    module.py       
+    __all__ = [....]
+
+
+3) from module import *
+    all objects from module
+
+
+Типичное Начало Модуля
+----------------------
+
+#!/usr/bin/env python3
+# Copyright (с) 2019 Qtrac Ltd. All rights reserved.
+
+"""                         // module.__doc__
+Этот модуль предоставляет несколько функций манипулирования строками.
+>» is_balanced("(Python (is (not (lisp))))")
+True
+>» shorten("The Crossing'", 10)
+'The Cro...'
+>» simplifyC some text with spurious whitespace ")
+'some text with spurious whitespace'
+"""
+
+import ...
+
+code is here...
+
+
+
+if __name__ == '__main__':
+--------------------------
+метод запуска модуля если его Вызвать в Консоли по Имени
+
+
+if __name__ == '__main__':
+
+    import doctest
+
+    doctest.testmod()
+
+    print('compleate')
+
+
+пример,
+если импортировать как модуль и вызвать функцию то __name__ будет имя Модуля
+------------
+def foo():
+    import sys
+    print(__name__)                 // имя объекта
+
+>>>>
+(base) ryndin@ubu:~/my_docs$ python
+Python 3.7.3 (default, Mar 27 2019, 22:11:17) 
+[GCC 7.3.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from my_test import foo
+>>> foo()
+my_test                             // имя модуля
+
+
+пример,
+если в Консоли вызвать как Модуль то
+----------------
+if __name__ == '__main__':
+    import sys
+    print(__name__)
+
+>>>>
+(base) ryndin@ubu:~/my_docs$ python3 -u my_test.py 
+__main__                            // как глобальная переменная в Программе при Запуске Скрипта
+
+
+
+Вызов команд в консоли
+======================
+import subprocess
+
+subprocess.call('clear')
+subprocess.call('python3')
+
+>>>>
+Python 3.7.3 (default, Mar 27 2019, 22:11:17) 
+[GCC 7.3.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+
+
+Стандартная Библиотека Питон (Самые те Модули)
+======================
+
+struct
+---------
+
+
+re
+----------
+
+
+io
+----------
+
+
+sys
+----------
+
+sys.stdout
+sys.stdin
+
+
+io
+----------
+io.StringIO()
+
+
+
+fileinput
+---------
+fileinput.input()
+fileinput.filename()
+
+
+decimal                     // числа
+---------
+decimal.Decimal()
+
+
+fractions                   // числа
+---------
+fractions.Fraction()
+
+
+math                        // математика
+cmath                       // математика комплексных чисел
+random                      // генерация случайных чисел
+numbers
+----------
+
+
+numpy
+scipy
+(внешние библиотеки)
+----------
+
+
+calendar
+datetime
+time
+dateutil
+(библиотеки работы с временем и датами - последняя внешняя)
+-------------
+datetime.datetime.now()
+
+
+besect
+-----------
+['__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__', 'bisect', 'bisect_left', 'bisect_right', 'insort', 'insort_left', 'insort_right']
+
+Функции поиска в отсортированных последовательностях
+Функции вставки элементов с сохранением порядка сортировки
+
+
+collections
+-----------
+collections.defaultdict()
+collections.namedtuple()
+
+Удобная обработка словарей и картежей
+
+
+array
+----------
+Работа с Массивами
+Это как Списки но только с одним Типом Данных (задается при Создании)
+
+
+
+heapq
+----------
+работа с Кучами данных
+
+пример
+----------
+import heapq
+
+li1 = [0,2,5,6,3,1,8,9]
+li2 = [10,9,6,5,3,2,7,8]
+li3 = [99,1,6,9,3,5,7,22]
+
+li4 = [x for x in sorted(heapq.merge(li1, li2, li3))]
+
+print(li4)
+
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+[0, 1, 1, 2, 2, 3, 3, 3, 5, 5, 5, 6, 6, 6, 7, 7, 8, 8, 9, 9, 9, 10, 22, 99]
+
+
+base64
+кодировка символов
+------------------
+
+
+gzip
+tarfile
+zipfile
+-----------------
+
+
+
+audioop
+wave
+работа с аудио
+----------------
+
+
+csv
+Comma Separeted Value
+---------------
+Формат Данных который легко читают файлы Эксель
+удобный формат для передачи и обработки массивов данных
+
+
+pickle
+shelve
+-------------
+пакеты для сохранения данных на диск и их чтения 
+а также их преобразование в байтовый формат и обратно
+(не база данных)
+более утилитарное применение
+
+
+sqlite
+-------
+встроенная облегченная база данных в виде 1 файла.
+
+
+subprocess
+multiprocessing
+---------------
+вхождение в другие процессы и иправление процессами Систмы
+
+
+shutil
+tempfile
+filecmp
+-----------
+Работа с Файлами и Каталогами
+Копирование, перемещение, удаление, сравнение содержимого 
+
+
+os
+-----------
+Доступ к данным ОС
+В том числе работа с файлами и директориями
+В том числе работа со строками путей файлов
+различные сведения о файлах
+Запуск процессов
+
+Кроме того работа с путями
+os.path()
+os.path.abspath()
+os.path.split()
+os.path.dirname()
+os.path.basename()
+os.path.splittext()
+os.path.join()
+os.path.getsize()
+os.path.isfile()
+os.path.isdir()
+
+
+mimetypes
+-----------
+
+
+socket
+asinchat
+http.cookies
+http.cookiejar
+(Это и далее - работа с Сетью и интернетом)
+-----------
+
+
+asincio
+aiohttp
+-----------
+https://habr.com/ru/post/337420/
+
+async
+await (функции типа декораторов от которых ожидают запуска процессов)
+
+Все это дает быстрое выполение Нескольких Процессов Сразу
+
+
+пример
+----------
+import asyncio
+
+async def foo():
+    print('Running in foo')
+    await asyncio.sleep(0)
+    print('Explicit context switch to foo again')
+
+
+async def bar():
+    print('Explicit context to bar')
+    await asyncio.sleep(0)
+    print('Implicit context switch back to bar')
+
+
+ioloop = asyncio.get_event_loop()
+tasks = [ioloop.create_task(foo()), ioloop.create_task(bar())]
+wait_tasks = asyncio.wait(tasks)
+ioloop.run_until_complete(wait_tasks)
+ioloop.close()
+
+>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+Running in foo
+Explicit context to bar
+Explicit context switch to foo again
+Implicit context switch back to bar
+
+
+
+urllib
+urllib3
+beautifulsoup4beautifulsoup4
+requests
+-----------
+https://www.8host.com/blog/rabota-s-veb-dannymi-s-pomoshhyu-requests-i-beautiful-soup-v-python-3/
+(requests and beautiful)
+
+
+smtpd
+smtplib
+imaplib
+polib
+mailbox
+-------------
+Сурвесы работы с Электронной Почтой
+
+
+twisted
+------------
+Сторонний Фреймворк для работы с Сетями
+
+
+django
+turbogears
+flask
+falcon
+------------
+Фреймворки ВЕБ приложений
+
+
+
+xml.dom
+xml.sax
+xml.etree. ElementTree (упрощенный)
+------------
+пасинги xml кода
+
+
+unittest
+----------
+модуль тестирования кода
+
+
+logging
+---------
+создания журналов логов и отправки на почту
+
+
+pprint
+---------
+форматирование вывода объектов
+
+
+
+thriding
+---------
+
+
+
+abs
+---------
+создание базовых абстрактных классов
+
+
+copy
+---------
+copy.popy()
+copy.deep.copy()
+
+
+
+OOP
+================
+
+Классы
+Объекты Классов
+Логика встроенных проверок
+Встороенные Методы Класса
+Статические переменные класс
+
+
+простой начальный пример Класса и Истансев
+------------------------
+class Point:
+    import math
+    
+    def __init__(self, x=0, y=0):           // Скрытые методы Класса (но Переопределяемые)
+        self.x = x
+        self.y = y
+
+    def return_of_sum(self):                // Доступный метод Класса
+        return (self.x + self.y)
+
+    def __eq__(self, other):                // Метод под ситуацию
+        return self.x == other.x and self.y == other.y
+
+    def __str__(self):                      // Скрытый метод Строчного отображения
+        return '({0.x}, {0.y})'.format(self)
+
+obj_a = Point(1,2)                  // два Инстанса Класса (Владеют всеми Методами Класса)
+obj_b = Point(3,4)
+
+print(obj_a)                        // self.__str__()
+print(obj_b)
+
+print(obj_a.return_of_sum())        // доступный метод Класса и инстанса
+print(obj_b.return_of_sum())
+
+print(obj_a == obj_b)
+print(obj_a != obj_b)
+
+print(isinstance(obj_a, Point))     // Проверка на Наследование
+print(isinstance(obj_a, object))    // Наследование от object
+
+>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+(1, 2)
+(3, 4)
+3
+7
+False
+True
+True
+True
+
+
+-------------------
+import math
+print(math.pi)
+
+class Circle(Point):                        // Наследование от СуперКласса
+    
+    def __init__(self, minus, x=0, y=0):    // Расширение даных при Инициации
+        super().__init__(x=x, y=y)          // Вызов метода Суперкласса (данные из ПодКласса)
+        self.minus = minus                  // Собсвенная инструкция ПодКласса
+
+    def return_to_minus(self):
+        return (self.return_of_sum() - self.minus)
+
+    @property
+    def return_area (self):
+        return math.pi * self.minus
+
+    def __repr__(self):
+        return 'Circle({0.minus}, {0.x}, {0.y})'.format(self)
+
+    def __str__(self):
+        return repr(self)
+
+obj_c = Circle(minus=1.2, x=3, y=5)         // Создание Инстанса Подкласса (__init__)
+
+print('='*10)
+print(obj_c)
+print(obj_c.return_area)                    // Вызов как Свойства и не Метода (@property)
+print(obj_c.return_to_minus())
+
+>>>>
+==========
+Circle(1.2, 3, 5)
+3.7699111843077517
+6.8
+
+
+
+
+Встроеные Методы Класса
+========================
+
+__new__(self, ...)
+
+__init__(self, ...)
+
+__repr__
+
+__str__
+
+__add__ (self, ...)
+
+__class__(self, ...)
+
+__delattr__(self, ...)
+
+__setattr__(self, ...)
+
+__invert__(self, ...)
+
+__iand__(self, ...)
+
+__hash__(self, ...)
+
+__format__(self, ...)
+
+__bool__(self, ...)
+
+__module__                  // переменная, имя Модуля для Объекта
+
+__hash__()                  // значение сохраненное в Хеше (в Хранилище Данных)
+
+__class__.__name__          // Имя Класса от онстанса (в репрезант форме)
+
+
+
+
+методы сравнения (для двух Инстансев x, y)
+----------------
+
+__lt__(self, other)         // x < y
+
+__le__(self, other)         // x <= y
+
+__eq__(self, other)         // x == y
+
+__ne__(self, other)         // x != y
+
+__ge__(self, other)         // x >= y
+
+__gt__(self, other)         // x > y
+
+__or__(self, other)         // логическое ИЛИ
+
+
+
+Пример Тернарный оператор в Классе
+----------------
+def __init__ (self, value=0.0):
+    self.__value = value if 0.0 <= value <= 1.0 else 0.0
+
+
+
+Осовюождение Ресурсов Компьютера
+--------------
+Есть только 2 способа Уничтожения ненужных Сущностей:
+1) try .... finally
+2) with
+
+
+
+@staticmethod
+-----------------
+Функция-Декоратор которая делеет метод рабочим в Классе но не рабочей для Инстанса
+ТАк Как не принимает атрибут self (отсекает его)
+
+@staticmethod
+    def __repr__(self):
+        return 'Circle({0.minus}, {0.x}, {0.y})'.format(self)
+
+>>>>
+Traceback (most recent call last):
+  File "/home/ryndin/my_docs/my_test.py", line 56, in <module>
+    print(obj_c)
+  File "/home/ryndin/my_docs/my_test.py", line 52, in __str__
+    return repr(self)
+TypeError: __repr__() missing 1 required positional argument: 'self'  // Отсек self
+
+
+
+Метод __new__(cls)
+==================
+Особенный Метод. Это Метод класса а не Инстанса (в этот момент Инстанса еще не существует).
+Это метод создания, предшествует методу Тнициации (когда создается Инстанс и Ссылки).
+
+
+пример
+---------
+class MyClass(float):
+    def __new__(cls, value=0.0):
+        return super().__new__(cls, value if 0.0 <= value <= 1.0 else 0.0)
+
+собственная Логики в примере добавляет проверку на Диапозон значения
+
+
+
+Приемы Исключение Методов из ПодКласса
+================
+    def __add__ (self, other):
+        raise NotImplementedError()
+
+    def __eq__(self, other):
+        return Notlmplemented
+
+
+    def __neg__(self):
+        raise TypeError("bad operand type for unary -: '{0}' ".format(
+self.__class__.__name__))
+
+
+
+Фокус - Частные Атрибуты Класса доступны через частные Переменные Инстанса (не перепишешь)
+========================
+
+@property
+def background(self):
+    return self .__background
+
+@property
+def width(self):
+    return self.__width
+
+
+
+yield - По Простому
+===================
+
+def my_foo(number):
+
+    summa = 0
+    count = 0
+
+    while count < len(range(number)):
+        for item in range(number):
+            summa += item
+            count += 1
+            yield summa                 // Это Объект-Генератор в Цикле
+
+my_gen = my_foo(4)
+print(next(my_gen))                     // Генерация Одного Витка Цикла
+print(next(my_gen))
+print(next(my_gen))
+print(next(my_gen))
+print(next(my_gen))
+
+>>>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+0
+1
+3
+6
+Traceback (most recent call last):
+  File "/home/ryndin/my_docs/my_test.py", line 17, in <module>
+    print(next(my_gen))
+StopIteration
+
+
+Генераторы в Словарях
+======================
+my_dict = dict(name='yurii', job='proger', age=40)
+
+print(my_dict.values())                 // 1
+print(my_dict.keys())                   // 2
+print(my_dict.items())                  // 3
+
+my_iter = my_dict.__iter__()            // 4
+print(my_iter)
+print(next(my_iter))
+
+>>>>
+[Running] python -u "/home/ryndin/my_docs/my_test.py"
+dict_values(['yurii', 'proger', 40])
+dict_keys(['name', 'job', 'age'])
+dict_items([('name', 'yurii'), ('job', 'proger'), ('age', 40)])
+
+<dict_keyiterator object at 0x7f1478aac318>
+name
+
+
+
+ФАЙЛЫ
+=================
+
+Форматы хранения данных
+- текстовый
+- двоичный
+- xml - с разметкой
+- бд - sqlite
+
+
+Основные типы данных для обработки
+- строки (str) (re)
+- целые числа (int)
+- числа с плавающ точкой (float)
+- логические значения (bool)
+- даты (datetime.date)
+
+
+
+pickle
+===============
+
+модкль кооторый позволяет сохранять инфу в виде байтовых фпйлов и читать их них.
+Подробнее по необходимости изучить Отдельно.
+
+
+bytes  and bytearray
+----------------
+
+bytes - создание Неизменяемых байтовых объектов
+
+bytearray - создание Изменяемы Байтовых объектов
+
+
+struct
+----------------
+Модуль дял Запаковки и Распаковки Двоичных данных
+
+data = struct.pack('<2h", 11, -9)       # data == b'\x0b\x00\xf7\xff'
+items = struct.unpack("<2h", data)      # items == (11, -9)
+
+Подробно разобраться по необходимости
+
+
+
+Еще Методы Строк
+-----------------
+
+my_string ="""   my string is cool
+and this string is good   """
+
+
+print(my_string.rstrip().lstrip().splitlines())
+
+print(my_string.title())
+
+>>>>
+['my string is cool', 'and this string is good']
+
+   My String Is Cool
+And This String Is Good   
+
+
+
+xml Деревья. Парсинг Чтение и Запись
+====================
+
+Основные Методы:
+
+xml.etree.ElementTree.Element()
+xml.etree.Element!" ree.SubElement()
+xml.etree.ElementTree.parse(filename)
+
+
+DOM XML
+===============
+
+dom = xml.dom.minidom.getDOMImplementation()
+tree = dom.createDocument(None, "incidents", None)
+root = tree.documentElement
+
+fh = open(filename, "w", encoding="utf8")
+tree.writexml(fh, encoding="UTF-8")
+return True
+
+
+Ветвление Логики через Словари - Работает Максимально Быстро
+===============================
+
+пример
+---------
+my_input = str(input('Input your Choice: A B C:  ')).lower()
+
+def less_ziro():
+    print('Your Nomber less Ziro')
+
+def from_ziro_to_100():
+    print('Your Nomber more them ziro but less 100')
+
+def more_then_100():
+    print('Your Nomber more them 100')
+
+
+actions_dict=dict(a = less_ziro, b = from_ziro_to_100, c=more_then_100)
+
+actions_dict[my_input]()        ## вся магия здесь - По Ключу из Словаря возбуждается Функция !!!
+
+
+>>>>
+(base) ryndin@ubu:~$ /home/ryndin/miniconda3/bin/python /home/ryndin/my_docs/my_test.py
+Input your Choice: A B C:  A
+Your Nomber less Ziro
+
+(base) ryndin@ubu:~$ /home/ryndin/miniconda3/bin/python /home/ryndin/my_docs/my_test.py
+Input your Choice: A B C:  B
+Your Nomber more them ziro but less 100
+
+
+yield
+================
+
+Если вместо return в Функции используется yield - 
+ТО Функция становится Генератором-Итератором
+
+
+my_list = [1,2,3,4,5,6,7,8]
+
+def my_foo():                           
+
+    resoult = []
+
+    for item in my_list:
+
+        resoult.append(item) 
+
+        yield resoult                   
+        
+my_iter = my_foo()                      ## __iter__
+
+print(my_iter.__next__())               ## __next__
+print(my_iter.__next__())
+print(my_iter.__next__())
+
+
+my_iter.close()                         ## в любой момент Останавливает Итерацию
+
+
+>>>>
+(base) ryndin@ubu:~/my_docs$ /home/ryndin/miniconda3/bin/python /home/ryndin/my_docs/my_test.py
+[1]
+[1, 2]
+[1, 2, 3]
+
+
+
+globals()
+locals()
+================
+встроенные функции создают словари объектов Области видимости
+
+print( (locals().keys() ) )
+print( (globals().keys() ) )
+
+
+
+
+
+Вызываемые и НеВызываемые Объекты
+=================================
+__call__
+hasatttr(objet, method)
+
+
+my_dict = dict()
+
+def my_foo():                   ## вызываемый объект
+    pass
+
+print(hasattr(my_dict, '__call__'))
+print(hasattr(my_foo, '__call__'))
+
+print('='*5)
+
+print(hasattr(my_dict, '__init__'))
+print(hasattr(my_foo, '__init__'))
+
+>>>>
+(base) ryndin@ubu:~$ /home/ryndin/miniconda3/bin/python /home/ryndin/my_docs/my_test.py
+False
+True
+=====
+True
+True
+
+
+
+Декораторы Функций и Методов
+Декораторы Классов
+============================
+
+@property
+@klassmethod
+
+
+
+__slots__
+если Класс без __slots__ - то Инстанс имеет __dict__ как словарь атрибутов
+а если есть __slots__ - то атрибуты класса только для чтения а не для Определения
+==============
+
+class Point:
+    
+    __slots__ = ("х", "y")    ## не дает возможности Инстансу Добавлять или Менять эти Атрибуты    
+
+    def __init__ (self, x=0, y=0):
+        self.x = x
+        self.y = y
+
+inst1 = Point(x = 2, y=3)
+
+print(inst1.__dict__)
+
+
+
+__setattr__
+__delattr__
+
+=========================
+
+class Const:
+
+    def __init__(self, *args, **kwargs):
+        self.age = 40
+
+    def __setattr__(self, name, value):
+        self.__dict__[name] = value
+
+    def __delattr__(self, name):            ## сделали Удаление Невозможным
+        if name in self.__dict__:
+            raise ValueError('CONSTANTAS can not delete!')
+
+
+inst1 = Const()
+
+inst1.name = 'yurii'            ## создает Атрибут Инстанса (в __dict__)
+
+print(inst1.__dict__)
+
+del inst1.name                  ## не дает удалить Атрибут Инстанса
+
+
+>>>>
+(base) ryndin@ubu:~$ /home/ryndin/miniconda3/bin/python /home/ryndin/my_docs/my_test.py
+{'age': 40, 'name': 'yurii'}
+
+Traceback (most recent call last):
+  File "/home/ryndin/my_docs/my_test.py", line 17, in <module>
+    del inst1.name
+  File "/home/ryndin/my_docs/my_test.py", line 8, in __delattr__
+    raise ValueError('CONSTANTAS can not delete!')
+ValueError: CONSTANTAS can not delete!
+
+
+
+Функциональное программирование
+================================
+
+Отображене (map)
+----------------
+def my_foo(number):
+    return number*number
+
+my_list = [1,2,3,4,5]
+
+resoult = map(my_foo, my_list)
+
+print(resoult)
+print(list(resoult))
+
+
+>>>>
+## или через lambda
+
+my_list = [1,2,3,4,5]
+
+resoult = map(lambda x: x*x, my_list)
+
+print(resoult)
+print(list(resoult))
+
+
+>>>>>
+(base) ryndin@ubu:~$ /home/ryndin/miniconda3/bin/python /home/ryndin/my_docs/my_test.py
+<map object at 0x7f29ec3bec50>
+[1, 4, 9, 16, 25]
+
+
+пример создания через Выражение-Генератор
+---------------------
+my_list = [1,2,3,4,5]
+
+resoult = [x*x for x in my_list]
+
+print(resoult)
+print(list(resoult))
+
+>>>>
+(base) ryndin@ubu:~$ /home/ryndin/miniconda3/bin/python /home/ryndin/my_docs/my_test.py
+[1, 4, 9, 16, 25]
+[1, 4, 9, 16, 25]
+
+
+Модули для Функционального Программирования
+(стандартная библиотека Питон)
+------------------------------
+import functools
+import operator
+import itertools
+
+
+itertools.chain()
+---------------
+создание итерируемого объекта из Кусочков
+
+my_list = []
+for item in itertools.chain('name', 'yurii', 'stepa'):
+    my_list.append(item)
+print(my_list)
+
+>>>>>
+(base) ryndin@ubu:~$ /home/ryndin/miniconda3/bin/python /home/ryndin/my_docs/my_test.py
+['n', 'a', 'm', 'e', 'y', 'u', 'r', 'i', 'i', 's', 't', 'e', 'p', 'a']
+
+
+
+threading [module] - менее эффективное чем мультипроцессинг
+==================
+функционал мнго поточности на одном ядре
+
+
+multiprocessing [module]
+=================
+функционал многопроцессности на всех ядрях процессора (как позволит система)
+
+
+
+socket
+================
+низкоуровненый модель для работы по сети в формтах IPv4  IPv6  TCP
+
+
+
+
+SQL and DBM
+==================
+(Structured Query Language) and (DataBase Manager)
+
+(MySQL PostgreSQL SQLite SQLAlchemy) and (  MongoDB ....)
+
+
+
+Регулярные Выражения
+====================
+re
+
+[0-9]       символьный классб на совпадение с одной цифрой из последовательности
+[a-z]
+
+[^0-9]      отрецание, что угодно но не цифра
+
+\d          цифра
+\d+         любоее число, где от 1 до много цифр
+\D          не цифра
+
+\s          символ
+\S          не символ
+
+\w          слово из литерала
+\w+         любое слово, где от 1 до много букв
+\W
+
+
+{m,n}       квонтификатор, количество совпадений (минимум, максимум)
+?2          тоже квонтификатор
+
+
+?P<name>    именованное значение
+(?P=name)   вызов именованного значения
+
+^           начало текста рег выражения
+
+$           конец текста
+
+\b...\b     граница слова      
+
+\A          начало текста
+
+\Z          конец текста
+
+import re
+re.A I M S X
+
+
+
+re
+=============
+match = re.search(r'...', text)     поиск по РегВыражению в Тексте
+
+
+color = re.compile(r'....')         скомпилир обэект РеВыражения
+match = color.search(text)          многократное использования Объекта
+
+
+
+Графический Интерфейс
+======================
+
+Библиотека Tk           // устарела
+
+
+Библиотека PyQt         // современное решение
+
+https://tproger.ru/translations/python-gui-pyqt/
+https://pythonworld.ru/gui/pyqt5-firstprograms.html
+
+
+$ sudo apt install python3-qt5 pyqt5-dev-tools qtcreator
+$ pip install  PyQt5
+
+
+ 
+Спец Комментарии ы Файле
+================
+
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+
+Поток ввода Данных из Файла через input()
+===================
+(base) ryndin@ubu:~/my_docs$ python my_test.py < my_test.txt 
+YURII
+
+>>>>
+input()
+
+
+
+Поток Вывода данных в Файл через print()
+===================
+(base) ryndin@ubu:~/my_docs$ python my_test.py > my_test.txt 
+
+>>>>
+print('HELLO')
+
+
+
+
+

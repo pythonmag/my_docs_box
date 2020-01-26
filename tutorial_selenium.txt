@@ -1,0 +1,16 @@
+Selenium
+===================
+http://selenium-python.readthedocs.io/index.html
+
+
+
+
+Selenium Webdriver with Python Tutorial - Installing Firefox Plugins
+---------------------
+https://www.youtube.com/watch?v=Ssp6dMWIocY&list=PL4tmZ2wr68XWgqJFzwWrw-JFd_vBEonsT
+...
+5. Selenium Webdriver with Python Tutorial - Basic Actions #1
+---------------------
+https://www.youtube.com/watch?v=--vqRAkcWoM
+
+

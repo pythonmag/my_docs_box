@@ -1,0 +1,379 @@
+
+(Это старые мои Шпаргалки)
+------------------------
+
+Конструкция Сортировки Списка Объектов QuerySet + Реверс
+и Конструкция Пагинации списка объектов
+======================================
+// Вьюка-питон
+def foo(request):
+    # import pdb; pdb.set_trace()										# инструмент дебагинга
+	# Список объектов формируется через Класс Моделей вызовом всех объектов Класса    
+	programmers_list = Programmer.objects.all()
+
+    # Есть ли в Реквесте от Браузера значение переменной order_by (в доп параметрах запроса
+	# имя переменной) фармируем переменную что сортировать список надо
+    ordered = request.GET.get('order_by', '')
+	# если объект запроса сортировки есть в словарях по именам
+    if ordered in ('first_name', 'last_name', 'programmer_team'):
+		# создаем список сортированный по методом order_by() с параметром - имя объекта
+		# (бибилотеки) для сортировки
+        programmers_list = programmers_list.order_by(ordered)
+		# если в объекте запроса также пришел параметр reverse со значением 1 - то применяем 
+		# метод reverse() для обратоной сортировки Списка
+        if request.GET.get('reverse', '') == '1':
+            programmers_list = programmers_list.reverse()
+
+	# Создали объект Пагинатора с входным списком и количеством страниц    
+	paginator = Paginator(programmers_list, 4)  
+	# объект дополнительного параметра запроса номер страницы   
+	page = request.GET.get('page')              
+	# Если в запросе (Отсортированном уже списке) пришла цифра(номер страницы)    
+	try:
+        programmers_list = paginator.page(page)
+	# Если в запроце цифра не пришла (запроса на страницу не было)    
+	except PageNotAnInteger:
+		# выводим по умолчанию первую страницу		
+		programmers_list = paginator.page(1)                    
+	# Если в запросе пришел параметр с несущесмтвующей страницей    
+	except EmptyPage:                                           
+        # Выводим стнаицу по последнему номеру (из метода пагинатор)
+        programmers_list = paginator.page(paginator.num_pages)  # выводим последнюю страницу
+
+	// В Итоге Объекты-Библиотеки programmers_list которые прошли Сортировку и разбивку на Куски 
+	// по заданым номерам Страниц (Пагинация) попадают в Функцию Рендер как параметр вместе с 
+	// Объектом Реквест(параметры запроса) и с именет Шаблона куда это все Применится
+	// Такая логика встроенной функции Рендер.
+	return render(request, 'template_html/python_base.html',
+                  {'programmers_list': programmers_list, 'teams_list': teams_list},)
+
+
+// Элементы Шаблона
+// Шаблоны Только делают Отображения по Тегам HTML и Джанго, Формируют параметры Запросов на Сервер
+// (УРЛы + доп.параметры) и Делают Простую логику отображения Тегов с помощью Шаблонов {{%%}} Джанго 
+
+// Логика и Теги для Заголовка Таблицы
+// Если существует Объект списка Программистов тогда выводятся Тэги (Проверка на Сервере)
+{% if programmers_list %}
+    <!--Table Of Programmers-->
+    <table class="table table-striped">
+		// создаем Инстансы(объекты) методов Сориторки и Реверса из Реквеста (для краткости) 
+        {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+        <thead>
+            <tr>
+				// Так можно задать Строку со Значениями для проверки на Экране (усть/нет/какие) 
+                <th>№</th>{{request.GET.order_by}}&{{request.GET.reverse}}
+				// Ссылка формирования запроса УРЛ с именем УРЛфункции (основной адрес) плюс Доп.параметры запроса
+				// сортировка по имени Группы и метод Реверса (Условие - если реверса раннее не было - это второй Клик)
+                <th><a href="{% url 'my_python' %}?order_by=programmer_team{% if order_by == 'programmer_team' and reverse != '1' %}&amp;reverse=1{% endif %}">
+					// Строка работает как Ссылка                    
+					Команда
+					// Если в Объектах есть параметры Сортировки и Реверса (в вариациях) - 
+					// Применяются разные Спаны с иконками визуального отображения Сортировки
+                    {% if order_by == 'programmer_team' and reverse != '1' %}
+                    <span class="glyphicon glyphicon-sort-by-alphabet"></span>{% endif %}
+                    {% if order_by == 'programmer_team' and reverse == '1' %}
+                    <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>{% endif %}
+                    </a></th>
+                <th>Фото</th>
+                ...
+            </tr>
+        </thead>
+        {% endwith %}
+
+
+// Логика и Теги для Тела Таблицы (наполнение Строками)
+	<tbody>
+			// Если в Ответе с Сервера пришли Списки Программистов (по кускам так как Пагинация)
+            {% for programmer in programmers_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+				// Создаем Столбец Кликабельный как ссылка на Форму редактирования Программиста
+                <td><a href="{% url 'team_edit' programmer.id %}">{{ programmer.programmer_team }}</a></td>
+				// Создаем Столбец как Фото (дает ссылку на фото как метод Объекта Модели) при
+				// условии что фото пришло или Не пришло (тогда вставляется дефолтное)                
+				<td>
+                    {% if programmer.photo %}
+                    <img height="40" width="40" src="{{ programmer.photo.url }}" class="img-circle"/>
+                    {% else %}
+                    <img height="40" width="40" src="{% static 'img/default_user.jpeg' %}" class="img-circle"/>
+                    {% endif %}
+                </td>
+				// Столбец Кликабельный на форму редактирования - Выводит Объект Модели Программиста по параметру
+				// Используется Шаблон Джанго по отображению Объекта
+                <td><a href="{% url 'programmer_edit' programmer.id %}">{{ programmer.last_name }}</a></td>
+                <td><a href="{% url 'programmer_edit' programmer.id %}">{{ programmer.first_name }}</a></td>
+				// Столбец                
+				<td>
+					// Кнопка Выпадайки
+                    <div class="dropdown" >
+                        <button class="btn btn-default dropdown-toggle" type="button"
+                                data-toggle="dropdown">Действия
+                                <span class="caret"></span></button>
+						// Выпадайка                        
+						<ul class="dropdown-menu">
+                            <li><a href="{% url 'programmer_edit' programmer.id %}" style="color: green;">Редактировать
+								// Кликабельная строка Формирует Ссылку Урл с параметром ID Программиста
+								// Должна увязаться с УРЛькой-функцией                                 
+								Данные
+                                </a></li>
+                            ...
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+
+
+// УРЛ паттерны в файле urls.py - Свзывает Шаблон html(Отображение) с Вьюшкой.py(Логика)
+// Имя УРЛьек (name="") дает возможность от Шаблона сделать ссылку на Паттерны где уже виден путь
+// к Вьюшкам. Также Урльки сопоставляют доплнительные параметры Запоросов свои значения по 
+// Регулярным выражениям (?P<pid>[0-9]+)   
+from django.conf.urls import include, url
+...
+from myproject2016app import views
+
+urlpatterns = [
+    url(r'^admin/', include(admin.site.urls)),
+	...
+    
+    # List Programmers Urls
+    url(r'^mypython/$', views.pythonprogrammers.mypython_html, name='my_python'),             ## one url to 2 # pages
+    url(r'^mypython/programmer_add$', views.pythonprogrammers.programmer_add, name='programmer_add'),
+    url(r'^mypython/(?P<pid>[0-9]+)/edit$', views.pythonprogrammers.programmer_edit, name='programmer_edit'),
+    url(r'^mypython/(?P<pid>[0-9]+)/delete$', views.pythonprogrammers.programmer_delete, name='programmer_delete'),
+    # Stop Programmers Urls
+	...
+
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+	...
+===================================
+
+
+
+Конструкция обработки Поста Формы и Передачи данных для Первого открытия Формы
+===================================
+Вьюшка:
+// Еще начальная вьюшка до трансформации
+def programmer_add(request):
+    # Если заправленная Форма была Отправлена на сервер (кнопку нажали)
+    # проверю какую кнопку нажали
+    if request.method == 'POST':
+
+        # если нажали кнопку Добавить
+        if request.POST.get('add_button') is not None:
+            # вытягиваю объект команда из БД через модель team
+            team = Team.objects.get(pk=request.POST['team'])
+            # создаю объект Модели в виде Списка со значениями имен(инпутов) из Формы
+            programmer = Programmer(first_name=request.POST['first_name'],
+                                    last_name=request.POST['last_name'],
+                                    middle_name=request.POST['middle_name'],
+                                    birthday=request.POST['birthday'],
+									# инфо о фото поступает в Библиотере Реквеста FILES
+									# сайм файл сохраняется в настроенную папку /media/ проекта
+                                    photo=request.FILES['photo'],
+                                    notes=request.POST['notes'],
+                                    programmer_team=team)
+			// Сохранение объекто Модели в Базу (пути сохранения понятно через Модель
+			// и настройки Проекта)            
+			programmer.save()
+			# ответ о перенаправлении на шаблон с именем урльки mypython
+			# дебагер потребовал Респонса/Редиректа после сохранения объекта в базе. Логично.
+            return HttpResponseRedirect(reverse('my_python'))
+        # Eсли нажали кнопку Отменить
+        elif request.POST.get('cancel_button') is not None:
+            # ответ о перенаправлении на шаблон с именем урльки mypython
+            return HttpResponseRedirect(reverse('my_python'))
+
+    # если Данные на сервер Не пришли в словаре POST
+    # Также через этот рендер в Шаблон приходит Словарь Комманд для Селекта(cорт по имени)
+    # при первом открытии шаблона именно этот Рендер и работает и дает Данные для Формы
+    else:
+        return render(request, 'template_html/form_programmer.html',
+                      {'teams': Team.objects.all().order_by('name')},
+                      )
+        # return HttpResponse('<h1>Its Add Programmer Page</h1>')
+
+
+Элементы Шаблона:
+// атрибуты name в Инпутах Шаблона и дают названия объектам которые отправляются на сервер
+	через Библиотеки Реквест(Гет и Пост)
+// Элемент формы - имеет атрибут name как ключ к Словарю в Реквесте
+<!--День Рождения-->
+        <div class="form-group">
+            <label for="birthday" class="col-sm-2 control-label">День Рождения *</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" name="birthday" id="birthday"
+                     placeholder="Форма Даты ГГГГ-ММ-ДД" value="">
+            </div>
+        </div>
+...
+// Заголовок на Начало формы - для ворматирования на экране - Все в контейнере, form class,
+	action указывает на имя УРЛ паттерна который связывает со вьюшкой (обоюдная связь)
+	method обязателен, или post или get, csrf защита в начале форме hidden.
+{% block content %}
+<div class="container">
+    <!--Main Form of Programmer-->
+    <form class="form-horizontal" action="{% url 'programmer_add' %}" method="post"
+          enctype="multipart/form-data">
+        {% csrf_token %}
+=======================================
+
+
+
+Конструкция Валидации Поля ввода даты через метод strftime() модуля datetime.datetime
+=======================================
+# запрашиваем из Реквеста из Формы введенную дату как Строку
+birthday = request.POST.get('birthday', '').strip()
+			# Если дату не ввели - собераем в Словарь одну ошибку
+            if not birthday:
+                errors['birthday_error'] = u'Введите Дату рождения'
+            # Дата получена но проверю ее формат
+			# Если Дата как входная строка соответствет заданому Формату то все ОК 
+            else:
+                try:
+                    datetime.strptime(birthday, '%Y-%m-%d')
+				# Если Дата формату не соответстует то Ловим Исключение и Собираем в Словарь 
+				# Альтенативную ошибку
+                except ValueError:
+                    errors['birthday_error'] = u'Введите корректный Формат даты Год-Месяц-День'
+========================================
+
+
+
+Безопасность
+===========================
+Найбільш поширеними прикладами валідації форм є:
+	перевірка на введення даних у обов’язкові поля форми;
+	перевірка на правильний формат телефонів, емейлів, дат;
+	перевірка на достатньо складний та правильний ввід пароля;
+	правильний тип файлу та обмеження на розмір файлу.
+HTTPS
+	Більшість форм логування та реєстрації (та й усі форми, що передають із
+	веб-сторінки на сервер паролі користувача) в інтернеті працюють не через
+	протокол HTTP, а через HTTPS.
+CSRF
+	{% csrf %}
+	Django фреймворк обов’язково перевіряє кожну форму на наявність певного
+	коду, щоб уникати CSRF хаку. Щоб доробити нашу форму для даної валіда-
+	ції просто додайте ось цей тег де-небудь всередині тегу form: “{% csrf_token %}
+===========================
+
+
+
+Валидация Файла-Изображения при Посте из Формы
+===========================
+// Логика Вьюшки
+from myproject2016app.views.validate_image import valid_image_phototype
+from myproject2016app.views.validate_image import valid_image_size
+...
+# вызвал объект фото из Реквеста
+            photo = request.FILES.get('photo')
+            # есди фото в Реквесте есть
+            if photo is not None:
+
+                # отдаем объект фото как аргумент в ф-цию валидации типа фото (ф-ция возвращает True/False)
+                correct_image_type = valid_image_phototype(photo)    # valid image file
+
+                # если файл имееет корректный формат:
+                if correct_image_type:
+                    # отдаем объект фото как аргумент в ф-цию валидации размера файла (на выходе True/False)
+                    correct_file_size = valid_image_size(photo, 2000000) # valid image size
+
+                    # последовательно - если файл имеет корректный размер
+                    if correct_file_size:
+                        # сохраняем в объект корректных данных
+                        correctdata['photo_error'] = photo
+                    else:
+                        # сохраняю ошибку о размере файла
+                        errors['photo_error'] = u"Файл слишком большой, Принимается размером до 2 МегаБайт"
+                else:
+                    # сохраняю ошибку о фрмате файла
+                    errors['photo_error'] = u"Выбирите файл-изображение"
+
+// Логика в отдельном файле python
+import magic													// pip install python-magic
+
+def get_phototype(fotobject):
+    proto = magic.Magic(mime=True)
+    phototype = proto.from_buffer(fotobject.read(1024))
+    fotobject.seek(0)
+    return phototype
+
+def valid_image_phototype(fotobject):
+    phototype = get_phototype(fotobject)
+    if phototype:
+        return phototype.startswith('image')
+    else:
+        return False
+
+MAX_SIZE = 2048000  #2mb
+
+def valid_image_size(image, max_size=MAX_SIZE):
+    image_size = len(image)
+    if image_size > max_size:
+        return False
+    else:
+        return True
+
+// Шабон
+<!--Фото-->
+        <div  class="form-group form-group-lg {% if errors.photo_error %}has-error{% endif %}" >
+            <label for="photo" class="col-sm-2 control-label" >Фото</label>
+            <input align="left" type="file" class="col-sm-6 control-label" name="photo" id="photo"
+                   placeholder="Фото"
+                    value="">
+            <span class="col-sm-3 control-label has-error">{{ errors.photo_error }}</span>
+        </div>
+=================================
+
+
+
+Статумные сообщения
+=================================
+// В принципе тема не сложная но сохраню
+// <div class="alert alert-info" role="alert"> -- bootstrap 
+// шаблон базовый
+<!--Block Status_Message and Title_of_Page-->
+<div class="container">
+    <div class="row">
+        <!--Block Status Message-->
+        {% block status_message %}
+        {% if request.GET.status_message %}
+        <div class="alert alert-info" role="alert">
+            <strong>{{request.GET.status_message}}</strong>
+        </div>
+        {% endif %}
+        {% endblock status_message %}
+		....
+
+// шаблорны наследники на случай замены статусного сообщения
+{% block status_message %}...{% endblock status_message %}
+
+// вьюшка 
+proglast_name = correctdata['last_name']
+                return HttpResponseRedirect(u'%s?status_message=Программист ** %s ** успешно Добавлен' %
+                                            (reverse('my_python'), proglast_name))
+// или
+return HttpResponseRedirect(u'%s?status_message=Добавление Программиста Отменено' %
+                                        reverse('my_python') )
+// В дальнейшем разобраться с:
+	вбудованої Django аплікації “django.contrib.messages”. Вони
+	спеціально призначені для даного завдання та надають як серверну логіку,
+	так і тег для шаблонів, щоб з легкістю і гнучко відображати статусні
+	повідомлення. Найпоширеніше їхнє застосування - це робота із формами.
+	http://djbook.ru/rel1.8/ref/contrib/messages.html#module-django.contrib.messages
+=================================
+
+
+
+
+
+
+
+
+
+
+
+
+

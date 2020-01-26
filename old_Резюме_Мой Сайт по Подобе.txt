@@ -1,0 +1,122 @@
+Анотация моего учебного Сайта
+=============================
+Данная Анотация имеет целью продемонстрировать все мои приобретенные навыки в процессе обучения
+и освоения профессии Программиста (web разработчика).
+Мне показалось разумным представить Вам мой Презенационный проект как визитку моих навыков.
+
+
+Вкладки My Python/Django/SQL(ссылка)  Send Me Mail(ссылка) и Регистарция на сайте реализованы в среде Python+Django(backend+frontand)
+Остальные Вкладки имеют статическое наполнение со стилизацией через Bootstrap3
+
+
+Основные ресурсы, которые я использовал с процессе своего обучения и создания данного
+Презентационного проекта:
+	книга: Лутц Марк, Изучаем Python, 4-е издание. – Пер. с англ. – СПб.: Символ-Плюс, 2011. – 1280 с.
+	книга: Віталій Подоба(http://www.vitaliypodoba.com/), Веб-розробка з Python та Django для Початківців, Виключно практичний посібник 
+		по веб-розробці з допомогою мови Python та фреймворку Django. Для початківців., 
+		©2014 - 2015р.(http://www.vitaliypodoba.com/books/django-for-beginners/)
+		Куплена мною и Сети с предоставлением доступа на форум поддержки.	
+	djangoprogect.com(ссылка)
+	djbook.ru(ссылка)
+	Интернет курсы на codecademy.com(https://www.codecademy.com/): Python, Learn the Command Line, HTML, JavaScript, HTML & CSS
+	Интернет туториолы на www.w3schools.com(http://www.w3schools.com/): HTML, CSS, Bootstrap, jQuery
+	Также было много других ресурсов в Сети, к которым обращаешся по мере необходимости.
+
+
+Среда Разработки
+=======================
+Мой Проект создан с использованием Средства установки Виртуальной среды Python - virtualenv
+(http://docs.python-guide.org/en/latest/dev/virtualenvs/)
+
+Презентационный Проект постоен на стабильной версии Django v.1.8.8 и Python v.2.7.9
+Ниже продемонстированы все установленные для python пакеты:
+
+(<virtualenv>)...$ pip list
+	Django (1.8.8)
+	django-crispy-forms (1.5.2)
+	MySQL-python (1.2.5)
+	Pillow (3.1.0)
+	pip (1.5.4)
+	python-dateutil (2.4.2)
+	python-magic (0.4.10)
+	setuptools (2.2)
+	six (1.10.0)
+	wsgiref (0.1.2)
+
+(<virtualenv>)...$ python
+	Python 2.7.9 (default, Feb  1 2016, 21:26:02) 
+	[GCC 4.8.4] on linux2
+
+
+
+JS jQuery +plugins
+==========================
+В Проекте нашли применение следующие Плагины для JavaScript:
+	Библиотека jQuery (https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js)
+	Плагин для jQuery Jquery.Cookie.js (https://plugins.jquery.com/cookie/)
+	Плагин для JS DatePicker.js (http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.0.0/js/bootstrap-datetimepicker.min.js)
+	Плагин для JS Moment.js (https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js)
+	Библиотека JS (http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js)
+
+
+mySQL
+===========================
+База Данных Проекта развернута на mySQL сервере v.5.5:
+(myvirtualenv)...$ python manage.py dbshell
+	...
+	Welcome to the MySQL monitor.  Commands end with ; or \g.
+	Server version: 5.5.47-0ubuntu0.14.04.1 (Ubuntu)
+	mysql> 
+
+
+Сервис пересылки сообщений (SMPL)
+============================
+Для пересылки сообщений Администратору сайта использовал SMPL сервис mandrillapp.com(https://mandrillapp.com/):
+	ADMIN_EMAIL = 'ryndin@i.ua'
+	EMAIL_HOST = 'smtp.mandrillapp.com'
+	EMAIL_PORT = '587'
+	EMAIL_HOST_USER = 'meg2mag@gmail.com'
+	EMAIL_HOST_PASSWORD = '***************'
+	EMAIL_USE_TLS = True
+	EMAIL_USE_SSL = False
+
+
+Кастомизация Админки Джанго
+============================
+В Проекте выполнена Кастомизация Интерфейса Администратора для работы с Объектами Базы Данных (фото прилагаются)
+
+
+Формы в Проекте:
+===================
+Кастомная Форма Добавления Програмиста выполнена вручную, то есть HTML-тегами польностью описан
+HTML шабон с применением Bootstrap3(ссылка) для оформления.
+Логика Предаставления по данной форме на стороне Сервера также описано вручную с Валидацией:
+	заполненностя обязательных полей (if request...)
+	формата даты для поля День рождения (datetime)
+	формата и размера файла для поля загрузки Фото (magic)
+
+Все Остальные формы
+	Редактирования/Удаления Программиста,
+	Добавления/Редактирования/Удаления Команды,
+	Форма отсылки Сообщения Администратору
+Созданы на базе Встроенных Классов форм Django: forms и ModelForm
+	from django import forms, ModelForm
+
+
+Логика обработки Форм создана на базе встроенных классов TemplateView, CreateView, UpdateView, DeleteView
+	from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
+
+Для оформления Форм на базе Встроенных Классов Django в HTML использована апликация 
+crispy-forms(ссылка) c пакетом Bootstrap3
+
+myproject2016app/static/img/Admin_interface.png
+myproject2016app/static/img/Admin_Programmer.png
+==============================
+
+
+
+
+
+
+
+

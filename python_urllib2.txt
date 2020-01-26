@@ -1,0 +1,21 @@
+
+urllib2 — extensible library for opening URLs
+================
+https://docs.python.org/2/library/urllib2.html
+
+
+Библиотека для упрощения HTTP-запросов
+================
+https://habrahabr.ru/post/126262/
+
+
+Python для web
+================
+http://python-for-web.blogspot.com/2014/06/urllib2-python.html
+
+
+
+
+
+
+

@@ -1,0 +1,136 @@
+
+0)
+Самый простой пример
+====================
+
+def decor(func):                        # захватчик                        
+  def inner(*args):                     # переробщик  -- принимает аргументы функции-жертвы
+    return func(*args) + ' ryndin'      # жертва
+  return inner
+
+@decor                                 
+def my_name(name):
+  return name
+
+res = my_name('yurii')
+print(res)
+
+>>>>>>
+yurii ryndin
+
+
+ИЛИ чуть сложнее
+----------------
+
+def decor(func):
+  def inner(*args):
+    return func(*args) + (' ryndin',)
+  return inner
+
+@decor
+def my_name(name, age):
+  return (name, age)
+
+
+res = my_name('yurii', '40')
+print(res)
+
+>>>>
+('yurii', '40', ' ryndin')
+
+
+
+1)
+Теория
+=================
+Декоратор (англ. Decorator) — структурный шаблон проектирования, предназначенный для
+динамического подключения дополнительного поведения к объекту. Шаблон Декоратор
+предоставляет гибкую альтернативу практике создания подклассов с целью расширения
+ функциональности.
+
+https://ru.wikipedia.org/wiki/%D0%94%D0%B5%D0%BA%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)
+
+
+2)
+Как создать собственный Сигнал 
+(очень понятно)
+===============
+https://djbook.ru/rel1.7/topics/signals.html#defining-signals
+
+
+3)
+Если кратко:
+================
+def make_bold(func):
+    def wrapped():
+        return "<b>" + func() + "</b>"
+    return wrapped
+ 
+def make_italic(func):
+    def wrapped():
+        return "<i>" + func() + "</i>"
+    return wrapped
+ 
+@make_bold			                # дает новое свойство объекту - жирный
+@make_italic			            # дает новое свойство объекту - курсив
+def hello():
+    return "hello habr"		        # декораторы работают с объектом из Ретурна / меняют его
+ 
+print hello() ## выведет <b><i>hello habr</i></b>
+
+
+4)
+Если длинно
+================
+https://habrahabr.ru/post/141411/       ## part 1
+https://habrahabr.ru/post/141501/       ## part 2
+
+
+Пример декоратора в прослушке Сигналов в Джаного
+-----------------
+
+from django.core.signals import request_finished
+from django.dispatch import receiver
+
+# функция сработает если придет сигнал об окончании запроса на сервер
+
+@receiver(request_finished)          
+def hello_world_callback(sender, **kwargs):
+    print(”Hello World”) 
+
+
+5)
+UDEMY курсы
+==============
+Фактически декоратор Это функции которая принимает объект Функции внуть себя
+Там ее обрабатывает внутренними механизмами, а возращает преобразованный Объект
+готовый к Вызову. 
+Фактически декоратор обвешивает Функцию новыми свойствами, которыми она начинает 
+обладать.
+
+def new_decorator(func):
+    var1 = 'var in new_decorator'
+
+    def wrap_func():
+        var2 = 'var in wrap_func'
+
+        print('befor call func() in wrap_func')
+        func()
+        print('after call func() in wrap_func')
+
+    return wrap_func
+
+@new_decorator
+def func_need_decorator():
+    var3 = 'var in func_need_decorator'
+
+    print('this func need decorator')
+
+# func_need_decorator = new_decorator(func_need_decorator)
+# инструкция выше это аналог инструкции @new_decorator
+
+# вызов функции - это без изменений
+func_need_decorator()
+
+
+

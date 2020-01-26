@@ -1,0 +1,90 @@
+
+Просчет % охвата кода проекта Тестами
+================
+http://coverage.readthedocs.io/en/latest/
+    // документация
+
+
+1) 
+https://pypi.python.org/pypi/coverage
+coverage==4.3.4
+
+https://pypi.python.org/pypi/django-coverage/
+django-coverage==1.2.4
+
+
+2)
+studentsdb27$ pip install -r requirements.txt 
+
+Successfully built django-coverage
+Installing collected packages: coverage, django-coverage
+Successfully installed coverage-4.3.4 django-coverage-1.2.4
+
+
+3) 
+INSTALLED_APPS = [
+    ...
+    'django_coverage',
+    'students',
+    'studentsdb27',
+    ...
+]
+
+
+4)
+для отчета в html
+COVERAGE_REPORT_HTML_OUTPUT_DIR = os.path.join(BASE_DIR, '..', 'coverage')
+
+
+5)
+$ python manage.py test_coverage pollsapp
+    // (если не сработает то следующее сработает)
+
+
+или
+----
+6)
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite/src/djbooksite$ 
+        coverage run --source='.' manage.py test pollsapp
+
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+2017-05-17 17:58:36.619107+00:00
+False
+.2017-03-18 17:58:36.620426+00:00
+False
+.2017-04-17 16:58:36.621476+00:00
+True
+.
+----------------------------------------------------------------------
+Ran 3 tests in 0.004s
+
+OK
+Destroying test database for alias 'default'...
+
+7)
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite/src/djbooksite$ coverage report
+
+Name                               Stmts   Miss  Cover
+------------------------------------------------------
+djbooksite/__init__                    0      0   100%
+djbooksite/settings                   19      0   100%
+djbooksite/urls                        3      0   100%
+djbooksite/wsgi                        4      4     0%
+manage                                13      6    54%
+pollsapp/__init__                      0      0   100%
+pollsapp/admin                         5      0   100%
+pollsapp/apps                          4      4     0%
+pollsapp/migrations/0001_initial       7      0   100%
+pollsapp/migrations/__init__           0      0   100%
+pollsapp/models                       23      3    87%
+pollsapp/tests                        25      0   100%
+pollsapp/urls                          5      0   100%
+pollsapp/views                        35     14    60%
+------------------------------------------------------
+TOTAL                                143     31    78%
+
+
+
+
+

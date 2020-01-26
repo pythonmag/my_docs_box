@@ -1,0 +1,28 @@
+
+0)
+Все по Стили CSS
+===================
+
+https://www.w3schools.com/css/default.asp
+
+
+0.1)
+Два Основных Фреймворка CSS
+===========================
+W3.CSS
+Bootstrap
+
+https://www.w3schools.com/css/css_rwd_frameworks.asp
+
+
+
+
+
+
+1)
+Наследование Стилей Селекторов (важно)
+===================
+
+https://html5book.ru/osnovy-css#part2
+
+https://www.w3schools.com/cssref/css_selectors.asp

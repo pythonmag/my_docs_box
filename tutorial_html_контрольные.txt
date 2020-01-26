@@ -1,0 +1,1582 @@
+Основная теория по html + DOM есть в основной книге по JS - изучить там
+
+HTML  доки
+======================
+https://ru.wikipedia.org/wiki/HTML      -- вики про HTML
+
+http://www.w3schools.com/tags/default.asp   --  инглиш туториал / От создателя HTML
+
+http://ruseller.com/htmlshpora.php             -- шпора на русском
+
+http://www.w3schools.com/tags/ref_colornames.asp    -- шпаргалка по кодам всех Цветов
+
+http://www.w3schools.com/tags/ref_eventattributes.asp   -- Шпаргалка по Событиям в HTML
+
+
+Основные Шрифты в HTML
+----------------------
+    serif / sans-serif / cursive /      -- встроенные в HTML
+    Verdana / Courier / Garamond / Tahoma / Vivaldi /   -- пользовательские шрифты
+
+Мнемоники HTML
+--------------
+    Это Сцециальные Символы / Типа Спрайтов / Гречечкие и Латинские Буквы
+    В принцие все Символы и их Коды есть по ссылке:
+        http://bit.ly/vphtmentities
+        https://ru.wikipedia.org/wiki/%D0%9C%D0%BD%D0%B5%D0%BC%D0%BE%D0%BD%D0%B8%D0%BA%D0%B8_%D0%B2_HTML
+
+
+Псевдо-Классы на Селекторы в HTML (набор эвантов)
+--------------------------
+http://htmlbook.ru/css/cat/pseudoclass  -- весь набор Псевдо-Классов
+http://htmlbook.ru/samcss/psevdoklassy  -- новые для меня операторы
+
+
+
+
+Первое знакомство
+/////////////////
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    <h1>Введение</h1>
+    
+    <p>В этом пособии изучается работа с HTML и CSS.</p>
+    
+    <h2>Глава 1</h2>
+    
+    <p>Работа с HTML, знакомство с тегами и атрибутами тегов.</p>
+    
+    <h2>Глава 2</h2>
+    
+    <p>Работа с CSS, знакомство с селекторами и свойствами.</p>
+    
+    <p class="cite">Самое лучшее онлайн-пособие</p>
+    
+</body>
+</html>
+
+
+css
+.......
+.cite{
+    padding: 5px 10px;
+    background: #f5f5f5;
+    border-left: 2px solid #ccc;
+    font-style:italic;
+}
+
+/* Служебные стили  */
+body{
+    width:260px;
+    margin:0;
+    padding:0 20px;
+    font-family:"Arial", sans-serif;
+    font-size:12px;
+    line-height:1.4;
+    color:black;
+}
+h1{
+    font-weight:bold;
+    font-size:2.5em;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+}
+h2{
+    font-size:1.5em;
+    color:#333;
+    font-weight:normal;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+}
+p{
+    margin:1em 0;
+    color:#666;
+}
+//////////////////
+
+
+
+Промежуточные испытания
+Испытание 1: фигурное катание, спортивные пары
+/////////////////
+<!DOCTYPE html>
+<html>
+    <head>
+       <title>1 испытание: Фигурное катание. Спортивные пары</title>
+       <meta charset="utf-8">
+    </head>
+    <body>
+        <h1><strong>Фигурное Катание.</strong> Спортивные пары</h1>
+        <!--
+        Адреса изображений:
+        /assets/ifmo/pair1.jpg
+        /assets/ifmo/pair2.jpg
+        /assets/ifmo/pair3.jpg
+        -->
+        <p>
+            <img src="/assets/ifmo/pair1.jpg" width="85">
+            <img src="/assets/ifmo/pair2.jpg" width="85">
+            <img src="/assets/ifmo/pair3.jpg" width="85">
+           
+        </p>
+        
+        <ul>
+        <li><b>Золото,</b> <i>236.86 балла</i>
+            <ul>
+                <li>Татьяна Волосожар
+                <li>Максим Траньков
+            </ul>
+        <li><b>Серебро,</b> <i>218.68 балла</i>
+            <ul>
+                <li>Ксения Столбова
+                <li>Федор Климов
+            </ul>
+        <li><b>6-е место,</b> <i>199.60 балла</i>
+            <ul>
+                <li>Вера Базарова
+                <li>Юрий Ларионов
+            </ul>
+        </ul>
+        
+    </body>
+</html>
+
+...
+html, body{
+    margin:0;
+    padding:0;
+}
+body{
+    width:400px;
+    padding:0 25px;
+    font-family:"Arial", sans-serif;
+    font-size:12px;
+}
+h1{
+    font-size:16px;
+    font-weight:normal;
+}
+li{
+    margin-bottom:5px;
+}
+li li{
+    margin:0;
+}
+//////////////////
+
+
+Испытание 2: медальный зачёт 
+//////////////////
+<!DOCTYPE html>
+<html>
+    <head>
+       <title>2 испытание: медальный зачет</title>
+       <meta charset="utf-8">
+    </head>
+    <body>
+        <h1><b>Медальный зачет</b></h1>
+
+        <table>
+        
+            <td>
+                <td /*colspan="2"*/></td>
+                <td></td>
+                <td> <img src="/assets/ifmo/medal-gold.png"> </td>
+                <td> <img src="/assets/ifmo/medal-silver.png"> </td>
+                <td> <img src="/assets/ifmo/medal-bronze.png"> </td>
+                <td> <img src="/assets/ifmo/medal-total.png"> </td>
+                
+            </td>
+        
+            <tr>
+                <td class>1</td>
+                <td> <img src="/assets/ifmo/germany.png"> </td>
+                <td>Германия</td>
+                <td>7</td>
+                <td>3</td>
+                <td>2</td>
+                <td><b>12</b></td>
+            </tr>
+        
+            <tr>
+                <td>2</td>
+                <td> <img src="/assets/ifmo/nederlands.png"> </td>
+                <td>Нидерланды</td>
+                <td>5</td>
+                <td>5</td>
+                <td>7</td>
+                <td><b>17</b></td>
+           </tr>
+        
+        
+            <tr>
+                <td class="italic-seryi vpravo">3</td>
+                <td> <img src="/assets/ifmo/norway.png"> </td>
+                <td>Норвегия</td>
+                <td>5</td>
+                <td>3</td>
+                <td>6</td>
+                <td><b>14</b></td>
+            </tr>
+        
+            <tr>
+                <td>4</td>
+                <td> <img src="/assets/ifmo/switzerland.png"> </td>
+                <td>Швейцария</td>
+                <td>5</td>
+                <td>1</td>
+                <td>1</td>
+                <td><b>7</b></td>
+            </tr>
+        
+            <tr>
+                <td>5</td>
+                <td> <img src="/assets/ifmo/russia.png"> </td>
+                <td>Россия</td>
+                <td>4</td>
+                <td>7</td>
+                <td>5</td>
+                <td><b>16</b></td>
+            </tr>
+            
+        </table>
+
+        <!--
+        Адреса картинок:
+        /assets/ifmo/medal-gold.png
+        /assets/ifmo/medal-silver.png
+        /assets/ifmo/medal-bronze.png
+        /assets/ifmo/medal-total.png
+        /assets/ifmo/germany.png
+        /assets/ifmo/nederlands.png
+        /assets/ifmo/norway.png
+        /assets/ifmo/switzerland.png
+        /assets/ifmo/russia.png
+        -->
+        
+    </body>
+</html>
+........
+html, body{
+    margin:0;
+    padding:0;
+}
+body{
+    width:450px;
+    font-family:"Arial", sans-serif;
+    font-size:16px;
+}
+h1{
+    padding:0 20px;
+    margin:0;
+    margin-top:20px;
+    font-size:18px;
+    font-weight:normal;
+}
+
+table {
+    border-collapse: collapse;  
+    /*>>> так схлопываются (склеиваются) рамки таблицы и внешние рамки ячеек*/
+}
+
+td{
+padding:10px 20px;}   ----------------- для всех столбцов
+
+tr:nth-child(2n){
+background:#eeeeee;}  ----------------- для каждой четной строки
+
+td:nth-child(1){      ----------------- для первого столбца
+color:#999999;
+font-style:italic;}
+
+td:nth-child(2){     ------------------ для второго столбца
+padding-left:0px;}
+
+td:nth-child(3){    ------------------ для третьего столбца
+padding-left:0px;}
+
+td:last-child{     ------------------- для последнего столбца
+font-weight:bold;
+text-align:right;}
+
+/* 
+    Все внутренние отступы кратны 5
+    Серый цвет фона: #eeeeee
+    Серый цвет цифр: #999999
+*/
+////////////////////////////
+
+
+Испытание 3: фильтры по цене
+////////////////////////////
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>3 испытание: фильтры</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div class="range-filter">
+            <div class="range-controls">
+                <div class="scale"><div style="margin-left:50px;width:100px;" class="bar"></div></div>
+                <div class="toggle min-toggle"></div>
+                <div class="toggle max-toggle"></div>
+            </div>
+            <div class="price-controls">
+                от <input class="min-price" type="text" value="5 000">
+                до <input class="max-price" type="text" value="15 000">
+            </div>
+        </div>
+        <div class="range-filter">
+            <div class="range-controls">
+                <div class="scale"><div style="margin-left:10px;width:150px;" class="bar"></div></div>
+                <div class="toggle min-toggle" style="left:40px;"></div>
+                <div class="toggle max-toggle" style="left:180px;"></div>
+            </div>
+            <div class="price-controls">
+                от <input class="min-price" type="text" value="1 000">
+                до <input class="max-price" type="text" value="2 000">
+            </div>
+        </div>
+    </body>
+</html>
+
+............
+html,body{
+    margin:0;
+    padding:0;
+}
+body{
+    width:450px;
+    height:300px;
+    font-size:16px;
+    font-family:"Tahoma", sans-serif;
+    color:black;
+    background:white;
+}
+
+.range-filter{
+    padding-top:10px;
+    width:240px;
+    margin:auto;
+    margin-bottom:10px;
+}
+
+.range-controls {
+    position:relative;
+    height:80px;
+    margin-bottom:15px;
+    padding:0 30px;
+    background:#34495e;
+    border-radius:5px;
+    overflow:hidden;
+}
+
+.scale{
+    margin-top:39px;
+    height:2px;
+    background:#d7dcde;
+}
+
+.bar{
+    height:2px;
+    background:#00ca74;
+}
+
+.toggle {
+    position:absolute;
+    top:30px;
+    left:30px;
+    width:4px;
+    height:4px;
+    border:8px solid white;
+    background:#ababab;
+    cursor:pointer;
+    border-radius:50%;
+}
+
+.min-toggle{
+    left:70px;
+}
+
+.max-toggle {
+    left:165px;
+}
+
+input {
+    width:55px;
+    padding:8px 10px;
+    margin-left:10px;
+    border:none;
+    background:#34495e;
+    font-size:16px;
+    font-family:"Tahoma", sans-serif;
+    text-align:center;
+    color:#283136;
+    border-radius:5px;
+    color:white;
+}
+
+.price-controls .min-price {
+    margin-right:14px;
+}
+////////////////////////////////
+
+
+Испытание: рецепт на css [16/16]
+////////////////////////////////
+Испытание: рецепт на css [16/16]
+
+В последнем испытании курса «Разметка текста с помощью html» вам нужно было разметить рецепт каши с помощью подходящих тэгов.
+
+В этом испытании вам нужно оформить этот же рецепт. Однако, задача изменилась. Исходный html-код уже полностью готов и заблокирован для редактирования. Вам нужно применить изученные в этом курсе css-свойства к соответствующим элементам <span>.
+<!DOCTYPE html>
+<html>
+    <head>
+       <title>Пшенная каша с тыквой</title>
+       <meta charset="utf-8">
+    </head>
+    <body>
+        <h1>Пшенная каша с тыквой</h1>
+        <ol>
+            <li>Пшено, 1 стакан</li>
+            <li>Вода H<span class="sub">2</span>O или AquaLife<span class="sup">®</span>, 2 стакана</li>
+            <li>Молоко, <span class="del">1,5 стакана</span> 2 стакана</li>
+            <li>Масло сливочное, 3 ст.л.</li>
+            <li>Тыква, около 300г</li>
+            <li>Соль, по вкусу</li>
+            <li><span class="underline">Сахар демерара, посыпать сверху</span></li>
+        </ol>
+        <hr>
+        <span class="italic">Примечания:</span><br>
+        Пшено необходимо перебрать<br>
+        Тыкву нарезать кубиками 1х1 см<br>
+        Кашу перемешивать не надо<br>
+    </body>
+</html>
+
+..........................
+body{
+    width:260px;
+    margin:0;
+    padding:0 10px;
+    font-family:"Times New Roman";
+    font-size:16px;
+}
+
+h1{
+    font-size:18px;
+}
+
+.sub {
+    vertical-align:sub;		-------------------- сделали блок текста в нижний регистр и для наглядности уменьшили размер текста
+    font-size:0.8em;
+    }
+    
+.sup {
+    vertical-align:super;	------------------ сделали блок текста в верхний регистр и для наглядности уменьшили размер текста
+    font-size:0.8em;
+    }
+    
+.del {
+    text-decoration: line-through;	----------- блок текста сделали зачеркнутым
+    }
+    
+.underline {
+    text-decoration: underline;  --------------- блок текста сделали подчеркнутым снизу
+    }
+    
+.italic {
+    font-style: italic;		-------------- блок текста сделали наклонным
+    }
+
+
+
+///////////////////////////////
+Курс «Сетки»
+Испытание: котогалерея на inline-block [32/32]
+
+В этом испытании вам нужно доверстать галерею картин с котами с помощью блочно-строчных элементов.
+
+HTML-код полностью готов и заблокирован. CSS-код готов частично. Мы сделали заготовки стилей, чтобы вам не нужно было верстать всё с нуля и угадывать не относящиеся к сетке мелочи.
+
+Вам нужно доверстать рамки, задать внешние и внутренние отступы элементов галереи, а также выстроить их в указанную сетку.
+
+Примените те приёмы работы с блочно-строчными элементами, которые разбирались в предыдущих заданиях.
+//////////////////////////////
+<!DOCTYPE html>
+<html>
+    <head>
+       <title>Испытание: котогалерея на inline-block</title>
+       <meta charset="utf-8">
+    </head>
+    <body>
+        <div class="gallery">
+            <div class="item">
+                <div class="title">Кот в коробке</div>
+                <div class="frame">
+                    <div class="image image-1"></div>
+                    <div class="date">июль 2013</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="title">Кот и рыба</div>
+                <div class="frame">
+                    <div class="image image-2"></div>
+                    <div class="date">август 2013</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="title">Кот, который мурлыкал</div>
+                <div class="frame">
+                    <div class="image image-3"></div>
+                    <div class="date">октябрь 2013</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="title">Рыжий кот</div>
+                <div class="frame">
+                    <div class="image image-4"></div>
+                    <div class="date">ноябрь 2013</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="title">Этюд с валерьянкой</div>
+                <div class="frame">
+                    <div class="image image-5"></div>
+                    <div class="date">январь 2014</div>
+                </div>
+            </div>
+        </div>
+    </div>        
+</body>
+
+...............
+html, body{
+    margin:0;
+    padding:0;
+}
+body{
+    width:450px;
+    height:300px;
+    font-family:'Arial', sans-serif;
+    font-size:12px;
+}
+.gallery{
+    padding-top:10px;
+    
+    text-align:center;
+    font-size:0px;
+    
+}
+.gallery .item{
+    width:125px;
+    margin:0 10px;
+    margin-bottom:10px;
+    
+    display:inline-block;
+    text-align:left;
+    font-size:12px;
+        
+    
+}
+.gallery .title{
+    margin-bottom:5px;
+    line-height:14px;
+}
+.gallery .frame{
+    background:#ECF0F1;
+    
+    border:1px solid black;
+    padding-top:10px;
+        
+}
+.gallery .image{
+    height:70px;
+    background-position:50% 50%;
+    background-repeat:no-repeat;
+    
+    border-bottom:1px solid black;
+    border-top:1px solid black;
+    
+}
+.gallery .image-1{
+    background-color:#2ECC71;
+    background-image:url('/assets/course13/cat_box.png');
+}
+.gallery .image-2{
+    background-color:#3498DB;
+    background-image:url('/assets/course13/cat_fish.png');
+}
+.gallery .image-3{
+    background-color:#f1c40f;
+    background-image:url('/assets/course13/cat_purr.png');
+}
+.gallery .image-4{
+    background-color:#E67E22;
+    background-image:url('/assets/course13/cat_walk.png');
+}
+.gallery .image-5{
+    background-color:#E74C3C;
+    background-image:url('/assets/course13/cat_drunk.png');
+}
+.gallery .date{
+    color:#666;
+    font-style:italic;
+    font-size:11px;
+    
+    padding:5px;
+    
+}
+//////////////////////////////
+ПОМОЩЬ ПО ЗАДАНИЮ: Последняя строка (.item:nth-child(4){margin-left:80px;}) не нужна.
+Тоже хотел подогнать блоки, но никак не удавалось. Стоит также помнить, что для верстальщика важно не засорять код. А такие подгонки, вроде вашей или вроде моих (которые я вначале пытался провернуть и тоже, как и вы, с маргинами) засоряют код.
+Поэтому нужно подумать, почему при 100% коде блоки все-таки смещены. Все оказалось просто! Попробуйте применить обнуление размера шрифта.
+Подсказка: обнуляем тут .gallery, возобновляем вот тут .item
+Удачи! ;)
+////////////////////////////
+Чтобы выполнить данное задание на 100% необходимо внимательно прочитать теорию 28 и 31-го заданий. С пробелами Вы разберетесь в 31-мзадании путем изменения размера текста. С выравниванием ВСЕХ объектов посередине Вам поможет 28-е задание (вручную отступы margin-ом, вымеряя все до 1px делать не нужно!!). В 28-м повторите выравнивание текста и определите кто родитель, а кто дочерние блоки и как у ним это выравнивание применить. Из 30-го задания можно даже конструкцию .item:nth-child(3n) не использовать. Останется только внутренние отступы сделать при помощи padding в датах, ну и границы в нужных местах нарисовать.
+///////////////////////////
+
+
+
+
+
+Курс «Фоны»
+Испытание: котокомикс [8/16]
+
+В этом испытании мы отработаем использование фоновых цветов и изображений, а также их позиционирование.
+
+Адреса используемых картинок перечислены в комментарии в CSS-коде. А вот используемые цвета:
+-----------------------------
+body{
+    width:300px;
+    margin:0; 
+    padding:0;
+    padding-top:15px;
+    font-size:0;
+    text-align:center;
+    background:white;
+}
+.block{
+    display:inline-block;
+    width:90px;
+    height:90px;
+    margin-bottom:1px;
+    margin-right:1px;
+    background-color:black;
+}
+/*
+Используемые изображения:
+/assets/course13/cat_poo.png
+/assets/course13/cat_hiss.png
+/assets/course13/cat_walk.png
+/assets/course13/cat_slippers.png
+/assets/course13/cat_grumpy.png
+*/
+
+  /*  #000000 -черный
+    #f1c40f - желтый
+    #e74c3c - красный
+    #3498db - синий
+    #27ae60 - зеленый
+    #bdc3c7 - светло серый
+    #95a5a6 - темно серый */
+==========
+
+.block1 {
+    background: #000000 url('/assets/course13/cat_poo.png') no-repeat 50% 50%;
+    }
+
+.block2 {
+    background: #f1c40f url('/assets/course13/cat_poo.png') no-repeat 50% 50%;
+}
+
+
+.block3 {
+    background: #e74c3c url('/assets/course13/cat_hiss.png') no-repeat 50% 50%;
+}
+
+.block4 {
+    background: #3498db url('/assets/course13/cat_walk.png') no-repeat 230% 50%;
+}
+
+.block5 {
+    background: #3498db url('/assets/course13/cat_walk.png') no-repeat -120% 50%;
+}
+
+.block6 {
+    background: #27ae60 url('/assets/course13/cat_slippers.png') no-repeat 50% 50%;
+}
+
+.block7 {
+    background: #bdc3c7 url('') no-repeat 50% 50%;
+    }
+    
+.block8 {
+    background: #95a5a6 url('/assets/course13/cat_grumpy.png') no-repeat 160% 50%;
+} 
+
+.block9 {
+    background: #bdc3c7 url('/assets/course13/cat_grumpy.png') no-repeat -190% 50%;
+} 
+    
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+Курс «Фоны»
+Испытание: CAT Academy [16/16]
+
+В последнем испытании нужно собрать постер группы «CAT Academy». Адреса картинок и небольшая подсказка есть в комментариях в CSS-коде.
+
+Вы можете накладывать фоны друг на друга с помощью вложенных элементов, а можете использовать множественные фоновые изображения.
+
+Множественные фоновые изображения — это очень просто. Берёте знакомое свойство background и перечисляете в нем картинки через запятую. Например:
+
+background:
+    url('img1.png') no-repeat 0 0,
+    url('img2.png') repeat-x 50% 50%,
+    url('img3.png');
+
+В этом примере у элемента будет 3 фоновых картинки. Причем картинка img3.png будет в нижнем слое, а img1.png в верхнем. В множественных фоновых изображениях нельзя задавать фоновый цвет, поэтому он вынесен в отдельный блок.
+
+--------------------------------------------------------
+<!DOCTYPE html>
+<html>
+    <head>
+       <title>Испытание: CAT Academy</title>
+       <meta charset="utf-8">
+    </head>
+    <body>
+        <div class="block">
+            <div class="bg"></div>
+        </div>
+    </body>
+</html>
+----------------------------------------
+html, body{
+    margin:0; 
+    padding:0;
+}
+.block{
+    width:300px;
+    height:300px;
+    background:#3498db;
+}
+.bg{
+    height:300px;
+    background:
+        url('/assets/course13/cat_fish_128.png') no-repeat 90px 145px,
+        
+        url('/assets/course13/cat_grumpy_128.png') no-repeat 5px 125px,
+        url('/assets/course13/cat_drunk_128.png') no-repeat 160px 125px,
+        
+        url('/assets/course13/cat_walk_128.png') no-repeat 80px 80px,
+        
+        url('/assets/course13/cat_academy.png') no-repeat 20px 20px,
+        
+        url('/assets/course13/star.png') repeat-x 0 10px,
+        url('/assets/course13/star.png') repeat-x 0 270px;
+     
+}
+/*
+Адреса картинок:
+/assets/course13/cat_fish_128.png ---------- кот аквариум
+/assets/course13/cat_grumpy_128.png ------------- кот грустит
+/assets/course13/cat_drunk_128.png ----------- кот бухает
+/assets/course13/cat_walk_128.png ------------ кот идет
+/assets/course13/cat_academy.png ----------- надпись
+/assets/course13/star.png ------------- звездочка
+
+Подсказка:
+Все координаты (background-position) кратны либо 5, либо 10
+*/---------------------------------------------
+
+
+
+
+
+////////////////////////////////////////////////////////
+Курс «Мастерская: создаём меню»
+Испытание: горизонтальное меню [20/28]
+
+Оформите горизонтальное меню. HTML-код уже готов и его изменить невозможно.
+
+В испытании используются следующие цвета:
+
+    #FFFFFF ------------- белый
+    #2980B9 ------------ синий
+    #2C3E50 -------------- асфальт
+    #1ABC9C -------------- берюзовый
+
+Подсказки: все размеры и отступы кратны 5. Толщина рамок у пунктов меню 2px. Для борьбы с пробелами после инлайн-блоков используется приём с отрицательным маргином.
+-------------------------------------
+<!DOCTYPE html>
+<html>
+    <head>
+       <title>Испытание: горизонтальное меню</title>
+       <meta charset="utf-8">
+    </head>
+    <body>
+        <ul class="main-menu">
+            <li><a href="/courses">Курсы</a></li>
+            <li><a href="/demos">Демонстрации</a></li>
+            <li class="active"><a href="/public_profiles">Участники</a></li>
+            <li><a href="/achievements">Достижения</a></li>
+        </ul>
+    </body>
+</html>
+
+------------------
+html, body{
+margin:0;
+padding:0;
+}
+
+body{
+width:430px;
+min-height:280px;
+padding:10px;
+font-family:Arial, sans-serif;
+font-size:14px;
+line-height:1.4;
+background:#ecf0f1;
+}
+
+.main-menu{
+padding:0px;
+margin:0px;
+background:#2980B9;
+}
+
+.main-menu li{
+list-style:none;
+display:inline-block;
+margin-right:-5px;
+border-left:2px solid #2C3E50;
+}
+
+.main-menu a{
+display:block;
+text-decoration:none;
+color:white;
+padding:10px 15px;
+}
+
+.main-menu .active{
+background:#1ABC9C;
+}-------------------
+
+
+
+
+Отображаем подменю при наведении [23/28]
+
+Последний этап — добавление интерактивности.
+
+Сначала прячем выпадающее подменю по умолчанию, с помощью display:none;.
+
+Затем делаем так, чтобы при наведении мыши на пункт меню, внутри которого расположено подменю, оно появлялось. Для этого используем контекстный селектор в сочетании с псевдоклассом :hover и display:block;.
+Что повторить:
+
+    display: none
+    Динамические эффекты с помощью :hover
+------------------------------------------
+Задание
+
+    Спрячьте подменю по умолчанию.
+    Сделайте так, чтобы оно появлялось при наведении на родительский элемент списка.
+    Наведите мышь на второй пункт, чтобы подменю появилось.
+----------------------------------------
+.main-menu{
+    width:180px;
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+.main-menu a{
+    display:block;
+    padding:8px 14px;
+    margin-bottom:-1px;
+    color:#0088CC;
+    text-decoration:none;
+    border:1px solid #E5E5E5;
+}
+.main-menu a:hover{
+    background:#F5F5F5;
+}
+.main-menu>li{
+    position:relative;
+}
+.main-menu .sub-menu{ ------------------------ тут этого блока не видно
+    position:absolute;
+    top:5px;
+    left:170px;
+    z-index:10;
+    width:150px;
+    padding:0;
+    margin:0;
+    list-style:none;
+    background:#FCF8E3;
+    display:none;
+}
+
+
+/* селектор для подменю, если навести мышь */ ----------------------------- тут блок появляется при наведении на родителя 
+/* на родительский элемент верхнего меню */
+.main-menu>li:hover .sub-menu{
+    display:block;
+}
+
+
+
+///////////////////////////
+Курс «Мастерская: декоративные элементы»
+Испытание: анонс поста [18/18]
+
+Финальное испытание достаточно сложное, поэтому HTML-разметку делать не придется. Но обилие множества декоративных элементов заставит вас попотеть.
+
+Адреса картинок и подсказки есть в комментарии в CSS-коде. А вот используемые цвета:
+
+    #ffffff
+    #7f8c8d
+    #2980b9
+    #bdc3c7
+-----------------------------
+<!DOCTYPE html>
+<html>
+
+    <head>
+       <title>Испытание: анонс поста</title>
+       <meta charset="utf-8">
+    </head>
+    
+    <body>
+        <div class="post">
+            
+            <div class="post-title">Интенсив: программа</div>
+            
+            <div class="post-date">13.09</div>
+            
+            <div class="post-type"></div>
+            
+            <div class="post-author">
+                Автор: <a href="#">HTML Academy</a>
+            </div>
+            
+            <div class="post-stats">
+                <div class="icon icon-tags"> </div> 
+                <a href="#">интенсив</a>,
+                <a href="#">программа</a>
+            </div>
+            
+            <div class="post-stats">
+                <div class="icon icon-comments"></div>
+                <a href="#">5</a>
+            </div>
+            
+            <div class="post-text">Работа над интенсивом идёт полным ходом. Мы нашли крутых людей в команду и решили еще кучу задач. Но сегодня я подробнее расскажу о работе над программой интенсива.</div>
+            </div>
+            
+    </body>
+    
+</html>
+-----------------------------
+html, body{
+    margin:0;
+    padding:0;
+}
+body{
+    width:280px;
+    min-height:250px;
+    padding-top:50px;
+    padding-left:10px;
+    padding-right:10px;
+    font-size:12px;
+    font-family:"Arial", sans-serif;
+    line-height:1.2;
+    color:#7f8c8d;
+    background:#ecf0f1;
+}
+
+.post {
+    position:relative;
+    }
+
+.post-title {
+    color: #2980b9;
+    font-size:20px;
+    margin-left: 75px;
+    }
+    
+.post-author {
+    margin-left: 75px;
+    padding: 5px;
+    }
+    
+.post-author a {
+    position:inline-block;
+    text-decoration:none;
+    color: #2980b9;
+    }        
+    
+.post-date {
+    position:absolute;
+    top:0;
+    width:60px;
+    height: 60px;
+    background:white;
+    font-size:15px;
+    font-weight:bold;
+    text-align:center;
+    vertical-align:middle;
+    border-bottom: 5px solid #bdc3c7;
+    }
+
+.post-type {
+    position:absolute;
+    top:75px;
+    width:60px;
+    height: 60px;
+    background:#7f8c8d;
+    border-bottom: 5px solid #bdc3c7;
+    background-image:url('/assets/course14/quotes.png');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    }
+
+
+.post-stats {
+    display: inline-block;
+    position:relative;
+    margin-left: 75px;
+    padding-left:0px;
+    }
+    
+.post-stats a {
+    text-decoration:none;
+    color: #2980b9;
+    }    
+    
+.post-stats .icon{
+    display:inline-block;
+    position:relative;
+    width:15px;
+    height:15px;
+}
+
+.post-stats .icon-tags {
+    background-image:url('/assets/course14/post-challenge.png');
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    }
+
+.post-stats .icon-comments {
+    background-image:url('/assets/course14/post-challenge.png');
+    background-repeat: no-repeat;
+    background-position: -20px 0;
+    }
+
+.post-text {
+    margin-left: 75px;
+    background:white;
+    padding: 10px 15px;
+    font-size:12px;
+    border-bottom: 5px solid #bdc3c7;
+    }
+    
+/*
+Все размеры, отступы, координаты, размеры шрифтов (не заданные в body) кратны 5 или 10.
+Ардеса картинок:
+/assets/course14/quotes.png
+/assets/course14/post-challenge.png
+Картинка "кавычки" выровнена по центру
+*/
+
+/*Финальное испытание достаточно сложное, поэтому HTML-разметку делать не придется. Но обилие множества декоративных элементов заставит вас попотеть.
+
+Адреса картинок и подсказки есть в комментарии в CSS-коде. А вот используемые цвета:
+
+    #ffffff - белый
+    #7f8c8d -  серый
+    #2980b9 - синий
+    #bdc3c7 - светло-серый
+*/--------------------------
+
+
+
+
+////////////////////////////
+Курс «Завершающие испытания»
+Испытание 1: красивая форма входа [1/3]
+
+Ваша задача заключается в том, чтобы сверстать форму входа.
+
+Подсказки:
+
+    все размеры, отступы, координаты, размеры шрифта кратны 5, кроме тех, что указаны в исходном CSS;
+    толщина рамок полей 2px, поэтому они будут чуть меньше кнопки;
+    текстовые поля и кнопки свёрстаны без задания высоты, вместо этого используются внутренние отступы;
+    подсказки в полях созданы с помощью атрибута placeholder, стилизовать его не надо;
+    остальные подсказки ищите в CSS.
+----------------------
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Испытание 1: красивая форма</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    
+        <form class="login-form" action="/auth" method="post">
+        
+            <span> Вход в кабинет </span>
+            <input type="text" placeholder="Логин">
+            <input type="password" placeholder="Пароль">
+            
+            <div class="underfield clearfix">
+		    <input type="checkbox">
+		    <span class="remember-me">Запомните меня</span>
+		    <span class="forgot-password">Я забыл пароль</span>
+	    </div>
+        
+       	    <input type="submit" value="Войти">
+            
+        </form>
+        
+    </body>
+</html>
+----------------------
+html, body{
+    margin:0;
+    padding:0;
+}
+body{
+    width:450px;
+    height:300px;
+    padding-top:20px;
+    font-size:16px;
+    font-family:"Tahoma", sans-serif;
+    line-height:1.3;
+    background:#34495e;
+}
+.login-form,
+.login-form input[type="text"],
+.login-form input[type="password"],
+.login-form input[type="submit"] {
+    font-weight:bold;
+    font-size:12px;
+    font-family:"Tahoma", sans-serif;
+    text-transform:uppercase;
+}
+.login-form input[type="checkbox"]{
+    vertical-align:middle;
+    margin-right:5px;
+}
+
+form.login-form {
+background:white;
+display:block;
+width:340px;
+height:255px;
+margin-left:35px;
+padding-left:40px;
+padding-top:20px;
+}
+
+.login-form span {
+display:block;
+font-size:20px;
+padding-bottom:5px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+position:relative;
+display:block;
+border:2px solid black;
+margin-top:10px;
+width:279px;
+height:33px;
+padding-left:15px;
+text-transform:none;
+background:#f9f6f3 url('/assets/ifmo/icon-user.png') no-repeat 270px 50%;
+}
+
+.login-form input[type="password"] {
+background:#f9f6f3 url('/assets/ifmo/icon-lock.png') no-repeat 270px 10px;
+}
+
+.underfield {
+padding:0px;
+margin:0px;
+margin-top:15px;
+}
+
+.clearfix:after {
+content:'';
+display:table;
+clear:both;
+}
+
+.login-form input[type="checkbox"] {
+display:inline-block;
+float:left;
+margin-right:9px;
+margin-left:3px;
+padding:0;
+}
+
+.login-form span.remember-me {
+font-size:12px;
+display:inline-block;
+float:left;
+padding:0;
+}
+
+.login-form span.forgot-password {
+font-size:12px;
+display:inline-block;
+padding:0;
+float:right;
+margin-right:40px;
+text-decoration:underline;
+}
+
+.login-form input[type="submit"] {
+padding-top:4px;
+margin-top:15px;
+width:300px;
+height:45px;
+background-color:black;
+color:white;
+border:none;
+
+/*
+Адреса иконок:
+/assets/ifmo/icon-user.png
+/assets/ifmo/icon-lock.png
+Цвет фона полей:
+#f9f6f3
+Цвет кнопки:
+#000000
+Фон формы:
+#ffffff
+*//////////////////////////
+
+
+
+///////////////////////////
+Испытание 2: слайдер [2/3]
+
+Ваша задача заключается в том, чтобы сверстать слайдер.
+
+Подсказки:
+
+    все размеры, отступы, координаты, размеры шрифта, высоты строк кратны 5, кроме тех, что указаны в исходном CSS;
+    переключатели слайдов — не поля формы;
+    для закруглений используется свойство border-radius;
+    остальные подсказки ищите в CSS.
+------------------------------------------
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Испытание 2: слайдер</title>
+        <meta charset="utf-8">
+    </head>
+    
+    <body>
+    
+        <div class="head">Долго, дорого, скрупулезно</div>
+        
+        <div class="slogan">Математически выверенный дизайн для вашего сайта или мобильного приложения.</div>
+        
+        <div class="more">Узнать больше</div>
+        
+        <div class="slider">
+            <div class="target gotcha"></div>	----------------- применены 2 класса для точки на цели
+            <div class="target"></div>		----------------- применены 3 дива в в иде кружков (прикольно) все вписаны в инлайн-блок
+            <div class="target"></div>
+        </div>
+        
+    </body>
+    
+</html>
+-----------------------------------------
+html,body{
+    margin:0;
+    padding:0;
+}
+body{
+    width:520px;
+    height:250px;
+    font-size:16px;
+    font-family:"Tahoma", sans-serif;
+    line-height:20px;
+    color:black;
+    background:#eeeeee url('/assets/ifmo/slide-bg.png') no-repeat 280px 82px;	---------------- изящно картинка запихнута как фон в боди
+    padding:40px 20px;
+}
+.head {
+    font-size:25px;
+    font-weight:bold;
+    width:250px;
+    line-height:25px;
+}
+.slogan {
+    margin-top:16px;
+    width:250px;
+}
+.more {
+    font-size:15px;
+    background-color:#fb565a;
+    width:180px;
+    height:20px;
+    color:white;
+    padding:10px;
+    text-transform:uppercase;
+    text-align:center;
+    border-radius:5px;
+    margin-top:25px;
+}
+.slider {
+    margin:29px 205px;
+}
+.target {
+    display:inline-block;	------------------- 3 дива в виде кружков вписаный в инлайн-блок и на первый из них наложен кружок как 								попадание
+    margin-right:5px;
+    width:5px;
+    height:5px;
+    background:#666666;
+    border:5px solid #666666;
+    border-radius:10px;
+}
+.gotcha {
+    background:white;
+}
+
+
+
+/* 
+Адрес фоновой картинки слайда:
+/assets/ifmo/slide-bg.png
+Используемые цвета:
+#666666
+#ffffff
+#fb565a
+*/
+
+
+/*
+Испытание 2: слайдер [2/3]
+
+Ваша задача заключается в том, чтобы сверстать слайдер.
+
+Подсказки:
+
+    все размеры, отступы, координаты, размеры шрифта, высоты строк кратны 5, кроме тех, что указаны в исходном CSS;
+    переключатели слайдов — не поля формы;
+    для закруглений используется свойство border-radius;
+    остальные подсказки ищите в CSS.
+*/
+/////////////////////////////////////////////////
+
+
+
+
+
+//////////////////////////////////////////////
+
+Курс «Завершающие испытания»
+Испытание 3: товары в каталоге [3/3]
+
+Ваша задача заключается в том, чтобы сверстать мини-каталог из двух товаров.
+
+Подсказки:
+
+    это испытание сделано в формате знакомой вам головоломки: весь код готов, осталось только подобрать селекторы;
+    один из селекторов такой .price:after, в нём используется псевдоэлемент after.
+
+------------------------------------<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Испытание 3: каталог</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+
+        <div class="catalog-items">
+
+            <div class="catalog-item">
+
+                <div class="flag flag-new">новинка</div>
+
+                <div class="actions">
+                    <a href="#" class="btn buy">Купить</a>
+                    <a href="#" class="btn bookmark">В закладки</a>
+                </div>
+
+                <div class="image"><img width="218" height="168" src="/assets/ifmo/product.jpg"></div>
+
+                <div class="title">Перфоратор BOSCH</div>
+
+                <div class="price">15 500 Р.</div>
+
+            </div>
+
+
+            <div class="catalog-item">
+
+                <div class="actions">
+                    <a href="#" class="btn buy">Купить</a>
+                    <a href="#" class="btn bookmark">В закладки</a>
+                </div>
+
+                <div class="image"><img width="218" height="168" src="/assets/ifmo/product.jpg"></div>
+
+                <div class="title">Перфоратор HUMMER</div>
+
+                <div class="price">14 500 Р.</div>
+
+            </div>
+
+        </div>
+
+    </body>
+</html>
+--------------------------------------------
+html,body{
+    margin:0;
+    padding:0;
+}
+
+body{
+    width:500px;
+    height:310px;
+    font-size:14px;
+    font-family:"Tahoma", sans-serif;
+    color:black;
+    background:#ecf0f1;
+}
+
+.catalog-items {
+    width:470px;
+    margin:auto;
+    padding-top:10px;
+}
+
+.catalog-item {
+    position:relative;
+    display:inline-block;
+    width:218px;
+    margin-right:20px;
+    border:1px solid #ccc;
+    line-height:20px;
+    font-weight:bold;
+    text-align:center;
+    vertical-align:top;
+    background:white;
+}
+
+.catalog-item:last-child {
+    margin-right:0;
+}
+.flag {
+    position:absolute;
+    top:-1px;
+    right:-1px;
+    width:60px;
+    height:60px;
+    text-indent:-1000px;
+    overflow:hidden;
+     z-index:20;
+}
+
+.flag-new {
+    background:url("/assets/ifmo/new-flag.png") no-repeat 0 0;
+}
+
+.flag+.actions {
+    position:absolute;
+    top:0;
+    left:0;
+    width:218px;
+    height:88px;
+    padding:40px 0;
+    background-color:rgba(255,255,255,0.9);
+    z-index:10;
+}
+
+.flag+.actions>.btn {
+    display:block;
+    width:129px;
+    margin:0 auto;
+    margin-bottom:7px;
+    padding:7px 0;
+    border:3px solid #63a63e;
+    border-bottom-color:#367315; 
+    background-color:#63a63e;
+    color:white;
+    font-size:12px;
+    font-weight:normal;
+    font-family:"Tahoma", sans-serif;
+    line-height:18px;
+    text-decoration:none;
+    text-transform:uppercase;
+    border-radius:3px;
+}
+
+.flag+.actions>.bookmark {
+    color:#32425c;
+    background:white;
+    border-bottom-color:#63a63e;
+}
+
+.btn {
+    display:none;
+}
+
+.image {
+    width:218px;
+    height:168px;
+}
+.title {
+    min-height:20px;
+    padding:0 20px;
+    margin-top:10px;
+    margin-bottom:15px;
+}
+
+.price {
+    position:relative;
+    width:80px;
+    margin:10px auto;
+    margin-bottom:20px;
+    padding:10px 30px;
+    color:white;
+    background:#ee3643;
+    border-radius:3px;
+}
+
+.price:after {	-------------------------делает триугольник дял последней кнопки
+    content:"";
+    position:absolute;
+    top:0;
+    right:-20px;
+    width:0;
+    height:0;
+    border:20px solid white;
+    border-left-color:#ee3643;
+}
+///////////////////////////////////////////////
+
+
+
+
+

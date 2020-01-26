@@ -1,0 +1,118 @@
+Самый Краткий мой манул по установуке проекта под Джаного
+(вариант без клонирования проекта из репозитория гитхаб - то есть чистая установка)
+
+1)
+ryndin@pc:~$ cd workprojects/
+ryndin@pc:~/workprojects$ ls
+code_work  jquery_code  studentsdb27  testSite  virtualenv27
+
+ryndin@pc:~/workprojects$ mkdir djbooksite
+ryndin@pc:~/workprojects$ cd djbooksite/
+
+ryndin@pc:~/workprojects/djbooksite$ ls
+
+ryndin@pc:~/workprojects/djbooksite$ virtualenv -p /usr/bin/python2.7 djbooksite --no-site-packages --prompt=="(djbooksite)"
+
+Running virtualenv with interpreter /usr/bin/python2.7
+...
+Installing setuptools, pkg_resources, pip, wheel...done.
+
+ryndin@pc:~/workprojects/djbooksite$ cd djbooksite/
+ryndin@pc:~/workprojects/djbooksite/djbooksite$ ls
+bin  include  lib  local  pip-selfcheck.json  share
+
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite$ which python
+/home/ryndin/workprojects/djbooksite/djbooksite/bin/python
+
+
+2)
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite$ mkdir project
+
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite$ cd project/
+
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite/project$ pip freeze
+appdirs==1.4.3
+packaging==16.8
+pkg-resources==0.0.0
+pyparsing==2.2.0
+six==1.10.0
+
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite/project$ pip install django 
+
+Collecting django
+  Downloading Django-1.11-py2.py3-none-any.whl (6.9MB)
+...
+Successfully installed django-1.11 pytz-2017.2
+
+
+3)
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite/project$ ../bin/django-admin startproject djbooksite
+
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite/project$ ls
+djbooksite
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite/project$ cd djbooksite/
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite/src/djbooksite$ ls
+djbooksite  manage.py
+
+
+4)
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite/src/djbooksite$ python manage.py runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 13 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+       // добавить миграции для создания БД (но пока это sqlite)
+
+April 15, 2017 - 10:55:07
+Django version 1.11, using settings 'djbooksite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+
+
+4)
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite/src/djbooksite$ python manage.py makemigrations         **
+    No changes detected
+
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite/src/djbooksite$ python manage.py migrate                **
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying sessions.0001_initial... OK
+
+
+5)
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite/src/djbooksite$ python manage.py createsuperuser                **
+Username (leave blank to use 'ryndin'): ryndin
+Email address: ryndin@i.ua
+Password: 
+Password (again): 
+Superuser created successfully.
+
+http://localhost:8000/admin/        -- доступно
+
+
+6)
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite/src/djbooksite$ python manage.py startapp pollsapp      **
+=(djbooksite)ryndin@pc:~/workprojects/djbooksite/djbooksite/src/djbooksite$ ls
+db.sqlite3  djbooksite  manage.py  pollsapp
+
+
+
+
+
+
+

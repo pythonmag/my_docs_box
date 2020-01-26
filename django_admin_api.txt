@@ -1,0 +1,236 @@
+
+1)
+https://docs.djangoproject.com/en/1.11/ref/contrib/admin/
+https://djbook.ru/rel1.9/ref/contrib/admin/index.html
+https://djbook.ru/rel1.9/ref/contrib/admin/actions.html
+
+
+2)
+В Документации подробно описаны настройки settings.py с необходимыми апликациями для Админки
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'students',
+    'crispy_forms',
+]
+
+
+3)
+файл Проекта admin.py
+---------------------
+Подключения Моделей проекта к Админ Панели
+---------------------
+Изначально я его уже настраивал Активируя(Регистрирую) Модели Классы для БД
+В этом же файле происходят все настройки Метаданных для Отображения Панели Администратора
+
+	from django.contrib import admin
+	from .models import Programmer, Team
+
+	# Register your models here.
+	admin.site.register(Programmer)
+	admin.site.register(Team)
+
+
+Усі зміни відбуваються через власний Python клас, який повинен унаслідуватись від ModelAdmin.
+
+
+Атрибуты и Методы (Самые Популярные):
+-----------------
+
+actions
+    список додаткових дій над елементами в списку моделей; зазвичай ці дії розробнику
+    потрібно самому реалізувати;
+
+
+actions_selection_counter
+    показувати чи ні лічильник вибраних серед списку об’єктів;
+	
+
+exclude
+    список полів, які виключити із форми редагування моделі;	
+	
+
+fields
+    список полів, які включити у форму редагування моделі;
+
+
+form
+    призначення кастомного класу форми; використовується для серйозніших змін у функціонал
+	та вигляд форми редагування моделі
+	
+
+list_display
+    список полів моделі для відображення у списку;
+	
+
+list_display_links
+    які із полів моделі у списку будуть огорнуті в лінк, який вказуватиме
+    на форму редагування об’єкта
+	
+
+list_editable
+    список полів, які можна буде поредагувати прямо у списку об’єктів;
+    не заходячи на форму редагування; (похоже только для селектов / нужен выбор)
+	
+
+list_filter
+    список полів для генерації фільтрів;
+
+
+list_per_page
+    кількість об’єктів на одній сторінці;
+	
+
+ordering
+    список полів, по яких початково сортувати об’єкти;
+
+
+readonly_fields
+    список полів, які не можна буде редагувати на формі;
+
+
+search_fields
+    список полів, по яких можна буде робити пошук об’єктів;
+	
+
+view_on_site
+    метод, що повертає URL адресу до фронт-енд в’юшки об’єкта.
+
+
+
+4)
+// Пример, тут все понятно, другие опции надо потом изучить:
+=======================
+# -*- coding: utf-8 -*-
+
+from django.contrib import admin
+from django.core.urlresolvers import reverse
+
+from .models import Programmer, Team
+
+
+class ProgrammerAdmin(admin.ModelAdmin):
+
+    list_display = ['last_name', 'first_name', 'programmer_team', 'notes']
+    list_display_links = ['last_name', 'first_name', 'notes']
+
+    list_editable = ['programmer_team']
+    ordering = ['last_name']
+
+    list_filter = ['programmer_team']
+    list_per_page = 7
+
+    search_fields = ['last_name', 'first_name', 'middle_name', 'notes']
+
+    def get_view_on_site_url(self, obj=None):
+
+        return reverse('programmer_edit', kwargs={'pk': obj.id})
+
+
+class TeamAdmin(admin.ModelAdmin):
+
+    list_display = ['name', 'leader', 'notes']
+    list_display_links = ['name', 'notes']
+
+    list_editable = ['leader']
+    ordering = ['name']
+
+    list_filter = ['leader']
+    list_per_page = 7
+
+    search_fields = ['name', 'leader', 'notes']
+
+	# Перекидывает на Форму на Сайте
+    def get_view_on_site_url(self, obj=None):			
+
+        return reverse('team_edit', kwargs={'pk': obj.id})
+
+
+5)
+# Регистрация в Админке
+admin.site.register(Programmer, ProgrammerAdmin)
+admin.site.register(Team, TeamAdmin)
+-----------------------------
+По логике Кастомизации Админки путем назначения атрибутов вопросов впринципе не возникло -
+нужно больше практики и все будет автоматически.
+
+
+6)
+Валидация Выбора Старосты Группы
+==========================
+Суть - если студент выбран Старостой Группы то он не может быть еще раз выдран Старостой
+другой группы
+
+Код работает я его приведу чтобы потом плотнее разобраться:
+
+# -*- coding: utf-8 -*-
+from django.contrib import admin
+from django.core.urlresolvers import reverse
+from django.forms import ModelForm, ValidationError
+
+from . models import Student, Group, Exam
+
+
+class StudentFormAdmin(ModelForm):
+
+    def clean_student_group(self):
+
+        groups = Group.objects.filter(leader=self.instance)
+
+        if len(groups) > 0 and self.cleaned_data['student_group'] != groups[0]:
+            raise ValidationError(u'Студент Уже является Старостой другой Группы', code='invalid')
+
+        return self.cleaned_data['student_group']
+
+class StudentAdmin(admin.ModelAdmin):
+    model = StudentFormAdmin
+
+    list_display = ['id', 'last_name', 'first_name', 'ticket', 'student_group', 'notes', 'birthday', 'have_breakfast']
+    ...
+
+
+Пояснения к нему из Книги Виталия:
+--------------------
+Давайте порядково пройдемось по останніх оновленнях:
+    -- декларуємо клас StudentFormAdmin, який унаслідує від ModelForm;
+
+    -- у Django формах перед викликом методів is_valid та is_invalid викликаються методи
+    валідації та перетворення даних із назвами clean_[назва поля]; ми скористались даним
+    підходом та перекрили метод валідація саме поля групи “clean_student_group”; він не
+    приймає жодних атрибутів, але поточний об’єкт форми має атрибут cleaned_data, яким
+    ми і скористаємось, щоб дізнатись яку саме групу обрав користувач на формі редагування
+    студента;
+
+    -- витягуємо усі групи з бази даних, в яких даний студента є призначений старостою;
+    
+-- якщо даний студент є старостою хоча б в одній групі, а також ця група не співпадає із
+    групою, яка була щойно обрана на формі редагування...;
+
+    -- тоді викидаємо спеціальну помилку ValidationError, якій передаємо повідомлення для
+    відображення користувачеві;
+    -- у випадку, якщо валідація проходить успішно, ми просто повертаємо значення обраного
+    поля student_group із методу;
+    -- прив’язуємо наш клас форми до адмін в’юшки.
+Тепер, щоб потестувати наш валідатор, потрібно відповідно налаштувати групу та студента.
+В одній із груп додайте студента в якості старости. Потім на формі редагування даного
+студента спробуйте обрати іншу групу і зберегти. При цьому ви повинні отримати повідомлення
+над полем: “Студент є старостою іншої групи.”.
+
+
+
+
+------------------
+2019 
+
+https://docs.djangoproject.com/en/3.0/intro/tutorial07/#customize-the-admin-form
+
+https://docs.djangoproject.com/en/3.0/ref/contrib/admin/#modeladmin-options
+
+https://docs.djangoproject.com/en/3.0/ref/contrib/admin/actions/#admin-actions
+
+
+

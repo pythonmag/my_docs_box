@@ -1,0 +1,136 @@
+
+MDN JS ...
+Mozilla Developer Network
+====================
+Все о синтаксисе JS (поиск в Гугле)
+
+
+
+Подробный план по изучению JavaScript
+====================
+ООП js (конструкторы, фабрики. наследование/
+Функциональный js (функции, замыкания. рекурсия/
+ HTML / css / jQuery )
+Алгоритмы ( курс статей в mega_tutorials.txt)
+-----------------
+https://tproger.ru/sponsored/javascript-curriculum/
+
+
+
+Базовый Курс по JS
+(от руды / в Ютюбе / на англ)
+==================
+1)
+Variables - Beau teaches JavaScript
+----------
+https://www.youtube.com/watch?list=PLWKjhJtqVAbk2qRZtWSzCIN38JC_NdhW5&v=le-URjBhevE
+
+2)
+Data Types - Beau teaches JavaScript
+----------
+https://www.youtube.com/watch?v=808eYu9B9Yw&index=2&list=PLWKjhJtqVAbk2qRZtWSzCIN38JC_NdhW5
+
+......
+
+
+Эпичный Курс по JS
+(от SORAX / в Ютюбе / на русском)
+==================
+
+Javascript-джедай #1 - Введение
+https://www.youtube.com/watch?v=H6G63NKRSi8&list=PL363QX7S8MfSxcHzvkNEqMYbOyhLeWwem
+
+Javascript-джедай #2 - Инструкции
+https://www.youtube.com/watch?v=5JEkiHHUOFs&index=2&list=PL363QX7S8MfSxcHzvkNEqMYbOyhLeWwem
+
+Javascript-джедай #3 - Выражения и операторы
+https://www.youtube.com/watch?v=-GWOP5JdPpo&list=PL363QX7S8MfSxcHzvkNEqMYbOyhLeWwem&index=3
+
+Javascript-джедай #4 - Типы данных и переменные
+https://www.youtube.com/watch?v=t19W25ROjss&index=4&list=PL363QX7S8MfSxcHzvkNEqMYbOyhLeWwem
+
+................ и еще много всего
+
+
+
+Академический курс по JS
+(от Казаха Давлеткалиева / в Ютюбе)
+========================
+
+JavaScript, урок 1: Введение. Числа
+https://www.youtube.com/watch?v=aGTjRU7Dp20
+
+JavaScript, урок 2: Строки. Объекты. Прототипы.
+https://www.youtube.com/watch?v=TAdEY2Rcuwo
+
+JavaScript, урок 3: Функции. Замыкания.
+https://www.youtube.com/watch?v=r-W_BUG3EbI
+
+JavaScript, урок 4: Наследование
+https://www.youtube.com/watch?v=-wY3IYmQzzc
+
+JavaScript, урок 5: Массивы
+https://www.youtube.com/watch?v=cTeBlVn_lyk
+
+JavaScript, урок 6: Регулярные выражения
+https://www.youtube.com/watch?v=VCgAvj9meHg
+
+JavaScript, урок 7: Сравнения, var, eval и заключение   / the end
+https://www.youtube.com/watch?v=-jZS8p5_quo
+
+
+
+Интерактивные учебники
+======================
+
+1)
+JS на русском языке
+-------------------
+https://learn.javascript.ru/
+
+
+Язык JavaScript (подкурс)
+---------------
+https://learn.javascript.ru/getting-started
+
+
+Документ, события, интерфейсы (подкурс)
+-----------------
+https://learn.javascript.ru/document
+
+
+JavaScript Cookbook
+интерактивный учебник JS
+-------------------
+http://chimera.labs.oreilly.com/books/1234000001681/index.html
+
+
+Programming JavaScript Applications
+Интерактивный учебник JS
+------------------------
+http://chimera.labs.oreilly.com/books/1234000000262/index.html
+
+
+
+Курс JS - база как сказал Виталий (прохожу)
+==================
+...
+
+Обучение JavaScript для начинающих. Часть 2. Условные и циклические конструкции
+https://youtu.be/xvNC6jy7VyI?t=10m13s
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

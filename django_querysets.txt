@@ -1,0 +1,415 @@
+
+QuerySet API  (объект данных из БД / Моделей)
+============
+https://docs.djangoproject.com/en/3.0/ref/models/querysets/ 
+ 
+https://docs.djangoproject.com/en/3.0/topics/db/sql/#performing-raw-sql-queries
+
+https://docs.djangoproject.com/en/3.0/topics/db/managers/#managers
+------------------
+Переопределение (Кастомизация) Менеджера Объекта КвериСет
+https://docs.djangoproject.com/en/3.0/topics/db/managers/#modifying-a-manager-s-initial-queryset
+
+
+https://docs.djangoproject.com/en/3.0/ref/models/querysets/#q-objects
+
+https://docs.djangoproject.com/en/3.0/ref/models/expressions/#f-expressions
+
+
+
+===========================
+
+Когда вычисляется QuerySets
+for e in Entry.objects.all():          ## фактически делает копию Объектов из БД (И кеширует данные) -- много разовая штука
+    print(e.headline)
+    // например итерация
+
+
+>>> dir(models.Question)
+['DoesNotExist', 'MultipleObjectsReturned', '__class__', '__delattr__', '__dict__', '__doc__', '__eq__', 
+'__format__', '__getattribute__', '__hash__', '__init__', u'__module__', '__ne__', '__new__', '__reduce__', 
+'__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', 
+'__unicode__', '__weakref__', '_check_column_name_clashes', '_check_field_name_clashes', '_check_fields', 
+'_check_id_field', '_check_index_together', '_check_local_fields', '_check_long_column_names', 
+'_check_m2m_through_same_relationship', '_check_managers', '_check_model', '_check_model_name_db_lookup_clashes', 
+'_check_ordering', '_check_swappable', '_check_unique_together', '_do_insert', '_do_update', '_get_FIELD_display', 
+'_get_next_or_previous_by_FIELD', '_get_next_or_previous_in_order', '_get_pk_val', '_get_unique_checks', 
+'_meta', '_perform_date_checks', '_perform_unique_checks', '_save_parents', '_save_table', '_set_pk_val', 
+'check', 'choice_set', 'clean', 'clean_fields', 'date_error_message', 'delete', 'from_db', 'full_clean', 
+
+ 'get_deferred_fields',
+ 'get_next_by_pub_date',
+ 'get_previous_by_pub_date', 
+ 'id',
+ 'objects',
+ 'pk', 'prepare_database_save',
+ 'pub_date',
+ 'question_text',
+ 'refresh_from_db', 'save', 'save_base', 'serializable_value', 'unique_error_message', 'validate_unique',
+ 'was_published_recently']
+
+
+
+
+objects.all()
+=============
+from pollsapp import models
+>>> q = models.Question.objects.all()
+>>> q
+<QuerySet [<Question: question say: What is your favorit pet?>, <Question: question say: What is your age?>, <Question: question say: What is your favirit Name ??>]>
+
+
+
+len(QuerySet)           -- метод длинны списка
+=============
+>>> len(models.Question.objects.all())
+3
+
+
+repr(QuerySet)          -- метод презентации
+=============
+>>> repr(models.Question.objects.all())
+
+'<QuerySet [<Question: question say: What is your favorit pet?>, <Question: question say: What is your age?>, <Question: question say: What is your favirit Name ??>]>'
+
+
+list(QuerySet)          -- метод списка
+=============
+list(models.Question.objects.all())
+
+[<Question: question say: What is your favorit pet?>, <Question: question say: What is your age?>, <Question: question say: What is your favirit Name ??>]
+
+
+>>> dir(models.Question.objects)
+
+['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', 
+'__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', 
+'__sizeof__', '__slotnames__', '__str__', '__subclasshook__', '__unicode__', '__weakref__', '_constructor_args', 
+'_db', '_get_queryset_methods', '_hints', '_insert', '_originating_model', '_queryset_class', 
+'_set_creation_counter', '_update', 'aggregate',
+ 
+ 'all',
+ 'annotate', 
+ 'auto_created',
+ 'bulk_create',
+ 'check',
+ 'complex_filter',
+ 'contribute_to_class',
+ 'count', 'create',
+ 'creation_counter',
+ 'dates',
+ 'datetimes',
+ 'db',  'db_manager',
+ 'deconstruct',  'defer',  'difference', 'distinct', 'earliest', 'exclude', 'exists',
+ 'extra',
+ 'filter',
+ 'first',
+ 'from_queryset',
+ 'get',
+ 'get_or_create',
+ 'get_queryset',
+ 'in_bulk', 'intersection', 'iterator', 'last', 'latest',
+ 'model',
+ 'name', 'none', 'only', 'order_by',
+ 'prefetch_related', 'raw',
+ 'reverse',
+ 'select_for_update', 'select_related', 'union', 'update', 'update_or_create', 'use_in_migrations', 'using',
+ 'values',
+ 'values_list']
+
+
+>>> models.Question.objects.values()
+
+<QuerySet [{'question_text': u'What is your favorit pet?', 'pub_date': datetime.datetime(2017, 4, 15, 15, 28, 3, tzinfo=<UTC>), u'id': 1}, {'question_text': u'What is your age?', 'pub_date': datetime.datetime(2017, 4, 15, 16, 25, 43, tzinfo=<UTC>), u'id': 2}, {'question_text': u'What is your favirit Name ??', 'pub_date': datetime.datetime(2017, 4, 18, 5, 17, 44, tzinfo=<UTC>), u'id': 3}]>
+
+
+>>> models.Question.objects.values_list()
+
+<QuerySet [(1, u'What is your favorit pet?', datetime.datetime(2017, 4, 15, 15, 28, 3, tzinfo=<UTC>)), (2, u'What is your age?', datetime.datetime(2017, 4, 15, 16, 25, 43, tzinfo=<UTC>)), (3, u'What is your favirit Name ??', datetime.datetime(2017, 4, 18, 5, 17, 44, tzinfo=<UTC>))]>
+
+
+
+objects.filter().order_by()     -- фильтр по значению + сортировка по значению
+================
+>>> models.Question.objects.filter(pub_date__year=2017).order_by('-pub_date', 'question_text')
+<QuerySet [<Question: question say: What is your favirit Name ??>, <Question: question say: What is your age?>, <Question: question say: What is your favorit pet?>]>
+
+
++ .exclude(var='str')       -- исключить
+==================
+>>> models.Question.objects.filter(pub_date__year=2017).order_by('-pub_date', 'question_text').exclude(question_text='What is your favirit Name ??')
+<QuerySet [<Question: question say: What is your age?>, <Question: question say: What is your favorit pet?>]>
+
+
+objects.reverse()       -- обратная сортировка
+=================
+>>> models.Question.objects.reverse()
+<QuerySet [<Question: question say: What is your favorit pet?>, <Question: question say: What is your age?>, <Question: question say: What is your favirit Name ??>]>
+
+
+objects.distinct()       -- уберет повторяющиеся записи
+=================
+>>> models.Question.objects.distinct()
+<QuerySet [<Question: question say: What is your favorit pet?>, <Question: question say: What is your age?>, <Question: question say: What is your favirit Name ??>]>
+
+
+objects.values()       -- выводит список словарей значений по ключам
+=================
+>>> models.Question.objects.values()
+<QuerySet [{'question_text': u'What is your favorit pet?', 'pub_date': datetime.datetime(2017, 4, 15, 15, 28, 3, tzinfo=<UTC>), u'id': 1}, {'question_text': u'What is your age?', 'pub_date': datetime.datetime(2017, 4, 15, 16, 25, 43, tzinfo=<UTC>), u'id': 2}, {'question_text': u'What is your favirit Name ??', 'pub_date': datetime.datetime(2017, 4, 18, 5, 17, 44, tzinfo=<UTC>), u'id': 3}]>
+
+
+objects.values_list()       -- выводит список кортежей значений
+=================
+>>> models.Question.objects.values_list()
+<QuerySet [(1, u'What is your favorit pet?', datetime.datetime(2017, 4, 15, 15, 28, 3, tzinfo=<UTC>)), (2, u'What is your age?', datetime.datetime(2017, 4, 15, 16, 25, 43, tzinfo=<UTC>)), (3, u'What is your favirit Name ??', datetime.datetime(2017, 4, 18, 5, 17, 44, tzinfo=<UTC>))]>
+
+
+objects.dates()       -- только для полей Date/Time
+=================
+>>> models.Question.objects.dates('pub_date', 'month')
+<QuerySet [datetime.date(2017, 4, 1)]>
+>>> models.Question.objects.dates('pub_date', 'day')
+<QuerySet [datetime.date(2017, 4, 15), datetime.date(2017, 4, 18)]>
+>>> models.Question.objects.dates('pub_date', 'year')
+<QuerySet [datetime.date(2017, 1, 1)]>
+
+
+objects.datetimes()       -- только для полей Date/Time
+=================
+>>> models.Question.objects.datetimes('pub_date', 'year')
+<QuerySet [datetime.datetime(2017, 1, 1, 0, 0, tzinfo=<UTC>)]>
+>>> models.Question.objects.datetimes('pub_date', 'day')
+<QuerySet [datetime.datetime(2017, 4, 15, 0, 0, tzinfo=<UTC>), datetime.datetime(2017, 4, 18, 0, 0, tzinfo=<UTC>)]>
+>>> models.Question.objects.datetimes('pub_date', 'month')
+<QuerySet [datetime.datetime(2017, 4, 1, 0, 0, tzinfo=<UTC>)]>
+
+
+objects.select_related(*fields)
+objects.prefetch_related(*lookups)
+================
+2 метода экономят память и уменьшают количество запросов на БД за счет кеширования и пр.
+https://djbook.ru/rel1.9/ref/models/querysets.html#prefetch-related
+
+
+
+Методы Возвращаяю НЕ QuerySet
+(а только выборки)
+=====================
+objects.get()       -- выборка по ключу
+---------------------
+>>> models.Question.objects.get(pk=3)
+<Question: question say: What is your favirit Name ??>
+>>> models.Question.objects.get(pk=2)
+<Question: question say: What is your age?>
+
+
+objects.create()       -- создание поля Модели / Таблицы на лету
+---------------------
+p = Person.objects.create(first_name="Bruce", last_name="Springsteen")
+    все равно что :
+p = Person(first_name="Bruce", last_name="Springsteen")
+p.save(force_insert=True)
+
+
+objects.get_or_create()       -- получение значения существующего или Создание новго объекта
+objects.update_or_create()   -- обновление или создание нового Объекта в БД
+    https://djbook.ru/rel1.9/ref/models/querysets.html#get-or-create
+---------------------
+
+
+objects.count()       -- количество полей в БД
+---------------------
+>>> models.Question.objects.count()
+3
+
+
+objects.bulk_create(objs, batch_size=None)      -- сохрарание Пачки новых объектов в БД
+--------------------
+Entry.objects.bulk_create([
+...     Entry(headline="Django 1.0 Released"),
+...     Entry(headline="Django 1.1 Announced"),
+...     Entry(headline="Breaking: Django is awesome")
+... ])
+
+
+objects.in_bulk()       -- возвращение значений сразу Пачкой по выборке
+---------------------
+>>> models.Question.objects.in_bulk([1,3])
+{1: <Question: question say: What is your favorit pet?>, 3: <Question: question say: What is your favirit Name ??>}
+
+
+objects.iterator()       -- создает объект итерации
+next()
+---------------------
+>>> q = models.Question.objects.iterator()
+>>> q.next()
+<Question: question say: What is your favorit pet?>
+>>> q.next()
+<Question: question say: What is your age?>
+>>> q.next()
+<Question: question say: What is your favirit Name ??>
+>>> q.next()
+StopIteration
+
+
+objects.latest('attr')           -- возвращение последнего значения по фильтру
+objects.earliest('attr')         -- самого раннего значения
+---------------------
+>>> models.Question.objects.latest('pub_date')
+<Question: question say: What is your favirit Name ??>
+
+
+objects.filter().last()
+objects.filter().first()        -- как правило возвращает последний/первый объект из выборки
+------------------------
+>>> models.Question.objects.last()
+<Question: question say: What is your favirit Name ??>
+>>> models.Question.objects.first()
+<Question: question say: What is your favorit pet?>
+
+
+
+objects.delete()        -- удаление объекта из БД
+------------------------
+>>> blogs = Blog.objects.all()
+# This will delete all Blogs and all of their Entry objects.
+>>> blogs.delete()
+(5, {'weblog.Blog': 1, 'weblog.Entry': 2, 'weblog.Entry_authors': 2})
+    // удаление всего множества объектов ДБ (таблицы)
+
+
+Операторы фильтрации
+ФИЛЬТРЫ
+====================    
+    https://djbook.ru/rel1.9/ref/models/querysets.html#field-lookups
+====================
+пример, получить объект по id, который равен именно 14 (__exact) 
+Entry.objects.get(id__exact=14)
+
+__exact
+--------
+(Выборка по точному значению переменной)
+>>> models.Question.objects.get(id__exact=2)
+<Question: question say: What is your age?>
+
+__contains
+----------
+(выборка поля по содержащейся подстроке)
+>>> models.Question.objects.get(question_text__contains='pet')
+<Question: question say: What is your favorit pet?>
+
+    in  ** входит в множество
+    gt  ** больше чем
+    gte ** больше чем или равно
+    lt  ** меньше чем
+    lte ** меньше чем или равно
+
+
+__in
+-------------
+вхождение в множество
+-------------
+students_id = request.GET.getlist('checks')
+global students_id
+students = Student.objects.filter(pk__in=students_id)
+
+    
+__istartswith
+-------------
+>>> models.Question.objects.filter(question_text__istartswith='what')
+<QuerySet [<Question: question say: What is your favorit pet?>, <Question: question say: What is your age?>, <Question: question say: What is your favirit Name ??>]>
+
+(get выдает ошибку Множественности объектов, так как может взять только 1 объект)
+-------------------
+>>> models.Question.objects.get(question_text__istartswith='what')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/home/ryndin/workprojects/djbooksite/djbooksite/local/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ryndin/workprojects/djbooksite/djbooksite/local/lib/python2.7/site-packages/django/db/models/query.py", line 383, in get
+    (self.model._meta.object_name, num)
+MultipleObjectsReturned: get() returned more than one Question -- it returned 3!
+
+
+__iendswith
+-----------------
+выборка на вхождение подстроки в конце объект
+-----------------
+>>> models.Question.objects.get(question_text__iendswith='age?')
+<Question: question say: What is your age?>
+
+>>> models.Question.objects.filter(question_text__iendswith='age?')
+<QuerySet [<Question: question say: What is your age?>]>
+
+
+__range
+---------------
+проверка на вхождение в диапозон
+---------------
+>>> import datetime
+>>> start_date = datetime.date(2017, 01, 01)
+>>> end_date = datetime.date(2017, 05, 01)
+
+>>> models.Question.objects.filter(pub_date__range=(start_date, end_date))
+
+/home/ryndin/workprojects/djbooksite/djbooksite/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1389: RuntimeWarning: DateTimeField Question.pub_date received a naive datetime (2017-01-01 00:00:00) while time zone support is active.
+  RuntimeWarning)
+/home/ryndin/workprojects/djbooksite/djbooksite/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1389: RuntimeWarning: DateTimeField Question.pub_date received a naive datetime (2017-05-01 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+<QuerySet [<Question: question say: What is your favorit pet?>, <Question: question say: What is your age?>, <Question: question say: What is your favirit Name ??>]>
+
+
+__date
+-----------------
+проверка на соответствие даты / в данном случае публикации объекта
+-----------------
+>>> models.Question.objects.filter(pub_date__date=datetime.date(2017, 04, 15))
+<QuerySet [<Question: question say: What is your favorit pet?>, <Question: question say: What is your age?>]>
+
+
+__year
+----------------
+проверка на соответствие ujle / в данном случае публикации объекта
+----------------
+>>> models.Question.objects.filter(pub_date__year=2016)
+<QuerySet []>
+
+(вариант 2 фильтра / год / большем чем или равно)
+>>> models.Question.objects.filter(pub_date__year__gte=2016)
+<QuerySet [<Question: question say: What is your favorit pet?>, <Question: question say: What is your age?>, <Question: question say: What is your favirit Name ??>]>
+
+
+__month
+__day
+__hour
+__minute
+__second
+-------
+та же логика фильтрации что и по датам и годам / также можно доп фильтры добавить больше/меньше
+
+__week_day
+------------
+Принимает номер дня недели от 1 (воскресение) до 7 (суббота).
+>>>models.Question.objects.filter(pub_date__week_day=2)
+
+__isnull = True
+---------------
+фильтация по объекту ждя которого пустое значение это True / или False
+
+__search
+
+__regex
+
+__avg
+
+__count
+
+__max
+
+__min
+
+__sum
+
+
