@@ -1,0 +1,21 @@
+GUI LIB Python Tkinter
+==========================
+
+
+https://stackoverflow.com/questions/4783810/install-tkinter-for-python
+
+
+https://blog.tecladocode.com/tag/gui-development/
+----------------------------
+
+https://blog.tecladocode.com/how-to-add-menu-to-tkinter-app/
+
+https://blog.tecladocode.com/tkinter-placeholder-entry-field/
+
+https://blog.tecladocode.com/tkinter-scrollable-frames/
+
+https://blog.tecladocode.com/write-snake-game-python-tkinter-part-2/
+
+
+ 
+

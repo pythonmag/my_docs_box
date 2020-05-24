@@ -233,6 +233,25 @@ post.tags.all()                         # массив внешних атриб
 tag.post_set.all()                      # обратное обращение к post (массив инстансев Post )
                                         # Доступ к задающему Связи объекту 
 
+
+
+
+---------------------------
+https://docs.djangoproject.com/en/3.0/topics/db/queries/#one-to-many-relationships
+
+
+ForeignKey(Blog, on_delete=models.CASCADE, related_name='entries'),         ##  related_name
+
+>>> b = Blog.objects.get(id=1)
+>>> b.entries.all()                                                         ## related_name methods
+
+# b.entries is a Manager that returns QuerySets.
+
+>>> b.entries.filter(headline__contains='Lennon')
+>>> b.entries.count()
+
+
+
 примеры обратных отношений
 --------------------------
 

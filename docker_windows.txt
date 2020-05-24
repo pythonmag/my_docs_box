@@ -1,0 +1,30 @@
+install docker windows
+======================
+
+https://runnable.com/docker/install-docker-on-windows-10
+
+0)
+C:\Users\User>docker --version
+Docker version 17.03.1-ce-rc1, build 3476dbf
+
+C:\Users\User>docker-compose --version
+docker-compose version 1.11.2, build f963d76f
+
+C:\Users\User>docker-machine --version
+docker-machine version 0.10.0, build 76ed2a6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

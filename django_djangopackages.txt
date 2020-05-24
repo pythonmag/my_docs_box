@@ -1,0 +1,14 @@
+
+https://djangopackages.org/
+===========================
+
+Django Packages is a directory of reusable apps, sites, tools, and more for your Django projects.
+
+
+example REST apps
+=================
+https://djangopackages.org/grids/g/django-rest-framework/
+
+- Django REST Framework 
+- django-rest-framework-jwt 
+- Django REST swagger 

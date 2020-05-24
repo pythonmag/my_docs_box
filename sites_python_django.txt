@@ -5,6 +5,52 @@ simple is better than complex
 https://simpleisbetterthancomplex.com/
 
 
+
+
+Blog Udemy Teacher of Flask and Python
+===========================
+
+https://blog.tecladocode.com/
+
+
+All Posts • 
+
+100DaysOfPython • 
+https://blog.tecladocode.com/tag/100daysofpython/
+
+Coding Interview Problems • 
+https://blog.tecladocode.com/tag/coding-interview-problems/
+
+Flask • 
+https://blog.tecladocode.com/tag/flask/
+
+GUI Development • 
+https://blog.tecladocode.com/tag/gui-development/
+
+Learn Python Programming • 
+https://blog.tecladocode.com/tag/learn-python-programming/
+
+Python Snippets • 
+https://blog.tecladocode.com/tag/python-snippets/
+
+REST APIs • 
+https://blog.tecladocode.com/tag/rest-apis/
+
+Understanding the Console • 
+https://blog.tecladocode.com/tag/understanding-the-console/
+
+Web Development
+https://blog.tecladocode.com/tag/web-development/
+
+
+
+
+
+
+
+
+
+
 Class Base Views Django Site
 ===================
 https://ccbv.co.uk/

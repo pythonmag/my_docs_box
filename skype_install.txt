@@ -1,0 +1,14 @@
+Installing Skype on Ubuntu
+Complete the following steps to install Skype on Ubuntu.
+=====================
+
+
+https://linuxize.com/post/how-to-install-skype-on-ubuntu-18-04/
+--------------------
+
+$ wget https://go.skype.com/skypeforlinux-64.deb
+
+$ sudo apt install ./skypeforlinux-64.deb
+
+$ cat /etc/apt/sources.list.d/skype-stable.list
+

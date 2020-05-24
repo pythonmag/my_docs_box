@@ -1,0 +1,143 @@
+
+Пока как мне кажется Самая простая установка Вирт Среды и Пакетов билиотек на Питоне
+==========================
+
+~/envs$ mkdir students_proj                                                 ***
+
+~/envs/students_proj$ virtualenv students_env --python=python3.8            ***
+
+~/envs/students_proj$ ls
+
+    students_env
+
+~/envs/students_proj$ mkdir code                                             ***
+
+
+~/envs/students_proj$ source students_env/bin/activate                       ***
+
+
+OR
+1)
+------------------
+создание чистого Проекта Джанго
+
+
+~/envs/students_proj/code$ pip install django                        ***
+
+
+~/envs/students_proj/code$ django-admin startproject students_proj        ***
+
+
+~/envs/students_proj/code/students_proj$ ls
+
+    manage.py  students_proj
+
+
+~/envs/students_proj/code/students_proj$ python manage.py runserver       ***
+
+    Watching for file changes with StatReloader
+    Performing system checks...
+
+    System check identified no issues (0 silenced).
+
+    You have 17 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+    Run 'python manage.py migrate' to apply them.
+
+    January 29, 2020 - 18:13:39
+    Django version 3.0.2, using settings 'students_proj.settings'
+    Starting development server at http://127.0.0.1:8000/
+    Quit the server with CONTROL-C.
+
+
+~/envs/students_proj/code/students_proj$ ls
+
+    db.sqlite3  manage.py  students_proj
+
+
+~/envs/students_proj/code/students_proj$ pip list
+
+    Package    Version
+    ---------- -------
+    asgiref    3.2.3  
+    Django     3.0.2  
+    pip        20.0.2 
+    pytz       2019.3 
+    setuptools 45.1.0 
+    sqlparse   0.3.0  
+    wheel      0.34.1
+
+
+~/envs/students_proj/code/students_proj$ pip freeze > requirements.txt
+
+
+~/envs/students_proj/code/students_proj$ touch .gitignore
+
+
+~/envs/students_proj/code/students_proj$ git init
+
+    Инициализирован пустой репозиторий Git в /home/user/envs/students_proj/code/students_proj/.git/
+
+
+OR
+2)
+Клонирования Гит Репозитория с Проектом Джанго
+=============================
+
+(students_env) ~/envs/students_proj/code$ git init                                                  ***
+
+Инициализирован пустой репозиторий Git в /home/user/envs/students_proj/code/.git/
+
+(students_env) ~/envs/students_proj/code$ git clone git@github.com:pythonmag/students_proj.git      ***
+
+Клонирование в «students_proj»…
+remote: Enumerating objects: 126, done.
+remote: Counting objects: 100% (126/126), done.
+remote: Compressing objects: 100% (82/82), done.
+remote: Total 126 (delta 44), reused 104 (delta 28), pack-reused 0
+Получение объектов: 100% (126/126), 956.55 KiB | 285.00 KiB/s, готово.
+Определение изменений: 100% (44/44), готово.
+
+(students_env) ~/envs/students_proj/code$ ls                            ***
+
+    students_proj
+
+
+(students_env) ~/envs/students_proj/code/students_proj$ ls              ***
+
+    __init__.py  manage.py	README.md  requirements.txt  static  students_app  students_proj  templates
+
+
+(students_env) ~/envs/students_proj/code/students_proj$ pip install -r requirements.txt         ***
+
+Collecting certifi==2019.11.28
+  Using cached certifi-2019.11.28-py2.py3-none-any.whl (156 kB)
+Collecting Django==2.2.8
+  Using cached Django-2.2.8-py3-none-any.whl (7.5 MB)
+Collecting django-debug-toolbar==2.0
+  Using cached django_debug_toolbar-2.0-py3-none-any.whl (198 kB)
+Collecting Pillow==6.2.1
+  Downloading Pillow-6.2.1-cp38-cp38-manylinux1_x86_64.whl (2.1 MB)
+     |████████████████████████████████| 2.1 MB 899 kB/s 
+Collecting pytz==2019.3
+  Using cached pytz-2019.3-py2.py3-none-any.whl (509 kB)
+Collecting sqlparse==0.3.0
+  Using cached sqlparse-0.3.0-py2.py3-none-any.whl (39 kB)
+Installing collected packages: certifi, sqlparse, pytz, Django, django-debug-toolbar, Pillow
+Successfully installed Django-2.2.8 Pillow-6.2.1 certifi-2019.11.28 django-debug-toolbar-2.0 pytz-2019.3 sqlparse-0.3.0
+
+(students_env) ~/envs/students_proj/code/students_proj$ pip list            ***
+
+Package              Version   
+-------------------- ----------
+certifi              2019.11.28
+Django               2.2.8     
+django-debug-toolbar 2.0       
+Pillow               6.2.1     
+pip                  20.0.2    
+pytz                 2019.3    
+setuptools           45.1.0    
+sqlparse             0.3.0     
+wheel                0.34.2 
+
+(students_env) ~/envs/students_proj/code/students_proj$ python manage.py runserver          ***
+

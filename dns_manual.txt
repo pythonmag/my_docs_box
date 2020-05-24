@@ -1,0 +1,10 @@
+
+
+Domains and HTTPS
+==================
+This book goes along with the course at 
+https://www.udemy.com/rest-api-flask-and-python/
+
+
+https://books.tecladocode.com/rest-apis-with-flask-and-python/domains-and-https
+

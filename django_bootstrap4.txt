@@ -1,0 +1,27 @@
+
+
+https://pypi.org/project/django-bootstrap4/
+
+https://django-bootstrap4.readthedocs.io/en/latest/
+
+
+
+example
+=============
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title_page%}SignUp Page{% endblock title_page %}
+
+{% block content %}
+    <h1>SignUp Page</h1>
+
+
+<form action="{% url 'accounts_app/signup' %}" method="post"></form>
+    {% csrf_token %}
+    {% bootstrap_form form.as_p %}                                             ##
+    {% buttons %}                                                               ##
+    <button type="button" class="btn btn-warning">SignUp User</button>
+    {% endbuttons %}                                                            ##
+{% endblock content %}

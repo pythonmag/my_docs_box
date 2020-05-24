@@ -9,6 +9,66 @@ https://docs.djangoproject.com/en/dev/howto/static-files/deployment/
 
 
 
+## settings.py
+==============
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static_all')
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+STATICFILES_DIR = os.path.join(BASE_DIR, 'static')
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.0/howto/static-files/
+
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+
+
+
+Static on Development and Prodaction
+====================================
+https://stackoverflow.com/questions/5756614/serving-static-files-on-django-production-tutorial
+
+https://www.agiliq.com/blog/2013/03/serving-static-files-in-django/
+
+example
+-------------------
+Development
+-----------
+STATICFILES_DIRS should have all static directories inside which all static files are resident.
+
+STATIC_URL should be /static/ if your files are in local machine otherwise put the base URL here e.g. http://example.com/.
+
+INSTALLED_APPS should include django.contrib.staticfiles.
+
+In the template, load the staticfiles module:
+
+{% load staticfiles %}
+<img src='{% static "images/test.png" %}' alt='img' />
+
+Production
+------------
+Add STATIC_ROOT that is used by Django to collect all static files from STATICFILES_DIRS to it.
+
+Collect static files:
+
+$ python manage.py collectstatic
+Add the path to urls.py:
+
+from . import settings
+
+urlpatterns = patterns('',
+..
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.STATIC_ROOT)}),)
+-----------------------
+
+
+
+
 Мануал
 =================
 1)
@@ -19,13 +79,14 @@ nameapp/static/nameapp/css
 <link rel="stylesheet" href="{% static 'comments/css/custom.css' %}">
 
 
+
 2)
 если импорт модуля из глобальных настроек
 -------------------------------
 from django.conf import settings
 
 
-то там стаят настройки:
+то там  настройки:
 -----------------------
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
@@ -51,6 +112,7 @@ STATIC_URL = None
 в локальных сеттингах можно переопределить пути:
 STATIC_URL = '/static/'
 STATIC_ROOT = None
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')          ## этот путь пойдет для collectstatic
 
@@ -61,16 +123,19 @@ urlpatterns = [
     ...
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
+or
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
+
 5) в общем надо пробывать нюансы на практике
 
 
+
 6)
-Вот такое может быть в Сеттингах проекта (но при деплое надо указывать путь на nginx):
+Вот такое может быть в Сеттингах проекта (но при деплое надо указывать путь в nginx):
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/

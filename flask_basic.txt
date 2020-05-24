@@ -1,0 +1,51 @@
+WHY
+=============
+
+https://testdriven.io/blog/django-vs-flask/
+
+
+
+FrameWork Flask
+=====================
+
+https://palletsprojects.com/p/flask/
+
+https://flask.palletsprojects.com/en/1.1.x/
+
+
+
+AUTHENTICATE
+=====================
+
+https://pythonhosted.org/Flask-JWT/
+
+
+
+Advanced REST APIs with Flask and Python
+===================
+
+https://arac.tecladocode.com/
+
+
+
+Flask-JWT-Extended’s Documentation
+==================
+
+https://flask-jwt-extended.readthedocs.io/en/latest/index.html
+
+https://tools.ietf.org/html/rfc7519
+
+
+
+Advanced configuration of Flask-JWT     (Udemy)
+=======================
+
+https://blog.tecladocode.com/learn-python-advanced-configuration-of-flask-jwt/
+
+https://blog.tecladocode.com/flashing-messages-with-flask/
+
+https://blog.tecladocode.com/handling-the-next-url-when-logging-in-with-flask/
+
+https://blog.tecladocode.com/protecting-endpoints-in-flask-apps-by-requiring-login/
+
+https://blog.tecladocode.com/how-to-add-user-logins-to-your-flask-website/

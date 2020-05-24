@@ -1,6 +1,12 @@
 
+Install Docker on Linux
+=======================
+https://runnable.com/docker/install-docker-on-linux
+
+
+
 Установка Docker на Ubuntu 16.04
------------------
+================
 http://isizov.ru/ustanovka-docker-na-ubuntu-16-04/
 
 
@@ -15,7 +21,7 @@ http://testdriven.io/part-three-intro/
 
 
 примененные Апликации:
----------------------
+======================
     Python v3.6.1
     Flask v0.12.2
     Flask-Script v2.0.5
@@ -32,3 +38,33 @@ http://testdriven.io/part-three-intro/
 Docker
 ======
 https://docs.docker.com/
+
+
+
+my course
+==============
+Docker Mastery: with Kubernetes +Swarm from a Docker Captain
+https://www.udemy.com/course/docker-mastery/
+
+
+How to completely uninstall docker
+https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker
+-----------------
+
+    dpkg -l | grep -i docker
+    sudo apt-get purge -y docker-engine docker docker.io docker-ce  
+    sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce
+    sudo rm -rf /var/lib/docker /etc/docker
+    sudo rm /etc/apparmor.d/docker
+    sudo groupdel docker
+    sudo rm -rf /var/run/docker.sock
+
+
+материалы курса
+---------------
+git clone https://github.com/BretFisher/udemy-docker-mastery.git
+
+
+
+
+

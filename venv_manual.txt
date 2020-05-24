@@ -1,0 +1,31 @@
+Начиная с Питона 35 модуль venv уже в стандартном пакете языка
+===============================
+
+user@ryndin-lenovo-ideapad-520:~/envs/test_venv$    python3 -m venv .env
+
+user@ryndin-lenovo-ideapad-520:~/envs/test_venv$    ls -la
+итого 12
+drwxr-xr-x 3 user user 4096 мар 11 21:59 .
+drwxr-xr-x 8 user user 4096 мар 11 21:46 ..
+drwxrwxr-x 5 user user 4096 мар 11 21:59 .env
+
+
+user@ryndin-lenovo-ideapad-520:~/envs/test_venv$    source .env/bin/activate
+
+(.env)user@ryndin-lenovo-ideapad-520:~/envs/test_venv$      which python
+    /home/user/envs/test_venv/.env/bin/python
+
+$ mkdir code
+
+
+(.env)user@ryndin-lenovo-ideapad-520:~/envs/test_venv$      pip install django
+
+
+(.env) user@ryndin-lenovo-ideapad-520:~/envs/test_venv$         pip freeze
+asgiref==3.2.5
+Django==3.0.4
+pytz==2019.3
+sqlparse==0.3.1
+
+(.env) user@ryndin-lenovo-ideapad-520:~/envs/test_venv$         django-admin startproject portfolio_proj
+

@@ -1,8 +1,16 @@
 
 1)
 https://docs.djangoproject.com/en/1.11/ref/contrib/admin/
-https://djbook.ru/rel1.9/ref/contrib/admin/index.html
-https://djbook.ru/rel1.9/ref/contrib/admin/actions.html
+
+=================
+2019 
+
+https://docs.djangoproject.com/en/3.0/intro/tutorial07/#customize-the-admin-form
+
+https://docs.djangoproject.com/en/3.0/ref/contrib/admin/#modeladmin-options
+
+https://docs.djangoproject.com/en/3.0/ref/contrib/admin/actions/#admin-actions
+
 
 
 2)
@@ -14,7 +22,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'students',
+
     'crispy_forms',
 ]
 
@@ -150,6 +160,7 @@ class TeamAdmin(admin.ModelAdmin):
         return reverse('team_edit', kwargs={'pk': obj.id})
 
 
+
 5)
 # Регистрация в Админке
 admin.site.register(Programmer, ProgrammerAdmin)
@@ -157,6 +168,7 @@ admin.site.register(Team, TeamAdmin)
 -----------------------------
 По логике Кастомизации Админки путем назначения атрибутов вопросов впринципе не возникло -
 нужно больше практики и все будет автоматически.
+
 
 
 6)
@@ -191,6 +203,7 @@ class StudentAdmin(admin.ModelAdmin):
 
     list_display = ['id', 'last_name', 'first_name', 'ticket', 'student_group', 'notes', 'birthday', 'have_breakfast']
     ...
+
 
 
 Пояснения к нему из Книги Виталия:

@@ -1,0 +1,97 @@
+
+1)
+Теория от Эдварда
+=================
+
+SSH. Авторизация через ключ
+---------------------------
+http://adw0rd.com/2011/8/2/ssh-auth-key/
+Блог от Эдварда
+
+
+
+2) 
+Практика от меня
+На примере ДиджитОушенСервера
+=================
+
+user@ryndin-lenovo-ideapad-520:~$       ssh root@128.199.59.110                 ##
+    root@128.199.59.110's password:
+
+or 
+
+user@ryndin-lenovo-ideapad-520:~$       ssh students@128.199.59.110             ##
+    students@128.199.59.110's password:
+
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$   ssh-keygen -t rsa -b 4096 -C "ryndin@ukr.net"      ## geny ssh key for my github
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/students/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/students/.ssh/id_rsa.
+Your public key has been saved in /home/students/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:yJTrqi/4UoVqCGby6lStFfrsUtceFT23bP3f2ZYge98 ryndin@ukr.net
+The key's randomart image is:
++---[RSA 4096]----+
+|            .    |
+|       .   . o . |
+|   . .o     . + o|
+|oo. +o.o   .   +.|
+|*o + o+ S .   . .|
+|o.+ =o . o . .  .|
+|.= ..oo . . o . *|
+|= ....   . . . o*|
+|.+o++.      . .oE|
++----[SHA256]-----+
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$      eval "$(ssh-agent -s)"                  ## ?
+Agent pid 32175
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$          cd .ssh
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~/.ssh$     ls
+    id_rsa  id_rsa.pub  known_hosts
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~/.ssh$     vim id_rsa.pub                      ## copy from this SSH key
+
+...And them insert SHH key for github setting on my account
+
+
+
+3)
+Чуть Теории
+=====================
+
+создание ssh
+------------
+https://webhamster.ru/site/page/index/articles/comp/171
+
+Настройка SSH-ключей в Linux
+**********
+В операционной системе Linux вначале нужно заглянуть в каталог ~/.ssh.
+Если там есть файлы id_rsa и id_rsa.pub то это и есть SSH-ключи.
+Если такого каталога или таких файлов нет, то ключи нужно сгенерировать. Даем команду:
+
+ssh-keygen -t rsa -C 'myemail@mail.ru'
+
+Вместо myemail@mail.ru нужно указать свой email. В процессе генерации ключа у вас
+спросят куда положить файлы, в ответ просто нажимаем Enter. При запросе пароля
+просто нажимаем Enter. После генерации, в каталоге ~/.ssh должны появиться файлы
+id_rsa и id_rsa.pub, они нам пригодятся в дальнейшем.
+
+ryndin@ubu:~/my_docs$       ssh-keygen -t rsa -C 'ryndin@i.ua'      ##
+    Generating public/private rsa key pair.
+    Enter file in which to save the key (/home/ryndin/.ssh/id_rsa): 
+    Created directory '/home/ryndin/.ssh'.
+    Enter passphrase (empty for no passphrase): 
+    Enter same passphrase again: 
+    Your identification has been saved in /home/ryndin/.ssh/id_rsa.
+    Your public key has been saved in /home/ryndin/.ssh/id_rsa.pub.
+....
+
+
+
+

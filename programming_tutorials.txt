@@ -135,10 +135,57 @@ http://quality-lab.ru/key-principles-of-web-testing/
 http://quality-lab.ru/blog/page/2/
 
 
- 
-5)
-Лекториум - Медиатека
-Фильмотека по разным курсам / Сборка из Ютюба
-Пока только Питон от Тузовой интересен, ну и Гуманитарные Науки
-============================
-https://www.lektorium.tv/medialibrary
+
+Статьи про паттерны Программирования
+=====================================
+
+https://testdriven.io/blog/
+
+https://testdriven.io/blog/running-flask-on-kubernetes/
+
+https://testdriven.io/blog/dockerizing-masonite-with-postgres-gunicorn-and-nginx/
+
+https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/
+
+https://testdriven.io/blog/asynchronous-tasks-with-flask-and-redis-queue/
+
+https://testdriven.io/blog/deploying-django-to-heroku-with-docker/
+
+
+
+
+kite.com blog
+==============
+
+https://kite.com/blog/
+
+https://kite.com/blog/tag/django/
+
+https://kite.com/blog/python/data-science-packages-python/
+
+https://kite.com/blog/python/advanced-django-models-python-overview/
+
+https://kite.com/blog/python/django-templates-best-practices/
+
+https://kite.com/blog/python/django-database-migrations-overview/
+
+https://kite.com/blog/python/custom-django-user-model/
+
+
+
+
+
+
+
+
+
+Flask VS Django
+=====================
+
+https://testdriven.io/blog/django-vs-flask/
+
+https://devel.tech/features/django-vs-flask/
+
+https://kite.com/blog/python/flask-vs-django-python/
+
+

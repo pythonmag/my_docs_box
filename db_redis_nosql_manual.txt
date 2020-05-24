@@ -12,3 +12,192 @@ Redis является высокопроизводительным хранил
 =================================
 
 https://python-scripts.com/redis
+
+
+
+ARTICALS
+================
+
+https://www.8host.com/blog/podklyuchenie-k-baze-dannyx-redis/
+
+https://www.8host.com/blog/upravlenie-bazami-dannyx-i-klyuchami-redis/
+
+https://www.8host.com/blog/upravlenie-strokami-v-redis/
+
+https://www.8host.com/blog/upravlenie-spiskami-v-redis/
+
+https://www.8host.com/blog/upravlenie-xeshami-v-redis/
+
+https://www.8host.com/blog/ustranenie-nepoladok-v-redis/
+
+https://www.8host.com/blog/podklyuchenie-k-upravlyaemomu-ekzemplyaru-redis-po-tls-s-pomoshhyu-stunnel-i-redis-cli/
+
+https://www.8host.com/blog/upravlenie-naborami-v-redis/
+
+https://www.8host.com/blog/zapusk-tranzakcij-v-redis/
+
+https://www.8host.com/blog/analiz-statistiki-upravlyaemoj-bazy-dannyx-redis-s-pomoshhyu-steka-elastic-v-ubuntu-18-04/
+
+https://www.8host.com/blog/zavershenie-sroka-dejstviya-klyuchej-v-redis/
+
+https://www.8host.com/blog/izmenenie-konfiguracij-redis-s-pomoshhyu-komandnoj-stroki/
+
+https://www.8host.com/blog/upravlenie-replikami-i-klientami-v-redis/
+
+
+
+redis install ubuntu
+======================
+https://python-scripts.com/redis
+
+Сначала, загрузим исходный код Redis в виде тарболла (архива):
+
+$   redisurl="http://download.redis.io/redis-stable.tar.gz"              ##
+
+$   curl -s -o redis-stable.tar.gz $redisurl                             ##
+
+
+Затем необходимо переключиться на root, после чего извлечь исходный код архива в /usr/local/lib:
+
+$   sudo su root                                            ##
+#   mkdir -p /usr/local/lib/                                ##
+#   chmod a+w /usr/local/lib/                               ##
+#   tar -C /usr/local/lib/ -xzf redis-stable.tar.gz         ##
+#   rm redis-stable.tar.gz                                  ##
+
+
+Это создаст директорию для исходного кода в /usr/local/lib/redis-stable/. Redis написан на С, так что вам
+нужно скомпоновать код и установить с помощью утилиты make:
+
+#   cd /usr/local/lib/redis-stable/                         ##
+/usr/local/lib/redis-stable/#   make && make install        ##
+
+## Команда make install выполняет два действия:
+
+## Первая команда make компилирует и компонует исходный код;
+## Команда make install берет бинарники и копирует их в /usr/local/bin/, так что вы можете запустить их 
+откуда угодно (предположим, что /usr/local/bin/ находится в PATH).
+
+$   redis-cli --version             ##
+    redis-cli 5.0.7
+
+
+Настройка Redis на сервере в подробностях
+================
+Redis имеет гибкие настройки. Хотя его можно использовать сразу из коробки, мы все же уделим немного
+времени на настройку базовых конфигураций. Они связаны с сохранением базы данных и безопасностью:
+
+#   mkdir -p /etc/redis/                    ##
+#   touch /etc/redis/6379.conf              ##
+
+
+Теперь, впишем следующее в /etc/redis/6379.conf. Значение каждого пункта рассмотрим чуть позже:
+
+#   nano /etc/redis/6379.conf               ##
+
+#   redis-server /etc/redis/6379.conf       ##
+
+14989:C 05 Feb 2020 17:12:14.722 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+14989:C 05 Feb 2020 17:12:14.722 # Redis version=5.0.7, bits=64, commit=00000000, modified=0, pid=14989, just started
+14989:C 05 Feb 2020 17:12:14.722 # Configuration loaded
+
+
+#   sudo su user        ##
+
+$ redis-cli
+127.0.0.1:6379> ping            
+(error) NOAUTH Authentication required.         ## ERROR UATH
+
+
+fixing error
+=============
+https://serverfault.com/questions/722803/redis-error-noauth-authentication-required
+
+127.0.0.1:6379> auth <yourpassword>             ## REDIS AUTH
+
+127.0.0.1:6379> ping                            ## OK          
+PONG        
+
+127.0.0.1:6379> ping 'hello world'              ## OK
+"hello world"
+
+127.0.0.1:6379> shutdown
+not connected> 
+
+
+test work redis
+===============
+
+127.0.0.1:6379> SET Croatia Zagreb
+OK
+
+127.0.0.1:6379> GET Croatia
+"Zagreb"
+
+127.0.0.1:6379> MGET Lebanon Norway Bahamas
+1) "Beirut"
+2) "Oslo"
+3) (nil)
+
+
+
+# redis-server /etc/redis/6379.conf             ##
+
+18168:C 05 Feb 2020 18:07:47.147 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+18168:C 05 Feb 2020 18:07:47.147 # Redis version=5.0.7, bits=64, commit=00000000, modified=0, pid=18168, just started
+18168:C 05 Feb 2020 18:07:47.147 # Configuration loaded
+
+
+# sudo netstat -lnp | grep redis                ##
+
+tcp        0      0 127.0.0.1:6379          0.0.0.0:*               LISTEN      16181/redis-server  
+tcp6       0      0 ::1:6379                :::*                    LISTEN      16181/redis-server
+
+
+
+
+
+PYTHON LIB
+================
+
+$   python3 -m pip install redis             ##
+
+Collecting redis
+  Downloading https://files.pythonhosted.org/packages/f0/05/1fc7feedc19c123e7a95cfc9e7892eb6cdd2e5df4e9e8af6384349c1cc3d/redis-3.4.1-py2.py3-none-any.whl (71kB)
+    100% |████████████████████████████████| 71kB 722kB/s 
+Installing collected packages: redis
+Successfully installed redis-3.4.1
+
+user@ryndin-lenovo-ideapad-520:/etc/redis$ python3
+Python 3.6.9 (default, Nov  7 2019, 10:44:02) 
+[GCC 8.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+
+>>> import redis
+
+>>> redis_db = redis.StrictRedis(host="localhost", port=6379, db=0, password='prostomag76')
+
+>>> redis_db.get("Croatia")             ## Было установлено ранее в ДБ в чистом Редисе запросе -- OK
+b'Zagreb'
+
+>>> redis_db.mget('Lebanon', 'Norway',  'Bahamas')
+[b'Beirut', b'Oslo', None]              ## Было установлено ранее в ДБ в чистом Редисе запросе -- OK
+
+>>> redis_db.mset({'name': 'yurii'})
+True
+
+>>> redis_db.get('name')
+b'yurii'
+
+>>> redis_db.mget('name', 'croatia', 'norway')
+[b'yurii', None, None]
+
+
+>>> redis_db.mget('name', 'Croatia', 'Norway')
+[b'yurii', b'Zagreb', b'Oslo']
+
+
+
+
+

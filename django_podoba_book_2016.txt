@@ -96,11 +96,21 @@ gzip, deflate, br
 Accept-Language	
 en-US,en;q=0.5
 
+
 Cookie	
-fr=0QzuKZJyuS5jgsYlG.AWXRN7ospfNJ-QpLjwB3iDgrIqk.BYdnRF.si.AAA.0.0.BYdnRc.AWUfgM0y; datr=RXR2WIiXEBbK-dzB3DUtz1VE
-; sb=XHR2WDca0PJFn42aSstPho-q; c_user=100003396089313; xs=21%3AlpFLkLSeSc_ibg%3A2%3A1484158044%3A17214
-; csm=2; s=Aa5KUnivjROTkbnb.BYdnRc; pl=n; lu=ggOeRs9Ex1OLdQNZwzWbhlzg; p=-2; presence=EDvF3EtimeF1484158062EuserFA21B03396089313A2EstateFDutF1484158062824CEchFDp_5f1B03396089313F2CC
-; wd=1225x526
+fr=0QzuKZJyuS5jgsYlG.AWXRN7ospfNJ-QpLjwB3iDgrIqk.BYdnRF.si.AAA.0.0.BYdnRc.AWUfgM0y; 
+datr=RXR2WIiXEBbK-dzB3DUtz1VE; 
+sb=XHR2WDca0PJFn42aSstPho-q; 
+c_user=100003396089313; 
+xs=21%3AlpFLkLSeSc_ibg%3A2%3A1484158044%3A17214; 
+csm=2; 
+s=Aa5KUnivjROTkbnb.BYdnRc; 
+pl=n; 
+lu=ggOeRs9Ex1OLdQNZwzWbhlzg; 
+p=-2; 
+presence=EDvF3EtimeF1484158062EuserFA21B03396089313A2EstateFDutF1484158062824CEchFDp_5f1B03396089313F2CC; 
+wd=1225x526
+
 
 Host	
 www.facebook.com
@@ -199,7 +209,9 @@ http://localhost:8000/static/css/custom.css
     // Эта строка сработала по относительному пути и открыла Мой Кастомный файл Стилей
 
 
-    // После создания папки static внутри Апликации эта папка стала достуана в проекте глобально - но это еще не конец, будет еще доступ через тег Джаного {% static ...%}
+    // После создания папки static внутри Апликации эта папка стала достуана в проекте глобально - но 
+это еще не конец, будет еще доступ через тег Джаного {% static ...%}
+
 <td><img src="static/img/abama.jpg" height="30" width="30" class="img-circle"></td>
 
 
@@ -208,6 +220,7 @@ Serving static files during development¶
 If you use django.contrib.staticfiles as explained above, runserver will do this automatically when DEBUG is set to True. If you don’t have django.contrib.staticfiles in INSTALLED_APPS, you can still manually serve static files using the django.contrib.staticfiles.views.serve() view.
 This is not suitable for production use! For some common deployment strategies, see Deploying static files.
 For example, if your STATIC_URL is defined as /static/, you can do this by adding the following snippet to your urls.py:
+
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -244,14 +257,14 @@ static
 Таблица в html заполяется подобными строками данных о студентах по единой логике
 ---------------------------------
 <tbody>
-{% for student in students_data %}      // доступны тестовые данные из функции render()
+{% for student in students_data %}                      // доступны тестовые данные из функции render()
 <tr>
-<td>{{ forloop.counter }}</td>          // forloop.counter дає нам порядковий номер ітерації циклу починаючи з 1;
+<td>{{ forloop.counter }}</td>                          // forloop.counter дає нам порядковий номер ітерації циклу починаючи з 1;
 <td><img class=”img-circle”
-src=”{% static student.image %}” height=”30”    // у объекта доступны атрибуты из БД(словаря)
+src=”{% static student.image %}” height=”30”            // у объекта доступны атрибуты из БД(словаря)
 width=”30” /></td>
-<td><a href=”{% url ”students_edit” student.id %}”> // у объекта доступны атрибуты из БД(словаря)
-{{ student.last_name }}</td>                    // у объекта доступны атрибуты из БД(словаря)
+<td><a href=”{% url ”students_edit” student.id %}”>     // у объекта доступны атрибуты из БД(словаря)
+{{ student.last_name }}</td>                            // у объекта доступны атрибуты из БД(словаря)
 <td><a href=”{% url ”students_edit” student.id %}”>
 {{ student.first_name }}</td>
 <td>{{ student.ticket }}</td>
@@ -311,8 +324,11 @@ width=”30” /></td>
 ---------------------
     http://djbook.ru/rel1.4/topics/templates.html#automatic-html-escaping
 По-умолчанию в Django, каждый шаблон экранирует все переменные.
-Опять же, мы подчеркиваем, что такое поведение используется по-умолчанию. Если вы используете систему шаблонов Django, вы в безопасности.
+Опять же, мы подчеркиваем, что такое поведение используется по-умолчанию. Если вы используете систему шаблонов Django, 
+вы в безопасности.
+
 Как это отключить
+
 Для отдельных переменных
 Для отключения авто-экранирования для отдельных переменных, используйте фильтр safe:
 This will be escaped: {{ data }}
@@ -337,11 +353,13 @@ This will not be escaped: {{ data|safe }}
 
 
 # return global atribute of http host of app like PORTAL_URL
-def url_students(request):
+
+def url_students(request):                                                      ##
     return {'PORTAL_URL': 'http://'+request.META['HTTP_HOST']}
 
 
 в самой settings.py к списку Действующих Контекст-процессоров добавляю свой:
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -353,22 +371,25 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'studentsdb27.context_processors.url_students',
-                'studentsdb27.context_processors.students_data',
+                'studentsdb27.context_processors.url_students',                 ##
+                'studentsdb27.context_processors.students_data',                ##
             ],
         },
     },
 
 В итоге в любом Шаблоне html доступна переменная {{ PORTAL_URL }}
 и при постановке в тег
+
 <link rel="stylesheet" href="{{PORTAL_URL}}{% static 'css/custom.css' %}"/>
 
 выдает на строне клиента
+
 <link rel="stylesheet" href="http://localhost:8000/static/css/custom.css">
 
 
 также можно поступить с пробными базами данных для моей апликации, дать Глобальную
 переменнную в виде словаря через контекст-процессор, зарегистрированный в settings.py
+
  def students_data(request):
     students_data = (
                 {'id':1,
@@ -405,7 +426,7 @@ SQL -- Structured Query Language -- Язык Структурированных 
 
 Документация по ДБ в Джанго
 ---------------------
-    https://docs.djangoproject.com/en/1.10/ref/databases/
+    https://docs.djangoproject.com/en/3.0/ref/databases/
 
 
 
@@ -461,10 +482,10 @@ SQLAlchemy
     1 инстанс Класса == 1 Строка Таблицы с данными по ключам (заголовки столбцов)
 
 
-from django.db import models        -- все там лежит
+from django.db import models                ## все там лежит
 
 
-Когда Создается Класс-Модель-Таблица то автоматически ORM набравляет запрос в БД типа:
+Когда Создается Класс-Модель-Таблица то автоматически ORM набравляет SQL запрос в БД типа:
 ---------------
 CREATE TABLE demoapp_product (
     ”id” integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -494,6 +515,7 @@ CREATE TABLE demoapp_product (
 Таким чином в браузері під адресою “http://localhost:8000/media/” можна буде отримувати
 файли, що лежатимуть у медіа директорії.
 ------------------------
+
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 
@@ -580,7 +602,7 @@ mysql> select * from students_student;
     <django.db.models.manager.Manager object at 0x7f10a3a9e750>
 
 
->>> Student.objects.all()       // метод дает Множесто Объектов из БД
+>>> Student.objects.all()       // метод дает Множесто Объектов из БД       ## methods can be added to manager
     >>> Student.objects.all()
     <QuerySet [<Student: Student object>, <Student: Student object>]>
         // получено 2 объекта Студентов
@@ -629,7 +651,7 @@ mysql> select * from students_student;
     3
 
     >>> to_delete = Student.objects.get(first_name='Alex')
-    >>> to_delete.delete()                      // .save() уже учтено
+    >>> to_delete.delete()                                          ## .save() уже учтено
     (1L, {u'students.Student': 1L})
 
     >>> len(Student.objects.all())
@@ -646,13 +668,15 @@ mysql> select * from students_student;
 Даже есть фильтр для полноценного поиска флагмента строки.
 
 
-    http://djbook.ru/rel1.7/ref/models/querysets.html#queryset-api-reference
+    https://docs.djangoproject.com/en/3.0/ref/models/querysets/
+    -----------------------------------------------------------
 
 
 QuerySet использует множество фильтров, которые всегда возвращают новый объект QuerySet
 
 Еще раз - чтобы достучатся до БД через модель надо импортировать Класс модели
 Чтобы использовать менеджер QuerySet Класса модели - надо объект objects
+
 Есть методы которые возвращают новый QuerySet, а есть методы которые модернизируют QuerySet  
 
     >>> from students.models import Student
@@ -666,30 +690,36 @@ QuerySet использует множество фильтров, которы�
 
     >>> list(Student.objects.all())
         [<Student: Student object>, <Student: Student object>]
-            // Возвращает копию QuerySet объекта, также кеширует данные их ДБ, потому
+
+            ## Возвращает копию QuerySet объекта, также кеширует данные их ДБ, потому
                 если вызвать метод еще раз, то обновятся данные из БД
 
 
     >>> Student.objects.values()
         <QuerySet [{'first_name': u'Yurii', 'last_name': u'Rundin', 'middle_name': u' ', 'photo': u'', 'notes': u'', 'birthday': datetime.date(2017, 1, 17), 'ticket': u'4578', u'id': 1L}, {'first_name': u'Helen', 'last_name': u'Zueva', 'middle_name': u' ', 'photo': u'', 'notes': u'', 'birthday': datetime.date(2017, 1, 17), 'ticket': u'777', u'id': 2L}]>
-        // Указывает все поля объекта в виде Словаря, в т.ч. не заполненные поля
+
+        ## Указывает все поля объекта в виде Словаря, в т.ч. не заполненные поля
 
 
     >>> Student.objects.values('last_name', 'id')
         <QuerySet [{'last_name': u'Rundin', 'id': 1L}, {'last_name': u'Zueva', 'id': 2L}]>
-        // встроена выборка по атрибутам
+
+        ## встроена выборка по атрибутам
 
 
     >>> Student.objects.values().order_by('ticket')
         <QuerySet [{'first_name': u'Yurii', 'last_name': u'Rundin', 'middle_name': u' ', 'photo': u'', 'notes': u'', 'birthday': datetime.date(2017, 1, 17), 'ticket': u'4578', u'id': 1L}, {'first_name': u'Helen', 'last_name': u'Zueva', 'middle_name': u' ', 'photo': u'', 'notes': u'', 'birthday': datetime.date(2017, 1, 17), 'ticket': u'777', u'id': 2L}]>
-        // после values() доступны все методы сортировки()
+
+        ## после values() доступны все методы сортировки()
 
 
 
 Вывод строк информации об Объектах в нужном формате
 ----------------------
-    >>> for item in Student.objects.values().order_by('first_name'): print(str(item) + '\n')
-...         // и Генерация строк / и сортировка по значению
+    >>> for item in Student.objects.values().order_by('first_name'): 
+            print(str(item) + '\n')
+
+...         ## и Генерация строк / и сортировка по значению
 {'first_name': u'Helen', 'last_name': u'Zueva', 'middle_name': u' ', 'photo': u'', 'notes': u'', 'birthday': datetime.date(2017, 1, 17), 'ticket': u'777', u'id': 2L}
 
 {'first_name': u'Pasha', 'last_name': u'Ryndin', 'middle_name': u' ', 'photo': u'', 'notes': u'', 'birthday': None, 'ticket': u' ', u'id': 3L}
@@ -697,7 +727,8 @@ QuerySet использует множество фильтров, которы�
 {'first_name': u'Yurii', 'last_name': u'Rundin', 'middle_name': u' ', 'photo': u'', 'notes': u'', 'birthday': datetime.date(2017, 1, 17), 'ticket': u'4578', u'id': 1L}
 
 
-    >>> for item in Student.objects.values_list().order_by('pk'): print(str(item) + '\n')
+    >>> for item in Student.objects.values_list().order_by('pk'): 
+            print(str(item) + '\n')
 ... 
 (1L, u'Yurii', u'Rundin', u' ', datetime.date(2017, 1, 17), u'', u'4578', u'')
 
@@ -722,29 +753,38 @@ QuerySet использует множество фильтров, которы�
         <Student: Student object>
      
     >>> Entry.objects.filter(pub_date__year=2005).order_by('headline')
-        // Цепочка - выборка по значению года + сортировка по значеням атрибута 
+        
+        ## Цепочка - выборка по значению года + сортировка по значеням атрибута 
     
 
 
 Методы которые не возвращают Не QuerySet и обычно не используют Кеш и работатю напрямую
 с объектами ДБ
         
-        // метод сразу создает объект в БД без save()
+        ## метод сразу создает объект в БД без save()
+
     >>> Student.objects.create(first_name='Pasha', last_name='Ryndin')
         <Student: Student object>
+
     >>> Student.objects.count()
         3
+
     >>> Student.objects.values().get(id=3)
         {'first_name': u'Pasha', 'last_name': u'Ryndin', 'middle_name': u' ', 'photo': u'', 'notes': u'', 'birthday': None, 'ticket': u' ', u'id': 3L}
 
 
 Подитожу цитатой из учебника:
     1) основні методи менеджера об’єктів, які найчастіше використовуються, це:
+
     all, filter, exclude, get, get_or_create, order_by, reverse, exists;
     
     2) кожен із вище перечислених методів (окрім get) повертає множину елементів з таблиці
-    - об’єкт типу QuerySet;
-        http://djbook.ru/rel1.7/ref/models/querysets.html#methods-that-do-not-return-querysets
+    - об’єкт типу QuerySet
+
+
+        https://docs.djangoproject.com/en/3.0/topics/db/queries/
+        -------------------------------------------------------
+
     
     3) методи менеджера об’єктів, які повертають об’єкт типу QuerySet (множину з
     результатами з бази даних) також можна викликати ланцюжком один за одним для
@@ -763,10 +803,13 @@ QuerySet использует множество фильтров, которы�
         return '* %s  %s *' % (self.first_name, self.last_name) 
 
 Теперь можно наглядно увидель методы соритровки по значениям атрибутов
+
     >>> Student.objects.all()
     <QuerySet [<Student: * Yurii  Rundin *>, <Student: * Helen  Zueva *>, <Student: * Pasha  Ryndin *>]>
+
     >>> Student.objects.all().order_by('last_name')
     <QuerySet [<Student: * Yurii  Rundin *>, <Student: * Pasha  Ryndin *>, <Student: * Helen  Zueva *>]>
+
     >>> Student.objects.all().order_by('first_name')
     <QuerySet [<Student: * Helen  Zueva *>, <Student: * Pasha  Ryndin *>, <Student: * Yurii  Rundin *>]>
 

@@ -1,0 +1,21 @@
+
+источник
+==============
+
+https://www.cloudflare.com/
+
+https://ru.wikipedia.org/wiki/Cloudflare
+
+В Удеми в Питон Фласк Курсе у меня есть как подюключать данный сервис для Замены Дефолтных DNS Серверов.
+Дает защиту, есть бесплатнй пакет.
+
+
+
+Дополнительные материалы
+(https ssl )
+========================
+https://robertheaton.com/2014/03/27/how-does-https-actually-work/
+
+https://www.digicert.com/ssl/
+
+https://www.websecurity.digicert.com/security-topics/how-does-ssl-handshake-work

@@ -1,0 +1,38 @@
+user@ryndin-lenovo-ideapad-520:~$   ssh root@128.199.59.110
+root@128.199.59.110's password: 
+
+root@ubuntu-s-1vcpu-1gb-ams3-01:~# nano /etc/nanorc
+===================
+
+Файл Настроек редактора НАНО на сервере
+
+
+
+https://www.nano-editor.org/dist/v2.9/nanorc.5.html
+===================
+
+Документация (опции настраиваемые)
+
+
+
+редактор в Командной строке
+=========
+$ nano requirements.txt     ## открывает в встроенном редакторе
+    Ctrl + O                ## сохранить изменения в файле
+    Ctrl + X                ## выход из встроенного редактора
+
+
+
+примеры настроек
+================
+
+
+1)
+set whitespace "string" 
+Установите два символа, чтобы указать наличие вкладок и пробелов. Они должны быть одноколоночными. 
+Пара по умолчанию для локали UTF-8 имеет значение "»·" , а для других локалей ">."
+
+
+2)
+set tabsize 4
+# Use a tab size of number columns. The value of number must be greater than 0. The default value is 8.

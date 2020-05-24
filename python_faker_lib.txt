@@ -1,0 +1,64 @@
+
+For create faker model object to Django app
+======================
+
+https://faker.readthedocs.io/en/latest/index.html
+
+1)
+pip install Faker
+
+
+
+2)
+example
+-----------------
+
+from faker import Faker
+fake = Faker()
+
+fake.name()
+# 'Lucy Cechtelar'
+
+fake.address()
+# '426 Jordy Lodge
+#  Cartwrightshire, SC 88120-6700'
+
+fake.text()
+
+
+3)
+-------------
+# django app
+
+# some_proj/create_fake_person.py
+
+
+from faker import Faker
+fake = Faker(['pl_PL', 'en_US', 'uk_UA', 'ko_KR'])               ## more languages or Empty
+
+from someapp.models import Person
+
+def do_fake(Items = N):
+    for item in range(N):
+        fake_name = fake.name().split()                 ## to 2 strings
+
+        fake_first_name = fake_name[0]
+        fake_last_name = fake_name[1]
+        fake_email = fake.email()
+
+
+person = Person.objects.get_or_create(
+    first_name = fake_first_name,
+    last_name = fake_last_name,
+    email = fake_email
+    )[0]
+
+
+if __name__ == '__main__':
+    print('start fake person')    
+    do_fake(5)
+    print('created fake person')
+
+
+
+

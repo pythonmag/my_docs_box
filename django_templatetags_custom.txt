@@ -1,0 +1,40 @@
+https://docs.djangoproject.com/en/3.0/howto/custom-template-tags/
+==========================
+
+1)
+my_proj/
+    __init__.py
+    models.py
+
+    templatetags/
+        __init__.py
+        my_proj_extras.py                   ##
+    
+    views.py
+
+
+
+2)
+{% load my_proj_extras %}
+
+{{ somevariable|cut:"0" }}
+
+
+
+3)
+## my_proj_extras.py
+ 
+from django import template
+
+register = template.Library()
+
+@register.filter(name='cut')                ## or
+def cut(value, arg):
+    return value.replace(arg, '')
+
+
+register.filter('cut', cut)                 ## or
+
+..... and more, and more .......
+
+

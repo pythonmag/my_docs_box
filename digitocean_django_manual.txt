@@ -1,0 +1,589 @@
+
+
+https://simpleisbetterthancomplex.com/tutorial/2016/10/14/how-to-deploy-to-digital-ocean.html
+так делал
+
+https://www.8host.com/blog/razrabotka-django-prilozheniya-na-postgresql-nginx-gunicorn-v-debian-9/
+хорошая доп инфа
+
+=====================================
+Хороший путь - Так и Делал
+
+
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04
+=========================
+Сложный путь - Так не Делал - но потом можно Разобраться
+
+
+
+
+1)
+Create a New Droplet
+====================
+
+and....
+=======
+
+(base) user@ryndin-lenovo-ideapad-520:~$ ssh root@128.199.59.110                # conect
+
+root@128.199.59.110's password:                                                 # password for root user
+
+Welcome to Ubuntu 18.04.4 LTS (GNU/Linux 4.15.0-66-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sun Feb  2 09:04:17 UTC 2020
+
+  System load:  0.0               Processes:           96
+  Usage of /:   7.3% of 24.06GB   Users logged in:     1
+  Memory usage: 22%               IP address for eth0: 128.199.59.110           # ip adress server
+  Swap usage:   0%
+
+ * Canonical Livepatch is available for installation.
+   - Reduce system reboots and improve kernel security. Activate at:
+     https://ubuntu.com/livepatch
+
+0 packages can be updated.
+0 updates are security updates.
+
+
+*** System restart required ***
+Last login: Sun Feb  2 05:41:08 2020 from 188.163.98.130
+root@ubuntu-s-1vcpu-1gb-ams3-01:~# 
+
+
+
+
+2)
+Installing the Server Dependencies
+======================
+
+# sudo apt-get update
+
+# sudo apt-get -y upgrade
+
+# sudo apt-get -y install build-essential libpq-dev python-dev
+
+# sudo apt-get -y install postgresql postgresql-contrib                 ## postgresql
+
+# apt-get -y install nginx                                              ## nginx
+
+# sudo apt-get -y install supervisor
+
+# sudo systemctl enable supervisor
+
+# sudo systemctl start supervisor
+
+# sudo apt-get -y install python-virtualenv                             ## virtualenv
+
+
+
+2.1
+Installing Python 3.7 or 3.8  on Ubuntu with Apt
+======================
+
+https://linuxize.com/post/how-to-install-python-3-7-on-ubuntu-18-04/
+or
+https://linuxize.com/post/how-to-install-python-3-8-on-ubuntu-18-04/
+
+
+# apt install python-pip                                                ## pip
+
+# python -V
+Python 2.7.17
+
+# python3 -V
+Python 3.6.9
+
+# sudo apt update
+
+# sudo apt install software-properties-common
+
+# sudo add-apt-repository ppa:deadsnakes/ppa
+
+# sudo apt install python3.7                                            ## python               
+
+# python3.7 --version
+
+# python3.7 --version
+Python 3.7.6
+
+# python3 -V
+Python 3.6.9
+
+# sudo apt install python3.8
+
+# python3.8 -V
+Python 3.8.1
+
+
+
+2) continue
+Configure PostgreSQL Database
+=============================
+
+
+root@ubuntu-s-1vcpu-1gb-ams3-01:~# su - postgres                        ## settings postresql / admin posgres user
+    postgres@ubuntu-s-1vcpu-1gb-ams3-01:~$ 
+
+postgres# createuser u_ryndin                                           ##
+
+postgres# createdb students_proj --owner u_ryndin                       ##
+
+postgres# psql -c "ALTER USER u_ryndin WITH PASSWORD 'prostomag76'"     ## создание пользователя для БД
+ALTER ROLE
+
+postgres@ubuntu-s-1vcpu-1gb-ams3-01:~$ exit                             ## exit from admin postres user 
+    logout
+    root@ubuntu-s-1vcpu-1gb-ams3-01:~# 
+
+
+# могут быть ошибки при настройках Джаного проекта с БД, возможные решения описаны здесь
+https://stackoverflow.com/questions/51299780/postgres-with-django-improperly-configured-error-improperlyconfigured-erro
+
+
+(students) students@ubuntu-s-1vcpu-1gb-ams3-01:~/students_proj$   sudo apt-get install build-dep python-psycopg2      ##
+    Reading package lists... Done
+    Building dependency tree       
+    Reading state information... Done
+    E: Unable to locate package build-dep
+
+(students) students@ubuntu-s-1vcpu-1gb-ams3-01:~/students_proj$   pip install psycopg2-binary      ##
+    Collecting psycopg2-binary
+      Downloading psycopg2_binary-2.8.4-cp37-cp37m-manylinux1_x86_64.whl (2.9 MB)
+         |████████████████████████████████| 2.9 MB 24.5 MB/s 
+    Installing collected packages: psycopg2-binary
+    Successfully installed psycopg2-binary-2.8.4
+
+
+
+## sittings in server
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'students_proj',
+        'USER': 'u_ryndin',
+        'PASSWORD': 'prosto***76',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
+
+
+
+
+
+3)
+Configure The Application User
+==============================
+
+root@ubuntu-s-1vcpu-1gb-ams3-01:~#  adduser students                    ## new user name kike application
+
+
+Adding user `students' ...
+Adding new group `students' (1000) ...
+Adding new user `students' (1000) with group `students' ...
+Creating home directory `/home/students' ...
+Copying files from `/etc/skel' ...
+Enter new UNIX password:                                                ## password for students(user)
+Retype new UNIX password: 
+passwd: password updated successfully
+Changing the user information for students
+Enter the new value, or press ENTER for the default
+	Full Name []: 
+	Room Number []: 
+	Work Phone []: 
+	Home Phone []: 
+	Other []: 
+Is the information correct? [Y/n] y
+
+
+root@ubuntu-s-1vcpu-1gb-ams3-01:~# gpasswd -a students sudo             ## add students to list of sudo users  !!!
+
+root@ubuntu-s-1vcpu-1gb-ams3-01:~#  su - students                       ## perekluchenie for students(user)
+
+    students@ubuntu-s-1vcpu-1gb-ams3-01:~$
+
+
+
+
+4)
+Configure the Python Virtualenv
+===============================
+(via user students, privat aria)
+
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$ pwd                                          ## where is
+/home/students
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$  virtualenv . --python=python3.7             ## install venv students
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$  source bin/activate
+
+    (students) students@ubuntu-s-1vcpu-1gb-ams3-01:~$ 
+
+(students) students@ubuntu-s-1vcpu-1gb-ams3-01:~$ python                            ## test python
+
+    Python 3.7.6 (default, Dec 19 2019, 23:50:13) 
+    [GCC 7.4.0] on linux
+    Type "help", "copyright", "credits" or "license" for more information.
+    >>> 
+
+
+
+5)
+SSH key for download data from gitrepo
+====================
+info how in 
+
+https://help.github.com/en/github/authenticating-to-github/checking-for-existing-ssh-keys
+
+https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+https://help.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
+
+
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$   ssh-keygen -t rsa -b 4096 -C "ryndin@ukr.net"      ## geny ssh key for my github
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/students/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/students/.ssh/id_rsa.
+Your public key has been saved in /home/students/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:yJTrqi/4UoVqCGby6lStFfrsUtceFT23bP3f2ZYge98 ryndin@ukr.net
+The key's randomart image is:
++---[RSA 4096]----+
+|            .    |
+|       .   . o . |
+|   . .o     . + o|
+|oo. +o.o   .   +.|
+|*o + o+ S .   . .|
+|o.+ =o . o . .  .|
+|.= ..oo . . o . *|
+|= ....   . . . o*|
+|.+o++.      . .oE|
++----[SHA256]-----+
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$      eval "$(ssh-agent -s)"                  ## ?
+Agent pid 32175
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$          cd .ssh
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~/.ssh$     ls
+    id_rsa  id_rsa.pub  known_hosts
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~/.ssh$     vim id_rsa.pub                      ## copy from this SSH key
+
+...And them insert SHH key for github setting on my account
+
+
+
+6)
+Install Django App
+==================
+
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$  git clone git@github.com:pythonmag/students_proj.git      ## good work
+    Cloning into 'students_proj'...
+    remote: Enumerating objects: 145, done.
+    remote: Counting objects: 100% (145/145), done.
+    remote: Compressing objects: 100% (94/94), done.
+    remote: Total 145 (delta 55), reused 119 (delta 35), pack-reused 0
+    Receiving objects: 100% (145/145), 959.17 KiB | 2.65 MiB/s, done.
+    Resolving deltas: 100% (55/55), done.
+
+
+## изменяю в сеттингах настройки для БД ПостгреСКЛ  
+students@ubuntu-s-1vcpu-1gb-ams3-01:~/students_proj/students_proj$      vim settings.py
+
+
+
+7)
+Тестовый Запуск Проекта
+========================
+
+python manage.py migrate        ##
+
+
+## settings.py
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, '../static/')
+
+
+(students) students@ubuntu-s-1vcpu-1gb-ams3-01:~/students_proj$         python manage.py collectstatic      ##
+
+    /home/students/students_proj
+    test run server and settings
+    144 static files copied to '/home/students/static'.
+
+
+(students) students@ubuntu-s-1vcpu-1gb-ams3-01:~/students_proj$         python manage.py createsuperuser    ##
+    /home/students/students_proj
+    test run server and settings
+    Username (leave blank to use 'students'): ryndin
+    Email address: ryndin@ukr.net
+    Password: 
+    Password (again): 
+    Superuser created successfully.
+
+
+
+
+python manage.py runserver 0.0.0.0:8000
+
+http://128.199.59.110:8000/                         ## Адрес Моего Сервера через Браузер
+
+
+
+
+8)
+Configure Gunicorn
+==================
+
+(students) students@ubuntu-s-1vcpu-1gb-ams3-01:~/students_proj$   pip install gunicorn      ##
+
+    Collecting gunicorn
+      Downloading gunicorn-20.0.4-py2.py3-none-any.whl (77 kB)
+         |████████████████████████████████| 77 kB 4.6 MB/s 
+    Requirement already satisfied: setuptools>=3.0 in /home/students/lib/python3.7/site-packages (from gunicorn) (45.1.0)
+    Installing collected packages: gunicorn
+    Successfully installed gunicorn-20.0.4
+
+
+(students) students@ubuntu-s-1vcpu-1gb-ams3-01:~$ ls
+    bin  lib  share  students_proj
+(students) students@ubuntu-s-1vcpu-1gb-ams3-01:~$ vim bin/gunicorn_start        ## 
+
+    ## add to file:
+
+    #!/bin/bash
+
+    NAME="students_proj"
+    DIR=/home/students/students_proj
+    USER=students
+    GROUP=students
+    WORKERS=3
+    BIND=unix:/home/students/run/gunicorn.sock
+    DJANGO_SETTINGS_MODULE=students_proj.settings
+    DJANGO_WSGI_MODULE=students_proj.wsgi
+    LOG_LEVEL=error
+
+    cd $DIR
+    source ../bin/activate
+
+    export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+    export PYTHONPATH=$DIR:$PYTHONPATH
+
+    exec ../bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
+      --name $NAME \
+      --workers $WORKERS \
+      --user=$USER \
+      --group=$GROUP \
+      --bind=$BIND \
+      --log-level=$LOG_LEVEL \
+      --log-file=-
+
+
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$      chmod u+x bin/gunicorn_start     ## Make the gunicorn_start file is executable
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$      mkdir run           ##  Create a directory named run, for the unix socket file
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$      ls
+    bin  lib  run  share  students_proj
+
+
+
+9)
+Configure Supervisor
+====================
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$      mkdir logs          ##
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$ ls
+    bin  lib  logs  run  share  students_proj
+
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$      touch logs/gunicorn-error.log       ##
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$      ls logs/
+    gunicorn-error.log
+
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$      sudo vim /etc/supervisor/conf.d/urban-train.conf        ##
+[sudo] password for students: 
+
+##  to file:
+
+    [program:students_proj]
+    command=/home/students/bin/gunicorn_start
+    user=students
+    autostart=true
+    autorestart=true
+    redirect_stderr=true
+    stdout_logfile=/home/students/logs/gunicorn-error.log
+
+
+## Reread Supervisor configuration files and make the new program available
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$      sudo supervisorctl reread       ##
+    students_proj: available
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$      sudo supervisorctl update       ##
+    students_proj: added process group
+
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$      sudo supervisorctl status students_proj     ##
+    students_proj                    RUNNING   pid 7307, uptime 0:02:18
+
+
+
+## Now you can control your application using Supervisor. If you want to update the source code of your
+application with a new version, you can pull the code from GitHub and then restart the process:
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$      sudo supervisorctl restart students_proj        ##
+students_proj: stopped
+students_proj: started
+
+
+
+
+10)
+Configure NGINX
+==================
+
+## Add a new configuration file named urban inside /etc/nginx/sites-available/:
+## это в корневой папке среды происходит, не в виртуальном данном окружении
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$ sudo     vim /etc/nginx/sites-available/students_proj        ##
+    [sudo] password for students:
+
+
+## on file:
+
+
+upstream app_server {
+    # server unix:///path/to/your/mysite/mysite.sock; # for a file socket
+
+    server unix:/home/students/run/gunicorn.sock fail_timeout=0;
+
+}
+
+
+server {
+    listen 80;
+
+    # add here the ip address of your server
+    # or a domain pointing to that ip (like example.com or www.example.com)
+
+    server_name 128.199.59.110;
+
+    keepalive_timeout 5;
+
+    charset utf-8;
+
+    client_max_body_size 4G;
+
+    access_log /home/students/logs/nginx-access.log;
+    error_log /home/students/logs/nginx-error.log;
+
+    location /static/ {
+        alias /home/students/static/;           # your Django project's static files - amend as required
+    }
+
+
+     location /media  {
+        alias /home/students/media/;            # your Django project's media files - amend as required
+    }
+
+    # checks for static file, if not found proxy to app
+
+    location / {
+        try_files $uri @proxy_to_app;
+    }
+
+    location @proxy_to_app {
+      proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header  Host $http_host;
+      proxy_redirect    off;
+      proxy_pass        http://app_server;
+    }
+}
+
+
+
+## Create a symbolic link to the sites-enabled dir:
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$  sudo ln -s /etc/nginx/sites-available/students_proj /etc/nginx/sites-enabled/students_proj      ##
+
+
+## Remove NGINX default website:
+## это в корневой папке среды происходит, не в данном вирт окружении
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$      sudo rm /etc/nginx/sites-enabled/default        ##
+
+## Restart NGINX:
+
+(students) students@ubuntu-s-1vcpu-1gb-ams3-01:~$       sudo service nginx restart          ##
+
+
+
+11)
+Итоговая Перезагрузка Сервера
+=====================
+
+## перезагрузка всего сервеза (гдето 5 сек)
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~/logs$         sudo reboot     ## 
+
+    Connection to 128.199.59.110 closed by remote host.
+    Connection to 128.199.59.110 closed.
+
+
+## после каждого изменения кода делать перезагрузку проекта 
+
+students@ubuntu-s-1vcpu-1gb-ams3-01:~$      sudo supervisorctl restart students_proj        ##
+students_proj: stopped
+students_proj: started
+
+
+
+12)
+How to enable remote access to PostgreSQL server
+=================================================
+
+https://support.plesk.com/hc/en-us/articles/115003321434-How-to-enable-remote-access-to-PostgreSQL-server-on-a-Plesk-server-
+
+
+user@ryndin-lenovo-ideapad-520:~$       ssh root@128.199.59.110             ##
+    root@128.199.59.110's password: 
+
+root@ubuntu-s-1vcpu-1gb-ams3-01:~#      find / -name "postgresql.conf"      ##
+    /usr/lib/tmpfiles.d/postgresql.conf
+    /etc/postgresql/10/main/postgresql.conf
+
+
+root@ubuntu-s-1vcpu-1gb-ams3-01:~#      vim /etc/postgresql/10/main/postgresql.conf         ##
+
+    listen_addresses = '*'      ##
+    
+    hba_file = '/etc/postgresql/10/main/pg_hba.conf'
+
+
+root@ubuntu-s-1vcpu-1gb-ams3-01:~#      vim /etc/postgresql/10/main/pg_hba.conf         ##
+
+    host all all 0.0.0.0/0 md5      ##
+
+
+root@ubuntu-s-1vcpu-1gb-ams3-01:~#      service postgresql restart          ##
+
+
+
+

@@ -1,101 +1,407 @@
-Install MySQL to UBUNTU (GLOBAL)
-=============
-https://support.rackspace.com/how-to/installing-mysql-server-on-ubuntu/
 
-https://support.rackspace.com/how-to/configuring-mysql-server-on-ubuntu/
+можно сначала пройтись по статье -- есть нюансы по установке билиотек для питона
+======================
+https://www.digitalocean.com/community/tutorials/how-to-create-a-django-app-and-connect-it-to-a-database
+
+https://www.digitalocean.com/community/tutorials/how-to-use-mysql-or-mariadb-with-your-django-application-on-ubuntu-14-04
+
+
+
+Сначала у меня Переустановка mysql сервера на  моей машине (Чистая)
+=============================
+
+https://oofloo.com/uninstall-mysql-ubuntu/
+Данное руководство дает Мануал по Переустановке БД, но также есть далее Как поностью Удалить Чисто  БД
+
+под root#
+
+
+#   sudo apt remove --purge mysql*          ##
+    ....
+    Следующие пакеты будут УДАЛЕНЫ:
+    mysql-client-5.7* mysql-client-core-5.7* mysql-common* mysql-server* mysql-server-5.7* mysql-server-core-5.7*
+    Обновлено 0 пакетов, установлено 0 новых пакетов, для удаления отмечено 6 пакетов, и 4 пакетов не обновлено.
+    После данной операции объём занятого дискового пространства уменьшится на 154 MB.
+    Хотите продолжить? [Д/н] yes
+
+#   sudo apt purge mysql*
+
+#   sudo apt autoremove
+
+#   sudo apt autoclean
+
+#   sudo apt remove dbconfig-mysql
+
+#   sudo apt dist-upgrade
+    
+
+#   sudo apt install mysql-server           ## Install MySQL
+    
+    Чтение списков пакетов… Готово
+    Построение дерева зависимостей       
+    Чтение информации о состоянии… Готово
+    Будут установлены следующие дополнительные пакеты:
+
+    libaio1 libevent-core-2.1-6 mysql-client-5.7 mysql-client-core-5.7 mysql-common mysql-server-5.7 mysql-server-core-5.7
+    
+    Предлагаемые пакеты:
+      mailx tinyca
+    Следующие НОВЫЕ пакеты будут установлены:
+      libaio1 libevent-core-2.1-6 mysql-client-5.7 mysql-client-core-5.7 mysql-common mysql-server mysql-server-5.7 mysql-server-core-5.7
+    Обновлено 0 пакетов, установлено 8 новых пакетов, для удаления отмечено 0 пакетов, и 0 пакетов не обновлено.
+    Необходимо скачать 19,1 MB архивов.
+    После данной операции объём занятого дискового пространства возрастёт на 155 MB.
+    Хотите продолжить? [Д/н] yes
+
+
+Дальнешая Установочная Настройка
+================================
+https://support.rackspace.com/how-to/install-mysql-server-on-the-ubuntu-operating-system/
+
+
+#   sudo mysql_secure_installation utility          ## Начальные настройки безопасности (пароль для Рута и пр.)
+
+    Securing the MySQL server deployment.
+    Connecting to MySQL using a blank password.
+    VALIDATE PASSWORD PLUGIN can be used to test passwords
+    and improve security. It checks the strength of password
+    and allows the users to set only those passwords which are
+    secure enough. Would you like to setup VALIDATE PASSWORD plugin?
+
+    Press y|Y for Yes, any other key for No: Yes                    ###
+    There are three levels of password validation policy:
+
+    LOW    Length >= 8
+    MEDIUM Length >= 8, numeric, mixed case, and special characters
+    STRONG Length >= 8, numeric, mixed case, special characters and dictionary file
+
+    Please enter 0 = LOW, 1 = MEDIUM and 2 = STRONG: 0             ###
+    Please set the password for root here.
+
+    New password: 
+    Re-enter new password: 
+    
+    ....
+
+    Do you wish to continue with the password provided?(Press y|Y for Yes, any other key for No) : y
+
+    Remove anonymous users? (Press y|Y for Yes, any other key for No) : y
+
+    Disallow root login remotely? (Press y|Y for Yes, any other key for No) : y
+
+    Remove test database and access to it? (Press y|Y for Yes, any other key for No) : y
+
+    Reload privilege tables now? (Press y|Y for Yes, any other key for No) : y
+
+
+Включить Удаленный доступ (Разрешение ФаерВоллу)
+(Знание пригодится на Продакш Сервере)
+-------------------------
+
+If you have iptables enabled and want to connect to the MySQL database from another machine,
+you must open a port in your server’s firewall (the default port is 3306).                      ###
+You don’t need to do this if the application that uses MySQL is running on the same server.
+
+#   sudo ufw enable             ##
+
+    Межсетевой экран включён и будет запускаться при запуске системы
+
+#   sudo ufw allow mysql        ##
+
+    Правило добавлено
+    Правило добавлено (v6)
+
+
+
+Еще настройки
+-----------------------
+https://support.rackspace.com/how-to/configure-mysql-server-on-the-ubuntu-operating-system/
+
+#   cd /etc/mysql
+#   ls
+    
+    conf.d  debian.cnf  debian-start  my.cnf  my.cnf.fallback  mysql.cnf  mysql.conf.d
+
+
+
+Start MySQL
+---------------------
+
+#   sudo systemctl start mysql          ###
+
+#   sudo systemctl enable mysql         ### reboot test
+
+    Synchronizing state of mysql.service with SysV service script with /lib/systemd/systemd-sysv-install.
+    Executing: /lib/systemd/systemd-sysv-install enable mysql
+
+#   sudo systemctl restart mysql        ###
+
+
+Настройка Прослушивания Интерфейсов
+-----------------------
+
+#   nano /etc/mysql/mysql.conf.d/mysqld.cnf         ## Все Настройки БД Здесь
+
+[mysqld]
+#
+# * Basic Settings
+#
+user            = mysql
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+port            = 3306
+basedir         = /usr
+datadir         = /var/lib/mysql
+tmpdir          = /tmp
+lc-messages-dir = /usr/share/mysql
+skip-external-locking
+
+
+пишу по желанию:
+
+bind-address		= 127.0.0.1 ( The default. )
+bind-address		= XXX.XXX.XXX.XXX ( The ip address of your Public Net interface. )
+bind-address		= ZZZ.ZZZ.ZZZ.ZZZ ( The ip address of your Service Net interface. )
+bind-address		= 0.0.0.0 ( All ip addresses. )
+
+
+log_error = /var/log/mysql/error.log
+
+
+
+#   sudo systemctl restart mysql        ###
+
+
+
+MySQL Shell
+================
+
+# /usr/bin/mysql -u root -p
+
+or 
+
+$ /usr/bin/mysql -u user -p
+
+
+mysql> status           ### 
+--------------
+/usr/bin/mysql  Ver 14.14 Distrib 5.7.29, for Linux (x86_64) using  EditLine wrapper
+
+Connection id:		8
+Current database:	                            ### рабочая БД еще не создана, 
+Current user:		root@localhost              ### вход в систему по Рутовым Пользователем
+SSL:			Not in use
+Current pager:		stdout
+Using outfile:		''
+Using delimiter:	;
+Server version:		5.7.29-0ubuntu0.18.04.1 (Ubuntu)
+Protocol version:	10
+Connection:		Localhost via UNIX socket
+Server characterset:	latin1
+Db     characterset:	latin1
+Client characterset:	utf8
+Conn.  characterset:	utf8
+UNIX socket:		/var/run/mysqld/mysqld.sock     ### сокет
+Uptime:			6 min 24 sec
+
+Threads: 1  Questions: 7  Slow queries: 0  Opens: 105  Flush tables: 1  Open tables: 98  Queries per second avg: 0.018
+
+
+
+Варианты Изменения Пароля для Руут пользователя
+(У меня не сработало, я не разбирался)
+Хочу создать Область Нового Пользователя и уже в нем Делать Таблицы Проекта !!
+------------------
+
+> UPDATE mysql.user SET Password = PASSWORD('password') WHERE User = 'root';                ## old version
+
+> UPDATE mysql.user SET authentication_string = PASSWORD('password') WHERE User = 'root';   ## new vession
+
+
+Для Сброса Руут Пароля есть отдельный Мануал
+(не Выполнил)
+------------------------
+https://support.rackspace.com/how-to/mysql-resetting-a-lost-mysql-root-password/
+
+
+
+MySQL Shell
+----------------------
+
+mysql> SELECT * FROM mysql.user;
+
+mysql> SELECT User, Host, authentication_string FROM mysql.user;        ##      Пользователи mysql-server
+
++------------------+-----------+-------------------------------------------+
+| User             | Host      | authentication_string                     |
++------------------+-----------+-------------------------------------------+
+| root             | localhost |                                           |
+| mysql.session    | localhost | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |
+| mysql.sys        | localhost | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |
+| debian-sys-maint | localhost | *6E1810B3CECD442CF716E8EEA3DFDF926EFA1B3A |
++------------------+-----------+-------------------------------------------+
+4 rows in set (0.00 sec)
+
+
+mysql> SHOW DATABASES;                  ###  начальные базы данных
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+
+
+Тестовое создание Базы Данных (как для Проекта) и для Нее Тестового Пользователя
+(Из Книги Джанго Виталия Подобы)
+-----------------
+
+
+mysql>  SHOW VARIABLES LIKE 'validate_password%';        ## Настройки Валидации Пароля
+
++--------------------------------------+--------+
+| Variable_name                        | Value  |
++--------------------------------------+--------+
+| validate_password_check_user_name    | OFF    |
+| validate_password_dictionary_file    |        |
+| validate_password_length             | 8      |
+| validate_password_mixed_case_count   | 1      |
+| validate_password_number_count       | 1      |
+| validate_password_policy             | MEDIUM |       ## уровень валидации
+| validate_password_special_char_count | 1      |
++--------------------------------------+--------+
+7 rows in set (0.00 sec)
+
+mysql>  SET GLOBAL validate_password_length = 6;
+
+mysql>  SET GLOBAL validate_password_number_count = 0;
+
+
+
+mysql>  CREATE DATABASE db_test;
+
+
+mysql>  INSERT INTO mysql.user (User,Host,authentication_string,ssl_cipher,x509_issuer,x509_subject) VALUES('user_test','localhost',PASSWORD('Prostomag76@python'),'','','');           ###
+
+    Query OK, 1 row affected, 1 warning (0.00 sec)
+
+
+mysql>  FLUSH PRIVILEGES;                           ###
+    Query OK, 0 rows affected (0.00 sec)
+
+
+
+mysql>  GRANT ALL PRIVILEGES ON db_test.* to user_test@localhost;            ###
+    GRANT ALL PRIVILEGES ON db_test.* to usr_test@localhost;
+
+
+
+mysql>  FLUSH PRIVILEGES;                           ###
+    Query OK, 0 rows affected (0.00 sec)
+
+
+mysql>  SHOW GRANTS FOR 'user_test'@'localhost';    ###
+
++----------------------------------------------------------------+
+| Grants for user_test@localhost                                 |
++----------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'user_test'@'localhost'                  |
+| GRANT ALL PRIVILEGES ON `db_test`.* TO 'user_test'@'localhost' |
++----------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+
+mysql>  SELECT User, Host, authentication_string FROM mysql.user; 
+
++------------------+-----------+-------------------------------------------+
+| User             | Host      | authentication_string                     |
++------------------+-----------+-------------------------------------------+
+| root             | localhost |                                           |
+| mysql.session    | localhost | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |
+| mysql.sys        | localhost | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |
+| debian-sys-maint | localhost | *DC290ADBB4EEC5D9CC39B211277CBF96E5705DAA |
+| user_test        | localhost | *FFC1E372012D9F7B6F99C1CA2904F3660CAD0BB0 |        ## new user
++------------------+-----------+-------------------------------------------+
+5 rows in set (0.00 sec)
+
+
+mysql>  SHOW DATABASES;
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| db_test            |          ## new DB
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+
+
+Джанго и Настройки Базы
+==============================
+для работы с MySQL  Запуск Джанго Сервера только под root !!!!!
+
+
+сначало смотрю это
+------------------
+https://www.digitalocean.com/community/tutorials/how-to-create-a-django-app-and-connect-it-to-a-database
+
+
+потом обращаю внимание на это -- устранение ошибок при установке либы клиента для майскл
+-----------------------------
+## https://zalinux.ru/?p=1667
 
 
 sudo apt-get update
-sudo apt-get install mysql-server
+
+sudo apt-get install python-pip python-dev mysql-server libmysqlclient-dev                ### mast have
+
+sudo apt install python3.7-dev                  ## обязательно установить под соответстующую версию питона
+
+# pip install mysqlclient                       ## этот клиент может встать только  при условии предыдущей комманды
 
 
-Start the mysql shell
-=====================
+сеттинги в джанго
+------------------
+https://docs.djangoproject.com/en/3.0/ref/databases/#connecting-to-the-database
 
-~$ /usr/bin/mysql -u root -p
+Изменение настроек проекта на использование MySQL:
+# инструкция с официального сайта djangoproject.com
 
-
-INFO
-===================
-
-mysql> SELECT User, Host, authentication_string FROM mysql.user;
-
-+---------------------------------+-----------+-------------------------------------------+
-| User                            | Host      | authentication_string                     |
-+---------------------------------+-----------+-------------------------------------------+
-| root                            | localhost | *ED3B4B07BC9C334E6A7F59D736F4E2398991A8D3 |
-| mysql.session                   | localhost | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |
-| mysql.sys                       | localhost | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |
-| debian-sys-maint                | localhost | *6BD0E811699FC86EA0F487A8C26EE68C20563394 |
-| students_service_user           | localhost | *A994A7AF16CA2A909D8B334C0503F199C71A81B4 |
-| students_service_user@localhost | %         | *A994A7AF16CA2A909D8B334C0503F199C71A81B4 |
-+---------------------------------+-----------+-------------------------------------------+
+sudo nano /etc/mysql/my.cnf                                 ##
 
 
-CREATE
-===================
-
-mysql>  CREATE DATABASE demodb;
-
-
-
-Add a database user
-===================
-
-mysql>  INSERT INTO mysql.user (User,Host,authentication_string,ssl_cipher,x509_issuer,x509_subject) VALUES('demouser','localhost',PASSWORD('demopassword'),'','','');
-
-mysql> FLUSH PRIVILEGES;
-
-mysql> SELECT User, Host, authentication_string FROM mysql.user;
-+---------------------------------+-----------+-------------------------------------------+
-| User                            | Host      | authentication_string                     |
-+---------------------------------+-----------+-------------------------------------------+
-| root                            | localhost | *ED3B4B07BC9C334E6A7F59D736F4E2398991A8D3 |
-| mysql.session                   | localhost | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |
-| mysql.sys                       | localhost | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |
-| debian-sys-maint                | localhost | *6BD0E811699FC86EA0F487A8C26EE68C20563394 |
-| students_service_user           | localhost | *A994A7AF16CA2A909D8B334C0503F199C71A81B4 |
-| students_service_user@localhost | %         | *A994A7AF16CA2A909D8B334C0503F199C71A81B4 |
-| demouser                        | localhost | *0756A562377EDF6ED3AC45A00B356AAE6D3C6BB6 |
-+---------------------------------+-----------+-------------------------------------------+
+# settings.py   
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': '/etc/mysql/my.cnf',        ## ссылка на файл в системе -- так и делать
+        },
+    }
+}
 
 
+# my.cnf                                                    ## исполняемый файл системы
+[client]
+database = db_test
+user = user_test
+password = Prostomag76@python
+default-character-set = utf8
 
-Grant database user permissions
-===============================
+    
+root# python manage.py migrate                              ## only root !!!
 
-mysql> GRANT ALL PRIVILEGES ON demodb.* to demouser@localhost;
-
-mysql> FLUSH PRIVILEGES;
-
-
-mysql> SHOW GRANTS FOR 'demouser'@'localhost';
-
-+--------------------------------------------------------------+
-| Grants for demouser@localhost                                |
-+--------------------------------------------------------------+
-| GRANT USAGE ON *.* TO 'demouser'@'localhost'                 |
-| GRANT ALL PRIVILEGES ON `demodb`.* TO 'demouser'@'localhost' |
-+--------------------------------------------------------------+
-
-mysql> SHOW GRANTS FOR 'root'@'localhost';
-+---------------------------------------------------------------------+
-| Grants for root@localhost                                           |
-+---------------------------------------------------------------------+
-| GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION |
-| GRANT PROXY ON ''@'' TO 'root'@'localhost' WITH GRANT OPTION        |
-+---------------------------------------------------------------------+
+root# python manage.py runserver                            ## only root !!!
+================================
 
 
-CONFIGURATION SERVER
-====================
-
-ryndin@ubu:~$ cd /etc/mysql
-
-ryndin@ubu:/etc/mysql$ ls
-conf.d  debian.cnf  debian-start  my.cnf  my.cnf.fallback  mysql.cnf  mysql.conf.d
-
-$ /usr/sbin/mysqld --help --verbose
 
 
 
@@ -128,6 +434,68 @@ $ python
  'threadsafety', 'utils', 'version']
 
 
+
+
+ОСТОРОЖНО!!!
+Мощная комманда
+Полностью Вычистить БД на языке SQL
+==================================
+
+Надо использовать данный алгоритм:
+(в консоли mySQL)
+-----------------------
+
+SET FOREIGN_KEY_CHECKS = 0;
+SET @tables = NULL;
+SELECT GROUP_CONCAT(table_schema, '.', table_name) INTO @tables
+  FROM information_schema.tables
+  WHERE table_schema = 'database_name';         // тут указать имя БД (myproject2016_db)
+SET @tables = CONCAT('DROP TABLE ', @tables);
+PREPARE stmt FROM @tables;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+SET FOREIGN_KEY_CHECKS = 1;
+drop database myproject2016_db;                 // тут указать имя БД (mproject2016_db)
+
+===================================
+проверено работает!!!!
+===================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================
+ЧТО ТО МОЕ СТАРОЕ
+==========================================
 
 1)
 Установка mysql-server на машину
